@@ -13,7 +13,7 @@
 
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
-			<bean class="first.common.resolver.CustomMapArgumentResolver"></bean>
+			<bean class="com.moviecube.resolver.MapArgumentResolver"></bean>
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -21,7 +21,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean id="loggerInterceptor"
-				class="first.common.logger.LoggerInterceptor"></bean>
+				class="com.moviecube.logger.LoggerInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -40,4 +40,6 @@
 		p:viewClass="org.springframework.web.servlet.view.JstlView"
 		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp">
 	</bean>
+	
+	<!-- 이야야야야아아아아아양-->
 </beans>
