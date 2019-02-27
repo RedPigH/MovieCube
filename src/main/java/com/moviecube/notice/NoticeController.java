@@ -1,8 +1,8 @@
-package com.moviecube.inquiry;
+package com.moviecube.notice;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class InquryController {
+public class NoticeController {
 
 }
