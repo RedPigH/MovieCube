@@ -2,8 +2,56 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<%@ include file="/WEB-INF/views/main/head.jspf" %>
+<title>MOVIECUBE</title>
+<meta >
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
+
+<script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
+<script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
+<script src="/moviecube/resources/css/bootstrap4/bootstrap.min.js "  ></script>
+<script src="/moviecube/resources/plugins/Isotope/isotope.pkgd.min.js "  ></script>
+<script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
+<script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
+<script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
+<script src="/moviecube/resources/js/custom.js " ></script>
+<script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script >
+	function showPageSelectedMovie(num) 
+	{ 
+		window.open("/moviecube/reserve.do", "a", "width=968, height=816");
+	}
+</script>
+<script>
+  $(document).ready(function(){ 
+    $('.slider').bxSlider({
+    	auto: true, 
+    	speed: 500, 
+    	pause: 3500, 
+    	mode:'fade', 
+    	pager:true,
+    	/* video: true, */
+    });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $("#thing-with-videos").fitVids();
+  });
+</script>
+
+<%@ include file="/WEB-INF/views/main/main_header.jspf" %>
 </head>
 <body>
 <!-- 
@@ -28,17 +76,328 @@
 
 		<!-- 바디 1단 -->
 		<!-- slider -->
-<%@ include file="/WEB-INF/views/main/body_SLIDER.jspf" %>
+		<div class="slider">
+			<div>
+			<div class="main_slider"
+				style="background-image: url(resources/images/lovelive.jpg)">
+				<div class="container fill_height">
+					<div class="row align-items-center fill_height">
+						<div class="row">
+							<div class="main_slider_content">
+								<h5 id="s1">LOVE LIVE SUNSHINE THE SCHOOL IDOL MOVIE:OVER
+									THE RAINBOW</h5>
+								<h2 id="s1">러브라이브! 선샤인!! 더 스쿨 아이돌 무비 오버 더 레인보우</h2>
+								<br>
+								<h4 id="s1">아홉 소녀들의 청춘 드라마 드디어 국내 개봉!!!</h4>
+								<div class="red_button shop_now_button">
+									<a href="javascript:showPageSelectedMovie();" onclick="showPageSelectedMovie();" class="img_btn movie pull-right" data-toggle="modal" data-target="#reservation" title="영화 예매하기">예매하기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			<div>
+			<div class="main_slider"
+				style="background-image: url(resources/images/wall-E.jpg)">
+				<div class="container fill_height">
+					<div class="row align-items-center fill_height">
+						<div class="row">
+							<div class="main_slider_content">
+								<h5 id="s1">WALT DISNEY</h5>
+								<h2 id="s1">월-E(WALL-E)</h2>
+								<br>
+								<h4 id="s1">예측불허! 차세대 영웅, 그가 지구 구하기에 나섰다!</h4>
+								<div class="red_button shop_now_button">
+									<a href="#">예매하기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			<div>
+			<div class="main_slider"
+				style="background-image: url(resources/images/Interstella.jpg)">
+				<div class="container fill_height">
+					<div class="row align-items-center fill_height">
+						<div class="row">
+							<div class="main_slider_content">
+								<h5 id="s1">Interstella</h5>
+								<h2 id="s1">인터스텔라</h2>
+								<br>
+								<h4 id="s1">"우린 답을 찾을 거야, 늘 그랬듯이"</h4>
+								<div class="red_button shop_now_button">
+									<a href="#">예매하기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			<div>
+			<div class="main_slider"
+				style="background-image: url(resources/images/starwars.jpg)">
+				<div class="container fill_height">
+					<div class="row align-items-center fill_height">
+						<div class="row">
+							<div class="main_slider_content">
+								<h5 id="s1">Star Wars: Episode II - Attack Of The Clones</h5>
+								<h2 id="s1">스타워즈 에피소드2 - 클론의 습격</h2>
+								<br>
+								<h4 id="s1">아주 먼 옛날 은하계 저편에...</h4>
+								<div class="red_button shop_now_button">
+									<a href="#">예매하기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		 </div>
 
 
-		<!-- 바디 2단 -->
 		<!-- BOX OFFICE -->
-<%@ include file="/WEB-INF/views/main/body_BOXOFFICE.jspf" %>
+	<div class="new_arrivals">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2>BOX OFFICE</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row align-items-center">
+				<div class="col text-center">
+					<div class="new_arrivals_sorting">
+						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">HOT</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">최신개봉작</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">상영예정작</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+						<!-- Product 1 -->
+
+						<div class="product-item men">
+							<div class="product discount product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_1.png" alt="">
+								</div>
+								<div class="favorite favorite_left"></div>
+								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+									<div class="product_price">$520.00<span>$590.00</span></div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 2 -->
+
+						<div class="product-item women">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_2.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
+									<div class="product_price">$610.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 3 -->
+
+						<div class="product-item women">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_3.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
+									<div class="product_price">$120.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 4 -->
+
+						<div class="product-item accessories">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_4.png" alt="">
+								</div>
+								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+								<div class="favorite favorite_left"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
+									<div class="product_price">$410.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 5 -->
+
+						<div class="product-item women men">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_5.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
+									<div class="product_price">$180.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 6 -->
+
+						<div class="product-item accessories">
+							<div class="product discount product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_6.png" alt="">
+								</div>
+								<div class="favorite favorite_left"></div>
+								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="#single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+									<div class="product_price">$520.00<span>$590.00</span></div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 7 -->
+
+						<div class="product-item women">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_7.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
+									<div class="product_price">$610.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 8 -->
+
+						<div class="product-item accessories">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_8.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
+									<div class="product_price">$120.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 9 -->
+
+						<div class="product-item men">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_9.png" alt="">
+								</div>
+								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+								<div class="favorite favorite_left"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
+									<div class="product_price">$410.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+
+						<!-- Product 10 -->
+
+						<div class="product-item men">
+							<div class="product product_filter">
+								<div class="product_image">
+									<img src="resources/images/product_10.png" alt="">
+								</div>
+								<div class="favorite"></div>
+								<div class="product_info">
+									<h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
+									<div class="product_price">$180.00</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a href="#">예매하기</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-		<!-- 바디 3단 -->
-		<!-- 이벤트 -->
-<%-- <%@ include file="/WEB-INF/views/main/body_EVENT.jspf" %> --%>
+	<!-- Deal of the week -->
+	<div class="deal_ofthe_week">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="deal_ofthe_week_img">
+						<img src="resources/images/deal_of_the_week.jpg" alt="">
+					</div>
+				</div>
+				<div class="col-lg-6 text-right deal_ofthe_week_col">
+					<div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
+						<div class="section_title">
+							<h2>MOVIECUBE 팝콘 콤보<br> 4,000원 이벤트!!</h2>
+						</div>
+						<ul class="timer">
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="day" class="timer_num">03</div>
+								<div class="timer_unit">Day</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="hour" class="timer_num">15</div>
+								<div class="timer_unit">Hours</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="minute" class="timer_num">45</div>
+								<div class="timer_unit">Mins</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="second" class="timer_num">23</div>
+								<div class="timer_unit">Sec</div>
+							</li>
+						</ul>
+						<div class="red_button deal_ofthe_week_button"><a href="#">구매하기</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- Best Sellers -->
