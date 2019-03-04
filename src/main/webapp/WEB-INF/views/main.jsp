@@ -26,8 +26,14 @@
 <script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
 <script src="/moviecube/resources/js/custom.js " ></script>
 <script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script >
+	function showPageSelectedMovie(num) 
+	{ 
+		window.open("/moviecube/reserve.do", "a", "width=968, height=816");
+	}
+</script>
 <script>
-  $(document).ready(function(){
+  $(document).ready(function(){ 
     $('.slider').bxSlider({
     	auto: true, 
     	speed: 500, 
@@ -162,7 +168,7 @@
 								<br>
 								<h4 id="s1">아홉 소녀들의 청춘 드라마 드디어 국내 개봉!!!</h4>
 								<div class="red_button shop_now_button">
-									<a href="#">예매하기</a>
+									<a href="javascript:showPageSelectedMovie();" onclick="showPageSelectedMovie();" class="img_btn movie pull-right" data-toggle="modal" data-target="#reservation" title="영화 예매하기">예매하기</a>
 								</div>
 							</div>
 						</div>
