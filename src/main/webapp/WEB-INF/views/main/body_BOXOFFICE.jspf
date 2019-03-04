@@ -2,6 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<link rel="stylesheet" href="/moviecube/resources/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_styles.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_responsive.css">
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="width: 1000px;">
+    <div class="modal-content">
+    	<%@ include file="/WEB-INF/views/detail/movie_detail.jspf" %>
+    </div>
+  </div>
+</div>
+
+
 <div class="new_arrivals">
 		<div class="container">
 			<div class="row">
@@ -36,7 +50,7 @@
 								<div class="favorite favorite_left"></div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
 								<div class="product_info">
-									<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+									<h6 class="product_name" data-toggle="modal" data-target=".bs-example-modal-lg">Fujifilm X100T 16 MP Digital Camera (Silver)</h6>
 									<div class="product_price">$520.00<span>$590.00</span></div>
 								</div>
 							</div>
