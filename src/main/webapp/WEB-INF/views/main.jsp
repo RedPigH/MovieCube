@@ -2,7 +2,55 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+<title>MOVIECUBE</title>
+<meta >
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
+
+<script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
+<script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
+<script src="/moviecube/resources/css/bootstrap4/bootstrap.min.js "  ></script>
+<script src="/moviecube/resources/plugins/Isotope/isotope.pkgd.min.js "  ></script>
+<script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
+<script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
+<script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
+<script src="/moviecube/resources/js/custom.js " ></script>
+<script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script >
+	function showPageSelectedMovie(num) 
+	{ 
+		window.open("/moviecube/reserve.do", "a", "width=968, height=816");
+	}
+</script>
+<script>
+  $(document).ready(function(){ 
+    $('.slider').bxSlider({
+    	auto: true, 
+    	speed: 500, 
+    	pause: 3500, 
+    	mode:'fade', 
+    	pager:true,
+    	/* video: true, */
+    });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $("#thing-with-videos").fitVids();
+  });
+</script>
+
 <%@ include file="/WEB-INF/views/main/main_header.jspf" %>
 </head>
 <body>
@@ -42,7 +90,7 @@
 								<br>
 								<h4 id="s1">아홉 소녀들의 청춘 드라마 드디어 국내 개봉!!!</h4>
 								<div class="red_button shop_now_button">
-									<a href="#">예매하기</a>
+									<a href="javascript:showPageSelectedMovie();" onclick="showPageSelectedMovie();" class="img_btn movie pull-right" data-toggle="modal" data-target="#reservation" title="영화 예매하기">예매하기</a>
 								</div>
 							</div>
 						</div>

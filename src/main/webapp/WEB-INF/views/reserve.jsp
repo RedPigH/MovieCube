@@ -19,7 +19,7 @@
 	<meta property="og:image" content="http://image2.megabox.co.kr/mop/home/appbunpage/URLVIEW.jpg" />
 
 	
-	<title>라이프시어터, 메가박스</title>
+	<title>MOVIECUBE</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link href="/moviecube/resources/css/megabox.css" rel="stylesheet">
@@ -98,7 +98,6 @@
 			},
 
 			setFavoriteCinema: function(selectTheater1,selectTheater2,selectTheater3) {
-
 				var selectCinema1 = $('#my_theater select[name=selectTheater1]').val();
 				var selectCinema2 = $('#my_theater select[name=selectTheater2]').val();
 				var selectCinema3 = $('#my_theater select[name=selectTheater3]').val();
