@@ -1,57 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>MOVIECUBE</title>
-<meta >
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
-
-<script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
-<script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
-<script src="/moviecube/resources/css/bootstrap4/bootstrap.min.js "  ></script>
-<script src="/moviecube/resources/plugins/Isotope/isotope.pkgd.min.js "  ></script>
-<script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
-<script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
-<script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
-<script src="/moviecube/resources/js/custom.js " ></script>
-<script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
-<script >
-	function showPageSelectedMovie(num) 
-	{ 
-		window.open("/moviecube/reserve.do", "a", "width=968, height=816");
-	}
-</script>
-<script>
-  $(document).ready(function(){ 
-    $('.slider').bxSlider({
-    	auto: true, 
-    	speed: 500, 
-    	pause: 3500, 
-    	mode:'fade', 
-    	pager:true,
-    	/* video: true, */
-    });
-  });
-</script>
-<script>
-  $(document).ready(function(){
-    // Target your .container, .wrapper, .post, etc.
-    $("#thing-with-videos").fitVids();
-  });
-</script>
+<%@ include file="/WEB-INF/views/main/main_header.jspf" %>
 </head>
-
 <body>
 <!-- 
 [목록] 
@@ -68,91 +21,12 @@
 -->
 <div class="super_container">
 
-	<!-- Header -->
-	<header class="header trans_300">
-		<!-- Top Navigation -->
-
-		<div class="top_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="top_nav_left">since 2019.02.25 / the masterpiece will go on</div>
-					</div>
-					<div class="col-md-6 text-right">
-						<div class="top_nav_right">
-							<ul class="top_nav_menu">
-								<li class="notice"><a href="#">공지사항</a></li>
-								<li class="FAQ"><a href="#">FAQ</a></li>
-								<li class="QnA"><a href="#">1:1문의</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Main Navigation -->
-
-		<div class="main_nav_container">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a href="#">MOVIE<span>CUBE</span></a>
-						</div>
-						<nav class="navbar">
-								<ul class="navbar_menu">
-									<li><a href="#">스토어</a></li>
-									<li><a href="#">이벤트</a></li>
-									<li><a href="#">빠른예매</a></li>
-									<li><a href="#">로그인</a></li>
-								</ul>
-								<div class="hamburger_container">
-									<i class="fa fa-bars" aria-hidden="true"></i>
-								</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="fs_menu_overlay"></div>
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						고객센터
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">공지사항</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">1:1문의</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">스토어</a></li>
-				<li class="menu_item"><a href="#">이벤트</a></li>
-				<li class="menu_item"><a href="#">빠른예매</a></li>
-				<li class="menu_item has-children">
-					<a href="#">
-						로그인
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">예매확인/취소</a></li>
-						<li><a href="#">찜목록</a></li>
-						<li><a href="#">마이페이지</a></li>
-						<li><a href="#">로그아웃</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
+<%@ include file="/WEB-INF/views/main/body_header.jspf" %>
 
 
+
+
+		<!-- 바디 1단 -->
 		<!-- slider -->
 		<div class="slider">
 			<div>
@@ -168,7 +42,7 @@
 								<br>
 								<h4 id="s1">아홉 소녀들의 청춘 드라마 드디어 국내 개봉!!!</h4>
 								<div class="red_button shop_now_button">
-									<a href="javascript:showPageSelectedMovie();" onclick="showPageSelectedMovie();" class="img_btn movie pull-right" data-toggle="modal" data-target="#reservation" title="영화 예매하기">예매하기</a>
+									<a href="#">예매하기</a>
 								</div>
 							</div>
 						</div>
@@ -272,7 +146,7 @@
 						<div class="product-item men">
 							<div class="product discount product_filter">
 								<div class="product_image">
-									<img src="images/product_1.png" alt="">
+									<img src="resources/images/product_1.png" alt="">
 								</div>
 								<div class="favorite favorite_left"></div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
@@ -289,7 +163,7 @@
 						<div class="product-item women">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_2.png" alt="">
+									<img src="resources/images/product_2.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
@@ -306,7 +180,7 @@
 						<div class="product-item women">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_3.png" alt="">
+									<img src="resources/images/product_3.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
@@ -322,7 +196,7 @@
 						<div class="product-item accessories">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_4.png" alt="">
+									<img src="resources/images/product_4.png" alt="">
 								</div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 								<div class="favorite favorite_left"></div>
@@ -339,7 +213,7 @@
 						<div class="product-item women men">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_5.png" alt="">
+									<img src="resources/images/product_5.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
@@ -355,7 +229,7 @@
 						<div class="product-item accessories">
 							<div class="product discount product_filter">
 								<div class="product_image">
-									<img src="images/product_6.png" alt="">
+									<img src="resources/images/product_6.png" alt="">
 								</div>
 								<div class="favorite favorite_left"></div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
@@ -372,7 +246,7 @@
 						<div class="product-item women">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_7.png" alt="">
+									<img src="resources/images/product_7.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
@@ -388,7 +262,7 @@
 						<div class="product-item accessories">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_8.png" alt="">
+									<img src="resources/images/product_8.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
@@ -404,7 +278,7 @@
 						<div class="product-item men">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_9.png" alt="">
+									<img src="resources/images/product_9.png" alt="">
 								</div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 								<div class="favorite favorite_left"></div>
@@ -421,7 +295,7 @@
 						<div class="product-item men">
 							<div class="product product_filter">
 								<div class="product_image">
-									<img src="images/product_10.png" alt="">
+									<img src="resources/images/product_10.png" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
@@ -499,7 +373,7 @@
 								<div class="product-item">
 									<div class="product discount">
 										<div class="product_image">
-											<img src="images/product_1.png" alt="">
+											<img src="resources/images/product_1.png" alt="">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
@@ -517,7 +391,7 @@
 								<div class="product-item women">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_2.png" alt="">
+											<img src="resources/images/product_2.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
@@ -535,7 +409,7 @@
 								<div class="product-item women">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_3.png" alt="">
+											<img src="resources/images/product_3.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
@@ -552,7 +426,7 @@
 								<div class="product-item accessories">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_4.png" alt="">
+											<img src="resources/images/product_4.png" alt="">
 										</div>
 										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 										<div class="favorite favorite_left"></div>
@@ -570,7 +444,7 @@
 								<div class="product-item women men">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_5.png" alt="">
+											<img src="resources/images/product_5.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
@@ -587,7 +461,7 @@
 								<div class="product-item accessories">
 									<div class="product discount">
 										<div class="product_image">
-											<img src="images/product_6.png" alt="">
+											<img src="resources/images/product_6.png" alt="">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
@@ -605,7 +479,7 @@
 								<div class="product-item women">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_7.png" alt="">
+											<img src="resources/images/product_7.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
@@ -622,7 +496,7 @@
 								<div class="product-item accessories">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_8.png" alt="">
+											<img src="resources/images/product_8.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
@@ -639,7 +513,7 @@
 								<div class="product-item men">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_9.png" alt="">
+											<img src="resources/images/product_9.png" alt="">
 										</div>
 										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 										<div class="favorite favorite_left"></div>
@@ -657,7 +531,7 @@
 								<div class="product-item men">
 									<div class="product">
 										<div class="product_image">
-											<img src="images/product_10.png" alt="">
+											<img src="resources/images/product_10.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
