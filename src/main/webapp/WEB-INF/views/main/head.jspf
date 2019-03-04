@@ -3,38 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
 <title>MOVIECUBE</title>
 <meta >
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="icon" type="image/png" href="/moviecube/resources/images/favicon.png"/>
-
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
+<!-- <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main.css "/> -->
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/animate/animate.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/css-hamburgers/hamburgers.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/animsition/css/animsition.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/select2/select2.min.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/daterangepicker/daterangepicker.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/MagnificPopup/magnific-popup.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/util.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/docs.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/categories_responsive.css"> -->
 
 <script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
 <script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
@@ -44,9 +30,16 @@
 <script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
 <script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
 <script src="/moviecube/resources/js/custom.js " ></script>
+<!-- <script src="/moviecube/resources/js/main.js " ></script> -->
 <script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script >
+	function showPageSelectedMovie(num) 
+	{ 
+		window.open("/moviecube/reserve.do", "a", "width=968, height=816");
+	}
+</script>
 <script>
-  $(document).ready(function(){
+  $(document).ready(function(){ 
     $('.slider').bxSlider({
     	auto: true, 
     	speed: 500, 
@@ -63,15 +56,3 @@
     $("#thing-with-videos").fitVids();
   });
 </script>
-<script>
-$('#loginModal').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var recipient = button.data('whatever') // Extract info from data-* attributes
-	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-	  var modal = $(this)
-	  modal.find('.modal-title').text('New message to ' + recipient)
-	  modal.find('.modal-body input').val(recipient)
-	})
-</script>
-</head>
