@@ -1,30 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>MOVIECUBE</title>
-<meta charset="utf-8">
+<meta >
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../css/bootstrap4/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="../css/main_styles.css">
-<link rel="stylesheet" type="text/css" href="../css/responsive.css">
-<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
 
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../css/bootstrap4/popper.js"></script>
-<script src="../css/bootstrap4/bootstrap.min.js"></script>
-<script src="../plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="../plugins/easing/easing.js"></script>
-<script src="../plugins/jquery.fitvids.js"></script>
-<script src="../js/custom.js"></script>
-<script src="../js/jquery.bxslider.min.js"></script>
+<script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
+<script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
+<script src="/moviecube/resources/css/bootstrap4/bootstrap.min.js "  ></script>
+<script src="/moviecube/resources/plugins/Isotope/isotope.pkgd.min.js "  ></script>
+<script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
+<script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
+<script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
+<script src="/moviecube/resources/js/custom.js " ></script>
+<script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
 <script>
   $(document).ready(function(){
     $('.slider').bxSlider({
@@ -430,14 +431,14 @@
 		</div>
 	</div>
 
-	<!-- Deal of the week -->
 
+	<!-- Deal of the week -->
 	<div class="deal_ofthe_week">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-6">
 					<div class="deal_ofthe_week_img">
-						<img src="images/deal_of_the_week.jpg" alt="">
+						<img src="resources/images/deal_of_the_week.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-6 text-right deal_ofthe_week_col">
@@ -470,8 +471,8 @@
 		</div>
 	</div>
 
-	<!-- Best Sellers -->
 
+	<!-- Best Sellers -->
 	<div class="best_sellers">
 		<div class="container">
 			<div class="row">
@@ -676,8 +677,8 @@
 		</div>
 	</div>
 
-	<!-- Benefit -->
 
+	<!-- Benefit -->
 	<div class="benefit">
 		<div class="container">
 			<div class="row benefit_row">
