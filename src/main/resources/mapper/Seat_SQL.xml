@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="seat">
+
+	<!-- 상영관 별 좌석 리스트 -->
+	<select id="selectScreenSeat" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM SEAT
+			WHERE SCREEN_NO = #{SCREEN_NO}
+			ORDER BY SEAT_ROW DESC, SEAT_COL DESC
+		]]>
+	</select>
+
+	<!-- 좌석 입력 -->
+	<insert id="insertSeat" parameterType="hashmap"
+		useGeneratedKeys="true" keyProperty="SEAT_NO">
+		<selectKey keyProperty="SEAT_NO" resultType="int"
+			order="BEFORE">
+			SELECT SEAT_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+	<![CDATA[
+		INSERT INTO SEAT
+		(
+			SEAT_NO,
+			SCREEN_NO,
+			SEAT_ROW,
+			SEAT_COL
+		)
+		VALUES
+		(
+			#{SEAT_NO},
+			#{SCREEN_NO},
+			#{SEAT_ROW},
+			#{SEAT_COL}
+		)
+	]]>
+		
+	</insert>
+</mapper>

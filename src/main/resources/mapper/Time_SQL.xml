@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="time">
+
+	<!-- 상영일정 리스트 -->
+	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
+	
+	
+	</select>
+
+
+	<!-- 상영일정 등록 -->
+	<insert id="insertTime" parameterType="hashmap"
+		useGeneratedKeys="true" keyProperty="TIME_NO">
+		<selectKey keyProperty="TIME_NO" resultType="int"
+			order="BEFORE">
+			SELECT MC_TIME_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+	<![CDATA[
+		INSERT INTO TIME
+		(
+			TIME_NO,
+			MOVIE_NO,
+			CINEMA_NO,
+			SCREEN_NO,
+			TIME_DATE,
+			START_TIME,
+			END_TIME,
+			MOVIE_CNT
+		)
+		VALUES
+		(
+			#{TIME_NO},
+			#{MOVIE_NO},
+			#{CINEMA_NO},
+			#{SCREEN_NO},
+			#{TIME_DATE},
+			#{START_TIME},
+			#{END_TIME},
+			#{MOVIE_CNT}
+		)
+	]]>
+	</insert>
+	
+	<update id="updateTime" parameterType = "hashmap">
+		<![CDATA[
+			UPDATE TIME 
+			SET
+				MOVIE_NO = #{MOVIE_NO}
+				CINEMA_NO = #{CINEMA_NO}
+				SCREEN_NO = #{SCREEN_NO}
+				TIME_DATE = #{TIME_DATE}
+				START_TIME = #{START_TIME}
+				END_TIME = #{END_TIME}
+				MOVIE_CNT = #{MOVIE_CNT}
+			WHERE
+				TIME_NO = #{TIME_NO}
+		]]>
+	</update>
+	
+	
+	<!-- 상영일정 삭제 -->
+	<delete id="deleteTime" parameterType="hashmap">
+		<![CDATA[
+		DELETE FROM TIME
+		WHERE TIME_NO = #{TIME_NO}
+		]]>
+	</delete>
+
+
+</mapper>

@@ -23,7 +23,7 @@
 	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO">
 		<selectKey keyProperty="MEMBER_NO" resultType="int" order="BEFORE">
-			SELECT MC_MEMBER_SEQ_NO.NEXTVAL FROM DUAL
+			SELECT MC_MEMBER_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 	<![CDATA[
 		INSERT INTO MC_MEMBER
