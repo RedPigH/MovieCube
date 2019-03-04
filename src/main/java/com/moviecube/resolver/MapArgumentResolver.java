@@ -27,8 +27,8 @@ public class MapArgumentResolver implements HandlerMethodArgumentResolver{
 		CommandMap commandMap = new CommandMap();
 		
 		HttpServletRequest request = (HttpServletRequest)webRequest.getNativeRequest();
-		Enumeration<?> enumeration = request.getParameterNames();	// '?name=½ÂÇö'À¸·Î url Äõ¸®°¡ ¿À¸é 
-																	// 'name'ÀÌ¶ó´Â ÆÄ¶ó¹ÌÅÍ ÀÌ¸§¸¸ »Ì¾Æ¼­ enumeration¿¡ ÀúÀå
+		Enumeration<?> enumeration = request.getParameterNames();	// '?name=ìŠ¹í˜„'ìœ¼ë¡œ url ì¿¼ë¦¬ê°€ ì˜¤ë©´ 
+																	// 'name'ì´ë¼ëŠ” íŒŒë¼ë¯¸í„° ì´ë¦„ë§Œ ë½‘ì•„ì„œ enumerationì— ì €ì¥
 		
 		String key = null;
 		String[] values = null;
@@ -36,9 +36,9 @@ public class MapArgumentResolver implements HandlerMethodArgumentResolver{
 			key = (String)enumeration.nextElement();		
 			values = request.getParameterValues(key);
 			if(values != null) {
-				commandMap.put(key, (values.length > 1) ? values:values[0]);	//while¹®À¸·Î key°ª ÀúÀå, 
-			}																	//valuesÀÇ ±æÀÌ°¡ 1º¸´Ù Å©¸é ±×³É values¸¦ ³Ö°í
-		}																	    //		                        ÀÛÀ¸¸é values¹è¿­ÀÇ 0¹øÀ» ³Ö´Â´Ù.
+				commandMap.put(key, (values.length > 1) ? values:values[0]);	//whileë¬¸ìœ¼ë¡œ keyê°’ ì €ì¥, 
+			}																	//valuesì˜ ê¸¸ì´ê°€ 1ë³´ë‹¤ í¬ë©´ ê·¸ëƒ¥ valuesë¥¼ ë„£ê³ 
+		}																	    //		                        ì‘ìœ¼ë©´ valuesë°°ì—´ì˜ 0ë²ˆì„ ë„£ëŠ”ë‹¤.
 		return commandMap;
 	}
 	

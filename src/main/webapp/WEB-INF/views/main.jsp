@@ -151,7 +151,7 @@
 		<div class="slider">
 			<div>
 			<div class="main_slider"
-				style="background-image: url(images/lovelive.jpg)">
+				style="background-image: url(resources/images/lovelive.jpg)">
 				<div class="container fill_height">
 					<div class="row align-items-center fill_height">
 						<div class="row">
@@ -173,7 +173,7 @@
 			
 			<div>
 			<div class="main_slider"
-				style="background-image: url(images/wall-E.jpg)">
+				style="background-image: url(resources/images/wall-E.jpg)">
 				<div class="container fill_height">
 					<div class="row align-items-center fill_height">
 						<div class="row">
@@ -194,7 +194,7 @@
 			
 			<div>
 			<div class="main_slider"
-				style="background-image: url(images/Interstella.jpg)">
+				style="background-image: url(resources/images/Interstella.jpg)">
 				<div class="container fill_height">
 					<div class="row align-items-center fill_height">
 						<div class="row">
@@ -215,7 +215,7 @@
 			
 			<div>
 			<div class="main_slider"
-				style="background-image: url(images/starwars.jpg)">
+				style="background-image: url(resources/images/starwars.jpg)">
 				<div class="container fill_height">
 					<div class="row align-items-center fill_height">
 						<div class="row">
