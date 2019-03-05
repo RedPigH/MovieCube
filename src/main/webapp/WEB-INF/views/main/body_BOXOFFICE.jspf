@@ -2,18 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="/moviecube/resources/plugins/themify-icons/themify-icons.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_styles.css">
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_responsive.css">
+
+<!-- <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/movie_detail/single_responsive.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/movie_detail/single_styles.css"> -->
 
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="width: 1000px;">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
     	<%@ include file="/WEB-INF/views/detail/movie_detail.jspf" %>
     </div>
   </div>
 </div>
+
 
 
 <div class="new_arrivals">
@@ -30,7 +31,7 @@
 					<div class="new_arrivals_sorting">
 						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
 							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">HOT</li>
-							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">최신개봉작</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">최근개봉작</li>
 							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">상영예정작</li>
 						</ul>
 					</div>
