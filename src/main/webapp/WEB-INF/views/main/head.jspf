@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="ko">
+<title>MOVIECUBE</title>
+<meta >
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="/moviecube/resources/images/favicon.png"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/bootstrap4/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/OwlCarousel2-2.2.1/animate.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/main_styles.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/docs.min.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
+
+<script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
+<script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
+<script src="/moviecube/resources/css/bootstrap4/bootstrap.min.js "  ></script>
+<script src="/moviecube/resources/plugins/Isotope/isotope.pkgd.min.js "  ></script>
+<script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
+<script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
+<script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
+<script src="/moviecube/resources/js/custom.js " ></script>
+<script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script>
+  $(document).ready(function(){ 
+    $('.slider').bxSlider({
+    	auto: true, 
+    	speed: 500, 
+    	pause: 3500, 
+    	mode:'fade', 
+    	pager:true,
+    	/* video: true, */
+    });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $("#thing-with-videos").fitVids();
+  });
+</script>

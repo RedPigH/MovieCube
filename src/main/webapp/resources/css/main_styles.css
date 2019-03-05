@@ -68,6 +68,7 @@ div
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 ul
 {
 	list-style: none;
@@ -459,6 +460,8 @@ section
 	display: inline-block;
 	position: relative;
 	min-width: 50px;
+	border-right: solid 1px #33333b;
+	padding-right: 20px;
 	padding-left: 20px;
 	text-align: center;
 	vertical-align: middle;
@@ -467,7 +470,7 @@ section
 .QnA > a
 {
 	display: block;
-	color: #ffffff;
+	color: #b5aec4;
 	font-weight: 400;
 	height: 50px;
 	line-height: 50px;
@@ -513,11 +516,11 @@ section
 	display: block;
 	color: #232530;
 	border-bottom: solid 1px #dddddd;
-	font-size: 14px;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-ms-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
+	font-size: 13px;
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	-ms-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
 }
 .QnA_selection li a:hover
@@ -559,8 +562,8 @@ section
 {
 	display: block;
 	color: #1e1e27;
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 800;
 	text-transform: uppercase;
 	padding: 20px;
 	-webkit-transition: color 0.3s ease;
