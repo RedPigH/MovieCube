@@ -3,7 +3,7 @@
 
 <mapper namespace="reservation">
 
-	<!-- 예약하기 -->
+	<!-- 예매하기 -->
 	<insert id="insertReservation" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="RES_NO">
 		<selectKey keyProperty="RES_NO" resultType="int" order="BEFORE">
 			SELECT RESERVATION_NO_SEQ.NEXTVAL FROM DUAL
@@ -33,7 +33,20 @@
 		<![CDATA[
 			INSERT INTO RES_QUANTITY
 			(
-				
+				RES_NO,
+				NOMAL,
+				YOUTH,
+				CHILD,
+				PREFERENCE
+			)
+			VALUES
+			(
+				#{RES_NO},
+				#{NOMAL},
+				#{YOUTH},
+				#{CHILD},
+				#{PREFERENCE}
+			)
 		]]>
 	</insert>
 	
