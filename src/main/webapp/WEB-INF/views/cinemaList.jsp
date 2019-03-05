@@ -15,7 +15,7 @@
         <colgroup>
             <col width="10%"/>
             <col width="*"/>
-            <col width="35%"/>
+            <col width="50%"/>
             <col width="30%"/>
         </colgroup>
         <thead>
@@ -31,10 +31,10 @@
                 <c:when test="${fn:length(list) > 0}">
                     <c:forEach items="${list }" var="row">
                         <tr>
-                            <td>${row.CINEMA_NO }</td>
-                            <td>${row.CINEMA_NAME}</td>
-                            <td>${row.CINEMA_CONTENT}</td>
-                            <td>${row.CINEMA_ADDRESS}</td>
+                            <td align = "center">${row.CINEMA_NO }</td>
+                            <td align = "center">${row.CINEMA_NAME}</td>
+                            <td align = "center">${row.CINEMA_CONTENT}</td>
+                            <td align = "center">${row.CINEMA_ADDRESS}</td>
                         </tr>
                     </c:forEach>
                 </c:when>

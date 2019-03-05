@@ -12,13 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moviecube.common.CommandMap;
 
 @Controller
-public class CinemaController {
+public class AdminCinemaController {
 	
 	@Resource(name="cinemaService")
 	private CinemaService cinemaService;
 	
-	@RequestMapping(value = "/CinemaList.do")
-	public ModelAndView CinemaList(CommandMap commandMap) throws Exception{
+	@RequestMapping(value = "/cinemaList.do")
+	public ModelAndView cinemaList(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/cinemaList");
 		
 		List<Map<String,Object>> list = cinemaService.selectCinemaList(commandMap.getMap());
