@@ -5,10 +5,12 @@
 
 	<!-- 상영일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
-	
+		<![CDATA[
+			SELECT * FROM TIME
+			WHERE CINEMA_NO
+		]]>
 	
 	</select>
-
 
 	<!-- 상영일정 등록 -->
 	<insert id="insertTime" parameterType="hashmap"

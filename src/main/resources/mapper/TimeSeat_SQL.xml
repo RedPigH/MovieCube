@@ -4,5 +4,25 @@
 <mapper namespace="time_seat">
 	
 	<!-- 시간별 좌석 생성 -->
+	<insert id="insertTimeSeat" parameterType = "hashmap">
+	<![CDATA[
+		INSERT INTO TIME_SEAT(
+			SEAT_NO,
+			TIME_NO,
+			STATUS
+		} 
+		VALUES
+		(
+			SEAT_NO = #{SEAT_NO},
+			TIME_NO = #{TIME_NO}
+		)
+	]]>
+	</insert>
 	
+	<!-- 좌석 예매 상태 변경 -->
+	<update id="updateStaus" parameterType = "hashmap">
+		UPDATE TIME_SEAT
+		SET STATUS = 'Y'
+		WHERE SEAT_NO = #{SEAT_NO} AND TIME_NO = #{TIME_NO}
+	</update>
 </mapper>

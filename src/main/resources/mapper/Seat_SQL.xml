@@ -11,6 +11,14 @@
 			ORDER BY SEAT_ROW DESC, SEAT_COL DESC
 		]]>
 	</select>
+	
+	<!-- 상영관 별 좌석 개수 -->
+	<select id="ScreenSeatNum" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT COUNT(SEAT_NO) FROM SEAT
+			WHERE SCREEN_NO = #{SCREEN_NO}
+		]]>
+	</select>
 
 	<!-- 좌석 입력 -->
 	<insert id="insertSeat" parameterType="hashmap"
