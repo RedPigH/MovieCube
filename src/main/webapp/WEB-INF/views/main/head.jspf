@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/responsive.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/docs.min.css "/>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/jquery.bxslider.css "/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_responsive.css">
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/single_styles.css">
 
 <script src="/moviecube/resources/js/jquery-3.2.1.min.js"  ></script>
 <script src="/moviecube/resources/css/bootstrap4/popper.js "  ></script>
@@ -27,8 +29,10 @@
 <script src="/moviecube/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js "  ></script>
 <script src="/moviecube/resources/plugins/easing/easing.js "  ></script>
 <script src="/moviecube/resources/plugins/jquery.fitvids.js "  ></script>
+<script src="/moviecube/resources/plugins/jquery-ui.js"></script>
 <script src="/moviecube/resources/js/custom.js " ></script>
 <script src="/moviecube/resources/js/jquery.bxslider.min.js "  ></script>
+<script src="/moviecube/resources/js/single_custom.js"></script>
 <script>
   $(document).ready(function(){ 
     $('.slider').bxSlider({
@@ -37,6 +41,7 @@
     	pause: 3500, 
     	mode:'fade', 
     	pager:true,
+    	autoHover: true    	
     	/* video: true, */
     });
   });

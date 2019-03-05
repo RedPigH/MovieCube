@@ -85,20 +85,6 @@
 
 @media only screen and (max-width: 991px)
 {
-	h1{font-size: 48px;}
-	h2{font-size: 36px;}
-	.top_nav
-	{
-		display: none;
-	}
-	.navbar_menu
-	{
-		display: none;
-	}
-	.hamburger_container
-	{
-		display: block;
-	}
 	.single_product_container
 	{
 		margin-top: 100px;
