@@ -23,15 +23,17 @@
 </head>
 <body>
 	극장선택
-	<select id="selectCinema">
+	<form name="fmCart" action="/moviecube/reserve.do">
+	<select id="selectCinema" name="selectCinema">
 		<option>선택</option>
 		<c:forEach items="${cinemaList }" var="row">
 			<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
 		</c:forEach>
 	</select>
 	<br><br>
-	<input type="button" value="선택" onclick="selectCinema();">
+	<input type="submit" value="선택">
 	<input type="button" value="뒤로" onclick="location.href = '/moviecube/reserve.do'">
+	</form>
 	
 	
 	
