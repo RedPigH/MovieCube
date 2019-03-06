@@ -47,7 +47,7 @@ COLOR PALETTE
 
 .single_product_container
 {
-	margin-top: 80px;
+	margin-top: 20px;
 	padding-bottom: 80px;
 	border-bottom: solid 1px #ebebeb;
 }
@@ -85,7 +85,7 @@ COLOR PALETTE
 }
 .image_col
 {
-	padding-right: 30px;
+	padding-right: 15px;
 }
 .single_product_image
 {
@@ -96,9 +96,9 @@ COLOR PALETTE
 {
 	position: absolute;
 	top: 0;
-	left: 40px;
-	width: 120%;
-	height: 112%;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -369,7 +369,7 @@ COLOR PALETTE
 
 .reviews_title
 {
-	margin-bottom: 58px;
+	margin-bottom: 50px;
 }
 .user_review_container
 {
@@ -378,7 +378,7 @@ COLOR PALETTE
 }
 .reviews_col
 {
-	padding-right: 30px;
+	padding-right: 15px;
 }
 .user_pic
 {
@@ -426,11 +426,12 @@ COLOR PALETTE
 
 .add_review
 {
-	margin-top: 94px;
+	margin-top: 60px;
+	margin-bottom: 50px
 }
 #review_form > div
 {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 #review_form div:nth-child(2) h1
 {
