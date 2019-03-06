@@ -2,10 +2,20 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-
+<style>
+@media ( min-width : 500px)
+	/* The minimum width of the display area, such as a browser window*/ {
+	.modal-lg {
+		max-width: 1000px;
+		width: 1000px;
+		position: relative;
+		margin: auto
+	}
+}
+</style>
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-	aria-labelledby="myLargeModalLabel" aria-hidden="true" style="padding-right: none; position: relative">
+	aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content" style="width: 1000px">
 			<%@ include file="/WEB-INF/views/detail/movieDetail.jspf"%>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reservation">
+
+	<!-- 예매하기 -->
+	<insert id="insertReservation" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="RES_NO">
+		<selectKey keyProperty="RES_NO" resultType="int" order="BEFORE">
+			SELECT RESERVATION_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>>
+		<![CDATA[
+			INSERT INTO RESERVATION
+			(
+				RES_NO,
+				MEMBER_NO,
+				TIME_NO,
+				RES_DATE,
+				TOTAL_PRICE
+			)
+			VALUES
+			(
+				#{RES_NO},
+				#{MEMBER_NO},
+				#{TIME_NO},
+				SYSDATE,
+				#{TOTAL_PRICE}
+			)
+		]]>
+	</insert>
+	
+	<!-- 예매 티켓 수량 -->
+	<insert id="insertResQuantity" parameterType = "hashmap">
+		<![CDATA[
+			INSERT INTO RES_QUANTITY
+			(
+				RES_NO,
+				NOMAL,
+				YOUTH,
+				CHILD,
+				PREFERENCE
+			)
+			VALUES
+			(
+				#{RES_NO},
+				#{NOMAL},
+				#{YOUTH},
+				#{CHILD},
+				#{PREFERENCE}
+			)
+		]]>
+	</insert>
+	
+	<!-- 회원별 예매 리스트 -->
+	<select id="MyReservation" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM RESERVATION
+			WHERE MEMBER_NO = #{MEMBER_NO}
+		]]>	
+	</select>
+	
+	<!-- 예매 취소 -->
+	<delete id="deleteReservation" parameterType = "hashmap">
+		<![CDATA[
+			DELETE FROM RESERVATION
+			WHERE MEMBER_NO = #{MEMBER_NO}
+		]]>
+	</delete>
+
+</mapper>
