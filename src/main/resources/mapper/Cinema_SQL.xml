@@ -12,7 +12,7 @@
 	</select>
 	
 	<!-- 영화관 정보 작성 -->
-	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO">
+	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="CINEMA_NO">
 		<selectKey keyProperty="CINEMA_NO" resultType="int" order="BEFORE">
 			SELECT CINEMA_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>

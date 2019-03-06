@@ -10,6 +10,7 @@ import com.moviecube.dao.AbstractDAO;
 @Repository("screenDAO")
 public class ScreenDAO extends AbstractDAO {
 	
+	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectScreenList(Map<String,Object> map) throws Exception{
 		return (List<Map<String,Object>>) selectList("screen.selectScreenList", map);
 	}

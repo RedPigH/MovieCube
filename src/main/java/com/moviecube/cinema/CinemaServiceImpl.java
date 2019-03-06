@@ -15,7 +15,7 @@ public class CinemaServiceImpl implements CinemaService{
 
 	@Override
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
+
 		return cinemaDAO.selectCinemaList(map);
 	}
 	
