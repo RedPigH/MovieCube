@@ -8,6 +8,6 @@ public interface ReserveService {
 	/* About cinema  */
 	List<Map<String,Object>> selectCinemaList(Map<String,Object> map) throws Exception;
 	
-	/* About something */
-	// List <..
+	/* About movie */
+	List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception;
 }

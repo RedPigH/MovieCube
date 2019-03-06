@@ -16,24 +16,14 @@
 	<br>
 
 	<hr>
-	영화관 선택
-	<select>
-		<c:forEach items="${cinemaList }" var="row">
-			<%-- <option value="${row.CINEMA_NO}">${row.CINEMA_NAME}> </option> --%>
-			<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
-		</c:forEach>
-	</select>
+	<input type="button" value="극장 선택" onclick = "location.href = '/moviecube/reserve_step1.do'"> 
+
 	<br>
 	<br>
 
 	<hr>
-	영화 선택
-	<select>
-		<c:forEach items="${cinemaList }" var="row">
-			<%-- <option value="${row.CINEMA_NO}">${row.CINEMA_NAME}> </option> --%>
-			<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
-		</c:forEach>
-	</select>
+	<input type="button" value="영화 선택" onclick = "location.href = '/moviecube/reserve_step2.do'">
+	
 
 
 </body>
