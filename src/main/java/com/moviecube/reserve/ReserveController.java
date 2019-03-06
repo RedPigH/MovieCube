@@ -22,7 +22,7 @@ public class ReserveController {
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
 
-		System.out.println("¿ö¿ì¿ö1 : ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½1 : ");
 		//int temp = (Integer)request.getAttribute("cinema_no");
 
 		return mv;
@@ -32,18 +32,18 @@ public class ReserveController {
 	public ModelAndView reserveStep1(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step1");
 
-		/* ±ØÀå °ü·Ã */
+		/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
 		mv.addObject("cinemaList", cinemaList);
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_step2.do") // ±ØÀå¼±ÅÃÈ­¸é
+	@RequestMapping(value = "/reserve_step2.do") // ï¿½ï¿½ï¿½å¼±ï¿½ï¿½È­ï¿½ï¿½
 	public ModelAndView reserveStep2(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step2");
 
-		/* ¿µÈ­ °ü·Ã */
+		/* ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ */
 		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
 		mv.addObject("movieList", movieList);
 
