@@ -14,22 +14,16 @@ import com.moviecube.common.CommandMap;
 
 @Controller
 public class ReserveController {
+
 	@Resource(name = "reserveService")
 	private ReserveService reserveService;
 
-	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
 
-<<<<<<< HEAD
 		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½1 : ");
 		//int temp = (Integer)request.getAttribute("cinema_no");
-=======
-		System.out.println("¿ö¿ì¿ö1 : ");
-		String temp = request.getParameter("selectCinema");
-		System.out.println("ÀÌ¿¡¿À¿¡¿À¾Æ¾îÀÌ³ª : " + temp);
->>>>>>> 85ff0a8380ff4d24ef3d755dbe972bcee75b4a01
 
 		return mv;
 	}
