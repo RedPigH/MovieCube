@@ -22,9 +22,9 @@ public class ReserveController {
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
 
-		System.out.println("¿ö¿ì¿ö1 : ");
+		System.out.println("ì›Œìš°ì›Œ1 : ");
 		String temp = request.getParameter("selectCinema");
-		System.out.println("ÀÌ¿¡¿À¿¡¿À¾Æ¾îÀÌ³ª : " + temp);
+		System.out.println("ì´ì—ì˜¤ì—ì˜¤ì•„ì–´ì´ë‚˜ : " + temp);
 
 		return mv;
 	}
@@ -33,18 +33,18 @@ public class ReserveController {
 	public ModelAndView reserveStep1(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step1");
 
-		/* ±ØÀå °ü·Ã */
+		/* ê·¹ì¥ ê´€ë ¨ */
 		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
 		mv.addObject("cinemaList", cinemaList);
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_step2.do") // ±ØÀå¼±ÅÃÈ­¸é
+	@RequestMapping(value = "/reserve_step2.do") // ê·¹ì¥ì„ íƒí™”ë©´
 	public ModelAndView reserveStep2(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step2");
 
-		/* ¿µÈ­ °ü·Ã */
+		/* ì˜í™” ê´€ë ¨ */
 		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
 		mv.addObject("movieList", movieList);
 
