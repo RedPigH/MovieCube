@@ -14,16 +14,17 @@ import com.moviecube.common.CommandMap;
 
 @Controller
 public class ReserveController {
-
 	@Resource(name = "reserveService")
 	private ReserveService reserveService;
 
+	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
 
-		System.out.println("�����1 : ");
-		//int temp = (Integer)request.getAttribute("cinema_no");
+		System.out.println("워우워1 : ");
+		String temp = request.getParameter("selectCinema");
+		System.out.println("이에오에오아어이나 : " + temp);
 
 		return mv;
 	}
@@ -32,18 +33,18 @@ public class ReserveController {
 	public ModelAndView reserveStep1(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step1");
 
-		/* ���� ���� */
+		/* 극장 관련 */
 		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
 		mv.addObject("cinemaList", cinemaList);
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_step2.do") // ���弱��ȭ��
+	@RequestMapping(value = "/reserve_step2.do") // 극장선택화면
 	public ModelAndView reserveStep2(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step2");
 
-		/* ��ȭ ���� */
+		/* 영화 관련 */
 		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
 		mv.addObject("movieList", movieList);
 
