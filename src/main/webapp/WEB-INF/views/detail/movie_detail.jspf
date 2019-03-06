@@ -3,22 +3,15 @@
 <!DOCTYPE html>
 
 
-<div class="modal-header">
-	<h4 class="modal-title" id="myLargeModalLabel" style="margin-left: 80px">
-		영화 정보
-	</h4>
-	<button type="button" class="close" data-dismiss="modal"
-		aria-label="Close">
-		<span aria-hidden="true">×</span>
-	</button>
-</div>
-<div class="modal-body">
+
 <div class="container single_product_container">
+
+
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="single_product_pics">
 				<div class="row">
-					<div class="col-lg-9 image_col order-lg-2 order-1" style="margin-left: 60px">
+					<div class="col-lg-9 image_col order-lg-2 order-1">
 						<div class="single_product_image">
 							<div class="single_product_image_background"
 								style="background-image: url(resources/images/captain_marvel.jpg)"></div>
@@ -30,9 +23,7 @@
 		<div class="col-lg-6" style="padding-right: 40px">
 			<div class="product_details">
 				<div class="product_details_title">
-					<h2>
-						캡틴 마블<span><font color="white">=박재연</font></span>
-					</h2>
+					<h2>캡틴 마블<span><font color="white">=박재연</font></span></h2>
 					<h6>Captain Marvel</h6>
 					<br>
 					<hr>
@@ -58,8 +49,8 @@
 					<span>현재 상영중!!</span>
 				</div>
 
-				
-				<div align="center" style="margin-top: 50px">
+				<br> <br> <br>
+				<div align="center">
 					<button type="button" class="btn btn-lg booking_button"
 						style="padding-right: 65px; padding-left: 65px;">예매하기</button>
 					<button type="button" class="btn btn-lg booking_button"
@@ -94,7 +85,7 @@
 				<!-- Tab 영화 상세 정보 -->
 
 				<div id="tab_1" class="tab_container active">
-					<div class="row">
+					<div class="row" style="margin-left: 20px">
 						<div class="col additional_info_col">
 							<div class="tab_title additional_info_title">
 								<h4>영화 상세 정보</h4>
@@ -125,23 +116,23 @@
 		<!-- 영화 리뷰 -->
 
 		<div id="tab_2" class="tab_container">
-			<div class="row">
+			<div class="row" style="margin-left: 20px">
 
 				<!-- 관람객 리뷰 -->
 
-				<div class="col-lg-12 reviews_col">
+				<div class="col-lg-6 reviews_col">
 					<div class="tab_title reviews_title">
 						<h4>영화 리뷰</h4>
 					</div>
 
 
 					<!-- 리뷰 추가-->
-					<div class="col-lg-12 add_review_col">
+					<div class="col-lg-8 add_review_col">
 
 						<div class="add_review">
 							<form id="review_form" action="post">
 								<div>
-									<h1 style="width: 100px; margin-bottom: 0px">나의 별점:</h1>
+									<h1>나의 별점:</h1>
 									<ul class="user_star_rating">
 										<li><i class="fa fa-star" aria-hidden="true"></i></li>
 										<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -160,8 +151,8 @@
 							</form>
 						</div>
 					</div>
-
-
+					
+					
 					<!-- 관람객 리뷰 -->
 
 					<div class="user_review_container d-flex flex-column flex-sm-row">
@@ -209,7 +200,7 @@
 								aliqua.</p>
 						</div>
 					</div>
-
+					
 					<!-- 관람객 리뷰 -->
 
 					<div class="user_review_container d-flex flex-column flex-sm-row">
@@ -257,11 +248,11 @@
 								aliqua.</p>
 						</div>
 					</div>
-
+					
 				</div>
 
 			</div>
 		</div>
-	</div>
+
 	</div>
 </div>
