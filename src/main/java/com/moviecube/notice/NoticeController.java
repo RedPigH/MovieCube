@@ -15,79 +15,79 @@ import com.moviecube.common.CommandMap;
 
 @Controller
 public class NoticeController {
-Logger log = Logger.getLogger(this.getClass());
+	Logger log = Logger.getLogger(this.getClass());
 
-@Resource(name="noticeService")
-private NoticeService noticeService;
+	@Resource(name = "noticeService")
+	private NoticeService noticeService;
 
-@RequestMapping(value="/notice/adminNoticeList.do")
-public ModelAndView noticeList(Map<String,Object>commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("noticeList");
-	
-	List<Map<String,Object>>list = noticeService.selectBoardList(commandMap);
-	mv.addObject("list",list);
-	
-	return mv;
-}
+	@RequestMapping(value = "/notice/adminNoticeList.do")
+	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("noticeList");
 
-@RequestMapping(value="/notice/adminNoticeWriteForm.do")
-public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("noticeWriteForm");
-	
-	return mv;
-	
-}
+		List<Map<String, Object>> list = noticeService.selectBoardList(commandMap);
+		mv.addObject("list", list);
 
-@RequestMapping(value="/notice/adminNoticeWrite.do")
-public ModelAndView writeNotice(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-	
-	noticeService.insertBoard(commandMap.getMap());
-	
-	return mv;
-	
-}
+		return mv;
+	}
 
-@RequestMapping(value="/notice/adminNoticeDetail.do")
-public ModelAndView noticeDetail(CommandMap commandMap ) throws Exception{
-	ModelAndView mv = new ModelAndView("noticeDetail");
-	
-	Map<String,Object> map = noticeService.selectBoardDetail(commandMap.getMap());
-	System.out.println(commandMap.getMap());
-	mv.addObject("map",map);
-	
-	return mv;
-}
+	@RequestMapping(value = "/notice/adminNoticeWriteForm.do")
+	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("noticeWriteForm");
 
-@RequestMapping(value="/notice/adminNoticeModifyForm.do")
-public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("noticeModify");
-	
-	Map<String,Object> map = noticeService.selectBoardDetail(commandMap.getMap());
-	mv.addObject("map", map);
-	
-	return mv;
-	
-}
+		return mv;
 
-@RequestMapping(value="/notice/adminNoticeModify.do")
-public ModelAndView modifyNotice(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-	
-	noticeService.updateBoard(commandMap.getMap());
-	
-	mv.addObject("NOTICE_NO", commandMap.get("NOTICE_NO"));
-	return mv;
-}
+	}
 
-@RequestMapping(value="/notice/adminNoticeDelete.do")
-public ModelAndView noticeDelete(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-    System.out.println("�����ٺ�:"+commandMap.getMap());
-	noticeService.deleteBoard(commandMap.getMap());
-	
-	return mv;
-}
+	@RequestMapping(value = "/notice/adminNoticeWrite.do")
+	public ModelAndView writeNotice(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
+
+		noticeService.insertBoard(commandMap.getMap());
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/notice/adminNoticeDetail.do")
+	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("noticeDetail");
+
+		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
+		System.out.println(commandMap.getMap());
+		mv.addObject("map", map);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/notice/adminNoticeModifyForm.do")
+	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("noticeModify");
+
+		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
+		mv.addObject("map", map);
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/notice/adminNoticeModify.do")
+	public ModelAndView modifyNotice(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
+
+		noticeService.updateBoard(commandMap.getMap());
+
+		mv.addObject("NOTICE_NO", commandMap.get("NOTICE_NO"));
+		return mv;
+	}
+
+	@RequestMapping(value = "/notice/adminNoticeDelete.do")
+	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
+		System.out.println("�����ٺ�:" + commandMap.getMap());
+		noticeService.deleteBoard(commandMap.getMap());
+
+		return mv;
+	}
 
 	/*
 	 * @RequestMapping(value="/ntoice/openNoticeList.do") public ModelAndView
@@ -107,4 +107,3 @@ public ModelAndView noticeDelete(CommandMap commandMap) throws Exception{
 	 * mv; }
 	 */
 }
-
