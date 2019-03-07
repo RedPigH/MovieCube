@@ -15,6 +15,11 @@ public class CinemaDAO extends AbstractDAO{
 		return (List<Map<String,Object>>) selectList("cinema.selectCinemaList", map);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> cinemaDetail(Map<String, Object> map) throws Exception{
+		return (Map<String,Object>) selectOne("cinema.selectOneCinema", map);
+	}
+	
 	public void insertCinema(Map<String, Object> map) throws Exception{
 		insert("cinema.insertCinema", map);
 	}

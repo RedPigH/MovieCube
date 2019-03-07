@@ -27,6 +27,17 @@ public class AdminCinemaController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/cinemaDetail.do")
+	public ModelAndView cinemaSelectOne(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/cinemaDetail.jsp");
+		
+		Map<String,Object> map = cinemaService.cinemaDetail(commandMap.getMap());
+		
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	
 	@RequestMapping(value = "/cinemaWriteForm.do")
 	public ModelAndView cinemaWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/cinemaWirte.jsp");
@@ -36,7 +47,7 @@ public class AdminCinemaController {
 	
 	@RequestMapping(value = "/cinemaWrite.do")
 	public ModelAndView cinemaWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/cinemaList");
+		ModelAndView mv = new ModelAndView("redirect:/cinemaList.do");
 		
 		cinemaService.insertCinema(commandMap.getMap());
 		
@@ -44,9 +55,32 @@ public class AdminCinemaController {
 	}
 	
 	@RequestMapping(value = "/cinemaUpdateForm.do")
-	public ModelAndView cinemaUpdate(CommandMap commandMap) throws Exception{
+	public ModelAndView cinemaUpdateForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/cinemaWirte.jsp");
-		/* mv.addObject("map", map); */
+		
+		Map<String,Object> map = cinemaService.cinemaDetail(commandMap.getMap());
+		
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/cinemaUpdate.do")
+	public ModelAndView cinemaUpdate(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/cinemaDetail.do");
+		
+		cinemaService.updateCinema(commandMap.getMap());
+		
+		mv.addObject("CINEMA_NO", commandMap.get("CINEMA_No"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/cinemaDelete.do")
+	public ModelAndView cinemaDelete(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/cinemaList.do");
+		
+		cinemaService.deleteCinema(commandMap.getMap());
 		
 		return mv;
 	}

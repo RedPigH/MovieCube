@@ -33,6 +33,11 @@ public class CinemaServiceImpl implements CinemaService{
 	public void deleteCinema(Map<String, Object> map) throws Exception {
 		cinemaDAO.deleteCinema(map);
 	}
+
+	@Override
+	public Map<String, Object> cinemaDetail(Map<String, Object> map) throws Exception {
+		return cinemaDAO.cinemaDetail(map);
+	}
 	
 	
 
