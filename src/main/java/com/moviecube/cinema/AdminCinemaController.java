@@ -26,5 +26,29 @@ public class AdminCinemaController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/cinemaWriteForm.do")
+	public ModelAndView cinemaWriteForm(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/cinemaWirte.jsp");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/cinemaWrite.do")
+	public ModelAndView cinemaWrite(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/cinemaList");
+		
+		cinemaService.insertCinema(commandMap.getMap());
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/cinemaUpdateForm.do")
+	public ModelAndView cinemaUpdate(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/cinemaWirte.jsp");
+		/* mv.addObject("map", map); */
+		
+		return mv;
+	}
 
 }

@@ -18,6 +18,21 @@ public class CinemaServiceImpl implements CinemaService{
 
 		return cinemaDAO.selectCinemaList(map);
 	}
+
+	@Override
+	public void insertCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.insertCinema(map);
+	}
+
+	@Override
+	public void updateCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.updateCinema(map);
+	}
+
+	@Override
+	public void deleteCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.deleteCinema(map);
+	}
 	
 	
 
