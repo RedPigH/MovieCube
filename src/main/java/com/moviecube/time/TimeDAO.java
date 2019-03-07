@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.moviecube.dao.AbstractDAO;
 
-@Repository("TimeDAO")
+@Repository("timeDAO")
 public class TimeDAO extends AbstractDAO {
 
 	@SuppressWarnings("unchecked")
