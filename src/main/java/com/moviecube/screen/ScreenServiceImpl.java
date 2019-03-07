@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service("screenService")
 public class ScreenServiceImpl implements ScreenService {
-	
+
 	@Resource(name = "screenDAO")
 	private ScreenDAO screenDAO;
 
@@ -18,7 +18,29 @@ public class ScreenServiceImpl implements ScreenService {
 
 		return screenDAO.selectScreenList(map);
 	}
-	
-	
+
+	@Override
+	public Map<String, Object> screenDetail(Map<String, Object> map) throws Exception {
+
+		return screenDAO.screenDetail(map);
+	}
+
+	@Override
+	public void insertScreen(Map<String, Object> map) throws Exception {
+
+		screenDAO.insertScreen(map);
+	}
+
+	@Override
+	public void updateScreen(Map<String, Object> map) throws Exception {
+
+		screenDAO.updateScreen(map);
+	}
+
+	@Override
+	public void deleteScreen(Map<String, Object> map) throws Exception {
+
+		screenDAO.deleteScreen(map);
+	}
 
 }

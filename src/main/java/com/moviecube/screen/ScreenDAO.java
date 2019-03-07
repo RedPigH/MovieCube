@@ -14,5 +14,22 @@ public class ScreenDAO extends AbstractDAO {
 	public List<Map<String,Object>> selectScreenList(Map<String,Object> map) throws Exception{
 		return (List<Map<String,Object>>) selectList("screen.selectScreenList", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> screenDetail(Map<String,Object> map) throws Exception{
+		return (Map<String,Object>) selectOne("screen.selectOneScreen", map);
+	}
+	
+	public void insertScreen(Map<String, Object> map) throws Exception{
+		insert("screen.insertScreen", map);
+	}
+	
+	public void updateScreen(Map<String, Object> map) throws Exception{
+		update("screen.updateScreen", map);
+	}
+	
+	public void deleteScreen(Map<String, Object> map) throws Exception{
+		delete("screen.deleteScreen", map);
+	}
 
 }

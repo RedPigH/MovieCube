@@ -11,6 +11,14 @@
 		]]>
 	</select>
 	
+	<!-- 상영관 선택 -->
+	<select id = "selectOneScreen" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FORM SCREEN
+			WHERE SCREEN_NO = #{SCREEN_NO}
+		]]>
+	</select>
+	
 	<!-- 상영관 정보 작성 -->
 	<insert id="insertScreen" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="SCREEN_NO">
 		<selectKey keyProperty="SCREEN_NO" resultType="int" order="BEFORE">

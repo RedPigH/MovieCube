@@ -7,4 +7,11 @@ public interface ScreenService {
 	
 	List<Map<String, Object>> selectScreenList(Map<String, Object> map) throws Exception;
 
+	Map<String, Object> screenDetail(Map<String, Object> map) throws Exception;
+	
+	void insertScreen(Map<String,Object> map) throws Exception;
+	
+	void updateScreen(Map<String,Object> map) throws Exception;
+	
+	void deleteScreen(Map<String,Object> map) throws Exception;
 }
