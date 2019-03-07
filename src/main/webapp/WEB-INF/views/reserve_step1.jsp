@@ -28,7 +28,7 @@
 			<option>선택</option>
 			<c:forEach items="${cinemaList }" var="row">
 				<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
-			</c:forEach>
+			</c:forEach> 
 		</select> <br>.
 		<br> 
 		<input type="hidden" name="selectMovie" value="${selectMovie }">
