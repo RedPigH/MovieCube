@@ -7,7 +7,6 @@
 	/* The minimum width of the display area, such as a browser window*/ {
 	.modal-lg {
 		max-width: 1000px;
-		width: 1000px;
 		position: relative;
 		margin: auto
 	}
