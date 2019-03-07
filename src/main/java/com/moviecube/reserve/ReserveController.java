@@ -18,62 +18,75 @@ public class ReserveController {
 	@Resource(name = "reserveService")
 	private ReserveService reserveService;
 
+	@SuppressWarnings("null")
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
+		String cinemaNo = "";
+		String movieNo = "";
+		Map<String, Object> cinemaMap = null;
+		Map<String, Object> movieMap = null;
 
-		// I don't know what it is ..
+		// 선택한 영화관 예매 홈 화면으로 불러오는 부분
 		if (request.getParameter("selectCinema") != null) {
-			
-			// System.out.println("테스트2: " + request.getParameter("selectCinema"));
-			
-			String cinemaNo = request.getParameter("selectCinema");
 
-			mv.addObject("cinemaNo", cinemaNo);
+			cinemaNo = request.getParameter("selectCinema");
 			commandMap.put("CINEMA_NO", cinemaNo); // key, value
-
-			Map<String, Object> cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
+			cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
 			mv.addObject("cinemaMap", cinemaMap);
-			
-			System.out.println("키테스트 : " + cinemaMap.get("CINEMA_NO"));
-			
+			mv.addObject("cinemaNo", cinemaNo); // 이 값을 영화선택 할 때도 줘서 값 유지시켜야됨.
+
 		}
 
-		// System.out.println("시네마 넘버 테스트 : " + cinema_no);
+		// 선택한 영화를 홈 화면으로 불러오는 부분
+		if (request.getParameter("selectMovie") != null) {
 
-		// (commandMap.getMap()).put("cinema_no", cinema_no);
-		// Map<String, Object> selectedCinema =
-		// reserveService.selectOneCinema(commandMap.getMap());
-		// reserveService.selectOneCinema(commandMap.getMap(), request);
+			movieNo = request.getParameter("selectMovie");
+			commandMap.put("MOVIE_NO", movieNo); // key, value
+			movieMap = reserveService.selectOneMovie(commandMap.getMap());
+			mv.addObject("movieMap", movieMap);
+			mv.addObject("movieNo", movieNo); // 이 값을 영화관선택할 때도 줘서 값 유지시켜야됨.
 
-		// mv.addObject("cinema_no", cinema_no);
-		// mv.addObject(selectedCinema);
+		}
 
 		return mv;
 	}
 
+	// 극장 리스트 전체
 	@RequestMapping(value = "/reserve_step1.do")
-	public ModelAndView reserveStep1(CommandMap commandMap) throws Exception {
+	public ModelAndView reserveStep1(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step1");
 
 		/* 극장 관련 */
 		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
 		mv.addObject("cinemaList", cinemaList);
 
+		if (request.getParameter("movieNo") != null) {
+			String movieNo = request.getParameter("movieNo");
+			mv.addObject("selectMovie", movieNo);
+		}
+
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_step2.do") // 극장선택화면
-	public ModelAndView reserveStep2(CommandMap commandMap) throws Exception {
+	// 영화  리스트 전체
+	@RequestMapping(value = "/reserve_step2.do")
+	public ModelAndView reserveStep2(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step2");
 
 		/* 영화 관련 */
 		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
 		mv.addObject("movieList", movieList);
 
+		if (request.getParameter("cinemaNo") != null) {
+			String cinemaNo = request.getParameter("cinemaNo");
+			mv.addObject("selectCinema", cinemaNo);
+		}
+
 		return mv;
 	}
 
+	// 선택한 극장, 선택한 영화에 맞는 시간표를 쫘라라라락 띄워줌.
 	@RequestMapping(value = "/reserve_step3.do")
 	public ModelAndView reserveStep3(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step3");

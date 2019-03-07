@@ -14,4 +14,5 @@ public interface ReserveService {
 	
 	/* About movie */
 	List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception;
+	Map<String,Object> selectOneMovie(Map<String,Object> map) throws Exception;
 }

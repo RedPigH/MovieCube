@@ -10,4 +10,10 @@
 			ORDER BY MOVIE_NO ASC
 		]]>
 	</select>
+	
+	<select id = "selectOneMovie" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM MC_MOVIE WHERE MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</select>
 </mapper>

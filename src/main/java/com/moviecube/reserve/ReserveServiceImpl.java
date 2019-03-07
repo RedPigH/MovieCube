@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -26,16 +25,22 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
+	public Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception {
+
+		Map<String, Object> resultMap = cinemaDAO.selectOneCinema(map);
+		
+		return resultMap;
+	}
+	
+	@Override
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
 
 		return movieDAO.selectMovieList(map);
 	}
 
 	@Override
-	public Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception {
-
-		Map<String, Object> resultMap = cinemaDAO.selectOneCinema(map);
-		
+	public Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception {
+		Map<String, Object> resultMap = movieDAO.selectOneMovie(map);
 		return resultMap;
 	}
 
