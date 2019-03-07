@@ -11,6 +11,14 @@
 		]]>
 	</select>
 	
+	<!-- 영화관 선택 -->
+	<select id = "selectOneCinema" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT & FROM CINEMA
+			WHERE CINEMA_NO = #{CINEMA_NO}
+		]]>
+	</select>
+	
 	<!-- 영화관 정보 작성 -->
 	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="CINEMA_NO">
 		<selectKey keyProperty="CINEMA_NO" resultType="int" order="BEFORE">
