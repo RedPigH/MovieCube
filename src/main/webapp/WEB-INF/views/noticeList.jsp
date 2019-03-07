@@ -51,7 +51,6 @@
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
  	$(document).ready(function() { 
-		fn_selectNoticeList(1);
 			$("#write").on("click", function(e) {/* 글쓰기 버튼 */
 				e.preventDefault();
 				fn_openBoardWrite();
@@ -65,7 +64,7 @@
 
 		function fn_openBoardWrite() {
 			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeWriteFrom.do'/>");
+			comSubmit.setUrl("<c:url value='/notice/adminNoticeWriteForm.do'/>");
 			comSubmit.submit();
 		}
 

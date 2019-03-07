@@ -3,8 +3,10 @@
 
 <mapper namespace="time">
 
+	<!-- 전체 상영 일정 리스트 -->
+	
 	<!-- 조건별(날짜,영화관,영화) 상영일정 리스트 -->
-	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
+	<select id="TimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
 			(SELECT COUNT(*) FROM SEAT WHERE SCREEN_NO = SC.SCREEN_NO) AS TOTAL_SEAT,

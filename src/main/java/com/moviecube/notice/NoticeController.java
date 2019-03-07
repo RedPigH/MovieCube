@@ -30,7 +30,7 @@ public ModelAndView noticeList(Map<String,Object>commandMap) throws Exception{
 	return mv;
 }
 
-@RequestMapping(value="/notice/adminNoticeWriteFrom.do")
+@RequestMapping(value="/notice/adminNoticeWriteForm.do")
 public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("noticeWriteForm");
 	
@@ -83,7 +83,7 @@ public ModelAndView modifyNotice(CommandMap commandMap) throws Exception{
 @RequestMapping(value="/notice/adminNoticeDelete.do")
 public ModelAndView noticeDelete(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-    System.out.println("Çý¼ö¹Ùº¸:"+commandMap.getMap());
+    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ùºï¿½:"+commandMap.getMap());
 	noticeService.deleteBoard(commandMap.getMap());
 	
 	return mv;
