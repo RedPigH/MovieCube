@@ -22,4 +22,25 @@ public class NoticeDAO extends AbstractDAO{
 		insert("notice.insertBoard", map);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> selectBoardDetail(Map<String,Object> map) throws Exception{
+		return (Map<String, Object>) selectOne("notice.selectBoardDetail", map);
+}
+
+	public void updateBoard(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		update("notice.updateBoard", map);
+	}
+
+	public void deleteBoard(Map<String, Object> map) throws Exception{
+		delete("notice.deleteBoard", map);
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*
+	 * @SuppressWarnings("unchecked") public List<Map<String,Object>>
+	 * selectNoticeList(Map<String,Object> map) throws Exception{ return
+	 * (List<Map<String,Object>>)selectPagingList("notice.selectNoticeList",map); }
+	 */
 }
