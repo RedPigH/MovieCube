@@ -8,17 +8,35 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service("cinemaService")
-public class CinemaServiceImpl implements CinemaService{
-	
+public class CinemaServiceImpl implements CinemaService {
+
 	@Resource(name = "cinemaDAO")
 	private CinemaDAO cinemaDAO;
 
 	@Override
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
+
 		return cinemaDAO.selectCinemaList(map);
 	}
-	
-	
+
+	@Override
+	public void insertCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.insertCinema(map);
+	}
+
+	@Override
+	public void updateCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.updateCinema(map);
+	}
+
+	@Override
+	public void deleteCinema(Map<String, Object> map) throws Exception {
+		cinemaDAO.deleteCinema(map);
+	}
+
+	@Override
+	public Map<String, Object> cinemaDetail(Map<String, Object> map) throws Exception {
+		return cinemaDAO.cinemaDetail(map);
+	}
 
 }
