@@ -52,12 +52,11 @@ COLOR PALETTE
 }
 body
 {
-	font-family: 'Poppins', sans-serif;
-	font-size: 16px;
-	line-height: 23px;
-	font-weight: 400;
-	background: #FFFFFF;
-	color: #000000;
+	font-fmily: 'Poppins', sans-serif;
+	/* line-height: 23px; */
+	/* font-weight: 400; */
+	/* background: #FFFFFF; */
+	/* color: #000000; */
 }
 div
 {
@@ -66,7 +65,6 @@ div
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	padding-right: 17px;
 }
 
 ul
