@@ -1,5 +1,6 @@
 package com.moviecube.reserve;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +18,36 @@ public class ReserveController {
 	@Resource(name = "reserveService")
 	private ReserveService reserveService;
 
-	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
 
-		System.out.println("워우워1 : ");
-		String temp = request.getParameter("selectCinema");
-		System.out.println("이에오에오아어이나 : " + temp);
+		// I don't know what it is ..
+		if (request.getParameter("selectCinema") != null) {
+			
+			// System.out.println("테스트2: " + request.getParameter("selectCinema"));
+			
+			String cinemaNo = request.getParameter("selectCinema");
+
+			mv.addObject("cinemaNo", cinemaNo);
+			commandMap.put("CINEMA_NO", cinemaNo); // key, value
+
+			Map<String, Object> cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
+			mv.addObject("cinemaMap", cinemaMap);
+			
+			System.out.println("키테스트 : " + cinemaMap.get("CINEMA_NO"));
+			
+		}
+
+		// System.out.println("시네마 넘버 테스트 : " + cinema_no);
+
+		// (commandMap.getMap()).put("cinema_no", cinema_no);
+		// Map<String, Object> selectedCinema =
+		// reserveService.selectOneCinema(commandMap.getMap());
+		// reserveService.selectOneCinema(commandMap.getMap(), request);
+
+		// mv.addObject("cinema_no", cinema_no);
+		// mv.addObject(selectedCinema);
 
 		return mv;
 	}

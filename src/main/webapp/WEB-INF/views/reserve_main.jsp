@@ -16,14 +16,29 @@
 	<br>
 
 	<hr>
-	<input type="button" value="극장 선택" onclick = "location.href = '/moviecube/reserve_step1.do'"> 
+	<input type="button" value="극장 선택"
+		onclick="location.href = '/moviecube/reserve_step1.do'">
+	<c:choose>
+		<c:when test="${fn:length(cinemaMap) > 0 }">
+		<br>선택한 영화관 : ${cinemaMap.CINEMA_NAME }
+		<br>영화관 주소 : ${cinemaMap.CINEMA_ADDRESS }
+		
+		
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td colspan="4">영화관을 선택해주세요</td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
 
 	<br>
 	<br>
 
 	<hr>
-	<input type="button" value="영화 선택" onclick = "location.href = '/moviecube/reserve_step2.do'">
-	
+	<input type="button" value="영화 선택"
+		onclick="location.href = '/moviecube/reserve_step2.do'">
+
 
 
 </body>
