@@ -3,7 +3,7 @@
 
 <mapper namespace="time">
 
-	<!-- 상영일정 리스트 -->
+	<!-- 조건별(날짜,영화관,영화) 상영일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
@@ -19,7 +19,7 @@
 			ORDER BY T.START_TIME ASC;
 		]]>
 	</select>
-
+	
 	<!-- 상영일정 등록 -->
 	<insert id="insertTime" parameterType="hashmap"
 		useGeneratedKeys="true" keyProperty="TIME_NO">
