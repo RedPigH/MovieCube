@@ -2,12 +2,125 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="movie">
-	
+
 	<!-- 영화 리스트 -->
-	<select id = "selectMovieList" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
-			SELECT * FROM MC_MOVIE
-			ORDER BY MOVIE_NO ASC
+	<select resultType="hashmap" parameterType="hashmap" id="selectMovieList">
+	<![CDATA[
+		select * from MC_MOVIE order by MOVIE_NO
 		]]>
 	</select>
+
+
+	<select resultType="hashmap" parameterType="hashmap" id="selectMovieDetail">
+	<![CDATA[
+		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</select>
+
+
+	<select resultType="hashmap" parameterType="hashmap" id="selectFileList">
+	<![CDATA[
+        SELECT
+            FILE_NO,
+            POSTER_ORGNAME,
+        FROM
+            MC_MOVIE_FILE
+        WHERE
+            MOVIE_NO = #{MOVIE_NO}
+            AND DEL_GB = 'N'
+    ]]>
+	</select>
+
+	<!-- 영화 정보 입력 -->
+	<insert parameterType="hashmap" id="insertMoive" keyProperty="MOVIE_NO" useGeneratedKeys="true">
+
+		<selectKey resultType="int" keyProperty="MOVIE_NO"
+			order="BEFORE">select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL 
+		</selectKey>
+ 		<![CDATA[
+		insert into MC_MOVIE 
+		( 
+			MOVIE_NO, 
+			MOVIE_NAME, 
+			MOVIE_TYPE, 
+		    MOVIE_OPENDATE, 
+		    MOVIE_DIRECTOR, 
+	        MOVIE_ACTOR, 
+	        MOVIE_GENRE, 
+	        MOVIE_CONTENT, 
+	        MOVIE_GRADE,
+		    MOVIE_AGE, 
+		    MOVIE_URL
+			)
+		values 
+		(
+			#{MOVIE_NO},
+			#{MOVIE_NAME},
+			#{MOVIE_TYPE},
+			#{MOVIE_OPENDATE},
+			#{MOVIE_DIRECTOR},
+			#{MOVIE_ACTOR},
+			#{MOVIE_GENRE},
+			#{MOVIE_CONTENT},
+			#{MOVIE_GRADE},
+			#{MOVIE_AGE},
+			#{MOVIE_URL}
+			)		 		  
+		]]>
+	</insert>
+
+	<insert parameterType="hashmap" id="insertFile">
+		<![CDATA[
+        INSERT INTO MC_MOVIE_FILE
+        (
+            FILE_NO,
+            MOVIE_NO,
+            POSTER_ORGNAME,
+            POSTER_SAVNAME
+        )
+        VALUES
+        (
+            MC_MOVIE_FILE_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{POSTER_ORGNAME},
+            #{POSTER_SAVNAME}
+        )
+    ]]>
+	</insert>
+
+	<!-- 영화 정보 수정 -->
+	<update parameterType="hashMap" id="updateMovie">
+ 		<![CDATA[
+		update MC_MOVIE set 
+			MOVIE_NAME = #{MOVIE_NAME},
+			MOVIE_TYPE = #{MOVIE_TYPE},
+			MOVIE_OPENDATE = #{MOVIE_OPENDATE},
+			MOVIE_DIRECTOR = #{MOVIE_DIRECTOR},
+			MOVIE_ACTOR = #{MOVIE_ACTOR},
+			MOVIE_GENRE = #{MOVIE_GENRE},
+			MOVIE_CONTENT = #{MOVIE_CONTENT},
+			MOVIE_AGE = #{MOVIE_AGE},
+			MOVIE_URL = #{MOVIE_URL},
+			POSTER_ORGNAME = #{POSTER_ORGNAME},
+			POSTER_SAVNAME = #{POSTER_SAVNAME}
+		]]>
+	</update>
+
+	<!-- 영화 정보 삭제 -->
+	<delete parameterType="hashmap" id="deleteMovie">
+ 	<![CDATA[
+		delete from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
+	]]>
+	</delete>
+
+	<update parameterType="hashmap" id="deleteFileList">
+		<![CDATA[
+		UPDATE MC_MOVIE_FILE
+			SET
+				DEL_GB = 'Y'
+			WHERE
+				MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</update>
+
 </mapper>
