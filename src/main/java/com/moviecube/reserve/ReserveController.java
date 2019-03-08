@@ -113,6 +113,14 @@ public class ReserveController {
 		String cinemaNo = request.getParameter("cinemaNo");
 		String movieNo = request.getParameter("movieNo");
 		String selectedDate = request.getParameter("selectDate");
+		String[] checkbox = request.getParameterValues("movie_type");
+		
+		System.out.println("사이즈 테스트 : " + checkbox.length);
+		
+		if(checkbox.length > 0) {
+			for(int i = 0; i < checkbox.length; i ++)
+				System.out.println("체크박스 값 테스트 : " + checkbox[i]);
+		}
 		
 		mv.addObject("selectMovie", movieNo);
 		mv.addObject("selectCinema", cinemaNo);
