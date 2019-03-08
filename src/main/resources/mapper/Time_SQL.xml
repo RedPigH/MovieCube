@@ -24,6 +24,7 @@
 			inner join screen sc on sc.screen_no = t.screen_no
 			where t.movie_no = #{MOVIE_NO}
 			and t.cinema_no = #{CINEMA_NO}
+			AND to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
 			order by t.start_time asc
 		]]>
 	</select>

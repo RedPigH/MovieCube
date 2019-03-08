@@ -28,6 +28,7 @@ public class ReserveController {
 		ModelAndView mv = new ModelAndView("reserve_main");
 		String cinemaNo = "";
 		String movieNo = "";
+		String selectDate = "";
 		Map<String, Object> cinemaMap = null;
 		Map<String, Object> movieMap = null;
 
@@ -53,7 +54,14 @@ public class ReserveController {
 
 		}
 		
-		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "") {
+		if(request.getParameter("selectdate") != null) {
+			
+			selectDate = request.getParameter("selectdate");
+			commandMap.put("TIME_DATE", selectDate);
+			
+		}
+		
+		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
 		
 			List<Map<String,Object>> timelist = timeService.testList(commandMap.getMap());
 		
@@ -106,12 +114,9 @@ public class ReserveController {
 		String movieNo = request.getParameter("movieNo");
 		String selectedDate = request.getParameter("selectDate");
 		
-		System.out.println("값 테스트한다리");
-		System.out.println(cinemaNo);
-		System.out.println(movieNo);
-		System.out.println(selectedDate);
-		
-		mv.addObject("thisMovie", movieNo);
+		mv.addObject("selectMovie", movieNo);
+		mv.addObject("selectCinema", cinemaNo);
+		mv.addObject("selectdate", selectedDate);
 		
 		return mv;
 	}
