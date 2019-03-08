@@ -88,8 +88,20 @@ public class ReserveController {
 
 	// 선택한 극장, 선택한 영화에 맞는 시간표를 쫘라라라락 띄워줌.
 	@RequestMapping(value = "/reserve_step3.do")
-	public ModelAndView reserveStep3(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step3");
+	public ModelAndView reserveStep3(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/reserve.do");
+		
+		String cinemaNo = request.getParameter("cinemaNo");
+		String movieNo = request.getParameter("movieNo");
+		String selectedDate = request.getParameter("selectDate");
+		
+		System.out.println("값 테스트한다리");
+		System.out.println(cinemaNo);
+		System.out.println(movieNo);
+		System.out.println(selectedDate);
+		
+		mv.addObject("thisMovie", movieNo);
+		
 		return mv;
 	}
 

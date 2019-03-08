@@ -52,6 +52,21 @@
 		</c:otherwise>
 	</c:choose>
 	</form>
+	
+	
+	<form action="/moviecube/reserve_step3.do">
+		<select id="selectDate" name="selectDate">
+			<option value="2019-03-04">2019-03-04</option>
+			<option value="2019-03-05">2019-03-05</option>
+			<option value="time3">2019-03-10</option>
+			<option value="time4">2019-03-11</option>
+		</select>
+		<input type="hidden" name="movieNo" value="${movieNo }">
+		<input type="hidden" name="cinemaNo" value="${cinemaNo }">
+		<input type="submit" value="검색" >
+	</form>
+	
+	
 
 
 </body>
