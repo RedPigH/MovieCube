@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.moviecube.cinema.CinemaDAO;
 import com.moviecube.movie.MovieDAO;
+import com.moviecube.time.TimeDAO;
 
 @Service("reserveService")
 public class ReserveServiceImpl implements ReserveService {
@@ -17,6 +18,9 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Resource(name = "movieDAO")
 	private MovieDAO movieDAO;
+	
+	@Resource(name = "timeDAO")
+	private TimeDAO timeDAO;
 
 	@Override
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
@@ -27,7 +31,7 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception {
 
-		Map<String, Object> resultMap = cinemaDAO.selectOneCinema(map);
+		Map<String, Object> resultMap = cinemaDAO.cinemaDetail(map);
 		
 		return resultMap;
 	}
@@ -42,6 +46,11 @@ public class ReserveServiceImpl implements ReserveService {
 	public Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = movieDAO.selectOneMovie(map);
 		return resultMap;
+	}
+	
+	public List<Map<String, Object>> testTimeList(Map<String, Object> map) throws Exception{
+		
+		return timeDAO.testList(map);
 	}
 
 

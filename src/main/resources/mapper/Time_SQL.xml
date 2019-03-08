@@ -12,10 +12,26 @@
 		]]>
 	</select>
 	
+	<!-- 테스트 -->
+	<select id="testList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date,
+			(select count(*) from seat where screen_no = sc.screen_no) as total_seat, 
+			(select count(*) from time_seat where time_no = t.time_no and status = 0) as possible_seat
+			from time t  
+			inner join mc_movie m on m.movie_no = t.movie_no
+			inner join cinema c on c.cinema_no = t.cinema_no
+			inner join screen sc on sc.screen_no = t.screen_no
+			where t.movie_no = #{MOVIE_NO}
+			and t.cinema_no = #{CINEMA_NO}
+			order by t.start_time asc
+		]]>
+	</select>
+	
 	<!-- 조건별(날짜,영화관,영화) 상영일정 리스트 -->
 	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
+			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE, M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
 			(SELECT COUNT(*) FROM SEAT WHERE SCREEN_NO = SC.SCREEN_NO) AS TOTAL_SEAT,
 			(SELECT COUNT(*) FROM TIME_SEAT WHERE TIME_NO = T.TIME_NO AND STATUS = 0) AS POSSIBLE_SEAT
 			FROM TIME T

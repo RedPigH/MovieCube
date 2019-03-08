@@ -52,7 +52,40 @@
 		</c:otherwise>
 	</c:choose>
 	</form>
-
-
+<table class="board_list">
+		<colgroup>
+			<col width="10%" />
+			<col width="*" />
+			<col width="15%" />
+			<col width="20%" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">번호</th>
+				<th scope="col">영화 제목</th>
+				<th scope="col">영화관 이름</th>
+				<th scope="col">시작시간</th>
+			</tr>
+		</thead>
+		<tbody>
+ 	 		 <c:choose>
+				<c:when test="${fn:length(timelist) > 0}">
+					<c:forEach items="${timelist }" var="row">
+						<tr>
+							<td>${row.TIME_NO }</td>
+							<td>${row.MOVIE_NAME }</td>
+							<td>${row.CINEMA_NAME }</td>
+							<td>${row.START_TIME }</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td colspan="4">조회된 결과가 없습니다.</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>  
+		</tbody>
+	</table>
 </body>
 </html>

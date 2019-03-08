@@ -43,4 +43,10 @@ public class TimeServiceImpl implements TimeService {
 		timeDAO.deleteTime(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> testList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return timeDAO.testList(map);
+	}
+
 }

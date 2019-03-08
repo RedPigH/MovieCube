@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.time.TimeService;
 
 @Controller
 public class ReserveController {
 	@Resource(name = "reserveService")
 	private ReserveService reserveService;
+	
+	@Resource(name = "timeService")
+	private TimeService timeService;
 
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/reserve.do")
@@ -47,6 +51,13 @@ public class ReserveController {
 			mv.addObject("movieMap", movieMap);
 			mv.addObject("movieNo", movieNo); // 이 값을 영화관선택할 때도 줘서 값 유지시켜야됨.
 
+		}
+		
+		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "") {
+		
+			List<Map<String,Object>> timelist = timeService.testList(commandMap.getMap());
+		
+			mv.addObject("timelist", timelist);
 		}
 
 		return mv;
