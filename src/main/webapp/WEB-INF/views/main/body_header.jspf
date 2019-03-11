@@ -83,7 +83,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-outline" data-dismiss="modal">로그인</button>
-        <button type="button" class="btn btn-lg btn-outline" data-dismiss="modal">회원가입</button>
+        <a href="/moviecube/openTerms.do"><button type="button" class="btn btn-lg btn-outline">회원가입</button></a>
         <button type="button" class="btn btn-lg btn-outline" data-dismiss="modal">닫기</button>
       </div>
     </div>
