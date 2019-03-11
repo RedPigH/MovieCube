@@ -3,33 +3,44 @@ package com.moviecube.screen;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
+import javax.annotation.Resource;
 
-import com.moviecube.dao.AbstractDAO;
+import org.springframework.stereotype.Service;
 
-@Repository("screenDAO")
-public class ScreenDAO extends AbstractDAO {
+@Service("screenService")
+public class ScreenServiceImpl implements ScreenService {
 
-	@SuppressWarnings("unchecked")
+	@Resource(name = "screenDAO")
+	private ScreenDAO screenDAO;
+
+	@Override
 	public List<Map<String, Object>> selectScreenList(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("screen.selectScreenList", map);
+
+		return screenDAO.selectScreenList(map);
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
 	public Map<String, Object> screenDetail(Map<String, Object> map) throws Exception {
-		return (Map<String, Object>) selectOne("screen.selectOneScreen", map);
+
+		return screenDAO.screenDetail(map);
 	}
 
+	@Override
 	public void insertScreen(Map<String, Object> map) throws Exception {
-		insert("screen.insertScreen", map);
+
+		screenDAO.insertScreen(map);
 	}
 
+	@Override
 	public void updateScreen(Map<String, Object> map) throws Exception {
-		update("screen.updateScreen", map);
+
+		screenDAO.updateScreen(map);
 	}
 
+	@Override
 	public void deleteScreen(Map<String, Object> map) throws Exception {
-		delete("screen.deleteScreen", map);
+
+		screenDAO.deleteScreen(map);
 	}
 
 }

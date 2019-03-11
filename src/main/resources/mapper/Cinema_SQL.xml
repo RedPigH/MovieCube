@@ -6,13 +6,21 @@
 	<!-- 영화관 리스트 -->
 	<select id="selectCinemaList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT * FROM CINEMA
+			SELECT * FROM CINEMA 
 			ORDER BY CINEMA_NO ASC
 		]]>
 	</select>
 	
+	<!-- 영화관 선택 -->
+	<select id = "selectOneCinema" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM CINEMA
+			WHERE CINEMA_NO = #{CINEMA_NO}
+		]]>
+	</select>
+	
 	<!-- 영화관 정보 작성 -->
-	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO">
+	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="CINEMA_NO">
 		<selectKey keyProperty="CINEMA_NO" resultType="int" order="BEFORE">
 			SELECT CINEMA_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
