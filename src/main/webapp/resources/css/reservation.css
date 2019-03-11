@@ -18,7 +18,7 @@
 }
 
 #reservation .wrapper .contents.ReservationBn_ok {
-    height: 698px;
+    height: 618px;
 }
 
 #reservation .wrapper .contents {
@@ -41,6 +41,8 @@
     padding: 18px 19px 0 20px;
 }
 
+
+/* 날짜 */
 #reservation .wrapper .contents .date {
     height: 90px;
     padding-bottom: 9px;
@@ -71,7 +73,256 @@
 }
 
 
-/* asd;lfjka;lskdjf */
+.slidebar {
+    position: relative;
+    height: 25px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.slidebar .slidebar_control {
+    position: absolute;
+    width: 100%;
+}
+
+.slidebar .slidebar_control li:first-child {
+    border-left: none;
+    border-right: 1px solid #e0e0e0;
+    float: left;
+}
+
+
+.slidebar .slidebar_control li {
+    width: 25px;
+    height: 25px;
+    float: right;
+    border-left: 1px solid #e0e0e0;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.slidebar .slidebar_control li i {
+    display: block;
+    line-height: 22px;
+}
+
+.fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slidebar .slidebar_control li {
+    width: 25px;
+    height: 25px;
+    float: right;
+    border-left: 1px solid #e0e0e0;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.slidebar .slidebar_item ol li a {
+    display: block;
+    height: 100%;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 23px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    text-decoration: none;
+}
+
+.blind {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: -1000em;
+    left: -1000em;
+}
+
+.slidebar .slidebar_item {
+    position: relative;
+    width: 340px;
+    overflow: hidden;
+    margin-left: 25px;
+    height: 100%;
+}
+
+.slidebar .slidebar_item ol {
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    left: 0;
+    position: absolute;
+}
+
+.slidebar .slidebar_item ol li {
+    float: left;
+    width: 68px;
+    height: 23px;
+    list-style: none;
+}
+
+.slidebar .slidebar_item ol li a.active {
+    background-color: #198591;
+    color: #fff;
+}
+
+
+/* 극장 */
+#reservation .wrapper .contents .left_wrap>.theater {
+    height: 219px;
+}
+
+#reservation .wrapper .contents .title h2 {
+    float: left;
+    color: #503396;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.booking_lp h2.h2_theater {
+    background-position: -80px -160px;
+}
+
+.booking_lp h2, .booking_lp h3 {
+    background: url(http://image2.megabox.co.kr/mop/home/btns/btn_booking_160912.png) 0 0 no-repeat;
+    height: 26px;
+    width: 80px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#reservation .wrapper .contents .title .util {
+    float: right;
+}
+
+#reservation .wrapper .contents .title .util .btn_util.refresh {
+    background-position: -80px -80px;
+}
+
+#reservation .wrapper .contents .title .util .btn_util {
+    width: 22px;
+    height: 22px;
+}
+
+.img_btn.booking {
+    background-image: url(http://image2.megabox.co.kr/mop/home/btns/btn_booking.png);
+}
+
+.img_btn {
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
+    border: none;
+    background-repeat: no-repeat;
+    background: transparent;
+    vertical-align: middle;
+}
+
+#reservation .wrapper .contents .left_wrap>.theater ul li {
+    position: relative;
+    float: left;
+    width: 190px;
+    height: 66px;
+    border: 1px solid #e0e0e0;
+    display: table;
+}
+
+.mb10 {
+    margin-bottom: 10px !important;
+}
+
+.mr13 {
+    margin-right: 13px !important;
+}
+
+#reservation .wrapper .contents button.btn_add {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: url(http://image2.megabox.co.kr/mop/home/btns/btn_add.png) 50% 50% no-repeat;
+}
+
+/* 영화 */
+#reservation .wrapper .contents .left_wrap>.movie {
+    height: 308px;
+    border: none;
+    position: relative;
+}
+
+
+.booking_lp h2.h2_movie {
+    background-position: -160px -160px;
+}
+
+.booking_lp h2, .booking_lp h3 {
+    background: url(http://image2.megabox.co.kr/mop/home/btns/btn_booking_160912.png) 0 0 no-repeat;
+    height: 26px;
+    width: 80px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#reservation .wrapper .contents .left_wrap>.movie .select_all {
+    position: absolute;
+    top: 55px;
+    width: 392px;
+    height: 230px;
+    border: 1px solid #e1e1e1;
+    z-index: 1;
+}
+
+#reservation .wrapper .contents .left_wrap>.movie .select_all .glass {
+    height: 139px;
+    background: #fff;
+    opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+#reservation .wrapper .contents .left_wrap>.movie .select_all .glass p {
+    text-align: center;
+    padding-top: 50px;
+    color: #333;
+    font-size: 34px;
+}
+
+#reservation .wrapper .contents .left_wrap>.movie .select_all .btn_wrap {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    height: 90px;
+    background: #fff;
+}
+
+#reservation .wrapper .contents .left_wrap>.movie .select_all .btn_wrap .select_movie {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: url(http://image2.megabox.co.kr/mop/home/btns/select_movie.png) 50% 50% no-repeat;
+}
+
+
+
 
 
 
@@ -82,4 +333,67 @@
     width: 534px;
 }
 
-/* adlfkgjadflkghsertgn */
+#reservation .wrapper .contents .right_wrap .time {
+    height: 90px;
+    padding: 18px 19px 9px 20px;
+}
+
+#reservation .wrapper .contents .right_wrap>div {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.booking_lp h2.h2_time {
+    background-position: -240px -160px;
+}
+
+.booking_lp h2, .booking_lp h3 {
+    background: url(http://image2.megabox.co.kr/mop/home/btns/btn_booking_160912.png) 0 0 no-repeat;
+    height: 26px;
+    width: 80px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#reservation .wrapper .contents .right_wrap .time .slidebar_item {
+    width: 440px;
+}
+
+#sel_time .slidebar_item {
+    height: 29px;
+}
+
+#reservation .wrapper .contents .right_wrap .time .slidebar_item li {
+    width: 44px;
+}
+
+#reservation .wrapper .contents .right_wrap .movie_list {
+    width: 533px !important;
+    height: 526px !important;
+}
+
+#reservation .wrapper .contents .right_wrap .movie_list {
+    height: 527px;
+    border: none;
+    overflow: auto;
+    position: relative;
+}
+
+#reservation .wrapper .contents .right_wrap .movie_list ul li.no_movie_list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFF url(http://image2.megabox.co.kr/mop/home/no_movie_list.png) 50% 50% no-repeat;
+    cursor: default;
+}
+
+#reservation .wrapper .contents .right_wrap .movie_list ul li {
+    height: 60px;
+    border-bottom: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+

@@ -3,15 +3,7 @@
 <!DOCTYPE html>
 
 
-
-<div class="modal fade bs-example-modal-lg" id="movieDetail" tabindex="-1" role="dialog"
-	aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content" style="width: 1000px">
-			<%@ include file="/WEB-INF/views/detail/movieDetail.jspf"%>
-		</div>
-	</div>
-</div>
+<%@ include file="/WEB-INF/views/detail/movieDetail.jspf"%>
 
 
 
@@ -61,8 +53,8 @@
 							</div>
 							<div class="product_info">
 								<h6 class="product_name" data-toggle="modal"
-									data-target="#movieDetail">Fujifilm X100T 16 MP
-									Digital Camera (Silver)</h6>
+									data-target="#movieDetail">Fujifilm X100T 16 MP Digital
+									Camera (Silver)</h6>
 								<div class="product_price">
 									$520.00<span>$590.00</span>
 								</div>
