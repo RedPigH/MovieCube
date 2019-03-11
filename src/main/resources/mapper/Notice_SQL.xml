@@ -62,26 +62,20 @@ NOTICE_NO = #{NOTICE_NO}
 	]]>
 	</update>
 
-	<delete id="deleteBoard" parameterType="hashmap">
-	<![CDATA[
-	DELETE MC_NOTICE
-	WHERE
-	NOTICE_NO = #{NOTICE_NO}
-	]]>
-	</delete>
 
-<!-- 	<select id="selectNoticeList" parameterType="hashmap"
-		resultType="hashmap">
-		<include refid="common.pagingPre" />
-	<![CDATA[
-	SELECT
-	ROW_NUMBER() OVER (ORDER BY NOTICE_NO DESC) RNUM,
-	NOTICE_NO,
-	NOTICE_SUB,
-	TO_CHAR(NOTICE_REGDATE, 'YYYY.MM.DD') AS NOTICE_REGDATE
-	FROM
-	MC_NOTICE
-	]]>
-		<include refid="common.pagingPost" />
-	</select> -->
+	<delete id="deleteBoard" parameterType="hashmap">
+    <![CDATA[
+    DELETE MC_NOTICE
+    WHERE
+    NOTICE_NO = #{NOTICE_NO}
+    ]]>
+	</delete>
+	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
+		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->
+
+	<!-- <select id="selectNoticeList" parameterType="hashmap" resultType="hashmap"> 
+		<include refid="common.pagingPre" /> <![CDATA[ SELECT ROW_NUMBER() OVER (ORDER 
+		BY NOTICE_NO DESC) RNUM, NOTICE_NO, NOTICE_SUB, TO_CHAR(NOTICE_REGDATE, 'YYYY.MM.DD') 
+		AS NOTICE_REGDATE FROM MC_NOTICE ]]> <include refid="common.pagingPost" /> 
+		</select> -->
 </mapper>

@@ -83,7 +83,7 @@ public ModelAndView modifyNotice(CommandMap commandMap) throws Exception{
 @RequestMapping(value="/notice/adminNoticeDelete.do")
 public ModelAndView noticeDelete(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-    System.out.println("�����ٺ�:"+commandMap.getMap());
+	System.out.println("혜수짱"+commandMap.getMap());
 	noticeService.deleteBoard(commandMap.getMap());
 	
 	return mv;

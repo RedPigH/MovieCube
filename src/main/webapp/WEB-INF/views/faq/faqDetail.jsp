@@ -17,25 +17,24 @@
 		<tbody>
 			<tr>
 				<th scope="row">글 번호</th>
-				<td>${map.NOTICE_SUB }</td>
+				<td>${map.FAQ_NO }</td>
 			</tr>
 			<tr>
-				<th scope="row">작성시간</th>
-				<td>${map.NOTICE_REGDATE }</td>
+				<th scope="row">타입</th>
+				<td>${map.FAQ_TYPE }</td>
 			</tr>
 			<tr>
-				<th scope="row">제목</th>
-				<td scope="3">${map.NOTICE_SUB }</td>
+				<th scope="row">질문</th>
+				<td colspan="3">${map.FAQ_SUB }</td>
 			</tr>
 			<tr>
-				<td colspan="4">${map.NOTICE_CONTENT }</td>
+				<td colspan="4">${map.FAQ_CONTENT }</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<a href="#this" class="btn" id="list">목록으로</a>
 	<a href="#this" class="btn" id="update">수정하기</a>
-	<a href="#this" class="btn" id="delete">삭제하기</a>
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
@@ -49,35 +48,19 @@
 				e.preventDefault();
 				fn_openBoardUpdate();
 			});
-
-			$("#delete").on("click", function(e) { /* 삭제하기 */
-				e.preventDefault();
-				fn_deleteBoard();
-			});
 		});
 
 		function fn_openBoardList() {
 			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeList.do'/>");
+			comSubmit.setUrl("<c:url value='/faq/adminFaqList.do'/>");
 			comSubmit.submit();
 		}
-
 		function fn_openBoardUpdate() {
-			var notice_no = "${map.NOTICE_NO}";
+			var FAQ_NO = "${map.FAQ_NO}";
 			var comSubmit = new ComSubmit();
-			comSubmit
-					.setUrl("<c:url value='/notice/adminNoticeModifyForm.do'/>")
-			comSubmit.addParam("NOTICE_NO", notice_no);
+			comSubmit.setUrl("<c:url value='/faq/adminFaqModifyForm.do'/>");
+			comSubmit.addParam("FAQ_NO", FAQ_NO);
 			comSubmit.submit();
-		}
-
-		function fn_deleteBoard() {
-			var comSubmit = new ComSubmit();
-			var notice_no = "${map.NOTICE_NO}";
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeDelete.do'/>");
-			comSubmit.addParam("NOTICE_NO", notice_no);
-			comSubmit.submit();
-			// im babo
 		}
 	</script>
 </body>
