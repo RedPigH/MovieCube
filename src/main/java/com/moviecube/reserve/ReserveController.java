@@ -29,6 +29,7 @@ public class ReserveController {
 		String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
+		String[] selectType;
 		Map<String, Object> cinemaMap = null;
 		Map<String, Object> movieMap = null;
 
@@ -54,12 +55,23 @@ public class ReserveController {
 
 		}
 		
-		if(request.getParameter("selectdate") != null) {
+		if(request.getParameter("selectDate") != null) {
 			
-			selectDate = request.getParameter("selectdate");
+			selectDate = request.getParameter("selectDate");
 			commandMap.put("TIME_DATE", selectDate);
 			
 		}
+		
+		if(request.getParameter("selectType") != null) {
+			
+			selectType = request.getParameterValues("selectType");
+			
+			for(int i = 0; i < selectType.length ; i++) {
+				commandMap.put("MOVIE_TYPE" + i, selectType[i]);			
+			}
+
+		}
+		
 		
 		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
 		
@@ -113,18 +125,12 @@ public class ReserveController {
 		String cinemaNo = request.getParameter("cinemaNo");
 		String movieNo = request.getParameter("movieNo");
 		String selectedDate = request.getParameter("selectDate");
-		String[] checkbox = request.getParameterValues("movie_type");
-		
-		System.out.println("사이즈 테스트 : " + checkbox.length);
-		
-		if(checkbox.length > 0) {
-			for(int i = 0; i < checkbox.length; i ++)
-				System.out.println("체크박스 값 테스트 : " + checkbox[i]);
-		}
+		String[] checktype = request.getParameterValues("movie_type");
 		
 		mv.addObject("selectMovie", movieNo);
 		mv.addObject("selectCinema", cinemaNo);
-		mv.addObject("selectdate", selectedDate);
+		mv.addObject("selectDate", selectedDate);
+		mv.addObject("selectType", checktype);
 		
 		return mv;
 	}

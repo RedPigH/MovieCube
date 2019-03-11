@@ -64,7 +64,7 @@
 		<input type="hidden" name="movieNo" value="${movieNo }">
 		<input type="hidden" name="cinemaNo" value="${cinemaNo }">
 		<br>
-		일반<input type="checkbox" name="movie_type" value="일반">
+		일반<input type="checkbox" name="movie_type" value="1">
 		IMAX<input type="checkbox" name="movie_type" value="IMAX">
 		3D<input type="checkbox" name="movie_type" value="3D">
 		4D<input type="checkbox" name="movie_type" value="4D">
