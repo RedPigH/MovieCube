@@ -8467,3 +8467,5 @@ textarea.form-group-lg .form-control, select[multiple].form-group-lg .form-contr
 ,
 
 .btn-default{color:#333;background-color:#fff;border-color:#ccc}
+
+.btn-group-xs>.btn,.btn-xs{padding:1px 5px;font-size:12px;line-height:1.5;border-radius:3px}

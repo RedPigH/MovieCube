@@ -17,4 +17,9 @@ public class MemberServiceImpl implements MemberService {
 	  
 	  memberDAO.insertMember(map);
 	  }
+	  
+	  @Override
+	  public int findUsedID(Map<String, Object> map) throws Exception{
+		  return memberDAO.findUsedID(map);
+	  }
 }

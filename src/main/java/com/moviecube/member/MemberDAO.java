@@ -17,6 +17,11 @@ public class MemberDAO extends AbstractDAO {
 	  
 	  // 회원가입
 	  public void insertMember(Map<String, Object> map) throws Exception {
-	  insert("member.insertMember", map);
-	  } 
+		  insert("member.insertMember", map);
+	  }
+	  
+	  //id 중복확인
+	  public int findUsedID(Map<String, Object> map) throws Exception{
+		  return (Integer) selectOne("member.findUsedID", map);
+	  }
 }

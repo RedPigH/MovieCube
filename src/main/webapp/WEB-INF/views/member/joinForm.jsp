@@ -71,7 +71,7 @@ function aaaa(){
                       <div class="modal-header">
                       <div class="mdt">
                           <h4 class="modal-title">알림</h4>
-                       </div>
+                      </div>
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                       </div>
                       <div class="modal-body">
@@ -89,6 +89,7 @@ function aaaa(){
         <form class="form-horizontal" id="joinForm" role="form" method="post">
             <div class="form-group" id="divId">
                 <label for="inputId" class="col-lg-2 control-label">아이디</label>
+                 <input type="button" value="ID중복확인" id="checkId" class="btn btn-primary btn-xs" style="position:relative; left:665px; bottom:2px;">
                 <div class="col-lg-10">
                     <input type="text" class="form-control onlyAlphabetAndNumber" id="id" name="MEMBER_ID" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
                 </div>
@@ -122,10 +123,11 @@ function aaaa(){
             
             <div class="form-group" id="divZipcode">
                 <label for="inputZipcode" class="col-lg-2 control-label">주소</label>
-                <input type="button" onclick="aaaa()" value="우편번호 찾기">
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
+                    <input type="text" class="form-control" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" style="width:300px; display:inline;" placeholder="우편번호" maxlength="6">
+                    <input type="button" onclick="aaaa()" value="우편번호 찾기" class="btn btn-default" style="position: absolute; left:320px;">
                 </div>
+                
             </div>
             
             <div class="form-group" id="divAddress1">
@@ -207,6 +209,8 @@ function aaaa(){
          
          
         <script>
+        
+        var checkid = 0;
         
             $(function(){
                 //모달을 전역변수로 선언
@@ -374,6 +378,41 @@ function aaaa(){
                    }
                });
                
+                //-------아이디 중복 확인
+                $( "#checkId" ).click(function() {
+					//id를 param
+                	var id = $("#id").val();
+					
+					$.ajax({
+						async: true,
+						type : 'POST',
+						data : id,
+						url : "/moviecube/member/findUsedId.do",
+						dataType : "json",
+						contentType : "application/json; charset=UTF-8",
+						success : function(data){
+							if($('#id').val()==""){
+								alert("아이디를 입력해주세요.");
+							} else if(data.count > 0) {
+								alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+								$("#divId").addClass("has-error")
+			                    $("#divId").removeClass("has-success")
+			                    $("#id").focus();
+							} else {
+								alert("사용가능한 아이디입니다.");
+								$("#divId").addClass("has-error")
+			                    $("#divId").removeClass("has-success")
+			                    $("#password").focus();
+								//아이디가 중복되지 않으면 checkid=1
+								checkid = 1;
+							}
+						},
+						error : function(error){
+							alert("error : "+error);
+						}
+					});
+                });
+               
                 //------- validation 검사
                 $( "#sm" ).click(function( event ) {
                      
@@ -403,7 +442,13 @@ function aaaa(){
                         divId.removeClass("has-error");
                         divId.addClass("has-success");
                     }
-                     
+                    
+                    //중복확인 검사
+                    if(checkid==0){
+                    	alert("중복확인 해주시길 바랍니다.");
+                    	return false;
+                    }
+                    
                     //패스워드 검사
                     if($('#password').val()==""){
                         modalContents.text("패스워드를 입력하여 주시기 바랍니다.");
@@ -550,6 +595,7 @@ function aaaa(){
             });
             
             function join(){
+            	alert("회원가입을 축하합니다.")
             	var joinform = document.getElementById("joinForm");
             	joinform.action="/moviecube/member/join.do";
             	joinform.submit();
