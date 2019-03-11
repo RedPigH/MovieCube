@@ -3,10 +3,53 @@
 
 <mapper namespace="time">
 
-	<!-- 상영일정 리스트 -->
+	<!-- 전체 상영 일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
+			SELECT * FROM TIME
+			WHERE TO_CHAR(TIME_DATE, 'YYYYMMDD') >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+			ORDER BY TIME_DATE ASC 
+		]]>
+	</select>
+	
+	<!-- 테스트 -->
+	<select id="testList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date,
+			(select count(*) from seat where screen_no = sc.screen_no) as total_seat, 
+			(select count(*) from time_seat where time_no = t.time_no and status = 0) as possible_seat
+			from time t
+			inner join mc_movie m on m.movie_no = t.movie_no
+			inner join cinema c on c.cinema_no = t.cinema_no
+			inner join screen sc on sc.screen_no = t.screen_no
+			where t.movie_no = #{MOVIE_NO}
+			and t.cinema_no = #{CINEMA_NO}
+			and to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
+		]]>
+			<choose>
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 == NULL and MOVIE_TYPE2 == NULL and MOVIE_TYPE3 == NULL">
+					and regexp_like(m.movie_type, #{MOVIE_TYPE0})
+				</when>
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 == NULL and MOVIE_TYPE3 == NULL">
+					and regexp_like(m.movie_type, '#{MOVIE_TYPE0}|#{MOVIE_TYPE1}')
+				</when>
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 == NULL">
+					and regexp_like(m.movie_type, #{MOVIE_TYPE0}||#{MOVIE_TYPE1}||#{MOVIE_TYPE2})
+				</when>
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 != NULL">
+					and regexp_like(m.movie_type, #{MOVIE_TYPE0}||#{MOVIE_TYPE1}||#{MOVIE_TYPE2}|#{MOVIE_TYPE3})
+				</when>
+				<otherwise>
+					and m.movie_type = ""
+				</otherwise>
+			</choose>
+			order by t.start_time asc
+	</select>
+	
+	<!-- 조건별(날짜,영화관,영화) 상영일정 리스트 -->
+	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE, M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
 			(SELECT COUNT(*) FROM SEAT WHERE SCREEN_NO = SC.SCREEN_NO) AS TOTAL_SEAT,
 			(SELECT COUNT(*) FROM TIME_SEAT WHERE TIME_NO = T.TIME_NO AND STATUS = 0) AS POSSIBLE_SEAT
 			FROM TIME T
@@ -14,12 +57,19 @@
 			INNER JOIN CINEMA C ON C.CINEMA = T.CINEMA_NO
 			INNER JOIN SCREEN SC ON SC.SCREEN_NO = T.SCREEN_NO
 			WHERE T.CINEMA_NO = #{CINEMA_NO} 
-			AND TO_CHAR(T.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+			AND TO_CHAR(T.TIME_DATE, 'YYYYMMDD') = TO_CHAR(#{TIME_DATE},'YYYYMMDD')
 			AND T.MOVIE_NO = #{MOVIE_NO}
-			ORDER BY T.START_TIME ASC;
+			ORDER BY T.START_TIME ASC
 		]]>
 	</select>
-
+	
+	<select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM TIME
+			WHERE TIME_NO = #{TIME_NO}
+		]]>
+	</select>
+	
 	<!-- 상영일정 등록 -->
 	<insert id="insertTime" parameterType="hashmap"
 		useGeneratedKeys="true" keyProperty="TIME_NO">
@@ -73,8 +123,8 @@
 	<!-- 상영일정 삭제 -->
 	<delete id="deleteTime" parameterType="hashmap">
 		<![CDATA[
-		DELETE FROM TIME
-		WHERE TIME_NO = #{TIME_NO}
+			DELETE FROM TIME
+			WHERE TIME_NO = #{TIME_NO}
 		]]>
 	</delete>
 

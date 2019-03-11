@@ -27,6 +27,11 @@ public class MovieDAO extends AbstractDAO{
 	public void modifyMovie(Map<String, Object> map) throws Exception{
 		update("movie.modifyMovie", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.selectOneMovie", map);
+	}
 
 	public void deleteMovie(Map<String, Object> map) throws Exception{
 		update("movie.deleteMovie", map);
