@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service("cinemaService")
-public class CinemaServiceImpl implements CinemaService{
-	
+public class CinemaServiceImpl implements CinemaService {
+
 	@Resource(name = "cinemaDAO")
 	private CinemaDAO cinemaDAO;
 
@@ -38,7 +38,5 @@ public class CinemaServiceImpl implements CinemaService{
 	public Map<String, Object> cinemaDetail(Map<String, Object> map) throws Exception {
 		return cinemaDAO.cinemaDetail(map);
 	}
-	
-	
 
 }

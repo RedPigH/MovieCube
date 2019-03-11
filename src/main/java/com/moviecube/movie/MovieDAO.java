@@ -20,6 +20,7 @@ public class MovieDAO extends AbstractDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	public Map<String, Object> selectMoiveDetail(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("moive.selectMovieDetail", map);
 	}
@@ -30,5 +31,22 @@ public class MovieDAO extends AbstractDAO{
 
 	public void deleteMovie(Map<String, Object> map) throws Exception{
 		update("moive.deleteMoive", map);
+=======
+	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.selectMovieDetail", map);
+	}
+	
+	public void modifyMovie(Map<String, Object> map) throws Exception{
+		update("movie.modifyMovie", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.selectOneMovie", map);
+	}
+
+	public void deleteMovie(Map<String, Object> map) throws Exception{
+		update("movie.deleteMovie", map);
+>>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 	}
 }

@@ -13,6 +13,10 @@ public interface MovieService {
 	
 	public void modifyMovie(Map<String, Object> map) throws Exception;
 	
+<<<<<<< HEAD
 	public void deleteMoive(Map<String, Object> map) throws Exception;
+=======
+	public void deleteMovie(Map<String, Object> map) throws Exception;
+>>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 		
 }
