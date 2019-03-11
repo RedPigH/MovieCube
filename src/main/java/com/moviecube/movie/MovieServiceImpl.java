@@ -30,11 +30,7 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
-<<<<<<< HEAD
-		Map<String, Object> resultMap = MovieDAO.selectMoiveDetail(map);
-=======
 		Map<String, Object> resultMap = MovieDAO.selectMovieDetail(map);
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 		return resultMap;
 	}
 
@@ -45,11 +41,7 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-<<<<<<< HEAD
-	public void deleteMoive(Map<String, Object> map) throws Exception {
-=======
 	public void deleteMovie(Map<String, Object> map) throws Exception {
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 		MovieDAO.deleteMovie(map);
 		
 	}

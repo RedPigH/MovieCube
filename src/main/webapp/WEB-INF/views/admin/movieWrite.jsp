@@ -32,7 +32,7 @@
 			<li><a href="<%=cp%>">영화시간표</a></li>
 			<li><a href="<%=cp%>">영화관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">공지사항</a></li>
+			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
@@ -160,11 +160,11 @@
 			</div>
 			
 			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_03 btnP_04" id="write">
+				<a href="#this" class="btn btnC_04 btnP_04" id="write">
 					<span>작성하기</span>
 				</a>
 			
-				<a href="#this" class="btn btnC_03 btnP_04" id="list">
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
 				</a>
 			</div>

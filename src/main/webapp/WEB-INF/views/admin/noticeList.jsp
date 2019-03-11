@@ -21,7 +21,7 @@
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie List</a></h1>
+	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Notice List</a></h1>
 	</div>
 </div>
 
@@ -38,48 +38,70 @@
 			<li><a href="<%=cp%>">회원정보</a></li>
 		</ul>
 	</div>
+	
 	<div class="admin_ct">
-		<div class="movie_list">
-			<h3 class="sub_tit">상영작</h3>
-			<ul>
-			<c:choose>
-			<c:when test="${fn:length(movieList) > 0}">
-            	<c:forEach items="${movieList}" var="row">
+		<h3 class="sub_tit">공지사항</h3>
+		<div class="tbl_type_02">
+			<table>
+				<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
+				<colgroup>
+					<col style="width:10%;" />
+					<col />
+					<col style="width:70%;" />
+					<col style="width:20%;" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col"> 
+						<th scope="col">제목</th>
+						<th scope="col">날짜</th>
+					</tr>
+				</thead>
+				<tbody>
 					
-				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/marble.jpeg" alt="영화포스터" /> 
-				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
-				<span class="detail">상세보기</span>
-						<div class="explan">
-							<p>
-								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
-							</p>
-							<p>
-								<strong>개봉</strong> :  <c:set var="TextValue" value="${row.MOVIE_OPENDATE}"/>
-									${fn:substring(TextValue,0,10)}
-							</p>
-						</div>
-				</a> 
-				</li>
-				</c:forEach>
-				</c:when>
+				<c:choose>
+					<c:when test="${fn:length(noticeList) > 0}">
+            			<c:forEach items="${noticeList}" var="row">
+						<tr>
+							<td>${row.NOTICE_NO}</td>
+							<td></td>
+							<td class="subject"><a href="#this" name="NOTICE_SUB">${row.NOTICE_SUB}
+							<input type="hidden" id="NOTICE_NO" value="${row.NOTICE_NO}"/></a></td>
+							<td><c:set var="TextValue" value="${row.NOTICE_REGDATE}"/>
+									${fn:substring(TextValue,0,10)}</td>
+						</tr>
+						</c:forEach>
+					</c:when>
 				<c:otherwise>
-					조회된 결과가 없습니다.
+					등록된 게시물이 없습니다
 				</c:otherwise>
 			</c:choose>
-			</ul>
+				</tbody>
+			</table>
 		</div>
-		<%-- <c:if test="${session_member_grade == 1}"> --%>
-			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_01 btnP_04" id="write">
-					<span>글쓰기</span>
-				</a>
-			</div>
-		<%-- </c:if> --%>
+		<div class="btn_type_03">
+			<a href="#this" class="btn btnC_01 btnP_04" id="write">
+				<span>글쓰기</span>
+			</a>
+		</div>
+				
+		<div class="search_form">
+			<form>
+				<div class="inner">
+					<select class="slct w100" name="searchNum">
+						<option value="0">제목</option>
+						<option value="1">내용</option>
+					</select>
+					<input class="txt w100" type="text" name="isSearch" />
+					<span class="btn btnC_04 btnP_04">
+						<input type="submit" value="검색" />
+					</span>
+				</div>
+			</form>	
+		</div>
 		
-		<div class="paging">
-			${pagingHtml}
-		</div>
+		<div class="paging">${pagingHtml}</div>
 	</div>
 </div>
 
@@ -92,7 +114,7 @@
                 fn_openBoardWrite();
             }); 
              
-            $("a[name='poster']").on("click", function(e){ // 영화제목, 영화포스터 클릭
+            $("a[name='NOTICE_SUB']").on("click", function(e){ // 영화제목, 영화포스터 클릭
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
@@ -100,14 +122,14 @@
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='noticeWriteForm.do' />");
             comSubmit.submit();
         }
          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieDetail.do' />");
-            comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+            comSubmit.setUrl("<c:url value='noticeDetail.do' />");
+            comSubmit.addParam("NOTICE_NO", obj.parent().find("#NOTICE_NO").val());
             comSubmit.submit();
         }
     </script> 

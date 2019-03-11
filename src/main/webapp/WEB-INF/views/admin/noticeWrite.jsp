@@ -21,7 +21,7 @@
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie List</a></h1>
+	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Register</a></h1>
 	</div>
 </div>
 
@@ -38,78 +38,89 @@
 			<li><a href="<%=cp%>">회원정보</a></li>
 		</ul>
 	</div>
+	
 	<div class="admin_ct">
-		<div class="movie_list">
-			<h3 class="sub_tit">상영작</h3>
-			<ul>
-			<c:choose>
-			<c:when test="${fn:length(movieList) > 0}">
-            	<c:forEach items="${movieList}" var="row">
+		<h3 class="sub_tit">공지사항 등록</h3>
+		<form id="frm">
+			<div class="tbl_type_01">
+				<table>
+					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+					<tbody>
 					
-				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/marble.jpeg" alt="영화포스터" /> 
-				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
-				<span class="detail">상세보기</span>
-						<div class="explan">
-							<p>
-								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
-							</p>
-							<p>
-								<strong>개봉</strong> :  <c:set var="TextValue" value="${row.MOVIE_OPENDATE}"/>
-									${fn:substring(TextValue,0,10)}
-							</p>
-						</div>
-				</a> 
-				</li>
-				</c:forEach>
-				</c:when>
-				<c:otherwise>
-					조회된 결과가 없습니다.
-				</c:otherwise>
-			</c:choose>
-			</ul>
-		</div>
-		<%-- <c:if test="${session_member_grade == 1}"> --%>
-			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_01 btnP_04" id="write">
-					<span>글쓰기</span>
-				</a>
+						<tr>
+							<th scope="row">제목</th>
+							<td>
+								<input type="text" class="txt w200" id="NOTICE_SUB" name="NOTICE_SUB" />
+								<font color="red"></font>
+							</td>
+						</tr>
+											
+						<tr>
+							<th scope="row">내용</th>
+							<td>
+								<div class="textarea_grp">
+									<textarea name="NOTICE_CONTENT"></textarea>
+								</div>
+								<font color="red"></font>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		<%-- </c:if> --%>
-		
-		<div class="paging">
-			${pagingHtml}
-		</div>
+			<div class="btn_type_03">
+				<a href="#this" class="btn btnC_04 btnP_04" id="write">
+					<span>작성하기</span>
+				</a>
+				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
+					<span>목록으로</span>
+				</a>
+<!--  				
+				<span class="btn btnC_04 btnP_04">
+					<input type="submit" value="작성하기"/>
+				</span>
+				
+				<a href="javascript:history.back()" class="btn btnC_04 btnP_04 mr10">
+					<span>목록으로</span>
+				</a>
+ -->				
+			</div>
+		</form>		
 	</div>
 </div>
 
 <form id="commonForm" name="common"></form>
 
 <script type="text/javascript">
+        var gfv_count = 1;
+     
         $(document).ready(function(){
-            $("#write").on("click", function(e){ //글쓰기 버튼
+            $("#list").on("click", function(e){ //목록으로 버튼
                 e.preventDefault();
-                fn_openBoardWrite();
-            }); 
+                fn_openBoardList();
+            });
              
-            $("a[name='poster']").on("click", function(e){ // 영화제목, 영화포스터 클릭
+            $("#write").on("click", function(e){ //작성하기 버튼
                 e.preventDefault();
-                fn_openBoardDetail($(this));
+                fn_insertBoard();
             });
         });
          
-        function fn_openBoardWrite(){
+        function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='/admin/noticeList.do' />");
             comSubmit.submit();
         }
          
-        function fn_openBoardDetail(obj){
-            var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieDetail.do' />");
-            comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+        function fn_insertBoard(){
+            var comSubmit = new ComSubmit("frm");
+            comSubmit.setUrl("<c:url value='noticeWrite.do' />");
             comSubmit.submit();
         }
-    </script> 
+    </script>
 </body>
 </html>
