@@ -50,7 +50,7 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	public List<Map<String, Object>> testTimeList(Map<String, Object> map) throws Exception{
 		
-		return timeDAO.testList(map);
+		return timeDAO.optionTimeList(map);
 	}
 
 

@@ -75,7 +75,7 @@ public class ReserveController {
 		
 		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
 		
-			List<Map<String,Object>> timelist = timeService.testList(commandMap.getMap());
+			List<Map<String,Object>> timelist = timeService.optionTimeList(commandMap.getMap());
 		
 			mv.addObject("timelist", timelist);
 		}
