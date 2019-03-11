@@ -11,14 +11,16 @@
 </head>
 <body>
 	영화선택
-	<select id="selectMovie">
-		<option>선택</option>
-		<c:forEach items="${movieList }" var="row">
-			<option value="${row.MOVIE_NO}">영화 이름 : ${row.MOVIE_NAME} / 감독 : ${row.MOVIE_DIRECTOR }</option>
-		</c:forEach>
-	</select>
-
-	<input type="button" value="선택" onclick="location.href = '/moviecube/reserve.do'">
-	<input type="button" value="뒤로" onclick="location.href = '/moviecube/reserve.do'">
+	<form action="/moviecube/reserve.do">
+		<select name = "selectMovie">
+			<option>선택</option>
+			<c:forEach items="${movieList }" var="row">
+				<option value="${row.MOVIE_NO}"> 영화 이름 : ${row.MOVIE_NAME} / 감독 : ${row.MOVIE_DIRECTOR }</option>
+			</c:forEach>
+		</select> 
+		<input type="hidden" name= "selectCinema" value="${selectCinema }">
+		<input type="submit" value="선택"> 
+		<input type="button" value="뒤로" onclick="location.href = '/moviecube/reserve.do'">
+	</form>
 </body>
 </html>

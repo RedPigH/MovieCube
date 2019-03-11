@@ -6,7 +6,7 @@
 	<!-- 영화관 리스트 -->
 	<select id="selectCinemaList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT * FROM CINEMA
+			SELECT * FROM CINEMA 
 			ORDER BY CINEMA_NO ASC
 		]]>
 	</select>
@@ -14,7 +14,7 @@
 	<!-- 영화관 선택 -->
 	<select id = "selectOneCinema" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT & FROM CINEMA
+			SELECT * FROM CINEMA
 			WHERE CINEMA_NO = #{CINEMA_NO}
 		]]>
 	</select>
