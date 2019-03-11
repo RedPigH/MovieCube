@@ -39,7 +39,7 @@
 								<ul class="navbar_menu">
 									<li><a href="#">스토어</a></li>
 									<li><a href="#">이벤트</a></li>
-									<li><a href="#">빠른예매</a></li>
+									<li data-toggle="modal" data-target="#reservation"><a href="#">빠른예매</a></li>
 									<li data-toggle="modal" data-target="#loginModal"><a href="#">로그인</a></li>
 									<li><a href="admin/movieList.do">관리자</a></li>
 								</ul>
@@ -52,8 +52,11 @@
 			</div>
 		</div>
 	</header>
-	
-	
+
+
+<!-- 빠른 예매 모달창 -->
+<%@ include file="/WEB-INF/views/reserve/reserve.jspf"%>
+
 
 	
 <!-- 회원가입/로그인 모달창 -->

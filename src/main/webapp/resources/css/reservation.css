@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+#reservation .wrapper {
+    width: 968px;
+    margin: 0 auto;
+    padding: 88px 0 30px 0;
+    margin-top: 300px;
+}
+
+#reservation.fade .wrapper {
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -moz-transition: -moz-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+}
+
+#reservation .wrapper .contents.ReservationBn_ok {
+    height: 698px;
+}
+
+#reservation .wrapper .contents {
+    width: 100%;
+    height: 619px;
+    border: 1px solid #cdcdcd;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+#reservation .wrapper .contents .left_wrap {
+    float: left;
+    width: 433px;
+    border-right: 1px solid #e0e0e0;
+    margin-right: -1px;
+}
+
+#reservation .wrapper .contents .left_wrap>div {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 18px 19px 0 20px;
+}
+
+#reservation .wrapper .contents .date {
+    height: 90px;
+    padding-bottom: 9px;
+}
+
+#reservation .wrapper .contents .title {
+    margin-bottom: 11px;
+}
+
+#reservation .wrapper .contents .title h2 {
+    float: left;
+    color: #503396;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.booking_lp h2.h2_date {
+    background-position: 0 -160px;
+}
+
+.booking_lp h2, .booking_lp h3 {
+    background: url(http://image2.megabox.co.kr/mop/home/btns/btn_booking_160912.png) 0 0 no-repeat;
+    height: 26px;
+    width: 80px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+
+/* asd;lfjka;lskdjf */
+
+
+
+
+
+#reservation .wrapper .contents .right_wrap {
+    float: left;
+    width: 534px;
+}
+
+/* adlfkgjadflkghsertgn */
