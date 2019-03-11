@@ -44,7 +44,7 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception {
-		Map<String, Object> resultMap = movieDAO.selectOneMovie(map);
+		Map<String, Object> resultMap = movieDAO.selectMovieDetail(map);
 		return resultMap;
 	}
 	
