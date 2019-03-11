@@ -2,23 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="movie">
-<<<<<<< HEAD
+
 
 	<!-- 영화 리스트 -->
 	<select resultType="hashmap" parameterType="hashmap" id="selectMovieList">
 	<![CDATA[
-=======
+
 	
 	
 	<!-- 영화 리스트 -->
 	<select id = "selectMovieList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
+
 		select * from MC_MOVIE order by MOVIE_NO
 		]]>
 	</select>
 
-<<<<<<< HEAD
+
 
 	<select resultType="hashmap" parameterType="hashmap" id="selectMovieDetail">
 	<![CDATA[
@@ -29,7 +29,7 @@
 
 	<select resultType="hashmap" parameterType="hashmap" id="selectFileList">
 	<![CDATA[
-=======
+
 	<select id = "selectMovieDetail" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
@@ -38,7 +38,7 @@
 	
 	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
 		 <![CDATA[
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
+
         SELECT
             FILE_NO,
             POSTER_ORGNAME,
@@ -49,7 +49,7 @@
             AND DEL_GB = 'N'
     ]]>
 	</select>
-<<<<<<< HEAD
+
 
 	<!-- 영화 정보 입력 -->
 	<insert parameterType="hashmap" id="insertMoive" keyProperty="MOVIE_NO" useGeneratedKeys="true">
@@ -58,7 +58,7 @@
 			order="BEFORE">select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL 
 		</selectKey>
  		<![CDATA[
-=======
+
 	
 	<!-- 영화 정보 입력 -->
 	<insert id="insertMovie" parameterType="hashmap" >
@@ -66,7 +66,7 @@
 			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
 		</selectKey> -->
 		<![CDATA[
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
+
 		insert into MC_MOVIE 
 		( 
 			MOVIE_NO, 
@@ -83,11 +83,10 @@
 			)
 		values 
 		(
-<<<<<<< HEAD
+
 			#{MOVIE_NO},
-=======
+
 			MC_MOVIE_NO_SEQ.NEXTVAL,
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 			#{MOVIE_NAME},
 			#{MOVIE_TYPE},
 			#{MOVIE_OPENDATE},
@@ -101,15 +100,14 @@
 			)		 		  
 		]]>
 	</insert>
-<<<<<<< HEAD
+
 
 	<insert parameterType="hashmap" id="insertFile">
 		<![CDATA[
-=======
+
 	
 	<insert id="insertFile" parameterType="hashmap">
 		 <![CDATA[
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
         INSERT INTO MC_MOVIE_FILE
         (
             FILE_NO,
@@ -126,7 +124,6 @@
         )
     ]]>
 	</insert>
-<<<<<<< HEAD
 
 	<!-- 영화 정보 수정 -->
 	<update parameterType="hashMap" id="updateMovie">
@@ -156,7 +153,6 @@
 	<update parameterType="hashmap" id="deleteFileList">
 		<![CDATA[
 		UPDATE MC_MOVIE_FILE
-=======
 	
 	<!-- 영화 정보 수정 -->
 	<update id = "modifyMovie" parameterType = "hashMap">
@@ -186,16 +182,12 @@
 	<update id = "deleteFileList" parameterType = "hashmap">
 		<![CDATA[
 			UPDATE MC_MOVIE_FILE
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
+
 			SET
 				DEL_GB = 'Y'
 			WHERE
 				MOVIE_NO = #{MOVIE_NO}
 		]]>
 	</update>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 </mapper>
