@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.moviecube.member;
 
 import java.util.HashMap;
@@ -23,7 +22,7 @@ public class MemberController {
 	  @Resource(name="memberService")
 	  private MemberServiceImpl memberService;
 	  
-	  //µ¿ÀÇ¼­
+	  //ï¿½ï¿½ï¿½Ç¼ï¿½
 	  
 	  @RequestMapping(value="/openTerms.do")
 	  public ModelAndView terms(CommandMap commandMap) throws Exception{
@@ -32,7 +31,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //È¸¿ø°¡ÀÔ Æû
+	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	  
 	  @RequestMapping(value="/member/joinForm.do")
 	  public ModelAndView joinForm(CommandMap commandMap) throws Exception{
@@ -66,7 +65,6 @@ public class MemberController {
 		  	return "redirect:/main.do";
 	  }
 }
-=======
 /*
  * package com.moviecube.member;
  * 
@@ -105,4 +103,3 @@ public class MemberController {
  * memberService.insertMember(commandMap.getMap()); } catch(Exception e) { }
  * return "redirect:/main"; } }
  */
->>>>>>> 8a90b3fee56d21d1bdb6df53403fa0f1ae40b70d
