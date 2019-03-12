@@ -143,20 +143,38 @@
 								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
 						</tr>
-						<!-- 
-						<tr>
-							<th scope="row">스틸컷 </th>
-							<td>
-								<input type="file" class="txt" name="STILLCUT_ORGNAME" />
-							</td>
-						</tr>
-						 -->
+						
+					
 					</tbody>
 				</table>
-			</div>
+				
+				
+				<div id="fileDiv">
+				<table>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+					<tbody>
+
+						<tr>	
+							<th scope="row">스틸컷</th>
+							<td>
+								<input type="file" class="txt" name="STILLCUT_ORGNAME" />
+								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
+								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
+							</td>
+						</tr>	
+					</tbody>
+				</div>
+				</table>
+					
+					
+			</div>	
 			
 			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_04 btnP_04" id="write">
+				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="write">
 					<span>작성하기</span>
 				</a>
 			
@@ -164,14 +182,6 @@
 					<span>목록으로</span>
 				</a>
 			</div>
-			
-			<!-- <div class="btn_type_03">
-				<span class="btn btnC_04 btnP_04"> 
-					<a href="#this" class="btn" id="write">작성하기</a>
-        			<a href="#this" class="btn" id="list">목록으로</a>
-				</span>
-			</div> -->
-			
 		</form>
 	</div>
 </div>
@@ -192,7 +202,7 @@
                 fn_insertBoard();
             });
              
-            /* $("#addFile").on("click", function(e){ //파일 추가 버튼
+            $("#addFile").on("click", function(e){ //파일 추가 버튼
                 e.preventDefault();
                 fn_addFile();
             });
@@ -200,7 +210,7 @@
             $("a[name='delete']").on("click", function(e){ //삭제 버튼
                 e.preventDefault();
                 fn_deleteFile($(this));
-            }); */
+            }); 
         });
          
         function fn_openBoardList(){
@@ -215,8 +225,8 @@
             comSubmit.submit();
         }
          
-        /* function fn_addFile(){
-            var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+        function fn_addFile(){
+            var str = "<p><input type='file' name='STILLCUT_ORGNAME_"+(gfv_count++)+"'><a href='#this' class='btn btnC_04 btnP_02' name='delete'><span>삭제</span></a></p>";
             $("#fileDiv").append(str);
             $("a[name='delete']").on("click", function(e){ //삭제 버튼
                 e.preventDefault();
@@ -226,7 +236,7 @@
          
         function fn_deleteFile(obj){
             obj.parent().remove();
-        } */
+        } 
         
     </script>
 </body>
