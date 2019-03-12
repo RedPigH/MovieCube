@@ -16,9 +16,9 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
-	function noticeDelete() {
+	function screenDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'noticeDelete.do?NOTICE_NO=${map.NOTICE_NO}';
+			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}';
 		} else { //취소
 			return;
 		}
@@ -27,11 +27,9 @@
 
 </head>
 
-<body>
-
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Detail </a></h1>
+	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Screen Regist</a></h1>
 	</div>
 </div>
 
@@ -40,10 +38,10 @@
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
-			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
+			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
 			<li><a href="<%=cp%>">영화시간표</a></li>
-			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
+			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
@@ -52,31 +50,30 @@
 	
 	<div class="admin_ct">
 		<div class="movie_list">
-			<h3 class="sub_tit">공지사항 상세보기</h3>
+			<h3 class="sub_tit">상영관 상세보기</h3>
 			<div class="tbl_type_01">
 				<table>
-					<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
+					<caption>상영관</caption>
 					<colgroup>
-						<col style="width: 120px;" />
+						<col style="width : 200px;" />
 						<col />
 					</colgroup>
 					<tbody>
 						<tr>
-							<th scope="row">글번호</th>
-							<td>${map.NOTICE_NO}</td>
+							<th scope="row">상영관 번호</th>
+							<td>${map.SCREEN_NO}</td>
 						</tr>
 						<tr>
-							<th scope="row">글제목</th>
-							<td>${map.NOTICE_SUB}</td>
+							<th scope="row">상영관 이름
+							<td align="left">${map.SCREEN_NAME}</td>
 						</tr>
 						<tr>
-							<th scope="row">작성일</th>
-							<td><c:set var="TextValue" value="${map.NOTICE_REGDATE}"/>
-								${fn:substring(TextValue,0,10)}
+							<th scope="row">상영관 타입</th>
+							<td>${map.SCREEN_TYPE}</td>
 						</tr>
 						<tr>
-							<th scope="row">글내용</th>
-							<td><pre>${map.NOTICE_CONTENT}</pre></td>
+							<th scope="row">소속 영화관  </th>
+							<td>${map.CINEMA_NO}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -85,15 +82,14 @@
 		<div class="btn_type_03">
 			
 			<span class="btn btnC_04 btnP_04">
-				<input type="button" onclick="location.href='noticeModifyForm.do?NOTICE_NO=${map.NOTICE_NO}'" value="수정" />
+				<input type="button" onclick="location.href='screenModifyForm.do?SCREEN_NO=${map.SCREEN_NO}'" value="수정" />
 			</span>
 			<span class="btn btnC_04 btnP_04" style="padding-left: 10px;">
-				<input type="button" onclick="noticeDelete()" value="삭제" />
+				<input type="button" onclick="screenDelete()" value="삭제" />
 			</span>
-			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='noticeList.do?currentPage=${currentPage}' ">
+			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='screenList.do?currentPage=${currentPage}' ">
 				<span>목록</span>
 			</a>
 		</div>
 	</div>
 </div>
-	

@@ -15,24 +15,19 @@
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-<style>
-background-color="#ffffff"
-</style>
 </head>
-
-<body>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie List</a></h1>
+	<h1><a href="<%=cp %>/admin/cinemaList.do">MovieCube Administrator - Cinema List</a></h1>
 	</div>
 </div>
 
 <div class="admin_grp">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
 			<li><a href="<%=cp%>">영화시간표</a></li>
@@ -42,48 +37,55 @@ background-color="#ffffff"
 			<li><a href="<%=cp%>">회원정보</a></li>
 		</ul>
 	</div>
+	
 	<div class="admin_ct">
-		<div class="movie_list">
-			<h3 class="sub_tit">상영작</h3>
-			<ul>
-			<c:choose>
-			<c:when test="${fn:length(movieList) > 0}">
-            	<c:forEach items="${movieList}" var="row">
+		<h3 class="sub_tit">영화관 목록</h3>
+		<div class="tbl_type_02">
+			<table>
+				<caption>영화관 등록</caption>
+				<colgroup>
+					<col style="width:10%;" />
+					<col />
+					<col style="width:50%;" />
+					<col style="width:20%;" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">영화관 번호</th>
+						<th scope="col">영화관 이름</th> 
+						<th scope="col">영화관 안내</th>
+						<th scope="col">영화관 주소</th>
+					</tr>
+				</thead>
+				<tbody>
 					
-				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/marble.jpeg" alt="영화포스터" /> 
-				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
-				<span class="detail">상세보기</span>
-						<div class="explan">
-							<p>
-								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
-							</p>
-							<p>
-								<strong>개봉</strong> :  <c:set var="TextValue" value="${row.MOVIE_OPENDATE}"/>
-									${fn:substring(TextValue,0,10)}
-							</p>
-						</div>
-				</a> 
-				</li>
-				</c:forEach>
-				</c:when>
-				<c:otherwise>
-					조회된 결과가 없습니다.
-				</c:otherwise>
-			</c:choose>
-			</ul>
+				<c:choose>
+					<c:when test="${fn:length(cinemaList) > 0}">
+            			<c:forEach items="${cinemaList}" var="row">
+						<tr>
+							<td>${row.CINEMA_NO}
+							<td><a href="#this" name="CINEMA_NAME">${row.CINEMA_NAME}
+							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
+							<td class="subject"><a href="#this" name="CINEMA_CONTENT"><pre>${row.CINEMA_CONTENT}</pre>
+							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
+							<td>${row.CINEMA_ADDRESS}</td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					등록된 게시물이 없습니다
+					</c:otherwise>
+				</c:choose>
+				</tbody>
+			</table>
 		</div>
-		<%-- <c:if test="${session_member_grade == 1}"> --%>
-			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_01 btnP_04" id="write">
-					<span>글쓰기</span>
-				</a>
-			</div>
-		<%-- </c:if> --%>
+		<div class="btn_type_03">
+			<a href="#this" class="btn btnC_01 btnP_04" id="write">
+				<span>글쓰기</span>
+			</a>
+		</div>
 		
-		<div class="paging">
-			${pagingHtml}
-		</div>
+		<div class="paging">${pagingHtml}</div>
 	</div>
 </div>
 
@@ -96,7 +98,12 @@ background-color="#ffffff"
                 fn_openBoardWrite();
             }); 
              
-            $("a[name='poster']").on("click", function(e){ // 영화제목, 영화포스터 클릭
+            $("a[name='CINEMA_NAME']").on("click", function(e){ // 영화관 이름 클릭
+                e.preventDefault();
+                fn_openBoardDetail($(this));
+            });
+            
+            $("a[name='CINEMA_CONTENT']").on("click", function(e){ // 영화관 이름 클릭
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
@@ -104,14 +111,14 @@ background-color="#ffffff"
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='cinemaWriteForm.do' />");
             comSubmit.submit();
         }
          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieDetail.do' />");
-            comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+            comSubmit.setUrl("<c:url value='cinemaDetail.do' />");
+            comSubmit.addParam("CINEMA_NO", obj.parent().find("#CINEMA_NO").val());
             comSubmit.submit();
         }
     </script> 

@@ -14,13 +14,12 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-</head>
 
-<body>
+</head>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Modify</a></h1>
+	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Cinema Modify</a></h1>
 	</div>
 </div>
 
@@ -28,11 +27,11 @@
 	<div class="admin_list">
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
 			<li><a href="<%=cp%>">영화시간표</a></li>
-			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
+			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
@@ -40,11 +39,11 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화 정보 등록</h3>
+		<h3 class="sub_tit">영화관 등록</h3>
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>
-					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
+					<caption></caption>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
@@ -52,19 +51,27 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">제목</th>
+							<th scope="row">영화관 이름</th>
 							<td>
-								<input type="text" class="txt w200" id="NOTICE_SUB" name="NOTICE_SUB" value="${map.NOTICE_SUB}"/>
-								<input type="hidden" id="NOTICE_NO" name="NOTICE_NO" value="${map.NOTICE_NO }">
+								<input type="text" class="txt w200" id="CINEMA_NAME" name="CINEMA_NAME" value="${map.CINEMA_NAME}"/>
+								<input type="hidden" id="CINEMA_NO" name="CINEMA_NO" value="${map.CINEMA_NO }">
+								<font color="red"></font>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">영화관 주소</th>
+							<td>
+								<input type="text" class="txt w200" id="CINEMA_ADDRESS" name="CINEMA_ADDRESS" value="${map.CINEMA_ADDRESS}" />
 								<font color="red"></font>
 							</td>
 						</tr>
 											
 						<tr>
-							<th scope="row">내용</th>
+							<th scope="row">영화관 안내</th>
 							<td>
 								<div class="textarea_grp">
-									<textarea name="NOTICE_CONTENT">${map.NOTICE_CONTENT}</textarea>
+									<textarea name="CINEMA_CONTENT">${map.CINEMA_NAME}</textarea>
 								</div>
 								<font color="red"></font>
 							</td>
@@ -72,17 +79,16 @@
 					</tbody>
 				</table>
 			</div>
-			
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
 					<span>수정하기</span>
 				</a>
-			
-				<a href="#this" class="btn btnC_04 btnP_04" id="list" style="padding-left: 10px;">
+				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
 				</a>
 			</div>
-		</form>
+		</form>		
 	</div>
 </div>
 
@@ -105,16 +111,15 @@
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/admin/noticeList.do' />");
+            comSubmit.setUrl("<c:url value='cinemaList.do' />");
             comSubmit.submit();
         }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='/admin/noticeModify.do' />");
+            comSubmit.setUrl("<c:url value='cinemaModify.do' />");
             comSubmit.submit();
-        }     
+        }
     </script>
 </body>
 </html>
-			

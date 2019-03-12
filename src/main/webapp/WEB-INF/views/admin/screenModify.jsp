@@ -14,13 +14,22 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-</head>
 
-<body>
+<script type="text/javascript">
+	function cinemaDelete() {
+		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}';
+		} else { //취소
+			return;
+		}
+	}
+</script>
+
+</head>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Modify</a></h1>
+	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Screen Regist</a></h1>
 	</div>
 </div>
 
@@ -29,10 +38,10 @@
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
-			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
+			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
 			<li><a href="<%=cp%>">영화시간표</a></li>
-			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
+			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
@@ -40,11 +49,11 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화 정보 등록</h3>
+		<h3 class="sub_tit">상영관 등록</h3>
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>
-					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
+					<caption></caption>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
@@ -52,37 +61,48 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">제목</th>
+							<th scope="row">상영관 이름</th>
 							<td>
-								<input type="text" class="txt w200" id="NOTICE_SUB" name="NOTICE_SUB" value="${map.NOTICE_SUB}"/>
-								<input type="hidden" id="NOTICE_NO" name="NOTICE_NO" value="${map.NOTICE_NO }">
+								<input type="text" class="txt w200" id="SCREEN_NAME" name="SCREEN_NAME" value="${map.SCREEN_NAME}" />
+								<input type="hidden" id="CINEMA_NO" name="SCREEN_NO" value="${map.SCREEN_NO}">
+								<font color="red"></font>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">상영관 타입</th>
+							<td>
+								<input type="text" class="txt w200" id="SCREEN_TYPE" name="SCREEN_TYPE" value="${map.SCREEN_TYPE}" />
+								<span class="ibk">예)3D, 4D</span>
 								<font color="red"></font>
 							</td>
 						</tr>
 											
 						<tr>
-							<th scope="row">내용</th>
+							<th scope="row">영화관 번호</th>
 							<td>
-								<div class="textarea_grp">
-									<textarea name="NOTICE_CONTENT">${map.NOTICE_CONTENT}</textarea>
-								</div>
+								<select name="CINEMA_NO" class="txt w200" >
+									<option value="1">강남 무비큐브</option>
+									<option value="2">교대 무비큐브</option>
+									<option value="3">사당 무비큐브</option>
+								</select>
+								
 								<font color="red"></font>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
 					<span>수정하기</span>
 				</a>
-			
-				<a href="#this" class="btn btnC_04 btnP_04" id="list" style="padding-left: 10px;">
+				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
 				</a>
 			</div>
-		</form>
+		</form>		
 	</div>
 </div>
 
@@ -97,7 +117,7 @@
                 fn_openBoardList();
             });
              
-            $("#write").on("click", function(e){ //작성하기 버튼
+            $("#write").on("click", function(e){ //수정하기 버튼
                 e.preventDefault();
                 fn_insertBoard();
             });
@@ -105,16 +125,15 @@
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/admin/noticeList.do' />");
+            comSubmit.setUrl("<c:url value='screenList.do' />");
             comSubmit.submit();
         }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='/admin/noticeModify.do' />");
+            comSubmit.setUrl("<c:url value='screenModify.do' />");
             comSubmit.submit();
-        }     
+        }
     </script>
 </body>
 </html>
-			

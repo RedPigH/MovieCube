@@ -133,7 +133,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
 		System.out.println("수정확인테스트 3: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap());
@@ -252,7 +252,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/noticeModify.do")
 	public ModelAndView modifyNotice(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/noticeDetail.do");
 
 		noticeService.updateBoard(commandMap.getMap());
 
