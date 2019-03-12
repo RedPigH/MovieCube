@@ -101,12 +101,11 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/movieWrite.do")
-	public ModelAndView movieWrtie(CommandMap commandMap) throws Exception {
+	public ModelAndView movieWrtie(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
 		System.out.println("쓰기확인 : " + commandMap.getMap());
-		
-		movieService.insertMovie(commandMap.getMap());
+		movieService.insertMovie(commandMap.getMap(), request);
 		return mv;
 	}
 	

@@ -42,7 +42,7 @@
 	
 	<div class="admin_ct">
 		<h3 class="sub_tit">영화 정보 등록</h3>
-		<form id="frm">
+		<form id="frm" name="frm" enctype="multipart/form-data">
 			<div class="tbl_type_01">
 				<table>
 					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
@@ -137,25 +137,20 @@
 							</td>
 						</tr>
 						
-						<!-- <tr>
+						<tr>
 							<th scope="row">포스터</th>
 							<td>
-								<input type="file" class="txt" name="poster" />
+								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
 						</tr>
+						<!-- 
 						<tr>
-							<th scope="row">스틸컷 1</th>
-							<td><input type="file" class="txt" name="cut1" /></td>
+							<th scope="row">스틸컷 </th>
+							<td>
+								<input type="file" class="txt" name="STILLCUT_ORGNAME" />
+							</td>
 						</tr>
-						<tr>
-							<th scope="row">스틸컷 2</th>
-							<td><input type="file" class="txt" name="cut2" /></td>
-						</tr>
-						<tr>
-							<th scope="row">스틸컷 2</th>
-							<td><input type="file" class="txt" name="cut3" /></td>
-						</tr> -->
-						
+						 -->
 					</tbody>
 				</table>
 			</div>

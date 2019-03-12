@@ -92,8 +92,7 @@
 						<span>삭제</span></a>
 					<a href="<%=cp%>/admin/movieList.do"
 						class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
-
-									
+				
 					<%-- <a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}" 
 					onclick="return confirm('삭제하시겠습니까?');" class="btn btnC_01 btnF_04"> <span>삭제</span> </a> --%>
 					
