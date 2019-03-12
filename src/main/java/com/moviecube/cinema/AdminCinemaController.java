@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
 
+@RequestMapping(value = "/admin")
 @Controller
 public class AdminCinemaController {
 
@@ -19,17 +20,17 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaList.do")
 	public ModelAndView cinemaList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/cinemaList");
+		ModelAndView mv = new ModelAndView("/admin/cinemaList");
 
-		List<Map<String, Object>> list = cinemaService.selectCinemaList(commandMap.getMap());
-		mv.addObject("list", list);
-
+		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
+		mv.addObject("cinemaList", cinemaList);
+		System.out.println("시네마 리스트 확인: " + commandMap.getMap());
 		return mv;
 	}
 
 	@RequestMapping(value = "/cinemaDetail.do")
 	public ModelAndView cinemaSelectOne(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/cinemaDetail");
+		ModelAndView mv = new ModelAndView("/admin/cinemaDetail");
 
 		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
 
@@ -40,23 +41,23 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaWriteForm.do")
 	public ModelAndView cinemaWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/cinemaWirte");
+		ModelAndView mv = new ModelAndView("/admin/cinemaWrite");
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/cinemaWrite.do")
 	public ModelAndView cinemaWrite(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/cinemaList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/cinemaList.do");
 
 		cinemaService.insertCinema(commandMap.getMap());
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/cinemaUpdateForm.do")
+	@RequestMapping(value = "/cinemaModifyForm.do")
 	public ModelAndView cinemaUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/cinemaWirte");
+		ModelAndView mv = new ModelAndView("/admin/cinemaModify");
 
 		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
 
@@ -65,9 +66,9 @@ public class AdminCinemaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/cinemaUpdate.do")
+	@RequestMapping(value = "/cinemaModify.do")
 	public ModelAndView cinemaUpdate(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/cinemaDetail.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/cinemaDetail.do");
 
 		cinemaService.updateCinema(commandMap.getMap());
 
@@ -78,7 +79,7 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaDelete.do")
 	public ModelAndView cinemaDelete(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/cinemaList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/cinemaList.do");
 
 		cinemaService.deleteCinema(commandMap.getMap());
 

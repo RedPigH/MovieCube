@@ -33,4 +33,10 @@ public class CinemaDAO extends AbstractDAO {
 		delete("cinema.deleteCinema", map);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectOneCinema(Map<String, Object> map) {
+		return(Map<String, Object>) selectOne("cinema.selectOneCinema", map);
+	}
+
 }

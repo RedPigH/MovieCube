@@ -22,17 +22,17 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeList.do")
 	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeList");
+		ModelAndView mv = new ModelAndView("/notice/noticeList");
 
-		List<Map<String, Object>> list = noticeService.selectBoardList(commandMap);
-		mv.addObject("list", list);
+		List<Map<String, Object>> Noticelist = noticeService.selectBoardList(commandMap);
+		mv.addObject("list", Noticelist);
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/notice/adminNoticeWriteForm.do")
 	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeWriteForm");
+		ModelAndView mv = new ModelAndView("/notice/noticeWriteForm");
 
 		return mv;
 
@@ -50,7 +50,7 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeDetail");
+		ModelAndView mv = new ModelAndView("/notice/noticeDetail");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		System.out.println(commandMap.getMap());
@@ -61,7 +61,7 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeModifyForm.do")
 	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeModify");
+		ModelAndView mv = new ModelAndView("/notice/noticeModify");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		mv.addObject("map", map);

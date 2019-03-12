@@ -24,7 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
 import com.moviecube.movie.MovieService;
+import com.moviecube.notice.NoticeService;
 import com.moviecube.common.Paging;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -32,6 +34,9 @@ public class AdminController {
 	
 	@Resource(name = "movieService")
 	private MovieService movieService;
+	
+	@Resource(name = "noticeService")
+	private NoticeService noticeService;
 	
 	private int currentPage = 1;
 	private int totalCount;
@@ -128,7 +133,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
 		System.out.println("수정확인테스트 3: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap());
@@ -155,5 +160,112 @@ public class AdminController {
 		
 		mav.setViewName("/admin/imgView");
 		return mav;
+	}
+
+/*
+	@RequestMapping(value = "/notice/adminNoticeList.do")
+	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("noticeList");
+
+		List<Map<String, Object>> list = noticeService.selectBoardList(commandMap);
+		mv.addObject("list", list);
+
+		return mv;
+	}
+*/
+	
+	@RequestMapping(value = "noticeList.do")
+	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Map<String, Object>> noticeList = noticeService.selectBoardList(commandMap.getMap());
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		totalCount = noticeList.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		//System.out.println(paging.getEndCount());
+		//System.out.println(totalCount);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		noticeList = noticeList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("noticeList", noticeList);
+		mv.addObject("list", noticeList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/admin/noticeList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/noticeWriteForm.do")
+	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/noticeWrite");
+
+		return mv;
+
+	}
+	
+	@RequestMapping(value = "/noticeWrite.do")
+	public ModelAndView writeNotice(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
+
+		noticeService.insertBoard(commandMap.getMap());
+
+		return mv;
+
+	}
+	
+	@RequestMapping(value = "/noticeDetail.do")
+	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/noticeDetail");
+		
+		System.out.println("상세보기 페이지 넘기는값 확인 : " + commandMap.getMap());
+		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
+		
+		mv.addObject("map", map);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/noticeModifyForm.do")
+	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/noticeModify");
+
+		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
+		mv.addObject("map", map);
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/noticeModify.do")
+	public ModelAndView modifyNotice(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/noticeDetail.do");
+
+		noticeService.updateBoard(commandMap.getMap());
+
+		mv.addObject("NOTICE_NO", commandMap.get("NOTICE_NO"));
+		return mv;
+	}
+
+	@RequestMapping(value = "/noticeDelete.do")
+	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
+		
+		noticeService.deleteBoard(commandMap.getMap());
+
+		return mv;
 	}
 }
