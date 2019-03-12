@@ -10,26 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.cinema.CinemaService;
 
+@RequestMapping(value = "/admin")
 @Controller
 public class AdminScreenController {
 
 	@Resource(name = "screenService")
 	private ScreenService screenService;
+	
+	@Resource(name = "cinemaService")
+	private CinemaService cinemaService;
 
 	@RequestMapping(value = "/screenList.do")
 	public ModelAndView screenList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/screenList");
+		ModelAndView mv = new ModelAndView("/admin/screenList");
 
-		List<Map<String, Object>> list = screenService.selectScreenList(commandMap.getMap());
-		mv.addObject("list", list);
-
+		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
+		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
+		
+		mv.addObject("screenList", screenList);
+		mv.addObject("map", map);
 		return mv;
 	}
 
 	@RequestMapping(value = "/screenDetail.do")
 	public ModelAndView screenDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/screenDetail");
+		ModelAndView mv = new ModelAndView("/admin/screenDetail");
 
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 
@@ -40,23 +47,23 @@ public class AdminScreenController {
 
 	@RequestMapping(value = "/screenWriteForm.do")
 	public ModelAndView screenWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/screenWrite");
+		ModelAndView mv = new ModelAndView("/admin/screenWrite");
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/screenWrite.do")
 	public ModelAndView screenWrite(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/screenList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/screenList.do");
 
 		screenService.insertScreen(commandMap.getMap());
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/screenUpdateForm.do")
+	@RequestMapping(value = "/screenModifyForm.do")
 	public ModelAndView screenUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/screenWirte");
+		ModelAndView mv = new ModelAndView("/admin/screenModify");
 
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 
@@ -65,9 +72,9 @@ public class AdminScreenController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/screenUpdate.do")
+	@RequestMapping(value = "/screenModify.do")
 	public ModelAndView screenUpdate(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/screenDetail.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/screenDetail.do");
 
 		screenService.updateScreen(commandMap.getMap());
 
@@ -78,7 +85,7 @@ public class AdminScreenController {
 
 	@RequestMapping(value = "/screenDelete.do")
 	public ModelAndView screenDelete(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/screenList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/screenList.do");
 
 		screenService.deleteScreen(commandMap.getMap());
 

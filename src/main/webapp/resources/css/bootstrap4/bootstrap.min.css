@@ -4939,7 +4939,15 @@ button.close {
 }
 
 .modal {
+<<<<<<< HEAD
+<<<<<<< HEAD
+	position: relative;
+=======
+	position: absolute;
+>>>>>>> c597a1560fc5a74598cbba266581dd71ed3de8a0
+=======
 	position: fixed;
+>>>>>>> e7db5cf19f4f82a67c374708f72f078636c482bd
 	top: 0;
 	right: 0;
 	bottom: 0;

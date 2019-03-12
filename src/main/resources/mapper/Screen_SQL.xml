@@ -14,7 +14,7 @@
 	<!-- 상영관 선택 -->
 	<select id = "selectOneScreen" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT * FORM SCREEN
+			SELECT * FROM SCREEN
 			WHERE SCREEN_NO = #{SCREEN_NO}
 		]]>
 	</select>

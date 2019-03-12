@@ -16,6 +16,16 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
+	function movieDelete() {
+		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+			location.href = 'movieDelete.do?MOVIE_NO=${map.MOVIE_NO}';
+		} else { //취소
+			return;
+		}
+	}
+</script>
+
+<script type="text/javascript">
 
 	function img_view(imgname) {
 		window.open("imgView.do?img="+imgname, "크게보기");
@@ -36,11 +46,12 @@
 <div class="admin_grp">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화정보</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
-			<li><a href="<%=cp%>">영화관</a></li>
+			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">공지사항</a></li>
+			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
@@ -77,10 +88,14 @@
 					<span></span>
 					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}"
 						class="btn btnC_01 btnF_04"> <span>수정</span></a> 
+					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;">
+						<span>삭제</span></a>
 					<a href="<%=cp%>/admin/movieList.do"
-						class="btn btnC_01 btnF_04"> <span>목록</span> </a>
-					<a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}" 
-					onclick="return confirm('삭제하시겠습니까?');" class="btn btnC_01 btnF_04"> <span>삭제</span> </a>
+						class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
+
+									
+					<%-- <a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}" 
+					onclick="return confirm('삭제하시겠습니까?');" class="btn btnC_01 btnF_04"> <span>삭제</span> </a> --%>
 					
 					<%-- <a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}"
 						class="btn btnC_01 btnF_04"> <span>삭제</span> </a> --%>

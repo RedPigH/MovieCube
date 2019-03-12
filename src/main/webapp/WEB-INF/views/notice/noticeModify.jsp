@@ -19,8 +19,7 @@
 				<tr>
 					<th scope="row">글 번호</th>
 					<td>${map.NOTICE_NO }
-					<input type="hidden" id="NOTICE_NO"
-						name="NOTICE_NO" value="${map.NOTICE_NO }">
+					<input type="hidden" id="NOTICE_NO" name="NOTICE_NO" value="${map.NOTICE_NO }">
 					</td>
 				<tr>
 					<th scope="row">작성시간</th>
