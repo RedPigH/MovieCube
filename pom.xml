@@ -30,7 +30,7 @@
 			</snapshots>
 		</repository>
 
-		<repository>
+	<!-- 	<repository>
 			<id>egovframe</id>
 			<url>http://www.egovframe.go.kr/maven/</url>
 			<releases>
@@ -39,7 +39,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
+		</repository> -->
 	</repositories>
 
 	<dependencies>
@@ -62,6 +62,12 @@
 			</exclusions>
 		</dependency>
 
+	<!-- 	<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.ptl.mvc</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+ 	-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -258,11 +264,12 @@
 		</dependency>
 
 		<!-- EgovProperty -->
-		<dependency>
+		
+		<!-- <dependency>
 			<groupId>egovframework.rte</groupId>
-			<artifactId>egovframework.rte.ptl.mvc</artifactId>
-			<version>3.5.0</version>
-		</dependency>
+			<artifactId>egovframework.rte.fdl.property</artifactId>
+			<version>2.7.0</version>
+		</dependency> -->
 
 		<!-- Log4j -->
 		<dependency>
@@ -308,18 +315,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.6.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.4</version>
 		</dependency>
 	</dependencies>
 
