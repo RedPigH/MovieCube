@@ -22,7 +22,6 @@ public class ReserveController {
 	@Resource(name = "timeService")
 	private TimeService timeService;
 
-	@SuppressWarnings("null")
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_main");
@@ -72,7 +71,7 @@ public class ReserveController {
 
 		}
 		
-		
+		//view단에서 validation 처리 보탁 드립니다
 		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
 		
 			List<Map<String,Object>> timelist = timeService.optionTimeList(commandMap.getMap());

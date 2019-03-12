@@ -14,7 +14,7 @@
 		<property name="password" value="oracle" />
 	</bean>
 
-	<bean id="textRenderer"
+	<!-- <bean id="textRenderer"
 		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer" />
 	<bean id="paginationManager"
 		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
@@ -23,7 +23,7 @@
 				<entry key="text" value-ref="textRenderer" />
 			</map>
 		</property>
-	</bean>
+	</bean> -->
 
 
 <bean id="dataSource"

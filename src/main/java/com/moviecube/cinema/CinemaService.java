@@ -15,4 +15,6 @@ public interface CinemaService {
 
 	void deleteCinema(Map<String, Object> map) throws Exception;
 
+	Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception;
+
 }
