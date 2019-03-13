@@ -19,112 +19,91 @@
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1"
-										style="border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
-										<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px;">날짜</h4>
-									</th>
-									<th class="column-4"
-										style="border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;"></th>
-									<th class="column-5" colspan="3"
-										style="border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;"><input
-										type="text" name="daterange" value="03/13/2019 - 03/14/2019" /></th>
-								</tr>
-
-								<tr class="table_row" style="height: 82px">
-									<td class="column-1" colspan="5" style="padding-top: 30px">
-										<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
-									</td>
-								</tr>
-								
-								<div id="pre_set" style="display:none">
-   									 <input type="text" name="" value="" style="width:200px"> 
-   									 <input type="button" value="삭제" onclick="remove_item(this)">
-								</div>
- 
-								<div id="field">
-									
-								</div>
-								<input type="button" value=" 추가 " onclick="add_item()"><br>
-								
-								
-								
-								<tr class="table_row">
-									<td class="column-1">
-
-										<div class="how-itemcart1">
-											<img src="resources/images/item-cart-04.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div
-												class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product"
-												type="number" name="num-product1" value="1">
-
-											<div
-												class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 36.00</td>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="resources/images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div
-												class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product"
-												type="number" name="num-product2" value="1">
-
-											<div
-												class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
-							</table>
-						</div>
-
+						
+						
 						<div
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm"
 							style="border-top: 1px solid #e6e6e6;">
 
 							<div class="flex-w flex-m m-r-20 m-tb-5">
+								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
+
+							</div>
+							
+								<input type="text"
+										name="daterange" value="03/13/2019 - 03/14/2019" />
+
+						</div>
+						
+						
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm" style="border-bottom: unset;">
+
+							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">극장</h4>
 
 							</div>
-
+						</div>
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 							<div
 								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-								지역</div>
+								지역1</div>
 
 							<div
 								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								상영관</div>
+								상영관1</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역2</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관2</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역3</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관3</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역4</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관4</div>
 						</div>
+
+
+
+
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm" style="border-bottom: unset;">
+							<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
+							<h6 onclick="add_item()" style="font-family: NanumGothicBold">추가</h6>
+						</div>
+						
+						<div>	
+							<div id="movieAdd" style="display: none;">
+									<div class="wrap-table-shopping-cart table-shopping-cart table_row tr    
+													flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+										<div class="column-1">
+											<div class="how-itemcart1">
+											<img src="resources/images/mayakwang.jpg" alt="IMG">
+											</div>
+										</div>
+										<div class="column-2">마약왕(2019)</div>
+										<div class="column-3"></div>
+									</div>
+									
+									<h6 onclick="remove_item(this)"  style="font-family: NanumGothicBold">삭제</h6>
+							</div>
+							<div id="field"></div>
+						</div>
+
+
 					</div>
 				</div>
 
@@ -323,9 +302,9 @@
 			class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-	
-	<%@ include file="main/script.jspf" %>
-	
-	
+
+	<%@ include file="main/script.jspf"%>
+
+
 </body>
 </html>

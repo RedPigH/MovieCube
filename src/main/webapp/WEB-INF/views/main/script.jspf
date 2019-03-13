@@ -133,7 +133,7 @@ $(function() {
     function add_item(){
         // pre_set 에 있는 내용을 읽어와서 처리..
         var div = document.createElement('div');
-        div.innerHTML = document.getElementById('pre_set').innerHTML;
+        div.innerHTML = document.getElementById('movieAdd').innerHTML;
         document.getElementById('field').appendChild(div);
     }
  
