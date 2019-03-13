@@ -26,8 +26,8 @@
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${fn:length(list) > 0 }">
-					<c:forEach items="${list }" var="row">
+				<c:when test="${fn:length(faqList) > 0 }">
+					<c:forEach items="${faqList }" var="row">
 						<tr>
 							<td>${row.FAQ_NO }</td>
 							<td>${row.FAQ_TYPE }</td>
@@ -46,7 +46,7 @@
 		</tbody>
 	</table>
 	<br />
-	<a href="#this" class="btn" id="write">글쓰기</a>
+	<a href="#this" class="btn" id="write">글쓰기</a>${pagingHtml}
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
