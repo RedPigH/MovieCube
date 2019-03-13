@@ -1952,13 +1952,9 @@ input.num-product::-webkit-inner-spin-button {
 .table-shopping-cart {
   border-collapse: collapse;
   width: 100%;
-  min-width: 680px;
+  min-width: 660px;
 }
 
-.table-shopping-cart tr {
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
-}
 
 .table-shopping-cart .column-1 {
   width: 133px;
@@ -1988,7 +1984,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .table_row {
-  height: 185px;
+  height: 140px;
 }
 
 .table-shopping-cart .table_row td {
@@ -2344,8 +2340,9 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .mtext-109 {
-  font-family: Poppins-Bold;
-  font-size: 20px;
+  font-family: NanumGothicExtraBold;
+  font-size: 30px;
+  color: #bf0000;
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -2687,7 +2684,7 @@ input.num-product::-webkit-inner-spin-button {
 .bg5 {background-color: rgba(0,0,0,0.5);}
 .bg6 {background-color: #f2f2f2;}
 .bg7 {background-color: #333;}
-.bg8 {background-color: #f3f3f3;}
+.bg8 {background-color: #fff;}
 .bg9 {background-color: rgba(255,255,255,0.9);}
 
 /*---------------------------------------------*/
@@ -3131,13 +3128,13 @@ input.num-product::-webkit-inner-spin-button {
 .hov-btn2:hover {
   border-color: #fff;
   background-color: #fff;
-  color: #717fe0;
+  color: #000080;
 }
 
 /*---------------------------------------------*/
 .hov-btn3:hover {
-  border-color: #717fe0;
-  background-color: #717fe0;
+  border-color: #ff5959;
+  background-color: #ff5959;
   color: #fff;
 }
 
@@ -3147,8 +3144,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-tag1:hover {
-  color: #717fe0;
-  border-color: #717fe0;
+  color: #ff5959;
+  border-color: #ff5959;
 }
 
 
