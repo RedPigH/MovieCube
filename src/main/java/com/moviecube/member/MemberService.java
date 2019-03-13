@@ -13,5 +13,8 @@ public interface MemberService {
 	 int login(Map<String, Object> map) throws Exception;
 	 
 	//CheckID . 아이디값으로 멤버정보 가져오기
-	 Map<String, Object> checkId(Map<String, Object> map)throws Exception;
+	 Map<String, Object> checkId(Map<String, Object> map) throws Exception;
+	 
+	 // 멤버정보 수정
+	void updateMember(Map<String, Object> map) throws Exception;
 }

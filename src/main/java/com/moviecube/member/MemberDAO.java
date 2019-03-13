@@ -20,6 +20,11 @@ public class MemberDAO extends AbstractDAO {
 	public void insertMember(Map<String, Object> map) throws Exception {
 		insert("member.insertMember", map);
 	}
+	
+	// 회원정보 수정
+	public void updateMember(Map<String, Object> map) throws Exception {
+		update("member.updateMember", map);
+	}
 
 	// id 중복확인
 	public int findUsedID(Map<String, Object> map) throws Exception {
@@ -40,4 +45,5 @@ public class MemberDAO extends AbstractDAO {
 	public Map<String, Object> checkId(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("member.checkId", map);
 	}
+
 }

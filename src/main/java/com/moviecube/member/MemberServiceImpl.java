@@ -37,4 +37,10 @@ public class MemberServiceImpl implements MemberService {
 	  public Map<String, Object> checkId(Map<String, Object> map) throws Exception {
 		  return memberDAO.checkId(map);
 	  }
+	  
+	  // 개인정보 수정
+	  @Override
+	  public void updateMember(Map<String, Object> map) throws Exception {
+		  memberDAO.updateMember(map);
+	  }
 }
