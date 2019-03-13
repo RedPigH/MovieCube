@@ -10,5 +10,4 @@ public interface MemberService {
 	 
 	//·Î±×ÀÎ
 	 Map<String, Object> findUserIdAndPassword(Map<String, Object> map)throws Exception;
-	 int login(Map<String, Object> map) throws Exception;
 }

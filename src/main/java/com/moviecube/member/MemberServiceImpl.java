@@ -27,9 +27,4 @@ public class MemberServiceImpl implements MemberService {
 	  public Map<String, Object> findUserIdAndPassword(Map<String, Object> map) throws Exception{
 		  return memberDAO.findUserIdAndPassword(map);
 	  }
-	  
-	  @Override
-	  public int login(Map<String, Object> map) throws Exception{
-		  return memberDAO.login(map);
-	  }
 }
