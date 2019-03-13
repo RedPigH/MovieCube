@@ -68,6 +68,13 @@ public class MemberController {
 		  	return "redirect:/main.do";
 	  }
 	  
+	  //로그인 폼
+	  @RequestMapping(value="/member/loginForm.do")
+	  public ModelAndView loginForm(CommandMap commandMap) throws Exception{
+		  ModelAndView mv = new ModelAndView("/member/loginForm");
+		  
+		  return mv;
+	  }
 	  
 	  //로그인
 	  @RequestMapping(value="/member/login.do")

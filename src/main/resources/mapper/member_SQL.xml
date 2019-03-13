@@ -102,7 +102,7 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap">
+	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap"><!--승표  -->
 	
 	</select>
 	

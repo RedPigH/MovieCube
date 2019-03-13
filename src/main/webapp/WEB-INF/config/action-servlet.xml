@@ -25,13 +25,13 @@
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean id="loggerInterceptor"
 				class="com.moviecube.logger.LoggerInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 	
 	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basenames">
@@ -46,6 +46,7 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	
 		<beans:property name="order" value="1" />
 	</bean>
 
@@ -63,6 +64,4 @@
 		<beans:property name="defaultEncoding" value="UTF-8" />
 		<beans:property name="maxUploadSize" value="10485760" />
 	</bean>
-	
-	<!-- 이야야야야아아아아아양-->
 </beans>
