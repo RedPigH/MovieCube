@@ -27,6 +27,23 @@ public class AdminSeatController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/insertSeat.do")
+	public ModelAndView insertSeat(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("");
+		
+		seatService.insertSeat(commandMap.getMap());
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/deleteSeat.do")
+	public ModelAndView deleteSeat(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("");
+		
+		seatService.deleteSeat(commandMap.getMap());
+		
+		return mv;
+	}
 	
 	/*
 	 * @RequestMapping(value = "/TimeSeatList.do") public ModelAndView
