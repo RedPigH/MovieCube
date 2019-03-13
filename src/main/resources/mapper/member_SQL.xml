@@ -68,8 +68,32 @@
 	</select>
 	
 	<!-- 로그인 -->
-	<select id = "login" parameterType = "hashmap" resultType = "hashmap">
-		
+	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT
+			 MEMBER_ID,
+			 MEMBER_PASSWD1,
+			 MEMBER_EMAIL,
+			 MEMBER_NAME,
+			 ISADMIN
+			FROM
+			 MC_MEMBER
+			WHERE
+			 MEMBER_ID=#{MEMBER_ID} AND MEMBER_PASSWD1=#{MEMBER_PASSWD1}
+		]]>
+	</select>
+	
+	<select id="login" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT
+			 COUNT(*)
+			FROM
+			 MC_MEMBER
+			WHERE
+			 MEMBER_ID = #{MEMBER_ID}
+			AND
+			 MEMBER_PASSWD1 = #{MEMBER_PASSWD1}
+		]]>
 	</select>
 	
 	<!-- ID 찾기 -->

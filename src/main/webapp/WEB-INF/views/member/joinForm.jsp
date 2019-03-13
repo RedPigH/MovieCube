@@ -4,8 +4,9 @@
 <html lang="ko">
 
 <head>
+<link href="/moviecube/resources/css/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="/moviecube/resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-<%@ include file="/WEB-INF/views/main/head.jspf" %>
+<script src="//code.jquery.com/jquery.js"></script>
 <script src="/moviecube/resources/js/respond.js"  ></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -62,7 +63,6 @@ function aaaa(){
     <body>
         <div class="container" style="margin-top: 200px"><!-- 좌우측의 공간 확보 -->
 
-		<%@ include file="/WEB-INF/views/main/body_header.jspf" %>
           
         <!-- 모달창 -->
           <div class="modal fade" id="defaultModal">
@@ -608,7 +608,7 @@ function aaaa(){
             <hr/>
         </div>
         <!-- 푸터 들어가는 부분 -->
- 				<%-- <%@ include file="/WEB-INF/views/main/benefit_footer.jspf" %> --%>
+
         <!--// 푸터 들어가는 부분 -->
     </body>
 </html>

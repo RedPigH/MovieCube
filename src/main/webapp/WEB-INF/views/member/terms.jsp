@@ -516,7 +516,6 @@
 </div>
 </div>
 				<!-- Benefit & footer -->
-	<%-- <%@ include file="/WEB-INF/views/main/benefit_footer.jspf" %> --%>
 
 </form>
 </div>

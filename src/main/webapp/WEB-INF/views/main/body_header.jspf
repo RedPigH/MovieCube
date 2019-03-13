@@ -44,7 +44,7 @@
 
 							<li><a href="reserve.do">빠른예매</a></li>
 
-							<li><a href="resources/index.html">로그인</a>
+							<li><a href="/moviecube/member/loginForm.do">로그인</a>
 								<ul class="sub-menu">
 									<li><a href="resources/index.html">Homepage 1</a></li>
 									<li><a href="resources/home-02.html">Homepage 2</a></li>
