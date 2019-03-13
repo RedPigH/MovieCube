@@ -608,7 +608,7 @@ function aaaa(){
             <hr/>
         </div>
         <!-- 푸터 들어가는 부분 -->
- 				<%@ include file="/WEB-INF/views/main/benefit_footer.jspf" %>
+ 				<%-- <%@ include file="/WEB-INF/views/main/benefit_footer.jspf" %> --%>
         <!--// 푸터 들어가는 부분 -->
     </body>
 </html>
