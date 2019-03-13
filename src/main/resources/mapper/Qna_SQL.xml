@@ -4,18 +4,11 @@
 
 <mapper namespace="qna">
 
-<!-- 	<select id="selectQnaList" parameterType="hashmap"
-		resultType="hashmap">
-<![CDATA[
-	SELECT q.QNA_NO, q.QNA_ID, q.QNA_SUB, q.QNA_CONTENT, q.QNA_REGDATE, q.QNA_STATUS, f.QNA_FILE_NO, f.QNA_ORGNAME, f.QNA_SAVNAME
-	FROM MC_QNA q INNER JOIN MC_QNA_FILE f
-	ON q.QNA_NO=f.QNA_NO
-	ORDER BY q.QNA_NO
-	
-	]]>
-	</select> -->
-	<select id="selectQnaList" parameterType="hashmap"
-		resultType="hashmap">
+	<!-- <select id="selectQnaList" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ SELECT q.QNA_NO, q.QNA_ID, q.QNA_SUB, q.QNA_CONTENT, q.QNA_REGDATE, 
+		q.QNA_STATUS, f.QNA_FILE_NO, f.QNA_ORGNAME, f.QNA_SAVNAME FROM MC_QNA q INNER 
+		JOIN MC_QNA_FILE f ON q.QNA_NO=f.QNA_NO ORDER BY q.QNA_NO ]]> </select> -->
+	<select id="selectQnaList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 SELECT
 QNA_NO,
@@ -29,10 +22,8 @@ QNA_NO DESC
 ]]>
 	</select>
 
-	<insert id="insertQna" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="QNA_NO">
-		<selectKey keyProperty="QNA_NO" resultType="string"
-			order="BEFORE">
+	<insert id="insertQna" parameterType="hashmap" useGeneratedKeys="true" keyProperty="QNA_NO">
+		<selectKey keyProperty="QNA_NO" resultType="string" order="BEFORE">
 			SELECT MC_QNA_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 <![CDATA[
@@ -55,10 +46,13 @@ SYSDATE
 ]]>
 	</insert>
 
-	<select id="selectQnaDetail" parameterType="hashmap"
-		resultType="hashmap"> 
-		<![CDATA[ SELECT QNA_NO, QNA_SUB, QNA_ID, QNA_CONTENT, QNA_REGDATE FROM MC_QNA 
-		WHERE QNA_NO = #{QNA_NO} ]]>
+	<select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ 
+			SELECT q.QNA_NO, q.QNA_ID, q.QNA_SUB, q.QNA_CONTENT, q.QNA_REGDATE, q.QNA_STATUS, f.QNA_FILE_NO, f.QNA_ORGNAME, f.QNA_SAVNAME 
+			FROM MC_QNA q LEFT OUTER JOIN MC_QNA_FILE f 
+			ON q.QNA_NO = f.QNA_NO
+			WHERE q.QNA_NO = #{QNA_NO}
+		]]>
 	</select>
 
 
@@ -100,12 +94,12 @@ SYSDATE
 		)
 	]]></insert>
 
-	<select id="selectQnaFileList" parameterType="hashmap"
-		resultType="hashmap">
+	<select id="selectQnaFileList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	SELECT
 	QNA_FILE_NO,
-	QNA_ORGNAME 
+	QNA_ORGNAME,
+	QNA_SAVNAME
 	FROM 
 	MC_QNA_FILE 
 	WHERE 

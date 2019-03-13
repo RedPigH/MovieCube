@@ -23,25 +23,8 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public Map<String, Object> selectQnaDetail(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		Map<String, Object> tempMap = qnaDAO.selectQnaDetail(map);
-		System.out.println("제발요ㅠㅠ" + map.size());
-		resultMap.put("map", tempMap);
 		
-	
-		
-		
-		// Map<String, Object> resultMap = MovieDAO.selectMovieDetail(map);
-
-		
-		//Map<String,Object> fileMap = (Map<String, Object>) qnaDAO.selectQnaFileList(map);
-		
-		//List<Map<String, Object>> list = qnaDAO.selectQnaFileList(map);
-		//System.out.println("리스트 사이즈는 ? " + fileMap.size());
-		//resultMap.put("list", list);
-
-		return resultMap;
+		return qnaDAO.selectQnaDetail(map);
 
 	}
 
@@ -49,9 +32,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public List<Map<String, Object>> selectQnaList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
 		return qnaDAO.selectQnaList(map);
-
 	}
 
 	@Override

@@ -36,10 +36,10 @@
 			</tr>
 			<tr>
 				<th scope="row">첨부파일</th>
-				<td colspan="3"><c:forEach var="row" items="${list }">
-						<input type="hidden" id="QNA_FILE_NO" value="${QNA_FILE_NO }">
+				<td colspan="3">
+						<input type="hidden" id="QNA_FILE_NO" value="${map.QNA_FILE_NO }">
 						<a href="#this" name="file">${map.QNA_ORGNAME }</a>
-					</c:forEach></td>
+				</td>
 			</tr>
 <%-- 				<tr>
 				<th scope="row">첨부파일</th>

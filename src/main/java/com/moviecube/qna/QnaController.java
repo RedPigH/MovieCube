@@ -77,7 +77,6 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 
 		qnaService.insertQna(commandMap.getMap(), request);
-		System.out.println("혜수짱이쁨:" + commandMap.getMap());
 		return mv;
 
 	}
@@ -85,24 +84,11 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryDetail.do")
 	public ModelAndView inquiryDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
-
-		
-		System.out.println("여기"+commandMap.get("map"));
-		System.out.println("여기"+commandMap.get("QNA_SUB"));
 		
 		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
 	
-		@SuppressWarnings("unchecked")
-		Map<String, Object> testMap = (Map<String, Object>)map.get("map");
-		System.out.println("넌 뭐냐" + testMap.get("QNA_NO"));
 		
-		System.out.println("혜수공주님:"+testMap.get("QNA_NO"));
-		System.out.println("혜수공주님:"+testMap.get("QNA_SUB"));
-		System.out.println("혜수공주님:"+testMap.get("QNA_CONTENT"));
-		System.out.println("혜수공주님:"+testMap.get("QNA_REGDATE"));
-		
-		mv.addObject("map", testMap);
-		mv.addObject("list", map.get("list"));
+		mv.addObject("map", map);
 
 		return mv;
 	}
@@ -131,7 +117,6 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryDelete.do")
 	public ModelAndView deleteInquiry(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-		System.out.println("혜수짱" + commandMap.getMap());
 		qnaService.deleteQna(commandMap.getMap());
 
 		return mv;
