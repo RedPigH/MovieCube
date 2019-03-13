@@ -102,6 +102,26 @@
     	]]>
 </insert>
 
+<insert id="insertFile2" parameterType="hashmap">
+
+		<![CDATA[
+        INSERT INTO STILLCUT
+        (
+            STILLCUT_NO,
+            MOVIE_NO,
+            STILLCUT_ORGNAME,
+            STILLCUT_SAVNAME
+        )
+        VALUES
+        (
+            STILLCUT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{STILLCUT_ORGNAME},
+            #{STILLCUT_SAVNAME}
+        )
+    	]]>
+</insert>
+
 <!-- 영화 정보 수정 -->
 
 
