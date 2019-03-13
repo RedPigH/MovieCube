@@ -76,25 +76,25 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //로그인
+	  //로그인 validation
 	  @RequestMapping(value="/member/login.do")
 	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
 		  ModelAndView mv = new ModelAndView();
-		  int count=0;
 		  Map <String, Object> user = new HashMap<String, Object>();
 		  
-		  count = memberService.login(commandMap.getMap());
 		  user = memberService.findUserIdAndPassword(commandMap.getMap());
 		  		  
-		  
-		  if(count == 1){
+		  if(user!=null){
 			  session.setAttribute("userLoginInfo", user);
 			  mv.setViewName("redirect:/main.do");
-		  } else if(count == 0) {
-			  mv.addObject("count", count);
-		  }
+			  
+			  return mv;
+		  } 
+		  
+		  mv.setViewName("/member/loginError");
 		  return mv;
 	  }
+	  
 	    
 	  //로그아웃
 	  @RequestMapping(value="/member/logout.do")

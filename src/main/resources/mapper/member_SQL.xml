@@ -83,19 +83,6 @@
 		]]>
 	</select>
 	
-	<select id="login" parameterType="hashmap" resultType="int">
-		<![CDATA[
-			SELECT
-			 COUNT(*)
-			FROM
-			 MC_MEMBER
-			WHERE
-			 MEMBER_ID = #{MEMBER_ID}
-			AND
-			 MEMBER_PASSWD1 = #{MEMBER_PASSWD1}
-		]]>
-	</select>
-	
 	<!-- ID 찾기 -->
 	<select id = "findId" parameterType = "hashmap" resultType = "hashmap">
 			
