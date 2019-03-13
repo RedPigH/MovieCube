@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.seat.SeatService;
 
 @Controller
 public class AdminTimeController {
 
 	@Resource(name = "timeService")
 	private TimeService timeService;
+	
+	@Resource(name = "seatService")
+	private SeatService seatService;
 
 	@RequestMapping(value = "/timeList.do")
 	public ModelAndView timeList(CommandMap commandMap) throws Exception {

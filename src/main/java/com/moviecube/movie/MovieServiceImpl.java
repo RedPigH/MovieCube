@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.moviecube.common.FileUtils;
 import com.moviecube.movie.MovieDAO;
 
 @Service("movieService")
@@ -22,8 +21,8 @@ public class MovieServiceImpl implements MovieService{
 	@Resource(name="movieDAO")
 	private MovieDAO MovieDAO;
 	
-	@Resource(name="fileUtils") // @Conponent 어노테이션을 이용하여 등록한 객체를 @Resource 어노테이션을 이용하여 객체를 선언 한다
-	private FileUtils fileUtils;
+	@Resource(name="movieFileUtils") // @Conponent 어노테이션을 이용하여 등록한 객체를 @Resource 어노테이션을 이용하여 객체를 선언 한다
+	private MovieFileUtils fileUtils;
 
 	@Override
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
