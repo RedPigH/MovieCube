@@ -61,7 +61,7 @@
 						$(this).on(
 								'click',
 								function() {
-									swal(nameProduct, "is added to wishlist !",
+									swal(nameProduct, "보고싶은 영화로 등록 !",
 											"success");
 
 									$(this).addClass('js-addedwish-b2');
@@ -77,7 +77,7 @@
 						$(this).on(
 								'click',
 								function() {
-									swal(nameProduct, "is added to wishlist !",
+									swal(nameProduct, "보고싶은 영화로 등록 !",
 											"success");
 
 									$(this).addClass('js-addedwish-detail');
@@ -92,7 +92,7 @@
 						var nameProduct = $(this).parent().parent().parent()
 								.parent().find('.js-name-detail').html();
 						$(this).on('click', function() {
-							swal(nameProduct, "is added to cart !", "success");
+							swal(nameProduct, "보고싶은 영화로 등록 !", "success");
 						});
 					});
 		</script>
@@ -138,7 +138,8 @@ $(function() {
     }
  
     function remove_item(obj){
+    	var object = obj;
         // obj.parentNode 를 이용하여 삭제
-        document.getElementById('field').removeChild(obj.parentNode);
+        document.getElementById('field').removeChild(object.parentNode);
     }
 </script>

@@ -45,41 +45,41 @@
 						</div>
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 							<div
-								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
 								지역1</div>
 
 							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								상영관1</div>
 								
 							<div
-								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
 								지역2</div>
 
 							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								상영관2</div>
 								
 							<div
-								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
 								지역3</div>
 
 							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								상영관3</div>
 								
 							<div
-								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
 								지역4</div>
 
 							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								상영관4</div>
 						</div>
 
 
 
-
+					<div style="border-bottom: 1px solid #e6e6e6;">
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm" style="border-bottom: unset;">
 							<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
 							<h6 onclick="add_item()" style="font-family: NanumGothicBold">추가</h6>
@@ -95,17 +95,20 @@
 											</div>
 										</div>
 										<div class="column-2">마약왕(2019)</div>
-										<div class="column-3"></div>
+										<div class="column-3"><h6 onclick="remove_item(document.getElementById('movieCancel'))" style="font-family: NanumGothicBold">삭제</h6></div>
 									</div>
-									
-									<h6 onclick="remove_item(this)"  style="font-family: NanumGothicBold">삭제</h6>
+									<h6 onclick="remove_item(this)" style="font-family: NanumGothicBold">삭제</h6>
 							</div>
 							<div id="field"></div>
 						</div>
-
-
+					</div>
 					</div>
 				</div>
+
+
+
+
+
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <!-- moviecube -->
-		<section class="bg0 p-t-23 p-b-140">
+		<section class="bg0 p-t-23 p-b-140" style="margin-top: 70px">
 			<div class="container">
 				<div class="flex-col-c p-b-10">
 					<h3 class="ltext-105 cl5">MOVIECUBE</h3>
