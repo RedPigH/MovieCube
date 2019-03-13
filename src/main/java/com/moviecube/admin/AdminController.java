@@ -88,7 +88,7 @@ public class AdminController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/movieList");
+		mv.setViewName("admin/movieList");
 		return mv;
 	}
 	

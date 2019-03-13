@@ -13,12 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.moviecube.util.FileUtils;
-
 @Service("qnaService")
 public class QnaServiceImpl implements QnaService {
-	@Resource(name = "fileUtils")
-	private FileUtils fileUtils;
+	@Resource(name = "qnaFileUtils")
+	private QnaFileUtils fileUtils;
 
 	@Resource(name = "qnaDAO")
 	private QnaDAO qnaDAO;

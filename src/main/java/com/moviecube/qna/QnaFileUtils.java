@@ -1,4 +1,4 @@
-package com.moviecube.util;
+package com.moviecube.qna;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,8 +13,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-@Component("fileUtils")
-public class FileUtils {
+import com.moviecube.common.CommonUtils;
+
+
+@Component("qnaFileUtils")
+public class QnaFileUtils {
 	private static final String filePath = "c:\\dev\\file2\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)

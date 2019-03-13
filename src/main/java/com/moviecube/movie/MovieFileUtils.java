@@ -1,4 +1,4 @@
-package com.moviecube.common;
+package com.moviecube.movie;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.moviecube.common.CommonUtils;
  
-@Component("fileUtils") // 이 객체의 관리를 스프링이 담당하도록 함
-public class FileUtils {
+@Component("movieFileUtils") // 이 객체의 관리를 스프링이 담당하도록 함
+public class MovieFileUtils {
     private static final String filePath = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\"; // 파일의 저장위치
      
     public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
