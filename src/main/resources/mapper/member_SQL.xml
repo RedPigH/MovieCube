@@ -35,11 +35,12 @@
 			MEMBER_NAME,
 			MEMBER_AGE,
 			MEMBER_PHONE,
-			MEMBER_EMAIL1,
-			MEMBER_EMAIL2,
+			MEMBER_EMAIL,
 			MEMBER_ZIPCODE,
 			MEMBER_ADDRESS1,
-			MEMBER_ADDRESS2
+			MEMBER_ADDRESS2,
+			MEMBER_REGDATE,
+			ISADMIN
 		)
 		VALUES
 		(
@@ -50,14 +51,21 @@
 			#{MEMBER_NAME},
 			#{MEMBER_AGE},
 			#{MEMBER_PHONE},
-			#{MEMBER_EMAIL1},
-			#{MEMBER_EMAIL2},
+			#{MEMBER_EMAIL},
 			#{MEMBER_ZIPCODE},
 			#{MEMBER_ADDRESS1},
-			#{MEMBER_ADDRESS2}
+			#{MEMBER_ADDRESS2},
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+			#{admin}				
 		)
 	]]>
 	</insert>
+	
+	<select id="findUsedID" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM MC_MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</select>
 	
 	<!-- 로그인 -->
 	<select id = "login" parameterType = "hashmap" resultType = "hashmap">
@@ -70,7 +78,7 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap">
+	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap"><!--승표  -->
 	
 	</select>
 	
