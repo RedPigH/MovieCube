@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,10 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="/movieWrite.do")
-	public ModelAndView movieWrtie(CommandMap commandMap) throws Exception {
+	public ModelAndView movieWrtie(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/movieList");
 		
-		movieService.insertMovie(commandMap.getMap());
+		movieService.insertMovie(commandMap.getMap(), request);
 		
 		return mv;
 	}
