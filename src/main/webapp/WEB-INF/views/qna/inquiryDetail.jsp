@@ -13,29 +13,44 @@
 			<col width="15%" />
 			<col width="35%" />
 		</colgroup>
-		<caption>게시글 상세</caption>
+		<caption>QnA 상세♥</caption>
 		<tbody>
 			<tr>
 				<th scope="row">글 번호</th>
-				<td>${map.NOTICE_SUB }</td>
+				<td>${map.QNA_NO }</td>
+			</tr>
+			<tr>
+				<th scope="row">작성자</th>
+				<td>${map.QNA_ID }</td>
 			</tr>
 			<tr>
 				<th scope="row">작성시간</th>
-				<td>${map.NOTICE_REGDATE }</td>
+				<td>${map.QNA_REGDATE }</td>
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td scope="3">${map.NOTICE_SUB }</td>
+				<td scope="3">${map.QNA_SUB }</td>
 			</tr>
 			<tr>
-				<td colspan="4">${map.NOTICE_CONTENT }</td>
+				<td colspan="4">${map.QNA_CONTENT }</td>
 			</tr>
+			<tr>
+				<th scope="row">첨부파일</th>
+				<td colspan="3"><c:forEach var="row" items="${list }">
+						<input type="hidden" id="QNA_FILE_NO" value="${QNA_FILE_NO }">
+						<a href="#this" name="file">${map.QNA_ORGNAME }</a>
+					</c:forEach></td>
+			</tr>
+<%-- 				<tr>
+				<th scope="row">첨부파일</th>
+				<td colspan="3">${map.QNA_ORGNAME }</td>
+			</tr>  --%>
 		</tbody>
 	</table>
+	<br />
 
 	<a href="#this" class="btn" id="list">목록으로</a>
 	<a href="#this" class="btn" id="update">수정하기</a>
-	<a href="#this" class="btn" id="delete">삭제하기</a>
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
@@ -50,34 +65,31 @@
 				fn_openBoardUpdate();
 			});
 
-			$("#delete").on("click", function(e) { /* 삭제하기 */
+			$("a[name='file']").on("click", function(e) {/*파일 이름  */
 				e.preventDefault();
-				fn_deleteBoard();
 			});
 		});
 
 		function fn_openBoardList() {
 			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeList.do'/>");
+			comSubmit.setUrl("<c:url value='/qna/adminInquiryList.do'/>");
 			comSubmit.submit();
 		}
 
 		function fn_openBoardUpdate() {
-			var notice_no = "${map.NOTICE_NO}";
+			var qna_no = "${map.QNA_NO}";
 			var comSubmit = new ComSubmit();
-			comSubmit
-					.setUrl("<c:url value='/notice/adminNoticeModifyForm.do'/>")
-			comSubmit.addParam("NOTICE_NO", notice_no);
+			comSubmit.setUrl("<c:url value='/qna/adminInquiryModifyForm.do'/>")
+			comSubmit.addParam("QNA_NO", qna_no);
 			comSubmit.submit();
-		}
 
-		function fn_deleteBoard() {
-			var comSubmit = new ComSubmit();
-			var notice_no = "${map.NOTICE_NO}";
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeDelete.do'/>");
-			comSubmit.addParam("NOTICE_NO", notice_no);
-			comSubmit.submit();
-			// im babo
+			/* 	function fn_deleteBoard() {
+					var comSubmit = new ComSubmit();
+					var qna_no = "${map.QNA_NO}";
+					comSubmit.setUrl("<c:url value='/qna/adminInquiryDelete.do'/>");
+					comSubmit.addParam("QNA_NO", qna_no);
+					comSubmit.submit();
+					// im babo */
 		}
 	</script>
 </body>
