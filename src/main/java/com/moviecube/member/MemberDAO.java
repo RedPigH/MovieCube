@@ -24,4 +24,13 @@ public class MemberDAO extends AbstractDAO {
 	  public int findUsedID(Map<String, Object> map) throws Exception{
 		  return (Integer) selectOne("member.findUsedID", map);
 	  }
-}
+	  
+	  //·Î±×ÀÎ
+	  public Map<String, Object> findUserIdAndPassword(Map<String, Object> map) throws Exception {
+		  return (Map<String, Object>)selectList("member.findUserIdAndPassword", map);
+	  }
+	  
+	  public int login(Map<String, Object> map) throws Exception{
+		  return (Integer) selectOne("member.login", map);
+	  }
+ }
