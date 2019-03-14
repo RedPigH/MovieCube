@@ -113,9 +113,10 @@ public class AdminController {
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
 		
-		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
 		
-		mv.addObject("map", map);
 		
 		return mv;
 	}
@@ -123,10 +124,12 @@ public class AdminController {
 	@RequestMapping(value="/movieModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify");
-		System.out.println("수정확인테스트 1: " + commandMap.getMap());
+		
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
-		mv.addObject("map", map);
-		System.out.println("수정확인테스트 2: " + commandMap.getMap());
+
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
+		
 		return mv;
 	}
 	
@@ -134,11 +137,11 @@ public class AdminController {
 	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
-		System.out.println("수정확인테스트 3: " + commandMap.getMap());
+		
 		movieService.modifyMovie(commandMap.getMap());
 		
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
-		System.out.println("수정확인테스트 4: " + commandMap.getMap());
+		
 		
 		return mv;
 	}

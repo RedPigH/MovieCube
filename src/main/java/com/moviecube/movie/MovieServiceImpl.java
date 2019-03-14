@@ -35,7 +35,9 @@ public class MovieServiceImpl implements MovieService{
 		
 		// FileUtils 클래스를 이용하야 파일을 저장하고 그 데이터를 가져온 후 DB에 저장하는 로직
 		List<Map<String,Object>> Filelist = fileUtils.parseInsertFileInfo(map, request);
-        for(int i=0, size=Filelist.size(); i<size; i++){
+		
+        List<Map<String,Object>> Filelist2 = fileUtils.parseInsertFileInfo2(map, request);
+		for(int i=0, size=Filelist.size(); i<size; i++){
             MovieDAO.insertFile(Filelist.get(i));
         }
 		
