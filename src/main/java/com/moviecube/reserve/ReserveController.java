@@ -140,9 +140,25 @@ public class ReserveController {
 	}
 
 	@RequestMapping(value = "/reserve_selectSeat.do")
-	public ModelAndView reserveStep4(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_selectSeat");
+	public ModelAndView reserveStep4(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("selectSeat");
 		
+		CommandMap timeSeatMap = new CommandMap();
+		CommandMap screenMap = new CommandMap();
+		
+		String time_no = request.getParameter("TIME_NO");
+		String screen_no = request.getParameter("SCREEN_NO");
+		
+		timeSeatMap.put("TIME_NO", time_no);
+		screenMap.put("SCREEN_NO", screen_no);
+		
+		List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
+		Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
+		
+		//시간별 좌석 리스트
+		mv.addObject("seatList", timeSeatlist);
+		//좌석 행 렬 값
+		mv.addObject("seatnum", seatnum);
 		
 		return mv;
 	}

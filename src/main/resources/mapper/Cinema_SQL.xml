@@ -11,6 +11,16 @@
 		]]>
 	</select>
 	
+	<!-- 영화관 별 상영관 리스트 -->
+	<select id="selectCinemaScreen" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT s.SCREEN_NO, s.SCREEN_NAME
+			FROM CINEMA c INNER JOIN SCREEN s
+			ON c.CINEMA_NO = s.CINEMA_NO
+			WHERE c.CINEMA_NO = #{CINEMA_NO}
+		]]>
+	</select>
+	
 	<!-- 영화관 선택 -->
 	<select id = "selectOneCinema" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[

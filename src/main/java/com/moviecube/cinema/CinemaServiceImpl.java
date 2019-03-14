@@ -17,6 +17,11 @@ public class CinemaServiceImpl implements CinemaService {
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
 		return cinemaDAO.selectCinemaList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map ) throws Exception{
+		return cinemaDAO.selectCinemaScreen(map);
+	}
 
 	@Override
 	public void insertCinema(Map<String, Object> map) throws Exception {
