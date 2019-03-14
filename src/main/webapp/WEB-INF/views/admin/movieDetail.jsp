@@ -61,9 +61,9 @@
 	<div class="admin_ct">
 		<div class="movie_grp">
 			<div class="movie_pic">
-				<a href="#none" onclick="img_view('${map.MOVIE_POSTER}')">
+				<a href="#none" onclick="img_view('${map.POSTER_SAVNAME}')">
 					<span class="detail">크게보기</span>
-					<img src="<%=cp%>/resources/upload/movie/marble.jpeg" alt="영화포스터"/>
+					<img src="<%=cp%>/resources/upload/movie/poster/${map.POSTER_SAVNAME}" alt="영화포스터"/>
 				</a>
 			</div>
 			<div class="movie_txt">
@@ -92,72 +92,21 @@
 						<span>삭제</span></a>
 					<a href="<%=cp%>/admin/movieList.do"
 						class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
-				
-					<%-- <a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}" 
-					onclick="return confirm('삭제하시겠습니까?');" class="btn btnC_01 btnF_04"> <span>삭제</span> </a> --%>
-					
-					<%-- <a href="<%=cp%>/admin/movieDelete.do?MOVIE_NO=${map.MOVIE_NO}"
-						class="btn btnC_01 btnF_04"> <span>삭제</span> </a> --%>
 				</div>
 			</div>
 		</div>
 		<h3 class="sub_tit">줄거리</h3>
 		<p class="summary">${map.MOVIE_CONTENT}</p>
-
+		
 		<h3 class="sub_tit">스틸컷</h3>
 		<div class="movie_steel">
 			<div class="inner">
 				<ul>
+					<c:forEach var="row" items="${movieDetail}">
 					<li>
-						<c:if test="${list.cut1 != '사진없음'}">
-						<%-- <a onclick="img_view('${list.cut1}')"> --%>
-							<img src="<%=cp%>/resources/upload/movie/movie_image1.jpg" alt="" /> 
-							<!-- </a> -->
-						</c:if>
-						<c:if test="${list.cut1 == '사진없음'}">
-							<img src="<%=cp%>/resources/upload/movie/noimage.gif" alt="" />
-						</c:if>
+						<img src="<%=cp%>/resources/upload/movie/stillcut/${row.STILLCUT_SAVNAME}" alt="" /> 
 					</li>
-					<li>
-						<c:if test="${list.cut2 != '사진없음'}">
-						<a onclick="img_view('${list.cut2}')">
-							<img src="<%=cp%>/resources/upload/movie/movie_image2.jpg" alt="" /> 
-							</a>
-						</c:if>
-						<c:if test="${list.cut2 == '사진없음'}">
-							<img src="<%=cp%>/resources/upload/movie/noimage.gif" alt="" />
-						</c:if>
-					</li>
-					<li>
-						<c:if test="${list.cut3 != '사진없음'}">
-						<a onclick="img_view('${list.cut3}')">
-							<img src="<%=cp%>/resources/upload/movie/movie_image3.jpg" alt="" />
-							</a>
-						</c:if>
-						<c:if test="${list.cut3 == '사진없음'}">
-							<img src="<%=cp%>/resources/upload/movie/noimage.gif" alt="" />
-						</c:if>
-					</li>
-					<li>
-						<c:if test="${list.cut1 != '사진없음'}">
-						<a onclick="img_view('${list.cut1}')">
-							<img src="<%=cp%>/resources/upload/movie/movie_image4.jpg" alt="" />
-							</a>
-						</c:if>
-						<c:if test="${list.cut1 == '사진없음'}">
-							<img src="<%=cp%>/resources/upload/movie/noimage.gif" alt="" />
-						</c:if>
-					</li>
-					<li>
-						<c:if test="${list.cut2 != '사진없음'}">
-						<a onclick="img_view('${list.cut2}')">
-							<img src="<%=cp%>/resources/upload/movie/movie_image2.jpg" alt="" />
-							</a>
-						</c:if>
-						<c:if test="${list.cut2 == '사진없음'}">
-							<img src="<%=cp%>/resources/upload/movie/noimage.gif" alt="" />
-						</c:if>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
