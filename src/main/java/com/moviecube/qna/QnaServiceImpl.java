@@ -23,7 +23,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public Map<String, Object> selectQnaDetail(Map<String, Object> map) throws Exception {
-		
+
 		return qnaDAO.selectQnaDetail(map);
 
 	}
@@ -73,6 +73,19 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		qnaDAO.deleteQna(map);
 
+	}
+
+	@Override
+	public void replyQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		qnaDAO.replyQna(map, request);
+
+	}
+
+	@Override
+	public void replyQna(Map<String, Object> map) throws Exception {
+		qnaDAO.replyQna(map, null);
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*

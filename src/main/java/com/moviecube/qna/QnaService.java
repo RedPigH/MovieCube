@@ -19,4 +19,8 @@ public interface QnaService {
 
 	void deleteQna(Map<String, Object> map) throws Exception;
 
+	void replyQna(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
+	void replyQna(Map<String, Object> map) throws Exception;
+
 }
