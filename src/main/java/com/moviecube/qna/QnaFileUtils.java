@@ -18,7 +18,7 @@ import com.moviecube.common.CommonUtils;
 
 @Component("qnaFileUtils")
 public class QnaFileUtils {
-	private static final String filePath = "C:\\muyi\\src\\main\\webapp\\resources\\upload\\qna";
+	private static final String filePath = "C:\\muyi\\src\\main\\webapp\\resources\\upload\\qna\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
 			throws Exception {

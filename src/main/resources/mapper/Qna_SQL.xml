@@ -94,7 +94,7 @@ REF DESC, RE_LEVEL ASC
 			q.QNA_CONTENT, 
 			q.QNA_REGDATE, 
 			q.QNA_STATUS, 
-			f.QNA_FILE_NO, 
+			f.QNA_FILE_NO,  
 			f.QNA_ORGNAME, 
 			f.QNA_SAVNAME 
 			FROM 

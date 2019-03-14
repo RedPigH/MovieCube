@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-	<% String cp = request.getContextPath(); %>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -49,7 +49,7 @@
 			<tr>
 			<td>
 <%-- 				<img src="<%=cp%>//resources//upload/qna/${QNA_SAVNAME}"/> --%>
-<img src="<%=cp%>/resources/upload/qna/${QNA_SAVNAME }"/>
+					<img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}"/>
 				</td>
 				</tr>
 		</tbody>
