@@ -12,13 +12,13 @@
 <!--===============================================================================================-->
 <script src="resources/vendor/select2/select2.min.js"></script>
 <script>
-			$(".js-select2").each(function() {
-				$(this).select2({
-					minimumResultsForSearch : 20,
-					dropdownParent : $(this).next('.dropDownSelect2')
-				});
-			})
-		</script>
+	$(".js-select2").each(function() {
+		$(this).select2({
+			minimumResultsForSearch : 20,
+			dropdownParent : $(this).next('.dropDownSelect2')
+		});
+	})
+</script>
 <!--===============================================================================================-->
 <script src="resources/vendor/daterangepicker/moment.min.js"></script>
 <script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
@@ -28,117 +28,122 @@
 <!--===============================================================================================-->
 <script src="resources/vendor/parallax100/parallax100.js"></script>
 <script>
-			$('.parallax100').parallax100();
-		</script>
+	$('.parallax100').parallax100();
+</script>
 <!--===============================================================================================-->
 <script
 	src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
-			$('.gallery-lb').each(function() { // the containers for all your galleries
-				$(this).magnificPopup({
-					delegate : 'a', // the selector for gallery item
-					type : 'image',
-					gallery : {
-						enabled : true
-					},
-					mainClass : 'mfp-fade'
-				});
-			});
-		</script>
+	$('.gallery-lb').each(function() { // the containers for all your galleries
+		$(this).magnificPopup({
+			delegate : 'a', // the selector for gallery item
+			type : 'image',
+			gallery : {
+				enabled : true
+			},
+			mainClass : 'mfp-fade'
+		});
+	});
+</script>
 <!--===============================================================================================-->
 <script src="resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
 <script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
-			$('.js-addwish-b2').on('click', function(e) {
-				e.preventDefault();
+	$('.js-addwish-b2').on('click', function(e) {
+		e.preventDefault();
+	});
+
+	$('.js-addwish-b2').each(function() {
+		var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+		$(this).on('click', function() {
+			swal(nameProduct, "is added to wishlist !", "success");
+
+			$(this).addClass('js-addedwish-b2');
+			$(this).off('click');
+		});
+	});
+
+	$('.js-addwish-detail').each(
+			function() {
+				var nameProduct = $(this).parent().parent().parent().find(
+						'.js-name-detail').html();
+
+				$(this).on('click', function() {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
 			});
 
-			$('.js-addwish-b2').each(
-					function() {
-						var nameProduct = $(this).parent().parent().find(
-								'.js-name-b2').html();
-						$(this).on(
-								'click',
-								function() {
-									swal(nameProduct, "is added to wishlist !",
-											"success");
+	/*---------------------------------------------*/
 
-									$(this).addClass('js-addedwish-b2');
-									$(this).off('click');
-								});
-					});
-
-			$('.js-addwish-detail').each(
-					function() {
-						var nameProduct = $(this).parent().parent().parent()
-								.find('.js-name-detail').html();
-
-						$(this).on(
-								'click',
-								function() {
-									swal(nameProduct, "is added to wishlist !",
-											"success");
-
-									$(this).addClass('js-addedwish-detail');
-									$(this).off('click');
-								});
-					});
-
-			/*---------------------------------------------*/
-
-			$('.js-addcart-detail').each(
-					function() {
-						var nameProduct = $(this).parent().parent().parent()
-								.parent().find('.js-name-detail').html();
-						$(this).on('click', function() {
-							swal(nameProduct, "is added to cart !", "success");
-						});
-					});
-		</script>
+	$('.js-addcart-detail').each(
+			function() {
+				var nameProduct = $(this).parent().parent().parent().parent()
+						.find('.js-name-detail').html();
+				$(this).on('click', function() {
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+</script>
 <!--===============================================================================================-->
 <script
 	src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-			$('.js-pscroll').each(function() {
-				$(this).css('position', 'relative');
-				$(this).css('overflow', 'hidden');
-				var ps = new PerfectScrollbar(this, {
-					wheelSpeed : 1,
-					scrollingThreshold : 1000,
-					wheelPropagation : false,
-				});
+	$('.js-pscroll').each(function() {
+		$(this).css('position', 'relative');
+		$(this).css('overflow', 'hidden');
+		var ps = new PerfectScrollbar(this, {
+			wheelSpeed : 1,
+			scrollingThreshold : 1000,
+			wheelPropagation : false,
+		});
 
-				$(window).on('resize', function() {
-					ps.update();
-				})
-			});
-		</script>
+		$(window).on('resize', function() {
+			ps.update();
+		})
+	});
+</script>
 <!--===============================================================================================-->
 <script src="resources/js/main.js"></script>
 
 <!--===============================================================================================-->
 <script>
-$(function() {
-  $('input[name="daterange"]').daterangepicker({
-    opens: 'right'
-  }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-  });
-});
+	$(function() {
+		$('input[name="daterange"]').daterangepicker(
+				{
+					opens : 'right'
+				},
+				function(start, end, label) {
+					console.log("A new date selection was made: "
+							+ start.format('YYYY-MM-DD') + ' to '
+							+ end.format('YYYY-MM-DD'));
+				});
+	});
 </script>
 
 <!--===============================================================================================-->
 <script type="text/javascript">
-    function add_item(){
-        // pre_set 에 있는 내용을 읽어와서 처리..
-        var div = document.createElement('div');
-        div.innerHTML = document.getElementById('pre_set').innerHTML;
-        document.getElementById('field').appendChild(div);
-    }
- 
-    function remove_item(obj){
-        // obj.parentNode 를 이용하여 삭제
-        document.getElementById('field').removeChild(obj.parentNode);
-    }
+	function add_item() {
+		// pre_set 에 있는 내용을 읽어와서 처리..
+		var div = document.createElement('div');
+		div.innerHTML = document.getElementById('pre_set').innerHTML;
+		document.getElementById('field').appendChild(div);
+	}
+
+	function remove_item(obj) {
+		// obj.parentNode 를 이용하여 삭제
+		document.getElementById('field').removeChild(obj.parentNode);
+	}
+</script>
+
+<!--===============================================================================================-->
+<script type="text/javascript">
+	$("#gahyun").on("click", function(e) {
+		e.preventDefault();
+		window.open($(this).attr("href"), "new", "width=800, height=800");
+		$("body").addClass("no-scrolling");
+	});
 </script>

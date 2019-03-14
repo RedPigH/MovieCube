@@ -556,6 +556,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*------------------------------------------------------------------
 [ Modal search ]*/
 .modal-search-header {
+  overflow: hidden;
   position: fixed;
   z-index: 2000;
   width: 100%;
@@ -1907,6 +1908,7 @@ input.num-product::-webkit-inner-spin-button {
 /*//////////////////////////////////////////////////////////////////
 [ Modal1 ]*/
 .wrap-modal1 {
+  
   position: fixed;
   width: 100%;
   height: 100vh;
