@@ -1127,8 +1127,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*------------------------------------------------------------------
 [ in select ]*/
 .rs1-select2 .select2-container .select2-selection--single .select2-selection__rendered {
-  font-family: Poppins-Regular;
-  font-size: 13px;
+  font-family: NanumGothicBold;
+  font-size: 15px;
   color: #555;
   line-height: 1.2;
   padding-left: 20px;
@@ -1957,8 +1957,7 @@ input.num-product::-webkit-inner-spin-button {
 
 
 .table-shopping-cart .column-1 {
-  width: 133px;
-  padding-left: 50px;
+  width: 100px;
 }
 
 .table-shopping-cart .column-2 {
@@ -2025,8 +2024,8 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 /*---------------------------------------------*/
-.block1-name {color: #333;}
-.block1-info {color: #555;}
+.block1-name {color: #333; text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;}
+.block1-info {color: #555; text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;}
 
 /*---------------------------------------------*/
 .block1-txt-child2 {
@@ -2049,7 +2048,7 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .block1-txt:hover {
-  background-color: #ff5959;
+  background-color: rgba(255,89,89,0.8);
 }
 
 .block1-txt:hover .block1-txt-child2 {
@@ -2071,6 +2070,7 @@ input.num-product::-webkit-inner-spin-button {
 .block1-txt:hover .block1-name,
 .block1-txt:hover .block1-info {
   color: #fff;
+  text-shadow: none;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -3042,6 +3042,48 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .how-itemcart1:hover:after {
+  opacity: 1;
+}
+
+
+/*---------------------------------------------*/
+.AddedMoviePoster {
+  width: 100px;
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.AddedMoviePoster img {
+  width: 100%;
+}
+
+.AddedMoviePoster::after {
+  content: '\e870';
+  font-family: Linearicons-Free;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  opacity: 0;
+}
+
+.AddedMoviePoster:hover:after {
   opacity: 1;
 }
 

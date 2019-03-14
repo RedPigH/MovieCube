@@ -5,12 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="main/head.jspf"%>
+<%@ include file="../main/head.jspf"%>
 </head>
 <body class="animsition">
 
-	<%@ include file="main/body_header.jspf"%>
-	<%@ include file="main/favorite.jspf"%>
+	<%@ include file="../main/body_header.jspf"%>
+	<%@ include file="../main/favorite.jspf"%>
 
 
 	<!-- 영화 예매 -->
@@ -54,6 +54,7 @@
 										<option>강남</option>
 										<option>신촌</option>
 										<option>동대문</option>
+										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -66,6 +67,7 @@
 										<option>강남</option>
 										<option>신촌</option>
 										<option>동대문</option>
+										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -78,6 +80,7 @@
 										<option>강남</option>
 										<option>신촌</option>
 										<option>동대문</option>
+										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -90,6 +93,7 @@
 										<option>강남</option>
 										<option>신촌</option>
 										<option>동대문</option>
+										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -105,7 +109,9 @@
 								class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm"
 								style="border-bottom: unset;">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
-								<h6 class="js-show-modal1" onclick="add_item()" style="font-family: NanumGothicBold">추가</h6>
+								<a href="#" onclick="add_item()"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+									style="position: unset;"> 영화 추가 </a>
 							</div>
 
 							<div>
@@ -113,16 +119,16 @@
 									<div
 										class="wrap-table-shopping-cart table-shopping-cart table_row tr flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 										<div class="column-1">
-											<div class="how-itemcart1">
+											<div class="AddedMoviePoster">
 												<img src="resources/images/mayakwang.jpg" alt="IMG">
 											</div>
 										</div>
 										<div class="column-2"
 											style="font-family: NanumGothicExtraBold; font-size: 20px">마약왕(2019)</div>
 										<div class="column-3">
-											<h6
+											<button
 												onclick="remove_item(document.getElementById('AddedMovieList'))"
-												style="font-family: NanumGothicBold">삭제</h6>
+												style="font-family: NanumGothicBold">삭제</button>
 										</div>
 									</div>
 								</div>
@@ -155,6 +161,34 @@
 								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
 							</div>
 						</div>
+						
+						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+							<div class="size-200">
+								<span class="mtext-110 cl2"> 강남 </span>
+							</div>
+
+							<div class="size-200">
+								<span class="mtext-110 cl2"> 2D </span>
+							</div>
+
+							<div class="size-199">
+								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
+							</div>
+						</div>
+						
+						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+							<div class="size-200">
+								<span class="mtext-110 cl2"> 강남 </span>
+							</div>
+
+							<div class="size-200">
+								<span class="mtext-110 cl2"> 2D </span>
+							</div>
+
+							<div class="size-199">
+								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -163,10 +197,7 @@
 	</form>
 
 
-
-
-
-	<%@ include file="main/body_footer.jspf"%>
+	<%@ include file="../main/body_footer.jspf"%>
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -175,7 +206,11 @@
 		</span>
 	</div>
 
-	<%@ include file="main/script.jspf"%>
+
+
+	<%@ include file="movieList_modal.jspf" %>
+	
+	<%@ include file="../main/script.jspf"%>
 
 
 </body>

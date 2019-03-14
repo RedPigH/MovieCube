@@ -24,7 +24,7 @@ public class ReserveController {
 
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_main");
+		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
