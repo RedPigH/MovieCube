@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 
 <!--===============================================================================================-->
-<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/moviecube/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/animsition/js/animsition.min.js"></script>
+<script src="/moviecube/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/bootstrap/js/popper.js"></script>
-<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/moviecube/resources/vendor/bootstrap/js/popper.js"></script>
+<script src="/moviecube/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/select2/select2.min.js"></script>
+<script src="/moviecube/resources/vendor/select2/select2.min.js"></script>
 <script>
 			$(".js-select2").each(function() {
 				$(this).select2({
@@ -20,19 +20,19 @@
 			})
 		</script>
 <!--===============================================================================================-->
-<script src="resources/vendor/daterangepicker/moment.min.js"></script>
-<script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="/moviecube/resources/vendor/daterangepicker/moment.min.js"></script>
+<script src="/moviecube/resources/vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/slick/slick.min.js"></script>
-<script src="resources/js/slick-custom.js"></script>
+<script src="/moviecube/resources/vendor/slick/slick.min.js"></script>
+<script src="/moviecube/resources/js/slick-custom.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/parallax100/parallax100.js"></script>
+<script src="/moviecube/resources/vendor/parallax100/parallax100.js"></script>
 <script>
 			$('.parallax100').parallax100();
 		</script>
 <!--===============================================================================================-->
 <script
-	src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	src="/moviecube/resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
 			$('.gallery-lb').each(function() { // the containers for all your galleries
 				$(this).magnificPopup({
@@ -46,9 +46,9 @@
 			});
 		</script>
 <!--===============================================================================================-->
-<script src="resources/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/moviecube/resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
-<script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
+<script src="/moviecube/resources/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
 			$('.js-addwish-b2').on('click', function(e) {
 				e.preventDefault();
@@ -98,7 +98,7 @@
 		</script>
 <!--===============================================================================================-->
 <script
-	src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	src="/moviecube/resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
 			$('.js-pscroll').each(function() {
 				$(this).css('position', 'relative');
@@ -115,7 +115,7 @@
 			});
 		</script>
 <!--===============================================================================================-->
-<script src="resources/js/main.js"></script>
+<script src="/moviecube/resources/js/main.js"></script>
 
 <!--===============================================================================================-->
 <script>
@@ -126,6 +126,7 @@ $(function() {
     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
   });
 });
+
 </script>
 
 <!--===============================================================================================-->
@@ -133,6 +134,7 @@ $(function() {
     function add_item(){
         // pre_set 에 있는 내용을 읽어와서 처리..
         var div = document.createElement('div');
+        div.setAttribute("id", "AddedMovieList");
         div.innerHTML = document.getElementById('movieAdd').innerHTML;
         document.getElementById('field').appendChild(div);
     }
@@ -140,6 +142,6 @@ $(function() {
     function remove_item(obj){
     	var object = obj;
         // obj.parentNode 를 이용하여 삭제
-        document.getElementById('field').removeChild(object.parentNode);
+        document.getElementById('field').removeChild(object);
     }
 </script>
