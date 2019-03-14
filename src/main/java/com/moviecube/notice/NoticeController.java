@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.common.Paging;
 
 @Controller
 public class NoticeController {
@@ -20,19 +22,52 @@ public class NoticeController {
 	@Resource(name = "noticeService")
 	private NoticeService noticeService;
 
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockpaging = 10;
+	private String pagingHtml;
+	private Paging paging;
+
 	@RequestMapping(value = "/notice/adminNoticeList.do")
-	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeList");
+	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
 
-		List<Map<String, Object>> Noticelist = noticeService.selectBoardList(commandMap);
-		mv.addObject("list", Noticelist);
+		List<Map<String, Object>> noticeList = noticeService.selectBoardList(commandMap.getMap());
 
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+
+		totalCount = noticeList.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminNoticeList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+		// System.out.println(paging.getEndCount());
+		// System.out.println(totalCount);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		noticeList = noticeList.subList(paging.getStartCount(), lastCount);
+
+		mv.addObject("noticeList", noticeList);
+		mv.addObject("list", noticeList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("noticeList");
 		return mv;
 	}
 
 	@RequestMapping(value = "/notice/adminNoticeWriteForm.do")
 	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeWriteForm");
+		ModelAndView mv = new ModelAndView("noticeWriteForm");
 
 		return mv;
 
@@ -50,7 +85,7 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeDetail");
+		ModelAndView mv = new ModelAndView("noticeDetail");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		System.out.println(commandMap.getMap());
@@ -61,7 +96,7 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeModifyForm.do")
 	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeModify");
+		ModelAndView mv = new ModelAndView("noticeModify");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -83,7 +118,7 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/adminNoticeDelete.do")
 	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-		System.out.println("�����ٺ�:" + commandMap.getMap());
+		System.out.println("혜수짱" + commandMap.getMap());
 		noticeService.deleteBoard(commandMap.getMap());
 
 		return mv;

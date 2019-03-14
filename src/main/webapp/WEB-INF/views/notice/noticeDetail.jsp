@@ -35,18 +35,24 @@
 
 	<a href="#this" class="btn" id="list">목록으로</a>
 	<a href="#this" class="btn" id="update">수정하기</a>
+	<a href="#this" class="btn" id="delete">삭제하기</a>
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#list").on("click", function(e) {
+			$("#list").on("click", function(e) { /* 목록으로 */
 				e.preventDefault();
 				fn_openBoardList();
 			});
 
-			$("#update").on("click", function(e) {
+			$("#update").on("click", function(e) { /* 저장하기  */
 				e.preventDefault();
 				fn_openBoardUpdate();
+			});
+
+			$("#delete").on("click", function(e) { /* 삭제하기 */
+				e.preventDefault();
+				fn_deleteBoard();
 			});
 		});
 
@@ -63,6 +69,15 @@
 					.setUrl("<c:url value='/notice/adminNoticeModifyForm.do'/>")
 			comSubmit.addParam("NOTICE_NO", notice_no);
 			comSubmit.submit();
+		}
+
+		function fn_deleteBoard() {
+			var comSubmit = new ComSubmit();
+			var notice_no = "${map.NOTICE_NO}";
+			comSubmit.setUrl("<c:url value='/notice/adminNoticeDelete.do'/>");
+			comSubmit.addParam("NOTICE_NO", notice_no);
+			comSubmit.submit();
+			// im babo
 		}
 	</script>
 </body>

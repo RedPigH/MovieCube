@@ -3,11 +3,13 @@ package com.moviecube.movie;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface MovieService {
 
 	List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception;
 	
-	void insertMovie(Map<String, Object> map) throws Exception;
+	void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception;
 	
 	Map<String,Object> selectMovieDetail(Map<String,Object> map) throws Exception;
 	
