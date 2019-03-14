@@ -137,28 +137,45 @@
 							</td>
 						</tr>
 						
-						<!-- <tr>
+						<tr>
 							<th scope="row">포스터</th>
-							<td>
-								<input type="file" class="txt" name="poster" />
+							<td><font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br>
+								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
 						</tr>
-						<tr>
-							<th scope="row">스틸컷 1</th>
-							<td><input type="file" class="txt" name="cut1" /></td>
-						</tr>
-						<tr>
-							<th scope="row">스틸컷 2</th>
-							<td><input type="file" class="txt" name="cut2" /></td>
-						</tr>
-						<tr>
-							<th scope="row">스틸컷 2</th>
-							<td><input type="file" class="txt" name="cut3" /></td>
-						</tr> -->
 						
+					
 					</tbody>
 				</table>
-			</div>
+				
+				
+				<div id="fileDiv">
+				<c:forEach var="row" items="${movieDetail}" varStatus="var">
+				<table>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+					<tbody>
+			
+						<tr>	
+							<th scope="row">스틸컷</th>
+							<td><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br><br>
+								<input type="file" class="txt" id="STILLCUT_ORGNAME_${var.index}" name="STILLCUT_ORGNAME_${var.index}" />
+								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
+								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
+								
+								
+							</td>
+						</tr>	
+					</tbody>
+				</table>
+				</c:forEach>	
+				</div>
+				
+			</div>	
 			
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
@@ -169,14 +186,6 @@
 					<span>목록으로</span>
 				</a>
 			</div>
-			
-			<!-- <div class="btn_type_03">
-				<span class="btn btnC_04 btnP_04"> 
-					<a href="#this" class="btn" id="write">작성하기</a>
-        			<a href="#this" class="btn" id="list">목록으로</a>
-				</span>
-			</div> -->
-			
 		</form>
 	</div>
 </div>
@@ -187,17 +196,17 @@
         var gfv_count = 1;
      
         $(document).ready(function(){
-            $("#list").on("click", function(e){ //목록으로 버튼
+            $("#list").on("click", function(e){ // 목록으로 버튼
                 e.preventDefault();
                 fn_openBoardList();
             });
              
-            $("#write").on("click", function(e){ //작성하기 버튼
+            $("#write").on("click", function(e){ // 수정하기 버튼
                 e.preventDefault();
                 fn_insertBoard();
             });
              
-            /* $("#addFile").on("click", function(e){ //파일 추가 버튼
+            $("#addFile").on("click", function(e){ //파일 추가 버튼
                 e.preventDefault();
                 fn_addFile();
             });
@@ -205,7 +214,7 @@
             $("a[name='delete']").on("click", function(e){ //삭제 버튼
                 e.preventDefault();
                 fn_deleteFile($(this));
-            }); */
+            }); 
         });
          
         function fn_openBoardList(){
@@ -216,12 +225,12 @@
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='/admin/movieModify.do' />");
+            comSubmit.setUrl("<c:url value='movieModify.do' />");
             comSubmit.submit();
         }
          
-        /* function fn_addFile(){
-            var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+        function fn_addFile(){
+            var str = "<p><input type='file' name='STILLCUT_ORGNAME_"+(gfv_count++)+"'><a href='#this' class='btn btnC_04 btnP_02' name='delete'><span>삭제</span></a></p>";
             $("#fileDiv").append(str);
             $("a[name='delete']").on("click", function(e){ //삭제 버튼
                 e.preventDefault();
@@ -231,7 +240,7 @@
          
         function fn_deleteFile(obj){
             obj.parent().remove();
-        } */
+        } 
         
     </script>
 </body>

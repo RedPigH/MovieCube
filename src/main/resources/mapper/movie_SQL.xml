@@ -9,21 +9,44 @@
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.MOVIE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.MOVIE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
-						order by m.MOVIE_NO
+						order by m.MOVIE_NO desc
 		]]>
 </select>
 
+<select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
 
+		<![CDATA[
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.MOVIE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
+				 ON m.MOVIE_NO = f.MOVIE_NO
+					WHERE m.MOVIE_NO = #{MOVIE_NO}				
+		]]>
+</select>
+
+<select id="selectMovieFileDetail" resultType="hashmap" parameterType="hashmap" >
+
+		<![CDATA[
+		select 
+			m.MOVIE_NO, s.STILLCUT_NO, s.MOVIE_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME
+				FROM MC_MOVIE m INNER JOIN STILLCUT s
+					ON m.MOVIE_NO = s.MOVIE_NO 
+						WHERE m.MOVIE_NO = #{MOVIE_NO}			
+		]]>
+</select>
+
+<!-- 
 <select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
 
 		<![CDATA[
 		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
 		]]>
 </select>
-
+ -->
 
 <select id="selectFileList" resultType="hashmap" parameterType="hashmap">
 
@@ -98,6 +121,26 @@
             #{MOVIE_NO},
             #{POSTER_ORGNAME},
             #{POSTER_SAVNAME}
+        )
+    	]]>
+</insert>
+
+<insert id="insertFile2" parameterType="hashmap">
+
+		<![CDATA[
+        INSERT INTO STILLCUT
+        (
+            STILLCUT_NO,
+            MOVIE_NO,
+            STILLCUT_ORGNAME,
+            STILLCUT_SAVNAME
+        )
+        VALUES
+        (
+            STILLCUT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{STILLCUT_ORGNAME},
+            #{STILLCUT_SAVNAME}
         )
     	]]>
 </insert>

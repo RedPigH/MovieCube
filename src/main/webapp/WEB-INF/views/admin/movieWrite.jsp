@@ -160,7 +160,7 @@
 						<tr>	
 							<th scope="row">스틸컷</th>
 							<td>
-								<input type="file" class="txt" name="STILLCUT_ORGNAME" />
+								<input type="file" class="txt" name="STILLCUT_ORGNAME_0" />
 								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
 								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
 							</td>
