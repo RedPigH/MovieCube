@@ -85,6 +85,8 @@ function aaaa(){
           </div><!-- /.modal -->
          <!--// 모달창 -->
 
+		<!-- 헤더 -->
+		
              
         <form class="form-horizontal" id="joinForm" role="form" method="post">
             <div class="form-group" id="divId">
