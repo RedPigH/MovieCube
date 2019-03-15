@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.CommandMap;
 import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
@@ -25,11 +26,22 @@ public class ReserveController {
 	
 	@Resource(name = "seatService")
 	private SeatService seatService;
+	
+	@Resource(name = "cinemaService")
+	private CinemaService cinemaService;
 
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
-		String cinemaNo = "";
+		
+		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
+		
+		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
+		
+		mv.addObject("alltimeList", alltimeList);
+		mv.addObject("cinemaList", cinemaList);
+		
+	/*	String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
 		String[] selectType;
@@ -82,7 +94,7 @@ public class ReserveController {
 			List<Map<String,Object>> timelist = timeService.optionTimeList(commandMap.getMap());
 		
 			mv.addObject("timelist", timelist);
-		}
+		} */
 
 		return mv;
 	}
