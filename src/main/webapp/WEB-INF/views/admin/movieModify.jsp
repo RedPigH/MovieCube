@@ -139,7 +139,9 @@
 						
 						<tr>
 							<th scope="row">포스터</th>
-							<td><font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+							<td>
+								<input type="hidden" id="poster" name="poster" value="${map.FILE_NO}">
+								<font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br>
 								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
@@ -161,7 +163,9 @@
 			
 						<tr>	
 							<th scope="row">스틸컷</th>
-							<td><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+							<td>
+								<input type="hidden" id="IDX" name="IDX_${var.index}" value="${row.STILLCUT_NO}">
+								<font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br><br>
 								<input type="file" class="txt" id="STILLCUT_ORGNAME_${var.index}" name="STILLCUT_ORGNAME_${var.index}" />
 								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>

@@ -104,7 +104,6 @@ public class AdminController {
 	public ModelAndView movieWrtie(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
-		System.out.println("쓰기확인 : " + commandMap.getMap());
 		movieService.insertMovie(commandMap.getMap(), request);
 		return mv;
 	}
@@ -134,23 +133,24 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/movieModify.do")
-	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
+	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
 		
-		movieService.modifyMovie(commandMap.getMap());
+		movieService.modifyMovie(commandMap.getMap(), request);
 		
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
-		
 		
 		return mv;
 	}
 	
 	@RequestMapping(value="/movieDelete.do")
-	public ModelAndView movieDelete(CommandMap commandMap) throws Exception {
+	public ModelAndView movieDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
-		movieService.deleteMovie(commandMap.getMap());
+		movieService.deleteMovie(commandMap.getMap(), request);
+		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		
 		return mv;
 	}

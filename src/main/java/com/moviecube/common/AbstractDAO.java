@@ -35,6 +35,11 @@ public class AbstractDAO {
 		return sqlSession.selectOne(queryId);		
 	}
 	
+	public Object delete(String queryId, Object params) {
+		printQueryId(queryId);
+		return sqlSession.selectOne(queryId);		
+	}
+	
 	public Object selectOne(String queryId) {
 		printQueryId(queryId);
 		return sqlSession.selectOne(queryId);
