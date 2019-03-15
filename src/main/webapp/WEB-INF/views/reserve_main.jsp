@@ -56,8 +56,8 @@
 	
 	<form action="/moviecube/reserve_step3.do">
 		<select id="selectDate" name="selectDate">
-			<option value="2019-03-13">2019-03-13</option>
-			<option value="2019-03-05">2019-03-05</option>
+			<option value="2019-03-15">2019-03-15</option>
+			<option value="2019-03-19">2019-03-19</option>
 			<option value="time3">2019-03-10</option>
 			<option value="time4">2019-03-11</option>
 		</select>

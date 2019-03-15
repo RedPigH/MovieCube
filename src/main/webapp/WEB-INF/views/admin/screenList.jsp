@@ -71,7 +71,7 @@
 							<td class="subject" align="left"><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
 							<input type="hidden" id="SCREEN_NO" value="${row.SCREEN_NO}"/></a></td>
 							<td>${row.SCREEN_TYPE}</td>
-							<td>${map.CINEMA_NAME}</td>
+							<td>${row.CINEMA_NAME}</td>
 						</tr>
 						</c:forEach>
 					</c:when>

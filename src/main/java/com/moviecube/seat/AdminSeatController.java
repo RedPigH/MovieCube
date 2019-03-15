@@ -30,7 +30,7 @@ public class AdminSeatController {
 	
 	@RequestMapping(value = "/insertSeatForm.do")
 	public ModelAndView insertSeatForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("insertSeatForm");
 		
 		return mv;
 	}

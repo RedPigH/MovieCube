@@ -27,10 +27,9 @@ public class AdminScreenController {
 		ModelAndView mv = new ModelAndView("/admin/screenList");
 
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
-		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
 		
 		mv.addObject("screenList", screenList);
-		mv.addObject("map", map);
+		
 		return mv;
 	}
 
