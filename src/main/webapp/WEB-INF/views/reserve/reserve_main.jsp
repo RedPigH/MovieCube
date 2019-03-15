@@ -6,6 +6,11 @@
 <html>
 <head>
 <%@ include file="../main/head.jspf"%>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<script src="/moviecube/resources/vendor/jqueryui/jquery-ui.min.js"></script>
 </head>
 <body class="animsition">
 
@@ -27,11 +32,9 @@
 
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
-
 							</div>
-
-							<input type="text" name="daterange"
-								value="2019-03-14 ~ 2019-03-15" />
+							<%@ include file="./datepicker.jspf"%>
+							
 						</div>
 
 
@@ -46,7 +49,10 @@
 						</div>
 						<div
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+							
+							<%-- <c:forEach var="item" items="${list}" begin=0 end=5 step=1 varStatus="status">
 
+							</c:forEach> --%>
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
@@ -109,7 +115,7 @@
 								class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm"
 								style="border-bottom: unset;">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
-								<a href="#" onclick="add_item()"
+								<a href="#"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
 									style="position: unset;"> 영화 추가 </a>
 							</div>
@@ -161,7 +167,7 @@
 								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
 							</div>
 						</div>
-						
+
 						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
 							<div class="size-200">
 								<span class="mtext-110 cl2"> 강남 </span>
@@ -175,7 +181,7 @@
 								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
 							</div>
 						</div>
-						
+
 						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
 							<div class="size-200">
 								<span class="mtext-110 cl2"> 강남 </span>
@@ -208,8 +214,8 @@
 
 
 
-	<%@ include file="movieList_modal.jspf" %>
-	
+	<%@ include file="movieList_modal.jspf"%>
+
 	<%@ include file="../main/script.jspf"%>
 
 
