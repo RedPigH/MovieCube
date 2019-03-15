@@ -15,7 +15,7 @@
 	<!-- 유저 선택 상영 일정 리스트 -->
 	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date,
+			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date, t.screen_no,
 			(select count(*) from seat where screen_no = sc.screen_no) as total_seat, 
 			(select count(*) from time_seat where time_no = t.time_no and status = 0) as possible_seat
 			from time t
@@ -27,40 +27,23 @@
 			and to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
 		]]>
 			<choose>
-				<when test = "MOVIE_TYPE0 != NULL">
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 == NULL">
 					and m.movie_type like #{MOVIE_TYPE0}
 				</when>
-				<when test = "MOVIE_TYPE1 != NULL">
-					and m.movie_type like #{MOVIE_TYPE1}
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 == NULL">
+					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1})
 				</when>
-				<when test = "MOVIE_TYPE2 != NULL">
-					and m.movie_type like #{MOVIE_TYPE2}
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 == NULL">
+					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2})
 				</when>
-				<when test = "MOVIE_TYPE3 != NULL">
-					and m.movie_type like #{MOVIE_TYPE3}
+				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 != NULL">
+					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2}, #{MOVIE_TYPE3})
 				</when>
 				<otherwise>
 				</otherwise>
 			</choose>
 			order by t.start_time asc
 	</select>
-	
-	<!-- 조건별(날짜,영화관,영화) 상영일정 리스트 
-	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
-			SELECT T.TIME_NO, M.MOVIE_NAME, M.MOVIE_TYPE, M.MOVIE_AGE, T.START_TIME, T.END_TIME, C.CINEMA_NAME, SC.SCREEN_NAME, T.TIME_DATE,
-			(SELECT COUNT(*) FROM SEAT WHERE SCREEN_NO = SC.SCREEN_NO) AS TOTAL_SEAT,
-			(SELECT COUNT(*) FROM TIME_SEAT WHERE TIME_NO = T.TIME_NO AND STATUS = 0) AS POSSIBLE_SEAT
-			FROM TIME T
-			INNER JOIN MC_MOVIE M ON M.MOVIE_NO = T.MOVIE_NO
-			INNER JOIN CINEMA C ON C.CINEMA = T.CINEMA_NO
-			INNER JOIN SCREEN SC ON SC.SCREEN_NO = T.SCREEN_NO
-			WHERE T.CINEMA_NO = #{CINEMA_NO} 
-			AND TO_CHAR(T.TIME_DATE, 'YYYYMMDD') = TO_CHAR(#{TIME_DATE},'YYYYMMDD')
-			AND T.MOVIE_NO = #{MOVIE_NO}
-			ORDER BY T.START_TIME ASC
-		]]>
-	</select> -->
 	
 	<select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
@@ -85,8 +68,7 @@
 			SCREEN_NO,
 			TIME_DATE,
 			START_TIME,
-			END_TIME,
-			MOVIE_CNT
+			END_TIME
 		)
 		VALUES
 		(
@@ -94,10 +76,9 @@
 			#{MOVIE_NO},
 			#{CINEMA_NO},
 			#{SCREEN_NO},
-			#{TIME_DATE},
+			SYSDATE,
 			#{START_TIME},
-			#{END_TIME},
-			#{MOVIE_CNT}
+			#{END_TIME}
 		)
 	]]>
 	</insert>

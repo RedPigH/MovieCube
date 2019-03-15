@@ -88,7 +88,7 @@ public class AdminController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/movieList");
+		mv.setViewName("admin/movieList");
 		return mv;
 	}
 	
@@ -101,12 +101,11 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/movieWrite.do")
-	public ModelAndView movieWrtie(CommandMap commandMap) throws Exception {
+	public ModelAndView movieWrtie(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
 		System.out.println("쓰기확인 : " + commandMap.getMap());
-		
-		movieService.insertMovie(commandMap.getMap());
+		movieService.insertMovie(commandMap.getMap(), request);
 		return mv;
 	}
 	
@@ -114,9 +113,10 @@ public class AdminController {
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
 		
-		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
 		
-		mv.addObject("map", map);
 		
 		return mv;
 	}
@@ -124,10 +124,12 @@ public class AdminController {
 	@RequestMapping(value="/movieModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify");
-		System.out.println("수정확인테스트 1: " + commandMap.getMap());
+		
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
-		mv.addObject("map", map);
-		System.out.println("수정확인테스트 2: " + commandMap.getMap());
+
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
+		
 		return mv;
 	}
 	
@@ -135,11 +137,11 @@ public class AdminController {
 	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
-		System.out.println("수정확인테스트 3: " + commandMap.getMap());
+		
 		movieService.modifyMovie(commandMap.getMap());
 		
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
-		System.out.println("수정확인테스트 4: " + commandMap.getMap());
+		
 		
 		return mv;
 	}

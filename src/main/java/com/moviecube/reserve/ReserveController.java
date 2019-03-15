@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
 
 @Controller
@@ -21,10 +22,13 @@ public class ReserveController {
 	
 	@Resource(name = "timeService")
 	private TimeService timeService;
+	
+	@Resource(name = "seatService")
+	private SeatService seatService;
 
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_main");
+		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
@@ -68,6 +72,7 @@ public class ReserveController {
 			for(int i = 0; i < selectType.length ; i++) {
 				commandMap.put("MOVIE_TYPE" + i, selectType[i]);			
 			}
+			System.out.println(commandMap.getMap());
 
 		}
 		
@@ -116,7 +121,7 @@ public class ReserveController {
 		return mv;
 	}
 
-	// 선택한 극장, 선택한 영화에 맞는 시간표를 쫘라라라락 띄워줌.
+	// 영화관, 영화, 영화 타입 선택 조건에 맞는 영화 상영 리스트 
 	@RequestMapping(value = "/reserve_step3.do")
 	public ModelAndView reserveStep3(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/reserve.do");
@@ -134,9 +139,27 @@ public class ReserveController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_step4.do")
-	public ModelAndView reserveStep4(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step4");
+	@RequestMapping(value = "/reserve_selectSeat.do")
+	public ModelAndView reserveStep4(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("selectSeat");
+		
+		CommandMap timeSeatMap = new CommandMap();
+		CommandMap screenMap = new CommandMap();
+		
+		String time_no = request.getParameter("TIME_NO");
+		String screen_no = request.getParameter("SCREEN_NO");
+		
+		timeSeatMap.put("TIME_NO", time_no);
+		screenMap.put("SCREEN_NO", screen_no);
+		
+		List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
+		Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
+		
+		//시간별 좌석 리스트
+		mv.addObject("seatList", timeSeatlist);
+		//좌석 행 렬 값
+		mv.addObject("seatnum", seatnum);
+		
 		return mv;
 	}
 }

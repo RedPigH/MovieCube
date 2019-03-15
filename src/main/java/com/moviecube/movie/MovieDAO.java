@@ -31,4 +31,12 @@ public class MovieDAO extends AbstractDAO{
 	public void deleteMovie(Map<String, Object> map) throws Exception{
 		update("movie.deleteMovie", map);
 	}
+	
+	public void insertFile(Map<String, Object> map) throws Exception{
+	    insert("movie.insertFile", map);
+	}
+	
+	public void insertFile2(Map<String, Object> map) throws Exception{
+	    insert("movie.insertFile2", map);
+	}
 }

@@ -68,13 +68,13 @@
         this.locale = {
             direction: 'ltr',
             format: moment.localeData().longDateFormat('L'),
-            separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
+            separator: ' ~ ',
+            applyLabel: '확인',
+            cancelLabel: '취소',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment.weekdaysMin(),
-            monthNames: moment.monthsShort(),
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             firstDay: moment.localeData().firstDayOfWeek()
         };
 
@@ -120,7 +120,7 @@
                 '</div>' +
                 '<div class="ranges">' +
                     '<div class="range_inputs">' +
-                        '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                        '<button class="applyBtn" disabled="disabled" type="button" style="background-color: #ff5959; border-color: #ff5959"></button> ' +
                         '<button class="cancelBtn" type="button"></button>' +
                     '</div>' +
                 '</div>' +
