@@ -76,7 +76,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //로그인 validation
+	  //로그인 
 	  @RequestMapping(value="/member/login.do")
 	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
 		  ModelAndView mv = new ModelAndView();

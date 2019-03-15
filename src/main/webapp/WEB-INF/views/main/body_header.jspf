@@ -28,8 +28,8 @@
 				<nav class="limiter-menu-desktop">
 
 					<!-- Logo desktop -->
-					<a href="main.do" class="logo"> <img
-						src="resources/images/icons/logo-01.png" alt="IMG-LOGO">
+					<a href="/moviecube/main.do" class="logo"> <img
+						src="/moviecube/resources/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 				</nav>
 					
@@ -71,7 +71,7 @@
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="resources/index.html"><img
-					src="resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+					src="/moviecube/resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
