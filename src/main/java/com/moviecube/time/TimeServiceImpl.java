@@ -24,6 +24,11 @@ public class TimeServiceImpl implements TimeService {
 		// TODO Auto-generated method stub
 		return timeDAO.optionTimeList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectAllTimeList(Map<String, Object> map) throws Exception{
+		return timeDAO.selectAllTimeList(map);
+	}
 
 	@Override
 	public Map<String, Object> timeDetail(Map<String, Object> map) throws Exception {

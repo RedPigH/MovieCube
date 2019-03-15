@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,11 +50,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -63,11 +62,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -76,11 +74,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -89,11 +86,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -147,49 +143,32 @@
 					<div
 						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
-
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
-
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
 						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
+						<c:choose>
+							<c:when test="${fn:length(alltimeList) > 0}">
+								<c:forEach items="${alltimeList}" var="row">
+									<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+										<div class="size-200">
+											<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
+										</div>
 
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
+										<div class="size-200">
+											<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
+										</div>
 
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
-
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
-
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
-
+										<div class="size-199">
+											<span class="mtext-110 cl2"> ${row.START_TIME } ~ ${row.END_TIME } </span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+									<div class="size-200">
+											<span class="mtext-110 cl2">조회결과없음</span>
+									</div>
+							</c:otherwise>
+						</c:choose> 
 					</div>
 				</div>
 			</div>
