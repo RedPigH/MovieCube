@@ -175,7 +175,7 @@
 									<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
 								</div>
 
-								<div class="size-199">
+								<div class="size-200">
 									<span class="mtext-110 cl2"> ${row.START_TIME } ~
 										${row.END_TIME } </span>
 								</div>

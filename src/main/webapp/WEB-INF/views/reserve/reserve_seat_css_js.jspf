@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 
 
-
 <script type="text/javascript"
 	src="/moviecube/resources/vendor/reserveSeat/jquery-1.11.0.min.js"></script>
 <script type="text/javascript"
 	src="/moviecube/resources/vendor/reserveSeat/jquery.seat-charts.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/moviecube/resources/vendor/reserveSeat/reserveSeat.css">
+
 <script>
 	var price = 10; //price
 	$(document)
