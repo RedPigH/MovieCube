@@ -116,7 +116,7 @@ body {
 					<c:forEach items="${seatList}" var="row">
 						<input type="checkbox" class="seat" name = "checkbox" id="seat${row.SEAT_ROW}${row.SEAT_COL}">
   							<label for="seat${row.SEAT_ROW}${row.SEAT_COL}">
-    							<p>${row.SEAT_ROW}${row.SEAT_COL}</p>
+    							<p>${row.SEAT_ROW}-${row.SEAT_COL}</p>
    								<p>${row.STATUS}</p>
   							</label>
 						</input>
