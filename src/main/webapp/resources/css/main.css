@@ -2457,6 +2457,11 @@ input.num-product::-webkit-inner-spin-button {
 
 /*//////////////////////////////////////////////////////////////////
 [ Size ]*/
+.size-100 {
+  min-width: 50px;
+  height: 46px;
+}
+
 .size-101 {
   min-width: 161px;
   height: 46px;

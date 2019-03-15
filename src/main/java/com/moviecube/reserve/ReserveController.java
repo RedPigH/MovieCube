@@ -29,7 +29,24 @@ public class ReserveController {
 	
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
+	
+	
+	
+	
+	/*     임시용  step2       */
+	@RequestMapping(value = "/reserve_seat.do")
+	public ModelAndView reserve_seat(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("reserve/reserve_seat");
+		
+		return mv;
+		
+	};
+	/*      임시용 step2 끝        */
+	
 
+	
+	
+	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
