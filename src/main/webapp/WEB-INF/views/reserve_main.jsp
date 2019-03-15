@@ -3,111 +3,117 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
+<html>
 <head>
-	<%@ include file="main/head.jspf" %>
+<%@ include file="main/head.jspf"%>
 </head>
 <body class="animsition">
 
-	<%@ include file="main/body_header.jspf" %>
-
-	<%@ include file="main/favorite.jspf" %>
+	<%@ include file="main/body_header.jspf"%>
+	<%@ include file="main/favorite.jspf"%>
 
 
 	<!-- 영화 예매 -->
 	<form class="bg0 p-t-75 p-b-85">
-		<div class="container">
+		<div class="container" style="margin-top: 50px">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">날짜</th>
-									<th class="column-2">극장</th>
-									<th class="column-3">상영관</th>
-									<th class="column-4">영화</th>
-									<th class="column-5">시간</th>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="resources/images/item-cart-04.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div
-												class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product"
-												type="number" name="num-product1" value="1">
-
-											<div
-												class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 36.00</td>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="resources/images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div
-												class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product"
-												type="number" name="num-product2" value="1">
-
-											<div
-												class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
-							</table>
-						</div>
-
+						
+						
 						<div
-							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input
-									class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5"
-									type="text" name="coupon" placeholder="Coupon Code">
+							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm"
+							style="border-top: 1px solid #e6e6e6;">
 
-								<div
-									class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon</div>
+							<div class="flex-w flex-m m-r-20 m-tb-5">
+								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
+
 							</div>
+							
+								<input type="text"
+										name="daterange" value="03/13/2019 - 03/14/2019" />
+
+						</div>
+						
+						
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm" style="border-bottom: unset;">
+
+							<div class="flex-w flex-m m-r-20 m-tb-5">
+								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">극장</h4>
+
+							</div>
+						</div>
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역1</div>
 
 							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart</div>
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관1</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역2</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관2</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역3</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관3</div>
+								
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								지역4</div>
+
+							<div
+								class="flex-c-m stext-101 cl2 size-126 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								상영관4</div>
+						</div>
+
+
+
+					<div style="border-bottom: 1px solid #e6e6e6;">
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm" style="border-bottom: unset;">
+							<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
+							<h6 onclick="add_item()" style="font-family: NanumGothicBold">추가</h6>
+						</div>
+						
+						<div>	
+							<div id="movieAdd" style="display: none;">
+									<div class="wrap-table-shopping-cart table-shopping-cart table_row tr    
+													flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+										<div class="column-1">
+											<div class="how-itemcart1">
+											<img src="resources/images/mayakwang.jpg" alt="IMG">
+											</div>
+										</div>
+										<div class="column-2">마약왕(2019)</div>
+										<div class="column-3"><h6 onclick="remove_item(document.getElementById('movieCancel'))" style="font-family: NanumGothicBold">삭제</h6></div>
+									</div>
+									<h6 onclick="remove_item(this)" style="font-family: NanumGothicBold">삭제</h6>
+							</div>
+							<div id="field"></div>
 						</div>
 					</div>
+					</div>
 				</div>
+
+
+
+
+
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
 						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
+						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
 
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
@@ -278,7 +284,9 @@
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script>
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
 					All rights reserved | Made with <i class="fa fa-heart-o"
 						aria-hidden="true"></i> by <a href="https://colorlib.com"
 						target="_blank">Colorlib</a> &amp; distributed by <a
@@ -298,46 +306,8 @@
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="resources/vendor/bootstrap/js/popper.js"></script>
-	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="resources/vendor/select2/select2.min.js"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
-	<!--===============================================================================================-->
-	<script
-		src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
+	<%@ include file="main/script.jspf"%>
 
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
-	<!--===============================================================================================-->
-	<script src="resources/js/main.js"></script>
 
 </body>
 </html>
