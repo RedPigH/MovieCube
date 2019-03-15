@@ -70,7 +70,7 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryWriteForm.do")
 	public ModelAndView writeInquiryForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("qna/inquiryWriteForm");
-		System.out.println("혜쮸글쓰기:"+commandMap.get("QNA_FILE_NO"));
+
 		return mv;
 
 	}
@@ -78,7 +78,6 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryWrite.do")
 	public ModelAndView writeInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-		System.out.println("혜쮸짱:"+commandMap.get("QNA_FILE_NO"));
 		qnaService.insertQna(commandMap.getMap(), request);
 		return mv;
 
@@ -87,13 +86,7 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryDetail.do")
 	public ModelAndView inquiryDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
-		System.out.println("히잉:"+commandMap.get("QNA_FILE_NO"));
-		System.out.println("히잉2:"+commandMap.get("QNA_ORGNAME"));
-		System.out.println("히잉3:"+commandMap.get("QNA_SAVNAME"));
 		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
-	System.out.println("히잉:"+commandMap.get("QNA_FILE_NO"));
-	System.out.println("히잉2:"+commandMap.get("QNA_ORGNAME"));
-	System.out.println("히잉3:"+commandMap.get("QNA_SAVNAME"));
 		mv.addObject("map", map);
 
 		return mv;
@@ -105,7 +98,6 @@ public class QnaController {
 
 		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
 		mv.addObject("map", map);
-
 		return mv;
 
 	}
@@ -113,10 +105,23 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryModify.do")
 	public ModelAndView modifyInquiry(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-
+		
+		 /*
+											 * mv.addObject("QNA_SUB", commandMap.get("QNA_SUB"));
+											 * mv.addObject("QNA_CONTENT", commandMap.get("QNA_CONTENT"));
+											 */
+		/*
+		 * System.out.println("혜쮸1"+commandMap.get("QNA_CONTENT"));
+		 * //SSystem.out.println("혜쮸1"+commandMap.get("QNA_NO"));
+		 * System.out.println(commandMap.get("QNA_NO").toString());
+		 * System.out.println("혜쮸1"+commandMap.get("QNA_SUB"));
+		 */
 		qnaService.updateQna(commandMap.getMap());
-
-		mv.addObject("QNA_NO", commandMap.get("QNA_NO"));
+		/*
+		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
+		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
+		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
+		 */
 		return mv;
 	}
 
@@ -144,12 +149,7 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryReply.do")
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-		/*
-		 * System.out.println("혜수님:"+commandMap.get("REF"));
-		 * System.out.println("혜수님:"+commandMap.get("QNA_SUB"));
-		 * System.out.println("혜수님:"+commandMap.get("QNA_ID"));
-		 * System.out.println("혜수님:"+commandMap.get("QNA_CONTENT"));
-		 */
+
 		commandMap.put("RE_STEP", 1);
 		commandMap.put("RE_LEVEL", 1);
 		
