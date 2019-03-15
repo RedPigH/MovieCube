@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,7 @@ public class MainController {
 		ModelAndView mv = new ModelAndView("/main");
 
 		List<Map<String, Object>> list = movieService.selectMovieList(commandMap.getMap());
-		
-		
+
 		mv.addObject("list", list);
 		mv.addObject(mv);
 

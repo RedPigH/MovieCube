@@ -3,7 +3,27 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<script type="text/javascript">
+function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genre, movie_content, movie_grade, movie_age, movie_url, poster_savname, movie_grade) {
+	// var movie_name;
+	$("#h_modal_movie_name").text(movie_name);
+	// img_url = "/moviecube/resources/upload/movie/poster/" + poster_savname;
+	// $("#h_modal_postersavname3").attr("src", img_url);
+	$("#h_modal_movie_type").text(movie_type);
+	$("#h_modal_movie_director").text(movie_director);
+	$("#h_modal_movie_actor").text(movie_actor);
+	$("#h_modal_movie_genre").text(movie_genre);
+	$("#h_modal_movie_content").text(movie_content);
+	$("#h_modal_movie_grade").text(movie_grade);
+	$("#h_modal_movie_age").text(movie_age);
+	$("#h_modal_movie_url").text(movie_url);
+	$("#h_modal_poster_savname").text(poster_savname);
+	$("#h_modal_movie_grade").text(movie_grade);
+	
+	
+	
+}
+</script>
 
 <!-- moviecube -->
 <section class="bg0 p-t-23 p-b-140">
@@ -180,13 +200,36 @@
 						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 							<!-- Block2 -->
 							<div class="block2">
-								<div class="block2-pic hov-img0">
+								<div class="block2-pic hov-img0" id="forMovieModal">
 									<img src="/moviecube/resources/upload/movie/poster/${row.POSTER_SAVNAME}" height="394" alt="영화포스터" /> 
 									<!-- <img src="resources/images/product-01.jpg" alt="IMG-PRODUCT"> -->
-
-									<a href="resources/#" id="gahyun"
+										
+										<a href="#" id="gahyun" onclick="toModal(
+										${row.MOVIE_NAME}, 
+										${row.MOVIE_TYPE },
+										${row.MOVIE_DIRECTOR },
+										${row.MOVIE_ACTOR },
+										${row.MOVIE_GENRE },
+										${row.MOVIE_CONTENT },
+										${row.MOVIE_GRADE },
+										${row.MOVIE_AGE },
+										${row.MOVIE_URL },
+										${row.POSTER_SAVNAME } );"
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 										상세보기 </a>
+										<%-- <input type="hidden" id="modal_movie_no" value="${row.MOVIE_NO }"> --%>
+										<input type="hidden" id="modal_movie_name" value="${row.MOVIE_NAME }">
+										<input type="hidden" id="modal_movie_type" value="${row.MOVIE_TYPE }">
+										<input type="hidden" id="modal_movie_director" value="${row.MOVIE_DIRECTOR }">
+										<input type="hidden" id="modal_movie_actor" value="${row.MOVIE_ACTOR }">
+										<input type="hidden" id="modal_movie_genre" value="${row.MOVIE_GENRE }">
+										<input type="hidden" id="modal_movie_content" value="${row.MOVIE_CONTENT }">
+										<input type="hidden" id="modal_movie_grade" value="${row.MOVIE_GRADE }">
+										<input type="hidden" id="modal_movie_age" value="${row.MOVIE_AGE }">
+										<input type="hidden" id="modal_movie_url" value="${row.MOVIE_URL }">
+										<input type="hidden" id="modal_poster_savname" value="${row.POSTER_SAVNAME }">
+										<input type="hidden" id="modal_movie_grade" value="${row.MOVIE_GRADE }">
+										
 								</div>
 
 								<div class="block2-txt flex-w flex-t p-t-14">
