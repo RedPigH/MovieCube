@@ -42,8 +42,20 @@ public class QnaDAO extends AbstractDAO {
 	public void insertFile(Map<String, Object> map) throws Exception {
 		insert("qna.insertQnaFile", map);
 	}
-	
+
 	public void replyQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		insert("qna.replyQna", map);
+	}
+
+	public void updateQnaFile(Map<String, Object> map) {
+		update("qna.updateQnaFile", map);
+		// TODO Auto-generated method stub
+
+	}
+
+	public void deleteQnaFile(Map<String, Object> map) {
+		delete("qna.deleteQnaFile",map);
+		// TODO Auto-generated method stub
+		
 	}
 }

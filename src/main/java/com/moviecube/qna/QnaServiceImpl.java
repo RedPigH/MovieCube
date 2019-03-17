@@ -85,6 +85,12 @@ public class QnaServiceImpl implements QnaService {
 	public void replyQna(Map<String, Object> map) throws Exception {
 		qnaDAO.replyQna(map, null);
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 
