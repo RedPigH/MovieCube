@@ -49,7 +49,7 @@
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/timeList.do">MovieCube Administrator - Time List</a></h1>
+	<h1><a href="<%=cp %>/admin/seatList.do">MovieCube Administrator - Seat List</a></h1>
 	</div>
 </div>
 
@@ -68,5 +68,85 @@
 		</ul>
 	</div>
 	
+	div class="admin_ct">
+		<h3 class="sub_tit">영화시간표 리스트</h3>
+			<div class="tbl_type_02">
+				<table>
+					<caption>시간표 등록</caption>
+					<colgroup>
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+					</colgroup>
+					
+					<thead>
+						<tr>
+							<th scope="col">상영관 이름</th>
+							<th scope="col">좌석 행</th>
+							<th scope="col">좌석 열</th>
+							
+						</tr>
+					</thead>
 	
-	
+					<tbody>
+					<c:choose>
+					<c:when test="${fn:length(seatList) > 0}">	
+						<c:forEach var="row" items="${seatList}">
+						<tr>
+							<td><a href="#this" name="SCREEN_NAME">${row.SEAT_NAME}
+							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
+							<td>${row.SEAT_ROW}</td>
+							<td>${row.SEAT_COL}</td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td colspan="13" class="tac">등록된 좌석이 없습니다.</td>
+					</tr>
+					</c:otherwise>
+				</c:choose>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="btn_type_03">
+			<a href="#this" class="btn btnC_01 btnP_04" id="write">
+				<span>글쓰기</span>
+			</a>
+		</div>
+		
+		<div class="paging">${pagingHtml}</div>
+	</div>
+</div>
+
+<form id="commonForm" name="common"></form>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $("#write").on("click", function(e){ //글쓰기 버튼
+                e.preventDefault();
+                fn_openBoardWrite();
+            }); 
+             
+            $("a[name='SCREEN_NAME']").on("click", function(e){ // 영화관 이름 클릭
+                e.preventDefault();
+                fn_openBoardDetail($(this));
+            });
+        });
+         
+        function fn_openBoardWrite(){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='insertSeatForm.do' />");
+            comSubmit.submit();
+        }
+         
+        function fn_openBoardDetail(obj){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='seatDetail.do' />");
+            comSubmit.addParam("SEAT_NO", obj.parent().find("#SEAT_NO").val());
+            comSubmit.submit();
+        }
+    </script> 
+</body>
+</html>

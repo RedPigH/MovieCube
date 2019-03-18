@@ -12,18 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
 
+@RequestMapping(value = "/admin")
 @Controller
 public class AdminSeatController {
 	
 	@Resource(name = "seatService")
 	private SeatService seatService;
 	
-	@RequestMapping(value = "/screenSeatList.do")
+	@RequestMapping(value = "/seatList.do")
 	public ModelAndView screenSeatList(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/screenSeatList");
+		ModelAndView mv = new ModelAndView("/admin/seatList");
 		
-		List<Map<String, Object>> list = seatService.selectScreenSeat(commandMap.getMap());
-		mv.addObject("screenSeatlist", list);
+		List<Map<String, Object>> seatList = seatService.selectScreenSeat(commandMap.getMap());
+		mv.addObject("seatlist", seatList);
 		
 		return mv;
 	}

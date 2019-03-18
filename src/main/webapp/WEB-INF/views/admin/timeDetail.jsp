@@ -91,7 +91,7 @@
 		<div class="btn_type_03">
 			
 			<span class="btn btnC_04 btnP_04">
-				<input type="button" onclick="location.href='timeModifyForm.do?TIME_NO=${map.TIME_NO}'" value="수정" />
+				<input type="button" onclick="location.href='timeModifyForm.do?TIME_NO=${map.TIME_NO}' " value="수정" />
 			</span>
 			<span class="btn btnC_04 btnP_04" style="padding-left: 10px;">
 				<input type="button" onclick="timeDelete()" value="삭제" />

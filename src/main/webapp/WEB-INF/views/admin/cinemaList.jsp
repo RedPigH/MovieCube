@@ -79,6 +79,7 @@
 				</tbody>
 			</table>
 		</div>
+		
 		<div class="btn_type_03">
 			<a href="#this" class="btn btnC_01 btnP_04" id="write">
 				<span>글쓰기</span>
