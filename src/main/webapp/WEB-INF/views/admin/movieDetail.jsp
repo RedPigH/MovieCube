@@ -86,8 +86,8 @@
 				<div class="movie_btn">
 					<span class="btn btnC_02 btnF_01 mr10"></span> 
 					<span></span>
-					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}"
-						class="btn btnC_01 btnF_04"> <span>수정</span></a> 
+					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" ${row.STILLCUT}
+						class="btn btnC_01 btnF_04"> <span>수정</span></a>
 					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;">
 						<span>삭제</span></a>
 					<a href="<%=cp%>/admin/movieList.do"

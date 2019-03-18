@@ -41,7 +41,7 @@
 	
 	<div class="admin_ct">
 		<h3 class="sub_tit">영화 정보 수정</h3>
-		<form id="frm">
+		<form id="frm" name="frm" enctype="multipart/form-data">
 			<div class="tbl_type_01">
 				<table>
 					<colgroup>
@@ -55,7 +55,8 @@
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" value="${map.MOVIE_NAME}"/>
 								<input type="hidden" id="MOVIE_NO" name="MOVIE_NO" value="${map.MOVIE_NO}" />
-								<font color="red"></font>
+								<font color="red"><span class="ibk">예) 영화제목(3D) </span></font>
+								
 							</td>
 						</tr>
 						
@@ -80,7 +81,6 @@
 							<td>
 								<c:set var="TextValue" value="${map.MOVIE_OPENDATE}"/>
 								<input type="date" class="txt w200" id="MOVIE_OPENDATE" name="MOVIE_OPENDATE" value="${fn:substring(TextValue,0,10)}" />
-								<span class="ibk">예)2019-04-05</span>
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -89,25 +89,34 @@
 							<th scope="row">장르 및 러닝타임</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" value="${map.MOVIE_GENRE}" />
-								<span class="ibk">예)액션 120분 </span>
-								<font color="red"></font>
+								<font color="red"><span class="ibk">예) 액션 120분 </span></font>
+								
 							</td>
 						</tr>
 						
 						<tr>
 							<th scope="row">타입</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_TYPE" name="MOVIE_TYPE" value="${map.MOVIE_TYPE}"/>
-								<span class="ibk">예)2D, 3D</span>
-								<font color="red"></font>
+								<select name="MOVIE_TYPE" class="slct w200" value="${map.MOVIE_TYPE}">
+									<option value="2D" <c:if test="${map.MOVIE_TYPE == '2D'}"> selected</c:if>>2D</option>
+									<option value="3D" <c:if test="${map.MOVIE_TYPE == '3D'}"> selected</c:if>>3D</option>
+									<option value="4D" <c:if test="${map.MOVIE_TYPE == '4D'}"> selected</c:if>>4D</option>
+								</select>
 							</td>
 						</tr>
 						
 						<tr>
 							<th scope="row">관람등급</th>
 							<td>
+								<select name="MOVIE_AGE" class="slct w200" value="${map.MOVIE_AGE}">
+									<option value="12" <c:if test="${map.MOVIE_TYPE == '12'}"> selected</c:if>>12</option>
+									<option value="15" <c:if test="${map.MOVIE_TYPE == '15'}"> selected</c:if>>15</option>
+									<option value="19" <c:if test="${map.MOVIE_TYPE == '19'}"> selected</c:if>>19</option>
+								</select>
+							<%-- 
 								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" value="${map.MOVIE_AGE}"/>
 								<font color="red"></font>
+								 --%>
 							</td>
 						</tr>
 						
@@ -136,20 +145,22 @@
 								<font color="red"></font>
 							</td>
 						</tr>
-						
+<%-- 					
 						<tr>
 							<th scope="row">포스터</th>
-							<td><font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+							<td>
+								<input type="hidden" id="poster" name="poster" value="${map.FILE_NO}">
+								<font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br>
 								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
 						</tr>
-						
+--%>					
 					
 					</tbody>
 				</table>
 				
-				
+<%-- 				
 				<div id="fileDiv">
 				<c:forEach var="row" items="${movieDetail}" varStatus="var">
 				<table>
@@ -161,7 +172,9 @@
 			
 						<tr>	
 							<th scope="row">스틸컷</th>
-							<td><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+							<td>
+								<input type="hidden" id="IDX" name="IDX_${var.index}" value="${row.STILLCUT_NO}">
+								<font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br><br>
 								<input type="file" class="txt" id="STILLCUT_ORGNAME_${var.index}" name="STILLCUT_ORGNAME_${var.index}" />
 								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
@@ -173,10 +186,11 @@
 					</tbody>
 				</table>
 				</c:forEach>	
-				</div>
 				
+				</div>
+--%>			
 			</div>	
-			
+	
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
 					<span>수정하기</span>

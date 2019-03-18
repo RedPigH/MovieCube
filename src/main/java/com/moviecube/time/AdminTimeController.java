@@ -18,7 +18,9 @@ import com.moviecube.movie.MovieService;
 import com.moviecube.screen.ScreenService;
 import com.moviecube.seat.SeatService;
 import com.moviecube.cinema.CinemaService;
+import com.moviecube.common.Paging;
 
+@RequestMapping(value = "/admin")
 @Controller
 public class AdminTimeController {
 
@@ -36,20 +38,52 @@ public class AdminTimeController {
 
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
+	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 5;
+	private int blockpaging = 5;
+	private String pagingHtml;
+	private Paging paging;
 
 	@RequestMapping(value = "/timeList.do")
-	public ModelAndView timeList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/timeList");
+	public ModelAndView timeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
 
-		List<Map<String, Object>> list = timeService.selectTimeList(commandMap.getMap());
-		mv.addObject("timelist", list);
+		List<Map<String, Object>> timeList = timeService.selectTimeList(commandMap.getMap());
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		totalCount = timeList.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		//System.out.println(paging.getEndCount());
+		//System.out.println(totalCount);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
 
+		timeList = timeList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("timeList", timeList);
+		mv.addObject("list", timeList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/admin/timeList");
 		return mv;
 	}
 
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/timeDetail");
+		ModelAndView mv = new ModelAndView("/admin/timeDetail");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -59,43 +93,44 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeWriteForm.do")
 	public ModelAndView timeWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/timeWrite");
+		ModelAndView mv = new ModelAndView("/admin/timeWrite");
 
-		List<Map<String, Object>> movielist = movieService.selectMovieList(commandMap.getMap());
-		List<Map<String, Object>> screenlist = screenService.selectScreenList(commandMap.getMap());
-		List<Map<String, Object>> cinemalist = cinemaService.selectCinemaList(commandMap.getMap());
+		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
+		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
 
-		mv.addObject("movielist", movielist);
-		mv.addObject("screenlist", screenlist);
-		mv.addObject("cinemalist", cinemalist);
+		mv.addObject("movieList", movieList);
+		mv.addObject("screenList", screenList);
+		mv.addObject("cinemaList", cinemaList);
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/timeWrite.do")
 	public ModelAndView timeWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/main.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
 
 		commandMap.put("MOVIE_NO", request.getParameter("selectMovie"));
 		commandMap.put("CINEMA_NO", request.getParameter("selectCinema"));
 		commandMap.put("SCREEN_NO", request.getParameter("selectScreen"));
-
+		
+		System.out.println("타임 등록 테스트 1: " + commandMap.getMap());
 		// 상영 시간표 생성
 		timeService.insertTime(commandMap.getMap());
-
+		
 		// 생성된 시간표에 대한 좌석 생성
 		CommandMap screenSeatmap = new CommandMap();
 		CommandMap timeSeatmap = new CommandMap();
 
 		screenSeatmap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
-
+		System.out.println("타임 등록 테스트 2: " + commandMap.getMap());
 		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(screenSeatmap.getMap());
 
 		for (int i = 0; i < seatlist.size(); i++) {
 			timeSeatmap.put("SEAT_NO", seatlist.get(i).get("SEAT_NO"));
 			seatService.insertTimeSeat(timeSeatmap.getMap());
 		}
-
+		System.out.println("타임 등록 테스트 3: " + commandMap.getMap());
 		return mv;
 	}
 	
@@ -115,19 +150,20 @@ public class AdminTimeController {
 		return entity;
 	}
 
-	@RequestMapping("value = /timeUpdateForm.do")
+	@RequestMapping("value = /timeModifyForm.do")
 	public ModelAndView timeUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/timeWrite");
+		ModelAndView mv = new ModelAndView("/admin/timeModify");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
+		
 		mv.addObject("map", map);
 
 		return mv;
 	}
 
-	@RequestMapping("value = /timeUpdate.do")
+	@RequestMapping("value = /timeModify.do")
 	public ModelAndView timeUpdate(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/timeDetail");
+		ModelAndView mv = new ModelAndView("redirect:/admin/timeDetail");
 
 		timeService.updateTime(commandMap.getMap());
 
@@ -138,10 +174,13 @@ public class AdminTimeController {
 
 	@RequestMapping("value = /timeDelete.do")
 	public ModelAndView timeDelete(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/timeList.do");
-
+		
+		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
+		
+		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
+		
 		timeService.deleteTime(commandMap.getMap());
-
+		
 		return mv;
 	}
 }

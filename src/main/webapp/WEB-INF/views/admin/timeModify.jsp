@@ -14,12 +14,11 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-
 </head>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Cinema Modify</a></h1>
+	<h1><a href="<%=cp %>/admin/cinemaList.do">MovieCube Administrator - Time Modify</a></h1>
 	</div>
 </div>
 
@@ -27,10 +26,10 @@
 	<div class="admin_list">
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li class="on"><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
@@ -39,7 +38,7 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화관 수정</h3>
+		<h3 class="sub_tit">영화 시간표 수정</h3>
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>
@@ -51,34 +50,81 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">영화관 이름</th>
+							<th scope="row">영화제목</th>
 							<td>
-								<input type="text" class="txt w200" id="CINEMA_NAME" name="CINEMA_NAME" value="${map.CINEMA_NAME}"/>
-								<input type="hidden" id="CINEMA_NO" name="CINEMA_NO" value="${map.CINEMA_NO }">
+								<select class="slct w300" name="selectMovie">
+									<c:forEach var="movie" items="${movieList}">
+									<option value="${movie.MOVIE_NO}" <c:if test="${movie.MOVIE_NAME =='${movie.MOVIE_NAME}'"> selected</c:if>>${movie.MOVIE_NAME}</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">영화관</th>
+							<td>
+								<select class="slct w300" name="selectCinema">
+									<c:forEach var="cinema" items="${cinemaList}">
+									<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">상영관</th>
+							<td>
+								<select class="slct w300" name="selectScreen">
+									<c:forEach var="screen" items="${screenList}">
+									<option value="${screen.SCREEN_NO}">${screen.SCREEN_NAME}</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">상영일</th>
+							<td>
+								<input type="date" class="txt w300" id="TIME_DATE" name="TIME_DATE" />
 								<font color="red"></font>
 							</td>
 						</tr>
 						
 						<tr>
-							<th scope="row">영화관 주소</th>
+							<th scope="row">시작시간</th>
 							<td>
-								<input type="text" class="txt w200" id="CINEMA_ADDRESS" name="CINEMA_ADDRESS" value="${map.CINEMA_ADDRESS}" />
-								<font color="red"></font>
-							</td>
+								<select name="START_TIME" class="slct w300">
+									<c:forEach begin="1" end="23" var="hour">
+										<option value="${hour}:00">${hour}:00</option>
+										<option value="${hour}:10">${hour}:10</option>
+										<option value="${hour}:20">${hour}:20</option>
+										<option value="${hour}:30">${hour}:30</option>
+										<option value="${hour}:40">${hour}:40</option>
+										<option value="${hour}:50">${hour}:50</option>
+									</c:forEach>
+										<option value="24:00">24:00</option>
+								</select>
 						</tr>
-											
+						
 						<tr>
-							<th scope="row">영화관 안내</th>
+							<th scope="row">종료시간</th>
 							<td>
-								<div class="textarea_grp">
-									<textarea name="CINEMA_CONTENT">${map.CINEMA_NAME}</textarea>
-								</div>
-								<font color="red"></font>
+								<select name="END_TIME" class="slct w300">
+									<c:forEach begin="1" end="23" var="hour">
+										<option value="${hour}:00">${hour}:00</option>
+										<option value="${hour}:10">${hour}:10</option>
+										<option value="${hour}:20">${hour}:20</option>
+										<option value="${hour}:30">${hour}:30</option>
+										<option value="${hour}:40">${hour}:40</option>
+										<option value="${hour}:50">${hour}:50</option>
+									</c:forEach>
+										<option value="24:00">24:00</option>
+								</select>
 							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
+			
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
 					<span>수정하기</span>
@@ -111,13 +157,13 @@
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaList.do' />");
+            comSubmit.setUrl("<c:url value='timeList.do' />");
             comSubmit.submit();
         }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='cinemaModify.do' />");
+            comSubmit.setUrl("<c:url value='timeModify.do' />");
             comSubmit.submit();
         }
     </script>
