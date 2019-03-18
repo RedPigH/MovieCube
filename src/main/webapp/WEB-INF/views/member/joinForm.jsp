@@ -417,7 +417,7 @@ function aaaa(){
 						async: true,
 						type : 'POST',
 						data : id,
-						url : "/moviecube/member/findUsedId.do",
+						url : "/moviecube/member/checkId.do",
 						dataType : "json",
 						contentType : "application/json; charset=UTF-8",
 						success : function(data){

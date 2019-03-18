@@ -26,7 +26,7 @@ public class MemberController {
 	  
 	  //동의서
 	  
-	  @RequestMapping(value="/openTerms.do")
+	  @RequestMapping(value="/term.do")
 	  public ModelAndView terms(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/terms");
 	  
@@ -43,7 +43,7 @@ public class MemberController {
 	  }
 	  
 	  //아이디 중복확인
-	  @RequestMapping("/member/findUsedId.do")
+	  @RequestMapping("/member/checkId.do")
 	  @ResponseBody
 	   public Map<String, Object> findUsedID(@RequestBody String id) throws Exception{
 		  Map<String, Object> map = new HashMap<String, Object>();	
@@ -82,7 +82,7 @@ public class MemberController {
 		  ModelAndView mv = new ModelAndView();
 		  Map <String, Object> user = new HashMap<String, Object>();
 		  
-		  user = memberService.findUserIdAndPassword(commandMap.getMap());
+		  user = memberService.checkUserIdAndPassword(commandMap.getMap());
 		  		  
 		  if(user!=null){
 			  session.setAttribute("userLoginInfo", user);
@@ -103,6 +103,41 @@ public class MemberController {
 		  session.setAttribute("userLoginInfo", null);
 		  return mv;
 	  }
+	  
+	  //아이디/비밀번호 찾기 페이지 이동
+	  @RequestMapping(value="/member/findForm.do")
+	  public ModelAndView findForm(CommandMap commandMap) throws Exception{
+		  ModelAndView mv = new ModelAndView("/member/findIdAndPassword");
+		  
+		  return mv;
+	  }
+	  
+	
+	  //아이디/비밀번호 찾기
+	  
+	  @RequestMapping(value="/member/find.do")
+	  @ResponseBody
+	  public Map<String, Object> findIdAndPw(@RequestBody String name, String age, String phone) throws Exception{
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  String id = "";
+		  String pw = "";
+		  
+		  map.put("MEMBER_NAME", name);
+		  map.put("MEMBER_AGE", age); // 주현이는 24세이다.
+		  map.put("MEMBER_PHONE" , phone);
+		  
+		  id = memberService.findId(map);
+		  
+		  	if(id!=null) {
+		  		
+		  	}
+		  pw = memberService.findPasswd(map);
+		  
+		  return map;
+				  
+	  }
+	 
+	  
 	  /*//마이페이지
 	  @RequestMapping
 	  public */

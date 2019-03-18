@@ -9,5 +9,9 @@ public interface MemberService {
 	 int findUsedID(Map<String, Object> map) throws Exception;
 	 
 	//로그인
-	 Map<String, Object> findUserIdAndPassword(Map<String, Object> map)throws Exception;
+	 Map<String, Object> checkUserIdAndPassword(Map<String, Object> map)throws Exception;
+	 
+	 //아이디,비밀번호 찾기
+	 String findId(Map<String, Object> map) throws Exception;
+	 String findPasswd(Map<String, Object> map) throws Exception;
 }

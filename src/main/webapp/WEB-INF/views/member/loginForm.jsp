@@ -54,8 +54,8 @@ function login()
     	<button type="button" class="cancelbtn" onclick="history.go(-1);">취소</button>
     	<span class="float-r flex-w flex-t p-t-5 p-b-10">
     	<ul>
-   		 <li><a href="/moviecube/openTerms.do" class="stext-107 cl7 hov-cl1 trans-04">회원가입</a></li>
-   		 <li><a href="#" class="stext-107 cl7 hov-cl1 trans-04">아이디/비밀번호 찾기</a></li>
+   		 <li><a href="/moviecube/term.do" class="stext-107 cl7 hov-cl1 trans-04">회원가입</a></li>
+   		 <li><a href="/moviecube/member/findForm.do" class="stext-107 cl7 hov-cl1 trans-04">아이디/비밀번호 찾기</a></li>
    		</ul>
    		 </span>
   	  </div>
