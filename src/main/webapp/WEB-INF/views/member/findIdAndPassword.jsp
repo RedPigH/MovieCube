@@ -2,15 +2,22 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<div id="" class="">
-<div class="user_wrap">
-		<h2 class="mb12">아이디 / 비밀번호 찾기</h2>
-</div>
-<div class="find_id_notice">
+<head>
+
+</head>
+
+<body>
+<form method="post">
+	<div id="container" class="width-fixed">
+	<div class="user_wrap">
+		<h2>아이디 / 비밀번호 찾기</h2>
+	</div>
+	<div class="find_id_notice">
 		<p>아이핀을 이용하여 회원에 가입하신 경우에는 회사가 회원님의 주민등록번호를 보유하고 있지 않은 관계로, 아이핀 등록기관의 실명확인 및 본인인증 서비스와 연계하여 아이디 및 패스워드 찾기 서비스가 제공되오니 참고하여 주시기 바랍니다. (실명확인 및 본인인증서비스 제공 기관 : 나이스신용평가정보㈜)<br>본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집 하며, 인증 이외의 용도로 이용 또는 저장하지 않습니다.</p>
 		<p>* 이용안내 <span>고객센터 &gt; 1:1</span>문의 또는 <span>ARS 1544-0070</span> (09:00~21:00)</p>
-</div>
-<div class="find_id_input_wrap">
+	</div>
+
+	<div class="find_id_input_wrap">
 		<div class="find_id tab_wrap">
 			<h3>아이디 찾기</h3>
 			<ul class="nav nav-tabs">
@@ -171,4 +178,6 @@
 		</div>
 	</div>
 </div>
+</form>
+</body>
 </html>
