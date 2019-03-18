@@ -13,7 +13,6 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
@@ -56,7 +55,7 @@
 							<th scope="row">영화제목</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" />
-								<font color="red"></font>
+								<font color="red"><span class="ibk">예) 영화제목(3D) </span></font>
 							</td>
 						</tr>
 						
@@ -80,7 +79,6 @@
 							<th scope="row">개봉일</th>
 							<td>
 								<input type="date" class="txt w200" id="MOVIE_OPENDATE" name="MOVIE_OPENDATE" />
-								<span class="ibk">예)2019-04-05</span>
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -89,25 +87,39 @@
 							<th scope="row">장르 및 러닝타임</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" />
-								<span class="ibk">예)액션 120분 </span>
-								<font color="red"></font>
+								<font color="red"><span class="ibk">예) 액션 120분 </span></font>
+								
 							</td>
 						</tr>
 						
 						<tr>
 							<th scope="row">타입</th>
 							<td>
+								<select name="MOVIE_TYPE" class="slct w200">
+									<option value="2D">2D</option>
+									<option value="3D">3D</option>
+									<option value="4D">4D</option>
+								</select>
+								<!-- 
 								<input type="text" class="txt w200" id="MOVIE_TYPE" name="MOVIE_TYPE" />
 								<span class="ibk">예)2D, 3D</span>
 								<font color="red"></font>
+								 -->
 							</td>
 						</tr>
 						
 						<tr>
 							<th scope="row">관람등급</th>
 							<td>
+								<select name="MOVIE_AGE" class="slct w200">
+									<option value="12">12</option>
+									<option value="15">15</option>
+									<option value="19">19</option>
+								</select>							
+							<!-- 
 								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" />
 								<font color="red"></font>
+								 -->
 							</td>
 						</tr>
 						

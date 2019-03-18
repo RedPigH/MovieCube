@@ -76,7 +76,7 @@ public class MovieServiceImpl implements MovieService{
 	public void modifyMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
 		MovieDAO.modifyMovie(map);
-		
+/*		
 		MovieDAO.updateFileList(map);
 		MovieDAO.updateFileList2(map);
 		
@@ -85,19 +85,23 @@ public class MovieServiceImpl implements MovieService{
 		
 		for(int i=0, size=Filelist.size(); i<size; i++){
 			tempMap = Filelist.get(i);
-			if     (i == 0 || tempMap.get("IS_NEW").equals("Y")){ 
-				MovieDAO.insertFile(tempMap);
+			if (i == 0 || tempMap.get("IS_NEW").equals("Y")) { 
+				MovieDAO.insertFile(tempMap);	
 			}
-			else if(i == 0 || tempMap.get("IS_NEW").equals("N")) {
+			
+			if (i == 0 || tempMap.get("IS_NEW").equals("N")) {
 				MovieDAO.modifyFile(tempMap);
 			}
-			else if(i >  0 || tempMap.get("IS_NEW").equals("Y")) {
+				
+			if (i >  0 || tempMap.get("IS_NEW").equals("Y")) {
 				MovieDAO.insertFile2(tempMap);
 			}
-			else if(i >  0 || tempMap.get("IS_NEW").equals("N")) {
+			
+			if (i >  0 || tempMap.get("IS_NEW").equals("N")) {
 				MovieDAO.modifyFile2(tempMap);
 			}
 		}
+*/
 	}	
 
 	@Override

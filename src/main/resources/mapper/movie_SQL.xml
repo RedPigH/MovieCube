@@ -40,15 +40,6 @@
 		]]>
 </select>
 
-<!-- 
-<select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
-
-		<![CDATA[
-		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
-		]]>
-</select>
- -->
-
 <select id="selectFileList" resultType="hashmap" parameterType="hashmap">
 
 		<![CDATA[
@@ -64,8 +55,6 @@
 </select>
 
 <!-- 영화 정보 입력 -->
-
-
 
 <insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
 	<selectKey keyProperty="MOVIE_NO" resultType="int" order="BEFORE">
@@ -148,8 +137,6 @@
 
 <!-- 영화 정보 수정 -->
 
-
-
 <update id="modifyMovie" parameterType="hashMap">
 
 		<![CDATA[
@@ -173,7 +160,7 @@
         UPDATE MC_MOVIE_FILE SET
             DEL_GB = 'Y'
         WHERE
-            FILE_NO = #{FILE_NO} 
+            MOVIE_NO = #{MOVIE_NO} 
     ]]>
 </update>
 
@@ -182,7 +169,7 @@
         UPDATE STILLCUT SET
             DEL_GB = 'Y'
         WHERE
-            STILLCUT_NO = #{STILLCUT_NO} 
+            MOVIE_NO = #{MOVIE_NO} 
     ]]>
 </update>
 
@@ -210,7 +197,7 @@
 <delete id="deleteMovie" parameterType="hashmap" >
 
 		<![CDATA[
-		delete * from MC_MOVIE 
+		delete from MC_MOVIE 
 			where MOVIE_NO = #{MOVIE_NO}
 		]]>
 </delete>
@@ -219,7 +206,7 @@
 
 		<![CDATA[
 		delete form MC_MOVIE_FILE
-			where FILE_NO = #{FILE_NO}
+			where MOVIE_NO = #{MOVIE_NO}
 		]]>
 </delete>
 
@@ -227,7 +214,7 @@
 		
 		<![CDATA[
 		delete from STILLCUT 
-			where STILLCUT_NO = #{STILLCUT_NO}
+			where MOVIE_NO = #{MOVIE_NO}
 		]]>
 </delete>
 </mapper>

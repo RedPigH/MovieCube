@@ -16,19 +16,19 @@
 			<tbody>
 				<select id="selectMovie" name="selectMovie">
 			<option>선택</option>
-			<c:forEach items="${movielist}" var="row">
+			<c:forEach items="${movieList}" var="row">
 				<option value="${row.MOVIE_NO}">${row.MOVIE_NAME}</option>
 			</c:forEach> 
 		</select>
 		<select id="selectCinema" name="selectCinema">
 			<option>선택</option>
-			<c:forEach items="${cinemalist }" var="row">
+			<c:forEach items="${cinemaList }" var="row">
 				<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
 			</c:forEach> 
 		</select>
 		<select id="selectScreen" name="selectScreen">
 			<option>선택</option>
-			<c:forEach items="${screenlist }" var="row">
+			<c:forEach items="${screenList }" var="row">
 				<option value="${row.SCREEN_NO}">${row.SCREEN_NAME}</option>
 			</c:forEach> 
 		</select>

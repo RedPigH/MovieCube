@@ -119,7 +119,7 @@ public class MovieFileUtils {
            		Filelist.add(FilelistMap);
             }
             
-            else if((!multipartFile.getName().equals("POSTER_ORGNAME")) || multipartFile.isEmpty() == false ) { 
+            if((!multipartFile.getName().equals("POSTER_ORGNAME")) || multipartFile.isEmpty() == false ) { 
             	
         		originalFileName = multipartFile.getOriginalFilename();
         		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -135,7 +135,7 @@ public class MovieFileUtils {
         		Filelist.add(FilelistMap);
             }	
             
-            else if(multipartFile.isEmpty() == true ) {
+            if(multipartFile.isEmpty()) {
  
                 if(map.containsKey("poster") == true && map.get("poster") != null){
                 	FilelistMap = new HashMap<String,Object>();
@@ -143,10 +143,8 @@ public class MovieFileUtils {
                     FilelistMap.put("FILE_NO", map.get("poster"));
                     Filelist.add(FilelistMap);
                 }
-            }
-            
-        	else { 
-        		
+            } else            
+         		
         		requestName = multipartFile.getName();
                 idx = "IDX_"+requestName.substring(requestName.indexOf("_")+1);
                 
@@ -157,7 +155,7 @@ public class MovieFileUtils {
                     Filelist.add(FilelistMap);
                 }
             }
-        }
+        
         return Filelist;
     }
 }
