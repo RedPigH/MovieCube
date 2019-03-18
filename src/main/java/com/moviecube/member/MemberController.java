@@ -127,11 +127,10 @@ public class MemberController {
 		  map.put("MEMBER_PHONE" , phone);
 		  
 		  id = memberService.findId(map);
-		  
-		  	if(id!=null) {
-		  		
-		  	}
 		  pw = memberService.findPasswd(map);
+		  
+		  map.put("id", id);
+		  map.put("pw", pw);
 		  
 		  return map;
 				  
