@@ -114,7 +114,7 @@ public class AdminTimeController {
 		commandMap.put("CINEMA_NO", request.getParameter("selectCinema"));
 		commandMap.put("SCREEN_NO", request.getParameter("selectScreen"));
 		
-		System.out.println("타임 등록 테스트 1: " + commandMap.getMap());
+		
 		// 상영 시간표 생성
 		timeService.insertTime(commandMap.getMap());
 		
@@ -123,14 +123,14 @@ public class AdminTimeController {
 		CommandMap timeSeatmap = new CommandMap();
 
 		screenSeatmap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
-		System.out.println("타임 등록 테스트 2: " + commandMap.getMap());
-		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(screenSeatmap.getMap());
+		
+		List<Map<String, Object>> seatlist = seatService.selectSeatList(screenSeatmap.getMap());
 
 		for (int i = 0; i < seatlist.size(); i++) {
 			timeSeatmap.put("SEAT_NO", seatlist.get(i).get("SEAT_NO"));
 			seatService.insertTimeSeat(timeSeatmap.getMap());
 		}
-		System.out.println("타임 등록 테스트 3: " + commandMap.getMap());
+		
 		return mv;
 	}
 	

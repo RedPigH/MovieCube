@@ -13,13 +13,43 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
+<script src="<%= cp %>/resources/js/jquery-ui.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
+
+<script type="text/javascript">
+/* 	
+	$(function(){
+		var schedule_btn = $(".schedule_delete");
+		
+		schedule_btn.each(function(){
+			var btn = $(this).children('.btn');
+			
+			btn.on('click',function(){
+				var check = confirm("삭제하시겠습니까?");	
+				if(check){
+					return true;
+				}else{
+					return false;
+				}
+			})
+		})
+	}) 
+	 */
+	
+	function timeDelete() {
+		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+			location.href = 'seatDelete.do';
+		} else { //취소
+			return;
+		}
+	}
+
+</script>
 </head>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/cinemaList.do">MovieCube Administrator - Cinema List</a></h1>
+	<h1><a href="<%=cp %>/admin/seatList.do">MovieCube Administrator - Seat List</a></h1>
 	</div>
 </div>
 
@@ -27,9 +57,9 @@
 	<div class="admin_list">
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
+			<li class="on"><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -39,41 +69,44 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화관 목록</h3>
-		<div class="tbl_type_02">
-			<table>
-				<caption>영화관 등록</caption>
-				<colgroup>
-					<col style="width:10%;" />
-					<col />
-					<col style="width:50%;" />
-					<col style="width:20%;" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th scope="col">영화관 번호</th>
-						<th scope="col">영화관 이름</th> 
-						<th scope="col">영화관 안내</th>
-						<th scope="col">영화관 주소</th>
-					</tr>
-				</thead>
-				<tbody>
+		<h3 class="sub_tit">좌석 리스트</h3>
+			<div class="tbl_type_02">
+				<table>
+					<caption>시간표 등록</caption>
+					<colgroup>
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+					</colgroup>
 					
-				<c:choose>
-					<c:when test="${fn:length(cinemaList) > 0}">
-            			<c:forEach items="${cinemaList}" var="row">
+					<thead>
 						<tr>
-							<td>${row.CINEMA_NO}
-							<td><a href="#this" name="CINEMA_NAME">${row.CINEMA_NAME}
-							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
-							<td class="subject"><a href="#this" name="CINEMA_CONTENT"><pre>${row.CINEMA_CONTENT}</pre>
-							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
-							<td>${row.CINEMA_ADDRESS}</td>
+							<th scope="col">상영관 </th>
+							<th scope="col">좌석 행</th>
+							<th scope="col">좌석 열</th>
+							<th scope="col">삭제</th>
+							
+						</tr>
+					</thead>
+	
+					<tbody>
+					<c:choose>
+					<c:when test="${fn:length(seatList) > 0}">	
+						<c:forEach var="row" items="${seatList}">
+						<tr>
+							<td><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
+							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
+							<td>${row.SEAT_ROW}</td>
+							<td>${row.SEAT_COL}</td>
+							<td><a href="<%=cp%>/admin/seatDelete.do?SEAT_NO=${row.SEAT_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td>
 						</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-					등록된 게시물이 없습니다
+					<tr>
+						<td colspan="13" class="tac">등록된 좌석이 없습니다.</td>
+					</tr>
 					</c:otherwise>
 				</c:choose>
 				</tbody>
@@ -99,12 +132,7 @@
                 fn_openBoardWrite();
             }); 
              
-            $("a[name='CINEMA_NAME']").on("click", function(e){ // 영화관 이름 클릭
-                e.preventDefault();
-                fn_openBoardDetail($(this));
-            });
-            
-            $("a[name='CINEMA_CONTENT']").on("click", function(e){ // 영화관 이름 클릭
+            $("a[name='SCREEN_NAME']").on("click", function(e){ // 영화관 이름 클릭
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
@@ -112,16 +140,17 @@
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='insertSeatForm.do' />");
             comSubmit.submit();
         }
-         
+/*          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaDetail.do' />");
-            comSubmit.addParam("CINEMA_NO", obj.parent().find("#CINEMA_NO").val());
+            comSubmit.setUrl("<c:url value='seatDetail.do' />");
+            comSubmit.addParam("SEAT_NO", obj.parent().find("#SEAT_NO").val());
             comSubmit.submit();
         }
-    </script> 
+*/       
+</script> 
 </body>
 </html>
