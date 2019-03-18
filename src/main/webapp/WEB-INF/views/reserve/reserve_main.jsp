@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="../main/head.jspf"%>
-<script
-	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-<script src="/moviecube/resources/vendor/jqueryui/jquery-ui.min.js"></script>
 </head>
 <body class="animsition">
 
@@ -32,9 +27,11 @@
 
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
+
 							</div>
-							<%@ include file="./datepicker.jspf"%>
-							
+
+							<input type="text" name="daterange"
+								value="2019-03-14 ~ 2019-03-15" />
 						</div>
 
 
@@ -49,18 +46,14 @@
 						</div>
 						<div
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
-							
-							<%-- <c:forEach var="item" items="${list}" begin=0 end=5 step=1 varStatus="status">
 
-							</c:forEach> --%>
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -69,11 +62,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -82,11 +74,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -95,11 +86,10 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="time">
-										<option value="" disabled selected>지역</option>
-										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
-										<option>중원이네</option>
+										<option>선택</option>
+										<c:forEach items="${cinemaList }" var="row">
+											<option value="${row.CINEMA_NO}">${row.CINEMA_NAME}</option>
+										</c:forEach> 
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -115,7 +105,7 @@
 								class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm"
 								style="border-bottom: unset;">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
-								<a href="#"
+								<a href="#" onclick="add_item()"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
 									style="position: unset;"> 영화 추가 </a>
 							</div>
@@ -153,49 +143,32 @@
 					<div
 						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
+						
+						<c:choose>
+							<c:when test="${fn:length(alltimeList) > 0}">
+								<c:forEach items="${alltimeList}" var="row">
+									<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+										<div class="size-200">
+											<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
+										</div>
 
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
+										<div class="size-200">
+											<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
+										</div>
 
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
-
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
-
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
-
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 강남 </span>
-							</div>
-
-							<div class="size-200">
-								<span class="mtext-110 cl2"> 2D </span>
-							</div>
-
-							<div class="size-199">
-								<span class="mtext-110 cl2"> 11:30 ~ 13:30 </span>
-							</div>
-						</div>
-
+										<div class="size-199">
+											<span class="mtext-110 cl2"> ${row.START_TIME } ~ ${row.END_TIME } </span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+									<div class="size-200">
+											<span class="mtext-110 cl2">조회결과없음</span>
+									</div>
+							</c:otherwise>
+						</c:choose> 
 					</div>
 				</div>
 			</div>
@@ -214,8 +187,8 @@
 
 
 
-	<%@ include file="movieList_modal.jspf"%>
-
+	<%@ include file="movieList_modal.jspf" %>
+	
 	<%@ include file="../main/script.jspf"%>
 
 

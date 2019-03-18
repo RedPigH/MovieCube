@@ -3,8 +3,9 @@
 
 <mapper namespace="movie">
 
-<!-- 영화 리스트 -->
-<select id="selectMovieList" resultType="hashmap" parameterType="hashmap">
+	<!-- 영화 리스트 -->
+	<select id="selectMovieList" resultType="hashmap"
+		parameterType="hashmap">
 
 		<![CDATA[
 		select 
@@ -14,18 +15,32 @@
 					ON m.MOVIE_NO = f.MOVIE_NO 
 						order by m.MOVIE_NO
 		]]>
-</select>
+	</select>
+
+	<!-- 영화명 중복 제거 리스트 -->
+	<select id = "MovieNameList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						order by m.MOVIE_NO
+		]]>
+	</select>
 
 
-<select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
+	<select id="selectMovieDetail" resultType="hashmap"
+		parameterType="hashmap">
 
 		<![CDATA[
 		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
 		]]>
-</select>
+	</select>
 
 
-<select id="selectFileList" resultType="hashmap" parameterType="hashmap">
+	<select id="selectFileList" resultType="hashmap"
+		parameterType="hashmap">
 
 		<![CDATA[
         SELECT
@@ -37,16 +52,19 @@
             MOVIE_NO = #{MOVIE_NO}
             AND DEL_GB = 'N'
    		 ]]>
-</select>
+	</select>
 
-<!-- 영화 정보 입력 -->
+	<!-- 영화 정보 입력 -->
 
 
 
-<insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
-	<selectKey keyProperty="MOVIE_NO" resultType="int" order="BEFORE">
-		select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
-	</selectKey> -->
+	<insert id="insertMovie" parameterType="hashmap"
+		useGeneratedKeys="true" keyProperty="MOVIE_NO">
+		<selectKey keyProperty="MOVIE_NO" resultType="int"
+			order="BEFORE">
+			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
+		</selectKey>
+		-->
 
 
 		<![CDATA[
@@ -79,10 +97,10 @@
 			#{MOVIE_URL}
 			)		 		  
 		]]>
-</insert>
+	</insert>
 
 
-<insert id="insertFile" parameterType="hashmap">
+	<insert id="insertFile" parameterType="hashmap">
 
 		<![CDATA[
         INSERT INTO MC_MOVIE_FILE
@@ -100,13 +118,13 @@
             #{POSTER_SAVNAME}
         )
     	]]>
-</insert>
+	</insert>
 
-<!-- 영화 정보 수정 -->
+	<!-- 영화 정보 수정 -->
 
 
 
-<update parameterType="hashMap" id="modifyMovie">
+	<update parameterType="hashMap" id="modifyMovie">
 
 		<![CDATA[
 		update MC_MOVIE set 
@@ -122,26 +140,26 @@
 		    MOVIE_URL = #{MOVIE_URL}
 		where MOVIE_NO = #{MOVIE_NO}
 		]]>
-</update>
+	</update>
 
-<!-- 영화 삭제 -->
+	<!-- 영화 삭제 -->
 
 
 
-<delete id="deleteMovie" parameterType="hashmap" >
+	<delete id="deleteMovie" parameterType="hashmap">
 
 		<![CDATA[
 		delete from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
 		]]>
-</delete>
+	</delete>
 
 
-<update id="deleteFileList" parameterType="hashmap">
+	<update id="deleteFileList" parameterType="hashmap">
 
 		<![CDATA[
 			delete form MC_MOVIE_FILE
 				FILE_NO = #{FILE_NO}
 		]]>
-</update>
+	</update>
 
 </mapper>

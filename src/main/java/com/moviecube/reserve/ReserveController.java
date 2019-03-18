@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.CommandMap;
 import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
@@ -25,11 +26,22 @@ public class ReserveController {
 	
 	@Resource(name = "seatService")
 	private SeatService seatService;
+	
+	@Resource(name = "cinemaService")
+	private CinemaService cinemaService;
 
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
-		String cinemaNo = "";
+		
+		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
+		
+		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
+		
+		mv.addObject("alltimeList", alltimeList);
+		mv.addObject("cinemaList", cinemaList);
+		
+	/*	String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
 		String[] selectType;
@@ -82,7 +94,7 @@ public class ReserveController {
 			List<Map<String,Object>> timelist = timeService.optionTimeList(commandMap.getMap());
 		
 			mv.addObject("timelist", timelist);
-		}
+		} */
 
 		return mv;
 	}
@@ -141,19 +153,22 @@ public class ReserveController {
 
 	@RequestMapping(value = "/reserve_selectSeat.do")
 	public ModelAndView reserveStep4(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("selectSeat");
+		ModelAndView mv = new ModelAndView("reserve/reserve_selectSeat");
 		
 		CommandMap timeSeatMap = new CommandMap();
 		CommandMap screenMap = new CommandMap();
 		
-		String time_no = request.getParameter("TIME_NO");
+		/*String time_no = request.getParameter("TIME_NO");
 		String screen_no = request.getParameter("SCREEN_NO");
+		*/
 		
-		timeSeatMap.put("TIME_NO", time_no);
-		screenMap.put("SCREEN_NO", screen_no);
+		timeSeatMap.put("TIME_NO", 1);
+		screenMap.put("SCREEN_NO", 1);
 		
 		List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
 		Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
+		
+		//System.out.println(seatnum.get(arg0));
 		
 		//시간별 좌석 리스트
 		mv.addObject("seatList", timeSeatlist);
