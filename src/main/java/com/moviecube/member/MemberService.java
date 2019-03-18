@@ -4,17 +4,14 @@ import java.util.Map;
 
 public interface MemberService {
 	
-	//íšŒì›ê°€ì…
+	//È¸¿ø°¡ÀÔ
 	 void insertMember(Map<String, Object> map)throws Exception; 
 	 int findUsedID(Map<String, Object> map) throws Exception;
 	 
-	//ë¡œê·¸ì¸
-	 Map<String, Object> findUserIdAndPassword(Map<String, Object> map)throws Exception;
-	 int login(Map<String, Object> map) throws Exception;
+	//·Î±×ÀÎ
+	 Map<String, Object> checkUserIdAndPassword(Map<String, Object> map)throws Exception;
 	 
-	//CheckID . ì•„ì´ë””ê°’ìœ¼ë¡œ ë©¤ë²„ì •ë³´ ê°€ì ¸ì˜¤ê¸°
-	 Map<String, Object> checkId(Map<String, Object> map) throws Exception;
-	 
-	 // ë©¤ë²„ì •ë³´ ìˆ˜ì •
-	void updateMember(Map<String, Object> map) throws Exception;
+	 //¾ÆÀÌµğ,ºñ¹Ğ¹øÈ£ Ã£±â
+	 String findId(Map<String, Object> map) throws Exception;
+	 String findPasswd(Map<String, Object> map) throws Exception;
 }

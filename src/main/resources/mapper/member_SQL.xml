@@ -98,26 +98,22 @@
 		]]>
 	</select>
 	
-	<select id="login" parameterType="hashmap" resultType="int">
-		<![CDATA[
+	<!-- ID 찾기 -->
+	<select id = "findId" parameterType = "hashmap" resultType = "String">
+			<![CDATA[
 			SELECT
-			 COUNT(*)
+			 MEMBER_ID
 			FROM
 			 MC_MEMBER
 			WHERE
-			 MEMBER_ID = #{MEMBER_ID}
-			AND
-			 MEMBER_PASSWD1 = #{MEMBER_PASSWD1}
+			 MEMBER_NAME=#{MEMBER_NAME}
+			 AND MEMBER_AGE=#{MEMBER_AGE}
+			 AND MEMBER_PHONE=#{MEMBER_PHONE}
 		]]>
 	</select>
 	
-	<!-- ID 찾기 -->
-	<select id = "findId" parameterType = "hashmap" resultType = "hashmap">
-			
-	</select>
-	
 	<!-- 비밀번호 찾기 -->
-	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap"><!--승표  -->
+	<select id = "findPasswd" parameterType = "hashmap" resultType = "String"><!--승표  -->
 	
 	</select>
 	

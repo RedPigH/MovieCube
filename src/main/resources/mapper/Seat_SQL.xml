@@ -15,20 +15,21 @@
 	<!-- 상영관 별 좌석 행,열 개수 -->
 	<select id="ScreenSeatNum" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT (
-				SELECT COUNT(SEAT_ROW) FROM (
-					SELECT DISTINCT SEAT_ROW FROM SEAT WHERE SCREEN_NO = #{SCREEN_NO})) AS ROW_NUM,
-				SELECT COUNT(SEAT_COL) FROM (
-					SELECT DISTINCT SEAT_COL FROM SEAT WHERE SCREEN_NO = #{SCREEN_NO})) AS COL_NUM
-				FROM DUAL;
+			select (
+				select count(seat_row) from (
+					select distinct seat_row from seat where SCREEN_NO = #{SCREEN_NO})) as row_num,
+				(select count(seat_col) from (
+					select distinct seat_col from seat where SCREEN_NO = #{SCREEN_NO})) as col_num
+				from dual
 		]]>
 	</select>
 	
 	<!-- 상영시간 별 좌석 리스트 -->
 	<select id="selectTimeSeat" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT SEAT_NO, STATUS FROM TIME_SEAT
-			WHERE TIME_NO = #{TIME_NO}
+			SELECT t.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, t.STATUS 
+			FROM TIME_SEAT t INNER JOIN SEAT s ON t.SEAT_NO = s.SEAT_NO
+			WHERE t.TIME_NO = #{TIME_NO}
 		]]>
 	</select>
 	
@@ -76,7 +77,7 @@
 		VALUES
 		(
 			#{SEAT_NO},
-			#{TIME_NO}	
+			MC_TIME_NO_SEQ.CURRVAL
 		)
 	]]>
 	</insert>

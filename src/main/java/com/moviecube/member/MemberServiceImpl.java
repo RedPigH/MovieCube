@@ -24,13 +24,18 @@ public class MemberServiceImpl implements MemberService {
 	  }
 	  
 	  @Override
-	  public Map<String, Object> findUserIdAndPassword(Map<String, Object> map) throws Exception{
-		  return memberDAO.findUserIdAndPassword(map);
+	  public Map<String, Object> checkUserIdAndPassword(Map<String, Object> map) throws Exception{
+		  return memberDAO.checkUserIdAndPassword(map);
 	  }
 	  
 	  @Override
-	  public int login(Map<String, Object> map) throws Exception{
-		  return memberDAO.login(map);
+	  public String findId(Map<String, Object> map) throws Exception{
+		  return memberDAO.findId(map);
+	  }
+	  
+	  @Override
+	  public String findPasswd(Map<String, Object> map) throws Exception{
+		  return memberDAO.findPasswd(map);
 	  }
 	  
 	  @Override

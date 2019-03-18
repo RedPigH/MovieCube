@@ -14,10 +14,9 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="resources/#" class="flex-c-m trans-04 p-lr-25"
-							style="width: 100px"> 공지사항 </a> <a href="resources/#"
-							class="flex-c-m trans-04 p-lr-25" style="width: 100px"> FAQs
-						</a> <a href="resources/#" class="flex-c-m trans-04 p-lr-25"
+						<a href="notice/adminNoticeList.do" class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 공지사항 </a> 
+						<a href="faq/adminFaqList.do" class="flex-c-m trans-04 p-lr-25" style="width: 100px"> FAQ </a> 
+						<a href="qna/adminInquiryList.do" class="flex-c-m trans-04 p-lr-25"
 							style="width: 100px"> 1:1문의 </a>
 
 					</div>
@@ -28,8 +27,8 @@
 				<nav class="limiter-menu-desktop">
 
 					<!-- Logo desktop -->
-					<a href="main.do" class="logo"> <img
-						src="resources/images/icons/logo-01.png" alt="IMG-LOGO">
+					<a href="/moviecube/main.do" class="logo"> <img
+						src="/moviecube/resources/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 				</nav>
 					
@@ -71,7 +70,7 @@
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="resources/index.html"><img
-					src="resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+					src="/moviecube/resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->

@@ -3,6 +3,8 @@ package com.moviecube.qna;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Repository;
 
 import com.moviecube.dao.AbstractDAO;
@@ -41,13 +43,19 @@ public class QnaDAO extends AbstractDAO {
 		insert("qna.insertQnaFile", map);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectQnaFileList(Map<String, Object> map) throws Exception {
-		return (Map<String, Object>) selectOne("qna.selectQnaFileList", map);
+	public void replyQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		insert("qna.replyQna", map);
 	}
-	/*
-	 * @SuppressWarnings("unchecked") public List<Map<String,Object>>
-	 * selectNoticeList(Map<String,Object> map) throws Exception{ return
-	 * (List<Map<String,Object>>)selectPagingList("notice.selectNoticeList",map); }
-	 */
+
+	public void updateQnaFile(Map<String, Object> map) {
+		update("qna.updateQnaFile", map);
+		// TODO Auto-generated method stub
+
+	}
+
+	public void deleteQnaFile(Map<String, Object> map) {
+		delete("qna.deleteQnaFile",map);
+		// TODO Auto-generated method stub
+		
+	}
 }

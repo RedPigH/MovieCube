@@ -30,7 +30,7 @@
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do/">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
@@ -71,7 +71,7 @@
 							<td class="subject" align="left"><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
 							<input type="hidden" id="SCREEN_NO" value="${row.SCREEN_NO}"/></a></td>
 							<td>${row.SCREEN_TYPE}</td>
-							<td>${map.CINEMA_NAME}</td>
+							<td>${row.CINEMA_NAME}</td>
 						</tr>
 						</c:forEach>
 					</c:when>
@@ -82,6 +82,7 @@
 				</tbody>
 			</table>
 		</div>
+		
 		<div class="btn_type_03">
 			<a href="#this" class="btn btnC_01 btnP_04" id="write">
 				<span>글쓰기</span>

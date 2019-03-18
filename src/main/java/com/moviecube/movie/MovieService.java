@@ -13,8 +13,8 @@ public interface MovieService {
 	
 	Map<String,Object> selectMovieDetail(Map<String,Object> map) throws Exception;
 	
-	public void modifyMovie(Map<String, Object> map) throws Exception;
+	public void modifyMovie(Map<String, Object> map,  HttpServletRequest request) throws Exception;
 	
-	public void deleteMovie(Map<String, Object> map) throws Exception;
+	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception;
 		
 }

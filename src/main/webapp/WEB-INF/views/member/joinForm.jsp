@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-<link href="/moviecube/resources/css/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="/moviecube/resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
 <script src="//code.jquery.com/jquery.js"></script>
-<script src="/moviecube/resources/js/respond.js"  ></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 function aaaa(){
@@ -60,155 +58,187 @@ function aaaa(){
 </script>
 </head>
 
-    <body>
-        <div class="container" style="margin-top: 200px"><!-- 좌우측의 공간 확보 -->
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 
-          
-        <!-- 모달창 -->
-          <div class="modal fade" id="defaultModal">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                      <div class="mdt">
-                          <h4 class="modal-title">알림</h4>
-                      </div>
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      </div>
-                      <div class="modal-body">
-                          <p class="modal-contents"></p>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                      </div>
-                  </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
-         <!--// 모달창 -->
+<body>
 
-             
-        <form class="form-horizontal" id="joinForm" role="form" method="post">
-            <div class="form-group" id="divId">
-                <label for="inputId" class="col-lg-2 control-label">아이디</label>
-                 <input type="button" value="ID중복확인" id="checkId" class="btn btn-primary btn-xs" style="position:relative; left:665px; bottom:2px;">
-                <div class="col-lg-10">
-                    <input type="text" class="form-control onlyAlphabetAndNumber" id="id" name="MEMBER_ID" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
-                </div>
-            </div>
-            <div class="form-group" id="divPassword">
-                <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" id="password" name="MEMBER_PASSWD1" data-rule-required="true" placeholder="패스워드" maxlength="30">
-                </div>
-            </div>
-            <div class="form-group" id="divPasswordCheck">
-                <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" id="passwordCheck" name="MEMBER_PASSWD2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
-                </div>
-            </div>
-            <div class="form-group" id="divName">
-                <label for="inputName" class="col-lg-2 control-label">이름</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control onlyHangul" id="name" name="MEMBER_NAME" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
-                </div>
-            </div>
-             
-             
-            <div class="form-group" id="divEmail">
-                <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
-                <div class="col-lg-10">
-                    <input type="email" class="form-control" id="email" name="MEMBER_EMAIL" data-rule-required="true" placeholder="이메일" maxlength="40">
-                </div>
-            </div>
-            
-            <div class="form-group" id="divZipcode">
-                <label for="inputZipcode" class="col-lg-2 control-label">주소</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" style="width:300px; display:inline;" placeholder="우편번호" maxlength="6">
-                    <input type="button" onclick="aaaa()" value="우편번호 찾기" class="btn btn-default" style="position: absolute; left:320px;">
-                </div>
-                
-            </div>
-            
-            <div class="form-group" id="divAddress1">
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="address1" name="MEMBER_ADDRESS1" data-rule-required="true" placeholder="주소" maxlength="40">
-                </div>
-            </div>
-            
-            <div class="form-group" id="divAddress2">
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="address2" name="MEMBER_ADDRESS2" data-rule-required="true" placeholder="상세주소" maxlength="40">
-                </div>
-            </div>
-            
-            <div class="form-group" id="divExtra">
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="extra" data-rule-required="true" placeholder="참고항목" maxlength="40">
-                </div>
-            </div>
-            
-            <div class="form-group" id="divPhoneNumber">
-                <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
-                <div class="col-lg-10">
-                    <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="MEMBER_PHONE" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
-                </div>
-            </div>
-            
-            <div class="form-group" id="divAge">
-                <label for="inputAge" class="col-lg-2 control-label">생일</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control onlyNumberSlash" id="age" name="MEMBER_AGE" data-rule-required="true" placeholder="YYYY/MM/DD형식으로 작성해주세요." maxlength="10">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="inputPhoneNumber" class="col-lg-2 control-label">성별</label>
-                <div class="col-lg-10">
-                    <select class="form-control" id="gender">
-                        <option value="M">남</option>
-                        <option value="F">여</option>
-                    </select>
-                </div>
-            </div>
-            
-            
-            
-            <div class="form-group">
-                <label for="inputEmailReceiveYn" class="col-lg-2 control-label">이메일 수신여부</label>
-                <div class="col-lg-10">
-                    <label class="radio-inline">
-                        <input type="radio" id="emailReceiveYn" name="emailReceiveYn" value="Y" checked> 동의합니다.
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" id="emailReceiveYn" name="emailReceiveYn" value="N"> 동의하지 않습니다.
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPhoneNumber" class="col-lg-2 control-label">SMS 수신여부</label>
-                <div class="col-lg-10">
-                    <label class="radio-inline">
-                        <input type="radio" id="smsReceiveYn" name="smsReceiveYn" value="Y" checked> 동의합니다.
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" id="smsReceiveYn" name="smsReceiveYn" value="N"> 동의하지 않습니다.
-                    </label>
-                </div>
-            </div>
-            
-            <input type="hidden" name="admin" value="0">
-            
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                    <button class="btn btn-default" id="sm">Sign in</button>
-                </div>
-            </div>
+	<div class="container" style="margin-top:150px;">
+		<!-- 좌우측의 공간 확보 -->
+		<div class="flex-w flex-tr">
+		<!-- 모달창 -->
+		<div class="modal fade" id="defaultModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="mdt">
+							<h4 class="modal-title">알림</h4>
+						</div>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<p class="modal-contents"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!--// 모달창 -->
 
-        </form>
-         
-         
-        <script>
+		<div class="size-219 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" style="margin:auto;">
+		<form id="joinForm" role="form" method="post">
+			<div id="divId">
+				<label for="inputId" style="display: inline-block;" class="cl2 mtext-114">아이디</label>
+				<input type="button" style="display: inline-block; position:float; right;" value="ID중복확인" id="checkId" class="flex-c-m stext-118 cl0 bg1 bor0 hov-btn1 p-lr-15 trans-04 pointer">
+				<div class="bor8 m-b-20 ">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyAlphabetAndNumber"
+						id="id" name="MEMBER_ID" data-rule-required="true"
+						placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+				</div>
+			</div>
+			
+			<div id="divPassword">
+				<label for="inputPassword" class="cl2 mtext-114">패스워드</label>
+				<div class="bor8 m-b-20 ">
+					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="password"
+						name="MEMBER_PASSWD1" data-rule-required="true" placeholder="패스워드"
+						maxlength="30">
+				</div>
+			</div>
+			
+			<div id="divPasswordCheck">
+				<label for="inputPasswordCheck" class="cl2 mtext-114">패스워드
+					확인</label>
+				<div class="bor8 m-b-20 ">
+					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="passwordCheck"
+						name="MEMBER_PASSWD2" data-rule-required="true"
+						placeholder="패스워드 확인" maxlength="30">
+				</div>
+			</div>
+			<div id="divName">
+				<label for="inputName" class="cl2 mtext-114">이름</label>
+				<div class="bor8 m-b-20 ">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyHangul" id="name"
+						name="MEMBER_NAME" data-rule-required="true"
+						placeholder="한글만 입력 가능합니다." maxlength="15">
+				</div>
+			</div>
+
+
+			<div id="divEmail">
+				<label for="inputEmail" class="cl2 mtext-114">이메일</label>
+				<div class="bor8 m-b-20 ">
+					<input type="email" class="stext-111 cl8 plh3 size-111 p-lr-15" id="email"
+						name="MEMBER_EMAIL" data-rule-required="true" placeholder="이메일"
+						maxlength="40">
+				</div>
+			</div>
+
+			<div id="divZipcode">
+				<label for="inputZipcode" class="cl2 mtext-114">주소</label>
+				<div class="how-pos4-parent">
+						<input type="text" style="margin-bottom: 5px; display: inline-block;" class="bor8 stext-111 cl8 plh3 size-128 p-lr-15" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
+						<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block;" class="flex-c-m stext-101 size-127 cl0 bg1 bor20 hov-btn1 p-lr-15 trans-04 pointer">
+				</div>
+			</div>
+
+			<div id="divAddress1">
+				<div class="bor8" style="margin-bottom: 5px;">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="address1"
+						name="MEMBER_ADDRESS1" data-rule-required="true" placeholder="주소"
+						maxlength="40">
+				</div>
+			</div>
+
+			<div id="divAddress2">
+				<div class="bor8" style="margin-bottom: 5px;">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="address2"
+						name="MEMBER_ADDRESS2" data-rule-required="true"
+						placeholder="상세주소" maxlength="40">
+				</div>
+			</div>
+
+			<div id="divExtra">
+				<div class="bor8 m-b-20 ">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="extra"
+						data-rule-required="true" placeholder="참고항목" maxlength="40">
+				</div>
+			</div>
+
+			<div id="divPhoneNumber">
+				<label for="inputPhoneNumber" class="cl2 mtext-114">휴대폰
+					번호</label>
+				<div class="bor8 m-b-20 ">
+					<input type="tel" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumber" id="phoneNumber"
+						name="MEMBER_PHONE" data-rule-required="true"
+						placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+				</div>
+			</div>
+
+			<div id="divAge">
+				<label for="inputAge" class="cl2 mtext-114">생일</label>
+				<div class="bor8 m-b-20 ">
+					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumberSlash" id="age"
+						name="MEMBER_AGE" data-rule-required="true"
+						placeholder="YYYY/MM/DD형식으로 작성해주세요." maxlength="10">
+				</div>
+			</div>
+
+			<div class="divSex">
+				<label for="inputSex" class="cl2 mtext-114">성별</label>
+				<div class="bor8 m-b-20 ">
+					<select class="stext-111 cl8 plh3 size-111 p-lr-15" id="gender">
+						<option value="M">남</option>
+						<option value="F">여</option>
+					</select>
+				</div>
+			</div>
+
+
+
+			<div class="divEmail">
+				<label for="inputEmailReceiveYn" class="cl2 mtext-114">이메일
+					수신여부</label>
+				<div class="col-lg-10">
+					<label class="radio-inline"> <input type="radio"
+						id="emailReceiveYn" name="emailReceiveYn" value="Y" checked>
+						동의합니다.
+					</label> <label class="radio-inline"> <input type="radio"
+						id="emailReceiveYn" name="emailReceiveYn" value="N"> 동의하지
+						않습니다.
+					</label>
+				</div>
+			</div>
+			<div class="">
+				<label for="inputPhoneNumber" class="cl2 mtext-114">SMS
+					수신여부</label>
+				<div class="col-lg-10">
+					<label class="radio-inline"> <input type="radio"
+						id="smsReceiveYn" name="smsReceiveYn" value="Y" checked>
+						동의합니다.
+					</label> <label class="radio-inline"> <input type="radio"
+						id="smsReceiveYn" name="smsReceiveYn" value="N"> 동의하지
+						않습니다.
+					</label>
+				</div>
+			</div>
+
+			<input type="hidden" name="admin" value="0">
+
+			<div class="flex-w flex-t p-t-27 p-b-33">
+				<span class="mtext-101 cl2">
+					<button class="flex-c-m stext-101 size-127 cl0 bg1 bor1 hov-btn1 p-lr-15 trans-04 pointer" id="sm">Sign in</button>
+				</span>
+			</div>
+		</form>
+		</div>
+
+		<script>
         
         var checkid = 0;
         
@@ -387,7 +417,7 @@ function aaaa(){
 						async: true,
 						type : 'POST',
 						data : id,
-						url : "/moviecube/member/findUsedId.do",
+						url : "/moviecube/member/checkId.do",
 						dataType : "json",
 						contentType : "application/json; charset=UTF-8",
 						success : function(data){
@@ -604,11 +634,12 @@ function aaaa(){
             
             
         </script>
-                <!--// 본문 들어가는 부분 -->
-            <hr/>
-        </div>
-        <!-- 푸터 들어가는 부분 -->
-
-        <!--// 푸터 들어가는 부분 -->
-    </body>
+		<!--// 본문 들어가는 부분 -->
+		<hr />
+		</div>
+	</div>
+	<!-- 푸터 들어가는 부분 -->
+<%@ include file="/WEB-INF/views/main/script.jspf" %>
+	<!--// 푸터 들어가는 부분 -->
+</body>
 </html>

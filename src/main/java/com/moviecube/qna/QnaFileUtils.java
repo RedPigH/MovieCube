@@ -15,14 +15,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.moviecube.common.CommonUtils;
 
-
 @Component("qnaFileUtils")
 public class QnaFileUtils {
-	private static final String filePath = "c:\\dev\\file2\\";
+	private static final String filePath = "C:\\muyi\\src\\main\\webapp\\resources\\upload\\qna\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
 			throws Exception {
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 
 		MultipartFile multipartFile = null;
@@ -56,7 +55,6 @@ public class QnaFileUtils {
 				listMap.put("QNA_SAVNAME", QNA_SAVNAME);
 				Qnalist.add(listMap);
 			}
-
 		}
 
 		return Qnalist;

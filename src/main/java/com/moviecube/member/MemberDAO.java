@@ -10,40 +10,32 @@ import com.moviecube.dao.AbstractDAO;
 
 @Repository("memberDAO")
 public class MemberDAO extends AbstractDAO {
-
-	/* protected Log log = LogFactory.getLog(MemberDAO.class); */
-
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-
-	// íšŒì›ê°€ì…
-	public void insertMember(Map<String, Object> map) throws Exception {
-		insert("member.insertMember", map);
-	}
 	
-	// íšŒì›ì •ë³´ ìˆ˜ì •
-	public void updateMember(Map<String, Object> map) throws Exception {
-		update("member.updateMember", map);
-	}
-
-	// id ì¤‘ë³µí™•ì¸
-	public int findUsedID(Map<String, Object> map) throws Exception {
-		return (Integer) selectOne("member.findUsedID", map);
-	}
-
-	// ë¡œê·¸ì¸
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> findUserIdAndPassword(Map<String, Object> map) throws Exception {
-		return (Map<String, Object>) selectList("member.findUserIdAndPassword", map);
-	}
-
-	public int login(Map<String, Object> map) throws Exception {
-		return (Integer) selectOne("member.login", map);
-	}
-
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> checkId(Map<String, Object> map) throws Exception {
-		return (Map<String, Object>) selectOne("member.checkId", map);
-	}
-
-}
+/*	  protected Log log = LogFactory.getLog(MemberDAO.class);*/
+	  
+	  @Autowired private SqlSessionTemplate sqlSession;
+	  
+	  // È¸¿ø°¡ÀÔ
+	  public void insertMember(Map<String, Object> map) throws Exception {
+		  insert("member.insertMember", map);
+	  }
+	  
+	  //id Áßº¹È®ÀÎ
+	  public int findUsedID(Map<String, Object> map) throws Exception{
+		  return (Integer) selectOne("member.findUsedID", map);
+	  }
+	  
+	  //·Î±×ÀÎ
+	  public Map<String, Object> checkUserIdAndPassword(Map<String, Object> map) throws Exception {
+		  return (Map<String, Object>)selectOne("member.findUserIdAndPassword", map);
+	  }
+	  
+	  //id,pw Ã£±â
+	  public String findId(Map<String, Object> map) throws Exception{
+		  return (String) selectOne("member.findId", map);
+	  }
+	  
+	  public String findPasswd(Map<String, Object> map) throws Exception{
+		  return (String) selectOne("member.findPasswd", map);
+	  }
+ }
