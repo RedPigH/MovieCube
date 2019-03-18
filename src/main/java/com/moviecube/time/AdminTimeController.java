@@ -153,7 +153,7 @@ public class AdminTimeController {
 	@RequestMapping("value = /timeModifyForm.do")
 	public ModelAndView timeUpdateForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/timeModify");
-
+		
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		
 		mv.addObject("map", map);
