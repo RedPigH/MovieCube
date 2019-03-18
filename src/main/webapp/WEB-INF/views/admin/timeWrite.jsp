@@ -110,7 +110,7 @@
 							<th scope="row">종료시간</th>
 							<td>
 								<select name="END_TIME" class="slct w300">
-									<c:forEach begin="0" end="23" var="hour">
+									<c:forEach begin="0`" end="23" var="hour">
 										<option value="${hour}:00">${hour}:00</option>
 										<option value="${hour}:10">${hour}:10</option>
 										<option value="${hour}:20">${hour}:20</option>

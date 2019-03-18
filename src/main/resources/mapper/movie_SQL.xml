@@ -3,9 +3,8 @@
 
 <mapper namespace="movie">
 
-	<!-- 영화 리스트 -->
-	<select id="selectMovieList" resultType="hashmap"
-		parameterType="hashmap">
+<!-- 영화 리스트 -->
+<select id="selectMovieList" resultType="hashmap" parameterType="hashmap">
 
 		<![CDATA[
 		select 
@@ -15,27 +14,9 @@
 					ON m.MOVIE_NO = f.MOVIE_NO 
 						order by m.MOVIE_NO desc
 		]]>
-	</select>
+</select>
 
-	<!-- 영화명 중복 제거 리스트 -->
-	<select id = "MovieNameList" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
-		select 
-			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME 
-				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
-					ON m.MOVIE_NO = f.MOVIE_NO 
-						order by m.MOVIE_NO
-		]]>
-	</select>
-
-<<<<<<< HEAD
 <select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
-=======
-
-	<select id="selectMovieDetail" resultType="hashmap"
-		parameterType="hashmap">
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 		<![CDATA[
 		select 
@@ -46,7 +27,7 @@
 					WHERE m.MOVIE_NO = #{MOVIE_NO}	
 						 			
 		]]>
-	</select>
+</select>
 
 <select id="selectMovieFileDetail" resultType="hashmap" parameterType="hashmap" >
 
@@ -59,8 +40,7 @@
 		]]>
 </select>
 
-	<select id="selectFileList" resultType="hashmap"
-		parameterType="hashmap">
+<select id="selectFileList" resultType="hashmap" parameterType="hashmap">
 
 		<![CDATA[
         SELECT
@@ -72,26 +52,14 @@
             MOVIE_NO = #{MOVIE_NO}
             AND DEL_GB = 'N'
    		 ]]>
-	</select>
+</select>
 
-	<!-- 영화 정보 입력 -->
+<!-- 영화 정보 입력 -->
 
-<<<<<<< HEAD
 <insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
 	<selectKey keyProperty="MOVIE_NO" resultType="int" order="BEFORE">
 		select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
 	</selectKey> -->
-=======
-
-
-	<insert id="insertMovie" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="MOVIE_NO">
-		<selectKey keyProperty="MOVIE_NO" resultType="int"
-			order="BEFORE">
-			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
-		</selectKey>
-		-->
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 
 		<![CDATA[
@@ -124,10 +92,10 @@
 			#{MOVIE_URL}
 			)		 		  
 		]]>
-	</insert>
+</insert>
 
 
-	<insert id="insertFile" parameterType="hashmap">
+<insert id="insertFile" parameterType="hashmap">
 
 		<![CDATA[
         INSERT INTO MC_MOVIE_FILE
@@ -145,13 +113,9 @@
             #{POSTER_SAVNAME}
         )
     	]]>
-	</insert>
+</insert>
 
-<<<<<<< HEAD
 <insert id="insertFile2" parameterType="hashmap">
-=======
-	<!-- 영화 정보 수정 -->
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 		<![CDATA[
         INSERT INTO STILLCUT
@@ -173,11 +137,7 @@
 
 <!-- 영화 정보 수정 -->
 
-<<<<<<< HEAD
 <update id="modifyMovie" parameterType="hashMap">
-=======
-	<update parameterType="hashMap" id="modifyMovie">
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 		<![CDATA[
 		update MC_MOVIE set 
@@ -193,9 +153,8 @@
 		    MOVIE_URL = #{MOVIE_URL}
 		where MOVIE_NO = #{MOVIE_NO}
 		]]>
-	</update>
+</update>
 
-<<<<<<< HEAD
 <update id="updateFileList" parameterType="hashmap">
     <![CDATA[
         UPDATE MC_MOVIE_FILE SET
@@ -213,9 +172,6 @@
             MOVIE_NO = #{MOVIE_NO} 
     ]]>
 </update>
-=======
-	<!-- 영화 삭제 -->
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 <update id="modifyFile" parameterType="hashmap">
 		<![CDATA[
@@ -237,35 +193,22 @@
 		]]>
 </update>
 
-<<<<<<< HEAD
 <!-- 영화 삭제 -->
 <delete id="deleteMovie" parameterType="hashmap" >
-=======
-	<delete id="deleteMovie" parameterType="hashmap">
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 		<![CDATA[
 		delete from MC_MOVIE 
 			where MOVIE_NO = #{MOVIE_NO}
 		]]>
-	</delete>
+</delete>
 
-<<<<<<< HEAD
 <delete id="deleteFile" parameterType="hashmap">
-=======
-
-	<update id="deleteFileList" parameterType="hashmap">
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 		<![CDATA[
 		delete form MC_MOVIE_FILE
 			where MOVIE_NO = #{MOVIE_NO}
 		]]>
-<<<<<<< HEAD
 </delete>
-=======
-	</update>
->>>>>>> 4c08e32d8a69aabc73c69dcfcfb131e31b0d2159
 
 <delete id="deleteFile2" parameterType="hashmap">
 		
