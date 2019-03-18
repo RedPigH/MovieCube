@@ -82,16 +82,7 @@ public class QnaController {
 		return mv;
 
 	}
-	/*
-	 * @RequestMapping(value = "/qna/adminInquiryWrite.do") public ModelAndView
-	 * writeInquiry(CommandMap commandMap, HttpServletRequest request) throws
-	 * Exception { ModelAndView mv = new
-	 * ModelAndView("redirect:/qna/adminInquiryList.do");
-	 * qnaService.insertQna(commandMap.getMap(), request); return mv;
-	 * 
-	 * }
-	 */
-
+	
 	@RequestMapping(value = "/qna/adminInquiryDetail.do")
 	public ModelAndView inquiryDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
@@ -111,26 +102,19 @@ public class QnaController {
 		return mv;
 
 	}
-	/*
-	 * @RequestMapping(value = "/qna/adminInquiryModifyForm.do") public ModelAndView
-	 * modifyInquiryForm(CommandMap commandMap) throws Exception { ModelAndView mv =
-	 * new ModelAndView("/qna/inquiryModify"); Map<String, Object> map =
-	 * qnaService.selectQnaDetail(commandMap.getMap()); mv.addObject("mqp",
-	 * map.get("map")); mv.addObject("list", map.get("list"));
-	 * System.out.println("혜쮸짜아아앙:" + commandMap.get("QNA_NO"));
-	 * System.out.println("혜쮸짜아아앙:" + commandMap.get("QNA_SUB"));
-	 * System.out.println("혜쮸짜아아앙:" + commandMap.get("QNA_REGDATE"));
-	 * System.out.println("혜쮸짜아아앙:" + commandMap.get("QNA_CONTENT"));
-	 * 
-	 * return mv; }
-	 */
 
 	@RequestMapping(value = "/qna/adminInquiryModify.do")
-	public ModelAndView modifyInquiry(CommandMap commandMap) throws Exception {
+	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 
-		qnaService.updateQna(commandMap.getMap());
-
+		
+		qnaService.updateQna(commandMap.getMap(), request);
+		
+		System.out.println("혜쮸꼰듀듀듀듀듀듀듀듀" + commandMap.getMap().size());
+		System.out.println(commandMap.get("QNA_SUB"));
+		System.out.println(commandMap.get("QNA_NO"));
+		System.out.println(commandMap.get("QNA_FILE_NO"));
+	
 		return mv;
 	}
 	
@@ -138,7 +122,9 @@ public class QnaController {
 	public ModelAndView modifyInquiryFile(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 		qnaService.updateQna(commandMap.getMap());
-		qnaService.updateQnaFile(commandMap.getMap(), null);
+		
+		
+		// qnaService.updateQnaFile(commandMap.getMap(), null);
 		return mv;
 	}
 
@@ -179,52 +165,4 @@ public class QnaController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/qna/adminInquiryReplyForm.do", method =
-	 * RequestMethod.GET) public ModelAndView replyInquiryForm(CommandMap
-	 * commandMap, HttpServletRequest request) { ModelAndView mv = new
-	 * ModelAndView(); int QNA_NO =
-	 * Integer.parseInt(request.getParameter("QNA_NO")); String QNA_CNOTENT =
-	 * (String) commandMap.get("QNA_CONTENT"); mv.addObject("QNA_NO",
-	 * commandMap.get("QNA_NO"));
-	 * mv.addObject("QNA_CONTENT",commandMap.get("QNA_CONTENT"));
-	 * mv.setViewName("inquiryReplyForm"); return mv; }
-	 * 
-	 * @RequestMapping(value = "/qna/adminInquiryReply.do") public ModelAndView
-	 * replyInquiry(CommandMap commandMap, HttpServletRequest request) throws
-	 * Exception {
-	 * 
-	 * ModelAndView mv = new ModelAndView();
-	 * 
-	 * int QNA_NO = Integer.parseInt(request.getParameter("QNA_NO")); int RE_STEP =
-	 * Integer.parseInt(request.getParameter("RE_STEP(1)")); String QNA_CNOTENT =
-	 * (String) commandMap.get("QNA_CONTENT");
-	 * 
-	 * 
-	 * qnaService.replyQna(commandMap.getMap());
-	 * 
-	 * mv.addObject("QNA_NO", commandMap.get("QNA_NO")); mv.addObject("RE_STEP",
-	 * commandMap.get("RE_STEP(1)"));
-	 * mv.addObject("QNA_CONTENT",commandMap.get("QNA_CONTENT"));
-	 * 
-	 * mv.setViewName("redirect:/qna/adminInquiryList.do"); return mv; }
-	 */
-
-	/*
-	 * @RequestMapping(value="/ntoice/openNoticeList.do") public ModelAndView
-	 * openNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv = new
-	 * ModelAndView("noticeList");
-	 * 
-	 * return mv; }
-	 * 
-	 * @RequestMapping(value="/notice/selectNoticeList.do") public ModelAndView
-	 * selectNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv =
-	 * new ModelAndView("jsonView");
-	 * 
-	 * List<Map<String,Object>> list =
-	 * noticeService.selectNoticeList(commandMap.getMap()); mv.addObject("list",
-	 * list); if(list.size() > 0) { mv.addObject("TOTAL",
-	 * list.get(0).get("TOTAL_COUNT")); } else { mv.addObject("TOTAL",0); } return
-	 * mv; }
-	 */
 }

@@ -35,7 +35,7 @@ public class MypageController {
 		// String member_id = session.getAttribute("MEMBER_ID").toString(); // Get Id
 		// from session.
 		// 비밀번호, 생년월일, 휴대폰, 이메일, 주소
-		String member_id = "ming";
+		/*String member_id = "ming";
 		commandMap.put("MEMBER_ID", member_id);
 		memberMap = memberService.checkId(commandMap.getMap());
 		System.out.println("테스트합니다" + memberMap.get("MEMBER_NAME"));
@@ -43,7 +43,7 @@ public class MypageController {
 		System.out.println(memberMap.get("MEMBER_PHONE"));
 		
 
-		mv.addObject("memberMap", memberMap);
+		mv.addObject("memberMap", memberMap);*/
 
 		return mv;
 	}

@@ -101,7 +101,7 @@ REF DESC, RE_LEVEL ASC
 			FROM 
 			MC_QNA q LEFT OUTER JOIN MC_QNA_FILE f 
 			ON q.QNA_NO = f.QNA_NO
-			WHERE q.QNA_NO = #{QNA_NO}
+			WHERE q.QNA_NO = #{QNA_NO} AND f.DEL_GB='N'
 		]]>
 	</select>
 
@@ -162,27 +162,45 @@ REF DESC, RE_LEVEL ASC
 	#{QNA_SAVNAME}
 		)
 	]]></insert>
-
-
-	<update id="updateQnaFile" parameterType="hashmap">
+	
+	<insert id="insertQnaFile2" parameterType="hashmap">
 	<![CDATA[
-	UPDATE MC_QNA_FILE
+	INSERT INTO MC_QNA_FILE
 	(
-	QNA_ORGNAME = #{QNA_ORGNAME},
-	QNA_SAVNAME = #{QNA_SAVNAME},
-	QNA_NO = #{QNA_NO}+1,
-	QNA_FILE_NO = MC_QNA_FILE_NO_SEQ.CURRVAL,
-	WHERE
-	QNA_NO = #{QNA_NO}
-	]]>
-	</update>
+	QNA_FILE_NO,
+	QNA_NO,
+	QNA_ORGNAME,
+	QNA_SAVNAME
+	)
+	VALUES
+	(
+	MC_QNA_FILE_NO_SEQ.NEXTVAL,
+	#{QNA_NO},
+	#{QNA_ORGNAME},
+	#{QNA_SAVNAME}
+		)
+	]]></insert>
+
 
 	<delete id="deleteQnaFile" parameterType="hashmap">
 	<![CDATA[
-	DELETE MC_QNA_FILE
-	WHERE
-	QNA_NO = #{QNA_NO}
+	UPDATE MC_QNA_FILE SET
+	DEL_GB = 'Y'
+	WHERE QNA_NO = #{QNA_NO}
 	]]></delete>
+	
+	<update id="updateQnaFile" parameterType="hashmap">
+	<![CDATA[
+	UPDATE MC_QNA_FILE
+	SET
+	(
+	DEL_GB = 'N' 
+	WHERE
+	QNA_FILE_NO = #{QNA_FILE_NO}
+	]]>
+	</update>
+
+
 
 	<select id="selectQnaFileList" parameterType="hashmap"
 		resultType="hashmap">

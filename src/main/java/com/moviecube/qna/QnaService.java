@@ -25,7 +25,5 @@ public interface QnaService {
 
 	void updateQna(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
-	void updateQnaFile(Map<String, Object> map, HttpServletRequest request) throws Exception;
-
 
 }

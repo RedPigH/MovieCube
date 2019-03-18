@@ -1,26 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%
 	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf"%>
+<link rel="stylesheet" type="text/css" href="/moviecube/css/ui.css" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <script src="/moviecube/resources/js/jquery-3.2.1.min.js"></script>
- <script>
-	$(document).ready(function() {
-		$("#deleteTest").removeClass('QNA_FILE_NO');
-	});
-</script> 
-<!-- <script>
-	function delete_file() {
-	var fso = new ActtiveXObject("Scripting.FileSystemObject");
-	var fileName = ${map.QNA_FILE_NO }
-	fso.DeleteFile(fileName);
-	alter("혜쮸는짱이당");
-	}
-</script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="<c:url value='/js/common2.js'/>" charset="utf-8"></script>
+
+<script>
+function delete_file() {
+	$("#fileid").remove();
+	/* $("#fileTD2").html("<input type='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>"); */
+	$("#fileTD2").html("<input type='file' name ='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>");
+}
+</script>
 </head>
 <body>
 	<form id="frm" name="frm" enctype="multipart/form-data">
@@ -51,47 +52,29 @@
 				</tr>
 				<tr>
 					<th scope="row">제목</th>
-					<td colspan="3"><input type="text" id="QNA_SUB" name="QNA_SUB"
-						class="wdp_90" value="${map.QNA_SUB }" /></td>
+					<td colspan="3"><input type="text" id="QNA_SUB" name="QNA_SUB" class="wdp_90" value="${map.QNA_SUB }" /></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="view_text"><textarea rows="20"
-							cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${map.QNA_CONTENT }</textarea>
+					<td colspan="4" class="view_text">
+						<textarea rows="20" cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${map.QNA_CONTENT }</textarea>
 					</td>
 				</tr>
 				 <tr id="deleteTest">
 					<th scope="row">첨부파일</th>
-					<td><a href="javascript:delete_file();" id="deleteFile"
-						class="deleteFiles">파일 삭제</a></td>
-					<td colspan="3"><input type="hidden" id="QNA_FILE_NO"
-						class="QNA_FILE_NO" value="${map.QNA_FILE_NO }"> <a
-						href="#this" name="file">${map.QNA_ORGNAME }</a></td>
-				</tr>  
-							<tr>
-					<td><img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}" />
+					<td id="file_TD">
+						<input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제">
 					</td>
-				</tr> 
+					<td colspan="3" id="fileTD2">
+						<input type="hidden" id="QNA_FILE_NO" class="QNA_FILE_NO" value="${map.QNA_FILE_NO }"> 
+						<a href="#this" name="file"> ${map.QNA_FILE_NO } ${map.QNA_ORGNAME }</a></td>
+				</tr>  
+	
 				<tr>
 				<!-- 여기서부터 추가 -->
-				<%-- 			<td colsnap="3">
-					<div id="fileDiv">
-						<c:forEach var="row" items="${list }" varStatus="var">
-							<p>
-								<input type="hidden" id="QNA_NO" name="QNA_NO_${var.index }"
-									value="${row.QNA_NO }"> <a href="#this"
-									id="name_${var.QNA_NO }" name="name_${var.index }">${row.QNA_ORGNAME }</a>
-								<input type="file" id="file_${var.index }"
-									name="file_${var.index }"> <a href="#this" class="btn"
-									id="delete_${var.index }" name="delete_${var.index }"> 삭제</a>
-							</p>
-						</c:forEach>
-					</div>
-				</td> --%>
+				
 			</tbody>
 		</table>
 					
-				
-		<input type="file" name="file"> <br />
 	</form>
 
 	<!-- 		<input type="file" name="file"> <br /> <br />  이거 추가시켜야함 원래대로 돌릴라면...-->
@@ -136,6 +119,13 @@
 		function fn_updateBoard() {
 			var comSubmit = new ComSubmit("frm");
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryModify.do'/>");
+			
+			var qna_file_no = "${map.QNA_FILE_NO}";
+			var qna_orgname = "${map.QNA_ORGNAME}";
+			
+			comSubmit.addParam("QNA_FILE_NO", qna_file_no);
+			comSubmit.addParam("QNA_ORGNAME", qna_orgname);
+			
 			comSubmit.submit();
 
 		}

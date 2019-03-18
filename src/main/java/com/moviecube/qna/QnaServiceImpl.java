@@ -44,46 +44,35 @@ public class QnaServiceImpl implements QnaService {
 		for (int i = 0, size = list.size(); i < size; i++) {
 			qnaDAO.insertFile(list.get(i));
 
-			/*
-			 * MultipartHttpServletRequest multipartHttpServletRequest =
-			 * (MultipartHttpServletRequest) request; Iterator<String> iterator =
-			 * multipartHttpServletRequest.getFileNames(); MultipartFile multipartFile =
-			 * null; while (iterator.hasNext()) { multipartFile =
-			 * multipartHttpServletRequest.getFile(iterator.next()); if
-			 * (multipartFile.isEmpty() == false) {
-			 * log.debug("-----------file start----------"); log.debug("name : " +
-			 * multipartFile.getName()); log.debug("filename : " +
-			 * multipartFile.getOriginalFilename());
-			 * log.debug("----------file end-----------\n");
-			 */
 		}
 	}
 
 	// TODO Auto-generated method stub
 
-	
-	  @Override public void updateQna(Map<String, Object> map) throws Exception {
-	 // TODO Auto-generated method stub qnaDAO.updateQna(map);
-	  
-	  qnaDAO.updateQna(map);
-		/* qnaDAO.updateQnaFile(map); */
-	 
-	  }
-	 
-	
-	/*
-	 * @Override public void updateQna(Map<String, Object> map, HttpServletRequest
-	 * request) throws Exception {
-	 * 
-	 * qnaDAO.updateQna(map);
-	 * 
-	 * List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
-	 * for (int i = 0, size = list.size(); i < size; i++) {
-	 * qnaDAO.updateQnaFile(list.get(i));
-	 * 
-	 * }
-	 */
+	@Override
+	public void updateQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		int size = 0;
+		qnaDAO.updateQna(map);
 
+		qnaDAO.deleteQnaFile(map);
+
+		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(map, request);
+		Map<String, Object> tempMap = null;
+		tempMap = list.get(0);
+		//System.out.println("항사이즈" + tempMap.size());
+		size = list.size();
+		//System.out.println("제발 출력좀 되라 어 !!");
+
+		for (int i = 0; i < size; i++) {
+			tempMap = list.get(i);
+			//System.out.println("어어어!! " + tempMap.get("IS_NEW"));
+			if (tempMap.get("IS_NEW").equals("Y")) {
+				qnaDAO.insertFile2(tempMap);
+			} else {
+				qnaDAO.updateQnaFile(tempMap);
+			}
+		}
+	}
 
 	@Override
 	public void deleteQna(Map<String, Object> map) throws Exception {
@@ -105,22 +94,9 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 
-	
-	 @Override public void updateQna(Map<String, Object> map, HttpServletRequest
-	 request) throws Exception { // TODO Auto-generated method stub
-	 
-	 }
-	 
-
 	@Override
-	public void updateQnaFile(Map<String, Object> map, HttpServletRequest request) throws Exception {
+	public void updateQna(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		qnaDAO.updateQna(map);
-		qnaDAO.deleteQnaFile(map);
-		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
-		for (int i = 0, size = list.size(); i < size; i++) {
-			qnaDAO.insertFile(list.get(i));
-		}
 
 	}
 
