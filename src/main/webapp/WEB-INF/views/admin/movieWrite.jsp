@@ -96,9 +96,10 @@
 							<th scope="row">타입</th>
 							<td>
 								<select name="MOVIE_TYPE" class="slct w200">
-									<option value="2D">2D</option>
+									<option value="일반">일반</option>
 									<option value="3D">3D</option>
 									<option value="4D">4D</option>
+									<option value="IMAX">IMAX</option>
 								</select>
 								<!-- 
 								<input type="text" class="txt w200" id="MOVIE_TYPE" name="MOVIE_TYPE" />

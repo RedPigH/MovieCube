@@ -93,6 +93,8 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeWriteForm.do")
 	public ModelAndView timeWriteForm(CommandMap commandMap) throws Exception {
+		System.out.println("타임 글쓰기폼 확인 테스트=============" + commandMap.getMap());
+		
 		ModelAndView mv = new ModelAndView("/admin/timeWrite");
 
 		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
@@ -113,7 +115,6 @@ public class AdminTimeController {
 		commandMap.put("MOVIE_NO", request.getParameter("selectMovie"));
 		commandMap.put("CINEMA_NO", request.getParameter("selectCinema"));
 		commandMap.put("SCREEN_NO", request.getParameter("selectScreen"));
-		
 		
 		// 상영 시간표 생성
 		timeService.insertTime(commandMap.getMap());
@@ -150,10 +151,10 @@ public class AdminTimeController {
 		return entity;
 	}
 
-	@RequestMapping("value = /timeModifyForm.do")
+	@RequestMapping(value = "/timeModifyForm.do")
 	public ModelAndView timeUpdateForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/timeModify");
-		
+
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		
 		mv.addObject("map", map);
@@ -161,7 +162,7 @@ public class AdminTimeController {
 		return mv;
 	}
 
-	@RequestMapping("value = /timeModify.do")
+	@RequestMapping(value = "/timeModify.do")
 	public ModelAndView timeUpdate(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeDetail");
 
@@ -172,7 +173,7 @@ public class AdminTimeController {
 		return mv;
 	}
 
-	@RequestMapping("value = /timeDelete.do")
+	@RequestMapping(value = "/timeDelete.do")
 	public ModelAndView timeDelete(CommandMap commandMap) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");

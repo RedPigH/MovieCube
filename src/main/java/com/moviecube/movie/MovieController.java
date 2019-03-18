@@ -54,7 +54,6 @@ public class MovieController {
 		mv.addObject("map", map.get("map"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
 		
-		
 		return mv;
 	}
 	

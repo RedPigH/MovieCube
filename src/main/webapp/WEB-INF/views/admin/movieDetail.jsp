@@ -90,7 +90,7 @@
 						class="btn btnC_01 btnF_04"> <span>수정</span></a>
 					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;">
 						<span>삭제</span></a>
-					<a href="<%=cp%>/admin/movieList.do"
+					<a href="<%=cp%>/admin/movieList.do?currentPage=${currentPage}"
 						class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
 				</div>
 			</div>
