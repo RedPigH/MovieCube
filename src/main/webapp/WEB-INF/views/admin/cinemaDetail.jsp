@@ -40,7 +40,7 @@
 			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
