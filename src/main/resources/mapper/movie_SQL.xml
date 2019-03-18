@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 
 <mapper namespace="movie">
 
-<!-- 영화 리스트 -->
-<select id="selectMovieList" resultType="hashmap" parameterType="hashmap">
+	<!-- 영화 리스트 -->
+
+
+
+	
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectMovieList">
 
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.MOVIE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
-						order by m.MOVIE_NO
+						order by m.MOVIE_NO desc
 		]]>
-</select>
+	</select>
 
 
-<select id="selectMovieDetail" resultType="hashmap" parameterType="hashmap" >
+	
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectMovieDetail">
 
 		<![CDATA[
-		select * from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
+				 ON m.MOVIE_NO = f.MOVIE_NO
+					WHERE m.MOVIE_NO = #{MOVIE_NO}	
+						 			
 		]]>
-</select>
+	</select>
 
 
-<select id="selectFileList" resultType="hashmap" parameterType="hashmap">
+	
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectMovieFileDetail">
+
+		<![CDATA[
+		select 
+			m.MOVIE_NO, s.STILLCUT_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME
+				FROM MC_MOVIE m INNER JOIN STILLCUT s
+					ON m.MOVIE_NO = s.MOVIE_NO 
+						WHERE m.MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</select>
+
+
+	
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectFileList">
 
 		<![CDATA[
         SELECT
@@ -37,18 +68,19 @@
             MOVIE_NO = #{MOVIE_NO}
             AND DEL_GB = 'N'
    		 ]]>
-</select>
+	</select>
 
-<!-- 영화 정보 입력 -->
-
-
-
-<insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
-	<selectKey keyProperty="MOVIE_NO" resultType="int" order="BEFORE">
-		select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
-	</selectKey> -->
+	<!-- 영화 정보 입력 -->
 
 
+
+	
+	<insert parameterType="hashmap" id="insertMovie"
+		keyProperty="MOVIE_NO" useGeneratedKeys="true">
+
+		<selectKey resultType="int" keyProperty="MOVIE_NO"
+			order="BEFORE">select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL </selectKey>
+		
 		<![CDATA[
 		insert into MC_MOVIE 
 		( 
@@ -79,10 +111,11 @@
 			#{MOVIE_URL}
 			)		 		  
 		]]>
-</insert>
+	</insert>
 
 
-<insert id="insertFile" parameterType="hashmap">
+	
+	<insert parameterType="hashmap" id="insertFile">
 
 		<![CDATA[
         INSERT INTO MC_MOVIE_FILE
@@ -100,13 +133,36 @@
             #{POSTER_SAVNAME}
         )
     	]]>
-</insert>
-
-<!-- 영화 정보 수정 -->
+	</insert>
 
 
+	
+	<insert parameterType="hashmap" id="insertFile2">
 
-<update parameterType="hashMap" id="modifyMovie">
+		<![CDATA[
+        INSERT INTO STILLCUT
+        (
+            STILLCUT_NO,
+            MOVIE_NO,
+            STILLCUT_ORGNAME,
+            STILLCUT_SAVNAME
+        )
+        VALUES
+        (
+            STILLCUT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{STILLCUT_ORGNAME},
+            #{STILLCUT_SAVNAME}
+        )
+    	]]>
+	</insert>
+
+	<!-- 영화 정보 수정 -->
+
+
+
+	
+	<update parameterType="hashMap" id="modifyMovie">
 
 		<![CDATA[
 		update MC_MOVIE set 
@@ -122,26 +178,89 @@
 		    MOVIE_URL = #{MOVIE_URL}
 		where MOVIE_NO = #{MOVIE_NO}
 		]]>
-</update>
-
-<!-- 영화 삭제 -->
+	</update>
 
 
+	
+	<update parameterType="hashmap" id="updateFileList">
 
-<delete id="deleteMovie" parameterType="hashmap" >
+		-<![CDATA[
+        UPDATE MC_MOVIE_FILE SET
+            DEL_GB = 'Y'
+        WHERE
+            MOVIE_NO = #{MOVIE_NO} 
+    ]]>
+	</update>
+
+
+	
+	<update parameterType="hashmap" id="updateFileList2">
+
+		-<![CDATA[
+        UPDATE STILLCUT SET
+            DEL_GB = 'Y'
+        WHERE
+            MOVIE_NO = #{MOVIE_NO} 
+    ]]>
+	</update>
+
+
+	
+	<update parameterType="hashmap" id="modifyFile">
 
 		<![CDATA[
-		delete from MC_MOVIE where MOVIE_NO = #{MOVIE_NO}
+		
+		UPDATE MC_MOVIE_FILE SET
+            DEL_GB = 'N'
+        WHERE
+            FILE_NO = #{FILE_IDX}  
+
 		]]>
-</delete>
+	</update>
 
 
-<update id="deleteFileList" parameterType="hashmap">
+	
+	<update parameterType="hashmap" id="modifyFile2">
 
 		<![CDATA[
-			delete form MC_MOVIE_FILE
-				FILE_NO = #{FILE_NO}
+		UPDATE STILL SET
+            DEL_GB = 'N'
+        WHERE
+            STILLCUT_NO = #{STILLCUT_NO} 
 		]]>
-</update>
+	</update>
+
+	<!-- 영화 삭제 -->
+
+
+
+	
+	<delete parameterType="hashmap" id="deleteMovie">
+
+		<![CDATA[
+		delete from MC_MOVIE 
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
+
+
+	
+	<delete parameterType="hashmap" id="deleteFile">
+
+		<![CDATA[
+		delete form MC_MOVIE_FILE
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
+
+
+	
+	<delete parameterType="hashmap" id="deleteFile2">
+
+	<![CDATA[
+		delete from STILLCUT 
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
 
 </mapper>

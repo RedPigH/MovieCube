@@ -13,11 +13,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-<style>
-background-color="#ffffff"
-</style>
 </head>
 
 <body>
@@ -35,7 +31,7 @@ background-color="#ffffff"
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
@@ -51,10 +47,13 @@ background-color="#ffffff"
             	<c:forEach items="${movieList}" var="row">
 					
 				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
+				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
 				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
 				<span class="detail">상세보기</span>
 						<div class="explan">
+							<p>
+								<strong>영화제목</strong> : ${row.MOVIE_NAME}
+							</p>
 							<p>
 								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
 							</p>

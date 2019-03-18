@@ -142,7 +142,9 @@
 
 		function fn_deleteBoard() {
 			var comSubmit = new ComSubmit();
+			var qna_no = "${map.QNA_NO}";
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryDelete.do'/>");
+			comSubmit.addParam("QNA_NO", qna_no);
 			comSubmit.submit();
 		}
 

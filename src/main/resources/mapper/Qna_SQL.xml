@@ -62,8 +62,8 @@ REF DESC, RE_LEVEL ASC
 		<![CDATA[ 
 		INSERT INTO MC_QNA
 		(
-		QNA_NO,
 		QNA_SUB,
+		QNA_NO,
 		QNA_ID,
 		QNA_CONTENT,
 		QNA_REGDATE,
@@ -73,8 +73,8 @@ REF DESC, RE_LEVEL ASC
 		)
 		VALUES
 		(
-	    #{QNA_NO},
 		#{QNA_SUB},
+	    #{QNA_NO},
 		#{QNA_ID},
 		#{QNA_CONTENT},
 		SYSDATE,

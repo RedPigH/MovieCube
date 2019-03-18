@@ -16,8 +16,7 @@
 			<tbody>
 				<tr>
 					<th scope="row">제목</th>
-					<td><input type="text" id="QNA_SUB" name="QNA_SUB"
-						class="wdp_90"></td>
+					<td>${map.QNA_SUB }</td>
 				</tr>
 				<tr>
 					<th scope="row">작성자</th>
@@ -72,8 +71,10 @@
 		function fn_insertBoard(){
 			var comSubmit = new ComSubmit("frm");
 			var qna_no = "${map.QNA_NOM}";
+			var qna_sub = "${map.QNA_SUB}"; 
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryReply.do'/>");
 			comSubmit.addParam("REF", qna_no);
+ 			comSubmit.addParam("QNA_SUB", qna_sub); 
 			comSubmit.submit();
 		}
 			

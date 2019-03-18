@@ -152,12 +152,14 @@ public class QnaController {
 
 	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
 	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
+		Map<String, Object> map1 = qnaService.selectQnaDetail(commandMap.getMap());
 		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
 
 		Map<String, Object> map = new HashMap();
 
 		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
 		mv.addObject("map", map);
+		mv.addObject("map", map1);
 
 		return mv;
 
@@ -166,10 +168,14 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryReply.do")
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-
+		
+		System.out.println("우앙"+commandMap.get("QNA_NOM"));
+		System.out.println("우앙은개뿔"+commandMap.get("REF"));
+		Map<String, Object> map = new HashMap();
+		map.put("REF", commandMap.get("REF"));
+		System.out.println("우앙은개뿔ㅎㅎ"+commandMap.get("REF"));
 		commandMap.put("RE_STEP", 1);
 		commandMap.put("RE_LEVEL", 1);
-
 		qnaService.replyQna(commandMap.getMap());
 		return mv;
 
