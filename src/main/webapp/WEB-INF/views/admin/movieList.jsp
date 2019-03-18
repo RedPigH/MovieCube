@@ -51,7 +51,7 @@ background-color="#ffffff"
             	<c:forEach items="${movieList}" var="row">
 					
 				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
+				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
 				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
 				<span class="detail">상세보기</span>
 						<div class="explan">

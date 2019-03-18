@@ -48,11 +48,12 @@ public class MovieController {
 	
 	@RequestMapping(value="/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("movlDetail");
+		ModelAndView mv = new ModelAndView("/admin/movieDetail");
 		
-		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
 		
-		mv.addObject("map", map);
 		
 		return mv;
 	}

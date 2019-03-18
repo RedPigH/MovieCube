@@ -18,7 +18,8 @@ public class MainController {
 	@RequestMapping(value = "/main.do")
 	public ModelAndView openBoardList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/main");
-
+			String path = "=========== 현재경로확인 =============" + System.getProperty("user.dir");
+			System.out.println(path);
 		//List<Map<String, Object>> list = sampleService.selectBoardList(commandMap.getMap());
 		//mv.addObject("list", list);
 

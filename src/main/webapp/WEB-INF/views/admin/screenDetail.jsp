@@ -73,7 +73,7 @@
 						</tr>
 						<tr>
 							<th scope="row">소속 영화관  </th>
-							<td>${map.CINEMA_NO}</td>
+							<td>${map.CINEMA_NAME}</td>
 						</tr>
 					</tbody>
 				</table>
