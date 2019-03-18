@@ -61,12 +61,29 @@ public class QnaServiceImpl implements QnaService {
 
 	// TODO Auto-generated method stub
 
-	@Override
-	public void updateQna(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		qnaDAO.updateQna(map);
+	
+	  @Override public void updateQna(Map<String, Object> map) throws Exception {
+	 // TODO Auto-generated method stub qnaDAO.updateQna(map);
+	  
+	  qnaDAO.updateQna(map);
+		/* qnaDAO.updateQnaFile(map); */
+	 
+	  }
+	 
+	
+	/*
+	 * @Override public void updateQna(Map<String, Object> map, HttpServletRequest
+	 * request) throws Exception {
+	 * 
+	 * qnaDAO.updateQna(map);
+	 * 
+	 * List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
+	 * for (int i = 0, size = list.size(); i < size; i++) {
+	 * qnaDAO.updateQnaFile(list.get(i));
+	 * 
+	 * }
+	 */
 
-	}
 
 	@Override
 	public void deleteQna(Map<String, Object> map) throws Exception {
@@ -88,10 +105,23 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 
+	
+	 @Override public void updateQna(Map<String, Object> map, HttpServletRequest
+	 request) throws Exception { // TODO Auto-generated method stub
+	 
+	 }
+	 
+
 	@Override
-	public void updateQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
+	public void updateQnaFile(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
-		
+		qnaDAO.updateQna(map);
+		qnaDAO.deleteQnaFile(map);
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
+		for (int i = 0, size = list.size(); i < size; i++) {
+			qnaDAO.insertFile(list.get(i));
+		}
+
 	}
 
 	/*

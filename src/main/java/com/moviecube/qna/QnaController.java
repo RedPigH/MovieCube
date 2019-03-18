@@ -129,23 +129,16 @@ public class QnaController {
 	public ModelAndView modifyInquiry(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 
-		/*
-		 * mv.addObject("QNA_SUB", commandMap.get("QNA_SUB"));
-		 * mv.addObject("QNA_CONTENT", commandMap.get("QNA_CONTENT"));
-		 */
-		/*
-		 * System.out.println("혜쮸1"+commandMap.get("QNA_CONTENT"));
-		 * //SSystem.out.println("혜쮸1"+commandMap.get("QNA_NO"));
-		 * System.out.println(commandMap.get("QNA_NO").toString());
-		 * System.out.println("혜쮸1"+commandMap.get("QNA_SUB"));
-		 */
 		qnaService.updateQna(commandMap.getMap());
 
-		/*
-		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
-		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
-		 * System.out.println("혜쮸"+commandMap.get("QNA_CONTENT"));
-		 */
+		return mv;
+	}
+	
+	@RequestMapping(value = "/qna/adminInquiryModifyFile.do")
+	public ModelAndView modifyInquiryFile(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		qnaService.updateQna(commandMap.getMap());
+		qnaService.updateQnaFile(commandMap.getMap(), null);
 		return mv;
 	}
 

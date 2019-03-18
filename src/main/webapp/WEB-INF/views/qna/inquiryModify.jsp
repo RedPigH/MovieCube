@@ -8,18 +8,19 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <script src="/moviecube/resources/js/jquery-3.2.1.min.js"></script>
-<!-- <script>
+ <script>
 	$(document).ready(function() {
-		$("#deleteTest").removeAttr('QNA_FILE_NO');
+		$("#deleteTest").removeClass('QNA_FILE_NO');
 	});
-</script> -->
-<script>
+</script> 
+<!-- <script>
 	function delete_file() {
-		$("#deleteFile").html = "sdfdsfdsfdsfs";
-		$("#deleteTest").removeAttr('QNA_FILE_NO');
-		alert("혜쮸는꽁뜌님이땅");
+	var fso = new ActtiveXObject("Scripting.FileSystemObject");
+	var fileName = ${map.QNA_FILE_NO }
+	fso.DeleteFile(fileName);
+	alter("혜쮸는짱이당");
 	}
-</script>
+</script> -->
 </head>
 <body>
 	<form id="frm" name="frm" enctype="multipart/form-data">
@@ -58,19 +59,19 @@
 							cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${map.QNA_CONTENT }</textarea>
 					</td>
 				</tr>
-				<tr id="deleteTest">
+				 <tr id="deleteTest">
 					<th scope="row">첨부파일</th>
 					<td><a href="javascript:delete_file();" id="deleteFile"
 						class="deleteFiles">파일 삭제</a></td>
 					<td colspan="3"><input type="hidden" id="QNA_FILE_NO"
 						class="QNA_FILE_NO" value="${map.QNA_FILE_NO }"> <a
 						href="#this" name="file">${map.QNA_ORGNAME }</a></td>
-				</tr>
-				<%-- 				<tr>
+				</tr>  
+							<tr>
 					<td><img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}" />
 					</td>
 				</tr> 
-				<tr> --%>
+				<tr>
 				<!-- 여기서부터 추가 -->
 				<%-- 			<td colsnap="3">
 					<div id="fileDiv">
@@ -88,6 +89,8 @@
 				</td> --%>
 			</tbody>
 		</table>
+					
+				
 		<input type="file" name="file"> <br />
 	</form>
 
@@ -109,6 +112,7 @@
 			$("#update").on("click", function(e) { //저장하기 버튼
 				e.preventDefault();
 				fn_updateBoard();
+
 			});
 
 			$("#addFile").on("click", function(e) { //파일 추가버튼
@@ -133,6 +137,7 @@
 			var comSubmit = new ComSubmit("frm");
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryModify.do'/>");
 			comSubmit.submit();
+
 		}
 
 		function fn_deleteBoard() {

@@ -44,7 +44,7 @@ REF DESC, RE_LEVEL ASC
 		
         MC_QNA_NO_SEQ.NEXTVAL,
 		#{QNA_SUB}, 
-		#{QNA_ID}, 
+		#{QNA_ID},
 		#{QNA_CONTENT}, 
 		SYSDATE,  
 		MC_QNA_NO_SEQ.CURRVAL,
@@ -106,14 +106,8 @@ REF DESC, RE_LEVEL ASC
 	</select>
 
 
-	<!-- <update id="updateQna" parameterType="hashmap" useGeneratedKeys="true" 
-		keyProperty="QNA_NO"> <selectKey keyProperty="QNA_NO" resultType="string" 
-		order="BEFORE"> SELECT MC_QNA_NO_SEQ.NEXTVAL FROM DUAL </selectKey> <![CDATA[ 
-		UPDATE MC_QNA ( QNA_NO, QNA_SUB, QNA_ID, QNA_CONTENT, QNA_REGDATE, REF, RE_LEVEL, 
-		RE_STEP ) VALUES ( MC_QNA_NO_SEQ.NEXTVAL, #{QNA_SUB}, #{QNA_ID}, #{QNA_CONTENT}, 
-		SYSDATE, MC_QNA_NO_SEQ.CURRVAL, #{RE_LEVEL}, #{RE_STEP} ) ]]> </update> -->
 
-	<update id="updateQna" parameterType="hashmap">
+ 	<update id="updateQna" parameterType="hashmap">
 	<![CDATA[
 	UPDATE MC_QNA
 	SET
@@ -122,8 +116,26 @@ REF DESC, RE_LEVEL ASC
 	WHERE
 	QNA_NO = #{QNA_NO, jdbcType=INTEGER}
 	]]>
-	</update>
-
+	</update> 
+	 
+<!-- 	<update id="updateQna" parameterType="hashmap"
+		useGeneratedKeys="true" keyProperty="QNA_NO">
+		<selectKey keyProperty="QNA_NO" resultType="string"
+			order="BEFORE"> SELECT MC_QNA_NO_SEQ.NEXTVAL FROM DUAL </selectKey> 
+			<![CDATA[ 
+			<![CDATA[
+	UPDATE MC_QNA
+	SET
+	QNA_SUB = #{QNA_SUB},
+	QNA_CONTENT = #{QNA_CONTENT}
+	REF = #{REF},
+	RE_STEP = #{RE_STEP},
+	RE_LEVEL = #{RE_LEVEL}
+	WHERE
+	QNA_NO = #{QNA_NO, jdbcType=INTEGER}
+	]]>
+	</update> 
+ -->
 
 	<delete id="deleteQna" parameterType="hashmap">
     <![CDATA[
@@ -154,12 +166,12 @@ REF DESC, RE_LEVEL ASC
 
 	<update id="updateQnaFile" parameterType="hashmap">
 	<![CDATA[
-	UPDATE INTO MC_QNA_FILE
+	UPDATE MC_QNA_FILE
 	(
 	QNA_ORGNAME = #{QNA_ORGNAME},
 	QNA_SAVNAME = #{QNA_SAVNAME},
 	QNA_NO = #{QNA_NO}+1,
-	QNA_FILE_NO = MC_QNA_FILE_NO_SEQ.NEXTVAL,
+	QNA_FILE_NO = MC_QNA_FILE_NO_SEQ.CURRVAL,
 	WHERE
 	QNA_NO = #{QNA_NO}
 	]]>
