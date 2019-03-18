@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.common.Paging;
+import com.moviecube.seat.SeatService;
 import com.moviecube.cinema.CinemaService;
 
 @RequestMapping(value = "/admin")
@@ -21,6 +24,16 @@ public class AdminScreenController {
 	
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
+	
+	@Resource(name = "seatService")
+	private SeatService seatService;
+	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockpaging = 5;
+	private String pagingHtml;
+	private Paging paging;
 
 	@RequestMapping(value = "/screenList.do")
 	public ModelAndView screenList(CommandMap commandMap) throws Exception {
@@ -34,11 +47,37 @@ public class AdminScreenController {
 	}
 
 	@RequestMapping(value = "/screenDetail.do")
-	public ModelAndView screenDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/screenDetail");
+	public ModelAndView screenDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
 
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
+		
+		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(map);
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		totalCount = seatlist.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "screenDetail");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+	
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
 
+		seatlist = seatlist.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("seatList", seatlist);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/admin/screenDetail");
 		mv.addObject("map", map);
 
 		return mv;

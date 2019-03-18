@@ -79,6 +79,54 @@
 				</table>
 			</div>
 		</div>
+		
+		<div class="admin_ct">
+		<h3 class="sub_tit">좌석 리스트</h3>
+			<div class="tbl_type_02">
+				<table>
+					<caption>시간표 등록</caption>
+					<colgroup>
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+					</colgroup>
+					
+					<thead>
+						<tr>
+							<th scope="col">상영관 </th>
+							<th scope="col">좌석 행</th>
+							<th scope="col">좌석 열</th>
+							<th scope="col">삭제</th>
+							
+						</tr>
+					</thead>
+	
+					<tbody>
+					<c:choose>
+					<c:when test="${fn:length(seatList) > 0}">	
+						<c:forEach var="row" items="${seatList}">
+						<tr>
+							<td><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
+							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
+							<td>${row.SEAT_ROW}</td>
+							<td>${row.SEAT_COL}</td>
+							<td><a href="<%=cp%>/admin/seatDelete.do?SEAT_NO=${row.SEAT_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td colspan="13" class="tac">등록된 좌석이 없습니다.</td>
+					</tr>
+					</c:otherwise>
+				</c:choose>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="paging">${pagingHtml}</div>
+		
 		<div class="btn_type_03">
 			
 			<span class="btn btnC_04 btnP_04">

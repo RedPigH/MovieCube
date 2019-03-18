@@ -67,7 +67,7 @@
 						</tr>
 											
 						<tr>
-							<th scope="row">영화관 안내</th>
+							<th scope="row">영화관</th>
 							<td>
 								<div class="textarea_grp">
 									<textarea name="CINEMA_CONTENT"></textarea>

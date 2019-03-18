@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 public interface SeatService {
 
 	List<Map<String, Object>> selectSeatList(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception;
 
 	Map<String, Object> ScreenSeatNum(Map<String, Object> map) throws Exception;
 	
