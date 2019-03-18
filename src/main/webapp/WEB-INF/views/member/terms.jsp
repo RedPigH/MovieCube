@@ -49,18 +49,18 @@
 
 	<%@ include file="/WEB-INF/views/main/body_header.jspf" %>
 
-<form id="frm" name="frmMain">
-<div class="user_wrap">
-	<div class="container" style="margin-top: 200px">
-			<div class="row">
+<form id="frm" name="frmMain" method="post">
+<div class="bg0 p-t-104">
+	<div class="container">
+			<div class="flex-w flex-tr">
 		<h2>약관동의<span class="ml10" style="font-size:20px; margin-left:10px">서비스 이용약관 및 정보이용 안내에 대한 동의를 해주세요.</span>
 			<span class="step step1"></span>
 		</h2>
 
 		<!-- 이용약관// -->
-		<div class="term">
+		<div class="size-217 p-lr-30 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 		<h3>이용약관</h3>
-		<div class="term_text" tabindex="0" style="overflow-y:scroll; height:300px; padding:15px; border:1px solid">
+		<div class="p-t-15" tabindex="0" style="overflow-y:scroll; height:300px; padding:15px; border:1px solid">
 			<dl>
 				<dt id="n1">제1조. 목적</dt>
 				<dd>이 약관은 메가박스중앙(주)(이하 '회사'라 합니다)가 제공하는 온라인, 오프라인 서비스(이하 "서비스"라 합니다) 이용과 관련하여 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</dd>
@@ -343,18 +343,18 @@
 			</dl>
 		</div>
 
-		<div class="term_check pl15">
-			<span class="term_grp"><input type="checkbox" title="위의 이용약관을 읽고 동의" name="terms" id="term1"></span>
-			<label for="term1" class="">위의 ‘이용약관’을 읽고 동의 합니다. (필수 동의)</label>
-			<p class="fz13 c_purple">※ 이용약관에 대한 동의를 거부할 수 있으며, 미 동의 시 회원가입을 하실 수 없습니다.</p>
+		<div class="size-217 p-t-10 p-b-10 p-lr-15-lg w-full-md">
+			<span class="term_grp" style="display:inline-block;"><input type="checkbox" title="위의 이용약관을 읽고 동의" name="terms" id="term1"></span>
+			<label for="term1" style="display:inline-block;">위의 ‘이용약관’을 읽고 동의 합니다. (필수 동의)</label>
+			<p class="cl13">※ 이용약관에 대한 동의를 거부할 수 있으며, 미 동의 시 회원가입을 하실 수 없습니다.</p>
 		</div>
 		</div>
 		<!-- //이용약관 -->
 		
-		<div class="term">
+		<div class="size-217 p-lr-30 p-t-10 p-b-70 p-lr-15-lg w-full-md">
 		<!-- 개인정보수집 및 이용안내// -->
 		<h3>개인정보수집 및 이용안내</h3>
-		<div class="term_text" tabindex="0" style="overflow-y:scroll; height:157px; padding:15px; border:1px solid">
+		<div class="p-t-15" tabindex="0" style="overflow-y:scroll; height:300px; padding:15px; border:1px solid">
 			<dl>
 				<dd>
 				메가박스중앙(주)가 개인정보를 수집하는 목적은 보다 다양하고 원활한 고객서비스를 제공하기 위함입니다.
@@ -410,18 +410,18 @@
 			</dl>
 		</div>
 
-		<div class="term_check pl15">
-			<span class="term_grp"><input type="checkbox" title="위의 이용약관을 읽고 동의" name="terms" id="term2"></span>
-			<label for="term2">위의 ‘개인정보수집 및 이용안내’를 읽고 동의 합니다. (필수 동의)</label>
-			<p class="fz13 c_purple">※ 개인정보수집 및 이용에 대한 동의를 거부할 수 있으며, 미 동의 시 회원가입을 하실 수 없습니다.</p>
+		<div class="size-217 p-t-10 p-b-10 p-lr-15-lg w-full-md">
+			<span class="term_grp" style="display:inline-block;"><input type="checkbox" title="위의 이용약관을 읽고 동의" name="terms" id="term2"></span>
+			<label for="term2" style="display:inline-block;">위의 ‘개인정보수집 및 이용안내’를 읽고 동의 합니다. (필수 동의)</label>
+			<p class="cl13">※ 개인정보수집 및 이용에 대한 동의를 거부할 수 있으며, 미 동의 시 회원가입을 하실 수 없습니다.</p>
 		</div>
 		</div>
 		<!-- //개인정보 처리방침 -->
 
-		<div class="term">
+		<div class="size-217 p-lr-30 p-t-10 p-b-70 p-lr-15-lg w-full-md">
 		<!-- 제휴 모바일 멤버십 서비스 이용을 위한 제 3자 제공에 관한 안내// -->
 		<h3>제휴 모바일 멤버십 서비스 이용을 위한 제 3자 제공에 관한 안내</h3>
-		<div class="term_text" tabindex="0">
+		<div class="p-t-15" tabindex="0">
 			<dl>
 				<dd> 1. 회사는 고객의 요청에 의하여 해당 고객의 개인정보를 제 3자에게 제공하는 경우,
 				그 제공하는 목적, 제공하는 개인정보의 항목, 개인정보를 제공받는 자 및 그 보유 • 이용기간은 다음 표와 같습니다.<br>
@@ -453,19 +453,19 @@
 		</div>
 
 		<form id="frm1" name="frmMain1">
-		<div class="term_check pl15">
-			<span class="term_grp"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="term3" name="terms" value="Y"></span>
-			<label for="term3">위의 '제휴 모바일 멤버십 서비스 이용을 위한 제3자 제공에 대한 안내'를 읽고 동의 합니다. (선택 동의)</label>
-			<p class="fz13 c_purple">※ 제3자 정보 제공 동의를 거부할 권리가 있으며, 동의를 거부하더라도 회원가입 및 서비스 이용이 가능합니다.</p>
+		<div class="size-217 p-t-10 p-b-10 p-lr-15-lg w-full-md">
+			<span class="term_grp" style="display:inline-block;"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="term3" name="terms" value="Y"></span>
+			<label for="term3" style="display:inline-block;">위의 '제휴 모바일 멤버십 서비스 이용을 위한 제3자 제공에 대한 안내'를 읽고 동의 합니다. (선택 동의)</label>
+			<p class="cl13">※ 제3자 정보 제공 동의를 거부할 권리가 있으며, 동의를 거부하더라도 회원가입 및 서비스 이용이 가능합니다.</p>
 		</div>
 		</form>
 		<!-- //제휴 모바일 멤버십 서비스 이용을 위한 제 3자 제공에 관한 안내 -->
 		</div>
 		
-		<div class="term">
+		<div class="size-217 p-lr-30 p-t-10 p-b-70 p-lr-15-lg w-full-md">
 		<!-- 마케팅 활용을 위한 개인정보 수집 이용 안내// -->
 		<h3>마케팅 활용을 위한 개인정보 수집 이용 안내</h3>
-		<div class="term_text" tabindex="0" >
+		<div class="p-t-15" tabindex="0" >
 			<table summary="개인정보 수집 및 활용에 대한 안내" style="width: 100%">
 				<caption class="blind">마케팅 활용을 위한 개인정보 수집 이용 안내:수집 목적, 수집 항목, 보유 및 이용 기간</caption>
 				<thead>
@@ -492,23 +492,23 @@
 		</div>
 		
 		<form id="frm2" name="frmMain2">
-		<div class="term_check pl15">
-			<span class="term_grp"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="marketingRuleAgree" name="terms" value="Y"></span>
-			<label for="marketingRuleAgree"> 위, 내용을 읽고 '마케팅 활용을 위한 개인정보 수집 이용 안내'에 동의합니다. (선택동의)</label>
-			<p class="fz13 c_purple">※ 마케팅 활용을 위한 개인정보 수집 이용 안내에 대한 동의를 거부할 권리가 있으며, 동의를 거부하더라도 회원가입 및 서비스 이용이 가능합니다.<br>
+		<div class="size-217 p-t-10 p-b-10 p-lr-15-lg w-full-md">
+			<span class="term_grp" style="display:inline-block;"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="marketingRuleAgree" name="terms" value="Y"></span>
+			<label for="marketingRuleAgree" style="display:inline-block;"> 위, 내용을 읽고 '마케팅 활용을 위한 개인정보 수집 이용 안내'에 동의합니다. (선택동의)</label>
+			<p class="cl13">※ 마케팅 활용을 위한 개인정보 수집 이용 안내에 대한 동의를 거부할 권리가 있으며, 동의를 거부하더라도 회원가입 및 서비스 이용이 가능합니다.<br>
 				단, 미 동의시 메가박스의 주요 행사 안내 및 혜택 제공에 제한이 있을 수 있습니다.
 			</p>
 		</div>
 		</form>
 		<!-- //개인정보 수집 및 활용에 대한 안내 -->
 
-		<div class="term_check bottom pl15">
-			<span class="term_grp"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="term_all" onclick="all_check(this, 'terms')"></span>
-			<label for="term_all">위의 모든 약관을 읽고 동의 합니다.</label>
+		<div class="p-t-30">
+			<span class="term_grp" style="display:inline-block;"><input type="checkbox" title="위의 이용약관을 읽고 동의" id="term_all" onclick="all_check(this, 'terms')"></span>
+			<label for="term_all" style="display:inline-block;">위의 모든 약관을 읽고 동의 합니다.</label>
 		</div>
-		<div class="btn_wrap text-center mt50">
-			<button type="button" class="img_btn user cancel mr7" onclick="history.back()">취소</button>
-			<button type="button" class="img_btn user ok ml7" id="next" onclick="check_terms()"><span class="blind">확인</span></button>
+		<div class="p-t-30 float-r">
+			<button type="button" style="display:inline-block;" class="flex-c-m stext-107 cl6 size-127 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5" onclick="history.back()">취소</button>
+			<button type="button" style="display:inline-block;" class="flex-c-m stext-107 cl6 size-127 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5" id="next" onclick="check_terms()"><span class="blind">확인</span></button>
 		</div>
 		</div>
 
@@ -516,7 +516,7 @@
 </div>
 </div>
 				<!-- Benefit & footer -->
-	<%-- <%@ include file="/WEB-INF/views/main/benefit_footer.jspf" %> --%>
+				<%@ include file="/WEB-INF/views/main/script.jspf" %>
 
 </form>
 </div>

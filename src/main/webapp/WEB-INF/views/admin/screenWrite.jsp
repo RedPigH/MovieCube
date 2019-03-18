@@ -68,7 +68,7 @@
 						</tr>
 											
 						<tr>
-							<th scope="row">영화관 번호</th>
+							<th scope="row">영화관</th>
 							<td>
 								<select name="CINEMA_NO" class="txt w200" >
 									<option value="1">강남 무비큐브</option>

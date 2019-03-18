@@ -14,6 +14,27 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
+<script type="text/javascript">
+//AJAX select box
+function screenSelect(CINEMA_NO){
+$.ajax({
+ type: "POST",
+ url: "<c:url value='/admin/ScreenSelect.do'/>",
+ dataType:"json",
+ data: {param:CINEMA_NO},
+ success: function(data){           
+  $("#selectScreen").find("option").remove().end().append("<option value=''>전체</option>");
+  
+  for(var idx = 0; idx < data.result.length; idx++){
+	  $("#selectScreen").append("<option value='"+data.result[idx].SCREEN_NO+"'>"+data.result[idx].SCREEN_NAME+"</option>")
+  }
+ },
+   error: function (jqXHR, textStatus, errorThrown) {
+   alert("오류가 발생하였습니다.");
+  }                     
+ });
+}
+</script>
 </head>
 
 <div class="admin">
@@ -63,7 +84,8 @@
 						<tr>
 							<th scope="row">영화관</th>
 							<td>
-								<select class="slct w300" name="selectCinema">
+								<select class="slct w300" name="selectCinema" id = "selectCinema" onchange = "screenSelect(this.value);">
+									<option value="">선 택</option>
 									<c:forEach var="cinema" items="${cinemaList}">
 									<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
 									</c:forEach>
@@ -74,11 +96,14 @@
 						<tr>
 							<th scope="row">상영관</th>
 							<td>
-								<select class="slct w300" name="selectScreen">
+								<select class="slct w300" name="selectScreen" id = "selectScreen">
+									<option value = "">선 택</option>
+								</select>
+								<%-- <select class="slct w300" name="selectScreen">
 									<c:forEach var="screen" items="${screenList}">
 									<option value="${screen.SCREEN_NO}">${screen.SCREEN_NAME}</option>
 									</c:forEach>
-								</select>
+								</select> --%>
 							</td>
 						</tr>
 						

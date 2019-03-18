@@ -18,6 +18,11 @@ public class SeatServiceImpl implements SeatService {
 	public List<Map<String, Object>> selectSeatList(Map<String, Object> map) throws Exception {
 		return seatDAO.selectSeatList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception{
+		return seatDAO.selectScreenSeat(map);
+	}
 
 	@Override
 	public Map<String, Object> ScreenSeatNum(Map<String, Object> map) throws Exception {

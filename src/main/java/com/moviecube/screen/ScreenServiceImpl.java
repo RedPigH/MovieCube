@@ -18,6 +18,12 @@ public class ScreenServiceImpl implements ScreenService {
 
 		return screenDAO.selectScreenList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map) throws Exception{
+		
+		return screenDAO.selectCinemaScreen(map);
+	}
 
 	@Override
 	public Map<String, Object> screenDetail(Map<String, Object> map) throws Exception {

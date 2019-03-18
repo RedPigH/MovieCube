@@ -16,8 +16,10 @@
 	<!-- 상영관 별 좌석 리스트 -->
 	<select id="selectScreenSeat" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT SEAT_NO FROM SEAT
-			WHERE SCREEN_NO = #{SCREEN_NO}
+			SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s
+			INNER JOIN SCREEN c ON s.SCREEN_NO = c.SCREEN_NO
+			WHERE s.SCREEN_NO = #{SCREEN_NO}
 			ORDER BY SEAT_NO ASC
 		]]>
 	</select>

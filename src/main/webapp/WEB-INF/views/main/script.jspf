@@ -126,7 +126,6 @@ $(function() {
     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
   });
 });
-
 </script>
 
 <!--===============================================================================================-->
@@ -134,7 +133,6 @@ $(function() {
     function add_item(){
         // pre_set 에 있는 내용을 읽어와서 처리..
         var div = document.createElement('div');
-        div.setAttribute("id", "AddedMovieList");
         div.innerHTML = document.getElementById('movieAdd').innerHTML;
         document.getElementById('field').appendChild(div);
     }
@@ -142,6 +140,6 @@ $(function() {
     function remove_item(obj){
     	var object = obj;
         // obj.parentNode 를 이용하여 삭제
-        document.getElementById('field').removeChild(object);
+        document.getElementById('field').removeChild(object.parentNode);
     }
 </script>
