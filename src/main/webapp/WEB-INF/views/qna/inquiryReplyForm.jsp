@@ -15,6 +15,10 @@
 			<caption>답변 작성♥</caption>
 			<tbody>
 				<tr>
+					<th scope="row">글번호</th>
+					<td>${map.QNA_NO }</td>
+				</tr>
+				<tr>
 					<th scope="row">제목</th>
 					<td>${map.QNA_SUB }</td>
 				</tr>
@@ -70,8 +74,8 @@
 		
 		function fn_insertBoard(){
 			var comSubmit = new ComSubmit("frm");
-			var qna_no = "${map.QNA_NOM}";
-			var qna_sub = "${map.QNA_SUB}"; 
+			var qna_no = "${map.QNA_NO}";
+			var qna_sub = "[답변]"+"${map.QNA_SUB}"; 
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryReply.do'/>");
 			comSubmit.addParam("REF", qna_no);
  			comSubmit.addParam("QNA_SUB", qna_sub); 

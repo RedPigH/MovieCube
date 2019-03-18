@@ -156,7 +156,7 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
 
 		Map<String, Object> map = new HashMap();
-
+        System.out.println("혜쮸꼰뜌"+commandMap.get("QNA_NOM"));
 		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
 		mv.addObject("map", map);
 		mv.addObject("map", map1);
@@ -169,8 +169,6 @@ public class QnaController {
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 		
-		System.out.println("우앙"+commandMap.get("QNA_NOM"));
-		System.out.println("우앙은개뿔"+commandMap.get("REF"));
 		Map<String, Object> map = new HashMap();
 		map.put("REF", commandMap.get("REF"));
 		System.out.println("우앙은개뿔ㅎㅎ"+commandMap.get("REF"));
