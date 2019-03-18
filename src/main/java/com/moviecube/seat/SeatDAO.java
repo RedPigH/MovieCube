@@ -13,8 +13,8 @@ import com.moviecube.dao.AbstractDAO;
 public class SeatDAO extends AbstractDAO {
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("seat.selectScreenSeat", map);
+	public List<Map<String, Object>> selectSeatList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("seat.selectSeatList", map);
 	}
 
 	@SuppressWarnings("unchecked")

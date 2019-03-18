@@ -59,7 +59,7 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li class="on"><a href="<%=cp%>/admin/seatList.do">영화 좌석</a></li>
+			<li class="on"><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -68,8 +68,8 @@
 		</ul>
 	</div>
 	
-	div class="admin_ct">
-		<h3 class="sub_tit">영화시간표 리스트</h3>
+	<div class="admin_ct">
+		<h3 class="sub_tit">좌석 리스트</h3>
 			<div class="tbl_type_02">
 				<table>
 					<caption>시간표 등록</caption>
@@ -77,13 +77,15 @@
 						<col style="width:25%" />
 						<col style="width:25%" />
 						<col style="width:25%" />
+						<col style="width:25%" />
 					</colgroup>
 					
 					<thead>
 						<tr>
-							<th scope="col">상영관 이름</th>
+							<th scope="col">상영관 </th>
 							<th scope="col">좌석 행</th>
 							<th scope="col">좌석 열</th>
+							<th scope="col">삭제</th>
 							
 						</tr>
 					</thead>
@@ -93,10 +95,11 @@
 					<c:when test="${fn:length(seatList) > 0}">	
 						<c:forEach var="row" items="${seatList}">
 						<tr>
-							<td><a href="#this" name="SCREEN_NAME">${row.SEAT_NAME}
+							<td><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
 							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
 							<td>${row.SEAT_ROW}</td>
 							<td>${row.SEAT_COL}</td>
+							<td><a href="<%=cp%>/admin/seatDelete.do?SEAT_NO=${row.SEAT_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td>
 						</tr>
 						</c:forEach>
 					</c:when>
@@ -140,13 +143,14 @@
             comSubmit.setUrl("<c:url value='insertSeatForm.do' />");
             comSubmit.submit();
         }
-         
+/*          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='seatDetail.do' />");
             comSubmit.addParam("SEAT_NO", obj.parent().find("#SEAT_NO").val());
             comSubmit.submit();
         }
-    </script> 
+*/       
+</script> 
 </body>
 </html>
