@@ -17,9 +17,11 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
+<body>
+
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/cinemaList.do">MovieCube Administrator - Cinema List</a></h1>
+	<h1><a href="<%=cp %>/admin/faqList.do">MovieCube Administrator - FAQ List</a></h1>
 	</div>
 </div>
 
@@ -27,55 +29,51 @@
 	<div class="admin_list">
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">영화 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li class="on"><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화관 목록</h3>
+		<h3 class="sub_tit">FAQ 리스트</h3>
 		<div class="tbl_type_02">
 			<table>
-				<caption>영화관 등록</caption>
+				<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
 				<colgroup>
-					<col style="width:10%;" />
-					<col />
-					<col style="width:50%;" />
-					<col style="width:20%;" />
+					<col style="width:10%;"/>
+					<col style="width:60%;"/>
+					<col style="width:30%;"/>
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">영화관 번호</th>
-						<th scope="col">영화관 이름</th> 
-						<th scope="col">영화관 안내</th>
-						<th scope="col">영화관 주소</th>
+						<th scope="col">번호</th>
+						<th scope="col">자주묻는질문</th>
+						<th scope="col">분류</th>
 					</tr>
 				</thead>
 				<tbody>
 					
 				<c:choose>
-					<c:when test="${fn:length(cinemaList) > 0}">
-            			<c:forEach items="${cinemaList}" var="row">
+					<c:when test="${fn:length(faqList) > 0}">
+            			<c:forEach items="${faqList}" var="row">
 						<tr>
-							<td>${row.CINEMA_NO}
-							<td><a href="#this" name="CINEMA_NAME">${row.CINEMA_NAME}
-							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
-							<td class="subject"><a href="#this" name="CINEMA_CONTENT"><pre>${row.CINEMA_CONTENT}</pre>
-							<input type="hidden" id="CINEMA_NO" value="${row.CINEMA_NO}"/></a></td>
-							<td>${row.CINEMA_ADDRESS}</td>
+							<td>${row.FAQ_NO}</td>
+							<td><a href="#this" name="FAQ_SUB">${row.FAQ_SUB}
+							<input type="hidden" id="FAQ_NO" value="${row.FAQ_NO}"/></a></td>
+							<td>${row.FAQ_TYPE}</td>				
 						</tr>
 						</c:forEach>
 					</c:when>
-					<c:otherwise>
+				<c:otherwise>
 					등록된 게시물이 없습니다
-					</c:otherwise>
-				</c:choose>
+				</c:otherwise>
+			</c:choose>
 				</tbody>
 			</table>
 		</div>
@@ -85,7 +83,7 @@
 				<span>글쓰기</span>
 			</a>
 		</div>
-		
+				
 		<div class="search_form">
 			<form>
 				<div class="inner">
@@ -114,12 +112,7 @@
                 fn_openBoardWrite();
             }); 
              
-            $("a[name='CINEMA_NAME']").on("click", function(e){ // 영화관 이름 클릭
-                e.preventDefault();
-                fn_openBoardDetail($(this));
-            });
-            
-            $("a[name='CINEMA_CONTENT']").on("click", function(e){ // 영화관 이름 클릭
+            $("a[name='FAQ_SUB']").on("click", function(e){ // 
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
@@ -127,17 +120,18 @@
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='faqWriteForm.do' />");
             comSubmit.submit();
         }
          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaDetail.do' />");
-            comSubmit.addParam("CINEMA_NO", obj.parent().find("#CINEMA_NO").val());
+            comSubmit.setUrl("<c:url value='faqDetail.do' />");
+            comSubmit.addParam("FAQ_NO", obj.parent().find("#FAQ_NO").val());
             comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
     </script> 
 </body>
 </html>
+	

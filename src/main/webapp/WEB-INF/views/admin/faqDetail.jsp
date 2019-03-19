@@ -16,9 +16,9 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
-	function cinemaDelete() {
+	function faqDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'cinemaDelete.do?CINEMA_NO=${map.CINEMA_NO}&currentPage=${currentPage}';
+			location.href = 'faqDelete.do?FAQ_NO=${map.FAQ_NO}&currentPage=${currentPage}';
 		} else { //취소
 			return;
 		}
@@ -27,9 +27,11 @@
 
 </head>
 
+<body>
+
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/cinemaList.do">MovieCube Administrator - Cinema Detail</a></h1>
+	<h1><a href="<%=cp %>/admin/faqList.do">MovieCube Administrator - FAQ Detail </a></h1>
 	</div>
 </div>
 
@@ -37,12 +39,12 @@
 	<div class="admin_list">
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li class="on"><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
@@ -50,30 +52,30 @@
 	
 	<div class="admin_ct">
 		<div class="movie_list">
-			<h3 class="sub_tit">영화관 상세보기</h3>
+			<h3 class="sub_tit">FAQ 상세보기 </h3>
 			<div class="tbl_type_01">
 				<table>
-					<caption>영화관</caption>
+					<caption>FAQ 상세보기</caption>
 					<colgroup>
-						<col style="width : 200px;" />
+						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
 						<tr>
-							<th scope="row">영화관 번호</th>
-							<td>${map.CINEMA_NO}</td>
+							<th scope="row">글번호</th>
+							<td>${map.FAQ_NO}</td>
 						</tr>
 						<tr>
-							<th scope="row">영화관 이름
-							<td align="left">${map.CINEMA_NAME}</td>
+							<th scope="row">타입</th>
+							<td>${map.FAQ_TYPE}</td>
 						</tr>
 						<tr>
-							<th scope="row">영화관 주소</th>
-							<td>${map.CINEMA_ADDRESS}</td>
+							<th scope="row">자주묻는질문</th>
+							<td>${map.FAQ_SUB }</td>
 						</tr>
 						<tr>
-							<th scope="row">영화관 안내 </th>
-							<td>${map.CINEMA_CONTENT}</td>
+							<th scope="row">내용</th>
+							<td><pre>${map.FAQ_CONTENT}</pre></td>
 						</tr>
 					</tbody>
 				</table>
@@ -82,12 +84,12 @@
 		<div class="btn_type_03">
 			
 			<span class="btn btnC_04 btnP_04">
-				<input type="button" onclick="location.href='cinemaModifyForm.do?CINEMA_NO=${map.CINEMA_NO}'" value="수정" />
+				<input type="button" onclick="location.href='faqModifyForm.do?FAQ_NO=${map.FAQ_NO}'" value="수정" />
 			</span>
 			<span class="btn btnC_04 btnP_04" style="padding-left: 10px;">
-				<input type="button" onclick="cinemaDelete()" value="삭제" />
+				<input type="button" onclick="faqDelete()" value="삭제" />
 			</span>
-			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='cinemaList.do?currentPage=${currentPage}' ">
+			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='<%=cp%>/admin/faqList.do?currentPage=${currentPage}' ">
 				<span>목록</span>
 			</a>
 		</div>

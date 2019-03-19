@@ -34,7 +34,6 @@ public class AdminScreenController {
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
-	private String screen_no;
 
 	@RequestMapping(value = "/screenList.do")
 	public ModelAndView screenList(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -74,16 +73,10 @@ public class AdminScreenController {
 	@RequestMapping(value = "/screenDetail.do")
 	public ModelAndView screenDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		if(commandMap.containsKey("SCREEN_NO")) {
-			screen_no = (String) commandMap.get("SCREEN_NO");
-		}else {
-			commandMap.put("SCREEN_NO", screen_no);
-		}
-		
+
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 		
-		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(map);
+		List<Map<String, Object>> seatList = seatService.selectScreenSeat(map);
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -91,7 +84,7 @@ public class AdminScreenController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		totalCount = seatlist.size();
+		totalCount = seatList.size();
 		
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "screenDetail");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -102,14 +95,15 @@ public class AdminScreenController {
 			lastCount = paging.getEndCount() + 1;
 		}
 
-		seatlist = seatlist.subList(paging.getStartCount(), lastCount);
+		seatList = seatList.subList(paging.getStartCount(), lastCount);
 		
-		mv.addObject("seatList", seatlist);
-		mv.addObject("list", seatlist);
+		mv.addObject("seatList", seatList);
+		mv.addObject("list", seatList);
+		mv.addObject("SCREEN_NO", commandMap.get("SCREEN_NO"));
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("admin/screenDetail");
+		mv.setViewName("/admin/screenDetail");
 		mv.addObject("map", map);
 
 		return mv;
@@ -158,15 +152,6 @@ public class AdminScreenController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/screenList.do");
 
 		screenService.deleteScreen(commandMap.getMap());
-		mv.addObject("currentPage", commandMap.get("currentPage"));
-		return mv;
-	}
-	
-	@RequestMapping(value = "/deleteSeat.do")
-	public ModelAndView deleteSeat(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/screenDetail.do");
-		
-		seatService.deleteSeat(commandMap.getMap());
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
 	}
