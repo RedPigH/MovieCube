@@ -105,7 +105,7 @@
 </div>
 
 <script type="text/javascript">
-function doImgPop(img){ 
+	function doImgPop(img){ 
 	 img1= new Image(); 
 	 img1.src=(img); 
 	 imgControll(img); 

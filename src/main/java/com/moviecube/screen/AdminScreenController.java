@@ -34,6 +34,7 @@ public class AdminScreenController {
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
+	private String screen_no;
 
 	@RequestMapping(value = "/screenList.do")
 	public ModelAndView screenList(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -73,7 +74,12 @@ public class AdminScreenController {
 	@RequestMapping(value = "/screenDetail.do")
 	public ModelAndView screenDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		
+		if(commandMap.containsKey("SCREEN_NO")) {
+			screen_no = (String) commandMap.get("SCREEN_NO");
+		}else {
+			commandMap.put("SCREEN_NO", screen_no);
+		}
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 		
 		List<Map<String, Object>> seatList = seatService.selectScreenSeat(map);
@@ -156,4 +162,12 @@ public class AdminScreenController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/deleteSeat.do")
+	public ModelAndView deleteSeat(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/screenDetail.do");
+		
+		seatService.deleteSeat(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
+		return mv;
+	}
 }
