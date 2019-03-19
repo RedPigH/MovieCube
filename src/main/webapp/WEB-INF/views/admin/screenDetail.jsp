@@ -16,9 +16,27 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
+
+	$(function(){
+		var schedule_btn = $(".schedule_delete");
+		
+		schedule_btn.each(function(){
+			var btn = $(this).children('.btn');
+		
+			btn.on('click',function(){
+				var check = confirm("정말 삭제하시겠습니까?");	
+				if(check){
+					return true;
+				}else{
+					return false;
+				}
+			})
+		})
+	}) 
+	
 	function screenDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}';
+			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}&currentPage={currentPage}}';
 		} else { //취소
 			return;
 		}
@@ -39,7 +57,7 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -50,7 +68,7 @@
 	
 	<div class="admin_ct">
 		<div class="movie_list">
-			<h3 class="sub_tit">상영관 상세보기</h3>
+			<h3 class="sub_tit">상영관 상세 정보</h3>
 			<div class="tbl_type_01">
 				<table>
 					<caption>상영관</caption>
@@ -81,7 +99,7 @@
 		</div>
 		
 		<div class="admin_ct">
-		<h3 class="sub_tit">좌석 리스트</h3>
+		<h3 class="sub_tit">좌석 정보</h3>
 			<div class="tbl_type_02">
 				<table>
 					<caption>시간표 등록</caption>
@@ -111,7 +129,10 @@
 							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
 							<td>${row.SEAT_ROW}</td>
 							<td>${row.SEAT_COL}</td>
-							<td><a href="<%=cp%>/admin/seatDelete.do?SEAT_NO=${row.SEAT_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td>
+							<td class="schedule_delete">
+							<a href = "deleteSeat.do?SEAT_NO=${row.SEAT_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03">
+								<span>삭제</span>
+							</a></td>
 						</tr>
 						</c:forEach>
 					</c:when>

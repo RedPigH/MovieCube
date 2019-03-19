@@ -68,7 +68,7 @@ public class AdminTimeController {
 
 		totalCount = timeList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "timeList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -94,6 +94,7 @@ public class AdminTimeController {
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		mv.addObject("map", map);
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}
@@ -186,6 +187,7 @@ public class AdminTimeController {
 		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
 
 		timeService.deleteTime(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}

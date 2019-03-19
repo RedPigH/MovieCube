@@ -105,7 +105,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
 		movieService.insertMovie(commandMap.getMap(), request);
+		
 		System.out.println("글쓰기 내용 테스트 1: " + commandMap.getMap());
+		
 		return mv;
 	}
 	
@@ -113,8 +115,11 @@ public class AdminController {
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
 		
+		System.out.println("상세보기  값 확인 ===============: " + commandMap.getMap());
 		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		
 		mv.addObject("map", map.get("map"));
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
 		
 		
@@ -244,7 +249,7 @@ public class AdminController {
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		
 		mv.addObject("map", map);
-
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
 	}
 
@@ -274,6 +279,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
 		
 		noticeService.deleteBoard(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}

@@ -30,7 +30,7 @@
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -55,7 +55,7 @@
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" value="${map.MOVIE_NAME}"/>
 								<input type="hidden" id="MOVIE_NO" name="MOVIE_NO" value="${map.MOVIE_NO}" />
-								<font color="red"><span class="ibk">예) 영화제목(3D) </span></font>
+								<font color="blue"><span class="ibk">예) 영화제목(3D) </span></font>
 								
 							</td>
 						</tr>
@@ -86,10 +86,19 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">장르 및 러닝타임</th>
+							<th scope="row">장르</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" value="${map.MOVIE_GENRE}" />
-								<font color="red"><span class="ibk">예) 액션 120분 </span></font>
+								<font color="red"><span class="ibk"></span></font>
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">러닝타임</th>
+							<td>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME" value="${map.MOVIE_RUNTIME}" />
+								<font color="red"><span class="ibk"></span></font>
 								
 							</td>
 						</tr>
@@ -98,9 +107,10 @@
 							<th scope="row">타입</th>
 							<td>
 								<select name="MOVIE_TYPE" class="slct w200" value="${map.MOVIE_TYPE}">
-									<option value="2D" <c:if test="${map.MOVIE_TYPE == '2D'}"> selected</c:if>>2D</option>
+									<option value="일반" <c:if test="${map.MOVIE_TYPE == '일반'}"> selected</c:if>>2D</option>
 									<option value="3D" <c:if test="${map.MOVIE_TYPE == '3D'}"> selected</c:if>>3D</option>
 									<option value="4D" <c:if test="${map.MOVIE_TYPE == '4D'}"> selected</c:if>>4D</option>
+									<option value="IMAX" <c:if test="${map.MOVIE_TYPE == 'IMAX'}"> selected</c:if>>IMAX</option>
 								</select>
 							</td>
 						</tr>

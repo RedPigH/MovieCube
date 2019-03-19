@@ -30,7 +30,7 @@
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -49,6 +49,7 @@
 				<li><a href="#this" name="poster" class="list"> 
 				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
 				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
+				<input type="hidden" id="currentPage" value="${currentPage}">
 				<span class="detail">상세보기</span>
 						<div class="explan">
 							<p>
@@ -111,8 +112,10 @@
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='movieDetail.do' />");
             comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+            comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
+        
     </script> 
 </body>
 </html>

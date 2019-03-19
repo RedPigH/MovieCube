@@ -30,19 +30,43 @@ public class AdminScreenController {
 	
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 5;
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
 
 	@RequestMapping(value = "/screenList.do")
-	public ModelAndView screenList(CommandMap commandMap) throws Exception {
+	public ModelAndView screenList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/screenList");
 
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
 		
-		mv.addObject("screenList", screenList);
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
+		totalCount = screenList.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "screenList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		//System.out.println(paging.getEndCount());
+		//System.out.println(totalCount);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		screenList = screenList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("screenList", screenList);
+		mv.addObject("list", screenList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/admin/screenList");
 		return mv;
 	}
 
@@ -74,10 +98,11 @@ public class AdminScreenController {
 		seatlist = seatlist.subList(paging.getStartCount(), lastCount);
 		
 		mv.addObject("seatList", seatlist);
+		mv.addObject("list", seatlist);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/screenDetail");
+		mv.setViewName("screenDetail");
 		mv.addObject("map", map);
 
 		return mv;
@@ -126,7 +151,7 @@ public class AdminScreenController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/screenList.do");
 
 		screenService.deleteScreen(commandMap.getMap());
-
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
 	}
 

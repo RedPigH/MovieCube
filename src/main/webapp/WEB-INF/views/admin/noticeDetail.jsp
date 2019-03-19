@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	function noticeDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'noticeDelete.do?NOTICE_NO=${map.NOTICE_NO}';
+			location.href = 'noticeDelete.do?NOTICE_NO=${map.NOTICE_NO}&currentPage=${currentPage}';
 		} else { //취소
 			return;
 		}
@@ -41,7 +41,7 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -52,7 +52,7 @@
 	
 	<div class="admin_ct">
 		<div class="movie_list">
-			<h3 class="sub_tit">공지사항 상세보기</h3>
+			<h3 class="sub_tit">공지사항 상세보기 </h3>
 			<div class="tbl_type_01">
 				<table>
 					<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
@@ -90,7 +90,7 @@
 			<span class="btn btnC_04 btnP_04" style="padding-left: 10px;">
 				<input type="button" onclick="noticeDelete()" value="삭제" />
 			</span>
-			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='noticeList.do?currentPage=${currentPage}' ">
+			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='<%=cp%>/admin/noticeList.do?currentPage=${currentPage}' ">
 				<span>목록</span>
 			</a>
 		</div>

@@ -17,7 +17,7 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
-/* 	
+
 	$(function(){
 		var schedule_btn = $(".schedule_delete");
 		
@@ -25,7 +25,7 @@
 			var btn = $(this).children('.btn');
 			
 			btn.on('click',function(){
-				var check = confirm("삭제하시겠습니까?");	
+				var check = confirm("정말 삭제하시겠습니까?");	
 				if(check){
 					return true;
 				}else{
@@ -34,16 +34,14 @@
 			})
 		})
 	}) 
-	 */
-	
-	function timeDelete() {
+
+	function seatDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'seatDelete.do';
+			location.href = 'deleteSeat.do?SEAT_NO=${row.SEAT_NO}&currentPage=${currentPage}';
 		} else { //취소
 			return;
 		}
 	}
-
 </script>
 </head>
 
@@ -99,7 +97,12 @@
 							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
 							<td>${row.SEAT_ROW}</td>
 							<td>${row.SEAT_COL}</td>
-							<td><a href="<%=cp%>/admin/seatDelete.do?SEAT_NO=${row.SEAT_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td>
+							<td class="schedule_delete">
+							<a href = "deleteSeat.do?SEAT_NO=${row.SEAT_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03">
+								<span>삭제</span>
+							</a></td>
+							<!-- <td><a onClick="seatDelete()" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td> -->
+							<!-- <td><a href="deleteSeat.do?SEAT_NO=${row.SEAT_NO}&currentPage=${currentPage}" class = "btn btnC_04 btnP_03"><span>삭제</span></a></td> -->
 						</tr>
 						</c:forEach>
 					</c:when>
