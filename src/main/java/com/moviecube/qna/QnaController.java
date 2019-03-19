@@ -88,7 +88,7 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
 		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
 		mv.addObject("map", map);
-		mv.addObject("list", map.get("list"));
+		/* mv.addObject("list", map.get("list")); */
 
 		return mv;
 	}

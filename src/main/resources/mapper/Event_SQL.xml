@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="event">
+
+	<!-- 이벤트 리스트 -->
+
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectEventList">
+
+<![CDATA[
+select
+e.EVENT_NO,
+e.EVENT_NAME,
+e.EVENT_TYPE,
+e.EVENT_OPENDATE,
+e.EVENT_CLOSEDATE,
+e.EVENT_URL,
+f.FILE_NO,
+f.EVENT_ORGNAME,
+f.EVENT_SAVNAME
+FROM MC_EVENT e INNER JOIN MC_EVENT_FILE f
+ON e.EVENT_NO = f.EVENT_NO
+order by e.EVENT_NO desc
+
+]]>
+	</select>
+
+	<insert parameterType="hashmap" id="insertEvent"
+		keyProperty="EVENT_NO" useGeneratedKeys="true">
+
+		<selectKey resultType="int" keyProperty="EVENT_NO"
+			order="BEFORE">select MC_EVENT_NO_SEQ.NEXTVAL from DUAL</selectKey>
+
+<![CDATA[
+insert into MC_EVENT
+(
+EVENT_NO,
+EVENT_NAME,
+EVENT_TYPE,
+EVENT_OPENDATE,
+EVENT_CLOSEDATE,
+EVENT_URL
+)
+values
+(
+#{EVENT_NO},
+#{EVENT_NAME},
+#{EVENT_TYPE},
+#{EVENT_OPENDATE},
+#{EVENT_CLOSEDATE},
+#{EVENT_URL}
+}
+]]>
+
+	</insert>
+</mapper>
