@@ -162,7 +162,13 @@ public class AdminTimeController {
 		ModelAndView mv = new ModelAndView("/admin/timeModify");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
+		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
+		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
 
+		mv.addObject("movieList", movieList);
+		mv.addObject("screenList", screenList);
+		mv.addObject("cinemaList", cinemaList);
 		mv.addObject("map", map);
 
 		return mv;

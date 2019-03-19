@@ -102,7 +102,7 @@ public class AdminScreenController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("screenDetail");
+		mv.setViewName("admin/screenDetail");
 		mv.addObject("map", map);
 
 		return mv;

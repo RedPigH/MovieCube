@@ -50,11 +50,11 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">영화제목</th>
+							<th scope="row">영화제목 </th>
 							<td>
-								<select class="slct w300" name="selectMovie">
+								<select class="slct w300" name="selectMovie" id = "selectMovie">
 									<c:forEach var="movie" items="${movieList}">
-									<option value="${movie.MOVIE_NO}" <c:if test="${movie.MOVIE_NAME} =='${movie.MOVIE_NAME}'"> selected</c:if>>${movie.MOVIE_NAME}</option>
+									<option value="${movie.MOVIE_NO}" <c:if test="${map.MOVIE_NO == movie.MOVIE_NO}">selected</c:if>> ${movie.MOVIE_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -63,9 +63,9 @@
 						<tr>
 							<th scope="row">영화관</th>
 							<td>
-								<select class="slct w300" name="selectCinema">
+								<select class="slct w300" name="selectCinema" id = "selectCinema">
 									<c:forEach var="cinema" items="${cinemaList}">
-									<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+									<option value="${cinema.CINEMA_NO}"<c:if test="${map.CINEMA_NO == cinema.CINEMA_NO}">selected</c:if>>${cinema.CINEMA_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -74,9 +74,9 @@
 						<tr>
 							<th scope="row">상영관</th>
 							<td>
-								<select class="slct w300" name="selectScreen">
+								<select class="slct w300" name="selectScreen" id = "selectScreen">
 									<c:forEach var="screen" items="${screenList}">
-									<option value="${screen.SCREEN_NO}">${screen.SCREEN_NAME}</option>
+									<option value="${screen.SCREEN_NO}"<c:if test="${map.SCREEN_NO == screen.SCREEN_NO}">selected</c:if>>${screen.SCREEN_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -85,7 +85,7 @@
 						<tr>
 							<th scope="row">상영일</th>
 							<td>
-								<input type="date" class="txt w300" id="TIME_DATE" name="TIME_DATE" />
+								<input type="date" class="txt w300" id="TIME_DATE" name="TIME_DATE" value = "${map.TIME_DATE}" />
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -93,7 +93,7 @@
 						<tr>
 							<th scope="row">시작시간</th>
 							<td>
-								<select name="START_TIME" class="slct w300">
+								<select name="START_TIME" id = "START_TIME" class="slct w300">
 									<c:forEach begin="1" end="23" var="hour">
 										<option value="${hour}:00">${hour}:00</option>
 										<option value="${hour}:10">${hour}:10</option>
@@ -109,7 +109,7 @@
 						<tr>
 							<th scope="row">종료시간</th>
 							<td>
-								<select name="END_TIME" class="slct w300">
+								<select name="END_TIME" id = "END_TIME" class="slct w300">
 									<c:forEach begin="1" end="23" var="hour">
 										<option value="${hour}:00">${hour}:00</option>
 										<option value="${hour}:10">${hour}:10</option>
@@ -166,6 +166,9 @@
             comSubmit.setUrl("<c:url value='timeModify.do' />");
             comSubmit.submit();
         }
-    </script>
+</script>
+<script>
+$("#seletMovie option:eq(${map.MOVIE_NO})").attr("selected", "selected");
+</script>
 </body>
 </html>
