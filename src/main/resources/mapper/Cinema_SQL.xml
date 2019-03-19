@@ -1,40 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cinema">
-	
+
 	<!-- 영화관 리스트 -->
-	<select id="selectCinemaList" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
+
+
+
+	<select resultType="hashmap" parameterType="hashmap"
+		id="selectCinemaList">
+
+<![CDATA[
 			SELECT * FROM CINEMA 
 			ORDER BY CINEMA_NO ASC
 		]]>
 	</select>
-	
+
 	<!-- 영화관 별 상영관 리스트 -->
-	<select id="selectCinemaScreen" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
+
+
+
+	<select resultType="hashmap" parameterType="hashmap"
+		id="selectCinemaScreen">
+
+<![CDATA[
 			SELECT s.SCREEN_NO, s.SCREEN_NAME
 			FROM CINEMA c INNER JOIN SCREEN s
 			ON c.CINEMA_NO = s.CINEMA_NO
 			WHERE c.CINEMA_NO = #{CINEMA_NO}
 		]]>
 	</select>
-	
+
 	<!-- 영화관 선택 -->
-	<select id = "selectOneCinema" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
+
+
+
+	<select resultType="hashmap" parameterType="hashmap"
+		id="selectOneCinema">
+
+<![CDATA[
 			SELECT * FROM CINEMA
 			WHERE CINEMA_NO = #{CINEMA_NO}
 		]]>
 	</select>
-	
+
 	<!-- 영화관 정보 작성 -->
-	<insert id="insertCinema" parameterType = "hashmap" useGeneratedKeys="true" keyProperty="CINEMA_NO">
-		<selectKey keyProperty="CINEMA_NO" resultType="int" order="BEFORE">
-			SELECT CINEMA_NO_SEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		<![CDATA[
+
+
+
+	<insert parameterType="hashmap" id="insertCinema"
+		keyProperty="CINEMA_NO" useGeneratedKeys="true">
+
+		<selectKey resultType="int" keyProperty="CINEMA_NO"
+			order="BEFORE">SELECT CINEMA_NO_SEQ.NEXTVAL FROM DUAL </selectKey>
+
+<![CDATA[
 			INSERT INTO CINEMA (
 				CINEMA_NO,
 				CINEMA_NAME,
@@ -50,10 +71,13 @@
 			) 
 		]]>
 	</insert>
-	
+
 	<!-- 영화관 정보 수정 -->
-	<update id="updateCinema" parameterType = "hashmap">
-		<![CDATA[
+
+
+	<update parameterType="hashmap" id="updateCinema">
+
+<![CDATA[
 			UPDATE CINEMA
 			SET
 				CINEMA_NAME = #{CINEMA_NAME},
@@ -62,10 +86,14 @@
 			WHERE CINEMA_NO = #{CINEMA_NO}
 		]]>
 	</update>
-	
+
 	<!-- 영화관 정보 삭제 -->
-	<delete id="deleteCinema" parameterType = "hashmap">
-		<![CDATA[
+
+
+
+	<delete parameterType="hashmap" id="deleteCinema">
+
+<![CDATA[
 			DELETE FROM CINEMA
 			WHERE CINEMA_NO = #{CINEMA_NO}
 		]]>

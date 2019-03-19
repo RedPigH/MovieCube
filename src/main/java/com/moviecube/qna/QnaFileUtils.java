@@ -17,7 +17,7 @@ import com.moviecube.common.CommonUtils;
 
 @Component("qnaFileUtils")
 public class QnaFileUtils {
-	private static final String filePath = "C:\\muyi\\src\\main\\webapp\\resources\\upload\\qna\\";
+	private static final String filePath = "D:\\wow\\src\\main\\webapp\\resources\\upload\\qna\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
 			throws Exception {
@@ -33,6 +33,7 @@ public class QnaFileUtils {
 		Map<String, Object> listMap = null;
 
 		String QNA_NO = (String) map.get("QNA_NO");
+		System.out.println("넘버 몇이냐 ? " + QNA_NO);
 
 		File file = new File(filePath);
 		if (file.exists() == false) {
@@ -58,6 +59,41 @@ public class QnaFileUtils {
 		}
 
 		return Qnalist;
-
+	}
+	
+	public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception{
+	    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    System.out.println("출력해봐라 : " + iterator.hasNext());
+	     
+	    MultipartFile multipartFile = null;
+	    String originalFileName = null;
+	    String originalFileExtension = null;
+	    String storedFileName = null;
+	     
+	    List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+	    Map<String, Object> listMap = null;
+	     
+	    String QNA_NO = (String)map.get("QNA_NO");
+	     
+	     
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	            originalFileName = multipartFile.getOriginalFilename();
+	            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+	            storedFileName = CommonUtils.getRandomString() + originalFileExtension;
+	             
+	            multipartFile.transferTo(new File(filePath + storedFileName));
+	             
+	            listMap = new HashMap<String,Object>();
+	            listMap.put("IS_NEW", "Y");
+	            listMap.put("QNA_NO", QNA_NO);
+	            listMap.put("QNA_ORGNAME", originalFileName);
+	            listMap.put("QNA_SAVNAME", storedFileName);
+	            list.add(listMap);
+	        }
+	    }
+	    return list;
 	}
 }

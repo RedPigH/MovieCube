@@ -28,7 +28,7 @@ public class QnaDAO extends AbstractDAO {
 		return (Map<String, Object>) selectOne("qna.selectQnaDetail", map);
 	}
 
-	public void updateQna(Map<String, Object> map) throws Exception {
+	public void updateQna(Map<String, Object> map) throws Exception { // 여기서 파일삭제까지 같이 할 예정
 		// TODO Auto-generated method stub
 		update("qna.updateQna", map);
 	}
@@ -42,20 +42,22 @@ public class QnaDAO extends AbstractDAO {
 	public void insertFile(Map<String, Object> map) throws Exception {
 		insert("qna.insertQnaFile", map);
 	}
+	
+	public void insertFile2(Map<String, Object> map) throws Exception {
+		insert("qna.insertQnaFile2", map);
+	}
 
 	public void replyQna(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		insert("qna.replyQna", map);
 	}
 
+	public void deleteQnaFile(Map<String, Object> map) {
+		delete("qna.deleteQnaFile", map);
+		// TODO Auto-generated method stub
+	}
+	
 	public void updateQnaFile(Map<String, Object> map) {
 		update("qna.updateQnaFile", map);
-		// TODO Auto-generated method stub
-
 	}
-
-	public void deleteQnaFile(Map<String, Object> map) {
-		delete("qna.deleteQnaFile",map);
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

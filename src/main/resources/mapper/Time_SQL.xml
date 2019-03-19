@@ -6,6 +6,11 @@
 	<!-- 전체 상영 일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
+<<<<<<< .merge_file_a11632
+			SELECT * FROM TIME
+			WHERE TO_CHAR(TIME_DATE, 'YYYYMMDD') >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+			ORDER BY TIME_DATE ASC 
+=======
 			SELECT m.MOVIE_NAME, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
 			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
 			WHERE
@@ -28,13 +33,18 @@
 			inner join cinema c on c.cinema_no = t.cinema_no
 			inner join screen sc on sc.screen_no = t.screen_no		
 			order by t.start_time asc
+>>>>>>> .merge_file_a14420
 		]]>
 	</select>
 	
 	<!-- 유저 선택 상영 일정 리스트 -->
 	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
+<<<<<<< .merge_file_a11632
+			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date,
+=======
 			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date, t.screen_no,
+>>>>>>> .merge_file_a14420
 			(select count(*) from seat where screen_no = sc.screen_no) as total_seat, 
 			(select count(*) from time_seat where time_no = t.time_no and status = 0) as possible_seat
 			from time t
@@ -66,13 +76,18 @@
 	
 	<select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT m.MOVIE_NO, m.MOVIE_NAME, c.CINEMA_NO, c.CINEMA_NAME, s.SCREEN_NO, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+<<<<<<< .merge_file_a11632
+			SELECT * FROM TIME
+			WHERE TIME_NO = #{TIME_NO}
+=======
+			SELECT m.MOVIE_NAME, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
 			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
 			WHERE 
 			t.CINEMA_NO = c.CINEMA_NO AND 
 			t.SCREEN_NO = s.SCREEN_NO AND 
 			t.MOVIE_NO= m.MOVIE_NO AND
 			t.TIME_NO = #{TIME_NO}
+>>>>>>> .merge_file_a14420
 		]]>
 	</select>
 	
@@ -92,7 +107,12 @@
 			SCREEN_NO,
 			TIME_DATE,
 			START_TIME,
+<<<<<<< .merge_file_a11632
+			END_TIME,
+			MOVIE_CNT
+=======
 			END_TIME
+>>>>>>> .merge_file_a14420
 		)
 		VALUES
 		(
@@ -100,9 +120,16 @@
 			#{MOVIE_NO},
 			#{CINEMA_NO},
 			#{SCREEN_NO},
+<<<<<<< .merge_file_a11632
+			#{TIME_DATE},
+			#{START_TIME},
+			#{END_TIME},
+			#{MOVIE_CNT}
+=======
 			SYSDATE,
 			#{START_TIME},
 			#{END_TIME}
+>>>>>>> .merge_file_a14420
 		)
 	]]>
 	</insert>
