@@ -30,7 +30,7 @@
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -55,7 +55,7 @@
 							<th scope="row">영화제목</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" />
-								<font color="red"><span class="ibk">예) 영화제목(3D) </span></font>
+								<font color="green"><span class="ibk">예) 영화제목 (3D) </span></font>
 							</td>
 						</tr>
 						
@@ -84,11 +84,19 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">장르 및 러닝타임</th>
+							<th scope="row">장르</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" />
-								<font color="red"><span class="ibk">예) 액션 120분 </span></font>
+								<font color="red"><span class="ibk"></span></font>
 								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">러닝타임</th>
+							<td>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME" />
+								<font color="red"><span class="ibk"></span></font>
 							</td>
 						</tr>
 						
@@ -101,11 +109,6 @@
 									<option value="4D">4D</option>
 									<option value="IMAX">IMAX</option>
 								</select>
-								<!-- 
-								<input type="text" class="txt w200" id="MOVIE_TYPE" name="MOVIE_TYPE" />
-								<span class="ibk">예)2D, 3D</span>
-								<font color="red"></font>
-								 -->
 							</td>
 						</tr>
 						

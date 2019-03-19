@@ -249,7 +249,7 @@ public class AdminController {
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		
 		mv.addObject("map", map);
-
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
 	}
 
@@ -279,6 +279,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
 		
 		noticeService.deleteBoard(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}

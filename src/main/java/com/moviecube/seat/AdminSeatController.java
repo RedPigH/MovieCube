@@ -26,8 +26,8 @@ public class AdminSeatController {
 	
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 5;
-	private int blockpaging = 5;
+	private int blockCount = 10;
+	private int blockpaging = 10;
 	private String pagingHtml;
 	private Paging paging;
 	
@@ -78,7 +78,7 @@ public class AdminSeatController {
 	
 	@RequestMapping(value = "/insertSeat.do")
 	public ModelAndView insertSeat(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/seatList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/insertSeatForm.do");
 		
 		commandMap.put("SCREEN_NO", request.getParameter("selectScreen"));
 		
@@ -105,10 +105,10 @@ public class AdminSeatController {
 	
 	@RequestMapping(value = "/deleteSeat.do")
 	public ModelAndView deleteSeat(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("");
-		System.out.println("좌석 삭제 로그 ===============: " + commandMap.getMap());
-		seatService.deleteSeat(commandMap.getMap());
+		ModelAndView mv = new ModelAndView("redirect:/admin/seatList.do");
 		
+		seatService.deleteSeat(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
 	}
 	

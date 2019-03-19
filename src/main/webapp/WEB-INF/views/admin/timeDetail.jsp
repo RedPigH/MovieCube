@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	function timeDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'timeDelete.do?TIME_NO=${map.TIME_NO}';
+			location.href = 'timeDelete.do?TIME_NO=${map.TIME_NO}&currentPage=${currentPage}';
 		} else { //취소
 			return;
 		}
@@ -40,7 +40,7 @@
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
-			<li class="on"><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li class="on"><a href="<%=cp%>/admin/insertSeatForm.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>

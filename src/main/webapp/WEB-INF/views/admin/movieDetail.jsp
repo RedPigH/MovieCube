@@ -49,7 +49,7 @@
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -86,7 +86,7 @@
 				<div class="movie_btn">
 					<span class="btn btnC_02 btnF_01 mr10"></span> 
 					<span></span>
-					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" ${row.STILLCUT}
+					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" 
 						class="btn btnC_01 btnF_04"> <span>수정</span></a>
 					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;">
 						<span>삭제</span></a>

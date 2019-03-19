@@ -86,10 +86,13 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/adminNoticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/notice/noticeDetail");
-
+		
+		System.out.println("공지사항 상세보기 값 확인 ================" + commandMap.getMap());
+		
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
-		System.out.println(commandMap.getMap());
+		
 		mv.addObject("map", map);
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}
@@ -118,7 +121,7 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/adminNoticeDelete.do")
 	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-		System.out.println("혜수짱" + commandMap.getMap());
+		
 		noticeService.deleteBoard(commandMap.getMap());
 
 		return mv;
