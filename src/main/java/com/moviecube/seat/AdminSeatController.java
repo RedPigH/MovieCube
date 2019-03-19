@@ -103,14 +103,14 @@ public class AdminSeatController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/deleteSeat.do")
-	public ModelAndView deleteSeat(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/seatList.do");
-		
-		seatService.deleteSeat(commandMap.getMap());
-		mv.addObject("currentPage", commandMap.get("currentPage"));
-		return mv;
-	}
+	/*
+	 * @RequestMapping(value = "/deleteSeat.do") public ModelAndView
+	 * deleteSeat(CommandMap commandMap) throws Exception{ ModelAndView mv = new
+	 * ModelAndView("redirect:/admin/seatList.do");
+	 * 
+	 * seatService.deleteSeat(commandMap.getMap()); mv.addObject("currentPage",
+	 * commandMap.get("currentPage")); return mv; }
+	 */
 	
 	/*
 	 * @RequestMapping(value = "/TimeSeatList.do") public ModelAndView
