@@ -54,7 +54,7 @@
 							<td>
 								<select class="slct w300" name="selectMovie">
 									<c:forEach var="movie" items="${movieList}">
-									<option value="${movie.MOVIE_NO}" <c:if test="${movie.MOVIE_NAME =='${movie.MOVIE_NAME}'"> selected</c:if>>${movie.MOVIE_NAME}</option>
+									<option value="${movie.MOVIE_NO}" <c:if test="${movie.MOVIE_NAME} =='${movie.MOVIE_NAME}'"> selected</c:if>>${movie.MOVIE_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
