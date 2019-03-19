@@ -13,13 +13,15 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
+<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-
 </head>
+
+<body>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Screen Regist</a></h1>
+	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Register</a></h1>
 	</div>
 </div>
 
@@ -28,57 +30,55 @@
 		<ul>
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
-			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
+			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li class="on"><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">상영관 등록</h3>
+		<h3 class="sub_tit">FAQ 등록</h3>
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>
-					<caption></caption>
+					<caption>FAQ</caption>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
-					
+						
 						<tr>
-							<th scope="row">상영관 이름</th>
+							<th scope="row">타입</th>
 							<td>
-								<input type="text" class="txt w200" id="SCREEN_NAME" name="SCREEN_NAME"  />
-								<font color="red"></font>
+								<select name="FAQ_TYPE" class="slct w200">
+									<option value="영화관">영화관</option>
+									<option value="상영관">상영관</option>
+									<option value="영화예매">영화예매</option>
+									<option value="멤버쉽">멤버쉽</option>
+									<option value="기타">기타</option>
+								</select>
 							</td>
 						</tr>
 						
 						<tr>
-							<th scope="row">상영관 타입</th>
+							<th scope="row">자주묻는질문</th>
 							<td>
-								<select name="MOVIE_TYPE" class="slct w200">
-									<option value="일반">일반</option>
-									<option value="3D">3D</option>
-									<option value="4D">4D</option>
-									<option value="IMAX">IMAX</option>
-								</select>
+								<input type="text" class="txt w350" id=FAQ_SUB" name="FAQ_SUB" />
+								<font color="red"></font>
 							</td>
 						</tr>
 											
 						<tr>
-							<th scope="row">영화관</th>
+							<th scope="row">내용</th>
 							<td>
-								<select name="CINEMA_NO" class="slct w200" >
-									<option value="1">강남 무비큐브</option>
-									<option value="2">교대 무비큐브</option>
-									<option value="3">사당 무비큐브</option>
-								</select>
-								
+								<div class="textarea_grp">
+									<textarea name="FAQ_CONTENT"></textarea>
+								</div>
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -92,7 +92,7 @@
 				
 				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
-				</a>
+				</a>			
 			</div>
 		</form>		
 	</div>
@@ -117,15 +117,16 @@
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='screenList.do' />");
+            comSubmit.setUrl("<c:url value='/admin/faqList.do' />");
             comSubmit.submit();
         }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='screenDetail.do?' />");
+            comSubmit.setUrl("<c:url value='faqWrite.do' />");
             comSubmit.submit();
         }
     </script>
 </body>
 </html>
+	

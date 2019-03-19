@@ -76,7 +76,7 @@ public class AdminScreenController {
 
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 		
-		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(map);
+		List<Map<String, Object>> seatList = seatService.selectScreenSeat(map);
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -84,7 +84,7 @@ public class AdminScreenController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		totalCount = seatlist.size();
+		totalCount = seatList.size();
 		
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "screenDetail");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -95,14 +95,15 @@ public class AdminScreenController {
 			lastCount = paging.getEndCount() + 1;
 		}
 
-		seatlist = seatlist.subList(paging.getStartCount(), lastCount);
+		seatList = seatList.subList(paging.getStartCount(), lastCount);
 		
-		mv.addObject("seatList", seatlist);
-		mv.addObject("list", seatlist);
+		mv.addObject("seatList", seatList);
+		mv.addObject("list", seatList);
+		mv.addObject("SCREEN_NO", commandMap.get("SCREEN_NO"));
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("screenDetail");
+		mv.setViewName("/admin/screenDetail");
 		mv.addObject("map", map);
 
 		return mv;

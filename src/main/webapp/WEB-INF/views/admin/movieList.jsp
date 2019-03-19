@@ -33,9 +33,9 @@
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	<div class="admin_ct">
@@ -80,6 +80,21 @@
 				</a>
 			</div>
 		<%-- </c:if> --%>
+		
+		<div class="search_form">
+			<form>
+				<div class="inner">
+					<select class="slct w100" name="searchNum">
+						<option value="0">제목</option>
+						<option value="1">내용</option>
+					</select>
+					<input class="txt w100" type="text" name="isSearch" />
+					<span class="btn btnC_04 btnP_04">
+						<input type="submit" value="검색" />
+					</span>
+				</div>
+			</form>	
+		</div>
 		
 		<div class="paging">
 			${pagingHtml}
