@@ -106,8 +106,6 @@ public class AdminController {
 		
 		movieService.insertMovie(commandMap.getMap(), request);
 		
-		System.out.println("글쓰기 내용 테스트 1: " + commandMap.getMap());
-		
 		return mv;
 	}
 	
@@ -115,7 +113,6 @@ public class AdminController {
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
 		
-		System.out.println("상세보기  값 확인 ===============: " + commandMap.getMap());
 		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
 		
 		mv.addObject("map", map.get("map"));
@@ -130,12 +127,10 @@ public class AdminController {
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify");
 		
-		System.out.println("수정확인테스트 1: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 
 		mv.addObject("map", map.get("map"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
-		System.out.println("수정확인테스트 2: " + commandMap.getMap());
 		
 		return mv;
 	}
@@ -143,8 +138,6 @@ public class AdminController {
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
-		
-		System.out.println("수정확인테스트 2: " + commandMap.getMap());
 		
 		movieService.modifyMovie(commandMap.getMap(), request);
 		
@@ -165,15 +158,6 @@ public class AdminController {
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		
 		return mv;
-	}
-	
-	@RequestMapping(value = "/imgView.do", method = RequestMethod.GET)
-	public ModelAndView imgView(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		
-		
-		mav.setViewName("/admin/imgView");
-		return mav;
 	}
 
 /*
