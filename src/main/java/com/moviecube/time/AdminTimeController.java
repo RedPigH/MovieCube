@@ -27,6 +27,7 @@ import net.sf.json.JSONObject;
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.Paging;
 
+
 @RequestMapping(value = "/admin")
 @Controller
 public class AdminTimeController {
