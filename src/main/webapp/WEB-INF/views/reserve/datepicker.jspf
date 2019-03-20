@@ -4,7 +4,7 @@
 
 
 <div class="wrapper">
-	<input type="text" id="datepicker" placeholder="날짜를 선택하세요." autocomplete="off" onchange="selected_date_reset(this.value);"/> <i
+	<input type="text" id="datepicker" placeholder="날짜를 선택하세요." autocomplete="off"/> <i
 		class="ion-calendar"></i>
 </div>
 
@@ -181,7 +181,6 @@ input::-moz-placeholder {
       /* to use in wix */
       onSelect: function (selected, event) {
         console.log(selected);
-		SelectedDate = selected;
         /* 
          * wix-send-messages from html component
          * https://support.wix.com/en/article/working-with-the-html-component-in-wix-code

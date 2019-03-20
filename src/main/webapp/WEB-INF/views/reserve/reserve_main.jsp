@@ -19,29 +19,33 @@
 	<%@ include file="../main/favorite.jspf"%>
 
 
+
 	<script type="text/javascript">
-	var CINEMA_NO = new Array;
-	var SelectedDate;
-	
-	var params="CINEMA_NO="+CINEMA_NO+"SelectedDate="+SelectedDate;  
-		
-	
-	
-		function cinema_no_reset(CINEMA_Num){
-			CINEMA_NO.push(CINEMA_Num);
-		}
-		
-		function movieSelect(params) {
+		function movieSelect() {
+
+			var selectedDate = $("#datepicker").val();
+
+			var cinemaNo = [];
+			$("select[name='selectCinema']").each(function(i) {
+				if ($(this).val() == "") {
+				} else {
+					cinemaNo.push($(this).val());
+				}
+			});
+
+			var allData = {
+				"selectedDate" : selectedDate,
+				"cinemaNo" : cinemaNo
+			};
+
+			jQuery.ajaxSettings.traditional = true;
+
 			$.ajax({
 				type : "POST",
 				url : "<c:url value='/reserve/movieSelect.do'/>",
 				dataType : "json",
-				data : {
-					param : params
-				},
+				data : allData,
 
-				
-				
 				success : function(data) {
 					$("#selectScreen").find("option").remove().end().append(
 							"<option value=''>전체</option>");
@@ -53,10 +57,7 @@
 										+ "</option>")
 					}
 				},
-				
-				
-				
-				
+
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert("오류가 발생하였습니다.");
 				}
@@ -81,7 +82,7 @@
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
 							</div>
-							
+
 							<%@ include file="./datepicker.jspf"%>
 
 						</div>
@@ -99,10 +100,26 @@
 						<div
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 
-							<div class="size-199 respon6-next">
+							<c:forEach var="i" begin="1" end="4" step="1">
+							<div class="size-199 respon6-next" id="cinemaNo${i}">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="selectCinema"
-										id="selectCinema1" onchange="cinema_no_reset(this.value);">
+										id="selectCinema">
+										<option value="" style="color: gray;">선 택</option>
+										<c:forEach var="cinema" items="${cinemaList}">
+											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+										</c:forEach>
+									</select>
+									<div class="dropDownSelect2"></div>
+								</div>
+							</div>
+							</c:forEach>
+							
+							
+							<%-- <div class="size-199 respon6-next" id="cinemaNo+${i}">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" name="selectCinema"
+										id="selectCinema">
 										<option value="" style="color: gray;">선 택</option>
 										<c:forEach var="cinema" items="${cinemaList}">
 											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
@@ -115,7 +132,7 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="selectCinema"
-										id="selectCinema2" onchange="cinema_no_reset(this.value);">
+										id="selectCinema">
 										<option value="" style="color: gray;">선 택</option>
 										<c:forEach var="cinema" items="${cinemaList}">
 											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
@@ -128,7 +145,7 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="selectCinema"
-										id="selectCinema3" onchange="cinema_no_reset(this.value);">
+										id="selectCinema">
 										<option value="" style="color: gray;">선 택</option>
 										<c:forEach var="cinema" items="${cinemaList}">
 											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
@@ -141,7 +158,7 @@
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="selectCinema"
-										id="selectCinema4" onchange="cinema_no_reset(this.value);">
+										id="selectCinema">
 										<option value="" style="color: gray;">선 택</option>
 										<c:forEach var="cinema" items="${cinemaList}">
 											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
@@ -149,7 +166,7 @@
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
-							</div>
+							</div> --%>
 
 
 						</div>
@@ -163,7 +180,7 @@
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
 								<a href="#"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-									style="position: unset;"> 영화 추가 </a>
+									style="position: unset;" onclick="movieSelect();"> 영화 추가 </a>
 							</div>
 
 							<div>
