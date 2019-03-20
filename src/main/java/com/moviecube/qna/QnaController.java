@@ -84,12 +84,30 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/qna/adminInquiryDetail.do")
-	public ModelAndView inquiryDetail(CommandMap commandMap) throws Exception {
+	public ModelAndView inquiryDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
-		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
+		
+		System.out.println("항항항항 ::::::" + commandMap.get("QNA_NO"));
+		
+		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
+		
+		System.out.println(cmap.get("CNT"));
+		
+		Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
 		mv.addObject("map", map);
-		mv.addObject("list", map.get("list"));
-
+		
+	
+		
+		
+		/*if(qnaService.countQnaFile(qna_no) > 0) {
+			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
+			mv.addObject("map", map);
+		}
+		else {
+			Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
+			mv.addObject("map", map);
+		}*/
+		
 		return mv;
 	}
 
@@ -97,7 +115,7 @@ public class QnaController {
 	public ModelAndView modifyInquiryForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryModify");
 
-		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
+		Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
 		mv.addObject("map", map);
 		return mv;
 
@@ -107,7 +125,6 @@ public class QnaController {
 	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 
-		
 		qnaService.updateQna(commandMap.getMap(), request);
 		
 		System.out.println("혜쮸꼰듀듀듀듀듀듀듀듀" + commandMap.getMap().size());
@@ -138,7 +155,7 @@ public class QnaController {
 
 	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
 	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
-		Map<String, Object> map1 = qnaService.selectQnaDetail(commandMap.getMap());
+		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
 		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
 
 		Map<String, Object> map = new HashMap();

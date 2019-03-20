@@ -1,7 +1,6 @@
 package com.moviecube.qna;
 
-import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service("qnaService")
 public class QnaServiceImpl implements QnaService {
@@ -22,9 +19,14 @@ public class QnaServiceImpl implements QnaService {
 	private QnaDAO qnaDAO;
 
 	@Override
-	public Map<String, Object> selectQnaDetail(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectQnaDetail1(Map<String, Object> map) throws Exception {
+		return qnaDAO.selectQnaDetail1(map);
 
-		return qnaDAO.selectQnaDetail(map);
+	}
+	
+	@Override
+	public Map<String, Object> selectQnaDetail2(Map<String, Object> map) throws Exception {
+		return qnaDAO.selectQnaDetail2(map);
 
 	}
 
@@ -41,10 +43,11 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.insertQna(map);
 
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
-		for (int i = 0, size = list.size(); i < size; i++) {
-			qnaDAO.insertFile(list.get(i));
-
-		}
+		if(list.size() > 0)
+			for (int i = 0, size = list.size(); i < size; i++) {
+				qnaDAO.insertFile(list.get(i));
+			}
+		
 	}
 
 	// TODO Auto-generated method stub
@@ -100,9 +103,22 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 
-	/*
-	 * @Override public List<Map<String, Object>> selectNoticeList(Map<String,
-	 * Object> map) throws Exception { // TODO Auto-generated method stub return
-	 * noticeDAO.selectNoticeList(map);
-	 */
+	@Override
+	public List<Map<String, Object>> selectQnaFileList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.selectQnaFileList(map);
+	}
+
+	@Override
+	public Map<String, Object> checkQnaFile(Map<String, Object> map) throws Exception {
+		Map<String, Object> result = qnaDAO.checkQnaFile(map);
+		
+		if(result == null) {
+			result.put("CNT", 0);
+			return result;
+		}
+		
+		return result;
+	}
+	
 }

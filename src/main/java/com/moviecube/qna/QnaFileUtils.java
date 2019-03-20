@@ -33,7 +33,9 @@ public class QnaFileUtils {
 		Map<String, Object> listMap = null;
 
 		String QNA_NO = (String) map.get("QNA_NO");
-		System.out.println("넘버 몇이냐 ? " + QNA_NO);
+
+		// multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+		// System.out.println("너의 이름은 무엇이냐 ? " + multipartFile.getOriginalFilename());
 
 		File file = new File(filePath);
 		if (file.exists() == false) {

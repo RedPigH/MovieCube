@@ -61,4 +61,9 @@ public class AbstractDAO {
 		printQueryId(queryId);
 		return sqlSession.selectList(queryId, params);	
 	}
+	
+	public int count(String queryId, Object params) {
+		printQueryId(queryId);
+		return sqlSession.selectOne(queryId, params);
+	}
 }
