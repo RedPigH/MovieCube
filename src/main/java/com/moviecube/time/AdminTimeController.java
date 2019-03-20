@@ -190,8 +190,6 @@ public class AdminTimeController {
 
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
 
-		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
-
 		timeService.deleteTime(commandMap.getMap());
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 
