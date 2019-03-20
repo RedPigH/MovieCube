@@ -13,7 +13,6 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
@@ -31,12 +30,12 @@
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
@@ -56,7 +55,7 @@
 							<th scope="row">영화제목</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" />
-								<font color="red"></font>
+								<font color="green"><span class="ibk">예) 영화제목 (3D) </span></font>
 							</td>
 						</tr>
 						
@@ -80,34 +79,51 @@
 							<th scope="row">개봉일</th>
 							<td>
 								<input type="date" class="txt w200" id="MOVIE_OPENDATE" name="MOVIE_OPENDATE" />
-								<span class="ibk">예)2019-04-05</span>
 								<font color="red"></font>
 							</td>
 						</tr>
 						
 						<tr>
-							<th scope="row">장르 및 러닝타임</th>
+							<th scope="row">장르</th>
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" />
-								<span class="ibk">예)액션 120분 </span>
-								<font color="red"></font>
+								<font color="red"><span class="ibk"></span></font>
+								
 							</td>
 						</tr>
-						
+						<!-- 
+						<tr>
+							<th scope="row">러닝타임</th>
+							<td>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME" />
+								<font color="red"><span class="ibk"></span></font>
+							</td>
+						</tr>
+						 -->
 						<tr>
 							<th scope="row">타입</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_TYPE" name="MOVIE_TYPE" />
-								<span class="ibk">예)2D, 3D</span>
-								<font color="red"></font>
+								<select name="MOVIE_TYPE" class="slct w200">
+									<option value="일반">일반</option>
+									<option value="3D">3D</option>
+									<option value="4D">4D</option>
+									<option value="IMAX">IMAX</option>
+								</select>
 							</td>
 						</tr>
 						
 						<tr>
 							<th scope="row">관람등급</th>
 							<td>
+								<select name="MOVIE_AGE" class="slct w200">
+									<option value="12">12</option>
+									<option value="15">15</option>
+									<option value="19">19</option>
+								</select>							
+							<!-- 
 								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" />
 								<font color="red"></font>
+								 -->
 							</td>
 						</tr>
 						
@@ -166,9 +182,8 @@
 							</td>
 						</tr>	
 					</tbody>
+				</table>	
 				</div>
-				</table>
-					
 					
 			</div>	
 			

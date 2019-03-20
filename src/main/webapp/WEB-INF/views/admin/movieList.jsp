@@ -13,11 +13,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-<style>
-background-color="#ffffff"
-</style>
 </head>
 
 <body>
@@ -34,12 +30,12 @@ background-color="#ffffff"
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	<div class="admin_ct">
@@ -53,8 +49,12 @@ background-color="#ffffff"
 				<li><a href="#this" name="poster" class="list"> 
 				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
 				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
+				<input type="hidden" id="currentPage" value="${currentPage}">
 				<span class="detail">상세보기</span>
 						<div class="explan">
+							<p>
+								<strong>영화제목</strong> : ${row.MOVIE_NAME}
+							</p>
 							<p>
 								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
 							</p>
@@ -80,6 +80,21 @@ background-color="#ffffff"
 				</a>
 			</div>
 		<%-- </c:if> --%>
+		
+		<div class="search_form">
+			<form>
+				<div class="inner">
+					<select class="slct w100" name="searchNum">
+						<option value="0">제목</option>
+						<option value="1">내용</option>
+					</select>
+					<input class="txt w100" type="text" name="isSearch" />
+					<span class="btn btnC_04 btnP_04">
+						<input type="submit" value="검색" />
+					</span>
+				</div>
+			</form>	
+		</div>
 		
 		<div class="paging">
 			${pagingHtml}
@@ -112,8 +127,10 @@ background-color="#ffffff"
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='movieDetail.do' />");
             comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+            comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
+        
     </script> 
 </body>
 </html>

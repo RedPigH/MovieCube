@@ -16,9 +16,27 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
+
+	$(function(){
+		var schedule_btn = $(".schedule_delete");
+		
+		schedule_btn.each(function(){
+			var btn = $(this).children('.btn');
+		
+			btn.on('click',function(){
+				var check = confirm("정말 삭제하시겠습니까?");	
+				if(check){
+					return true;
+				}else{
+					return false;
+				}
+			})
+		})
+	}) 
+	
 	function screenDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}';
+			location.href = 'screenDelete.do?SCREEN_NO=${map.SCREEN_NO}&currentPage={currentPage}}';
 		} else { //취소
 			return;
 		}
@@ -39,18 +57,18 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
 	<div class="admin_ct">
 		<div class="movie_list">
-			<h3 class="sub_tit">상영관 상세보기</h3>
+			<h3 class="sub_tit">상영관 상세 정보</h3>
 			<div class="tbl_type_01">
 				<table>
 					<caption>상영관</caption>
@@ -79,6 +97,57 @@
 				</table>
 			</div>
 		</div>
+		
+		<div class="admin_ct">
+		<h3 class="sub_tit">좌석 정보</h3>
+			<div class="tbl_type_02">
+				<table>
+					<caption>시간표 등록</caption>
+					<colgroup>
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+						<col style="width:25%" />
+					</colgroup>
+					
+					<thead>
+						<tr>
+							<th scope="col">상영관 </th>
+							<th scope="col">좌석 행</th>
+							<th scope="col">좌석 열</th>
+							<th scope="col">삭제</th>
+							
+						</tr>
+					</thead>
+	
+					<tbody>
+					<c:choose>
+					<c:when test="${fn:length(seatList) > 0}">	
+						<c:forEach var="row" items="${seatList}">
+						<tr>
+							<td><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
+							<input type="hidden" id="SEAT_NO" value="${row.SEAT_NO}"/></a></td>
+							<td>${row.SEAT_ROW}</td>
+							<td>${row.SEAT_COL}</td>
+							<td class="schedule_delete">
+							<a href = "deleteSeat.do?SEAT_NO=${row.SEAT_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03">
+								<span>삭제</span>
+							</a></td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td colspan="13" class="tac">등록된 좌석이 없습니다.</td>
+					</tr>
+					</c:otherwise>
+				</c:choose>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="paging">${pagingHtml}</div>
+		
 		<div class="btn_type_03">
 			
 			<span class="btn btnC_04 btnP_04">

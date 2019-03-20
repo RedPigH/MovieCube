@@ -61,13 +61,13 @@ public class NoticeController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("noticeList");
+		mv.setViewName("/notice/noticeList");
 		return mv;
 	}
 
 	@RequestMapping(value = "/notice/adminNoticeWriteForm.do")
 	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeWriteForm");
+		ModelAndView mv = new ModelAndView("/notice/noticeWriteForm");
 
 		return mv;
 
@@ -85,18 +85,21 @@ public class NoticeController {
 
 	@RequestMapping(value = "/notice/adminNoticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeDetail");
-
+		ModelAndView mv = new ModelAndView("/notice/noticeDetail");
+		
+		System.out.println("공지사항 상세보기 값 확인 ================" + commandMap.getMap());
+		
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
-		System.out.println(commandMap.getMap());
+		
 		mv.addObject("map", map);
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/notice/adminNoticeModifyForm.do")
 	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeModify");
+		ModelAndView mv = new ModelAndView("/notice/noticeModify");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -118,7 +121,7 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/adminNoticeDelete.do")
 	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-		System.out.println("혜수짱" + commandMap.getMap());
+		
 		noticeService.deleteBoard(commandMap.getMap());
 
 		return mv;

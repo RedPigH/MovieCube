@@ -34,6 +34,9 @@
 	href="/moviecube/resources/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
+	href="/moviecube/resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
 	href="/moviecube/resources/vendor/slick/slick.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"

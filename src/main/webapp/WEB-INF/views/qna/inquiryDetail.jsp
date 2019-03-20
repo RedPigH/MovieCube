@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,22 +38,28 @@
 				<td colspan="4">${map.QNA_CONTENT }</td>
 			</tr>
 			<tr>
+
+
+ 			<tr>
 				<th scope="row">첨부파일</th>
-				<td colspan="3">
-						<input type="hidden" id="QNA_FILE_NO" value="${map.QNA_FILE_NO }">
-						<a href="#this" name="file">${map.QNA_ORGNAME }</a>
+				<td colspan="3"><input type="hidden" id="QNA_FILE_NO"
+					value="${map.QNA_FILE_NO }"> <a href="#this" name="file">${map.QNA_ORGNAME }</a>
 				</td>
-			</tr>
-<%-- 				<tr>
-				<th scope="row">첨부파일</th>
-				<td colspan="3">${map.QNA_ORGNAME }</td>
-			</tr>  --%>
+			</tr> 
+			<tr>
+			<td>
+<%-- 				<img src="<%=cp%>//resources//upload/qna/${QNA_SAVNAME}"/> --%>
+					<img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}"/>
+				</td>
+				</tr>
 		</tbody>
 	</table>
 	<br />
 
 	<a href="#this" class="btn" id="list">목록으로</a>
+	<a href="#this" class="btn" id="reply">답변달기</a>
 	<a href="#this" class="btn" id="update">수정하기</a>
+
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">
@@ -65,9 +74,15 @@
 				fn_openBoardUpdate();
 			});
 
+			$("#reply").on("click", function(e) { /* 답변달기 */
+				e.preventDefault();
+				fn_openBoardReply();
+			});
+
 			$("a[name='file']").on("click", function(e) {/*파일 이름  */
 				e.preventDefault();
 			});
+
 		});
 
 		function fn_openBoardList() {
@@ -82,15 +97,22 @@
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryModifyForm.do'/>")
 			comSubmit.addParam("QNA_NO", qna_no);
 			comSubmit.submit();
-
-			/* 	function fn_deleteBoard() {
-					var comSubmit = new ComSubmit();
-					var qna_no = "${map.QNA_NO}";
-					comSubmit.setUrl("<c:url value='/qna/adminInquiryDelete.do'/>");
-					comSubmit.addParam("QNA_NO", qna_no);
-					comSubmit.submit();
-					// im babo */
 		}
+
+		function fn_openBoardReply() {
+			var qna_no = "${map.QNA_NO}";
+			var comSubmit = new ComSubmit();
+			comSubmit.setUrl("<c:url value='/qna/adminInquiryReplyForm.do'/>");
+			comSubmit.addParam("QNA_NOM", qna_no);
+			comSubmit.submit();
+		}
+		/* 	function fn_deleteBoard() {
+			var comSubmit = new ComSubmit();
+			var qna_no = "${map.QNA_NO}";
+			comSubmit.setUrl("<c:url value='/qna/adminInquiryDelete.do'/>");
+			comSubmit.addParam("QNA_NO", qna_no);
+			comSubmit.submit();
+			// im babo */
 	</script>
 </body>
 </html>

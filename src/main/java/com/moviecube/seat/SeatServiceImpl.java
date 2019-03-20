@@ -15,7 +15,12 @@ public class SeatServiceImpl implements SeatService {
 	private SeatDAO seatDAO;
 
 	@Override
-	public List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception {
+	public List<Map<String, Object>> selectSeatList(Map<String, Object> map) throws Exception {
+		return seatDAO.selectSeatList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception{
 		return seatDAO.selectScreenSeat(map);
 	}
 

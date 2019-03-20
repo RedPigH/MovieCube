@@ -54,15 +54,14 @@ public class MovieController {
 		mv.addObject("map", map.get("map"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
 		
-		
 		return mv;
 	}
 	
 	@RequestMapping(value="/movieModify.do")
-	public ModelAndView movieModify(CommandMap commandMap) throws Exception {
+	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/movieDetail");
 		
-		movieService.modifyMovie(commandMap.getMap());
+		movieService.modifyMovie(commandMap.getMap(), request);
 		
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		
@@ -70,10 +69,10 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="/movieDelete.do")
-	public ModelAndView movieDelete(CommandMap commandMap) throws Exception {
+	public ModelAndView movieDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/movieList");
 		
-		movieService.modifyMovie(commandMap.getMap());
+		movieService.deleteMovie(commandMap.getMap(), request);
 		
 		return mv;
 	}

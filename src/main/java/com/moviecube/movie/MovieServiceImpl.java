@@ -1,5 +1,6 @@
 package com.moviecube.movie;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class MovieServiceImpl implements MovieService{
 	
 	@Resource(name="movieFileUtils") // @Conponent 어노테이션을 이용하여 등록한 객체를 @Resource 어노테이션을 이용하여 객체를 선언 한다
 	private MovieFileUtils fileUtils;
-
+	
 	@Override
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectMovieList(map);
@@ -33,12 +34,10 @@ public class MovieServiceImpl implements MovieService{
 	public void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		MovieDAO.insertMovie(map);
 		
-		// FileUtils 클래스를 이용하야 파일을 저장하고 그 데이터를 가져온 후 DB에 저장하는 로직
-		List<Map<String,Object>> Filelist = fileUtils.parseInsertFileInfo(map, request);
-		
-        List<Map<String,Object>> Filelist2 = fileUtils.parseInsertFileInfo2(map, request);
-		for(int i=0, size=Filelist.size(); i<size; i++){
-            MovieDAO.insertFile(Filelist.get(i));
+		List<Map<String,Object>> fileList = fileUtils.parseInsertFileInfo(map, request);
+		 	MovieDAO.insertFile(fileList.get(0)); 	
+        for(int i=1, size=fileList.size(); i<size; i++){
+        	MovieDAO.insertFile2(fileList.get(i));
         }
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request; 
@@ -64,19 +63,65 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
-		Map<String, Object> resultMap = MovieDAO.selectMovieDetail(map);
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		Map<String, Object> tempMap = MovieDAO.selectMovieDetail(map);
+		resultMap.put("map", tempMap);
+		
+		List<Map<String, Object>> movieDetail = MovieDAO.selectMovieFileDetail(map);
+		resultMap.put("movieDetail", movieDetail);
 		return resultMap;
 	}
 
 	@Override
-	public void modifyMovie(Map<String, Object> map) throws Exception {
+	public void modifyMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		
 		MovieDAO.modifyMovie(map);
 		
-	}
+		MovieDAO.updateFileList(map);
+		MovieDAO.updateFileList2(map);
+		
+		List<Map<String,Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
+		Map<String, Object> tempMap = null;
+		
+		for(int i=0, size=fileList.size(); i<size; i++){
+			tempMap = fileList.get(i);
+			if (i == 0) {
+				
+				if(tempMap.get("IS_NEW").equals("Y")) { 
+					MovieDAO.insertFile(tempMap);	
+				}
+				if(tempMap.get("IS_NEW").equals("N")) {
+					MovieDAO.modifyFile(tempMap);
+				}
+			}
+/*			
+			if (i > 0 ) {
+				if(tempMap.get("IS_NEW").equals("Y")) {
+					MovieDAO.insertFile2(tempMap);
+				}
+				if (tempMap.get("IS_NEW").equals("N")) {
+					MovieDAO.modifyFile2(tempMap);	
+				}
+			}
+*/			
+/*				
+			if (i >  0 || tempMap.get("IS_NEW").equals("Y")) {
+				MovieDAO.insertFile2(tempMap);
+			}
+			
+			if (i >  0 || tempMap.get("IS_NEW").equals("N")) {
+				MovieDAO.modifyFile2(tempMap);
+			}
+*/			
+		}
+
+	}	
 
 	@Override
-	public void deleteMovie(Map<String, Object> map) throws Exception {
-		MovieDAO.deleteMovie(map);
+	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
+		MovieDAO.deleteMovie(map);	
+//		MovieDAO.deleteFile(map);
+//		MovieDAO.deleteFile2(map);
 	}
 }

@@ -72,6 +72,7 @@
 		function fn_insertBoard() {
 			var comSubmit = new ComSubmit("frm");
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryWrite.do'/>");
+			comSubmit.addParam("QNA_NO", $("#QNA_NO").val());
 			comSubmit.submit();
 		}
 	</script>

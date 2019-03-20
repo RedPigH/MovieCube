@@ -29,47 +29,45 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do/">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
 	<div class="admin_ct">
 		<h3 class="sub_tit">스크린 </h3>
-		<div class="tbl_type_02">
-			<table>
+			<div class="tbl_type_02">
+				<table>
 				<caption>스크린 리스트</caption>
 				<colgroup>
-					<col style="width:10%;" />
+					<col style="width:15%;" />
+					<col style="width:45%;" />
 					<col style="width:20%;" />
-					<col style="width:40%;" />
-					<col style="width:10%;" />
-					<col style="width:20%;" />	
+					<col style="width:20%;" />
 				</colgroup>
+				
 				<thead>
 					<tr>
 						<th scope="col">상영관 번호</th>
 						<th scope="col">상영관 이름</th>
-						<th>
 						<th scope="col">상영관 타입</th>
 						<th scope="col">영화관 번호(이름)</th>
-						<th> </th>
 						
 					</tr>
 				</thead>
+				
 				<tbody>
-					
 				<c:choose>
 					<c:when test="${fn:length(screenList) > 0}">
             			<c:forEach items="${screenList}" var="row">
 						<tr>
-							<td>${row.SCREEN_NO}<td>
-							<td class="subject" align="left"><a href="#this" name="SCREEN_NAME">${row.SCREEN_NAME}
-							<input type="hidden" id="SCREEN_NO" value="${row.SCREEN_NO}"/></a></td>
+							<td>${row.SCREEN_NO}</td>
+							<td><a href="#this" id="SCREEN_NAME" name="SCREEN_NAME">
+							<input type="hidden" id="SCREEN_NO" value="${row.SCREEN_NO}"/>${row.SCREEN_NAME}</a></td>
 							<td>${row.SCREEN_TYPE}</td>
 							<td>${row.CINEMA_NAME}</td>
 						</tr>
@@ -82,10 +80,26 @@
 				</tbody>
 			</table>
 		</div>
+		
 		<div class="btn_type_03">
 			<a href="#this" class="btn btnC_01 btnP_04" id="write">
 				<span>글쓰기</span>
 			</a>
+		</div>
+		
+		<div class="search_form">
+			<form>
+				<div class="inner">
+					<select class="slct w100" name="searchNum">
+						<option value="0">제목</option>
+						<option value="1">내용</option>
+					</select>
+					<input class="txt w100" type="text" name="isSearch" />
+					<span class="btn btnC_04 btnP_04">
+						<input type="submit" value="검색" />
+					</span>
+				</div>
+			</form>	
 		</div>
 		
 		<div class="paging">${pagingHtml}</div>
@@ -117,6 +131,7 @@
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='screenDetail.do' />");
             comSubmit.addParam("SCREEN_NO", obj.parent().find("#SCREEN_NO").val());
+//          comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
     </script> 

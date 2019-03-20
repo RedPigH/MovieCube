@@ -22,4 +22,19 @@ public class MemberServiceImpl implements MemberService {
 	  public int findUsedID(Map<String, Object> map) throws Exception{
 		  return memberDAO.findUsedID(map);
 	  }
+	  
+	  @Override
+	  public Map<String, Object> checkUserIdAndPassword(Map<String, Object> map) throws Exception{
+		  return memberDAO.checkUserIdAndPassword(map);
+	  }
+	  
+	  @Override
+	  public String findId(Map<String, Object> map) throws Exception{
+		  return memberDAO.findId(map);
+	  }
+	  
+	  @Override
+	  public String findPasswd(Map<String, Object> map) throws Exception{
+		  return memberDAO.findPasswd(map);
+	  }
 }

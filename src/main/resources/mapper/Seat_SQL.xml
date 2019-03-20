@@ -3,11 +3,23 @@
 
 <mapper namespace="seat">
 
+	<!-- 좌석 리스트 -->
+	<select id="selectSeatList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[ 
+		SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s, SCREEN c
+			WHERE s.SCREEN_NO = c.SCREEN_NO
+			ORDER BY SEAT_NO ASC
+		]]>
+	</select>
+		
 	<!-- 상영관 별 좌석 리스트 -->
 	<select id="selectScreenSeat" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT SEAT_NO FROM SEAT
-			WHERE SCREEN_NO = #{SCREEN_NO}
+			SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s INNER JOIN SCREEN c 
+			ON s.SCREEN_NO = c.SCREEN_NO
+			WHERE s.SCREEN_NO = #{SCREEN_NO}
 			ORDER BY SEAT_NO ASC
 		]]>
 	</select>
@@ -42,10 +54,8 @@
 	</select>
 
 	<!-- 좌석 입력 -->
-	<insert id="insertSeat" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="SEAT_NO">
-		<selectKey keyProperty="SEAT_NO" resultType="int"
-			order="BEFORE">
+	<insert id="insertSeat" parameterType="hashmap" useGeneratedKeys="true" keyProperty="SEAT_NO">
+		<selectKey keyProperty="SEAT_NO" resultType="int" order="BEFORE">
 			SELECT SEAT_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 	<![CDATA[

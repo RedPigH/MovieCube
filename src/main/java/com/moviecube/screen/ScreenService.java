@@ -6,6 +6,8 @@ import java.util.Map;
 public interface ScreenService {
 
 	List<Map<String, Object>> selectScreenList(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map) throws Exception;
 
 	Map<String, Object> screenDetail(Map<String, Object> map) throws Exception;
 
