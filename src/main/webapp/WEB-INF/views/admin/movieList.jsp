@@ -48,6 +48,7 @@
 					
 				<li><a href="#this" name="poster" class="list"> 
 				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
+				
 				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
 				<input type="hidden" id="currentPage" value="${currentPage}">
 				<span class="detail">상세보기</span>

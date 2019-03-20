@@ -24,7 +24,7 @@
 	<div class="admin">
 		<div class="logo">
 			<h1>
-				<a href="<%=cp%>/eventList.do">MovieCube Administrator -
+				<a href="<%=cp%>/admin/movieList.do">MovieCube Administrator -
 					EVENT List</a>
 			</h1>
 		</div>
@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		<div class="admin_ct">
-			<div class="movie_list">
+			<div class="event_list">
 				<h3 class="sub_tit">이벤트</h3>
 				<ul>
 					<c:choose>
@@ -53,23 +53,24 @@
 							<c:forEach items="${eventList}" var="row">
 
 								<li><a href="#this" name="poster" class="list"> <img
-										src="<%=cp%>/resources/upload/event/${row.EVENT_SAVNAME}" width="350" height="350"
-										
+										src="<%=cp%>/resources/upload/event/${row.EVENT_SAVNAME}"
 										alt="이벤트" /> <input type="hidden" id="EVENT_NO"
 										value="${row.EVENT_NO}"> <input type="hidden"
 										id="currentPage" value="${currentPage}"> <span
 										class="detail">상세보기</span>
 										<div class="explan">
 											<p>
-												<strong>이벤트 제목</strong> : ${row.EVENT_NAME} 
+												<strong>이벤트 제목</strong> : ${row.EVENT_NAME}
 											</p>
 
 											<p>
-												<strong></strong> : ${row.EVENT_OPENDATE}
+												<strong>이벤트 시작일</strong> :
+												<c:set var="TextValue" value="${row.EVENT_OPENDATE}" />
 											</p>
 
 											<p>
-												<strong>~</strong> :${row.EVENT_CLOSEDATE}
+												<strong>이벤트 종료일</strong> :
+												<c:set var="TextValue" value="${row.EVENT_CLOSEDATE}" />
 											</p>
 										</div>
 								</a></li>

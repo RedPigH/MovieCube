@@ -20,8 +20,7 @@ public class EventFileUtils {
 	private static final String filePath = "C:\\muyilove\\src\\main\\webapp\\resources\\upload\\event\\"; // Event 이미지
 																											// 파일 저장 위치
 
-	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
-			throws Exception {
+	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 
@@ -33,8 +32,9 @@ public class EventFileUtils {
 		List<Map<String, Object>> Filelist = new ArrayList<Map<String, Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는
 																					// List (다중파일전송)
 		Map<String, Object> FilelistMap = null;
+		
 
-		int EVENT_NO = (Integer) map.get("EVENT_NO"); // EventServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
+		int EVENT_NO = (int)map.get("EVENT_NO");	 // EventServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
 
 		File file = new File(filePath); // 파일을 저장할 경로에 해당폴더가 없으면 폴더를 생성한다
 		if (file.exists() == false) {
@@ -45,9 +45,8 @@ public class EventFileUtils {
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			System.out.println("test ============================== " + multipartFile.getName());
 
-			if (multipartFile.getName().equals("EVENT_ORGNAME")) {
-				if (multipartFile.isEmpty() == false) { // 파일의 정보를 받아서 새로우은 이름으로 변경하는 로직
-					originalFileName = multipartFile.getOriginalFilename();
+			if (multipartFile.isEmpty() == false) {		
+				originalFileName = multipartFile.getOriginalFilename();
 					originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 					storedFileName = CommonUtils.getRandomString() + originalFileExtension; // 32자리의 랜덤한 파일이름 생성하고 원본파일의
 																							// 확장자를 붙여준다
@@ -64,9 +63,11 @@ public class EventFileUtils {
 				}
 
 			}
-		}
+		
 		return Filelist;
-	}
+
+}
+
 
 	public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object> map, HttpServletRequest request)
 			throws Exception {
@@ -87,7 +88,7 @@ public class EventFileUtils {
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			System.out.println("test ============================== " + multipartFile.getName());
 
-			if (multipartFile.getName().equals("EVENT_ORGNAME") || multipartFile.isEmpty() == false) {
+			if (multipartFile.isEmpty() == false && multipartFile.getName().equals("EVENT_ORGNAME")) {
 
 				originalFileName = multipartFile.getOriginalFilename();
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));

@@ -52,7 +52,7 @@ values
 #{EVENT_OPENDATE},
 #{EVENT_CLOSEDATE},
 #{EVENT_URL}
-}
+)
 ]]>
 
 	</insert>
@@ -68,7 +68,7 @@ values
 	)
 	VALUES
 	(
-	MV_EVENT_FILE_NO_SEQ.NEXTVAL,
+	MC_EVENT_FILE_NO_SEQ.NEXTVAL,
 	#{EVENT_NO},
 	#{EVENT_ORGNAME},
 	#{EVENT_SAVNAME}
