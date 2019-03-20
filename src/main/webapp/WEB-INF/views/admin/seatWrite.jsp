@@ -32,9 +32,9 @@
 			<li class="on"><a href="<%=cp%>/admin/seatList.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	

@@ -42,9 +42,9 @@
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
@@ -72,16 +72,19 @@
 						<tr>
 							<th scope="row">상영관 타입</th>
 							<td>
-								<input type="text" class="txt w200" id="SCREEN_TYPE" name="SCREEN_TYPE" value="${map.SCREEN_TYPE}" />
-								<span class="ibk">예)3D, 4D</span>
-								<font color="red"></font>
+								<select name="SCREEN_TYPE" class="slct w200" value="${map.SCREEN_TYPE}">
+									<option value="일반" <c:if test="${map.MOVIE_TYPE == '일반'}"> selected</c:if>>2D</option>
+									<option value="3D" <c:if test="${map.MOVIE_TYPE == '3D'}"> selected</c:if>>3D</option>
+									<option value="4D" <c:if test="${map.MOVIE_TYPE == '4D'}"> selected</c:if>>4D</option>
+									<option value="IMAX" <c:if test="${map.MOVIE_TYPE == 'IMAX'}"> selected</c:if>>IMAX</option>
+								</select>
 							</td>
 						</tr>
 											
 						<tr>
 							<th scope="row">영화관 번호</th>
 							<td>
-								<select name="CINEMA_NO" class="txt w200" >
+								<select name="CINEMA_NO" class="slct w200" >
 									<option value="1">강남 무비큐브</option>
 									<option value="2">교대 무비큐브</option>
 									<option value="3">사당 무비큐브</option>

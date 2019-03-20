@@ -11,5 +11,7 @@ public interface EventService {
 
 	public void insertEvent(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
+	public Map<String, Object> selectEventDetail(Map<String, Object> map) throws Exception;
+
 
 }

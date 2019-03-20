@@ -40,10 +40,23 @@ public class EventController {
 	@RequestMapping(value="/eventWrite.do")
 	public ModelAndView eventWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/event/eventList");
-		
+		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_NAME"));
+		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_TYPE"));
+		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_OPENDATE"));
+		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_CLOSEDATE"));
 		eventService.insertEvent(commandMap.getMap(), request);
 		
 		return mv;
 	}
 
+	@RequestMapping(value="/eventDetail.do")
+	public ModelAndView eventDetail(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/eventDetail");
+		
+		Map<String,Object> map = eventService.selectEventDetail(commandMap.getMap());
+		mv.addObject("map",map.get("map"));
+		mv.addObject("eventDetail",map.get("eventDetail"));
+		
+		return mv;
+	}
 }

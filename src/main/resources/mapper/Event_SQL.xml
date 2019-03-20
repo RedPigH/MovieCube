@@ -32,7 +32,7 @@ order by e.EVENT_NO desc
 		keyProperty="EVENT_NO" useGeneratedKeys="true">
 
 		<selectKey resultType="int" keyProperty="EVENT_NO"
-			order="BEFORE">select MC_EVENT_NO_SEQ.NEXTVAL from DUAL</selectKey>
+			order="BEFORE">select MC_EVENT_NO_SEQ.NEXTVAL from DUAL </selectKey>
 
 <![CDATA[
 insert into MC_EVENT
@@ -56,4 +56,44 @@ values
 ]]>
 
 	</insert>
+
+	<insert parameterType="hashmap" id="insertFile">
+	<![CDATA[
+	INSERT INTO MC_EVENT_FILE
+	(
+	FILE_NO,
+	EVENT_NO,
+	EVENT_ORGNAME,
+	EVENT_SAVNAME
+	)
+	VALUES
+	(
+	MV_EVENT_FILE_NO_SEQ.NEXTVAL,
+	#{EVENT_NO},
+	#{EVENT_ORGNAME},
+	#{EVENT_SAVNAME}
+	)
+	]]>
+	
+	</insert>
+
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectEventDetail">
+	
+	<![CDATA[
+	select
+	e.EVENT_NO,
+	e.EVENT_NAME, 
+	e.EVENT_TYPE,
+	e.EVENT_OPENDATE,
+	e.EVENT_CLOSEDATE,
+	e.EVENT_URL,
+	f.FILE_NO,
+	f.EVENT_ORGNAME,
+	f.EVENT_SAVNAME
+	FROM MV_EVENT e INNER JOIN MV_EVENT_FILE f
+	ON e.EVENT_NO = f.EVENT_NO
+	WHERE e.EVENT_NO = #{EVENT_NO}
+	 ]]>
+	</select>
 </mapper>
