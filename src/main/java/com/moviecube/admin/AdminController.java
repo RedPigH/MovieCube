@@ -133,11 +133,12 @@ public class AdminController {
 	@RequestMapping(value="/movieModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify");
-		
+		System.out.println("영화 수정 폼 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 
 		mv.addObject("map", map.get("map"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
+		mv.addObject("fileList", map.get("fileList"));
 		
 		return mv;
 	}
@@ -145,9 +146,9 @@ public class AdminController {
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
-		
+		System.out.println("영화 수정 처리 값 확인 =============: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap(), request);
-		
+
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 
 		return mv;
