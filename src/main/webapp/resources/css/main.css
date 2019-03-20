@@ -1935,7 +1935,16 @@ input.num-product::-webkit-inner-spin-button {
   opacity: 0.8;
 }
 
+
+/* 중원이가 추가함 */
+.no-scrolling {
+   height:100%;
+   overflow:hidden;
+}
+
 .show-modal1 {
+  /* 중원이가 추가함 */
+  /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
 }
@@ -2594,6 +2603,14 @@ input.num-product::-webkit-inner-spin-button {
 
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
+.size-197 {
+	width: 35%;
+}
+
+.size-198 {
+	width: 25%;
+}
+
 .size-199 {
 	width: 40%;
 	margin-bottom: 30px;

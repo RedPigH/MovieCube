@@ -60,8 +60,8 @@
 									<select class="js-select2" name="time">
 										<option style="color: gray">지역</option>
 										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
+										<option>사당</option>
+										<option>교대</option>
 										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
@@ -73,8 +73,8 @@
 									<select class="js-select2" name="time">
 										<option style="color: gray">지역</option>
 										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
+										<option>사당</option>
+										<option>교대</option>
 										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
@@ -86,8 +86,8 @@
 									<select class="js-select2" name="time">
 										<option style="color: gray">지역</option>
 										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
+										<option>사당</option>
+										<option>교대</option>
 										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
@@ -99,8 +99,8 @@
 									<select class="js-select2" name="time">
 										<option style="color: gray">지역</option>
 										<option>강남</option>
-										<option>신촌</option>
-										<option>동대문</option>
+										<option>사당</option>
+										<option>교대</option>
 										<option>중원이네</option>
 									</select>
 									<div class="dropDownSelect2"></div>
@@ -167,15 +167,15 @@
 							
 							<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
 							<a href="/moviecube/reserve_seat.do" class="flex-c-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								<div class="size-200">
+								<div class="size-198">
 									<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
 								</div>
 
-								<div class="size-200">
+								<div class="size-198">
 									<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
 								</div>
 
-								<div class="size-200">
+								<div class="size-197">
 									<span class="mtext-110 cl2"> ${row.START_TIME } ~
 										${row.END_TIME } </span>
 								</div>
