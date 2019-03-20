@@ -245,8 +245,8 @@
 						<div class="tab-pane fade" id="information" role="tabpanel">
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-									<!-- 여기부처 -->
-									<%@ include file="cut.jspf" %>
+									<!-- 여기가 스틸컷 탭 -->
+									<%@ include file="cut.jsp" %>
 								</div>
 							</div>
 						</div>

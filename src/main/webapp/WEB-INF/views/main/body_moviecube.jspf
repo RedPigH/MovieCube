@@ -230,17 +230,6 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 										'${row.MOVIE_OPENDATE }'
 									);" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 										상세보기 </a>
-									<%-- <input type="hidden" id="modal_movie_no" value="${row.MOVIE_NO }"> --%>
-									<%-- <input type="hidden" id="modal_movie_name" value="${row.MOVIE_NAME }"> 
-									<input type="hidden" id="modal_movie_type" value="${row.MOVIE_TYPE }"> 
-									<input type="hidden" id="modal_movie_director" value="${row.MOVIE_DIRECTOR }"> 
-									<input type="hidden" id="modal_movie_actor" value="${row.MOVIE_ACTOR }"> 
-									<input type="hidden" id="modal_movie_genre" value="${row.MOVIE_GENRE }"> 
-									<input type="hidden" id="modal_movie_content" value="${row.MOVIE_CONTENT }"> 
-									<input type="hidden" id="modal_movie_age" value="${row.MOVIE_AGE }"> 
-									<input type="hidden" id="modal_movie_url" value="${row.MOVIE_URL }">
-									<input type="hidden" id="modal_poster_savname" value="${row.POSTER_SAVNAME }"> 
-									<input type="hidden" id="modal_movie_grade" value="${row.MOVIE_GRADE }"> --%>
 
 								</div>
 
