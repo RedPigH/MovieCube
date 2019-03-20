@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service("timeService")
 public class TimeServiceImpl implements TimeService {
 
+	
 	@Resource(name = "timeDAO")
 	private TimeDAO timeDAO;
 

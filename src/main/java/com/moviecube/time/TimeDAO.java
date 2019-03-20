@@ -10,6 +10,7 @@ import com.moviecube.dao.AbstractDAO;
 @Repository("timeDAO")
 public class TimeDAO extends AbstractDAO {
 
+	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectTimeList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("time.selectTimeList", map);
