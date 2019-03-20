@@ -19,10 +19,56 @@
 	<%@ include file="../main/favorite.jspf"%>
 
 
+	<script type="text/javascript">
+	var CINEMA_NO = new Array;
+	var SelectedDate;
+	
+	var params="CINEMA_NO="+CINEMA_NO+"SelectedDate="+SelectedDate;  
+		
+	
+	
+		function cinema_no_reset(CINEMA_Num){
+			CINEMA_NO.push(CINEMA_Num);
+		}
+		
+		function movieSelect(params) {
+			$.ajax({
+				type : "POST",
+				url : "<c:url value='/reserve/movieSelect.do'/>",
+				dataType : "json",
+				data : {
+					param : params
+				},
+
+				
+				
+				success : function(data) {
+					$("#selectScreen").find("option").remove().end().append(
+							"<option value=''>전체</option>");
+
+					for (var idx = 0; idx < data.result.length; idx++) {
+						$("#selectScreen").append(
+								"<option value='"+data.result[idx].SCREEN_NO+"'>"
+										+ data.result[idx].SCREEN_NAME
+										+ "</option>")
+					}
+				},
+				
+				
+				
+				
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("오류가 발생하였습니다.");
+				}
+			});
+		}
+	</script>
+
+
 	<!-- 영화 예매 -->
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container" style="margin-top: 100px">
-		
+
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -35,6 +81,7 @@
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
 							</div>
+							
 							<%@ include file="./datepicker.jspf"%>
 
 						</div>
@@ -52,17 +99,14 @@
 						<div
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 
-							<%-- <c:forEach var="item" items="${list}" begin=0 end=5 step=1 varStatus="status">
-
-							</c:forEach> --%>
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="time">
-										<option style="color: gray">지역</option>
-										<option>강남</option>
-										<option>사당</option>
-										<option>교대</option>
-										<option>중원이네</option>
+									<select class="js-select2" name="selectCinema"
+										id="selectCinema1" onchange="cinema_no_reset(this.value);">
+										<option value="" style="color: gray;">선 택</option>
+										<c:forEach var="cinema" items="${cinemaList}">
+											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+										</c:forEach>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -70,12 +114,12 @@
 
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="time">
-										<option style="color: gray">지역</option>
-										<option>강남</option>
-										<option>사당</option>
-										<option>교대</option>
-										<option>중원이네</option>
+									<select class="js-select2" name="selectCinema"
+										id="selectCinema2" onchange="cinema_no_reset(this.value);">
+										<option value="" style="color: gray;">선 택</option>
+										<c:forEach var="cinema" items="${cinemaList}">
+											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+										</c:forEach>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -83,12 +127,12 @@
 
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="time">
-										<option style="color: gray">지역</option>
-										<option>강남</option>
-										<option>사당</option>
-										<option>교대</option>
-										<option>중원이네</option>
+									<select class="js-select2" name="selectCinema"
+										id="selectCinema3" onchange="cinema_no_reset(this.value);">
+										<option value="" style="color: gray;">선 택</option>
+										<c:forEach var="cinema" items="${cinemaList}">
+											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+										</c:forEach>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -96,12 +140,12 @@
 
 							<div class="size-199 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="time">
-										<option style="color: gray">지역</option>
-										<option>강남</option>
-										<option>사당</option>
-										<option>교대</option>
-										<option>중원이네</option>
+									<select class="js-select2" name="selectCinema"
+										id="selectCinema4" onchange="cinema_no_reset(this.value);">
+										<option value="" style="color: gray;">선 택</option>
+										<c:forEach var="cinema" items="${cinemaList}">
+											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+										</c:forEach>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -164,24 +208,25 @@
 
 
 						<c:forEach items="${alltimeList}" var="row">
-							
+
 							<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-							<a href="/moviecube/reserve_seat.do" class="flex-c-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								<div class="size-198">
-									<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
-								</div>
+								<a href="/moviecube/reserve_seat.do"
+									class="flex-c-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+									<div class="size-198">
+										<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
+									</div>
 
-								<div class="size-198">
-									<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
-								</div>
+									<div class="size-198">
+										<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
+									</div>
 
-								<div class="size-197">
-									<span class="mtext-110 cl2"> ${row.START_TIME } ~
-										${row.END_TIME } </span>
-								</div>
+									<div class="size-197">
+										<span class="mtext-110 cl2"> ${row.START_TIME } ~
+											${row.END_TIME } </span>
+									</div>
 								</a>
 							</div>
-							
+
 						</c:forEach>
 
 					</div>

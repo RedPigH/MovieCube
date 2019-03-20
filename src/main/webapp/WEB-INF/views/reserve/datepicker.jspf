@@ -2,10 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+
 <div class="wrapper">
-	<input type="text" id="datepicker" placeholder="날짜를 선택하세요."
-		readonly="true" /> <i class="ion-calendar"></i>
+	<input type="text" id="datepicker" placeholder="날짜를 선택하세요." autocomplete="off" onchange="selected_date_reset(this.value);"/> <i
+		class="ion-calendar"></i>
 </div>
+
+
 <style>
 * {
 	box-sizing: border-box;
@@ -119,7 +122,7 @@ input::-moz-placeholder {
 }
 
 .ui-datepicker-calendar>tbody>tr>td:hover {
-	background-color: #c6e2f7;
+	background-color: #ff5959;
 }
 
 .ui-datepicker-calendar>tbody>tr>td>a {
@@ -151,7 +154,7 @@ input::-moz-placeholder {
 	}
 }
 </style>
-<script>
+ <script>
     $.datepicker.setDefaults({
       closeText: "닫기",
       prevText: "이전달",
@@ -167,7 +170,7 @@ input::-moz-placeholder {
       dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
       dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
       weekHeader: "주",
-      dateFormat: "yy년 m월 d일",
+      dateFormat: "yy-mm-dd",
       firstDay: 0,
       isRTL: false,
       showMonthAfterYear: true,
@@ -178,6 +181,7 @@ input::-moz-placeholder {
       /* to use in wix */
       onSelect: function (selected, event) {
         console.log(selected);
+		SelectedDate = selected;
         /* 
          * wix-send-messages from html component
          * https://support.wix.com/en/article/working-with-the-html-component-in-wix-code
@@ -186,3 +190,4 @@ input::-moz-placeholder {
       }
     })
   </script>
+  
