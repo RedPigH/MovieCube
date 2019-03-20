@@ -95,10 +95,7 @@ public class QnaController {
 		
 		Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
 		mv.addObject("map", map);
-		
-	
-		
-		
+
 		/*if(qnaService.countQnaFile(qna_no) > 0) {
 			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
 			mv.addObject("map", map);
@@ -179,7 +176,6 @@ public class QnaController {
 		commandMap.put("RE_LEVEL", 1);
 		qnaService.replyQna(commandMap.getMap());
 		return mv;
-
 	}
 
 }

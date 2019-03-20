@@ -76,4 +76,5 @@ public class QnaDAO extends AbstractDAO {
 		return (Map<String, Object>) selectOne("qna.checkQnaFile", map);
 	}
 
+	
 }

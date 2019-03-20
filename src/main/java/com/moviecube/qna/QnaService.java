@@ -31,5 +31,4 @@ public interface QnaService {
 	
 	Map<String, Object> checkQnaFile(Map<String, Object> map) throws Exception;
 
-
 }
