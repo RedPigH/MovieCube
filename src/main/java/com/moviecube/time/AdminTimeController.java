@@ -88,7 +88,8 @@ public class AdminTimeController {
 		mv.addObject("totalCount", totalCount);
 		return mv;
 	}
-
+  
+	
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/timeDetail");
