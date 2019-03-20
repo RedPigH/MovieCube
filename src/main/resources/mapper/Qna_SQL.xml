@@ -86,9 +86,24 @@ REF DESC, RE_LEVEL ASC
 
 	</insert>
 
-	<select id="selectQnaDetail" parameterType="hashmap"
-		resultType="hashmap"> 
+	<select id="selectQnaDetail1" parameterType="hashmap" resultType="hashmap"> <!-- 파일 없을 때 상세보기 -->
 		<![CDATA[ 
+			SELECT QNA_NO, 
+			QNA_ID, 
+			QNA_SUB, 
+			QNA_CONTENT, 
+			QNA_REGDATE, 
+			QNA_STATUS 
+			FROM 
+			MC_QNA 
+			WHERE QNA_NO = #{QNA_NO}
+		]]>
+	</select>
+
+
+
+	<select id="selectQnaDetail2" parameterType="hashmap" resultType="hashmap">  <!-- 파일 있을 때 상세보기 -->
+		<![CDATA[
 			SELECT q.QNA_NO, 
 			q.QNA_ID, 
 			q.QNA_SUB, 
@@ -107,7 +122,7 @@ REF DESC, RE_LEVEL ASC
 
 
 
- 	<update id="updateQna" parameterType="hashmap">
+	<update id="updateQna" parameterType="hashmap">
 	<![CDATA[
 	UPDATE MC_QNA
 	SET
@@ -116,26 +131,14 @@ REF DESC, RE_LEVEL ASC
 	WHERE
 	QNA_NO = #{QNA_NO, jdbcType=INTEGER}
 	]]>
-	</update> 
-	 
-<!-- 	<update id="updateQna" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="QNA_NO">
-		<selectKey keyProperty="QNA_NO" resultType="string"
-			order="BEFORE"> SELECT MC_QNA_NO_SEQ.NEXTVAL FROM DUAL </selectKey> 
-			<![CDATA[ 
-			<![CDATA[
-	UPDATE MC_QNA
-	SET
-	QNA_SUB = #{QNA_SUB},
-	QNA_CONTENT = #{QNA_CONTENT}
-	REF = #{REF},
-	RE_STEP = #{RE_STEP},
-	RE_LEVEL = #{RE_LEVEL}
-	WHERE
-	QNA_NO = #{QNA_NO, jdbcType=INTEGER}
-	]]>
-	</update> 
- -->
+	</update>
+
+	<!-- <update id="updateQna" parameterType="hashmap" useGeneratedKeys="true" 
+		keyProperty="QNA_NO"> <selectKey keyProperty="QNA_NO" resultType="string" 
+		order="BEFORE"> SELECT MC_QNA_NO_SEQ.NEXTVAL FROM DUAL </selectKey> <![CDATA[ 
+		<![CDATA[ UPDATE MC_QNA SET QNA_SUB = #{QNA_SUB}, QNA_CONTENT = #{QNA_CONTENT} 
+		REF = #{REF}, RE_STEP = #{RE_STEP}, RE_LEVEL = #{RE_LEVEL} WHERE QNA_NO = 
+		#{QNA_NO, jdbcType=INTEGER} ]]> </update> -->
 
 	<delete id="deleteQna" parameterType="hashmap">
     <![CDATA[
@@ -162,7 +165,7 @@ REF DESC, RE_LEVEL ASC
 	#{QNA_SAVNAME}
 		)
 	]]></insert>
-	
+
 	<insert id="insertQnaFile2" parameterType="hashmap">
 	<![CDATA[
 	INSERT INTO MC_QNA_FILE
@@ -188,7 +191,7 @@ REF DESC, RE_LEVEL ASC
 	DEL_GB = 'Y'
 	WHERE QNA_NO = #{QNA_NO}
 	]]></delete>
-	
+
 	<update id="updateQnaFile" parameterType="hashmap">
 	<![CDATA[
 	UPDATE MC_QNA_FILE
@@ -202,8 +205,7 @@ REF DESC, RE_LEVEL ASC
 
 
 
-	<select id="selectQnaFileList" parameterType="hashmap"
-		resultType="hashmap">
+	<select id="selectQnaFileList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	SELECT
 	QNA_FILE_NO,
@@ -214,14 +216,11 @@ REF DESC, RE_LEVEL ASC
 	WHERE 
 	QNA_NO = #{QNA_NO}
 	]]></select>
+	
+	<select id="checkQnaFile" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	SELECT COUNT(*) AS CNT FROM MC_QNA_FILE WHERE QNA_NO = #{QNA_NO} AND DEL_GB = 'N'
+	]]></select>
+	
 
-
-	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
-		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->
-
-	<!-- <select id="selectNoticeList" parameterType="hashmap" resultType="hashmap"> 
-		<include refid="common.pagingPre" /> <![CDATA[ SELECT ROW_NUMBER() OVER (ORDER 
-		BY NOTICE_NO DESC) RNUM, NOTICE_NO, NOTICE_SUB, TO_CHAR(NOTICE_REGDATE, 'YYYY.MM.DD') 
-		AS NOTICE_REGDATE FROM MC_NOTICE ]]> <include refid="common.pagingPost" /> 
-		</select> -->
 </mapper>
