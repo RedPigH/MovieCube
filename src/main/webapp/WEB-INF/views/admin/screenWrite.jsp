@@ -29,12 +29,12 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li class="on"><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
-			<li><a href="<%=cp%>">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
@@ -53,7 +53,7 @@
 						<tr>
 							<th scope="row">상영관 이름</th>
 							<td>
-								<input type="text" class="txt w200" id="SCREEN_NAME" name="SCREEN_NAME" />
+								<input type="text" class="txt w200" id="SCREEN_NAME" name="SCREEN_NAME"  />
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -61,16 +61,19 @@
 						<tr>
 							<th scope="row">상영관 타입</th>
 							<td>
-								<input type="text" class="txt w200" id="SCREEN_TYPE" name="SCREEN_TYPE" />
-								<span class="ibk">예)3D, 4D</span>
-								<font color="red"></font>
+								<select name="MOVIE_TYPE" class="slct w200">
+									<option value="일반">일반</option>
+									<option value="3D">3D</option>
+									<option value="4D">4D</option>
+									<option value="IMAX">IMAX</option>
+								</select>
 							</td>
 						</tr>
 											
 						<tr>
-							<th scope="row">영화관 번호</th>
+							<th scope="row">영화관</th>
 							<td>
-								<select name="CINEMA_NO" class="txt w200" >
+								<select name="CINEMA_NO" class="slct w200" >
 									<option value="1">강남 무비큐브</option>
 									<option value="2">교대 무비큐브</option>
 									<option value="3">사당 무비큐브</option>
@@ -120,7 +123,7 @@
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='screenWrite.do' />");
+            comSubmit.setUrl("<c:url value='screenDetail.do?' />");
             comSubmit.submit();
         }
     </script>

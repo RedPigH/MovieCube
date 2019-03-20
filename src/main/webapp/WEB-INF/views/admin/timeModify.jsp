@@ -14,6 +14,27 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
+<script type="text/javascript">
+//AJAX select box
+function screenSelect(CINEMA_NO){
+$.ajax({
+ type: "POST",
+ url: "<c:url value='/admin/ScreenSelect.do'/>",
+ dataType:"json",
+ data: {param:CINEMA_NO},
+ success: function(data){           
+  $("#selectScreen").find("option").remove().end().append("<option value=''>전체</option>");
+  
+  for(var idx = 0; idx < data.result.length; idx++){
+	  $("#selectScreen").append("<option value='"+data.result[idx].SCREEN_NO+"'>"+data.result[idx].SCREEN_NAME+"</option>")
+  }
+ },
+   error: function (jqXHR, textStatus, errorThrown) {
+   alert("오류가 발생하였습니다.");
+  }                     
+ });
+}
+</script>
 </head>
 
 <div class="admin">
@@ -28,7 +49,7 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li class="on"><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>">FAQ</a></li>
@@ -50,11 +71,11 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">영화제목</th>
+							<th scope="row">영화제목 </th>
 							<td>
-								<select class="slct w300" name="selectMovie">
+								<select class="slct w300" name="selectMovie" id = "selectMovie">
 									<c:forEach var="movie" items="${movieList}">
-									<option value="${movie.MOVIE_NO}" <c:if test="${movie.MOVIE_NAME =='${movie.MOVIE_NAME}'"> selected</c:if>>${movie.MOVIE_NAME}</option>
+									<option value="${movie.MOVIE_NO}" <c:if test="${map.MOVIE_NO == movie.MOVIE_NO}">selected</c:if>> ${movie.MOVIE_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -63,9 +84,10 @@
 						<tr>
 							<th scope="row">영화관</th>
 							<td>
-								<select class="slct w300" name="selectCinema">
+								<select class="slct w300" name="selectCinema" id = "selectCinema" onchange = "screenSelect(this.value);">
+									<option value="">선 택</option>
 									<c:forEach var="cinema" items="${cinemaList}">
-									<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+									<option value="${cinema.CINEMA_NO}"<c:if test="${map.CINEMA_NO == cinema.CINEMA_NO}">selected</c:if>>${cinema.CINEMA_NAME}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -74,10 +96,8 @@
 						<tr>
 							<th scope="row">상영관</th>
 							<td>
-								<select class="slct w300" name="selectScreen">
-									<c:forEach var="screen" items="${screenList}">
-									<option value="${screen.SCREEN_NO}">${screen.SCREEN_NAME}</option>
-									</c:forEach>
+								<select class="slct w300" name="selectScreen" id = "selectScreen">
+									<option value = "">선 택</option>
 								</select>
 							</td>
 						</tr>
@@ -85,7 +105,7 @@
 						<tr>
 							<th scope="row">상영일</th>
 							<td>
-								<input type="date" class="txt w300" id="TIME_DATE" name="TIME_DATE" />
+								<input type="date" class="txt w300" id="TIME_DATE" name="TIME_DATE" value = "${map.TIME_DATE}" />
 								<font color="red"></font>
 							</td>
 						</tr>
@@ -93,7 +113,7 @@
 						<tr>
 							<th scope="row">시작시간</th>
 							<td>
-								<select name="START_TIME" class="slct w300">
+								<select name="START_TIME" id = "START_TIME" class="slct w300">
 									<c:forEach begin="1" end="23" var="hour">
 										<option value="${hour}:00">${hour}:00</option>
 										<option value="${hour}:10">${hour}:10</option>
@@ -109,7 +129,7 @@
 						<tr>
 							<th scope="row">종료시간</th>
 							<td>
-								<select name="END_TIME" class="slct w300">
+								<select name="END_TIME" id = "END_TIME" class="slct w300">
 									<c:forEach begin="1" end="23" var="hour">
 										<option value="${hour}:00">${hour}:00</option>
 										<option value="${hour}:10">${hour}:10</option>
@@ -166,6 +186,9 @@
             comSubmit.setUrl("<c:url value='timeModify.do' />");
             comSubmit.submit();
         }
-    </script>
+</script>
+<script>
+$("#seletMovie option:eq(${map.MOVIE_NO})").attr("selected", "selected");
+</script>
 </body>
 </html>

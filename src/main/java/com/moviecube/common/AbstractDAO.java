@@ -37,7 +37,7 @@ public class AbstractDAO {
 	
 	public Object delete(String queryId, Object params) {
 		printQueryId(queryId);
-		return sqlSession.delete(queryId);		
+		return sqlSession.delete(queryId,params);		
 	}
 	
 	public Object selectOne(String queryId) {
@@ -62,8 +62,5 @@ public class AbstractDAO {
 		return sqlSession.selectList(queryId, params);	
 	}
 	
-	public int count(String queryId, Object params) {
-		printQueryId(queryId);
-		return sqlSession.selectOne(queryId, params);
-	}
+	
 }

@@ -14,6 +14,27 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
+<script type="text/javascript">
+//AJAX select box
+function screenSelect(CINEMA_NO){
+$.ajax({
+ type: "POST",
+ url: "<c:url value='/admin/ScreenSelect.do'/>",
+ dataType:"json",
+ data: {param:CINEMA_NO},
+ success: function(data){           
+  $("#selectScreen").find("option").remove().end().append("<option value=''>전체</option>");
+  
+  for(var idx = 0; idx < data.result.length; idx++){
+	  $("#selectScreen").append("<option value='"+data.result[idx].SCREEN_NO+"'>"+data.result[idx].SCREEN_NAME+"</option>")
+  }
+ },
+   error: function (jqXHR, textStatus, errorThrown) {
+   alert("오류가 발생하였습니다.");
+  }                     
+ });
+}
+</script>
 </head>
 
 <div class="admin">
@@ -28,12 +49,12 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">영화 좌석</a></li>
 			<li class="on"><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
@@ -54,7 +75,7 @@
 							<td>
 								<select class="slct w300" name="selectMovie">
 									<c:forEach var="movie" items="${movieList}">
-									<option value="${movie.MOVIE_NO}">${movie.MOVIE_NAME}</option>
+									<option value="${movie.MOVIE_NO}">${movie.MOVIE_NAME} / ${movie.MOVIE_TYPE}</option>
 									</c:forEach>
 								</select>
 							</td>
@@ -63,7 +84,8 @@
 						<tr>
 							<th scope="row">영화관</th>
 							<td>
-								<select class="slct w300" name="selectCinema">
+								<select class="slct w300" name="selectCinema" id = "selectCinema" onchange = "screenSelect(this.value);">
+									<option value="">선 택</option>
 									<c:forEach var="cinema" items="${cinemaList}">
 									<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
 									</c:forEach>
@@ -74,11 +96,14 @@
 						<tr>
 							<th scope="row">상영관</th>
 							<td>
-								<select class="slct w300" name="selectScreen">
+								<select class="slct w300" name="selectScreen" id = "selectScreen">
+									<option value = "">선 택</option>
+								</select>
+								<%-- <select class="slct w300" name="selectScreen">
 									<c:forEach var="screen" items="${screenList}">
 									<option value="${screen.SCREEN_NO}">${screen.SCREEN_NAME}</option>
 									</c:forEach>
-								</select>
+								</select> --%>
 							</td>
 						</tr>
 						
@@ -171,6 +196,4 @@
          
     </script>
 </body>
-</html>
-				
-					
+</html>								

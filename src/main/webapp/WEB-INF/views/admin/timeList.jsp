@@ -17,7 +17,7 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 
 <script type="text/javascript">
-/* 	
+	
 	$(function(){
 		var schedule_btn = $(".schedule_delete");
 		
@@ -34,7 +34,6 @@
 			})
 		})
 	}) 
-	 */
 	
 	function timeDelete() {
 		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
@@ -59,12 +58,12 @@
 			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>">영화 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li class="on"><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
-			<li><a href="<%=cp%>">FAQ</a></li>
-			<li><a href="<%=cp%>">Q&amp;A</a></li>
-			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
+			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
 		</ul>
 	</div>
 	
@@ -101,27 +100,28 @@
 						<c:forEach var="row" items="${timeList}">
 						<tr>
 							<td>
-							<a href="#this" name="MOVIE_NAME">${row.MOVIE_NAME}
+							<a href="#this" name="MOVIE_NAME">${row.MOVIE_NAME} / ${row.MOVIE_TYPE}
 							<input type="hidden" id="TIME_NO" value="${row.TIME_NO}"/></a></td>
 							<td>${row.CINEMA_NAME}</td>
 							<td>${row.SCREEN_NAME}</td>
 							<td><c:set var="TextValue" value="${row.TIME_DATE}"/> ${fn:substring(TextValue,0,10)}</td>
 							<td>${row.START_TIME}</td>
 							<td>${row.END_TIME}</td>
-							<%--  
+							
 							<td class="schedule_delete">
-								<a href="timeDelete.do?TIME_NO=${row.TIME_NO}" class="btn btnC_04 btnP_03"> <span>삭제</span></a> 
+								<a href="timeDelete.do?TIME_NO=${row.TIME_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03"> <span>삭제</span></a> 
 							</td>
-							  --%>
-							<%--   
+							 
+							 <%--   
 							<td><span class="btn btnC_04 btnP_04" style="padding-left: 10px;">
-								<input type="button" onclick="timeDelete()" value="삭제" /></span>
-								<input type="hidden" id="TIME_NO" value="${row.TIME_NO}">
+								<input type="button" onclick="timeDelete()" value="삭제" />
+								<input type="hidden" id="TIME_NO" value="${row.TIME_NO}"/>
+								<input type="hidden" id="currentPage" value="${currentPage}"/></span>
 							</td>
-							 --%>
-							<td>
+								 --%>						 
+							<%-- <td>
 							<a href="timeDelete.do?TIME_NO=${row.TIME_NO}" class = "btn btnC_04 btnP_03"><span>삭제</span></a>
-							</td>
+							</td> --%>
 							
 							
 						</tr>
@@ -141,6 +141,21 @@
 			<a href="#this" class="btn btnC_01 btnP_04" id="write">
 				<span>글쓰기</span>
 			</a>
+		</div>
+		
+		<div class="search_form">
+			<form>
+				<div class="inner">
+					<select class="slct w100" name="searchNum">
+						<option value="0">제목</option>
+						<option value="1">내용</option>
+					</select>
+					<input class="txt w100" type="text" name="isSearch" />
+					<span class="btn btnC_04 btnP_04">
+						<input type="submit" value="검색" />
+					</span>
+				</div>
+			</form>	
 		</div>
 		
 		<!-- paging -->
@@ -175,6 +190,7 @@
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='timeDetail.do' />");
             comSubmit.addParam("TIME_NO", obj.parent().find("#TIME_NO").val());
+            comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
     </script> 
