@@ -1,6 +1,7 @@
 package com.moviecube.qna;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -79,8 +80,8 @@ public class QnaFileUtils {
 	    String QNA_NO = (String)map.get("QNA_NO");
 	     
 	     
-	    while(iterator.hasNext()){
-	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	    while(iterator.hasNext()){ // 업데이트 할 파일이 들어올 경우. 
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next()); 
 	        if(multipartFile.isEmpty() == false){
 	            originalFileName = multipartFile.getOriginalFilename();
 	            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -96,6 +97,8 @@ public class QnaFileUtils {
 	            list.add(listMap);
 	        }
 	    }
+	    
+	    
 	    return list;
 	}
 	

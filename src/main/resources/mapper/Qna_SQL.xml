@@ -219,18 +219,8 @@ REF DESC, RE_LEVEL ASC
 	
 	<select id="checkQnaFile" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-	SELECT COUNT(*) AS CNT FROM MC_QNA_FILE WHERE QNA_NO = #{QNA_NO)
+	SELECT COUNT(*) AS CNT FROM MC_QNA_FILE WHERE QNA_NO = #{QNA_NO} AND DEL_GB = 'N'
 	]]></select>
 	
-	
 
-
-	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
-		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->
-
-	<!-- <select id="selectNoticeList" parameterType="hashmap" resultType="hashmap"> 
-		<include refid="common.pagingPre" /> <![CDATA[ SELECT ROW_NUMBER() OVER (ORDER 
-		BY NOTICE_NO DESC) RNUM, NOTICE_NO, NOTICE_SUB, TO_CHAR(NOTICE_REGDATE, 'YYYY.MM.DD') 
-		AS NOTICE_REGDATE FROM MC_NOTICE ]]> <include refid="common.pagingPost" /> 
-		</select> -->
 </mapper>

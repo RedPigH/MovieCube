@@ -62,7 +62,16 @@ function delete_file() {
 				 <tr id="deleteTest">
 					<th scope="row">첨부파일</th>
 					<td id="file_TD">
-						<input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제">
+					
+					<c:choose>
+						<c:when test="${map.QNA_FILE_NO > 0 }">
+							<input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제">
+						</c:when>
+						<c:otherwise>
+							<input type="file" name ="file" id='QNA_FILE_NO' class='QNA_FILE_NO' value="파일수정">
+						</c:otherwise>
+					</c:choose>
+						<!-- <input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제"> -->
 					</td>
 					<td colspan="3" id="fileTD2">
 						<input type="hidden" id="QNA_FILE_NO" class="QNA_FILE_NO" value="${map.QNA_FILE_NO }"> 

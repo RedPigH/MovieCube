@@ -38,19 +38,20 @@
 				<td colspan="4">${map.QNA_CONTENT }</td>
 			</tr>
 			<tr>
-
+			
+			<c:if test="${map.QNA_FILE_NO > 0 }"> 
  			<tr>
 				<th scope="row">첨부파일</th>
-				<td colspan="3"><input type="hidden" id="QNA_FILE_NO"
-					value="${map.QNA_FILE_NO }"> <a href="#this" name="file">${map.QNA_ORGNAME }</a>
+				<td colspan="3"><input type="hidden" id="QNA_FILE_NO" value="${map.QNA_FILE_NO }">
+				<a href="#this" name="file">${map.QNA_ORGNAME }</a>
 				</td>
-			</tr> 
-			<tr>
-			<td>
-<%-- 				<img src="<%=cp%>//resources//upload/qna/${QNA_SAVNAME}"/> --%>
-					<img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}"/>
-				</td>
+			</tr>
+				<tr>
+					<td>
+						<img src="<%=cp%>/resources/upload/qna/${map.QNA_SAVNAME}"/>
+					</td>
 				</tr>
+			</c:if>
 		</tbody>
 	</table>
 	<br />
