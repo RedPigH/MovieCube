@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-<<<<<<< .merge_file_a11000
-<!-- Cart -->
-=======
 <!-- Favorite -->
->>>>>>> .merge_file_a05064
 		<div class="wrap-header-cart js-panel-cart">
 			<div class="s-full js-hide-cart"></div>
 

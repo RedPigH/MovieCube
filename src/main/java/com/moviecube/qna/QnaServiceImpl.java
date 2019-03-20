@@ -20,7 +20,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public Map<String, Object> selectQnaDetail1(Map<String, Object> map) throws Exception {
-		return qnaDAO.selectQnaDetail1(map);
+		return qnaDAO.selectQnaDetail1(map); 
 
 	}
 	

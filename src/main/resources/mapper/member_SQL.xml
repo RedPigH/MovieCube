@@ -61,21 +61,6 @@
 	]]>
 	</insert>
 	
-	<!-- 멤버 정보 수정 --><!-- 비밀번호, 생년월일, 휴대폰, 이메일, 주소 -->
-	<update id="updateMember" parameterType = "hashmap">
-		<![CDATA[
-			UPDATE MC_MEMBER
-			SET
-				MEMBER_PASSWD1 = #{MEMBER_PASSWD1},
-				MEMBER_AGE = #{MEMBER_AGE},
-				MEMBER_PHONE = #{MEMBER_PHONE},
-				MEMBER_EMAIL = #{MEMBER_EMAIL},
-				MEMBER_ADDRESS1 = #{MEMBER_ADDRESS1},
-				MEMBER_ADDRESS2 = #{MEMBER_ADDRESS2} 
-			WHERE MEMBER_ID = #{MEMBER_ID}
-		]]>
-	</update>
-	
 	<select id="findUsedID" parameterType="hashmap" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM MC_MEMBER WHERE MEMBER_ID = #{MEMBER_ID}

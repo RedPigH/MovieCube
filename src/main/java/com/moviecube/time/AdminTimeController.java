@@ -21,9 +21,11 @@ import com.moviecube.movie.MovieService;
 import com.moviecube.screen.ScreenService;
 import com.moviecube.seat.SeatService;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.Paging;
-
 
 @RequestMapping(value = "/admin")
 @Controller
@@ -85,8 +87,7 @@ public class AdminTimeController {
 		mv.addObject("totalCount", totalCount);
 		return mv;
 	}
-  
-	
+
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/timeDetail");

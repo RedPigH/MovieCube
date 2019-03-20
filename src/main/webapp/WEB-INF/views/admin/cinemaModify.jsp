@@ -39,11 +39,7 @@
 	</div>
 	
 	<div class="admin_ct">
-<<<<<<< .merge_file_a09188
-		<h3 class="sub_tit">영화관 등록</h3>
-=======
 		<h3 class="sub_tit">영화관 수정</h3>
->>>>>>> .merge_file_a01580
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>

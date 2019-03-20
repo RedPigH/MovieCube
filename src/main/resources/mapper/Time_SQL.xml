@@ -41,9 +41,7 @@
 			inner join mc_movie m on m.movie_no = t.movie_no
 			inner join cinema c on c.cinema_no = t.cinema_no
 			inner join screen sc on sc.screen_no = t.screen_no
-			where t.movie_no = #{MOVIE_NO}
-			and t.cinema_no = #{CINEMA_NO}
-			and to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
+			where to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
 		]]>
 			<choose>
 				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 == NULL">

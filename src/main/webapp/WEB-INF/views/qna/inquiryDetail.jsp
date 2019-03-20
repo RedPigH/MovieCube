@@ -39,6 +39,7 @@
 			</tr>
 			<tr>
 
+
  			<tr>
 				<th scope="row">첨부파일</th>
 				<td colspan="3"><input type="hidden" id="QNA_FILE_NO"
@@ -100,13 +101,9 @@
 
 		function fn_openBoardReply() {
 			var qna_no = "${map.QNA_NO}";
-			var qna_no1 = "${map.QNA_NO}";
-			var qna_sub = "${map.QNA_SUB }";
 			var comSubmit = new ComSubmit();
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryReplyForm.do'/>");
-			comSubmit.addParam("QNA_NOM", qna_no1);
-     		comSubmit.addParam("QNA_NO", qna_no); 
-			comSubmit.addParam("QNA_SUB", qna_sub);
+			comSubmit.addParam("QNA_NOM", qna_no);
 			comSubmit.submit();
 		}
 		/* 	function fn_deleteBoard() {
