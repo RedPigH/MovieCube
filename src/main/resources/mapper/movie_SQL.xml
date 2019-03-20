@@ -60,7 +60,7 @@
 <insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
 	<selectKey keyProperty="MOVIE_NO" resultType="int" order="BEFORE">
 		select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
-	</selectKey> -->
+	</selectKey>
 
 
 		<![CDATA[
