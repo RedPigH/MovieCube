@@ -203,7 +203,7 @@ public class AdminTimeController {
 	public ModelAndView selectAjaxScreen(HttpServletRequest request, HttpServletResponse response, String param)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		
 		String cinema_no = param;
 
 		CommandMap map = new CommandMap();
@@ -216,17 +216,5 @@ public class AdminTimeController {
 		mv.addObject("result", screenList);
 		
 		return mv;
-	}
-
-	public static JSONObject getJsonStringFromMap(Map<String, Object> map) {
-
-		JSONObject jsonObject = new JSONObject();
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			jsonObject.put(key, value);
-		}
-
-		return jsonObject;
 	}
 }
