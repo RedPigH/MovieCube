@@ -16,10 +16,11 @@
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
-						order by m.MOVIE_NO desc
+						WHERE f.DEL_GB = 'N'
+							order by m.MOVIE_NO desc
 		]]>
 	</select>
 
@@ -31,10 +32,10 @@
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
 				 ON m.MOVIE_NO = f.MOVIE_NO
-					WHERE m.MOVIE_NO = #{MOVIE_NO}	
+					WHERE m.MOVIE_NO = #{MOVIE_NO} AND f.DEL_GB = 'N'
 						 			
 		]]>
 	</select>
@@ -46,10 +47,10 @@
 
 		<![CDATA[
 		select 
-			m.MOVIE_NO, s.STILLCUT_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME
+			m.MOVIE_NO, s.STILLCUT_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME, s.DEL_GB
 				FROM MC_MOVIE m INNER JOIN STILLCUT s
 					ON m.MOVIE_NO = s.MOVIE_NO 
-						WHERE m.MOVIE_NO = #{MOVIE_NO}
+						WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
 		]]>
 	</select>
 
@@ -176,7 +177,7 @@
 	        MOVIE_GRADE = #{MOVIE_GRADE},
 		    MOVIE_AGE = #{MOVIE_AGE}, 
 		    MOVIE_URL = #{MOVIE_URL}
-		where MOVIE_NO = #{MOVIE_NO}
+				where MOVIE_NO = #{MOVIE_NO}
 		]]>
 	</update>
 
@@ -213,7 +214,7 @@
 		UPDATE MC_MOVIE_FILE SET
             DEL_GB = 'N'
         WHERE
-            FILE_NO = #{FILE_IDX}  
+            FILE_NO = #{FILE_NO}  
 
 		]]>
 	</update>

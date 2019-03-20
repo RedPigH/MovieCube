@@ -34,10 +34,10 @@ public class MovieServiceImpl implements MovieService{
 	public void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		MovieDAO.insertMovie(map);
 		
-		List<Map<String,Object>> Filelist = fileUtils.parseInsertFileInfo(map, request);
-		 	MovieDAO.insertFile(Filelist.get(0)); 	
-        for(int i=1, size=Filelist.size(); i<size; i++){
-        	MovieDAO.insertFile2(Filelist.get(i));
+		List<Map<String,Object>> fileList = fileUtils.parseInsertFileInfo(map, request);
+		 	MovieDAO.insertFile(fileList.get(0)); 	
+        for(int i=1, size=fileList.size(); i<size; i++){
+        	MovieDAO.insertFile2(fileList.get(i));
         }
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request; 
@@ -76,23 +76,35 @@ public class MovieServiceImpl implements MovieService{
 	public void modifyMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
 		MovieDAO.modifyMovie(map);
-/*		
+		
 		MovieDAO.updateFileList(map);
 		MovieDAO.updateFileList2(map);
 		
-		List<Map<String,Object>> Filelist = fileUtils.parseUpdateFileInfo(map, request);
+		List<Map<String,Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
 		Map<String, Object> tempMap = null;
 		
-		for(int i=0, size=Filelist.size(); i<size; i++){
-			tempMap = Filelist.get(i);
-			if (i == 0 || tempMap.get("IS_NEW").equals("Y")) { 
-				MovieDAO.insertFile(tempMap);	
-			}
-			
-			if (i == 0 || tempMap.get("IS_NEW").equals("N")) {
-				MovieDAO.modifyFile(tempMap);
-			}
+		for(int i=0, size=fileList.size(); i<size; i++){
+			tempMap = fileList.get(i);
+			if (i == 0) {
 				
+				if(tempMap.get("IS_NEW").equals("Y")) { 
+					MovieDAO.insertFile(tempMap);	
+				}
+				if(tempMap.get("IS_NEW").equals("N")) {
+					MovieDAO.modifyFile(tempMap);
+				}
+			}
+/*			
+			if (i > 0 ) {
+				if(tempMap.get("IS_NEW").equals("Y")) {
+					MovieDAO.insertFile2(tempMap);
+				}
+				if (tempMap.get("IS_NEW").equals("N")) {
+					MovieDAO.modifyFile2(tempMap);	
+				}
+			}
+*/			
+/*				
 			if (i >  0 || tempMap.get("IS_NEW").equals("Y")) {
 				MovieDAO.insertFile2(tempMap);
 			}
@@ -100,8 +112,9 @@ public class MovieServiceImpl implements MovieService{
 			if (i >  0 || tempMap.get("IS_NEW").equals("N")) {
 				MovieDAO.modifyFile2(tempMap);
 			}
+*/			
 		}
-*/
+
 	}	
 
 	@Override

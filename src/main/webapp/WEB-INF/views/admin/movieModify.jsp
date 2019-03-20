@@ -93,7 +93,7 @@
 								
 							</td>
 						</tr>
-						
+						<%-- 
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -102,7 +102,7 @@
 								
 							</td>
 						</tr>
-						
+						 --%>
 						<tr>
 							<th scope="row">타입</th>
 							<td>
@@ -123,10 +123,6 @@
 									<option value="15" <c:if test="${map.MOVIE_TYPE == '15'}"> selected</c:if>>15</option>
 									<option value="19" <c:if test="${map.MOVIE_TYPE == '19'}"> selected</c:if>>19</option>
 								</select>
-							<%-- 
-								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" value="${map.MOVIE_AGE}"/>
-								<font color="red"></font>
-								 --%>
 							</td>
 						</tr>
 						
@@ -155,22 +151,19 @@
 								<font color="red"></font>
 							</td>
 						</tr>
-<%-- 					
+				
 						<tr>
 							<th scope="row">포스터</th>
 							<td>
 								<input type="hidden" id="poster" name="poster" value="${map.FILE_NO}">
-								<font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+								<a href="#this" id="name" name="name"><font color="red">${map.POSTER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br>
 								<input type="file" class="txt" name="POSTER_ORGNAME" />
 							</td>
 						</tr>
---%>					
-					
 					</tbody>
 				</table>
-				
-<%-- 				
+<%-- 							
 				<div id="fileDiv">
 				<c:forEach var="row" items="${movieDetail}" varStatus="var">
 				<table>
@@ -179,13 +172,13 @@
 						<col />
 					</colgroup>
 					<tbody>
-			
 						<tr>	
 							<th scope="row">스틸컷</th>
 							<td>
 								<input type="hidden" id="IDX" name="IDX_${var.index}" value="${row.STILLCUT_NO}">
-								<font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;
+								<a href="#this" id="name" name="name"><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br><br>
+								
 								<input type="file" class="txt" id="STILLCUT_ORGNAME_${var.index}" name="STILLCUT_ORGNAME_${var.index}" />
 								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
 								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
@@ -195,11 +188,10 @@
 						</tr>	
 					</tbody>
 				</table>
-				</c:forEach>	
-				
-				</div>
---%>			
-			</div>	
+				</c:forEach>		
+				</div>			
+ --%>			
+ 			</div>	
 	
 			<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">
