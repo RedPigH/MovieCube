@@ -163,7 +163,7 @@
 			var selectedDate = $("#datepicker").val();
 
 			var cinemaNo = [];
-			$("select[name='selectCinema']").each(function(i) {
+			$("select[name='selectCinema']").each(function(i) {	//4개
 				if ($(this).val() == "") {
 				} else {
 					cinemaNo.push($(this).val());
@@ -171,7 +171,7 @@
 			});
 			
 			var movieName = [];
-			$("div[class='AddedMovieList']").each(function(i) {
+			$("div[class='AddedMovieList']").each(function(i) {	//4개
 					movieName.push($(this).attr('value'));
 				});
 			

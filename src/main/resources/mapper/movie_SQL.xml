@@ -8,13 +8,23 @@
 		parameterType="hashmap">
 
 		<![CDATA[
-		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
-from (select * from mc_movie
-where rowid in(select max(rowid) from mc_movie group by movie_name)) m
-inner join mc_movie_file f
-on m.movie_no = f.movie_no
-where f.del_gb = 'N'
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						WHERE f.DEL_GB = 'N'
+							order by m.MOVIE_NO desc
 		]]>
+	</select>
+
+	<!-- 영화 중복제거 리스트 -->
+	<select id="DupMovieList" resultType="hashmap" parameterType = "hashmap">
+		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
+		from (select * from mc_movie
+		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
+		inner join mc_movie_file f
+		on m.movie_no = f.movie_no
 	</select>
 
 	<select id="selectMovieDetail" resultType="hashmap"
@@ -66,7 +76,6 @@ where f.del_gb = 'N'
 			order="BEFORE">
 			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
 		</selectKey>
-		-->
 
 
 		<![CDATA[
@@ -193,7 +202,7 @@ where f.del_gb = 'N'
 
 	<update id="modifyFile2" parameterType="hashmap">
 		<![CDATA[
-		UPDATE STILL SET
+		UPDATE STILLCUT SET
             DEL_GB = 'N'
         WHERE
             STILLCUT_NO = #{STILLCUT_NO} 

@@ -29,6 +29,11 @@ public class MovieServiceImpl implements MovieService{
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectMovieList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.dupMovieList(map);
+	}
 
 	@Override
 	public void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
@@ -36,9 +41,9 @@ public class MovieServiceImpl implements MovieService{
 		
 		List<Map<String,Object>> fileList = fileUtils.parseInsertFileInfo(map, request);
 		 	MovieDAO.insertFile(fileList.get(0)); 	
-        for(int i=1, size=fileList.size(); i<size; i++){
-        	MovieDAO.insertFile2(fileList.get(i));
-        }
+//          for(int i=1, size=fileList.size(); i<size; i++){
+//      	MovieDAO.insertFile2(fileList.get(i));
+//          }
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request; 
 		// HttpServletRequest 자체로는 Multipart형식 데이터 조작하는데 어려움이 있기 때문에 MultipartHttpServletRequest 형식으로 형 변환한다
@@ -60,7 +65,16 @@ public class MovieServiceImpl implements MovieService{
 	    }
 	}
 	
+	@Override
+	public void insertMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		List<Map<String,Object>> fileList2 = fileUtils.parseInsertFileInfo2(map, request);
+	 		
+			for(int i=0, size=fileList2.size(); i<size; i++){
+				MovieDAO.insertFile2(fileList2.get(i));
+			}
+	}
 
+	
 	@Override
 	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
@@ -78,7 +92,6 @@ public class MovieServiceImpl implements MovieService{
 		MovieDAO.modifyMovie(map);
 		
 		MovieDAO.updateFileList(map);
-		MovieDAO.updateFileList2(map);
 		
 		List<Map<String,Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
 		Map<String, Object> tempMap = null;
@@ -90,38 +103,37 @@ public class MovieServiceImpl implements MovieService{
 				if(tempMap.get("IS_NEW").equals("Y")) { 
 					MovieDAO.insertFile(tempMap);	
 				}
-				if(tempMap.get("IS_NEW").equals("N")) {
+				else {
 					MovieDAO.modifyFile(tempMap);
 				}
 			}
-/*			
-			if (i > 0 ) {
-				if(tempMap.get("IS_NEW").equals("Y")) {
-					MovieDAO.insertFile2(tempMap);
-				}
-				if (tempMap.get("IS_NEW").equals("N")) {
-					MovieDAO.modifyFile2(tempMap);	
-				}
-			}
-*/			
-/*				
-			if (i >  0 || tempMap.get("IS_NEW").equals("Y")) {
+		}
+	}	
+	
+	@Override
+	public void modifyMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		MovieDAO.updateFileList2(map);
+		
+		List<Map<String,Object>> fileList2 = fileUtils.parseUpdateFileInfo2(map, request);
+		Map<String, Object> tempMap = null;
+		
+		for(int i=0, size=fileList2.size(); i<size; i++){
+			tempMap = fileList2.get(i);
+			
+			if(tempMap.get("IS_NEW").equals("Y")) {
 				MovieDAO.insertFile2(tempMap);
 			}
-			
-			if (i >  0 || tempMap.get("IS_NEW").equals("N")) {
-				MovieDAO.modifyFile2(tempMap);
+			else {
+				MovieDAO.modifyFile2(tempMap);	
 			}
-*/			
 		}
-
-	}	
-
+	}
+	
 	@Override
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
 		MovieDAO.deleteMovie(map);	
-//		MovieDAO.deleteFile(map);
-//		MovieDAO.deleteFile2(map);
+		MovieDAO.updateFileList(map);
+		MovieDAO.updateFileList2(map);
 	}
 }

@@ -6,7 +6,7 @@
 	<!-- 전체 상영 일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT m.MOVIE_NAME, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
 			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
 			WHERE
 			t.CINEMA_NO = c.CINEMA_NO AND 
@@ -41,22 +41,36 @@
 			inner join mc_movie m on m.movie_no = t.movie_no
 			inner join cinema c on c.cinema_no = t.cinema_no
 			inner join screen sc on sc.screen_no = t.screen_no
-			where t.movie_no = #{MOVIE_NO}
-			and t.cinema_no = #{CINEMA_NO}
-			and to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
+			where to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
 		]]>
 			<choose>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 == NULL">
-					and m.movie_type like #{MOVIE_TYPE0}
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 == NULL">
+					and m.movie_name = #{MOVIE_NAME0}
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 == NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1})
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 == NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1})
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 == NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2})
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 == NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2})
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 != NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2}, #{MOVIE_TYPE3})
+				<when test = "MOVIE_NAME0 != NULL andMOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 != NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2} or m.movie_name = #{MOVIE_NAME3})
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			<choose>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 == NULL">
+					and c.cinema_no = #{CINEMA_NO0}
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 == NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1})
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 != NULL and CINEMA_NO3 == NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1} or c.cinema_no = #{CINEMA_NO2})
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 != NULL and CINEMA_NO3 != NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1} or c.cinema_no = #{CINEMA_NO2} or c.cinema_no = #{CINEMA_NO3})
 				</when>
 				<otherwise>
 				</otherwise>

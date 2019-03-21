@@ -55,7 +55,7 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeList.do")
 	public ModelAndView timeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeList");
+		ModelAndView mv = new ModelAndView("/admin/time/timeList");
 
 		List<Map<String, Object>> timeList = timeService.selectTimeList(commandMap.getMap());
 
@@ -90,7 +90,7 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeDetail");
+		ModelAndView mv = new ModelAndView("/admin/time/timeDetail");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -101,7 +101,7 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeWriteForm.do")
 	public ModelAndView timeWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeWrite");
+		ModelAndView mv = new ModelAndView("/admin/time/timeWrite");
 
 		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
@@ -159,7 +159,7 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeModifyForm.do")
 	public ModelAndView timeUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeModify");
+		ModelAndView mv = new ModelAndView("/admin/time/timeModify");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
@@ -189,8 +189,6 @@ public class AdminTimeController {
 	public ModelAndView timeDelete(CommandMap commandMap) throws Exception {
 
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
-
-		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
 
 		timeService.deleteTime(commandMap.getMap());
 		mv.addObject("currentPage", commandMap.get("currentPage"));

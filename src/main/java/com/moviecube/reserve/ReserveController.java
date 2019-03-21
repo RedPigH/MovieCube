@@ -59,7 +59,7 @@ public class ReserveController {
 		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
-		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
 	      
 	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
@@ -73,24 +73,38 @@ public class ReserveController {
 	public ModelAndView movieSelect(CommandMap commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		
+		String selectedDate = request.getParameter("selectedDate");
+		String[] var = request.getParameterValues("cinemaNo");
+		String[] var2 = request.getParameterValues("movieName");
 		
+		CommandMap map = new CommandMap();
+		
+		map.put("TIME_DATE", selectedDate);
+		
+		for(int i = 0; i < var.length ; i++) {
+			map.put("CINEMA_NO" + i, var[i]);			
+		}
+		
+		for(int i = 0; i < var2.length ; i++) {
+			map.put("MOVIE_NAME" + i, var2[i]);			
+		}
 		/* 데이터 확인용  */
 		System.out.println(request.getParameter("selectedDate"));
 		
-		String[] var = request.getParameterValues("cinemaNo");
+		
 		for(String arr : var) {
 		System.out.println(arr);
 		};
 		
-		String[] var2 = request.getParameterValues("movieName");
+		
 		for(String arr : var2) {
 		System.out.println(arr);
 		};
 		
 		
-		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
+		List<Map<String, Object>> optiontimeList = timeService.optionTimeList(map.getMap());
 		
-		mv.addObject("alltimeList", alltimeList);
+		mv.addObject("optiontimeList", optiontimeList);
 		
 		return mv;
 	}

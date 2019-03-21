@@ -30,7 +30,7 @@ public class AdminScreenController {
 	
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 5;
+	private int blockCount = 10;
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
@@ -67,7 +67,7 @@ public class AdminScreenController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/screenList");
+		mv.setViewName("/admin/screen/screenList");
 		return mv;
 	}
 
@@ -109,7 +109,7 @@ public class AdminScreenController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/screenDetail");
+		mv.setViewName("/admin/screen/screenDetail");
 		mv.addObject("map", map);
 
 		return mv;
@@ -117,7 +117,7 @@ public class AdminScreenController {
 
 	@RequestMapping(value = "/screenWriteForm.do")
 	public ModelAndView screenWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/screenWrite");
+		ModelAndView mv = new ModelAndView("/admin/screen/screenWrite");
 
 		return mv;
 	}
@@ -133,7 +133,7 @@ public class AdminScreenController {
 
 	@RequestMapping(value = "/screenModifyForm.do")
 	public ModelAndView screenUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/screenModify");
+		ModelAndView mv = new ModelAndView("/admin/screen/screenModify");
 
 		Map<String, Object> map = screenService.screenDetail(commandMap.getMap());
 
