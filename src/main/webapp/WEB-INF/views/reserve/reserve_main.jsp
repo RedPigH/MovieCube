@@ -119,11 +119,17 @@
 					<div
 						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
+						
+						
+						<div class="flex-w flex-t bor12 p-t-15 p-b-15">
+									<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">
+										<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>
+									</div>
+						</div>
 
+						<%-- <c:forEach items="${alltimeList}" var="row">
 
-						<c:forEach items="${alltimeList}" var="row">
-
-							<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
+							<div class="flex-w flex-t bor12 p-t-15 p-b-15">
 								<a href="/moviecube/reserve_seat.do"
 									class="flex-col-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-20 trans-04">
 									<div class="size-196">
@@ -139,7 +145,7 @@
 								</a>
 							</div>
 
-						</c:forEach>
+						</c:forEach> --%>
 
 					</div>
 				</div>
@@ -171,6 +177,20 @@
 			
 			
 			
+			if(selectedDate.trim() == "" || !cinemaNo.length || !cinemaNo.length){
+			
+					if(selectedDate.trim() != "" && !cinemaNo.length && !cinemaNo.length){
+						$("#movieSelectNotice").find("span").remove().end().append(
+						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">극장, 영화를 선택해주세요.</span>');
+				} else if(selectedDate.trim() == "" && cinemaNo.length && !cinemaNo.length){
+						$("#movieSelectNotice").find("span").remove().end().append(
+						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 영화를 선택해주세요.</span>');
+				} else if(selectedDate.trim() == "" && !cinemaNo.length && cinemaNo.length){
+						$("#movieSelectNotice").find("span").remove().end().append(
+						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장을 선택해주세요.</span>');
+				}
+			} else {
+			
 			var allData = {
 				"selectedDate" : selectedDate,
 				"cinemaNo" : cinemaNo,
@@ -186,8 +206,8 @@
 				data : allData,
 
 				success : function(data) {
-					$("#selectScreen").find("option").remove().end().append(
-							"<option value=''>전체</option>");
+					$("#movieSelectNotice").find("span").remove().end().append(
+							'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>');
 
 					for (var idx = 0; idx < data.result.length; idx++) {
 						$("#selectScreen").append(
@@ -201,6 +221,7 @@
 					alert("오류가 발생하였습니다.");
 				}
 			}); 
+		}
 		}
 	</script>
 
