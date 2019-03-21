@@ -58,13 +58,13 @@ public class AdminCinemaController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/cinemaList");
+		mv.setViewName("/admin/cinema/cinemaList");
 		return mv;
 	}
 
 	@RequestMapping(value = "/cinemaDetail.do")
 	public ModelAndView cinemaSelectOne(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/cinemaDetail");
+		ModelAndView mv = new ModelAndView("/admin/cinema/cinemaDetail");
 
 		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
 
@@ -76,7 +76,7 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaWriteForm.do")
 	public ModelAndView cinemaWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/cinemaWrite");
+		ModelAndView mv = new ModelAndView("/admin/cinema/cinemaWrite");
 
 		return mv;
 	}
@@ -92,7 +92,7 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaModifyForm.do")
 	public ModelAndView cinemaUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/cinemaModify");
+		ModelAndView mv = new ModelAndView("/admin/cinema/cinemaModify");
 
 		Map<String, Object> map = cinemaService.cinemaDetail(commandMap.getMap());
 

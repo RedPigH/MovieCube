@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moviecube.common.CommandMap;
 import com.moviecube.movie.MovieService;
 import com.moviecube.notice.NoticeService;
+import com.moviecube.qna.QnaService;
 import com.moviecube.common.Paging;
 import com.moviecube.faq.FaqService;
 
@@ -43,6 +45,9 @@ public class AdminController {
 	
 	@Resource(name = "adminService")
 	private AdminService adminService;
+	
+	@Resource(name = "qnaService")
+	private QnaService qnaService;
 	
 	private int currentPage = 1;
 	private int totalCount;
@@ -83,13 +88,13 @@ public class AdminController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("admin/movieList");
+		mv.setViewName("admin/movie/movieList");
 		return mv;
 	}
 	
 	@RequestMapping(value="/movieWriteForm.do")
 	public ModelAndView movieWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieWrite");
+		ModelAndView mv = new ModelAndView("/admin/movie/movieWrite");
 		
 		return mv;
 	}
@@ -105,7 +110,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieWriteForm2.do")
 	public ModelAndView movieWriteForm2(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieWrite2");
+		ModelAndView mv = new ModelAndView("/admin/movie/movieWrite2");
 		
 		System.out.println(" 스틸컷 추가 폼 체크 ================" + commandMap.getMap());
 		return mv;
@@ -127,7 +132,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieDetail");
+		ModelAndView mv = new ModelAndView("/admin/movie/movieDetail");
 		
 		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
 		
@@ -141,7 +146,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieModify");
+		ModelAndView mv = new ModelAndView("/admin/movie/movieModify");
 		System.out.println("영화 수정 폼1 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 
@@ -166,7 +171,7 @@ public class AdminController {
 
 	@RequestMapping(value="/movieModifyForm2.do")
 	public ModelAndView movieModifyForm2(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieModify2");
+		ModelAndView mv = new ModelAndView("/admin/movie/movieModify2");
 		
 		System.out.println("스틸컷 수정 폼 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
@@ -237,13 +242,13 @@ public class AdminController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/noticeList");
+		mv.setViewName("/admin/notice/noticeList");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/noticeWriteForm.do")
 	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/noticeWrite");
+		ModelAndView mv = new ModelAndView("/admin/notice/noticeWrite");
 
 		return mv;
 
@@ -261,7 +266,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/noticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/noticeDetail");
+		ModelAndView mv = new ModelAndView("/admin/notice/noticeDetail");
 		
 		System.out.println("상세보기 페이지 넘기는값 확인 : " + commandMap.getMap());
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
@@ -273,7 +278,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/noticeModifyForm.do")
 	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/noticeModify");
+		ModelAndView mv = new ModelAndView("/admin/notice/noticeModify");
 
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -332,13 +337,13 @@ public class AdminController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/faqList");
+		mv.setViewName("/admin/faq/faqList");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/faqWriteForm.do")
 	public ModelAndView faqWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faqWrite");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqWrite");
 
 		return mv;
 	}
@@ -361,7 +366,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/faqDetail.do")
 	public ModelAndView faqDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faqDetail");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqDetail");
 
 		Map<String, Object> map = faqService.selectFaqDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -372,7 +377,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/faqModifyForm.do")
 	public ModelAndView faqModifyForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faqModify");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqModify");
 
 		Map<String, Object> map = faqService.selectFaqDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -440,7 +445,7 @@ public class AdminController {
 			mav.addObject("currentPage", currentPage);
 			mav.addObject("pagingHtml", pagingHtml);
 			mav.addObject("memberList", memberList);
-			mav.setViewName("/admin/memberList");
+			mav.setViewName("/admin/member/memberList");
 			return mav;
 		}
 		
@@ -461,7 +466,7 @@ public class AdminController {
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("pagingHtml", pagingHtml);
 		mav.addObject("memberList", memberList);
-		mav.setViewName("/admin/memberList");
+		mav.setViewName("/admin/member/memberList");
 		return mav;
 	}
 	
@@ -478,4 +483,148 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/qna/adminInquiryList.do")
+	public ModelAndView inquiryList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		List<Map<String, Object>> Qnalist = qnaService.selectQnaList(commandMap.getMap());
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+
+		totalCount = Qnalist.size();
+
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminInquiryList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+		// System.out.println(paging.getEndCount());
+		// System.out.println(totalCount);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		Qnalist = Qnalist.subList(paging.getStartCount(), lastCount);
+
+		mv.addObject("Qnalist", Qnalist);
+		mv.addObject("list", Qnalist);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/qna/inquiryList");
+		return mv;
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryWriteForm.do")
+	public ModelAndView writeInquiryForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("qna/inquiryWriteForm");
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryWrite.do")
+	public ModelAndView writeInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		qnaService.insertQna(commandMap.getMap(), request);
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryDetail.do")
+	public ModelAndView inquiryDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
+
+		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
+
+		String temp = String.valueOf(cmap.get("CNT"));
+		int count = Integer.parseInt(temp);
+
+		if (count == 0) {
+			Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
+			mv.addObject("map", map);
+		} else {
+			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
+			mv.addObject("map", map);
+		}
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryModifyForm.do")
+	public ModelAndView modifyInquiryForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/qna/inquiryModify");
+
+		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
+
+		String temp = String.valueOf(cmap.get("CNT"));
+		int count = Integer.parseInt(temp);
+
+		if (count == 0) {
+			Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
+			mv.addObject("map", map);
+		} else {
+			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
+			mv.addObject("map", map);
+		}
+		
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryModify.do")
+	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		
+		qnaService.updateQna(commandMap.getMap(), request);
+		
+		System.out.println("혜쮸꼰듀듀듀듀듀듀듀듀" + commandMap.getMap().size());
+		System.out.println(commandMap.get("QNA_ORGNAME"));
+		System.out.println(commandMap.get("QNA_SUB"));
+		System.out.println(commandMap.get("QNA_NO"));
+		System.out.println(commandMap.get("QNA_FILE_NO"));
+
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/qna/adminInquiryDelete.do")
+	public ModelAndView deleteInquiry(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		qnaService.deleteQna(commandMap.getMap());
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
+	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
+		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
+		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
+
+		Map<String, Object> map = new HashMap();
+		System.out.println("혜쮸꼰뜌" + commandMap.get("QNA_NOM"));
+		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
+		mv.addObject("map", map);
+		mv.addObject("map", map1);
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryReply.do")
+	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+
+		Map<String, Object> map = new HashMap();
+		map.put("REF", commandMap.get("REF"));
+		System.out.println("우앙은개뿔ㅎㅎ" + commandMap.get("REF"));
+		commandMap.put("RE_STEP", 1);
+		commandMap.put("RE_LEVEL", 1);
+		qnaService.replyQna(commandMap.getMap());
+		return mv;
+	}
+
 }
