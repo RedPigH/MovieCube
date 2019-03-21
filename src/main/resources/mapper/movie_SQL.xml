@@ -202,7 +202,7 @@
 
 	<update id="modifyFile2" parameterType="hashmap">
 		<![CDATA[
-		UPDATE STILL SET
+		UPDATE STILLCUT SET
             DEL_GB = 'N'
         WHERE
             STILLCUT_NO = #{STILLCUT_NO} 
