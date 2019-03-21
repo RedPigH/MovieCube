@@ -5,8 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.moviecube.common.CommandMap;
-
 public interface QnaService {
 
 	List<Map<String, Object>> selectQnaList(Map<String, Object> map) throws Exception;
