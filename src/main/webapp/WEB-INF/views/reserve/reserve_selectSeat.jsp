@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <script type="text/javascript" src="/moviecube/resources/js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/moviecube/resources/js/jquery.seat-charts.min.js"></script>
 <script>
-	var price = 10; //price
+	var price = 8000; //price
+	var seatlength = ${fn:length(seatmap)};
+	var seats = '${seats}';
+	var seatmap = seats.split(",");
+	
 	$(document)
 			.ready(
 					function() {
@@ -16,16 +22,7 @@
 						var sc = $('#seat-map')
 								.seatCharts(
 										{
-											map : [ //Seating chart
-											'aaaaaaaaaa', 
-											'aaaaaaaaaa',
-											'aaaaaaaaaa', 
-											'aaaaaaaaaa',
-											'aaaaaaaaaa', 
-											'aaaaaaaaaa',
-											'aaaaaaaaaa', 
-											'aaaaaaaaaa',
-											],
+											map : seatmap,
 											naming : {
 												top : false,
 												getLabel : function(character,
@@ -245,7 +242,9 @@ span.seatCharts-legendDescription {
 
 <div class="demo">
 	<div id="seat-map">
-		<div class="front">SCREEN</div>
+		<div class="front">SCREEN 
+		<c:out value="${seatmap[0]}" />
+		</div>
 	</div>
 	<div class="booking-details">
 		<p>
@@ -260,7 +259,7 @@ span.seatCharts-legendDescription {
 			Tickets: <span id="counter">0</span>
 		</p>
 		<p>
-			Total: <b>$<span id="total">0</span></b>
+			Total: <b><span id="total">0</span>¿ø</b>
 		</p>
 
 		<button class="checkout-button">BUY</button>

@@ -50,7 +50,7 @@ public class AdminController {
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
-	
+	private String MOVIE_NO;
 /*	
 	@RequestMapping(value="/movieList.do")
 	public ModelAndView movieList(CommandMap commandMap) throws Exception {
@@ -116,6 +116,28 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/movieWriteForm2.do")
+	public ModelAndView movieWriteForm2(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/movieWrite2");
+		
+		System.out.println(" 스틸컷 추가 폼 체크 ================" + commandMap.getMap());
+		return mv;
+	}
+	
+	@RequestMapping(value="/movieWrite2.do")
+	public ModelAndView movieWrtie2(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
+		
+		System.out.println(" 스틸컷 추가 값 체크 ================" + commandMap.get("MOVIE_NO"));
+		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
+		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
+		movieService.insertMovie2(commandMap.getMap(), request);
+		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
@@ -125,7 +147,7 @@ public class AdminController {
 		mv.addObject("map", map.get("map"));
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
-		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		
 		return mv;
 	}
@@ -133,7 +155,7 @@ public class AdminController {
 	@RequestMapping(value="/movieModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify");
-		System.out.println("영화 수정 폼 값 확인 =============: " + commandMap.getMap());
+		System.out.println("영화 수정 폼1 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 
 		mv.addObject("map", map.get("map"));
@@ -146,7 +168,7 @@ public class AdminController {
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
-		System.out.println("영화 수정 처리 값 확인 =============: " + commandMap.getMap());
+		System.out.println("영화 수정 처리1 값 확인 =============: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap(), request);
 
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
@@ -154,6 +176,37 @@ public class AdminController {
 		return mv;
 	}
 
+	@RequestMapping(value="/movieModifyForm2.do")
+	public ModelAndView movieModifyForm2(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/movieModify2");
+		System.out.println("스틸컷 수정 폼 값 확인 =============: " + commandMap.getMap());
+		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+
+		mv.addObject("map", map.get("map"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
+		mv.addObject("fileList", map.get("fileList"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/movieModify2.do")
+	public ModelAndView movieModify2(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
+		
+		if(commandMap.containsKey("MOVIE_NO")) {
+			MOVIE_NO = (String) commandMap.get("MOVIE_NO");
+		}else {
+			commandMap.put("MOVIE_NO", MOVIE_NO);
+		}
+		
+		System.out.println(" 스틸컷 수정 값 체크 ================" + commandMap.get("MOVIE_NO"));
+		
+		movieService.modifyMovie2(commandMap.getMap(), request);
+		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+		
+		return mv;
+	}
 
 	
 	@RequestMapping(value="/movieDelete.do")

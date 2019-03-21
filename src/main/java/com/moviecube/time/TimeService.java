@@ -5,7 +5,6 @@ import java.util.Map;
 
 public interface TimeService {
 
-	
 	List<Map<String, Object>> selectTimeList(Map<String, Object> map) throws Exception;
 	
 	List<Map<String, Object>> optionTimeList(Map<String, Object> map) throws Exception;
