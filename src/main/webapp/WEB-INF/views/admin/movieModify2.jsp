@@ -60,7 +60,7 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
 						<tr>	
 							<th scope="row">스틸컷</th>
 							<td>
-								<input type="hidden" id="IDX" name="IDX_${var.index}" value="${row.STILLCUT_NO}">
+								<input type="hidden" id="IDX" name="IDX_ORGNAME_${var.index}" value="${row.STILLCUT_NO}">
 								<a href="#this" id="name" name="name"><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font>
 								<input type="hidden" name="MOVIE_NO" value="${map.MOVIE_NO}"/>

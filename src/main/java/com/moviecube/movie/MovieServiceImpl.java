@@ -29,6 +29,11 @@ public class MovieServiceImpl implements MovieService{
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectMovieList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.dupMovieList(map);
+	}
 
 	@Override
 	public void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {

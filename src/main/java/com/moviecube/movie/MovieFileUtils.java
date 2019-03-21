@@ -17,8 +17,8 @@ import com.moviecube.common.CommonUtils;
  
 @Component("movieFileUtils") // 이 객체의 관리를 스프링이 담당하도록 함
 public class MovieFileUtils {
-    private static final String filePath = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\poster\\"; // POSTER 이미지 파일의 저장위치
-    private static final String filePath2 = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\stillcut\\"; // POSTER 이미지 파일의 저장위치
+    private static final String filePath = "C:\\java\\maven\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\poster\\"; // POSTER 이미지 파일의 저장위치
+    private static final String filePath2 = "C:\\java\\maven\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\stillcut\\"; // POSTER 이미지 파일의 저장위치
     
     public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -213,10 +213,10 @@ public class MovieFileUtils {
             else {
         		requestName = multipartFile.getName();
             	idx2 = "IDX_"+requestName.substring(requestName.indexOf("_")+1);
-
+            	System.out.println("dsfsd" + idx2);
             	fileListMap2 = new HashMap<String,Object>();
             	fileListMap2.put("IS_NEW", "N");
-                fileListMap2.put("STULLCUT_NO", map.get(idx2));
+                fileListMap2.put("STLLCUT_NO", map.get(idx2));
                 fileList2.add(fileListMap2);
             }
         }

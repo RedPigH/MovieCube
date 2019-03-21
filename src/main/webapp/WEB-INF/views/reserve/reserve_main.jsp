@@ -185,7 +185,7 @@
 
 							<div>
 
-								<c:forEach items="${alltimeList}" var="row">
+								<c:forEach items="${movieList}" var="row">
 									<div id="${row.MOVIE_NO}" style="display: none;">
 										<div
 											class="wrap-table-shopping-cart table-shopping-cart table_row tr flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm ${row.MOVIE_NO}">
