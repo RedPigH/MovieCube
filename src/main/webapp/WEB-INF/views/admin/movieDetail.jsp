@@ -77,12 +77,16 @@
 				<div class="movie_btn">
 					<span class="btn btnC_02 btnF_01 mr10"></span> 
 					<span></span>
-					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" 
-						class="btn btnC_01 btnF_04"> <span>수정</span></a>
-					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;">
-						<span>삭제</span></a>
-					<a href="<%=cp%>/admin/movieList.do?currentPage=${currentPage}"
-						class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
+					
+					<a href="<%=cp%>/admin/movieWriteForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04"> <span>스틸컷추가</span></a>
+					
+					<a href="<%=cp%>/admin/movieModifyForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" style="padding-left: 10px;"> <span>스틸컷수정</span></a>	
+						
+					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>수정</span></a>				
+						
+					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>삭제</span></a>
+					
+					<a href="<%=cp%>/admin/movieList.do?currentPage=${currentPage}" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
 				</div>
 			</div>
 		</div>

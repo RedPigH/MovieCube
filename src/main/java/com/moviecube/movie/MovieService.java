@@ -16,5 +16,9 @@ public interface MovieService {
 	public void modifyMovie(Map<String, Object> map,  HttpServletRequest request) throws Exception;
 	
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
+	void insertMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
+	public void modifyMovie2(Map<String, Object> map,  HttpServletRequest request) throws Exception;
 		
 }
