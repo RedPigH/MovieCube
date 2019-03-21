@@ -165,7 +165,7 @@
 				</table>
 				
 				
-				<div id="fileDiv">
+<%-- 				<div id="fileDiv">
 				<table>
 					<colgroup>
 						<col style="width: 120px;" />
@@ -184,7 +184,7 @@
 					</tbody>
 				</table>	
 				</div>
-					
+ --%>
 			</div>	
 			
 			<div class="btn_type_03">

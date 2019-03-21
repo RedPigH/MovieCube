@@ -14,22 +14,23 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-
 </head>
+
+<body>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Cinema Modify</a></h1>
+	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie Register</a></h1>
 	</div>
 </div>
 
 <div class="admin_grp">
 	<div class="admin_list">
 		<ul>
-			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
-			<li class="on"><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
+			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
@@ -39,60 +40,52 @@
 	</div>
 	
 	<div class="admin_ct">
-<<<<<<< .merge_file_a09188
-		<h3 class="sub_tit">영화관 등록</h3>
-=======
-		<h3 class="sub_tit">영화관 수정</h3>
->>>>>>> .merge_file_a01580
-		<form id="frm">
+		<h3 class="sub_tit">스틸컷 등록</h3>
+		<form id="frm" name="frm" enctype="multipart/form-data">
 			<div class="tbl_type_01">
 				<table>
-					<caption></caption>
+					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+				</table>
+			
+				
+				<div id="fileDiv">
+				<table>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
-					
-						<tr>
-							<th scope="row">영화관 이름</th>
+
+						<tr>	
+							<th scope="row">스틸컷</th>
 							<td>
-								<input type="text" class="txt w200" id="CINEMA_NAME" name="CINEMA_NAME" value="${map.CINEMA_NAME}"/>
-								<input type="hidden" id="CINEMA_NO" name="CINEMA_NO" value="${map.CINEMA_NO }">
-								<font color="red"></font>
+								<input type="file" class="txt" name="STILLCUT_ORGNAME_0" />
+								<input type="hidden" name="MOVIE_NO" value="${param.MOVIE_NO}"/>
+								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
+								<a href="#this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
 							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">영화관 주소</th>
-							<td>
-								<input type="text" class="txt w200" id="CINEMA_ADDRESS" name="CINEMA_ADDRESS" value="${map.CINEMA_ADDRESS}" />
-								<font color="red"></font>
-							</td>
-						</tr>
-											
-						<tr>
-							<th scope="row">영화관 안내</th>
-							<td>
-								<div class="textarea_grp">
-									<textarea name="CINEMA_CONTENT">${map.CINEMA_NAME}</textarea>
-								</div>
-								<font color="red"></font>
-							</td>
-						</tr>
+						</tr>	
 					</tbody>
-				</table>
-			</div>
+				</table>	
+				</div>
+
+			</div>	
+			
 			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_04 btnP_04" id="write">
-					<span>수정하기</span>
-				</a>
 				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="write">
+					<span>작성하기</span>
+				</a>
+			
 				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
 				</a>
 			</div>
-		</form>		
+		</form>
 	</div>
 </div>
 
@@ -111,19 +104,43 @@
                 e.preventDefault();
                 fn_insertBoard();
             });
+             
+            $("#addFile").on("click", function(e){ //파일 추가 버튼
+                e.preventDefault();
+                fn_addFile();
+            });
+             
+            $("a[name='delete']").on("click", function(e){ //삭제 버튼
+                e.preventDefault();
+                fn_deleteFile($(this));
+            }); 
         });
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='cinemaList.do' />");
+            comSubmit.setUrl("<c:url value='/admin/movieList.do' />");
             comSubmit.submit();
         }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='cinemaModify.do' />");
+            comSubmit.setUrl("<c:url value='movieWrite2.do' />");
             comSubmit.submit();
         }
+         
+        function fn_addFile(){
+            var str = "<p><input type='file' name='STILLCUT_ORGNAME_"+(gfv_count++)+"'><a href='#this' class='btn btnC_04 btnP_02' name='delete'><span>삭제</span></a></p>";
+            $("#fileDiv").append(str);
+            $("a[name='delete']").on("click", function(e){ //삭제 버튼
+                e.preventDefault();
+                fn_deleteFile($(this));
+            });
+        }
+         
+        function fn_deleteFile(obj){
+            obj.parent().remove();
+        } 
+        
     </script>
 </body>
 </html>

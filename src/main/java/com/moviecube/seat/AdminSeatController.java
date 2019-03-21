@@ -62,13 +62,13 @@ public class AdminSeatController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/seatList");
+		mv.setViewName("/admin/seat/seatList");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/insertSeatForm.do")
 	public ModelAndView insertSeatForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/seatWrite");
+		ModelAndView mv = new ModelAndView("/admin/seat/seatWrite");
 		
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
 		mv.addObject("screenList", screenList);
