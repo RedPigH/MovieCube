@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.CommandMap;
+import com.moviecube.movie.MovieService;
 import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
 
@@ -31,6 +32,8 @@ public class ReserveController {
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
 	
+	@Resource(name = "movieService")
+	private MovieService movieService;
 	
 	
 	
@@ -56,6 +59,9 @@ public class ReserveController {
 		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
+		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+	      
+	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
 		mv.addObject("cinemaList", cinemaList);
 		
@@ -73,6 +79,11 @@ public class ReserveController {
 		
 		String[] var = request.getParameterValues("cinemaNo");
 		for(String arr : var) {
+		System.out.println(arr);
+		};
+		
+		String[] var2 = request.getParameterValues("movieName");
+		for(String arr : var2) {
 		System.out.println(arr);
 		};
 		
