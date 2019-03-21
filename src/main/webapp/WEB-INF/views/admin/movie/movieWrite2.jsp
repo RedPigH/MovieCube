@@ -14,18 +14,13 @@
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-<style type="text/css">
-
-hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
-
-</style>
 </head>
 
 <body>
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie Modify</a></h1>
+	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie Register</a></h1>
 	</div>
 </div>
 
@@ -35,7 +30,7 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
 			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
@@ -45,42 +40,48 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">스틸컷 수정</h3>
+		<h3 class="sub_tit">스틸컷 등록</h3>
 		<form id="frm" name="frm" enctype="multipart/form-data">
-		
-		<div id="fileDiv">
-			<c:forEach var="row" items="${movieDetail}" varStatus="var">
+			<div class="tbl_type_01">
+				<table>
+					<%-- <caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption> --%>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+				</table>
+			
+				
+				<div id="fileDiv">
 				<table>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
-						
+
 						<tr>	
 							<th scope="row">스틸컷</th>
 							<td>
-								<input type="hidden" id="IDX" name="IDX_ORGNAME_${var.index}" value="${row.STILLCUT_NO}">
-								<a href="#this" id="name" name="name"><font color="red">${row.STILLCUT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
-								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font>
-								<input type="hidden" name="MOVIE_NO" value="${map.MOVIE_NO}"/>
-								<input type="file" class="txt" id="STILLCUT_ORGNAME_${var.index}" name="STILLCUT_ORGNAME_${var.index}" />
+								<input type="file" class="txt" name="STILLCUT_ORGNAME_0" />
+								<input type="hidden" name="MOVIE_NO" value="${param.MOVIE_NO}"/>
 								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
-								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
-								
-								
+								<a href="#this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
 							</td>
 						</tr>	
 					</tbody>
-				</table>
-			</c:forEach>		
-		</div>	
-		<div class="btn_type_03">
-				<a href="#this" class="btn btnC_04 btnP_04" id="write">
-					<span>수정하기</span>
+				</table>	
+				</div>
+
+			</div>	
+			
+			<div class="btn_type_03">
+				
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="write">
+					<span>작성하기</span>
 				</a>
 			
-				<a href="#this" class="btn btnC_04 btnP_04" id="list" style="padding-left: 10px;">
+				<a href="#this" class="btn btnC_04 btnP_04" style="padding-left: 10px;" id="list">
 					<span>목록으로</span>
 				</a>
 			</div>
@@ -94,12 +95,12 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
         var gfv_count = 1;
      
         $(document).ready(function(){
-            $("#list").on("click", function(e){ // 목록으로 버튼
+            $("#list").on("click", function(e){ //목록으로 버튼
                 e.preventDefault();
                 fn_openBoardList();
             });
              
-            $("#write").on("click", function(e){ // 수정하기 버튼
+            $("#write").on("click", function(e){ //작성하기 버튼
                 e.preventDefault();
                 fn_insertBoard();
             });
@@ -123,7 +124,7 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='movieModify2.do' />");
+            comSubmit.setUrl("<c:url value='movieWrite2.do' />");
             comSubmit.submit();
         }
          
@@ -142,4 +143,4 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
         
     </script>
 </body>
-</html>			
+</html>

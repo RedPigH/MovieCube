@@ -63,7 +63,7 @@ public class MovieDAO extends AbstractDAO{
 	}
 	
 	public void modifyFile2(Map<String, Object> map) {
-		update("movie.modifyFile", map);
+		update("movie.modifyFile2", map);
 	}
 
 	public void deleteFile(Map<String, Object> map) {
