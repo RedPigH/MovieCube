@@ -99,7 +99,7 @@
 												style="font-family: NanumGothicExtraBold; font-size: 20px">${row.MOVIE_NAME}</div>
 											<div class="column-3">
 												<button
-													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}'))"
+													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}')); movieSelect();"
 													style="font-family: NanumGothicBold">삭제</button>
 											</div>
 										</div>
@@ -117,36 +117,15 @@
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
-						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" id="timeList">
 						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
 						
 						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-15">
+							<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
 									<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">
 										<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>
 									</div>
-						</div>
-
-						<%-- <c:forEach items="${alltimeList}" var="row">
-
-							<div class="flex-w flex-t bor12 p-t-15 p-b-15">
-								<a href="/moviecube/reserve_seat.do"
-									class="flex-col-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-20 trans-04">
-									<div class="size-196">
-										<span class="mtext-110 cl2"
-											style="font-family: NanumGothicExtraBold">[${row.MOVIE_NAME }]</span>
-									</div>
-									<div class="flex-sb size-196">
-										<span class="mtext-110 cl2">${row.CINEMA_NAME } </span> <span
-											class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span> <span
-											class="mtext-110 cl2"> ${row.START_TIME }~${row.END_TIME }
-										</span>
-									</div>
-								</a>
 							</div>
-
-						</c:forEach> --%>
-
 					</div>
 				</div>
 			</div>
@@ -176,20 +155,30 @@
 				});
 			
 			
+			if(selectedDate.trim() == "" || !cinemaNo.length || !movieName.length){
 			
-			if(selectedDate.trim() == "" || !cinemaNo.length || !cinemaNo.length){
-			
-					if(selectedDate.trim() != "" && !cinemaNo.length && !cinemaNo.length){
+					if(selectedDate.trim() != "" && !cinemaNo.length && !movieName.length){
 						$("#movieSelectNotice").find("span").remove().end().append(
 						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">극장, 영화를 선택해주세요.</span>');
-				} else if(selectedDate.trim() == "" && cinemaNo.length && !cinemaNo.length){
+				} else if(selectedDate.trim() == "" && !(!cinemaNo.length) && !movieName.length){
 						$("#movieSelectNotice").find("span").remove().end().append(
 						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 영화를 선택해주세요.</span>');
-				} else if(selectedDate.trim() == "" && !cinemaNo.length && cinemaNo.length){
+				} else if(selectedDate.trim() == "" && !cinemaNo.length && !(!movieName.length)){
 						$("#movieSelectNotice").find("span").remove().end().append(
 						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장을 선택해주세요.</span>');
+						
+				} else if(selectedDate.trim() != "" && !(!cinemaNo.length) && !movieName.length){
+					$("#movieSelectNotice").find("span").remove().end().append(
+					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">영화를 선택해주세요.</span>');
+				} else if(selectedDate.trim() != "" && !cinemaNo.length && !(!movieName.length)){
+					$("#movieSelectNotice").find("span").remove().end().append(
+					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">극장을 선택해주세요.</span>');
+				} else if(selectedDate.trim() == "" && !(!cinemaNo.length) && !(!movieName.length)){
+					$("#movieSelectNotice").find("span").remove().end().append(
+					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜를 선택해주세요.</span>');
 				}
-			} else {
+					
+			} else if(selectedDate.trim() != "" && !(!cinemaNo.length) && !(!movieName.length)){
 			
 			var allData = {
 				"selectedDate" : selectedDate,
@@ -204,16 +193,36 @@
 				url : "<c:url value='/reserve/movieSelect.do'/>",
 				dataType : "json",
 				data : allData,
-
+				
 				success : function(data) {
-					$("#movieSelectNotice").find("span").remove().end().append(
-							'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>');
-
-					for (var idx = 0; idx < data.result.length; idx++) {
-						$("#selectScreen").append(
-								"<option value='"+data.result[idx].SCREEN_NO+"'>"
-										+ data.result[idx].SCREEN_NAME
-										+ "</option>")
+					$("#timeList").find("#Notice").remove().end();
+					
+					if(data.optionTimeList.length != 0){
+							for (var idx = 0; idx < data.optionTimeList.length; idx++) {
+								$("#timeList").append(
+								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice"><a href="/moviecube/reserve_seat.do?'+data.optionTimeList[idx].MOVIE_NO+'"'
+									+'class="flex-col-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-20 trans-04">'
+										+'<div class="size-196">'
+											+'<span class="mtext-110 cl2"'
+												+'style="font-family: NanumGothicExtraBold">['+data.optionTimeList[idx].MOVIE_NAME+']</span>'
+										+'</div>'
+										+'<div class="flex-sb size-196">'
+										+'<span class="mtext-110 cl2">'+data.optionTimeList[idx].CINEMA_NAME+'</span> <span'
+										+'class="mtext-110 cl2">'+data.optionTimeList[idx].MOVIE_TYPE+'</span> <span'
+										+'class="mtext-110 cl2">'+data.optionTimeList[idx].START_TIME+"~"+data.optionTimeList[idx].END_TIME
+										+'</span>'
+										+'</div>'
+										+'</a>'
+										+'</div>')
+							}
+					} else {
+						$("#timeList").append(
+								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">'
+								+'<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">'
+									+'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">상영 중인 영화가 없습니다.</span>'
+								+'</div>'
+						+'</div>'
+								)						
 					}
 				},
 

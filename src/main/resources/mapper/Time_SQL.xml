@@ -34,7 +34,7 @@
 	<!-- 유저 선택 상영 일정 리스트 -->
 	<select id="optionTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			select t.time_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date, t.screen_no,
+			select t.time_no, m.movie_no, m.movie_name, m.movie_type, m.movie_age, t.start_time, t.end_time, c.cinema_name, sc.screen_name, t.time_date, t.screen_no,
 			(select count(*) from seat where screen_no = sc.screen_no) as total_seat, 
 			(select count(*) from time_seat where time_no = t.time_no and status = 0) as possible_seat
 			from time t
