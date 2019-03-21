@@ -36,6 +36,7 @@ public class ReserveController {
 	private MovieService movieService;
 	
 	
+	
 	/*     임시용  step2       */
 	@RequestMapping(value = "/reserve_seat.do")
 	public ModelAndView reserve_seat(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -56,12 +57,12 @@ public class ReserveController {
 		
 		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
 		
-		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
-		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
+		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+	      
+	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
-		mv.addObject("movieList", movieList);
 		mv.addObject("cinemaList", cinemaList);
 		
 		return mv;
@@ -78,6 +79,11 @@ public class ReserveController {
 		
 		String[] var = request.getParameterValues("cinemaNo");
 		for(String arr : var) {
+		System.out.println(arr);
+		};
+		
+		String[] var2 = request.getParameterValues("movieName");
+		for(String arr : var2) {
 		System.out.println(arr);
 		};
 		
@@ -98,30 +104,22 @@ public class ReserveController {
 		CommandMap timeSeatMap = new CommandMap();
 		CommandMap screenMap = new CommandMap();
 		
-		//나중에 Step1 완료시 Map으로 변경
-		timeSeatMap.put("TIME_NO", 21);
-		screenMap.put("SCREEN_NO", 2);
+		/*String time_no = request.getParameter("TIME_NO");
+		String screen_no = request.getParameter("SCREEN_NO");
+		*/
+		
+		timeSeatMap.put("TIME_NO", 1);
+		screenMap.put("SCREEN_NO", 1);
 		
 		List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
 		Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
 		
-		int row = Integer.parseInt(seatnum.get("ROW_NUM").toString());
-		int col = Integer.parseInt(seatnum.get("COL_NUM").toString());
-		String seats = "";
+		//System.out.println(seatnum.get(arg0));
 		
-		for(int i = 0; i < row; i++) {
-			
-			for(int j = 0; j < col; j++) {
-				seats +="a";
-			}
-			if(i == row-1) continue;
-			else seats += ",";
-		}
-	
 		//시간별 좌석 리스트
 		mv.addObject("seatList", timeSeatlist);
-		//좌석 행 열 String
-		mv.addObject("seats", seats);
+		//좌석 행 렬 값
+		mv.addObject("seatnum", seatnum);
 		
 		return mv;
 	}

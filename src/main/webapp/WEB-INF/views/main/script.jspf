@@ -117,13 +117,22 @@
 
 <!--===============================================================================================-->
 <script type="text/javascript">
-    function add_item(MOVIE_NO){
-        // pre_set 에 있는 내용을 읽어와서 처리..
+    function add_item(MOVIE_NAME){
+    	
+        var length = $(".AddedMovieList").length;
+        
+        if(length < 4){
         var div = document.createElement('div');
-        var movie_no = MOVIE_NO;
-        div.setAttribute("id", "AddedMovieList");
-        div.innerHTML = document.getElementById(movie_no).innerHTML;
+        var movie_name = MOVIE_NAME;
+        div.setAttribute("id", "AddedMovieList"+movie_name);
+        div.setAttribute("value", movie_name);
+        div.setAttribute("class", "AddedMovieList");
+        div.innerHTML = document.getElementById(movie_name).innerHTML;
         document.getElementById('field').appendChild(div);
+        } else {
+        	alert("더 이상 영화를 추가할 수 없습니다.");
+        	return false;
+        }
     }
  
     function remove_item(obj){
@@ -131,3 +140,6 @@
         document.getElementById('field').removeChild(obj);
     }
 </script>
+
+
+

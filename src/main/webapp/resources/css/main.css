@@ -2529,7 +2529,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .size-111 {
   width: 100%;
-  height: 40px;
+  height: 60px;
 }
 
 .size-112 {
@@ -2609,6 +2609,10 @@ input.num-product::-webkit-inner-spin-button {
 
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
+.size-196 {
+	width: 100%;
+}
+
 .size-197 {
 	width: 35%;
 }
@@ -3172,8 +3176,8 @@ input.num-product::-webkit-inner-spin-button {
 
 .hov-cl0:hover {color: #fff;}
 .hov-bg0:hover {background-color: #fff;}
-.hov-cl1:hover {color: #717fe0;}
-.hov-bg1:hover {background-color: #717fe0;}
+.hov-cl1:hover {color: #ff5959;}
+.hov-bg1:hover {background-color: #ff5959;}
 
 /*---------------------------------------------*/
 .hov-img0 {
@@ -3199,8 +3203,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn1:hover {
-  border-color: #222;
-  background-color: #222;
+  border-color: #ff5959;
+  background-color: #ff5959;
   color: #fff;
 }
 
@@ -3212,7 +3216,7 @@ input.num-product::-webkit-inner-spin-button {
 .hov-btn2:hover {
   border-color: #fff;
   background-color: #fff;
-  color: #000080;
+  color: #000;
 }
 
 /*---------------------------------------------*/
