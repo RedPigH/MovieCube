@@ -22,6 +22,7 @@ $.ajax({
  url: "<c:url value='/admin/ScreenSelect.do'/>",
  dataType:"json",
  data: {param:CINEMA_NO},
+ 
  success: function(data){           
   $("#selectScreen").find("option").remove().end().append("<option value=''>전체</option>");
   
