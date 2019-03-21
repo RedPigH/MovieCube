@@ -24,9 +24,9 @@ public class MainController {
 	@RequestMapping(value = "/main.do")
 	public ModelAndView openBoardList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/main");
-
+		
 		List<Map<String, Object>> list = movieService.selectMovieList(commandMap.getMap());
-
+		
 		mv.addObject("list", list);
 		mv.addObject(mv);
 
