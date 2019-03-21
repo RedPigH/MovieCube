@@ -100,7 +100,7 @@
 						<c:forEach var="row" items="${timeList}">
 						<tr>
 							<td>
-							<a href="#this" name="MOVIE_NAME">${row.MOVIE_NAME}
+							<a href="#this" name="MOVIE_NAME">${row.MOVIE_NAME} / ${row.MOVIE_TYPE}
 							<input type="hidden" id="TIME_NO" value="${row.TIME_NO}"/></a></td>
 							<td>${row.CINEMA_NAME}</td>
 							<td>${row.SCREEN_NAME}</td>

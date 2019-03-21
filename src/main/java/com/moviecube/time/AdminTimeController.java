@@ -21,11 +21,9 @@ import com.moviecube.movie.MovieService;
 import com.moviecube.screen.ScreenService;
 import com.moviecube.seat.SeatService;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.Paging;
+
 
 @RequestMapping(value = "/admin")
 @Controller
@@ -87,7 +85,8 @@ public class AdminTimeController {
 		mv.addObject("totalCount", totalCount);
 		return mv;
 	}
-
+  
+	
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/timeDetail");
@@ -190,8 +189,6 @@ public class AdminTimeController {
 
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
 
-		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
-
 		timeService.deleteTime(commandMap.getMap());
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 
@@ -203,7 +200,7 @@ public class AdminTimeController {
 	public ModelAndView selectAjaxScreen(HttpServletRequest request, HttpServletResponse response, String param)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		
 		String cinema_no = param;
 
 		CommandMap map = new CommandMap();
@@ -216,17 +213,5 @@ public class AdminTimeController {
 		mv.addObject("result", screenList);
 		
 		return mv;
-	}
-
-	public static JSONObject getJsonStringFromMap(Map<String, Object> map) {
-
-		JSONObject jsonObject = new JSONObject();
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			jsonObject.put(key, value);
-		}
-
-		return jsonObject;
 	}
 }

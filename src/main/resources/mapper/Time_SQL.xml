@@ -6,7 +6,7 @@
 	<!-- 전체 상영 일정 리스트 -->
 	<select id="selectTimeList" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT m.MOVIE_NAME, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
 			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
 			WHERE
 			t.CINEMA_NO = c.CINEMA_NO AND 
