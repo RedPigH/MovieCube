@@ -128,7 +128,7 @@ public class MovieServiceImpl implements MovieService{
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
 		MovieDAO.deleteMovie(map);	
-//		MovieDAO.deleteFile(map);
-//		MovieDAO.deleteFile2(map);
+		MovieDAO.updateFileList(map);
+		MovieDAO.updateFileList2(map);
 	}
 }

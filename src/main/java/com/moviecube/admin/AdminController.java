@@ -50,18 +50,7 @@ public class AdminController {
 	private int blockpaging = 5;
 	private String pagingHtml;
 	private Paging paging;
-	private String MOVIE_NO;
-/*	
-	@RequestMapping(value="/movieList.do")
-	public ModelAndView movieList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/movieList");
-		
-		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
-		mv.addObject("movieList", movieList);
-		
-		return mv;
-	}
-*/
+
 	
 	@RequestMapping(value="/movieList.do")
 	public ModelAndView movieList(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -82,8 +71,7 @@ public class AdminController {
 		pagingHtml = paging.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
-		//System.out.println(paging.getEndCount());
-		//System.out.println(totalCount);
+	
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}
@@ -98,7 +86,6 @@ public class AdminController {
 		mv.setViewName("admin/movieList");
 		return mv;
 	}
-	
 	
 	@RequestMapping(value="/movieWriteForm.do")
 	public ModelAndView movieWriteForm(CommandMap commandMap) throws Exception {
@@ -168,6 +155,7 @@ public class AdminController {
 	@RequestMapping(value="/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
+		
 		System.out.println("영화 수정 처리1 값 확인 =============: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap(), request);
 
@@ -179,6 +167,7 @@ public class AdminController {
 	@RequestMapping(value="/movieModifyForm2.do")
 	public ModelAndView movieModifyForm2(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieModify2");
+		
 		System.out.println("스틸컷 수정 폼 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 
@@ -193,13 +182,8 @@ public class AdminController {
 	public ModelAndView movieModify2(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
-		if(commandMap.containsKey("MOVIE_NO")) {
-			MOVIE_NO = (String) commandMap.get("MOVIE_NO");
-		}else {
-			commandMap.put("MOVIE_NO", MOVIE_NO);
-		}
-		
-		System.out.println(" 스틸컷 수정 값 체크 ================" + commandMap.get("MOVIE_NO"));
+		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
+		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
 		
 		movieService.modifyMovie2(commandMap.getMap(), request);
 		
@@ -211,6 +195,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieDelete.do")
 	public ModelAndView movieDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
 		
 		System.out.println("삭제 확인 테스트 2: " + commandMap.getMap());
@@ -220,18 +205,6 @@ public class AdminController {
 		
 		return mv;
 	}
-
-/*
-	@RequestMapping(value = "/notice/adminNoticeList.do")
-	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("noticeList");
-
-		List<Map<String, Object>> list = noticeService.selectBoardList(commandMap);
-		mv.addObject("list", list);
-
-		return mv;
-	}
-*/
 	
 	@RequestMapping(value = "noticeList.do")
 	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -347,8 +320,7 @@ public class AdminController {
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
-		// System.out.println(paging.getEndCount());
-		// System.out.println(totalCount);
+
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}

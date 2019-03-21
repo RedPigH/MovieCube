@@ -40,7 +40,7 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화 정보 등록</h3>
+		<h3 class="sub_tit">스틸컷 등록</h3>
 		<form id="frm" name="frm" enctype="multipart/form-data">
 			<div class="tbl_type_01">
 				<table>
