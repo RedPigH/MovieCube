@@ -39,6 +39,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	
 	/* Ajax를 해봅시다 */
 	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
+	
 	jQuery.ajaxSettings.traditional = true;
 	stillcut_list = new Array();
 	var data = {
@@ -63,6 +64,8 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 					var label_prev = "";
 					var label_next = "";
 					
+					$('#stillcut-slide').children().remove();
+					
 					for(var i = 0 ; i < data.stillcut_list.length; i++) {
 						img_tag = "<img src='/moviecube/resources/upload/movie/stillcut/";
 						var input_tag = "<input type='radio' name='radio-btn' id='img-" + (i+1) + "' />" // i = 0일때 checked 해줘야됨.
@@ -70,6 +73,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 							input_tag = "<input type='radio' name='radio-btn' id='img-1' checked />";
 						}
 						var savname = data.stillcut_list[i].STILLCUT_SAVNAME + "'/>";
+						// alert(data.stillcut_list[i].STILLCUT_SAVNAME);
 						img_tag = img_tag + savname;
 						
 						if(i == 0) { // 만약 i가 처음 값이면 이전 버튼 눌렀을 때 마지막 사진을 띄워줘야됨.
