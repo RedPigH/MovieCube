@@ -166,6 +166,7 @@ public class AdminController {
 
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 
+
 		return mv;
 	}
 

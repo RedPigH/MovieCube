@@ -58,15 +58,15 @@
 			</ul>
 		</div>
 
-		<div class="admin_ct">
+<%-- 		<div class="admin_ct">
 			<div class="movie_grp">
 				<div class="movie_pic">
 					<a href="#this" name="poster"> <span class="detail">크게보기</span>
-						<img src="<%=cp%>/resources/upload/event/${map.EVENT_SAVNAME}"
+						<img src="<%=cp%>/resources/upload/event/${map.EVENT_SAVNAME_0}"
 						title="클릭하시면 원본크기로 보실 수 있습니다." style="cursor: pointer;"
-						onclick="doImgPop('<%=cp%>/resources/upload/event/${map.EVENT_SAVNAME}')" />
+						onclick="doImgPop('<%=cp%>/resources/upload/event/${map.EVENT_SAVNAME_0}')" />
 					</a>
-				</div>
+				</div> --%>
 				<div class="movie_txt">
 					<p class="tit">${map.EVENT_NAME}</p>
 					<dl>
@@ -80,10 +80,10 @@
 					</dl>
 					<div class="movie_btn">
 						<span class="btn btnC_02 btnF_01 mr10"></span> <span></span> <a
-							href="<%=cp%>/eventModifyForm.do?MOVIE_NO=${map.MOVIE_NO}"
-							class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>수정</span></a>
+							href="<%=cp%>/eventModifyForm.do?EVENT_NO=${map.EVENT_NO}"
+							class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>내용 수정</span></a>
 
-						<a onClick="movieDelete()" class="btn btnC_01 btnF_04"
+						<a onClick="eventDelete()" class="btn btnC_01 btnF_04"
 							style="padding-left: 10px;"> <span>삭제</span></a> <a
 							href="<%=cp%>/eventList.do?currentPage=${currentPage}"
 							class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span>
@@ -103,8 +103,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+
 	<script type="text/javascript">
 		function doImgPop(img) {
 			img1 = new Image();

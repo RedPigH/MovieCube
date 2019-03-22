@@ -30,8 +30,7 @@
 			m.MOVIE_GENRE, 
 			m.MOVIE_CONTENT, 
 			m.MOVIE_GRADE, 
-			m.MOVIE_AGE,
-			 m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
+			m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
 				 ON m.MOVIE_NO = f.MOVIE_NO
 					WHERE m.MOVIE_NO = #{MOVIE_NO} AND f.DEL_GB = 'N'
@@ -42,15 +41,11 @@
 <select id="selectMovieFileDetail" resultType="hashmap" parameterType="hashmap" >
 
 		<![CDATA[
-		select
-		m.MOVIE_NO,
-		s.STILLCUT_NO,
-		s.STILLCUT_ORGNAME, 
-		s.STILLCUT_SAVNAME, 
-		s.DEL_GB
-		FROM MC_MOVIE m INNER JOIN STILLCUT s
-		ON m.MOVIE_NO = s.MOVIE_NO 
-		WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
+		select 
+			m.MOVIE_NO, s.STILLCUT_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME, s.DEL_GB
+				FROM MC_MOVIE m INNER JOIN STILLCUT s
+					ON m.MOVIE_NO = s.MOVIE_NO 
+						WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
 		]]>
 </select>
 

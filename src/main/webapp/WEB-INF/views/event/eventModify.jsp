@@ -50,6 +50,35 @@
 			<h3 class="sub_tit">이벤트 정보 수정</h3>
 			<form id="frm" name="frm" enctype="multipart/form-data">
 				<div class="tbl_type_01">
+					<div id="fileDiv">
+			<c:forEach var="row" items="${eventDetail}" varStatus="var">
+				<table>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+					<tbody>
+						
+						<tr>	
+							<th scope="row">이벤트 이미지</th>
+			          
+							<td>
+								<input type="hidden" id="EVENT_NO" name="EVENT_ORGNAME_${var.index}" value="${row.EVENT_NO}">
+								<a href="#this" id="name" name="name"><font color="red">${row.EVENT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
+								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font>
+								
+								<input type="file" class="txt" id="EVENT_ORGNAME_${var.index}" name="EVENT_ORGNAME_${var.index}" />
+								
+								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>이벤트 추가</span></a>
+								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
+								
+								
+							</td>
+						</tr>	
+					</tbody>
+				</table>
+			</c:forEach>		
+		</div>	
 					<table>
 						<colgroup>
 							<col style="width: 120px;" />
@@ -57,7 +86,7 @@
 						</colgroup>
 						<tbody>
 
-							<tr>
+<%-- 							<tr>
 								<th scope="row">이벤트 제목</th>
 								<td colspan="3"><input type="text" id="EVENT_NAME" name="EVENT_NAME" class="txt w200" value="${map.EVENT_NAME }"/></td>
 								<td><input type="text" class="txt w200" id="EVENT_NAME"
@@ -65,7 +94,16 @@
 									type="hidden" id="EVENT_NO" name="EVENT_NO"
 									value="${map.EVENT_NO}" /> <font color="blue"><span
 										class="ibk">예) (캡틴마블) MX관 특별 포스터 증정 이벤트 </span></font></td>
-							</tr>
+							</tr> --%>		
+							<tr>
+							<th scope="row">영화제목</th>
+							<td>
+								<input type="text" class="txt w200" id="EVENT_NAME" name="EVENT_NAME" value="${map.EVENT_NAME}"/>
+								<input type="hidden" id="EVENT_NO" name="EVENT_NO" value="${map.EVENT_NO}" />
+								<font color="blue"><span class="ibk">예) 영화제목(3D) </span></font>
+								
+							</td>
+						</tr>
 
 							<tr>
 								<th scope="row">이벤트 타입</th>
@@ -98,31 +136,37 @@
 									<font color="red"></font></td>
 							</tr>
 
-
-							<tr>
-								<th scope="row">동영상 URL</th>
-								<td><input type="text" class="txt w200" id="EVENT_URL"
-									name="EVENT_URL" value="${map.EVENT_URL}" /> <font color="red"></font>
-								</td>
-							</tr>
+<tr>
+							<th scope="row">동영상 URL</th>
+							<td>
+								<input type="text" class="txt w200" id="EVENT_URL" name="EVENT_URL" value="${map.EVENT_URL}" />
+								<font color="red"></font>
+							</td>
+						</tr>
 							
+							
+							
+							
+							
+			<%-- 				
 							<tr>
 							<th scope="row">이미지</th>
 							<td>
 							<input type="hidden" id="image" name="imgae" value="${map.FILE_NO }">
 							<a href="#this" id="name" name="name"><font color="red">${map.EVENT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 							<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br/>
-							<input type="file" class="txt" name="EVENT_ORGNAME"/>
+							<input type="file" class="txt" name="EVENT_ORGNAME"/> --%>
 							
 
 
 						</tbody>
 					</table>
-
 				</div>
+				
 
 				<div class="btn_type_03">
-					<a href="#this" class="btn btnC_04 btnP_04" id="write"> <span>수정하기</span>
+					<a href="#this" class="btn btnC_04 btnP_04" id="write"> 
+					<input type="hidden" name="MOVIE_NO" value="${param.EVENT_NO}"/><span>수정하기</span>
 					</a> <a href="#this" class="btn btnC_04 btnP_04" id="list"
 						style="padding-left: 10px;"> <span>목록으로</span>
 					</a>

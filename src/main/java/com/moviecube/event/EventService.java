@@ -15,7 +15,7 @@ public interface EventService {
 
 	public void modifyEvent(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
-	public Map<String, Object> checkEventFile(Map<String, Object> map) throws Exception;
+
 
 	public Map<String, Object> selectEventDetail2(Map<String, Object> map) throws Exception;
 

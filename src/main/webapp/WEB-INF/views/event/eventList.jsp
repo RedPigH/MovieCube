@@ -65,6 +65,10 @@
 											<p>
 												<strong>이벤트 제목</strong> : ${row.EVENT_NAME} 
 											</p>
+											
+											<p>
+											<strong>번호</strong> :${row.EVENT_NO}
+											</p>
 
 											<p>
 												<strong></strong> : ${row.EVENT_OPENDATE}

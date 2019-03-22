@@ -49,10 +49,6 @@ public class EventDAO extends AbstractDAO {
 		update("event.modifyFile", map);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> checkEventFile(Map<String, Object> map) throws Exception {
-		return (Map<String, Object>) selectOne("event.checkEventFile", map);
-	}
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectEventDetail2(Map<String, Object> map) throws Exception {
@@ -61,5 +57,9 @@ public class EventDAO extends AbstractDAO {
 	
 	public void deleteEvent(Map<String, Object> map)throws Exception{
 		update("event.deleteEvent", map);
+	}
+	
+	public void deleteFileList(Map<String,Object> map) throws Exception{
+		update("event.deleteFileList", map);
 	}
 }

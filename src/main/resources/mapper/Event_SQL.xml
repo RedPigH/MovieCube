@@ -23,6 +23,7 @@ f.EVENT_ORGNAME,
 f.EVENT_SAVNAME
 FROM MC_EVENT e INNER JOIN MC_EVENT_FILE f
 ON e.EVENT_NO = f.EVENT_NO
+WHERE f.DEL_GB = 'N'
 order by e.EVENT_NO desc
 
 ]]>
@@ -80,9 +81,26 @@ values
 		파일 없을 때 상세보기 <![CDATA[ SELECT EVENT_NO, EVENT_NAME, EVENT_TYPE, EVENT_OPENDATE, 
 		EVENT_CLOSEDATE, EVENT_URL FROM MC_EVENT WHERE EVENT_NO = #{EVENT_NO} ]]> 
 		</select> -->
+		
+			<select parameterType="hashmap" resultType="hashmap"
+		id="selectEventDetail">
+	
+	<![CDATA[
+	SELECT
+	 EVENT_NO,
+	 EVENT_NAME, 
+	 EVENT_TYPE,
+	 EVENT_OPENDATE,
+	 EVENT_CLOSEDATE,
+	 EVENT_URL
+	 FROM
+	 MC_EVENT
+	 WHERE EVENT_NO = #{EVENT_NO}
+	 ]]>
+	</select>
 
 	<select parameterType="hashmap" resultType="hashmap"
-		id="selectEventDetail">
+		id="selectEventDetail2">
 	
 	<![CDATA[
 	select
@@ -97,7 +115,7 @@ values
 	f.EVENT_SAVNAME
 	FROM MC_EVENT e INNER JOIN MC_EVENT_FILE f
 	ON e.EVENT_NO = f.EVENT_NO
-	WHERE e.EVENT_NO = #{EVENT_NO}
+	WHERE e.EVENT_NO = #{EVENT_NO} AND f.DEL_GB = 'N'
 	 ]]>
 	</select>
 
@@ -113,7 +131,7 @@ values
 	f.DEL_GB
 	FROM MC_EVENT e INNER JOIN MC_EVENT_FILE f
 	ON e.EVENT_NO = f.EVENT_NO
-	WHERE e.EVENT_NO = #{EVENT_NO} and f.DEL_GB = 'N'
+	WHERE e.EVENT_NO = #{EVENT_NO} AND f.DEL_GB = 'N'
 	]]>
 	</select>
 
@@ -149,12 +167,12 @@ values
 	]]>
 	</update>
 
-	<select id="checkEventFile" parameterType="hashmap"
+<!-- 	<select id="checkEventFile" parameterType="hashmap"
 		resultType="hashmap">
 	<![CDATA[
 	SELECT COUNT(*) AS CNT FROM MC_EVENT_FILE WHERE EVENT_NO = #{EVENT_NO} AND DEL_GB = 'N'
 	]]></select>
-
+ -->
 	<delete parameterType="hashmap" id="deleteEvent">
 	
 	<![CDATA[
@@ -162,4 +180,12 @@ values
 	where EVENT_NO = #{EVENT_NO}
 	]]>
 	</delete>
+	
+	<update id="deleteFileList" parameterType="hashmap">
+	<![CDATA[
+	UPDATE MC_EVENT_FILE SET
+	DEL_GB = 'Y'
+	WHERE
+	EVENT_NO = #{EVENT_NO}
+	]]></update>
 </mapper>

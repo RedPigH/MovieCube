@@ -87,40 +87,35 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void modifyEvent(Map<String, Object> map, HttpServletRequest request) throws Exception {
-
 		EventDAO.modifyEvent(map);
-
-		EventDAO.updateFileList(map);
+		EventDAO.deleteFileList(map);
 
 		List<Map<String, Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
 		Map<String, Object> tempMap = null;
 
-		for (int i = 0, size = fileList.size(); i < size; i++) {
-			tempMap = fileList.get(i);
-			if (i == 0) {
 
-				if (tempMap.get("IS_NEW").equals("Y")) {
-					EventDAO.insertFile(tempMap);
-				}
-				if (tempMap.get("IS_NEW").equals("N")) {
-					EventDAO.modifyFile(tempMap);
+		for (int i = 0, size = fileList.size(); i < size; i++) {
+			EventDAO.insertFile(fileList.get(i));
+			/*
+			 * tempMap = fileList.get(i); if (i == 0) {
+			 * 
+			 * if (tempMap.get("IS_NEW").equals("Y")) { EventDAO.insertFile(tempMap); } else
+			 * { EventDAO.modifyFile(tempMap);
+			 */
+			
 				}
 			}
-		}
-	}
+		
+	
 
-	@Override
-	public Map<String, Object> checkEventFile(Map<String, Object> map) throws Exception {
-		Map<String, Object> result = EventDAO.checkEventFile(map);
-
-		if (result == null) {
-			result.put("CNT", 0);
-			return result;
-		}
-
-		return result;
-	}
-
+	/*
+	 * @Override public Map<String, Object> checkEventFile(Map<String, Object> map)
+	 * throws Exception { Map<String, Object> result = EventDAO.checkEventFile(map);
+	 * 
+	 * if (result == null) { result.put("CNT", 0); return result; }
+	 * 
+	 * return result; }
+	 */
 	@Override
 	public void deleteEvent(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		EventDAO.deleteEvent(map);
