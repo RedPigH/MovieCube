@@ -267,4 +267,7 @@
 		}
 		}
 	</script>
-
+	
+<!--===============================================================================================-->
+<!-- <script type="text/javascript" src="/moviecube/resources/vendor/reserveSeat/jquery-1.11.0.min.js"></script> -->
+<script type="text/javascript" src="/moviecube/resources/vendor/reserveSeat/jquery.seat-charts.min.js"></script>
