@@ -53,7 +53,7 @@
 				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 == NULL">
 					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2})
 				</when>
-				<when test = "MOVIE_NAME0 != NULL andMOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 != NULL">
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 != NULL">
 					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2} or m.movie_name = #{MOVIE_NAME3})
 				</when>
 				<otherwise>

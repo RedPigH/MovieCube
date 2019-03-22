@@ -121,7 +121,7 @@
 						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
 
 
-						<c:forEach items="${alltimeList}" var="row">
+						<c:forEach items="${optiontimeList}" var="row">
 
 							<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
 								<a href="/moviecube/reserve_seat.do"
