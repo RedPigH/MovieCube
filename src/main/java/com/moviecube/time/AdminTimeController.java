@@ -131,7 +131,7 @@ public class AdminTimeController {
 
 		screenSeatmap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
 
-		List<Map<String, Object>> seatlist = seatService.selectSeatList(screenSeatmap.getMap());
+		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(screenSeatmap.getMap());
 
 		for (int i = 0; i < seatlist.size(); i++) {
 			timeSeatmap.put("SEAT_NO", seatlist.get(i).get("SEAT_NO"));
