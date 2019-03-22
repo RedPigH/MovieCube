@@ -60,38 +60,7 @@
 			</div>
 		</div>
 	</section>
-
-
-
-	<!-- 
-	<div class="demo">
-		<div id="seat-map">
-			<div class="front">SCREEN</div>
-		</div>
-		<div class="booking-details">
-			<p>
-				영화: <span> Gingerclown</span>
-			</p>
-			<p>
-				상영시간: <span>November 3, 21:00</span>
-			</p>
-			<p>좌석:</p>
-			<ul id="selected-seats"></ul>
-			<p>
-				좌석수: <span id="counter">0</span>
-			</p>
-			<p>
-				금액: <b>$<span id="total">0</span></b>
-			</p>
-
-			<button class="checkout-button">확인</button>
-
-			<div id="legend"></div>
-		</div>
-		<div style="clear: both"></div>
-	</div> -->
-
-
+	
 	<%@ include file="../main/body_footer.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>
