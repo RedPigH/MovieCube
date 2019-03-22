@@ -2472,6 +2472,11 @@ input.num-product::-webkit-inner-spin-button {
 
 /*//////////////////////////////////////////////////////////////////
 [ Size ]*/
+.size-99 {
+  min-width: 100px;
+  height: 35px;
+}
+
 .size-100 {
   min-width: 50px;
   height: 46px;
@@ -2836,6 +2841,8 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 25px;
 }
 
+
+
 /*---------------------------------------------*/
 .bor18 {
   border-top: 1px solid #e6e6e6;
@@ -2849,6 +2856,10 @@ input.num-product::-webkit-inner-spin-button {
 .bor19 {
   border: 1px solid #d9d9d9;
   border-radius: 2px;
+}
+
+.bor20 {
+  border-radius: 15px;
 }
 
 
