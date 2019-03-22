@@ -2,15 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script src="/moviecube/resources/js_test/jquery-1.12.4.min.js"></script>
+<script>
+function get_reviews() {
+	var movie_no = $("#h_modal_movie_no").val();
+	// alert(movie_no);
+}
 
-
-<script type="text/javascript">
-	function getMovieName() {
-		var movie_name = $("#modal_movie_no").val();
-		$("#h_modal_movie_name").text(movie_name);
-	}
 </script>
-
 <!-- Modal1 -->
 <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
 	<div class="overlay-modal1 js-hide-modal1"></div>
@@ -112,13 +110,14 @@
 						</h4>
 						<hr>
 						<p class="stext-102 cl3 p-t-23"> </p>
-						<p id="h_modal_movie_grade" style="font-weight: bold; font-size: 20px"> <!-- Jquery로 값 자동으로들어감 --> </p>
+						<p id="h_modal_movie_grade" style="font-weight: bold; font-size: 20px"> ㅇㅇ<!-- Jquery로 값 자동으로들어감 --> </p>
 						<p class="stext-102 cl3 p-t-23"> </p>
 						<p id="h_modal_movie_type" style="font-weight: bold; font-size: 20px">타입 : </p> 
 						<p id="h_modal_movie_opendate" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
 						<p id="h_modal_movie_director" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
 						<p id="h_modal_movie_actor" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
 						<p id="h_modal_movie_genre" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
+						<input type="hidden" id="h_modal_movie_no" value=""/>
 						
 						
 						<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
@@ -227,7 +226,7 @@
 							data-toggle="tab" href="#information" role="tab">스틸컷
 								</a></li>
 
-						<li class="nav-item p-b-10"><a class="nav-link"
+						<li class="nav-item p-b-10"><a class="nav-link" onclick="get_reviews();" 
 							data-toggle="tab" href="#reviews" role="tab">리뷰 (1)</a></li>
 					</ul>
 
@@ -246,12 +245,13 @@
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<!-- 여기가 스틸컷 탭 -->
-									<%@ include file="cut.jsp" %>
+									<%@ include file="stillcut.jspf" %>
 								</div>
 							</div>
 						</div>
 
 						-
+						<!-- 여기부터가 리뷰 -->
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">

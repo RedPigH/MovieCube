@@ -131,4 +131,9 @@ public class MovieServiceImpl implements MovieService{
 //		MovieDAO.deleteFile(map);
 //		MovieDAO.deleteFile2(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception {
+		return MovieDAO.selectStillCutList(map);
+	}
 }

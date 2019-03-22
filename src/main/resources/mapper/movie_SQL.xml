@@ -55,6 +55,12 @@
    		 ]]>
 </select>
 
+<select id="selectStillCutList" resultType="hashmap" parameterType="hashmap">
+		<![CDATA[
+        SELECT * FROM STILLCUT WHERE MOVIE_NO = #{MOVIE_NO} AND DEL_GB = 'N' ORDER BY STILLCUT_NO DESC
+   		 ]]>
+</select>
+
 <!-- 영화 정보 입력 -->
 
 <insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">

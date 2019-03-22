@@ -212,11 +212,7 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
-
+				
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
