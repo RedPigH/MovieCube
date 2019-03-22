@@ -234,7 +234,7 @@
 					if(data.optionTimeList.length != 0){
 							for (var idx = 0; idx < data.optionTimeList.length; idx++) {
 								$("#timeList").append(
-								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="TimeTable"><a href="/moviecube/reserve_seat.do?time_no='+data.optionTimeList[idx].TIME_NO+'&screen_no='+data.optionTimeList[idx].SCREEN_NO+'"'
+								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="TimeTable"><a href="/moviecube/reserve_selectSeat.do?time_no='+data.optionTimeList[idx].TIME_NO+'&screen_no='+data.optionTimeList[idx].SCREEN_NO+'"'
 									+'class="flex-col-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-20 trans-04">'
 										+'<div class="size-196">'
 											+'<span class="mtext-110 cl2"'
