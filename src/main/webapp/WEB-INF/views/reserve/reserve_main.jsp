@@ -118,7 +118,7 @@
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
 						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" id="timeList">
-						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
+						<h4 class="mtext-109 cl2 p-b-30">상영시간표</h4>
 						
 						
 							<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
@@ -137,10 +137,17 @@
 	<!-- 예약 페이지1 / 상영시간표 Ajax -->
 	<script type="text/javascript">
 		function movieSelect() {
-
 			
+			
+			if(!(!document.getElementById('TimeTable'))){
+			$('div').remove('#TimeTable');
+			};
+			
+			
+			/* 날짜 변수 저장 */
 			var selectedDate = $("#datepicker").val();
-
+			
+			/* 극장 변수 저장 */
 			var cinemaNo = [];
 			$("select[name='selectCinema']").each(function(i) {	//4개
 				if ($(this).val() == "") {
@@ -149,13 +156,26 @@
 				}
 			});
 			
+			/* 영화 변수 저장 */
 			var movieName = [];
 			$("div[class='AddedMovieList']").each(function(i) {	//4개
 					movieName.push($(this).attr('value'));
 				});
 			
+
 			
+			/* 상영시간표 쪽에 안내 멘트 출력 */
 			if(selectedDate.trim() == "" || !cinemaNo.length || !movieName.length){
+				
+				if(!document.getElementById('movieSelectNotice')){
+					$("#timeList").append(
+							'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">'
+							+'<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">'
+								+'<span class="mtext-110 cl2" style="font-family: NanumGothicBold"></span>'
+							+'</div>'
+					+'</div>'
+						)	
+					};
 			
 					if(selectedDate.trim() != "" && !cinemaNo.length && !movieName.length){
 						$("#movieSelectNotice").find("span").remove().end().append(
@@ -178,6 +198,10 @@
 					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜를 선택해주세요.</span>');
 				}
 					
+					
+					
+					
+			/* DB에서 상영시간표 가져오기 */		
 			} else if(selectedDate.trim() != "" && !(!cinemaNo.length) && !(!movieName.length)){
 			
 			var allData = {
@@ -195,12 +219,13 @@
 				data : allData,
 				
 				success : function(data) {
+					
 					$("#timeList").find("#Notice").remove().end();
 					
 					if(data.optionTimeList.length != 0){
 							for (var idx = 0; idx < data.optionTimeList.length; idx++) {
 								$("#timeList").append(
-								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice"><a href="/moviecube/reserve_seat.do?'+data.optionTimeList[idx].MOVIE_NO+'"'
+								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="TimeTable"><a href="/moviecube/reserve_seat.do?'+data.optionTimeList[idx].MOVIE_NO+'"'
 									+'class="flex-col-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-20 trans-04">'
 										+'<div class="size-196">'
 											+'<span class="mtext-110 cl2"'
