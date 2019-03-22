@@ -20,7 +20,6 @@ var unableseats = '${unableseats}';
 var seatmap = seats.split(",");
 var unableseatmap = unableseats.split(",");
 
-alert(unableseatmap);
 
 $(document).ready(function() {
 					var $cart = $('#selected-seats'), //Sitting Area
@@ -87,8 +86,8 @@ function recalculateTotal(sc) {
 
 <style>
 .front {
-	width: 300px;
-	margin: 5px 32px 45px 57px;
+	width: 280px;
+	margin: 5px 32px 45px 50px;
 	background-color: #f0f0f0;
 	color: #666;
 	text-align: center;
@@ -141,8 +140,8 @@ div.seatCharts-seat {
 }
 
 div.seatCharts-row {
-	display: inline-block;
 	height: 35px;
+	display: inline-block;
 }
 
 div.seatCharts-seat.available {
