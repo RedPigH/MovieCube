@@ -102,9 +102,10 @@ public class ReserveController {
 		};
 		
 		
-		List<Map<String, Object>> optiontimeList = timeService.optionTimeList(map.getMap());
+		List<Map<String, Object>> optionTimeList = timeService.optionTimeList(map.getMap());
 		
-		mv.addObject("optiontimeList", optiontimeList);
+		mv.setViewName("jsonView");
+		mv.addObject("optionTimeList", optionTimeList);
 		
 		return mv;
 	}
