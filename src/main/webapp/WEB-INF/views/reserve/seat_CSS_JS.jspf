@@ -10,9 +10,11 @@
 	href="/moviecube/resources/vendor/reserveSeat/reserveSeat.css">
 <script>
 	var price = 8000; //price
-	var seatlength = ${fn:length(seatmap)};
+	var seatlength = ${fn:length(seatmap)}; 
 	var seats = '${seats}';
 	var seatmap = seats.split(",");
+	
+	alert(seatmap);
 	
 	$(document)
 			.ready(
