@@ -18,10 +18,10 @@
 		<div class="container">
 			<div class="flex-w flex-tr">
 				<div
-					class="size-217 bor7 p-lr-10 p-t-10 p-b-10 p-lr-10-lg w-full-md">
+					class="size-217 bor7 p-tb-10 w-full-md">
 					<div class="row">
-						<div class="col-md-6 col-lg-7 p-b-30">
-							<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="col-md-6 col-lg-7 p-tb-15">
+							<div class="p-l-25 p-lr-0-lg" style="text-align: center;">	
 								<div id="seat-map">
 									<div class="front">
 										SCREEN
@@ -30,14 +30,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6 col-lg-5 p-b-30">
-							<div class="p-t-5 p-lr-0-lg">
+						<div class="col-md-6 col-lg-5 p-t-15">
+							<div class="p-t-25 p-lr-0-lg">
 								<div class="booking-details">
 									<p>
-										영화: <span>${time.MOVIE_NAME }</span>
+										영화: <span> 캡틴마블</span>
 									</p>
 									<p>
-										상영시간: <span>${time.TIME_DATE}, ${time.START_TIME} ~ ${time.END_TIME}</span>
+										상영시간: <span>3월 15일, 21:00~23:00</span>
 									</p>
 									<p>좌석:</p>
 									<ul id="selected-seats"></ul>
@@ -45,10 +45,11 @@
 										좌석수: <span id="counter">0</span>
 									</p>
 									<p>
-										금액: <b><span id="total">0</span>원</b>
+										금액: <b>&#8361<span id="total">0</span></b>
 									</p>
 
-									<button class="checkout-button">확인</button>
+									<button class="checkout-button stext-101 cl0 size-99 bg1 bor20 hov-btn2 p-lr-15 trans-04">
+									결제</button>
 
 									<div id="legend"></div>
 								</div>
@@ -60,7 +61,38 @@
 			</div>
 		</div>
 	</section>
-	
+
+
+
+	<!-- 
+	<div class="demo">
+		<div id="seat-map">
+			<div class="front">SCREEN</div>
+		</div>
+		<div class="booking-details">
+			<p>
+				영화: <span> Gingerclown</span>
+			</p>
+			<p>
+				상영시간: <span>November 3, 21:00</span>
+			</p>
+			<p>좌석:</p>
+			<ul id="selected-seats"></ul>
+			<p>
+				좌석수: <span id="counter">0</span>
+			</p>
+			<p>
+				금액: <b>$<span id="total">0</span></b>
+			</p>
+
+			<button class="checkout-button">확인</button>
+
+			<div id="legend"></div>
+		</div>
+		<div style="clear: both"></div>
+	</div> -->
+
+
 	<%@ include file="../main/body_footer.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>

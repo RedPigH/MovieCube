@@ -16,11 +16,7 @@
 	var price = 8000; //price
 	var seatlength = ${fn:length(seatmap)};
 	var seats = '${seats}';
-	var unableseats = '${unableseats}';
 	var seatmap = seats.split(",");
-	var unableseatmap = unableseats.split(",");
-	
-	alert(unableseatmap);
 	
 	$(document).ready(function() {
 						var $cart = $('#selected-seats'), //Sitting Area
@@ -28,7 +24,18 @@
 						$total = $('#total'); //Total money
 
 						var sc = $('#seat-map').seatCharts({
-											map : seatmap,
+											map : [
+												'aaaaaaaaaa',
+									            'aaaaaaaaaa',
+									            '__________',
+									            'aaaaaaaaaa',
+									            'aaaaaaaaaa',
+												'aaaaaaaaaa',
+												'aaaaaaaaaa',
+												'aaaaaaaaaa',
+												'aaaaaaaaaa',
+									            'aaaaaaaaaa'
+											],
 											naming : {
 												top : false,
 												getLabel : function(character, row, column) {
@@ -71,7 +78,7 @@
 											}
 										});
 						//sold seat
-						sc.get(unableseatmap).status('unavailable');
+						sc.get([ '1_2' ]).status('unavailable');
 
 					});
 	//sum total money
@@ -98,6 +105,7 @@
 
 .booking-details {
 	float: none;
+	margin-left: 70px;
 	position: relative;
 	width: 300px;
 	height: 450px;
@@ -109,6 +117,7 @@
 }
 
 .booking-details p {
+	font-family: NanumGothicBold;
 	line-height: 26px;
 	font-size: 16px;
 	color: #999
@@ -143,28 +152,28 @@ div.seatCharts-row {
 }
 
 div.seatCharts-seat.available {
-	background-color: #B9DEA0;
+	background-color: #555;
 }
 
 div.seatCharts-seat.focused {
-	background-color: #76B474;
+	background-color: #bf0000;
 	border: none;
 }
 
 div.seatCharts-seat.selected {
-	background-color: #ff5959;
+	background-color: #bf0000;
 }
 
 div.seatCharts-seat.unavailable {
-	background-color: #472B34;
+	background-color: #ccc;
 	cursor: not-allowed;
 }
 
 div.seatCharts-container {
-	border-right: 1px dotted #adadad;
 	width: 400px;
 	padding: 20px;
-	float: left;
+	float: none;
+	display: inline-block;
 }
 
 div.seatCharts-legend {
@@ -179,7 +188,6 @@ ul.seatCharts-legendList {
 
 .seatCharts-legendItem {
 	float: left;
-	width: 90px;
 	margin-top: 10px;
 	line-height: 2;
 }
@@ -191,12 +199,7 @@ span.seatCharts-legendDescription {
 
 .checkout-button {
 	display: block;
-	width: 80px;
-	height: 24px;
-	line-height: 20px;
 	margin: 10px auto;
-	border: 1px solid #999;
-	font-size: 14px;
 	cursor: pointer
 }
 
