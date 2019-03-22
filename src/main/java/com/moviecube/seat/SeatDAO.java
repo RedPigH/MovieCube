@@ -31,6 +31,11 @@ public class SeatDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectTimeSeat(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("seat.selectTimeSeat", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> unableTimeSeat(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("time_seat.unableTimeSeat", map);
+	}
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectSeat(Map<String, Object> map) throws Exception {

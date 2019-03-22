@@ -90,6 +90,7 @@
 		]]>
 	</select>
 	
+	
 	<!-- 상영일정 등록 -->
 	<insert id="insertTime" parameterType="hashmap"
 		useGeneratedKeys="true" keyProperty="TIME_NO">

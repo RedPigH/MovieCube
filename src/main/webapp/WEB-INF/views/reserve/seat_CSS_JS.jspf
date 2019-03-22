@@ -16,7 +16,11 @@
 	var price = 8000; //price
 	var seatlength = ${fn:length(seatmap)};
 	var seats = '${seats}';
+	var unableseats = '${unableseats}';
 	var seatmap = seats.split(",");
+	var unableseatmap = unableseats.split(",");
+	
+	alert(unableseatmap);
 	
 	$(document).ready(function() {
 						var $cart = $('#selected-seats'), //Sitting Area
@@ -24,18 +28,7 @@
 						$total = $('#total'); //Total money
 
 						var sc = $('#seat-map').seatCharts({
-											map : [
-												'aaaaaaaaaa',
-									            'aaaaaaaaaa',
-									            '__________',
-									            'aaaaaaaa__',
-									            'aaaaaaaaaa',
-												'aaaaaaaaaa',
-												'aaaaaaaaaa',
-												'aaaaaaaaaa',
-												'aaaaaaaaaa',
-									            'aa__aa__aa'
-											],
+											map : seatmap,
 											naming : {
 												top : false,
 												getLabel : function(character, row, column) {
@@ -78,7 +71,7 @@
 											}
 										});
 						//sold seat
-						sc.get([ '1_2' ]).status('unavailable');
+						sc.get(unableseatmap).status('unavailable');
 
 					});
 	//sum total money

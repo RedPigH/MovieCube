@@ -53,13 +53,14 @@ public class ReserveController {
 	      screenMap.put("SCREEN_NO", commandMap.get("screen_no"));
 	      timeMap.put("TIME_NO", commandMap.get("time_no"));
 	      
-	      List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
+	      List<Map<String, Object>> unableSeatList = seatService.unableTimeSeat(timeSeatMap.getMap());
 	      Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
 	      Map<String, Object> time = timeService.timeDetail(timeMap.getMap());
 	      
 	      int row = Integer.parseInt(seatnum.get("ROW_NUM").toString());
 	      int col = Integer.parseInt(seatnum.get("COL_NUM").toString());
 	      String seats = "";
+	      String unableseats = "";
 	      
 	      for(int i = 0; i < row; i++) {
 	         
@@ -70,10 +71,17 @@ public class ReserveController {
 	         else seats += ",";
 	      }
 	      
+	      for(int i = 0; i < unableSeatList.size(); i++) {
+	    	  unableseats += unableSeatList.get(i).get("SEAT_ROW").toString() + "_" + unableSeatList.get(i).get("SEAT_COL").toString();
+	    	  if(i == unableSeatList.size() -1) continue;
+	    	  else unableseats += ",";
+	      }
+	      
 	      System.out.println(seats);
+	      System.out.println(unableseats);
 	   
 	      //시간별 좌석 리스트
-	      mv.addObject("seatList", timeSeatlist);
+	      mv.addObject("unableseats", unableseats);
 	      //좌석 행 열 String
 	      mv.addObject("seats", seats);
 	      //상영 정보

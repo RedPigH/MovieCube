@@ -34,10 +34,10 @@
 							<div class="p-t-5 p-lr-0-lg">
 								<div class="booking-details">
 									<p>
-										영화: <span> 캡틴마블</span>
+										영화: <span>${time.MOVIE_NAME }</span>
 									</p>
 									<p>
-										상영시간: <span>3월 15일, 21:00~23:00</span>
+										상영시간: <span>${time.TIME_DATE}, ${time.START_TIME} ~ ${time.END_TIME}</span>
 									</p>
 									<p>좌석:</p>
 									<ul id="selected-seats"></ul>
@@ -45,7 +45,7 @@
 										좌석수: <span id="counter">0</span>
 									</p>
 									<p>
-										금액: <b>$<span id="total">0</span></b>
+										금액: <b><span id="total">0</span>원</b>
 									</p>
 
 									<button class="checkout-button">확인</button>
