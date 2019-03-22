@@ -5,8 +5,8 @@
 <%
 	String cp = request.getContextPath();
 %>
+<!DOCTYPE HTML>
 <html lang="ko">
-<html>
 <head>
 <meta charset="UTF-8">
 <title>EVENT 관리자</title>
@@ -33,7 +33,8 @@
 	<div class="admin_grp">
 		<div class="admin_list">
 			<ul>
-				<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+				<li class="on"><a href="<%=cp%>movieList.do">이벤트 정보</a></li>
+				<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 				<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 				<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 				<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
@@ -55,48 +56,7 @@
 							<col style="width: 120px;" />
 							<col />
 						</colgroup>
-						<tbody>
-							<tr>
-								<th scope="row">이벤트 제목</th>
-								<td><input type="text" class="txt w200" id="EVENT_NAME"
-									name="EVENT_NAME" /> <font color="green"><span
-										class="ibk">예) (캡틴마블) MX관 특별 포스터 증정 이벤트 </span></font></td>
-							</tr>
-
-							<tr>
-								<th scope="row">이벤트 타입</th>
-								<td><select name="EVENT_TYPE" class="slct w200">
-										<option value="무비큐브 이벤트">무비큐브 이벤트</option>
-										<option value="영화 이벤트">영화 이벤트</option>
-										<option value="영화관 이벤트">영화관 이벤트</option>
-										<option value="제휴 이벤트">제휴 이벤트</option>
-								</select></td>
-							</tr>
-
-							<tr>
-								<th scope="row">이벤트 시작일</th>
-								<td><input type="date" class="txt w200" id="EVENT_OPENDATE"
-									name="EVENT_OPENDATE" /> <font color="red"></font></td>
-							</tr>
-
-							<tr>
-								<th scope="row">이벤트 마감일</th>
-								<td><input type="date" class="txt w200"
-									id="EVENT_CLOSEDATE" name="EVENT_CLOSEDATE" /> <font
-									color="red"></font></td>
-							</tr>
-
-
-							<tr>
-								<th scope="row">동영상 URL</th>
-								<td><input type="text" class="txt w200" id="EVENT_URL"
-									name="EVENT_URL" /> <font color="red"></font></td>
-							</tr>
-
-
-						</tbody>
 					</table>
-
 
 					<div id="fileDiv">
 						<table>
@@ -105,30 +65,82 @@
 								<col />
 							</colgroup>
 							<tbody>
+							<tbody>
+								<tr>
+									<th scope="row">이벤트 제목</th>
+									<td><input type="text" class="txt w200" id="EVENT_NAME"
+										name="EVENT_NAME" /> <font color="green"><span
+											class="ibk">예) (캡틴마블) MX관 특별 포스터 증정 이벤트 </span></font></td>
+								</tr>
 
 								<tr>
-									<th scope="row">이벤트 이미지</th>
-									<td><input type="file" class="txt" name="EVENT_ORGNAME_0" />
-										<a href="#this" class="btn btnC_04 btnP_04" id="addFile">
-											<span>이벤트 추가</span>
-									</a> <a href="this" class="btn btnC_04 btnP_04" id="delete"
-										name="delete"><span>삭제</span></a></td>
+									<th scope="row">이벤트 타입</th>
+									<td><select name="EVENT_TYPE" class="slct w200">
+											<option value="무비큐브 이벤트">무비큐브 이벤트</option>
+											<option value="영화 이벤트">영화 이벤트</option>
+											<option value="영화관 이벤트">영화관 이벤트</option>
+											<option value="제휴 이벤트">제휴 이벤트</option>
+									</select></td>
 								</tr>
+
+								<tr>
+									<th scope="row">이벤트 시작일</th>
+									<td><input type="date" class="txt w200"
+										id="EVENT_OPENDATE" name="EVENT_OPENDATE" /> <font
+										color="red"></font></td>
+								</tr>
+
+								<tr>
+									<th scope="row">이벤트 마감일</th>
+									<td><input type="date" class="txt w200"
+										id="EVENT_CLOSEDATE" name="EVENT_CLOSEDATE" /> <font
+										color="red"></font></td>
+								</tr>
+
+
+								<tr>
+									<th scope="row">동영상 URL</th>
+									<td><input type="text" class="txt w200" id="EVENT_URL"
+										name="EVENT_URL" /> <font color="red"></font></td>
+								</tr>
+
+
 							</tbody>
-							</div>
 						</table>
 
 
-					</div>
+						<div id="fileDiv">
+							<table>
+								<colgroup>
+									<col style="width: 120px;" />
+									<col />
+								</colgroup>
+								<tbody>
 
-					<div class="btn_type_03">
+									<tr>
+										<th scope="row">이벤트 이미지</th>
+										<td><input type="file" class="txt" name="EVENT_ORGNAME_0" />
+											<input type="hidden" name="EVENT_NO"
+											value="${param.EVENT_NO }" /> <a href="#this"
+											class="btn btnC_04 btnP_04" id="addFile"> <span>이미지
+													추가</span>
+										</a> <a href="this" class="btn btnC_04 btnP_04" id="delete"
+											name="delete"><span>삭제</span></a></td>
+									</tr>
+								</tbody>
+							</table>
 
-						<a href="#this" class="btn btnC_04 btnP_04"
-							style="padding-left: 10px;" id="write"> <span>작성하기</span>
-						</a> <a href="#this" class="btn btnC_04 btnP_04"
-							style="padding-left: 10px;" id="list"> <span>목록으로</span>
-						</a>
-					</div>
+
+						</div>
+
+						<div class="btn_type_03">
+
+							<a href="#this" class="btn btnC_04 btnP_04"
+								style="padding-left: 10px;" id="write"> <span>작성하기</span>
+							</a> <a href="#this" class="btn btnC_04 btnP_04"
+								style="padding-left: 10px;" id="list"> <span>목록으로</span>
+							</a>
+						</div>
 			</form>
 		</div>
 	</div>

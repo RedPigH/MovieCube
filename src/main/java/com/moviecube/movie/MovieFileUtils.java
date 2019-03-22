@@ -17,8 +17,8 @@ import com.moviecube.common.CommonUtils;
  
 @Component("movieFileUtils") // 이 객체의 관리를 스프링이 담당하도록 함
 public class MovieFileUtils {
-    private static final String filePath = "C:\\muyilove\\src\\main\\webapp\\resources\\upload\\mvoie\\"; // POSTER 이미지 파일의 저장위치
-    private static final String filePath2 = "C:\\muyilove\\src\\main\\webapp\\resources\\upload\\movie\\"; // POSTER 이미지 파일의 저장위치
+    private static final String filePath = "C:\\muyilove\\src\\main\\webapp\\resources\\upload\\mvoie\\poster\\"; // POSTER 이미지 파일의 저장위치
+    private static final String filePath2 = "C:\\muyilove\\src\\main\\webapp\\resources\\upload\\movie\\stillcut\\"; // POSTER 이미지 파일의 저장위치
     
     public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -32,7 +32,7 @@ public class MovieFileUtils {
         List<Map<String,Object>> fileList = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
         Map<String, Object> fileListMap = null;
                
-        String MOVIE_NO = (String)map.get("MOVIE_NO");  // MovieServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
+        int MOVIE_NO = (int)map.get("MOVIE_NO");  // MovieServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
          
         File file = new File(filePath); // 파일을 저장할 경로에 해당폴더가 없으면 폴더를 생성한다
         if(file.exists() == false){

@@ -40,12 +40,6 @@ public class EventController {
 	@RequestMapping(value="/eventWrite.do")
 	public ModelAndView eventWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/eventList.do");
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_NAME"));
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_TYPE"));
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_OPENDATE"));
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_CLOSEDATE"));
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("FILE_NO"));
-		System.out.println("혜쮸꼰뜌님"+commandMap.get("EVENT_ORGNAME"));
 		eventService.insertEvent(commandMap.getMap(), request);
 		
 		return mv;

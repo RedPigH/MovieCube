@@ -45,7 +45,8 @@
 	<div class="admin_grp">
 		<div class="admin_list">
 			<ul>
-				<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+				<li class="on"><a href="<%=cp%>eventList.do">영화 정보</a></li>
+				<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 				<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 				<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 				<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
@@ -79,13 +80,26 @@
 					</dl>
 					<div class="movie_btn">
 						<span class="btn btnC_02 btnF_01 mr10"></span> <span></span> <a
-							href="<%=cp%>/eventModifyForm.do?EVENT_NO=${map.EVENT_NO}"
-							class="btn btnC_01 btnF_04"> <span>수정</span></a> <a
-							onClick="eventDelete()" class="btn btnC_01 btnF_04"
+							href="<%=cp%>/eventModifyForm.do?MOVIE_NO=${map.MOVIE_NO}"
+							class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>수정</span></a>
+
+						<a onClick="movieDelete()" class="btn btnC_01 btnF_04"
 							style="padding-left: 10px;"> <span>삭제</span></a> <a
 							href="<%=cp%>/eventList.do?currentPage=${currentPage}"
 							class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span>
 						</a>
+					</div>
+				</div>
+				<h3 class="sub_tit">이미지</h3>
+				<div class="movie_steel">
+					<div class="inner">
+						<ul>
+							<c:forEach var="row" items="${eventDetail}">
+								<li><img
+									src="<%=cp%>/resources/upload/event/${row.EVENT_SAVNAME}"
+									alt="" /></li>
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
 			</div>
