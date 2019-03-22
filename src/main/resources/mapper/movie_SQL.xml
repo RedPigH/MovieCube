@@ -67,6 +67,12 @@
             AND DEL_GB = 'N'
    		 ]]>
 	</select>
+	
+	<select parameterType="hashmap" resultType="hashmap" id="selectStillCutList">
+		<![CDATA[
+        SELECT * FROM STILLCUT WHERE MOVIE_NO = #{MOVIE_NO} AND DEL_GB = 'N' ORDER BY STILLCUT_NO DESC
+   		 ]]>
+   	</select>
 
 	<!-- 영화 정보 입력 -->
 
