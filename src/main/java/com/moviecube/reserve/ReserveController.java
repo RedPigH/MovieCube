@@ -41,9 +41,6 @@ public class ReserveController {
 	   public ModelAndView reserve_seat(CommandMap commandMap, HttpServletRequest request) throws Exception {
 	      ModelAndView mv = new ModelAndView("reserve/reserve_selectSeat");
 	      
-	      System.out.println(commandMap.get("time_no"));
-	      System.out.println(commandMap.get("screen_no"));
-	      
 	      CommandMap timeSeatMap = new CommandMap();
 	      CommandMap screenMap = new CommandMap();
 	      CommandMap timeMap = new CommandMap();
@@ -76,10 +73,7 @@ public class ReserveController {
 	    	  if(i == unableSeatList.size() -1) continue;
 	    	  else unableseats += ",";
 	      }
-	      
-	      System.out.println(seats);
-	      System.out.println(unableseats);
-	   
+
 	      //시간별 좌석 리스트
 	      mv.addObject("unableseats", unableseats);
 	      //좌석 행 열 String

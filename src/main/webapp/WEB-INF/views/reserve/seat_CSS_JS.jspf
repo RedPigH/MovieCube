@@ -88,7 +88,7 @@ function recalculateTotal(sc) {
 <style>
 .front {
 	width: 300px;
-	margin: 5px 32px 45px 32px;
+	margin: 5px 32px 45px 57px;
 	background-color: #f0f0f0;
 	color: #666;
 	text-align: center;
@@ -141,6 +141,7 @@ div.seatCharts-seat {
 }
 
 div.seatCharts-row {
+	display: inline-block;
 	height: 35px;
 }
 

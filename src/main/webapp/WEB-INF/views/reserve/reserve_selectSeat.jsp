@@ -37,7 +37,8 @@
 										영화: <span> 캡틴마블</span>
 									</p>
 									<p>
-										상영시간: <span>3월 15일, 21:00~23:00</span>
+										상영시간: <span><c:set var="TextValue" value="${time.TIME_DATE}"/>
+									${fn:substring(TextValue,0,10)}, 21:00~23:00</span>
 									</p>
 									<p>좌석:</p>
 									<ul id="selected-seats"></ul>
