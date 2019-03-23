@@ -25,32 +25,32 @@ public class ReserveController {
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_main");
+		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		String cinemaNo = "";
 		String movieNo = "";
 		String selectDate = "";
 		Map<String, Object> cinemaMap = null;
 		Map<String, Object> movieMap = null;
 
-		// 선택한 영화관 예매 홈 화면으로 불러오는 부분
+		// �꽑�깮�븳 �쁺�솕愿� �삁留� �솃 �솕硫댁쑝濡� 遺덈윭�삤�뒗 遺�遺�
 		if (request.getParameter("selectCinema") != null) {
 
 			cinemaNo = request.getParameter("selectCinema");
 			commandMap.put("CINEMA_NO", cinemaNo); // key, value
 			cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
 			mv.addObject("cinemaMap", cinemaMap);
-			mv.addObject("cinemaNo", cinemaNo); // 이 값을 영화선택 할 때도 줘서 값 유지시켜야됨.
+			mv.addObject("cinemaNo", cinemaNo); // �씠 媛믪쓣 �쁺�솕�꽑�깮 �븷 �븣�룄 以섏꽌 媛� �쑀吏��떆耳쒖빞�맖.
 
 		}
 
-		// 선택한 영화를 홈 화면으로 불러오는 부분
+		// �꽑�깮�븳 �쁺�솕瑜� �솃 �솕硫댁쑝濡� 遺덈윭�삤�뒗 遺�遺�
 		if (request.getParameter("selectMovie") != null) {
 
 			movieNo = request.getParameter("selectMovie");
 			commandMap.put("MOVIE_NO", movieNo); // key, value
 			movieMap = reserveService.selectOneMovie(commandMap.getMap());
 			mv.addObject("movieMap", movieMap);
-			mv.addObject("movieNo", movieNo); // 이 값을 영화관선택할 때도 줘서 값 유지시켜야됨.
+			mv.addObject("movieNo", movieNo); // �씠 媛믪쓣 �쁺�솕愿��꽑�깮�븷 �븣�룄 以섏꽌 媛� �쑀吏��떆耳쒖빞�맖.
 
 		}
 		
@@ -71,12 +71,12 @@ public class ReserveController {
 		return mv;
 	}
 
-	// 극장 리스트 전체
+	// 洹뱀옣 由ъ뒪�듃 �쟾泥�
 	@RequestMapping(value = "/reserve_step1.do")
 	public ModelAndView reserveStep1(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step1");
 
-		/* 극장 관련 */
+		/* 洹뱀옣 愿��젴 */
 		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
 		mv.addObject("cinemaList", cinemaList);
 
@@ -88,12 +88,12 @@ public class ReserveController {
 		return mv;
 	}
 
-	// 영화  리스트 전체
+	// �쁺�솕  由ъ뒪�듃 �쟾泥�
 	@RequestMapping(value = "/reserve_step2.do")
 	public ModelAndView reserveStep2(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve_step2");
 
-		/* 영화 관련 */
+		/* �쁺�솕 愿��젴 */
 		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
 		mv.addObject("movieList", movieList);
 
@@ -105,7 +105,7 @@ public class ReserveController {
 		return mv;
 	}
 
-	// 선택한 극장, 선택한 영화에 맞는 시간표를 쫘라라라락 띄워줌.
+	// �꽑�깮�븳 洹뱀옣, �꽑�깮�븳 �쁺�솕�뿉 留욌뒗 �떆媛꾪몴瑜� 已섎씪�씪�씪�씫 �쓣�썙以�.
 	@RequestMapping(value = "/reserve_step3.do")
 	public ModelAndView reserveStep3(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/reserve.do");
