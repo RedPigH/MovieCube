@@ -15,8 +15,12 @@ public class CinemaServiceImpl implements CinemaService {
 
 	@Override
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
-
 		return cinemaDAO.selectCinemaList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map ) throws Exception{
+		return cinemaDAO.selectCinemaScreen(map);
 	}
 
 	@Override
@@ -39,4 +43,8 @@ public class CinemaServiceImpl implements CinemaService {
 		return cinemaDAO.cinemaDetail(map);
 	}
 
+	@Override
+	public Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception {
+		return cinemaDAO.selectOneCinema(map);	
+	}
 }

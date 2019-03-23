@@ -5,68 +5,75 @@
 
 	<select id="selectBoardList" parameterType="hashmap"
 		resultType="hashmap">
-		<![CDATA[
-		SELECT
-			NOTICE_NO,
-			NOTICE_SUB,
-			NOTICE_REGDATE
-		FROM 
-			MC_NOTICE
-		ORDER BY NOTICE_NO DESC
-		]]>
+<![CDATA[
+SELECT
+NOTICE_NO,
+NOTICE_SUB,
+NOTICE_REGDATE
+FROM 
+MC_NOTICE
+ORDER BY 
+NOTICE_NO DESC
+]]>
 	</select>
 
 	<insert id="insertBoard" parameterType="hashmap">
-		<![CDATA[
-			INSERT INTO MC_NOTICE
-			(
-				NOTICE_NO,
-				NOTICE_SUB,
-				NOTICE_CONTENT,
-				NOTICE_REGDATE
-			)
-			VALUES
-			(
-			MC_NOTICE_NO_SEQ.NEXTVAL,
-			#{NOTICE_SUB},
-			#{NOTICE_CONTENT},
-			SYSDATE
-			)
-		]]>
+<![CDATA[
+INSERT INTO MC_NOTICE
+(
+NOTICE_NO,
+NOTICE_SUB,
+NOTICE_CONTENT,
+NOTICE_REGDATE
+)
+VALUES
+(
+MC_NOTICE_NO_SEQ.NEXTVAL,
+#{NOTICE_SUB},
+#{NOTICE_CONTENT},
+SYSDATE
+)
+]]>
 	</insert>
 
 	<select id="selectBoardDetail" parameterType="hashmap"
 		resultType="hashmap">
-		<![CDATA[
-			SELECT
-				NOTICE_NO,
-				NOTICE_SUB,
-				NOTICE_CONTENT,
-				NOTICE_REGDATE
-			FROM
-				MC_NOTICE
-			WHERE
-				NOTICE_NO = #{NOTICE_NO}
-		]]>
+<![CDATA[
+SELECT
+NOTICE_NO,
+NOTICE_SUB,
+NOTICE_CONTENT,
+NOTICE_REGDATE
+FROM
+MC_NOTICE
+WHERE
+NOTICE_NO = #{NOTICE_NO}
+]]>
 	</select>
 
 	<update id="updateBoard" parameterType="hashmap">
 	<![CDATA[
-		UPDATE MC_NOTICE
-		SET
-			NOTICE_SUB = #{NOTICE_SUB},
-			NOTICE_CONTENT = #{NOTICE_CONTENT}
-		WHERE
-			NOTICE_NO = #{NOTICE_NO}
+	UPDATE MC_NOTICE
+	SET
+	NOTICE_SUB = #{NOTICE_SUB},
+	NOTICE_CONTENT = #{NOTICE_CONTENT}
+	WHERE
+	NOTICE_NO = #{NOTICE_NO}
 	]]>
 	</update>
 
+
 	<delete id="deleteBoard" parameterType="hashmap">
-	<![CDATA[
-		DELETE MC_NOTICE
-		WHERE NOTICE_NO = #{NOTICE_NO}
-	]]>
+    <![CDATA[
+    DELETE MC_NOTICE
+    WHERE
+    NOTICE_NO = #{NOTICE_NO}
+    ]]>
 	</delete>
+	
+	
+	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
+		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->
 
 	<!-- <select id="selectNoticeList" parameterType="hashmap" resultType="hashmap"> 
 		<include refid="common.pagingPre" /> <![CDATA[ SELECT ROW_NUMBER() OVER (ORDER 

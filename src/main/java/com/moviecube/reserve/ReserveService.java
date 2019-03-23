@@ -6,13 +6,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public interface ReserveService {
-	
-	/* About cinema  */
-	List<Map<String,Object>> selectCinemaList(Map<String,Object> map) throws Exception;
-	Map<String,Object> selectOneCinema(Map<String,Object> map) throws Exception;
-	
-	
-	/* About movie */
+
+// About cinema 
+	List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception;
+
+	Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception;
+
+//About movie 
 	List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception;
-	Map<String,Object> selectOneMovie(Map<String,Object> map) throws Exception;
+
+	Map<String, Object> selectOneMovie(Map<String, Object> map) throws Exception;
 }

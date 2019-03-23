@@ -6,12 +6,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.CommandMap;
+import com.moviecube.movie.MovieService;
+import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
 
 @Controller
@@ -21,109 +25,132 @@ public class ReserveController {
 	
 	@Resource(name = "timeService")
 	private TimeService timeService;
+	
+	@Resource(name = "seatService")
+	private SeatService seatService;
+	
+	@Resource(name = "cinemaService")
+	private CinemaService cinemaService;
+	
+	@Resource(name = "movieService")
+	private MovieService movieService;
+	
+	
 
-	@SuppressWarnings("null")
+	@RequestMapping(value = "/reserve_selectSeat.do")
+	   public ModelAndView reserve_seat(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	      ModelAndView mv = new ModelAndView("reserve/reserve_selectSeat");
+	      
+	      System.out.println(commandMap.get("time_no"));
+	      System.out.println(commandMap.get("screen_no"));
+	      
+	      CommandMap timeSeatMap = new CommandMap();
+	      CommandMap screenMap = new CommandMap();
+	      CommandMap timeMap = new CommandMap();
+	      
+	      //나중에 Step1 완료해서 Map으로 변경함  -국
+	      timeSeatMap.put("TIME_NO", commandMap.get("time_no"));
+	      screenMap.put("SCREEN_NO", commandMap.get("screen_no"));
+	      timeMap.put("TIME_NO", commandMap.get("time_no"));
+	      
+	      List<Map<String, Object>> unableSeatList = seatService.unableTimeSeat(timeSeatMap.getMap());
+	      Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
+	      Map<String, Object> time = timeService.timeDetail(timeMap.getMap());
+	      
+	      int row = Integer.parseInt(seatnum.get("ROW_NUM").toString());
+	      int col = Integer.parseInt(seatnum.get("COL_NUM").toString());
+	      String seats = "";
+	      String unableseats = "";
+	      
+	      for(int i = 0; i < row; i++) {
+	         
+	         for(int j = 0; j < col; j++) {
+	            seats +="a";
+	         }
+	         if(i == row-1) continue;
+	         else seats += ",";
+	      }
+	      
+	      for(int i = 0; i < unableSeatList.size(); i++) {
+	    	  unableseats += unableSeatList.get(i).get("SEAT_ROW").toString() + "_" + unableSeatList.get(i).get("SEAT_COL").toString();
+	    	  if(i == unableSeatList.size() -1) continue;
+	    	  else unableseats += ",";
+	      }
+	      
+	      System.out.println(seats);
+	      System.out.println(unableseats);
+	   
+	      //시간별 좌석 리스트
+	      mv.addObject("unableseats", unableseats);
+	      //좌석 행 열 String
+	      mv.addObject("seats", seats);
+	      //상영 정보
+	      mv.addObject("time", time);
+	      
+	      return mv;
+	   }
+	
+
+	
+	
+	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
-		String cinemaNo = "";
-		String movieNo = "";
-		String selectDate = "";
-		Map<String, Object> cinemaMap = null;
-		Map<String, Object> movieMap = null;
-
-		// �꽑�깮�븳 �쁺�솕愿� �삁留� �솃 �솕硫댁쑝濡� 遺덈윭�삤�뒗 遺�遺�
-		if (request.getParameter("selectCinema") != null) {
-
-			cinemaNo = request.getParameter("selectCinema");
-			commandMap.put("CINEMA_NO", cinemaNo); // key, value
-			cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
-			mv.addObject("cinemaMap", cinemaMap);
-			mv.addObject("cinemaNo", cinemaNo); // �씠 媛믪쓣 �쁺�솕�꽑�깮 �븷 �븣�룄 以섏꽌 媛� �쑀吏��떆耳쒖빞�맖.
-
-		}
-
-		// �꽑�깮�븳 �쁺�솕瑜� �솃 �솕硫댁쑝濡� 遺덈윭�삤�뒗 遺�遺�
-		if (request.getParameter("selectMovie") != null) {
-
-			movieNo = request.getParameter("selectMovie");
-			commandMap.put("MOVIE_NO", movieNo); // key, value
-			movieMap = reserveService.selectOneMovie(commandMap.getMap());
-			mv.addObject("movieMap", movieMap);
-			mv.addObject("movieNo", movieNo); // �씠 媛믪쓣 �쁺�솕愿��꽑�깮�븷 �븣�룄 以섏꽌 媛� �쑀吏��떆耳쒖빞�맖.
-
-		}
 		
-		if(request.getParameter("selectdate") != null) {
-			
-			selectDate = request.getParameter("selectdate");
-			commandMap.put("TIME_DATE", selectDate);
-			
-		}
+		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
 		
-		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
+		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
-			List<Map<String,Object>> timelist = timeService.testList(commandMap.getMap());
-		
-			mv.addObject("timelist", timelist);
-		}
-
-		return mv;
-	}
-
-	// 洹뱀옣 由ъ뒪�듃 �쟾泥�
-	@RequestMapping(value = "/reserve_step1.do")
-	public ModelAndView reserveStep1(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step1");
-
-		/* 洹뱀옣 愿��젴 */
-		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
+		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
+	      
+	    mv.addObject("movieList", movieList);
+		mv.addObject("alltimeList", alltimeList);
 		mv.addObject("cinemaList", cinemaList);
-
-		if (request.getParameter("movieNo") != null) {
-			String movieNo = request.getParameter("movieNo");
-			mv.addObject("selectMovie", movieNo);
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/reserve/movieSelect.do")
+	public ModelAndView movieSelect(CommandMap commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mv = new ModelAndView("reserve/reserve_main");
+		
+		String selectedDate = request.getParameter("selectedDate");
+		String[] var = request.getParameterValues("cinemaNo");
+		String[] var2 = request.getParameterValues("movieName");
+		
+		CommandMap map = new CommandMap();
+		
+		map.put("TIME_DATE", selectedDate);
+		
+		for(int i = 0; i < var.length ; i++) {
+			map.put("CINEMA_NO" + i, var[i]);			
 		}
-
-		return mv;
-	}
-
-	// �쁺�솕  由ъ뒪�듃 �쟾泥�
-	@RequestMapping(value = "/reserve_step2.do")
-	public ModelAndView reserveStep2(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step2");
-
-		/* �쁺�솕 愿��젴 */
-		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
-		mv.addObject("movieList", movieList);
-
-		if (request.getParameter("cinemaNo") != null) {
-			String cinemaNo = request.getParameter("cinemaNo");
-			mv.addObject("selectCinema", cinemaNo);
+		
+		for(int i = 0; i < var2.length ; i++) {
+			map.put("MOVIE_NAME" + i, var2[i]);			
 		}
-
+		/* 데이터 확인용  */
+		System.out.println(request.getParameter("selectedDate"));
+		
+		
+		for(String arr : var) {
+		System.out.println(arr);
+		};
+		
+		
+		for(String arr : var2) {
+		System.out.println(arr);
+		};
+		
+		
+		List<Map<String, Object>> optionTimeList = timeService.optionTimeList(map.getMap());
+		
+		mv.setViewName("jsonView");
+		mv.addObject("optionTimeList", optionTimeList);
+		
 		return mv;
 	}
 
-	// �꽑�깮�븳 洹뱀옣, �꽑�깮�븳 �쁺�솕�뿉 留욌뒗 �떆媛꾪몴瑜� 已섎씪�씪�씪�씫 �쓣�썙以�.
-	@RequestMapping(value = "/reserve_step3.do")
-	public ModelAndView reserveStep3(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/reserve.do");
-		
-		String cinemaNo = request.getParameter("cinemaNo");
-		String movieNo = request.getParameter("movieNo");
-		String selectedDate = request.getParameter("selectDate");
-		
-		mv.addObject("selectMovie", movieNo);
-		mv.addObject("selectCinema", cinemaNo);
-		mv.addObject("selectdate", selectedDate);
-		
-		return mv;
-	}
-
-	@RequestMapping(value = "/reserve_step4.do")
-	public ModelAndView reserveStep4(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step4");
-		return mv;
-	}
 }

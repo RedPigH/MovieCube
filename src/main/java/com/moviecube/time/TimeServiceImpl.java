@@ -20,6 +20,17 @@ public class TimeServiceImpl implements TimeService {
 	}
 
 	@Override
+	public List<Map<String, Object>> optionTimeList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return timeDAO.optionTimeList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectAllTimeList(Map<String, Object> map) throws Exception{
+		return timeDAO.selectAllTimeList(map);
+	}
+
+	@Override
 	public Map<String, Object> timeDetail(Map<String, Object> map) throws Exception {
 
 		return timeDAO.selectOneTime(map);
@@ -41,12 +52,6 @@ public class TimeServiceImpl implements TimeService {
 	public void deleteTime(Map<String, Object> map) throws Exception {
 
 		timeDAO.deleteTime(map);
-	}
-
-	@Override
-	public List<Map<String, Object>> testList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return timeDAO.testList(map);
 	}
 
 }

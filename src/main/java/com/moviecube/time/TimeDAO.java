@@ -16,8 +16,13 @@ public class TimeDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> testList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectList("time.testList", map);
+	public List<Map<String, Object>> optionTimeList(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>) selectList("time.optionTimeList", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectAllTimeList(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>) selectList("time.selectAllTimeList", map);
 	}
 
 	/*

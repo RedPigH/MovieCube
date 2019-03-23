@@ -3,32 +3,59 @@
 
 <mapper namespace="seat">
 
+	<!-- 좌석 리스트 -->
+	<select id="selectSeatList" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[ 
+		SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s, SCREEN c
+			WHERE s.SCREEN_NO = c.SCREEN_NO
+			ORDER BY SEAT_NO ASC
+		]]>
+	</select>
+		
 	<!-- 상영관 별 좌석 리스트 -->
 	<select id="selectScreenSeat" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT * FROM SEAT
-			WHERE SCREEN_NO = #{SCREEN_NO}
-			ORDER BY SEAT_ROW ASC, SEAT_COL ASC
+			SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s INNER JOIN SCREEN c 
+			ON s.SCREEN_NO = c.SCREEN_NO
+			WHERE s.SCREEN_NO = #{SCREEN_NO}
+			ORDER BY SEAT_NO ASC
 		]]>
 	</select>
 	
 	<!-- 상영관 별 좌석 행,열 개수 -->
 	<select id="ScreenSeatNum" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT (
-				SELECT COUNT(SEAT_ROW) FROM (
-					SELECT DISTINCT SEAT_ROW FROM SEAT WHERE SCREEN_NO = #{SCREEN_NO})) AS ROW_NUM,
-				SELECT COUNT(SEAT_COL) FROM (
-					SELECT DISTINCT SEAT_COL FROM SEAT WHERE SCREEN_NO = #{SCREEN_NO})) AS COL_NUM
-				FROM DUAL;
+			select (
+				select count(seat_row) from (
+					select distinct seat_row from seat where SCREEN_NO = #{SCREEN_NO})) as row_num,
+				(select count(seat_col) from (
+					select distinct seat_col from seat where SCREEN_NO = #{SCREEN_NO})) as col_num
+				from dual
+		]]>
+	</select>
+	
+	<!-- 상영시간 별 좌석 리스트 -->
+	<select id="selectTimeSeat" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT t.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, t.STATUS 
+			FROM TIME_SEAT t INNER JOIN SEAT s ON t.SEAT_NO = s.SEAT_NO
+			WHERE t.TIME_NO = #{TIME_NO}
+		]]>
+	</select>
+	
+	<!-- 선택 좌석 정보 -->
+	<select id = "selectSeat" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT SEAT_ROW, SEAT_COL FROM SEAT
+			WHERE SEAT_NO = #{SEAT_NO}
 		]]>
 	</select>
 
 	<!-- 좌석 입력 -->
-	<insert id="insertSeat" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="SEAT_NO">
-		<selectKey keyProperty="SEAT_NO" resultType="int"
-			order="BEFORE">
+	<insert id="insertSeat" parameterType="hashmap" useGeneratedKeys="true" keyProperty="SEAT_NO">
+		<selectKey keyProperty="SEAT_NO" resultType="int" order="BEFORE">
 			SELECT SEAT_NO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 	<![CDATA[
@@ -47,6 +74,35 @@
 			#{SEAT_COL}
 		)
 	]]>
-		
 	</insert>
+	
+	<!-- 일정별 좌석 생성 -->
+	<insert id = "insertTimeSeat" parameterType = "hashmap">
+	<![CDATA[
+		INSERT INTO TIME_SEAT
+		(
+			SEAT_NO,
+			TIME_NO
+		)
+		VALUES
+		(
+			#{SEAT_NO},
+			MC_TIME_NO_SEQ.CURRVAL
+		)
+	]]>
+	</insert>
+	
+	<!-- 일정별 좌석 예매 상태 변경 -->
+	<update id="updateSeatStatus" parameterType = "hashmap">
+		UPDATE SET TIME_SEAT
+			STATUS = #{STATUS}
+		WHERE
+			SEAT_NO = #{SEAT_NO} AND TIME_NO = #{TIME_NO}
+	</update>
+	
+	<!-- 상영관 좌석 삭제 -->
+	<delete id="deleteSeat" parameterType = "hashmap">
+		DELETE FROM SEAT
+		WHERE SEAT_NO = #{SEAT_NO}
+	</delete>
 </mapper>

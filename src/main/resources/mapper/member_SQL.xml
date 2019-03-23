@@ -35,11 +35,12 @@
 			MEMBER_NAME,
 			MEMBER_AGE,
 			MEMBER_PHONE,
-			MEMBER_EMAIL1,
-			MEMBER_EMAIL2,
+			MEMBER_EMAIL,
 			MEMBER_ZIPCODE,
 			MEMBER_ADDRESS1,
-			MEMBER_ADDRESS2
+			MEMBER_ADDRESS2,
+			MEMBER_REGDATE,
+			ISADMIN
 		)
 		VALUES
 		(
@@ -50,27 +51,54 @@
 			#{MEMBER_NAME},
 			#{MEMBER_AGE},
 			#{MEMBER_PHONE},
-			#{MEMBER_EMAIL1},
-			#{MEMBER_EMAIL2},
+			#{MEMBER_EMAIL},
 			#{MEMBER_ZIPCODE},
 			#{MEMBER_ADDRESS1},
-			#{MEMBER_ADDRESS2}
+			#{MEMBER_ADDRESS2},
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+			#{admin}				
 		)
 	]]>
 	</insert>
 	
+	<select id="findUsedID" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM MC_MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</select>
+	
 	<!-- 로그인 -->
-	<select id = "login" parameterType = "hashmap" resultType = "hashmap">
-		
+	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT
+			 MEMBER_ID,
+			 MEMBER_PASSWD1,
+			 MEMBER_EMAIL,
+			 MEMBER_NAME,
+			 ISADMIN
+			FROM
+			 MC_MEMBER
+			WHERE
+			 MEMBER_ID=#{MEMBER_ID} AND MEMBER_PASSWD1=#{MEMBER_PASSWD1}
+		]]>
 	</select>
 	
 	<!-- ID 찾기 -->
-	<select id = "findId" parameterType = "hashmap" resultType = "hashmap">
-			
+	<select id = "findId" parameterType = "hashmap" resultType = "String">
+			<![CDATA[
+			SELECT
+			 MEMBER_ID
+			FROM
+			 MC_MEMBER
+			WHERE
+			 MEMBER_NAME=#{MEMBER_NAME}
+			 AND MEMBER_AGE=#{MEMBER_AGE}
+			 AND MEMBER_PHONE=#{MEMBER_PHONE}
+		]]>
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id = "findPasswd" parameterType = "hashmap" resultType = "hashmap">
+	<select id = "findPasswd" parameterType = "hashmap" resultType = "String"><!--승표  -->
 	
 	</select>
 	

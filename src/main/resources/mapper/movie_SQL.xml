@@ -2,18 +2,241 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="movie">
-	
+
 	<!-- 영화 리스트 -->
-	<select id = "selectMovieList" parameterType = "hashmap" resultType = "hashmap">
+	<select id="selectMovieList" resultType="hashmap"
+		parameterType="hashmap">
+
 		<![CDATA[
-			SELECT * FROM MC_MOVIE
-			ORDER BY MOVIE_NO ASC
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						WHERE f.DEL_GB = 'N'
+							order by m.MOVIE_NO desc
 		]]>
+	</select>
+
+	<!-- 영화 중복제거 리스트 -->
+	<select id="DupMovieList" resultType="hashmap" parameterType = "hashmap">
+		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
+		from (select * from mc_movie
+		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
+		inner join mc_movie_file f
+		on m.movie_no = f.movie_no
+	</select>
+
+	<select id="selectMovieDetail" resultType="hashmap"
+		parameterType="hashmap">
+
+		<![CDATA[
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
+				 ON m.MOVIE_NO = f.MOVIE_NO
+					WHERE m.MOVIE_NO = #{MOVIE_NO} AND f.DEL_GB = 'N'
+						 			
+		]]>
+	</select>
+
+	<select id="selectMovieFileDetail" resultType="hashmap"
+		parameterType="hashmap">
+
+		<![CDATA[
+		select 
+			m.MOVIE_NO, s.STILLCUT_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME, s.DEL_GB
+				FROM MC_MOVIE m INNER JOIN STILLCUT s
+					ON m.MOVIE_NO = s.MOVIE_NO 
+						WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
+		]]>
+	</select>
+
+	<select id="selectFileList" resultType="hashmap"
+		parameterType="hashmap">
+
+		<![CDATA[
+        SELECT
+            FILE_NO,
+            POSTER_ORGNAME,
+        FROM
+            MC_MOVIE_FILE
+        WHERE
+            MOVIE_NO = #{MOVIE_NO}
+            AND DEL_GB = 'N'
+   		 ]]>
 	</select>
 	
-	<select id = "selectOneMovie" parameterType = "hashmap" resultType = "hashmap">
+	<select parameterType="hashmap" resultType="hashmap" id="selectStillCutList">
 		<![CDATA[
-			SELECT * FROM MC_MOVIE WHERE MOVIE_NO = #{MOVIE_NO}
+        SELECT * FROM STILLCUT WHERE MOVIE_NO = #{MOVIE_NO} AND DEL_GB = 'N' ORDER BY STILLCUT_NO DESC
+   		 ]]>
+   	</select>
+
+	<!-- 영화 정보 입력 -->
+
+	<insert id="insertMovie" parameterType="hashmap"
+		useGeneratedKeys="true" keyProperty="MOVIE_NO">
+		<selectKey keyProperty="MOVIE_NO" resultType="int"
+			order="BEFORE">
+			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
+		</selectKey>
+
+
+		<![CDATA[
+		insert into MC_MOVIE 
+		( 
+			MOVIE_NO, 
+			MOVIE_NAME, 
+			MOVIE_TYPE, 
+		    MOVIE_OPENDATE, 
+		    MOVIE_DIRECTOR, 
+	        MOVIE_ACTOR, 
+	        MOVIE_GENRE, 
+	        MOVIE_CONTENT, 
+	        MOVIE_GRADE,
+		    MOVIE_AGE, 
+		    MOVIE_URL
+			)
+		values 
+		(
+			#{MOVIE_NO},
+			#{MOVIE_NAME},
+			#{MOVIE_TYPE},
+			#{MOVIE_OPENDATE},
+			#{MOVIE_DIRECTOR},
+			#{MOVIE_ACTOR},
+			#{MOVIE_GENRE},
+			#{MOVIE_CONTENT},
+			#{MOVIE_GRADE},
+			#{MOVIE_AGE},
+			#{MOVIE_URL}
+			)		 		  
 		]]>
-	</select>
+	</insert>
+
+
+	<insert id="insertFile" parameterType="hashmap">
+
+		<![CDATA[
+        INSERT INTO MC_MOVIE_FILE
+        (
+            FILE_NO,
+            MOVIE_NO,
+            POSTER_ORGNAME,
+            POSTER_SAVNAME
+        )
+        VALUES
+        (
+            MC_MOVIE_FILE_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{POSTER_ORGNAME},
+            #{POSTER_SAVNAME}
+        )
+    	]]>
+	</insert>
+
+	<insert id="insertFile2" parameterType="hashmap">
+
+		<![CDATA[
+        INSERT INTO STILLCUT
+        (
+            STILLCUT_NO,
+            MOVIE_NO,
+            STILLCUT_ORGNAME,
+            STILLCUT_SAVNAME
+        )
+        VALUES
+        (
+            STILLCUT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{STILLCUT_ORGNAME},
+            #{STILLCUT_SAVNAME}
+        )
+    	]]>
+	</insert>
+
+	<!-- 영화 정보 수정 -->
+
+	<update id="modifyMovie" parameterType="hashMap">
+
+		<![CDATA[
+		update MC_MOVIE set 
+			MOVIE_NAME = #{MOVIE_NAME}, 
+			MOVIE_TYPE = #{MOVIE_TYPE}, 
+		    MOVIE_OPENDATE = #{MOVIE_OPENDATE}, 
+		    MOVIE_DIRECTOR = #{MOVIE_DIRECTOR}, 
+	        MOVIE_ACTOR = #{MOVIE_ACTOR}, 
+	        MOVIE_GENRE = #{MOVIE_GENRE}, 
+	        MOVIE_CONTENT = #{MOVIE_CONTENT} , 
+	        MOVIE_GRADE = #{MOVIE_GRADE},
+		    MOVIE_AGE = #{MOVIE_AGE}, 
+		    MOVIE_URL = #{MOVIE_URL}
+				where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</update>
+
+	<update id="updateFileList" parameterType="hashmap">
+    <![CDATA[
+        UPDATE MC_MOVIE_FILE SET
+            DEL_GB = 'Y'
+        WHERE
+            MOVIE_NO = #{MOVIE_NO} 
+    ]]>
+	</update>
+
+	<update id="updateFileList2" parameterType="hashmap">
+    <![CDATA[
+        UPDATE STILLCUT SET
+            DEL_GB = 'Y'
+        WHERE
+            MOVIE_NO = #{MOVIE_NO} 
+    ]]>
+	</update>
+
+	<update id="modifyFile" parameterType="hashmap">
+		<![CDATA[
+		
+		UPDATE MC_MOVIE_FILE SET
+            DEL_GB = 'N'
+        WHERE
+            FILE_NO = #{FILE_NO}  
+
+		]]>
+	</update>
+
+	<update id="modifyFile2" parameterType="hashmap">
+		<![CDATA[
+		UPDATE STILLCUT SET
+            DEL_GB = 'N'
+        WHERE
+            STILLCUT_NO = #{STILLCUT_NO} 
+		]]>
+	</update>
+
+	<!-- 영화 삭제 -->
+	<delete id="deleteMovie" parameterType="hashmap">
+
+		<![CDATA[
+		delete from MC_MOVIE 
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
+
+	<delete id="deleteFile" parameterType="hashmap">
+
+		<![CDATA[
+		delete form MC_MOVIE_FILE
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
+
+	<delete id="deleteFile2" parameterType="hashmap">
+		
+		<![CDATA[
+		delete from STILLCUT 
+			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
 </mapper>

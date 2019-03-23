@@ -20,7 +20,7 @@ public class CommandMap {
 		return map.remove(key);
 	}
 
-	public boolean containsKey(String key) { // 키 가지고 있으면 true 리턴
+	public boolean containsKey(String key) { 
 		return map.containsKey(key);
 	}
 
@@ -33,7 +33,7 @@ public class CommandMap {
 	}
 
 	public Set<Entry<String, Object>> entrySet() {
-		return map.entrySet(); // iterator 같은 느낌. map 전체 다 리턴하는듯 , map을 순회함, key랑 value 둘 다 뽑음
+		return map.entrySet(); 
 	}
 
 	public Set<String> keySet() {
