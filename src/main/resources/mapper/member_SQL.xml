@@ -71,6 +71,7 @@
 	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 			SELECT
+			 MEMBER_NO,
 			 MEMBER_ID,
 			 MEMBER_PASSWD1,
 			 MEMBER_EMAIL,
@@ -111,6 +112,15 @@
 	<!-- 2. 기본 정보 변경 -->
 	<update id = "informUpdate" parameterType = "hashmap">
 		
+	</update>
+	
+	<!-- 3. 마일리지 update -->
+	<update id = "updateMile" parameterType = "hashmap">
+	<![CDATA[
+		UPDATE MC_MEMBER SET
+		MEMBER_MILE = MEMBER_MILE + #{MEMBER_MILE}
+		WHERE MEMBER_NO = #{MEMBER_NO}
+	]]>
 	</update>
 
 	<!-- 회원 탈퇴 -->

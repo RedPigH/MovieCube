@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService {
 	  public String findPasswd(Map<String, Object> map) throws Exception{
 		  return memberDAO.findPasswd(map);
 	  }
+	  
+	  @Override
+	  public void updateMile(Map<String, Object> map) throws Exception{
+		  memberDAO.updateMile(map);
+	  }
 }
