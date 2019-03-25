@@ -15,27 +15,31 @@ public class MemberDAO extends AbstractDAO {
 	  
 	  @Autowired private SqlSessionTemplate sqlSession;
 	  
-	  // È¸¿ø°¡ÀÔ
+	  // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	  public void insertMember(Map<String, Object> map) throws Exception {
 		  insert("member.insertMember", map);
 	  }
 	  
-	  //id Áßº¹È®ÀÎ
+	  //id ï¿½ßºï¿½È®ï¿½ï¿½
 	  public int findUsedID(Map<String, Object> map) throws Exception{
 		  return (Integer) selectOne("member.findUsedID", map);
 	  }
 	  
-	  //·Î±×ÀÎ
+	  //ï¿½Î±ï¿½ï¿½ï¿½
 	  public Map<String, Object> checkUserIdAndPassword(Map<String, Object> map) throws Exception {
 		  return (Map<String, Object>)selectOne("member.findUserIdAndPassword", map);
 	  }
 	  
-	  //id,pw Ã£±â
+	  //id,pw Ã£ï¿½ï¿½
 	  public String findId(Map<String, Object> map) throws Exception{
 		  return (String) selectOne("member.findId", map);
 	  }
 	  
 	  public String findPasswd(Map<String, Object> map) throws Exception{
 		  return (String) selectOne("member.findPasswd", map);
+	  }
+	  
+	  public void updateMile(Map<String, Object> map) throws Exception{
+		  update("member.updateMile", map);
 	  }
  }

@@ -4,14 +4,18 @@ import java.util.Map;
 
 public interface MemberService {
 	
-	//È¸¿ø°¡ÀÔ
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 void insertMember(Map<String, Object> map)throws Exception; 
+	 
 	 int findUsedID(Map<String, Object> map) throws Exception;
 	 
-	//·Î±×ÀÎ
+	//ï¿½Î±ï¿½ï¿½ï¿½
 	 Map<String, Object> checkUserIdAndPassword(Map<String, Object> map)throws Exception;
 	 
-	 //¾ÆÀÌµð,ºñ¹Ð¹øÈ£ Ã£±â
+	 //ï¿½ï¿½ï¿½Ìµï¿½,ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
 	 String findId(Map<String, Object> map) throws Exception;
+	 
 	 String findPasswd(Map<String, Object> map) throws Exception;
+	 
+	 void updateMile(Map<String, Object> map) throws Exception;
 }

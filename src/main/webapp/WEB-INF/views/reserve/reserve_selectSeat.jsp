@@ -6,6 +6,20 @@
 <meta charset="UTF-8">
 <title>자리 예매</title>
 <%@ include file="../main/head.jspf"%>
+<script type="text/javascript">
+	function confirm() {
+		$(function() { 	//선택 좌석 행,열 값 가져오기
+		    var selectSeats = $.map($('ul li').contents(), function(elem, i) { 
+		    if(elem.nodeType === 3 && $.trim(elem.nodeValue).length) 
+		     return $.trim(elem.nodeValue); 
+		    }); 
+		
+			var totalprice = $("#total").text();
+		
+		    location.href = 'reserve_confirm.do?time_no=${time.TIME_NO}&selectSeats=' +selectSeats +'&totalprice=' + totalprice;
+		}); 
+	}
+</script>
 </head>
 <body class="animsition">
 
@@ -58,9 +72,9 @@
 									</p>
 
 									<button
-										class="checkout-button stext-101 cl0 size-99 bg1 bor20 hov-btn2 p-lr-15 trans-04">
-										결제</button>
-
+										class="checkout-button stext-101 cl0 size-99 bg1 bor20 hov-btn2 p-lr-15 trans-04"
+										onclick = "confirm()">
+										결제 </button>
 									<div id="legend"></div>
 								</div>
 								<div style="clear: both"></div>
@@ -71,7 +85,6 @@
 			</div>
 		</div>
 	</section>
-
 
 	<%@ include file="../main/body_footer.jspf"%>
 

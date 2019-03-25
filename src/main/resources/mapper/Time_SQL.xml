@@ -115,7 +115,7 @@
 			#{MOVIE_NO},
 			#{CINEMA_NO},
 			#{SCREEN_NO},
-			SYSDATE,
+			#{TIME_DATE},
 			#{START_TIME},
 			#{END_TIME}
 		)

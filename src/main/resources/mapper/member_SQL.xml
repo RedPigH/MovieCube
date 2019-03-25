@@ -112,6 +112,15 @@
 	<update id = "informUpdate" parameterType = "hashmap">
 		
 	</update>
+	
+	<!-- 3. 마일리지 update -->
+	<update id = "updateMile" parameterType = "hashmap">
+	<![CDATA[
+		UPDATE MC_MEMBER SET
+		MEMBER_MILE = MEMBER_MILE + #{MEMBER_MILE}
+		WHERE MEMBER_NO = #{MEMBER_NO}
+	]]>
+	</update>
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="hashmap">
