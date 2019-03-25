@@ -1696,13 +1696,13 @@ button.mfp-close {
 }
 
 .swal-button {
-  background-color: #717fe0;
-  font-family: Poppins-Regular;
+  background-color: #ff5959;
+  font-family: NanumGothicBold;
   font-size: 16px;
   color: white;
   text-transform: uppercase;
   font-weight: unset;
-  border-radius: 4px;
+  border-radius: 24px;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -2362,7 +2362,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .mtext-103 {
-  font-family: Poppins-Bold;
+  font-family: NanumGothicBold;
   font-size: 18px;
   line-height: 1.333333;
   text-transform: uppercase;
