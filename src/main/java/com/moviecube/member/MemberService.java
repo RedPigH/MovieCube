@@ -4,18 +4,19 @@ import java.util.Map;
 
 public interface MemberService {
 	
-	//ȸ������
 	 void insertMember(Map<String, Object> map)throws Exception; 
 	 
 	 int findUsedID(Map<String, Object> map) throws Exception;
-	 
-	//�α���
+	
 	 Map<String, Object> checkUserIdAndPassword(Map<String, Object> map)throws Exception;
 	 
-	 //���̵�,��й�ȣ ã��
+	 Map<String, Object> selectOneMember(Map<String, Object> map) throws Exception;
+	 
 	 String findId(Map<String, Object> map) throws Exception;
 	 
 	 String findPasswd(Map<String, Object> map) throws Exception;
 	 
 	 void updateMile(Map<String, Object> map) throws Exception;
+	 
+	 void updateRank(Map<String, Object> map) throws Exception;
 }

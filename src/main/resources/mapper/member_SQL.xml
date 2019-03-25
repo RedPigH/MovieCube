@@ -19,7 +19,15 @@
 			WHERE MEMBER_ID = #{MEMBER_ID}
 		]]>
 	</select>
-
+	
+	<!-- 단일 회원 정보 -->
+	<select id = "selectOneMember" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM MC_MEMBER
+			WHERE MEMBER_NO = #{MEMBER_NO}
+		]]>
+	</select>
+	
 	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO">
 		<selectKey keyProperty="MEMBER_NO" resultType="int" order="BEFORE">
@@ -119,6 +127,15 @@
 	<![CDATA[
 		UPDATE MC_MEMBER SET
 		MEMBER_MILE = MEMBER_MILE + #{MEMBER_MILE}
+		WHERE MEMBER_NO = #{MEMBER_NO}
+	]]>
+	</update>
+	
+	<!-- 4. 등급 update -->
+	<update id = "updateRank" parameterType = "hashmap">
+	<![CDATA[
+		UPDATE MC_MEMBER SET
+		MEMBER_RANK = #{MEMBER_RANK}
 		WHERE MEMBER_NO = #{MEMBER_NO}
 	]]>
 	</update>

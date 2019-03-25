@@ -56,5 +56,8 @@ public class ReserveServiceImpl implements ReserveService {
 		reserveDAO.insertReserve(map);
 	}
 
-
+	@Override
+	public void deleteReservation(Map<String, Object> map) throws Exception{
+		reserveDAO.deleteReserve(map);
+	}
 }
