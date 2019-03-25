@@ -26,28 +26,6 @@
 			)
 	</insert>
 	
-	<!-- 예매 티켓 수량 -->
-	<insert id="insertResQuantity" parameterType = "hashmap">
-		<![CDATA[
-			INSERT INTO RES_QUANTITY
-			(
-				RES_NO,
-				NOMAL,
-				YOUTH,
-				CHILD,
-				PREFERENCE
-			)
-			VALUES
-			(
-				#{RES_NO},
-				#{NOMAL},
-				#{YOUTH},
-				#{CHILD},
-				#{PREFERENCE}
-			)
-		]]>
-	</insert>
-	
 	<!-- 회원별 예매 리스트 -->
 	<select id="MyReservation" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
@@ -60,7 +38,7 @@
 	<delete id="deleteReservation" parameterType = "hashmap">
 		<![CDATA[
 			DELETE FROM RESERVATION
-			WHERE MEMBER_NO = #{MEMBER_NO}
+			WHERE RES_NO = #{RES_NO}
 		]]>
 	</delete>
 

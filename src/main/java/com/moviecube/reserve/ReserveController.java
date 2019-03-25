@@ -156,7 +156,6 @@ public class ReserveController {
 		
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
-		//reservation insert
 		CommandMap reserveMap = new CommandMap();
 		CommandMap seatMap = new CommandMap();
 		CommandMap updateMap = new CommandMap();
@@ -165,6 +164,7 @@ public class ReserveController {
 		//insert reservation
 		reserveMap.put("TIME_NO", commandMap.get("TIME_NO"));
 		reserveMap.put("TOTAL_PRICE", commandMap.get("TOTAL_PRICE"));
+		
 		//need reserveMap add "MEMBER_NO" get session value
 		reserveMap.put("MEMBER_NO", user.get("MEMBER_NO"));
 		
@@ -175,11 +175,11 @@ public class ReserveController {
 		//res_seat insert and time_seat status update
 		seatMap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
 		updateMap.put("TIME_NO", commandMap.get("TIME_NO"));
+		updateMap.put("STATUS", 1);	// reserve unable 
 		
 		String[] selectSeats = commandMap.get("selectSeats").toString().split(",");
 		
 		for(String s : selectSeats) {
-			System.out.println(s);
 			String[] temp = s.split("-");
 			seatMap.put("SEAT_ROW", temp[0]);
 			seatMap.put("SEAT_COL", temp[1]);
@@ -199,13 +199,21 @@ public class ReserveController {
 		}
 		
 		//update Mile 
-		//need userMap add "MEMBER_NO" get session value
 		int totalprice = Integer.parseInt(commandMap.get("TOTAL_PRICE").toString());
 				
 		userMap.put("MEMBER_NO", user.get("MEMBER_NO"));
 		userMap.put("MEMBER_MILE", totalprice/10);
 		
 		memberService.updateMile(userMap.getMap()); 
+		
+		//update grade
+		Map<String, Object> MemberInfoMap = memberService.selectOneMember(userMap.getMap());
+		
+		if(MemberInfoMap.get("MEMBER_RANK").equals("일반") && Integer.parseInt(MemberInfoMap.get("MEMBER_MILE").toString()) >= 10000) {
+			userMap.put("MEMBER_RANK", "우수");
+			
+			memberService.updateRank(userMap.getMap());
+		}
 		
 		return mv;
 	}

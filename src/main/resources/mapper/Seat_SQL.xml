@@ -119,7 +119,7 @@
 	<!-- 일정별 좌석 예매 상태 변경 -->
 	<update id="updateSeatStatus" parameterType = "hashmap">
 		UPDATE TIME_SEAT SET 
-			STATUS = 1
+			STATUS = #{STATUS}
 		WHERE
 			SEAT_NO = #{SEAT_NO} AND TIME_NO = #{TIME_NO}
 	</update>

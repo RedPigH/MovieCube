@@ -14,5 +14,10 @@ public class ReserveDAO extends AbstractDAO {
 
 		insert("reservation.insertReservation", map);
 	}
+	
+	public void deleteReserve(Map<String, Object> map) throws Exception{
+		
+		delete("reservation.deleteReservation", map);
+	}
 
 }
