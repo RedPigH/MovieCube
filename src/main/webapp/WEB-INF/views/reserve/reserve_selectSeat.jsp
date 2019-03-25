@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>자리 예매</title>
 <%@ include file="../main/head.jspf"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	function confirm() {
 		$(function() { 	//선택 좌석 행,열 값 가져오기

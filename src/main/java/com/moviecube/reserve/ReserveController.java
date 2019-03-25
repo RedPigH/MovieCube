@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -150,10 +151,10 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value = "/reserve_complete.do")
-	public ModelAndView reserveComplete(CommandMap commandMap) throws Exception{
+	public ModelAndView reserveComplete(CommandMap commandMap, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:main.do");
 		
-		System.out.println("complete 실행");
+		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
 		//reservation insert
 		CommandMap reserveMap = new CommandMap();
@@ -165,7 +166,7 @@ public class ReserveController {
 		reserveMap.put("TIME_NO", commandMap.get("TIME_NO"));
 		reserveMap.put("TOTAL_PRICE", commandMap.get("TOTAL_PRICE"));
 		//need reserveMap add "MEMBER_NO" get session value
-		reserveMap.put("MEMBER_NO", 221);
+		reserveMap.put("MEMBER_NO", user.get("MEMBER_NO"));
 		
 		System.out.println(reserveMap.getMap());
 		
@@ -200,9 +201,8 @@ public class ReserveController {
 		//update Mile 
 		//need userMap add "MEMBER_NO" get session value
 		int totalprice = Integer.parseInt(commandMap.get("TOTAL_PRICE").toString());
-		System.out.println("앙 가격띠 : " + totalprice);
 				
-		userMap.put("MEMBER_NO", 221);
+		userMap.put("MEMBER_NO", user.get("MEMBER_NO"));
 		userMap.put("MEMBER_MILE", totalprice/10);
 		
 		memberService.updateMile(userMap.getMap()); 
