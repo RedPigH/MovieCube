@@ -145,6 +145,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   .container {max-width: 1200px;}
 }
 
+
 /*------------------------------------------------------------------
 [ Slick2 ]*/
 .slick-slide {outline: none !important;}
@@ -459,7 +460,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .sub-menu a {
-  font-family: Poppins-Regular;
+  font-family: NanumGothicBold;
   font-size: 14px;
   line-height: 1.5;
   color: #555;
@@ -1955,6 +1956,49 @@ input.num-product::-webkit-inner-spin-button {
   opacity: 1;
 }
 
+/* [ Modal2 ] */
+.wrap-modal2 {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  overflow: auto;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay-modal2 {
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.8;
+}
+
+
+/* 중원이가 추가함 */
+.no-scrolling {
+   height:100%;
+   overflow:hidden;
+}
+
+.show-modal2 {
+  /* overflow: hidden; */
+  visibility: visible;
+  opacity: 1;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Table Shopping Cart ]*/
 
@@ -2612,6 +2656,16 @@ input.num-product::-webkit-inner-spin-button {
   height: 45px;
 }
 
+.size-127 {
+  min-width: 270px;
+  height: 45px;
+}
+
+.size-128 {
+  min-width: 135px;
+  height: 40px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
 .size-196 {
@@ -3261,7 +3315,7 @@ input.num-product::-webkit-inner-spin-button {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(103,117,214,0.8);
+  background: rgba(255,89,89,0.8);
   opacity: 0;
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
@@ -3466,4 +3520,10 @@ input.num-product::-webkit-inner-spin-button {
   }
 
 }
+
+
+.jointext {
+  font-family: NanumGothicExtraBold;
+  font-size: 20px;
+  color: #808080;
 
