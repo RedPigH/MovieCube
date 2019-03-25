@@ -32,14 +32,15 @@ public class WishListController {
 		List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
 		
 		mv.addObject("WishList", wish);
-		mv.addObject("WishCnt", wish.size());
 		
 		return mv;
 	}
 	
 	@RequestMapping(value = "/insertWishList.do")
 	public ModelAndView insertWishList(CommandMap commandMap, HttpSession session) throws Exception{
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("/main");
+		
+		System.out.println(commandMap.get("MOVIE_NO"));
 		
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
@@ -49,6 +50,10 @@ public class WishListController {
 		map.put("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		
 		wishlistService.insertWishList(map.getMap());
+		List<Map<String, Object>> wish = wishlistService.selectWishList(user);
+		
+		mv.setViewName("jsonView");
+		mv.addObject("WishList", wish);
 		
 		return mv;
 	}

@@ -315,7 +315,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 									</div>
 
 									<div class="block2-txt-child2 flex-r p-t-3">
-										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="addWishList('${row.POSTER_SAVNAME}', '${row.MOVIE_NO }', '${row.MOVIE_NAME}', '${row.MOVIE_TYPE }', '${row.MOVIE_GENRE }');">
+										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="addWishList('${row.MOVIE_NO }');">
 											<img class="icon-heart1 dis-block trans-04"
 											src="resources/images/icons/icon-heart-01.png" alt="ICON">
 											
@@ -339,54 +339,40 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 </section>
 
 <script type="text/javascript">
-function addWishList(poster_savname, movie_no, movie_name, movie_type, movie_genre) {
+function addWishList(MOVIE_NO) {
 			
-			
-			var POSTER_SAVNAME = poster_savname;
-			
-			var MOVIE_NO = movie_no;
-			
-			var MOVIE_NAME = movie_name;
-			
-			var MOVIE_TYPE = movie_type;
-			
-			var MOVIE_GENRE = movie_genre;
+			var movie_no = MOVIE_NO;
 			
 			var allData = {
-				"poster_savname" : POSTER_SAVNAME,
-				"movie_no" : MOVIE_NO,
-				"movie_name" : MOVIE_NAME,
-				"movie_type" : MOVIE_TYPE, 
-				"movie_genre" : MOVIE_GENRE
+				"MOVIE_NO" : movie_no
 			};
 
 			jQuery.ajaxSettings.traditional = true;
 
 			$.ajax({
 				type : "POST",
-				url : "<c:url value='/reserve/movieSelect.do'/>",
+				url : "<c:url value='/insertWishList.do'/>",
 				dataType : "json",
 				data : allData,
 				
 				success : function(data) {
 					
-					$("#wishListIcon").removeChild();
+					$("#wishListIcon").find('.icon-header-item').remove().end();
 					$("#wishListIcon").append(
-							+'<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-modal2"'
-								+'data-notify="'+data.WishList[idx].WISHLIST_LENGTH+'">'
-								+'<i class="zmdi zmdi-favorite-outline"></i>'
+							'<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-modal2 data-notify="'
+							+data.WishList.length+'"><i class="zmdi zmdi-favorite-outline"></i>'
 					);
 					
 					$("#wishListLength").remove();
 					$(".w-full").append(
-							+'<div class="header-cart-total w-full p-tb-40">총 : '+data.WishList[idx].WISHLIST_LENGTH+'편</div>'
+							'<div class="header-cart-total w-full p-tb-40">총 : '+data.WishList.length+'편</div>'
 					);
 					
 					$("#emptyWishListNotice").remove().end();
 					
 					for (var idx = 0; idx < data.WishList.length; idx++) {
 								$("#WishList").append( 
-										+'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
+										'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
 										+'<input type="checkbox" name="terms" id="term1" style="margin-right: 10px">'
 										+'<div class="header-cart-item-img">'
 											+'<img src="resources/upload/movie/poster/'+data.WishList[idx].POSTER_SAVNAME+'" alt="IMG">'

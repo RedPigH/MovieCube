@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <!-- WishList -->
@@ -18,54 +20,34 @@
 
 				<div class="header-cart-content flex-w js-pscroll">
 					<ul class="header-cart-wrapitem w-full" id="WishList" style="margin-left: 0px;">
-						<li class="header-cart-item flex-w flex-t m-b-12" style="margin-left: 30px;">
+					
+			<c:choose>
+				<c:when test="${fn:length(WishList) > 0 }">
+					<c:forEach items="${WishList}" var="row">
+						<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">
+										<input type="checkbox" name="terms" id="term1" style="margin-right: 10px">
+										<div class="header-cart-item-img">'
+											<img src="resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="IMG">
+										</div>
+
+										<div class="p-t-8">
+											<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+												${row.MOVIE_NAME}</a> <span class="header-cart-item-info">
+												${row.MOVIE_TYPE}${row.MOVIE_DIRECTOR}</span>
+										</div>
+									</li>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<li class="header-cart-item flex-w flex-t m-b-12" style="margin-left: 30px;">
 							<div class="header-cart-item-txt p-t-8">
 								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04" id="emptyWishListNotice">
 									보고싶은 영화가 없네요ㅠㅠ</a>
 							</div>
 						</li>
+				</c:otherwise>
+			</c:choose>
 						
-						<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">
-							<input type="checkbox" name="terms" id="term1" style="margin-right: 10px">
-							<div class="header-cart-item-img">
-								<img src="resources/images/item-cart-01.jpg" alt="IMG">
-							</div>
-
-							<div class="p-t-8">
-								<a href="resources/#"
-									class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-									White Shirt Pleat </a> <span class="header-cart-item-info">
-									1 x $19.00 </span>
-							</div>
-						</li>
-
-						<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">
-							<input type="checkbox" name="terms" id="term1" style="margin-right: 10px">
-							<div class="header-cart-item-img">
-								<img src="resources/images/item-cart-01.jpg" alt="IMG">
-							</div>
-
-							<div class="p-t-8">
-								<a href="resources/#"
-									class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-									White Shirt Pleat </a> <span class="header-cart-item-info">
-									1 x $19.00 </span>
-							</div>
-						</li>
-
-						<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">
-							<input type="checkbox" name="terms" id="term1" style="margin-right: 10px">
-							<div class="header-cart-item-img">
-								<img src="resources/images/item-cart-01.jpg" alt="IMG">
-							</div>
-
-							<div class="p-t-8">
-								<a href="resources/#"
-									class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-									White Shirt Pleat </a> <span class="header-cart-item-info">
-									1 x $19.00 </span>
-							</div>
-						</li>
 					</ul>
 
 					<div class="w-full">
