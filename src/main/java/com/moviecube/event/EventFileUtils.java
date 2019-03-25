@@ -72,6 +72,7 @@ public class EventFileUtils {
 			throws Exception {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	
 
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
@@ -81,12 +82,13 @@ public class EventFileUtils {
 		List<Map<String, Object>> Filelist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> FilelistMap = null;
 
-		String EVENT_NO = (String) map.get("EVENT_NO");
+		String EVENT_NO = (String)map.get("EVENT_NO");
 		String requestName = null;
 		String idx = null;
 
 		while (iterator.hasNext()) {
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+			System.out.println("이상한 나라의 코" + multipartFile.getName());
 			System.out.println("test ============================== " + multipartFile.getName());
 
 			if (multipartFile.isEmpty() == false) {
@@ -108,7 +110,7 @@ public class EventFileUtils {
 				Filelist.add(FilelistMap);
 			} else {
 				requestName = multipartFile.getName();
-				idx = "EVENT_NAME" + requestName.substring(requestName.indexOf("_") + 1);
+				idx = "IDX_" + requestName.substring(requestName.indexOf("_") + 1);
 
 				FilelistMap = new HashMap<String, Object>();
 				FilelistMap.put("IS_NEW", "N");
@@ -116,6 +118,7 @@ public class EventFileUtils {
 				Filelist.add(FilelistMap);
 			}
 		}
+		
 
 		return Filelist;
 	}

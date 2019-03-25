@@ -26,6 +26,9 @@ public class EventController {
 
 		List<Map<String, Object>> eventList = eventService.selectEventList(commandMap);
 		mv.addObject("eventList", eventList);
+		System.out.println("혜수뀨:"+commandMap.get("FILE_NO"));
+		System.out.println("혜수뀨:"+commandMap.get("EVENT_ORGNAME"));
+		System.out.println("혜수뀨:"+commandMap.get("EVENT_SAVNAME"));
 
 		return mv;
 	}
@@ -39,7 +42,7 @@ public class EventController {
 
 	@RequestMapping(value = "/eventWrite.do")
 	public ModelAndView eventWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/eventList.do");
+		ModelAndView mv = new ModelAndView("event/eventList");
 		eventService.insertEvent(commandMap.getMap(), request);
 
 		return mv;
@@ -90,6 +93,9 @@ public class EventController {
 	@RequestMapping(value = "/eventModify.do")
 	public ModelAndView modifyEvent(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("event/eventList");
+
+		String EVENT_NO = (String)commandMap.get("EVENT_NO");
+		commandMap.getMap().put("EVENT_NO", EVENT_NO);
 
 		eventService.modifyEvent(commandMap.getMap(), request);
 
