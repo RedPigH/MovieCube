@@ -127,13 +127,16 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-		MovieDAO.deleteMovie(map);	
-//		MovieDAO.deleteFile(map);
-//		MovieDAO.deleteFile2(map);
+		MovieDAO.deleteMovie(map);
 	}
 
 	@Override
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectStillCutList(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
+		return MovieDAO.selectCommentList(map);
 	}
 }

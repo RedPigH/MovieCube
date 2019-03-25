@@ -250,6 +250,7 @@
             var index = item.index(this);
             rated = index;
             $(input).val(index+1);
+            alert(index+1);
         });
 
         $(this).on('mouseleave', function(){

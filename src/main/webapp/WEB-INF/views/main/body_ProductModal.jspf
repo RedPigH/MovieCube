@@ -6,6 +6,50 @@
 function get_reviews() {
 	var movie_no = $("#h_modal_movie_no").val();
 	// alert(movie_no);
+	var data = {
+			"movie_no" : movie_no
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : "<c:url value='/movieComment.do'/>",
+		dataType : "json",
+		data : data,
+
+		success : function(data) {
+			var comment_list_length = data.comment_list.length;
+			var cmt_id = "";
+			var cmt_content = "";
+			var cmt_like = "";
+			
+			alert(comment_list_length);
+			for(var i = 0; i < comment_list_length; i++) {
+				cmt_id = data.comment_list[i].CMT_ID;
+				cmt_content = data.comment_list[i].CMT_CONTENT;
+				cmt_like = data.comment_list[i].CMT_LIKE;
+				
+				
+				$("#commentDiv").prepend( 
+						"<div class='flex-w flex-t p-b-68'>" +
+						"<div class='wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6'>" + 
+						"<img src='images/avatar-01.jpg' alt='AVATAR'>" + 
+						"</div>" + 
+						"<div class='size-207'>" + 
+						"<div class='flex-w flex-sb-m p-b-17'>" + 
+						"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
+						"<span class='fs-18 cl11'>" + 
+						"<i class='zmdi zmdi-star'></i>" + 
+						"</span>" + 
+						"</div>" + 
+						"<p class='stext-102 cl6'>" + cmt_content + "</p>" + "</div>" + "</div>"
+				);
+			}
+			
+		},
+		error : function() { 
+			alert("오류가 발생혔슈"); 
+			}
+		});
 }
 
 </script>
@@ -207,44 +251,47 @@ function get_reviews() {
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-									<div class="p-b-30 m-lr-15-sm">
+									<div class="p-b-30 m-lr-15-sm" id="commentDiv">
+										
+										
 										<!-- Review -->
-										<div class="flex-w flex-t p-b-68">
+										<!-- <div class="flex-w flex-t p-b-68">
 											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
 												<img src="images/avatar-01.jpg" alt="AVATAR">
 											</div>
 
 											<div class="size-207">
 												<div class="flex-w flex-sb-m p-b-17">
-												<!-- 여기부터가 작성자 아이디 불러와야되는 부분임 -->
+												여기부터가 작성자 아이디 불러와야되는 부분임
 													<span class="mtext-107 cl2 p-r-20"> Ariana Grande </span> 
 													<span class="fs-18 cl11"> 
-														<!-- 별점에 따라 뿌려줘야하는 별이 다름.  COMMENT_LIKE -->
-														<i class="zmdi zmdi-star"></i>
+														별점에 따라 뿌려줘야하는 별이 다름.  COMMENT_LIKE
 														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star"></i>
 														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star-half"></i>
+														<i class="zmdi zmdi-star"></i> 
+														<i class="zmdi zmdi-star"></i> 
+														<i class="zmdi zmdi-star-half"></i> 
 													</span>
-												</div>
+											</div>
 												
-												<!-- 여기가 COMMENT_CONTENT -->
+												여기가 COMMENT_CONTENT
 												<p class="stext-102 cl6">Quod autem in homine
 													praestantissimum atque optimum est, id deseruit. Apud
 													ceteros autem philosophos</p>
 											</div>
 										</div>
+										<!-- 여기까지 리뷰 한 줄 끝 -->
+										
 
 										<!-- 	Add review -->
 										<form class="w-full">
-											<h5 class="mtext-108 cl2 p-b-7">Add a review</h5>
+											<h5 class="mtext-108 cl2 p-b-7">리뷰 작성하기</h5>
 
-											<p class="stext-102 cl6">Your email address will not be
-												published. Required fields are marked *</p>
+											<p class="stext-102 cl6">함께 아름다운 댓글 문화를 만들어가요 ~</p>
 
 											<div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16"> Your Rating </span> 
-												<span class="wrap-rating fs-18 cl11 pointer"> 
+												<span class="stext-102 cl3 m-r-16"> 별 점 </span>
+												<span class="wrap-rating fs-18 cl11 pointer">
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i> 
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i> 
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i> 
@@ -263,7 +310,7 @@ function get_reviews() {
 														id="review" name="review"></textarea>
 												</div>
 
-												<div class="col-sm-6 p-b-5">
+												<!-- <div class="col-sm-6 p-b-5">
 													<label class="stext-102 cl3" for="name">Name</label> <input
 														class="size-111 bor8 stext-102 cl2 p-lr-20" id="name"
 														type="text" name="name">
@@ -273,7 +320,7 @@ function get_reviews() {
 													<label class="stext-102 cl3" for="email">Email</label> <input
 														class="size-111 bor8 stext-102 cl2 p-lr-20" id="email"
 														type="text" name="email">
-												</div>
+												</div> -->
 											</div>
 
 											<button

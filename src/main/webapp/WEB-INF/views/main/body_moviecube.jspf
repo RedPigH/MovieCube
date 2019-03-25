@@ -55,7 +55,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 				success : function(data) {
 					
 					var stillcut_length = data.stillcut_list.length;
-					// alert('스틸컷 리스트 넘버 : ' + stillcut_length);
+					alert('스틸컷 리스트 넘버 : ' + stillcut_length);
 					
 					var for_label_prev = "&#x2039;";
 					var for_label_next = "&#x203a;"

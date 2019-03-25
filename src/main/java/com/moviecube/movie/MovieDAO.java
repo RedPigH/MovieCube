@@ -19,6 +19,11 @@ public class MovieDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectStillCutList", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("movie.selectCommentList", map);
+	}
 
 	public void insertMovie(Map<String, Object> map) throws Exception{
 		insert("movie.insertMovie", map);

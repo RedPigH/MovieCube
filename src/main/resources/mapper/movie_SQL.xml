@@ -61,6 +61,12 @@
    		 ]]>
 </select>
 
+<select id="selectCommentList" resultType="hashmap" parameterType="hashmap">
+		<![CDATA[
+        SELECT * FROM MC_COMMENT WHERE MOVIE_NO = #{MOVIE_NO} AND CMT_DEL = 'N' ORDER BY CMT_REGDATE, CMT_NO ASC
+   		 ]]>
+</select>
+
 <!-- 영화 정보 입력 -->
 
 <insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
@@ -138,6 +144,30 @@
             #{MOVIE_NO},
             #{STILLCUT_ORGNAME},
             #{STILLCUT_SAVNAME}
+        )
+    	]]>
+</insert>
+
+<insert id="insertComment" parameterType="hashmap"> <!-- MC_COMMENT_NO_SEQ -->
+
+		<![CDATA[
+        INSERT INTO MC_COMMENT
+        (
+            CMT_NO,
+            MOVIE_NO,
+            CMT_ID,
+            CMT_REGDATE,
+            CMT_LIKE,
+            CMT_DEL
+        )
+        VALUES
+        (
+            MC_COMMENT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{CMT_ID},
+            SYSDATE,
+            #{CMT_LIKE},
+            #{CMT_DEL}
         )
     	]]>
 </insert>

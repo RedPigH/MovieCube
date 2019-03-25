@@ -85,7 +85,6 @@ public class MovieController {
 		ModelAndView mv = new ModelAndView("redirect:/main");
 
 		String movieNo = request.getParameter("movie_no");
-		// System.out.println("찍히는지 테스트 : " + movieNo);
 
 		commandMap.put("MOVIE_NO", movieNo);
 
@@ -94,6 +93,23 @@ public class MovieController {
 		mv.setViewName("jsonView");
 		mv.addObject("stillcut_list", stillcut_list);
 
+		return mv;
+	}
+	
+	@RequestMapping(value = "/movieComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView commentList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/main");
+		
+		String movie_no = request.getParameter("movie_no");
+		System.out.println("찍히는지 테스트 : " + movie_no);
+		
+		commandMap.put("MOVIE_NO", movie_no);
+		List<Map<String, Object>> comment_list = movieService.selectCommentList(commandMap.getMap());
+		
+		mv.setViewName("jsonView");
+		mv.addObject("comment_list", comment_list);
+		
 		return mv;
 	}
 

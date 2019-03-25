@@ -22,5 +22,7 @@ public interface MovieService {
 	public void modifyMovie2(Map<String, Object> map,  HttpServletRequest request) throws Exception;
 	
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception;
+	
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception;
 		
 }
