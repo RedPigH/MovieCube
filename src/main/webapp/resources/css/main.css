@@ -2392,6 +2392,14 @@ input.num-product::-webkit-inner-spin-button {
   text-transform: uppercase;
 }
 
+.mtext-115 {
+  font-family: NanumGothicBold;
+  font-size: 18px;
+  color: #1b1b1b;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ L-Text >= 26 ]*/
@@ -2699,6 +2707,10 @@ input.num-product::-webkit-inner-spin-button {
 	width : 70%;
 }
 
+.size-220{
+	width: 133px;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -2851,6 +2863,11 @@ input.num-product::-webkit-inner-spin-button {
 /*--------------------Ãß°¡ Æû-------------------------*/
 .bor20 {
 	border-radius: 15px;
+}
+
+.bor21 {
+  border: 1px solid #ff5959;
+  border-radius: 15px;
 }
 
 
@@ -3196,6 +3213,10 @@ input.num-product::-webkit-inner-spin-button {
   border-color: #ff5959;
 }
 
+.hov-tag2:hover {
+  color: #1d1d1d;
+  border-color: #1d1d1d;
+}
 
 /*---------------------------------------------*/
 .hov-ovelay1 {
@@ -3509,24 +3530,26 @@ input.num-product::-webkit-inner-spin-button {
 	padding: 15px;
 	border-bottom: 1px solid #e9ecef;
 	border-top-left-radius: .3rem;
-	border-top-right-radius: .3rem
+	border-top-right-radius: .3rem;
 }
 
 .modal-header .close {
 	padding: 15px;
-	margin: -15px -15px -15px auto
+	margin: -15px -15px -15px;
 }
 
 .modal-title {
 	margin-bottom: 0;
-	line-height: 1.5
+	line-height: 1.5;
+	margin-left: 45%;
 }
 
 .modal-body {
 	position: relative;
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
-	padding: 15px
+	padding: 30px;
+	text-align: center;
 }
 
 .modal-footer {
@@ -3536,8 +3559,8 @@ input.num-product::-webkit-inner-spin-button {
 	align-items: center;
 	-ms-flex-pack: end;
 	justify-content: flex-end;
-	padding: 15px;
-	border-top: 1px solid #e9ecef
+	padding: 0 15px 15px 0;
+	border-top: 0px solid #e9ecef
 }
 
 .modal-footer>:not (:first-child ){
@@ -3559,7 +3582,7 @@ input.num-product::-webkit-inner-spin-button {
 @media ( min-width :576px) {
 	.modal-dialog {
 		max-width: 500px;
-		margin: 30px auto
+		margin: 350px auto
 	}
 	.modal-sm {
 		max-width: 300px

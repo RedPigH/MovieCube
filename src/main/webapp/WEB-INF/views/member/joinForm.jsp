@@ -70,14 +70,12 @@ function aaaa(){
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<div class="mdt">
-							<h4 class="modal-title">알림</h4>
-						</div>
+						<h4 class="mtext-115 modal-title">알림</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
 					</div>
 					<div class="modal-body">
-						<p class="modal-contents"></p>
+						<p class="stext-112 modal-contents"></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -475,7 +473,8 @@ function aaaa(){
                     
                     //중복확인 검사
                     if(checkid==0){
-                    	alert("중복확인 해주시길 바랍니다.");
+                        modalContents.text("중복확인 해주세요.");
+                        modal.modal('show');
                     	return false;
                     }
                     
