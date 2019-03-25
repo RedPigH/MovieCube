@@ -25,7 +25,7 @@
 	<div class="admin">
 		<div class="logo">
 			<h1>
-				<a href="<%=cp%>/admin/movieList.do">MovieCube Administrator -
+				<a href="<%=cp%>/eventList.do">MovieCube Administrator -
 					Event Modify</a>
 			</h1>
 		</div>
@@ -34,7 +34,8 @@
 	<div class="admin_grp">
 		<div class="admin_list">
 			<ul>
-				<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+				<li class="on"><a href="<%=cp%>/eventList.do">이벤트 정보</a></li>
+				<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 				<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 				<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 				<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
@@ -215,8 +216,8 @@
 		}
 
 		function fn_addFile() {
-			var str = "<p><input type='file' name='EVENT_ORGNAME_"
-					+ (gfv_count++)
+			var str = "<p><input type='file' name='EVENT_ORGNAME_" + (gfv_count++)
+			         +"id='EVENT_ORGNAME_" + (gfv_count)
 					+ "'><a href='#this' class='btn btnC_04 btnP_02' name='delete'><span>삭제</span></a></p>";
 			$("#fileDiv").append(str);
 			$("a[name='delete']").on("click", function(e) { //삭제 버튼
