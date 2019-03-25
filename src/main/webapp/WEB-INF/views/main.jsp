@@ -14,7 +14,7 @@
 
    <%@ include file="main/body_header.jspf" %>
    
-   <%@ include file="main/favorite.jspf" %>
+   <%@ include file="main/wishList.jspf" %>
       
    <%@ include file="main/body_slider.jspf" %>
 

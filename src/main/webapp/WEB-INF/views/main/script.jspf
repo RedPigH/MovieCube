@@ -46,34 +46,30 @@
 <script src="/moviecube/resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
 <script src="/moviecube/resources/vendor/sweetalert/sweetalert.min.js"></script>
+
 <script>
-			$('.js-addwish-b2').on('click', function(e) {
+$('.js-addwish-b2').on('click', function(e) {
 				e.preventDefault();
 			});
 
 			$('.js-addwish-b2').each(
 					function() {
-						var nameProduct = $(this).parent().parent().find(
-								'.js-name-b2').html();
-						$(this).on(
-								'click',
-								function() {
-									swal(nameProduct, "보고싶은 영화로 등록 !",
-											"success");
-
+						var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+						$(this).on('click',function() {
+									swal(nameProduct, "보고싶은 영화로 등록 !","success");
 									$(this).addClass('js-addedwish-b2');
 									$(this).off('click');
 								});
-					});
+					}
+			);
+			
 
-			$('.js-addwish-detail').each(
+			/*  $('.js-addwish-detail').each(
 					function() {
 						var nameProduct = $(this).parent().parent().parent()
 								.find('.js-name-detail').html();
 
-						$(this).on(
-								'click',
-								function() {
+						$(this).on('click',function() {
 									swal(nameProduct, "보고싶은 영화로 등록 !",
 											"success");
 
@@ -82,7 +78,7 @@
 								});
 					});
 
-			/*---------------------------------------------*/
+			
 
 			$('.js-addcart-detail').each(
 					function() {
@@ -91,8 +87,9 @@
 						$(this).on('click', function() {
 							swal(nameProduct, "보고싶은 영화로 등록 !", "success");
 						});
-					});
-		</script>
+					}); */
+</script>
+
 <!--===============================================================================================-->
 <script
 	src="/moviecube/resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
