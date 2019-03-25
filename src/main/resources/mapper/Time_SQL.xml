@@ -44,17 +44,33 @@
 			where to_char(T.TIME_DATE,'yyyy-mm-dd') = #{TIME_DATE} 
 		]]>
 			<choose>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 == NULL">
-					and m.movie_type like #{MOVIE_TYPE0}
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 == NULL">
+					and m.movie_name = #{MOVIE_NAME0}
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 == NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1})
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 == NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1})
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 == NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2})
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 == NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2})
 				</when>
-				<when test = "MOVIE_TYPE0 != NULL and MOVIE_TYPE1 != NULL and MOVIE_TYPE2 != NULL and MOVIE_TYPE3 != NULL">
-					and m.movie_type in (#{MOVIE_TYPE0}, #{MOVIE_TYPE1}, #{MOVIE_TYPE2}, #{MOVIE_TYPE3})
+				<when test = "MOVIE_NAME0 != NULL and MOVIE_NAME1 != NULL and MOVIE_NAME2 != NULL and MOVIE_NAME3 != NULL">
+					and (m.movie_name = #{MOVIE_NAME0} or m.movie_name = #{MOVIE_NAME1} or m.movie_name = #{MOVIE_NAME2} or m.movie_name = #{MOVIE_NAME3})
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			<choose>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 == NULL">
+					and c.cinema_no = #{CINEMA_NO0}
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 == NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1})
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 != NULL and CINEMA_NO3 == NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1} or c.cinema_no = #{CINEMA_NO2})
+				</when>
+				<when test = "CINEMA_NO0 != NULL and CINEMA_NO1 != NULL and CINEMA_NO2 != NULL and CINEMA_NO3 != NULL">
+					and (c.cinema_no = #{CINEMA_NO0} or c.cinema_no = #{CINEMA_NO1} or c.cinema_no = #{CINEMA_NO2} or c.cinema_no = #{CINEMA_NO3})
 				</when>
 				<otherwise>
 				</otherwise>
@@ -73,6 +89,7 @@
 			t.TIME_NO = #{TIME_NO}
 		]]>
 	</select>
+	
 	
 	<!-- 상영일정 등록 -->
 	<insert id="insertTime" parameterType="hashmap"

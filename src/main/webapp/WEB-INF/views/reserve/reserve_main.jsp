@@ -19,53 +19,6 @@
 	<%@ include file="../main/favorite.jspf"%>
 
 
-
-	<script type="text/javascript">
-		function movieSelect() {
-
-			var selectedDate = $("#datepicker").val();
-
-			var cinemaNo = [];
-			$("select[name='selectCinema']").each(function(i) {
-				if ($(this).val() == "") {
-				} else {
-					cinemaNo.push($(this).val());
-				}
-			});
-
-			var allData = {
-				"selectedDate" : selectedDate,
-				"cinemaNo" : cinemaNo
-			};
-
-			jQuery.ajaxSettings.traditional = true;
-
-			$.ajax({
-				type : "POST",
-				url : "<c:url value='/reserve/movieSelect.do'/>",
-				dataType : "json",
-				data : allData,
-
-				success : function(data) {
-					$("#selectScreen").find("option").remove().end().append(
-							"<option value=''>전체</option>");
-
-					for (var idx = 0; idx < data.result.length; idx++) {
-						$("#selectScreen").append(
-								"<option value='"+data.result[idx].SCREEN_NO+"'>"
-										+ data.result[idx].SCREEN_NAME
-										+ "</option>")
-					}
-				},
-
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("오류가 발생하였습니다.");
-				}
-			});
-		}
-	</script>
-
-
 	<!-- 영화 예매 -->
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container" style="margin-top: 100px">
@@ -82,7 +35,11 @@
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">날짜</h4>
 							</div>
-
+							<div class="wrapper">
+								<input type="text" id="datepicker" placeholder="날짜를 선택하세요."
+									autocomplete="off" /> <i
+									class="ion-calendar"></i>
+							</div>
 							<%@ include file="./datepicker.jspf"%>
 
 						</div>
@@ -101,77 +58,20 @@
 							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 
 							<c:forEach var="i" begin="1" end="4" step="1">
-							<div class="size-199 respon6-next" id="cinemaNo${i}">
-								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="selectCinema"
-										id="selectCinema">
-										<option value="" style="color: gray;">선 택</option>
-										<c:forEach var="cinema" items="${cinemaList}">
-											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
-										</c:forEach>
-									</select>
-									<div class="dropDownSelect2"></div>
+								<div class="size-199 respon6-next" id="cinemaNo${i}">
+									<div class="rs1-select2 bor8 bg0">
+										<select class="js-select2" name="selectCinema"
+											id="selectCinema" onchange="movieSelect();">
+											<option value="" style="color: gray;">선 택</option>
+											<c:forEach var="cinema" items="${cinemaList}">
+												<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
+											</c:forEach>
+										</select>
+										<div class="dropDownSelect2"></div>
+									</div>
 								</div>
-							</div>
 							</c:forEach>
-							
-							
-							<%-- <div class="size-199 respon6-next" id="cinemaNo+${i}">
-								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="selectCinema"
-										id="selectCinema">
-										<option value="" style="color: gray;">선 택</option>
-										<c:forEach var="cinema" items="${cinemaList}">
-											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
-										</c:forEach>
-									</select>
-									<div class="dropDownSelect2"></div>
-								</div>
-							</div>
-
-							<div class="size-199 respon6-next">
-								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="selectCinema"
-										id="selectCinema">
-										<option value="" style="color: gray;">선 택</option>
-										<c:forEach var="cinema" items="${cinemaList}">
-											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
-										</c:forEach>
-									</select>
-									<div class="dropDownSelect2"></div>
-								</div>
-							</div>
-
-							<div class="size-199 respon6-next">
-								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="selectCinema"
-										id="selectCinema">
-										<option value="" style="color: gray;">선 택</option>
-										<c:forEach var="cinema" items="${cinemaList}">
-											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
-										</c:forEach>
-									</select>
-									<div class="dropDownSelect2"></div>
-								</div>
-							</div>
-
-							<div class="size-199 respon6-next">
-								<div class="rs1-select2 bor8 bg0">
-									<select class="js-select2" name="selectCinema"
-										id="selectCinema">
-										<option value="" style="color: gray;">선 택</option>
-										<c:forEach var="cinema" items="${cinemaList}">
-											<option value="${cinema.CINEMA_NO}">${cinema.CINEMA_NAME}</option>
-										</c:forEach>
-									</select>
-									<div class="dropDownSelect2"></div>
-								</div>
-							</div> --%>
-
-
 						</div>
-
-
 
 						<div style="border-bottom: 1px solid #e6e6e6;">
 							<div
@@ -180,13 +80,13 @@
 								<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">영화</h4>
 								<a href="#"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-									style="position: unset;" onclick="movieSelect();"> 영화 추가 </a>
+									style="position: unset;">영화 추가 </a>
 							</div>
 
 							<div>
 
-								<c:forEach items="${alltimeList}" var="row">
-									<div id="${row.MOVIE_NO}" style="display: none;">
+								<c:forEach items="${movieList}" var="row">
+									<div id="${row.MOVIE_NAME}" style="display: none;">
 										<div
 											class="wrap-table-shopping-cart table-shopping-cart table_row tr flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm ${row.MOVIE_NO}">
 											<div class="column-1">
@@ -199,7 +99,7 @@
 												style="font-family: NanumGothicExtraBold; font-size: 20px">${row.MOVIE_NAME}</div>
 											<div class="column-3">
 												<button
-													onclick="remove_item(document.getElementById('AddedMovieList'))"
+													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}')); movieSelect();"
 													style="font-family: NanumGothicBold">삭제</button>
 											</div>
 										</div>
@@ -212,36 +112,20 @@
 						</div>
 					</div>
 				</div>
-				
+
+
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
-						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">시간</h4>
-
-
-						<c:forEach items="${alltimeList}" var="row">
-
-							<div class="flex-w flex-t bor12 p-t-15 p-b-15" onclick="">
-								<a href="/moviecube/reserve_seat.do"
-									class="flex-c-m stext-101 cl0 size-111 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-									<div class="size-198">
-										<span class="mtext-110 cl2">${row.CINEMA_NAME }</span>
+						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" id="timeList">
+						<h4 class="mtext-109 cl2 p-b-30">상영시간표</h4>
+						
+						
+							<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
+									<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">
+										<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>
 									</div>
-
-									<div class="size-198">
-										<span class="mtext-110 cl2"> ${row.MOVIE_TYPE } </span>
-									</div>
-
-									<div class="size-197">
-										<span class="mtext-110 cl2"> ${row.START_TIME } ~
-											${row.END_TIME } </span>
-									</div>
-								</a>
 							</div>
-
-						</c:forEach>
-
 					</div>
 				</div>
 			</div>
@@ -249,7 +133,9 @@
 	</form>
 
 
+
 	<%@ include file="../main/body_footer.jspf"%>
+
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -257,8 +143,6 @@
 			class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-
 
 	<%@ include file="movieList_modal.jspf"%>
 

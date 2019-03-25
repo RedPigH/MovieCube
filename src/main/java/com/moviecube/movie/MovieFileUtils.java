@@ -32,7 +32,7 @@ public class MovieFileUtils {
         List<Map<String,Object>> fileList = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
         Map<String, Object> fileListMap = null;
                
-        int MOVIE_NO = (Integer)map.get("MOVIE_NO");  // MovieServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
+        String MOVIE_NO = (String)map.get("MOVIE_NO");  // MovieServiceImpl 영역에서 전달해준 map에서 신규게시글의 번호를 받아온다
          
         File file = new File(filePath); // 파일을 저장할 경로에 해당폴더가 없으면 폴더를 생성한다
         if(file.exists() == false){
@@ -43,9 +43,8 @@ public class MovieFileUtils {
             multipartFile = multipartHttpServletRequest.getFile(iterator.next());
             System.out.println("test ============================== " + multipartFile.getName());
 
-         	if(multipartFile.isEmpty() == false) { 
-//            if(multipartFile.getName().equals("POSTER_ORGNAME")) {          	
-//            if(multipartFile.isEmpty() == false) { // 파일의 정보를 받아서 새로우은 이름으로 변경하는 로직
+         	if(multipartFile.isEmpty() == false) {  // 파일의 정보를 받아서 새로우은 이름으로 변경하는 로직
+
             	originalFileName = multipartFile.getOriginalFilename();
             	originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
            		storedFileName = CommonUtils.getRandomString() + originalFileExtension; // 32자리의 랜덤한 파일이름 생성하고 원본파일의 확장자를 붙여준다
@@ -58,25 +57,7 @@ public class MovieFileUtils {
            		fileListMap.put("POSTER_ORGNAME", originalFileName);
            		fileListMap.put("POSTER_SAVNAME", storedFileName);
            		fileList.add(fileListMap);
-//            	}
             } 
-//            else {
-            	
-//            	if(multipartFile.isEmpty() == false) { 
-//            		originalFileName = multipartFile.getOriginalFilename();
-//            		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-//            		storedFileName = CommonUtils.getRandomString() + originalFileExtension; // 32자리의 랜덤한 파일이름 생성하고 원본파일의 확장자를 붙여준다
-//                 
-//            		file = new File(filePath2 + storedFileName); // 서버에 실제 파일을 저장하는 부분
-//           		multipartFile.transferTo(file); // 지정된 경로에 파일을 생성한다
-//            		// 위에서 만든 정보를 Filelist에 추가한다 
-//            		fileListMap = new HashMap<String,Object>();
-//            		fileListMap.put("MOVIE_NO", MOVIE_NO);
-//            		fileListMap.put("STILLCUT_ORGNAME", originalFileName);
-//            		fileListMap.put("STILLCUT_SAVNAME", storedFileName);
-//            		fileList.add(fileListMap);
-//            	}
-//            }
         }
         return fileList;
     }
@@ -118,7 +99,7 @@ public class MovieFileUtils {
            		fileListMap2.put("STILLCUT_ORGNAME", originalFileName);
           		fileListMap2.put("STILLCUT_SAVNAME", storedFileName);
            		fileList2.add(fileListMap2);
-//            	}
+
             }
         }
         return fileList2;
@@ -132,8 +113,8 @@ public class MovieFileUtils {
         String originalFileName = null;
         String originalFileExtension = null;
         String storedFileName = null;
-         
-        List<Map<String,Object>> fileList = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
+        // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
+        List<Map<String,Object>> fileList = new ArrayList<Map<String,Object>>(); 
         Map<String, Object> fileListMap = null;
          
         String MOVIE_NO = (String)map.get("MOVIE_NO");
@@ -183,11 +164,11 @@ public class MovieFileUtils {
         String originalFileName = null;
         String originalFileExtension = null;
         String storedFileName = null;
-         
-        List<Map<String,Object>> fileList2 = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
+        // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
+        List<Map<String,Object>> fileList2 = new ArrayList<Map<String,Object>>(); 
         Map<String, Object> fileListMap2 = null;
          
-        String MOVIE_NO = (String)map.get("MOVIE_NO");
+        int MOVIE_NO = (Integer)map.get("MOVIE_NO");
         String requestName = null;
         String idx2 = null;
         
@@ -213,13 +194,26 @@ public class MovieFileUtils {
             else {
         		requestName = multipartFile.getName();
             	idx2 = "IDX_"+requestName.substring(requestName.indexOf("_")+1);
-
+            	
             	fileListMap2 = new HashMap<String,Object>();
             	fileListMap2.put("IS_NEW", "N");
-                fileListMap2.put("STULLCUT_NO", map.get(idx2));
+                fileListMap2.put("STILLCUT_NO", map.get(idx2));
                 fileList2.add(fileListMap2);
             }
         }
         return fileList2;
+    }
+    
+    public void fileDelete(Map<String, Object> map, String filePath, String media) throws Exception{
+        String POSTER_SAVNAME = null;
+        String STILLCUT_SAVNAME = null;
+        File file = null;
+        
+        file = new File(filePath + POSTER_SAVNAME);
+        file.delete();
+        
+        file = new File(filePath2 + STILLCUT_SAVNAME);
+        file.delete();
+            
     }
 }

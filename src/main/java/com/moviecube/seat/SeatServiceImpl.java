@@ -35,6 +35,11 @@ public class SeatServiceImpl implements SeatService {
 	}
 	
 	@Override
+	public List<Map<String, Object>> unableTimeSeat(Map<String, Object> map) throws Exception{
+		return seatDAO.unableTimeSeat(map);
+	}
+	
+	@Override
 	public Map<String, Object> selectSeat(Map<String,Object> map) throws Exception{
 		return seatDAO.selectSeat(map);
 	}

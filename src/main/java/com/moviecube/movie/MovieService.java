@@ -9,6 +9,8 @@ public interface MovieService {
 
 	List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception;
 	
+	List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception;
+	
 	void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception;
 	
 	Map<String,Object> selectMovieDetail(Map<String,Object> map) throws Exception;
