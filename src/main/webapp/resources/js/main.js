@@ -266,6 +266,7 @@
         });
     });
     
+   
     /*==================================================================
  [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
@@ -281,5 +282,19 @@
     });
 
 
+/*==================================================================
+[ Show modal2 ] 로그인 창 */
+$('.js-show-modal2').on('click',function(e){
+    e.preventDefault();
+    $('.js-modal2').addClass('show-modal2');
+    $("input[name='MEMBER_ID']").focus();
+    // 승현이가 추가함
+    $("body").addClass("no-scrolling");
+});
+
+$('.js-hide-modal2').on('click',function(){
+    $('.js-modal2').removeClass('show-modal2');
+    $("body").removeClass("no-scrolling");
+});
 
 })(jQuery);

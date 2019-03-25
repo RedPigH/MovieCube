@@ -31,7 +31,9 @@
             class="zmdi zmdi-chevron-up"></i>
          </span>
       </div>
-
+      
+      
+   <%@ include file="member/loginForm.jspf" %>
 
    <%@ include file="main/body_ProductModal.jspf" %>
 
