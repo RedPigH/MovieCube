@@ -55,6 +55,7 @@ $.ajax({
 			<li><a href="<%=cp%>">FAQ</a></li>
 			<li><a href="<%=cp%>">Q&amp;A</a></li>
 			<li><a href="<%=cp%>">회원정보</a></li>
+			<li><a href="<%=cp%>/main.do" style="text-decoration: underline">메인으로</a></li>
 		</ul>
 	</div>
 	

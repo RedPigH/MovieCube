@@ -41,6 +41,7 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
+			<li><a href="<%=cp%>/main.do" style="text-decoration: underline">메인으로</a></li>
 		</ul>
 	</div>
 	
