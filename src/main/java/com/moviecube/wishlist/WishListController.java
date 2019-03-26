@@ -23,6 +23,7 @@ public class WishListController {
 	public ModelAndView MyWishList(CommandMap commandMap, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("");
 		
+		@SuppressWarnings("unchecked")
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
 		CommandMap map = new CommandMap();
@@ -40,6 +41,7 @@ public class WishListController {
 	public ModelAndView insertWishList(CommandMap commandMap, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("/main");
 		
+		@SuppressWarnings("unchecked")
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
 		CommandMap map = new CommandMap();
