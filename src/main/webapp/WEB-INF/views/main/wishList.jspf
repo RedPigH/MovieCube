@@ -18,7 +18,7 @@
 					</div>
 				</div>
 
-				<div class="header-cart-content flex-w js-pscroll">
+				<div class="header-cart-content flex-w js-pscroll" style="width: 270px;">
 					<ul class="header-cart-wrapitem w-full" style="margin-left: 0px;" id="myWishList">
 					
 			<c:choose>
@@ -50,7 +50,8 @@
 						
 					</ul>
 
-					<div class="w-full">
+				</div>
+				<div class="w-full">
 						<div class="header-cart-total w-full p-tb-40" id="WishListLength">총 : ${fn:length(WishList)}편</div>
 
 						<div class="header-cart-buttons flex-w w-full">
@@ -61,7 +62,6 @@
 								예매하기 </a>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 		

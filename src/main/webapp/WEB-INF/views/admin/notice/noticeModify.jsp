@@ -36,6 +36,7 @@
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
+			<li><a href="<%=cp%>/main.do" style="text-decoration: underline">메인으로</a></li>
 		</ul>
 	</div>
 	
