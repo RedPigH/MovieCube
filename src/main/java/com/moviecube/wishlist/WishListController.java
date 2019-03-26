@@ -40,8 +40,6 @@ public class WishListController {
 	public ModelAndView insertWishList(CommandMap commandMap, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("/main");
 		
-		System.out.println(commandMap.get("MOVIE_NO"));
-		
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
 		CommandMap map = new CommandMap();
