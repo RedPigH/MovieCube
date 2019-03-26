@@ -46,7 +46,18 @@ public class MainController {
 		
 		List<Map<String, Object>> list = movieService.selectMovieList(commandMap.getMap());
 		
+		List<Map<String, Object>> HotList = movieService.HotMovieList(commandMap.getMap()); 
+		
+		List<Map<String, Object>> LatelyList = movieService.LatelyMovieList(commandMap.getMap());
+		
+		List<Map<String, Object>> ExpectedList = movieService.ExpectedMovieList(commandMap.getMap());
+		
+		
 		mv.addObject("list", list);
+		mv.addObject("HotList", HotList);
+		mv.addObject("LatelyList", LatelyList);
+		mv.addObject("ExpectedList", ExpectedList);
+		
 		mv.addObject(mv);
 		
 		return mv;
