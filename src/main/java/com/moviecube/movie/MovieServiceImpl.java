@@ -131,7 +131,7 @@ public class MovieServiceImpl implements MovieService{
 		
 		List<Map<String,Object>> fileList2 = fileUtils.parseUpdateFileInfo2(map, request);
 		Map<String, Object> tempMap = null;
-		
+	
 		for(int i=0, size=fileList2.size(); i<size; i++){
 			tempMap = fileList2.get(i);
 			

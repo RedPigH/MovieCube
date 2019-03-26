@@ -101,7 +101,6 @@ public class EventServiceImpl implements EventService {
 
 		for (int i = 0, size = fileList.size(); i < size; i++) {
 			tempMap = fileList.get(i);
-			if (i == 0) {
 
 				if (tempMap.get("IS_NEW").equals("Y")) {
 					EventDAO.insertFile(tempMap);
@@ -115,7 +114,6 @@ public class EventServiceImpl implements EventService {
 					 */
 				}
 			}
-		}
 	}
 
 	/*

@@ -21,9 +21,8 @@ e.EVENT_URL,
 f.FILE_NO,
 f.EVENT_ORGNAME,
 f.EVENT_SAVNAME
-FROM MC_EVENT e INNER JOIN MC_EVENT_FILE f
+FROM MC_EVENT e INNER JOIN (select * from mc_event_file where rowid in(select min(rowid) from mc_event_file where del_gb = 'N' group by event_no)) f
 ON e.EVENT_NO = f.EVENT_NO
-WHERE f.DEL_GB = 'N'
 order by e.EVENT_NO desc
 
 ]]>
