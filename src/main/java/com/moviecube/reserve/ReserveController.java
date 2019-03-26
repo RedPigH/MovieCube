@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.CommandMap;
+import com.moviecube.member.MemberService;
+import com.moviecube.movie.MovieService;
 import com.moviecube.seat.SeatService;
 import com.moviecube.time.TimeService;
 
@@ -29,7 +33,61 @@ public class ReserveController {
 	
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
+	
+	@Resource(name = "movieService")
+	private MovieService movieService;
+	
+	@Resource(name = "memberService")
+	private MemberService memberService;
+	
 
+	@RequestMapping(value = "/reserve_selectSeat.do")
+	   public ModelAndView reserve_seat(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	      ModelAndView mv = new ModelAndView("reserve/reserve_selectSeat");
+	      
+	      CommandMap timeSeatMap = new CommandMap();
+	      CommandMap screenMap = new CommandMap();
+	      CommandMap timeMap = new CommandMap();
+	      
+	      //나중에 Step1 완료해서 Map으로 변경함  -국
+	      timeSeatMap.put("TIME_NO", commandMap.get("time_no"));
+	      screenMap.put("SCREEN_NO", commandMap.get("screen_no"));
+	      timeMap.put("TIME_NO", commandMap.get("time_no"));
+	      
+	      List<Map<String, Object>> unableSeatList = seatService.unableTimeSeat(timeSeatMap.getMap());
+	      Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
+	      Map<String, Object> time = timeService.timeDetail(timeMap.getMap());
+	      
+	      int row = Integer.parseInt(seatnum.get("ROW_NUM").toString());
+	      int col = Integer.parseInt(seatnum.get("COL_NUM").toString());
+	      String seats = "";
+	      String unableseats = "";
+	      
+	      for(int i = 0; i < row; i++) {
+	         
+	         for(int j = 0; j < col; j++) {
+	            seats +="a";
+	         }
+	         if(i == row-1) continue;
+	         else seats += ",";
+	      }
+	      
+	      for(int i = 0; i < unableSeatList.size(); i++) {
+	    	  unableseats += unableSeatList.get(i).get("SEAT_ROW").toString() + "_" + unableSeatList.get(i).get("SEAT_COL").toString();
+	    	  if(i == unableSeatList.size() -1) continue;
+	    	  else unableseats += ",";
+	      }
+
+	      //시간별 좌석 리스트
+	      mv.addObject("unableseats", unableseats);
+	      //좌석 행 열 String
+	      mv.addObject("seats", seats);
+	      //상영 정보
+	      mv.addObject("time", time);
+	      
+	      return mv;
+	   }
+	
 	@RequestMapping(value = "/reserve.do")
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
@@ -38,143 +96,126 @@ public class ReserveController {
 		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
+		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
+	      
+	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
 		mv.addObject("cinemaList", cinemaList);
 		
-	/*	String cinemaNo = "";
-		String movieNo = "";
-		String selectDate = "";
-		String[] selectType;
-		Map<String, Object> cinemaMap = null;
-		Map<String, Object> movieMap = null;
-
-		// 선택한 영화관 예매 홈 화면으로 불러오는 부분
-		if (request.getParameter("selectCinema") != null) {
-
-			cinemaNo = request.getParameter("selectCinema");
-			commandMap.put("CINEMA_NO", cinemaNo); // key, value
-			cinemaMap = reserveService.selectOneCinema(commandMap.getMap());
-			mv.addObject("cinemaMap", cinemaMap);
-			mv.addObject("cinemaNo", cinemaNo); // 이 값을 영화선택 할 때도 줘서 값 유지시켜야됨.
-
-		}
-
-		// 선택한 영화를 홈 화면으로 불러오는 부분
-		if (request.getParameter("selectMovie") != null) {
-
-			movieNo = request.getParameter("selectMovie");
-			commandMap.put("MOVIE_NO", movieNo); // key, value
-			movieMap = reserveService.selectOneMovie(commandMap.getMap());
-			mv.addObject("movieMap", movieMap);
-			mv.addObject("movieNo", movieNo); // 이 값을 영화관선택할 때도 줘서 값 유지시켜야됨.
-
+		return mv;
+	}
+	
+	@RequestMapping(value = "/reserve/movieSelect.do")
+	public ModelAndView movieSelect(CommandMap commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mv = new ModelAndView("reserve/reserve_main");
+		
+		String selectedDate = request.getParameter("selectedDate");
+		String[] var = request.getParameterValues("cinemaNo");
+		String[] var2 = request.getParameterValues("movieName");
+		
+		CommandMap map = new CommandMap();
+		
+		map.put("TIME_DATE", selectedDate);
+		
+		for(int i = 0; i < var.length ; i++) {
+			map.put("CINEMA_NO" + i, var[i]);			
 		}
 		
-		if(request.getParameter("selectDate") != null) {
+		for(int i = 0; i < var2.length ; i++) {
+			map.put("MOVIE_NAME" + i, var2[i]);			
+		}
+	
+		List<Map<String, Object>> optionTimeList = timeService.optionTimeList(map.getMap());
+		
+		mv.setViewName("jsonView");
+		mv.addObject("optionTimeList", optionTimeList);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/reserve_confirm.do")
+	public ModelAndView reserveConfirm(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("reserve/reserve_confirm");
+		
+		CommandMap map = new CommandMap();
+		
+		map.put("TIME_NO", commandMap.get("time_no"));
+		
+		Map<String,Object> timemap = timeService.timeDetail(map.getMap());
+		
+		mv.addObject("time", timemap);
+		mv.addObject("selectSeats",commandMap.get("selectSeats"));
+		mv.addObject("totalprice", commandMap.get("totalprice"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/reserve_complete.do")
+	public ModelAndView reserveComplete(CommandMap commandMap, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:main.do");
+		
+		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
+		
+		CommandMap reserveMap = new CommandMap();
+		CommandMap seatMap = new CommandMap();
+		CommandMap updateMap = new CommandMap();
+		CommandMap userMap = new CommandMap();
+		
+		//insert reservation
+		reserveMap.put("TIME_NO", commandMap.get("TIME_NO"));
+		reserveMap.put("TOTAL_PRICE", commandMap.get("TOTAL_PRICE"));
+		
+		//need reserveMap add "MEMBER_NO" get session value
+		reserveMap.put("MEMBER_NO", user.get("MEMBER_NO"));
+		
+		System.out.println(reserveMap.getMap());
+		
+		reserveService.insertReservation(reserveMap.getMap());
+		
+		//res_seat insert and time_seat status update
+		seatMap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
+		updateMap.put("TIME_NO", commandMap.get("TIME_NO"));
+		updateMap.put("STATUS", 1);	// reserve unable 
+		
+		String[] selectSeats = commandMap.get("selectSeats").toString().split(",");
+		
+		for(String s : selectSeats) {
+			String[] temp = s.split("-");
+			seatMap.put("SEAT_ROW", temp[0]);
+			seatMap.put("SEAT_COL", temp[1]);
 			
-			selectDate = request.getParameter("selectDate");
-			commandMap.put("TIME_DATE", selectDate);
+			Map<String, Object> SeatNoMap = seatService.selectSeatNo(seatMap.getMap());
 			
-		}
-		
-		if(request.getParameter("selectType") != null) {
+			//res_seat insert
+			seatService.insertResSeat(SeatNoMap);
 			
-			selectType = request.getParameterValues("selectType");
+			//time_seat update
+			updateMap.put("SEAT_NO", SeatNoMap.get("SEAT_NO"));
+			seatService.updateSeatStatus(updateMap.getMap());
 			
-			for(int i = 0; i < selectType.length ; i++) {
-				commandMap.put("MOVIE_TYPE" + i, selectType[i]);			
-			}
-			System.out.println(commandMap.getMap());
-
+			seatMap.remove("SEAT_ROW");
+			seatMap.remove("SEAT_COL");
+			updateMap.remove("SEAT_NO");
 		}
 		
-		//view단에서 validation 처리 보탁 드립니다
-		if(commandMap.containsKey("CINEMA_NO") && commandMap.containsKey("MOVIE_NO") && commandMap.containsKey("TIME_DATE") && commandMap.get("CINEMA_NO") != "" && commandMap.get("MOVIE_NO") != "" && commandMap.get("TIME_DATE") != "") {
+		//update Mile 
+		int totalprice = Integer.parseInt(commandMap.get("TOTAL_PRICE").toString());
+				
+		userMap.put("MEMBER_NO", user.get("MEMBER_NO"));
+		userMap.put("MEMBER_MILE", totalprice/10);
 		
-			List<Map<String,Object>> timelist = timeService.optionTimeList(commandMap.getMap());
+		memberService.updateMile(userMap.getMap()); 
 		
-			mv.addObject("timelist", timelist);
-		} */
-
-		return mv;
-	}
-
-	// 극장 리스트 전체
-	@RequestMapping(value = "/reserve_step1.do")
-	public ModelAndView reserveStep1(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step1");
-
-		/* 극장 관련 */
-		List<Map<String, Object>> cinemaList = reserveService.selectCinemaList(commandMap.getMap());
-		mv.addObject("cinemaList", cinemaList);
-
-		if (request.getParameter("movieNo") != null) {
-			String movieNo = request.getParameter("movieNo");
-			mv.addObject("selectMovie", movieNo);
+		//update grade
+		Map<String, Object> MemberInfoMap = memberService.selectOneMember(userMap.getMap());
+		
+		if(MemberInfoMap.get("MEMBER_RANK").equals("일반") && Integer.parseInt(MemberInfoMap.get("MEMBER_MILE").toString()) >= 10000) {
+			userMap.put("MEMBER_RANK", "우수");
+			
+			memberService.updateRank(userMap.getMap());
 		}
-
-		return mv;
-	}
-
-	// 영화  리스트 전체
-	@RequestMapping(value = "/reserve_step2.do")
-	public ModelAndView reserveStep2(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve_step2");
-
-		/* 영화 관련 */
-		List<Map<String, Object>> movieList = reserveService.selectMovieList(commandMap.getMap());
-		mv.addObject("movieList", movieList);
-
-		if (request.getParameter("cinemaNo") != null) {
-			String cinemaNo = request.getParameter("cinemaNo");
-			mv.addObject("selectCinema", cinemaNo);
-		}
-
-		return mv;
-	}
-
-	// 영화관, 영화, 영화 타입 선택 조건에 맞는 영화 상영 리스트 
-	@RequestMapping(value = "/reserve_step3.do")
-	public ModelAndView reserveStep3(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/reserve.do");
-		
-		String cinemaNo = request.getParameter("cinemaNo");
-		String movieNo = request.getParameter("movieNo");
-		String selectedDate = request.getParameter("selectDate");
-		String[] checktype = request.getParameterValues("movie_type");
-		
-		mv.addObject("selectMovie", movieNo);
-		mv.addObject("selectCinema", cinemaNo);
-		mv.addObject("selectDate", selectedDate);
-		mv.addObject("selectType", checktype);
 		
 		return mv;
 	}
 
-	@RequestMapping(value = "/reserve_selectSeat.do")
-	public ModelAndView reserveStep4(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("reserve/reserve_selectSeat");
-		
-		CommandMap timeSeatMap = new CommandMap();
-		CommandMap screenMap = new CommandMap();
-		
-		/*String time_no = request.getParameter("TIME_NO");
-		String screen_no = request.getParameter("SCREEN_NO");
-		*/
-		
-		timeSeatMap.put("TIME_NO", 1);
-		screenMap.put("SCREEN_NO", 1);
-		
-		List<Map<String, Object>> timeSeatlist = seatService.selectTimeSeat(timeSeatMap.getMap());
-		Map<String, Object> seatnum = seatService.ScreenSeatNum(screenMap.getMap());
-		
-		//System.out.println(seatnum.get(arg0));
-		
-		//시간별 좌석 리스트
-		mv.addObject("seatList", timeSeatlist);
-		//좌석 행 렬 값
-		mv.addObject("seatnum", seatnum);
-		
-		return mv;
-	}
 }

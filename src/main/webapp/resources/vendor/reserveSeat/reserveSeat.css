@@ -1,22 +1,12 @@
 /* Documentation Stylesheet */
 
 html,
-body,
-div,
 span,
 applet,
 object,
 iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
 blockquote,
 pre,
-a,
 abbr,
 acronym,
 address,
@@ -75,7 +65,6 @@ menu,
 nav,
 output,
 ruby,
-section,
 summary,
 time,
 mark,
@@ -104,13 +93,6 @@ html {
 	font-size: 100%;
 }
 
-body {
-	font-size: 1em;
-	line-height: 1.5;
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
-	color: #444;
-	background: #f5f5f5;
-}
 
 /* Headings */
 h1,
@@ -381,11 +363,6 @@ tfoot th {
 	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-	float: left;
-	width: 50%;
 }
 
 .theme-name {

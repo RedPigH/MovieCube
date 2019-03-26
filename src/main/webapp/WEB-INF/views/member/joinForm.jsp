@@ -91,8 +91,8 @@ function aaaa(){
 		<div class="size-219 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" style="margin:auto;">
 		<form id="joinForm" role="form" method="post">
 			<div id="divId">
-				<label for="inputId" style="display: inline-block;" class="cl2 mtext-114">아이디</label>
-				<input type="button" style="display: inline-block; position:float; right;" value="ID중복확인" id="checkId" class="flex-c-m stext-118 cl0 bg1 bor0 hov-btn1 p-lr-15 trans-04 pointer">
+				<label for="inputId" style="display: inline-block;" class="cl2 mtext-114 jointext">아이디</label>
+				<input type="button" style="display: inline-block; position:float; right;" value="ID중복확인" id="checkId" class="flex-c-m stext-118 cl0 bg1 bor2 hov-btn1 p-lr-15 trans-04 pointer">
 				<div class="bor8 m-b-20 ">
 					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyAlphabetAndNumber"
 						id="id" name="MEMBER_ID" data-rule-required="true"
@@ -101,7 +101,7 @@ function aaaa(){
 			</div>
 			
 			<div id="divPassword">
-				<label for="inputPassword" class="cl2 mtext-114">패스워드</label>
+				<label for="inputPassword" class="cl2 mtext-114 jointext">패스워드</label>
 				<div class="bor8 m-b-20 ">
 					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="password"
 						name="MEMBER_PASSWD1" data-rule-required="true" placeholder="패스워드"
@@ -110,7 +110,7 @@ function aaaa(){
 			</div>
 			
 			<div id="divPasswordCheck">
-				<label for="inputPasswordCheck" class="cl2 mtext-114">패스워드
+				<label for="inputPasswordCheck" class="cl2 mtext-114 jointext">패스워드
 					확인</label>
 				<div class="bor8 m-b-20 ">
 					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="passwordCheck"
@@ -119,7 +119,7 @@ function aaaa(){
 				</div>
 			</div>
 			<div id="divName">
-				<label for="inputName" class="cl2 mtext-114">이름</label>
+				<label for="inputName" class="cl2 mtext-114 jointext">이름</label>
 				<div class="bor8 m-b-20 ">
 					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyHangul" id="name"
 						name="MEMBER_NAME" data-rule-required="true"
@@ -129,7 +129,7 @@ function aaaa(){
 
 
 			<div id="divEmail">
-				<label for="inputEmail" class="cl2 mtext-114">이메일</label>
+				<label for="inputEmail" class="cl2 mtext-114 jointext">이메일</label>
 				<div class="bor8 m-b-20 ">
 					<input type="email" class="stext-111 cl8 plh3 size-111 p-lr-15" id="email"
 						name="MEMBER_EMAIL" data-rule-required="true" placeholder="이메일"
@@ -138,10 +138,10 @@ function aaaa(){
 			</div>
 
 			<div id="divZipcode">
-				<label for="inputZipcode" class="cl2 mtext-114">주소</label>
+				<label for="inputZipcode" class="cl2 mtext-114 jointext">주소</label>
 				<div class="how-pos4-parent">
 						<input type="text" style="margin-bottom: 5px; display: inline-block;" class="bor8 stext-111 cl8 plh3 size-128 p-lr-15" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
-						<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block;" class="flex-c-m stext-101 size-127 cl0 bg1 bor20 hov-btn1 p-lr-15 trans-04 pointer">
+						<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block;" class="flex-c-m size-127 cl0 bg1 bor20 hov-btn1 p-lr-15 trans-04 pointer">
 				</div>
 			</div>
 
@@ -169,7 +169,7 @@ function aaaa(){
 			</div>
 
 			<div id="divPhoneNumber">
-				<label for="inputPhoneNumber" class="cl2 mtext-114">휴대폰
+				<label for="inputPhoneNumber" class="cl2 mtext-114 jointext">휴대폰
 					번호</label>
 				<div class="bor8 m-b-20 ">
 					<input type="tel" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumber" id="phoneNumber"
@@ -179,7 +179,7 @@ function aaaa(){
 			</div>
 
 			<div id="divAge">
-				<label for="inputAge" class="cl2 mtext-114">생일</label>
+				<label for="inputAge" class="cl2 mtext-114 jointext">생일</label>
 				<div class="bor8 m-b-20 ">
 					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumberSlash" id="age"
 						name="MEMBER_AGE" data-rule-required="true"
@@ -188,7 +188,7 @@ function aaaa(){
 			</div>
 
 			<div class="divSex">
-				<label for="inputSex" class="cl2 mtext-114">성별</label>
+				<label for="inputSex" class="cl2 mtext-114 jointext">성별</label>
 				<div class="bor8 m-b-20 ">
 					<select class="stext-111 cl8 plh3 size-111 p-lr-15" id="gender">
 						<option value="M">남</option>
@@ -200,7 +200,7 @@ function aaaa(){
 
 
 			<div class="divEmail">
-				<label for="inputEmailReceiveYn" class="cl2 mtext-114">이메일
+				<label for="inputEmailReceiveYn" class="cl2 mtext-114 jointext">이메일
 					수신여부</label>
 				<div class="col-lg-10">
 					<label class="radio-inline"> <input type="radio"
@@ -213,7 +213,7 @@ function aaaa(){
 				</div>
 			</div>
 			<div class="">
-				<label for="inputPhoneNumber" class="cl2 mtext-114">SMS
+				<label for="inputPhoneNumber" class="cl2 mtext-114 jointext">SMS
 					수신여부</label>
 				<div class="col-lg-10">
 					<label class="radio-inline"> <input type="radio"
@@ -230,7 +230,7 @@ function aaaa(){
 
 			<div class="flex-w flex-t p-t-27 p-b-33">
 				<span class="mtext-101 cl2">
-					<button class="flex-c-m stext-101 size-127 cl0 bg1 bor1 hov-btn1 p-lr-15 trans-04 pointer" id="sm">Sign in</button>
+					<button class="flex-c-m stext-101 size-127 cl0 bg1 bor1 hov-btn1 p-lr-15 trans-04 pointer" id="sm">완료</button>
 				</span>
 			</div>
 		</form>

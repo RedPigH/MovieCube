@@ -12,7 +12,7 @@
 				<!-- Tab01 -->
 				<div class="tab01">
 					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
+					<ul class="nav nav-tabs" role="tablist" style="margin-left: 0px">
 						<li class="nav-item p-b-10"><a class="nav-link active"
 							data-toggle="tab" href="#best-seller" role="tab">HOT</a>
 						</li>

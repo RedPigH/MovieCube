@@ -70,6 +70,8 @@ NOTICE_NO = #{NOTICE_NO}
     NOTICE_NO = #{NOTICE_NO}
     ]]>
 	</delete>
+	
+	
 	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
 		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->
 

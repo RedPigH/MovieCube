@@ -1,5 +1,6 @@
 package com.moviecube.qna;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class QnaController {
 
 	@Resource(name = "qnaService")
 	private QnaService qnaService;
-	
+
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 10;
@@ -43,7 +44,7 @@ public class QnaController {
 		}
 
 		totalCount = Qnalist.size();
-		
+
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminInquiryList");
 		pagingHtml = paging.getPagingHtml().toString();
 
@@ -68,27 +69,35 @@ public class QnaController {
 	@RequestMapping(value = "/qna/adminInquiryWriteForm.do")
 	public ModelAndView writeInquiryForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("qna/inquiryWriteForm");
+
 		return mv;
 
 	}
 
 	@RequestMapping(value = "/qna/adminInquiryWrite.do")
-	public ModelAndView writeNotice(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView writeInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-
 		qnaService.insertQna(commandMap.getMap(), request);
 		return mv;
 
 	}
 
 	@RequestMapping(value = "/qna/adminInquiryDetail.do")
-	public ModelAndView inquiryDetail(CommandMap commandMap) throws Exception {
+	public ModelAndView inquiryDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
-		
-		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
-	
-		
-		mv.addObject("map", map);
+
+		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
+
+		String temp = String.valueOf(cmap.get("CNT"));
+		int count = Integer.parseInt(temp);
+
+		if (count == 0) {
+			Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
+			mv.addObject("map", map);
+		} else {
+			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
+			mv.addObject("map", map);
+		}
 
 		return mv;
 	}
@@ -97,22 +106,38 @@ public class QnaController {
 	public ModelAndView modifyInquiryForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/qna/inquiryModify");
 
-		Map<String, Object> map = qnaService.selectQnaDetail(commandMap.getMap());
-		mv.addObject("map", map);
+		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
 
+		String temp = String.valueOf(cmap.get("CNT"));
+		int count = Integer.parseInt(temp);
+
+		if (count == 0) {
+			Map<String, Object> map = qnaService.selectQnaDetail1(commandMap.getMap());
+			mv.addObject("map", map);
+		} else {
+			Map<String, Object> map = qnaService.selectQnaDetail2(commandMap.getMap());
+			mv.addObject("map", map);
+		}
+		
 		return mv;
 
 	}
 
 	@RequestMapping(value = "/qna/adminInquiryModify.do")
-	public ModelAndView modifyInquiry(CommandMap commandMap) throws Exception {
+	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		
+		qnaService.updateQna(commandMap.getMap(), request);
+		
+		System.out.println("혜쮸꼰듀듀듀듀듀듀듀듀" + commandMap.getMap().size());
+		System.out.println(commandMap.get("QNA_ORGNAME"));
+		System.out.println(commandMap.get("QNA_SUB"));
+		System.out.println(commandMap.get("QNA_NO"));
+		System.out.println(commandMap.get("QNA_FILE_NO"));
 
-		qnaService.updateQna(commandMap.getMap());
-
-		mv.addObject("QNA_NO", commandMap.get("QNA_NO"));
 		return mv;
 	}
+
 
 	@RequestMapping(value = "/qna/adminInquiryDelete.do")
 	public ModelAndView deleteInquiry(CommandMap commandMap) throws Exception {
@@ -122,21 +147,32 @@ public class QnaController {
 		return mv;
 	}
 
-	/*
-	 * @RequestMapping(value="/ntoice/openNoticeList.do") public ModelAndView
-	 * openNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv = new
-	 * ModelAndView("noticeList");
-	 * 
-	 * return mv; }
-	 * 
-	 * @RequestMapping(value="/notice/selectNoticeList.do") public ModelAndView
-	 * selectNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv =
-	 * new ModelAndView("jsonView");
-	 * 
-	 * List<Map<String,Object>> list =
-	 * noticeService.selectNoticeList(commandMap.getMap()); mv.addObject("list",
-	 * list); if(list.size() > 0) { mv.addObject("TOTAL",
-	 * list.get(0).get("TOTAL_COUNT")); } else { mv.addObject("TOTAL",0); } return
-	 * mv; }
-	 */
+	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
+	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
+		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
+		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
+
+		Map<String, Object> map = new HashMap();
+		System.out.println("혜쮸꼰뜌" + commandMap.get("QNA_NOM"));
+		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
+		mv.addObject("map", map);
+		mv.addObject("map", map1);
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/qna/adminInquiryReply.do")
+	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+
+		Map<String, Object> map = new HashMap();
+		map.put("REF", commandMap.get("REF"));
+		System.out.println("우앙은개뿔ㅎㅎ" + commandMap.get("REF"));
+		commandMap.put("RE_STEP", 1);
+		commandMap.put("RE_LEVEL", 1);
+		qnaService.replyQna(commandMap.getMap());
+		return mv;
+	}
+
 }

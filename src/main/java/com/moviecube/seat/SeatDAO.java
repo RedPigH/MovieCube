@@ -13,6 +13,11 @@ import com.moviecube.dao.AbstractDAO;
 public class SeatDAO extends AbstractDAO {
 
 	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectSeatList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("seat.selectSeatList", map);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectScreenSeat(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("seat.selectScreenSeat", map);
 	}
@@ -21,15 +26,25 @@ public class SeatDAO extends AbstractDAO {
 	public Map<String, Object> ScreenSeatNum(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("seat.ScreenSeatNum", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectTimeSeat(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("seat.selectTimeSeat", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> unableTimeSeat(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("time_seat.unableTimeSeat", map);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectSeat(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("seat.selectSeat", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectSeatNo(Map<String, Object>map) throws Exception{
+		return (Map<String, Object>) selectOne("seat.selectSeatNo", map);
 	}
 
 	public void insertSeat(Map<String, Object> map) throws Exception {
@@ -38,6 +53,10 @@ public class SeatDAO extends AbstractDAO {
 
 	public void insertTimeSeat(Map<String, Object> map) throws Exception {
 		insert("seat.insertTimeSeat", map);
+	}
+	
+	public void insertResSeat(Map<String, Object> map) throws Exception {
+		insert("seat.insertResSeat", map);
 	}
 
 	public void updateSeatStatus(Map<String, Object> map) throws Exception {

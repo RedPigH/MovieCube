@@ -19,7 +19,15 @@
 			WHERE MEMBER_ID = #{MEMBER_ID}
 		]]>
 	</select>
-
+	
+	<!-- 단일 회원 정보 -->
+	<select id = "selectOneMember" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT * FROM MC_MEMBER
+			WHERE MEMBER_NO = #{MEMBER_NO}
+		]]>
+	</select>
+	
 	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO">
 		<selectKey keyProperty="MEMBER_NO" resultType="int" order="BEFORE">
@@ -71,8 +79,7 @@
 	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 			SELECT
-			 MEMBER_NAME,
-			 MEMBER_PHONE,
+			 MEMBER_NO,
 			 MEMBER_ID,
 			 MEMBER_PASSWD1,
 			 MEMBER_EMAIL,
@@ -87,7 +94,7 @@
 	
 	<!-- ID 찾기 -->
 	<select id = "findId" parameterType = "hashmap" resultType = "String">
-		<![CDATA[
+			<![CDATA[
 			SELECT
 			 MEMBER_ID
 			FROM
@@ -101,16 +108,7 @@
 	
 	<!-- 비밀번호 찾기 -->
 	<select id = "findPasswd" parameterType = "hashmap" resultType = "String"><!--승표  -->
-		<![CDATA[
-			SELECT
-			 MEMBER_PASSWD1
-			FROM
-			 MC_MEMBER
-			WHERE
-			 MEMBER_ID=#{MEMBER_ID}
-			 AND MEMBER_NAME=#{MEMBER_NAME1}
-			 AND MEMBER_PHONE=#{MEMBER_PHONE1}
-		]]>
+	
 	</select>
 	
 	<!-- 회원 정보 수정 -->
@@ -122,6 +120,24 @@
 	<!-- 2. 기본 정보 변경 -->
 	<update id = "informUpdate" parameterType = "hashmap">
 		
+	</update>
+	
+	<!-- 3. 마일리지 update -->
+	<update id = "updateMile" parameterType = "hashmap">
+	<![CDATA[
+		UPDATE MC_MEMBER SET
+		MEMBER_MILE = MEMBER_MILE + #{MEMBER_MILE}
+		WHERE MEMBER_NO = #{MEMBER_NO}
+	]]>
+	</update>
+	
+	<!-- 4. 등급 update -->
+	<update id = "updateRank" parameterType = "hashmap">
+	<![CDATA[
+		UPDATE MC_MEMBER SET
+		MEMBER_RANK = #{MEMBER_RANK}
+		WHERE MEMBER_NO = #{MEMBER_NO}
+	]]>
 	</update>
 
 	<!-- 회원 탈퇴 -->

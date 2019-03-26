@@ -1,10 +1,13 @@
 package com.moviecube.time;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,10 @@ import com.moviecube.common.CommandMap;
 import com.moviecube.movie.MovieService;
 import com.moviecube.screen.ScreenService;
 import com.moviecube.seat.SeatService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.Paging;
 
@@ -38,7 +45,7 @@ public class AdminTimeController {
 
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
-	
+
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 5;
@@ -48,52 +55,53 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeList.do")
 	public ModelAndView timeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("/admin/time/timeList");
 
 		List<Map<String, Object>> timeList = timeService.selectTimeList(commandMap.getMap());
-		
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
-		}else{
+		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		totalCount = timeList.size();
-		
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
+
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "timeList");
 		pagingHtml = paging.getPagingHtml().toString();
-		
+
 		int lastCount = totalCount;
-		//System.out.println(paging.getEndCount());
-		//System.out.println(totalCount);
+		// System.out.println(paging.getEndCount());
+		// System.out.println(totalCount);
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}
 
 		timeList = timeList.subList(paging.getStartCount(), lastCount);
-		
+
 		mv.addObject("timeList", timeList);
 		mv.addObject("list", timeList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/timeList");
 		return mv;
 	}
 
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeDetail");
+		ModelAndView mv = new ModelAndView("/admin/time/timeDetail");
 
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
 		mv.addObject("map", map);
+		mv.addObject("currentPage", commandMap.get("currentPage"));
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/timeWriteForm.do")
 	public ModelAndView timeWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeWrite");
+		ModelAndView mv = new ModelAndView("/admin/time/timeWrite");
 
 		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
@@ -113,55 +121,60 @@ public class AdminTimeController {
 		commandMap.put("MOVIE_NO", request.getParameter("selectMovie"));
 		commandMap.put("CINEMA_NO", request.getParameter("selectCinema"));
 		commandMap.put("SCREEN_NO", request.getParameter("selectScreen"));
-		
-		System.out.println("타임 등록 테스트 1: " + commandMap.getMap());
+
 		// 상영 시간표 생성
 		timeService.insertTime(commandMap.getMap());
-		
+
 		// 생성된 시간표에 대한 좌석 생성
 		CommandMap screenSeatmap = new CommandMap();
 		CommandMap timeSeatmap = new CommandMap();
 
 		screenSeatmap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
-		System.out.println("타임 등록 테스트 2: " + commandMap.getMap());
+
 		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(screenSeatmap.getMap());
 
 		for (int i = 0; i < seatlist.size(); i++) {
 			timeSeatmap.put("SEAT_NO", seatlist.get(i).get("SEAT_NO"));
 			seatService.insertTimeSeat(timeSeatmap.getMap());
 		}
-		System.out.println("타임 등록 테스트 3: " + commandMap.getMap());
+
 		return mv;
 	}
-	
+
 	@RequestMapping("/selectscreenList.do")
 	@ResponseBody
-	public ResponseEntity<List<Map<String, Object>>> selectscreenList(String cinema_no) throws Exception{
+	public ResponseEntity<List<Map<String, Object>>> selectscreenList(String cinema_no) throws Exception {
 		ResponseEntity<List<Map<String, Object>>> entity = null;
 		CommandMap smap = new CommandMap();
 		smap.put("CINEMA_NO", cinema_no);
 		try {
 			List<Map<String, Object>> screenlist = cinemaService.selectCinemaScreen(smap.getMap());
 			entity = new ResponseEntity<List<Map<String, Object>>>(screenlist, HttpStatus.OK);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return entity;
 	}
 
-	@RequestMapping("value = /timeModifyForm.do")
+	@RequestMapping(value = "/timeModifyForm.do")
 	public ModelAndView timeUpdateForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/timeModify");
-		
+		ModelAndView mv = new ModelAndView("/admin/time/timeModify");
+
 		Map<String, Object> map = timeService.timeDetail(commandMap.getMap());
-		
+		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
+		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
+		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
+
+		mv.addObject("movieList", movieList);
+		mv.addObject("screenList", screenList);
+		mv.addObject("cinemaList", cinemaList);
 		mv.addObject("map", map);
 
 		return mv;
 	}
 
-	@RequestMapping("value = /timeModify.do")
+	@RequestMapping(value = "/timeModify.do")
 	public ModelAndView timeUpdate(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeDetail");
 
@@ -172,14 +185,33 @@ public class AdminTimeController {
 		return mv;
 	}
 
-	@RequestMapping("value = /timeDelete.do")
+	@RequestMapping(value = "/timeDelete.do")
 	public ModelAndView timeDelete(CommandMap commandMap) throws Exception {
-		
+
 		ModelAndView mv = new ModelAndView("redirect:/admin/timeList.do");
-		
-		System.out.println("타임 삭제 테스트 1: " + commandMap.getMap());
-		
+
 		timeService.deleteTime(commandMap.getMap());
+		mv.addObject("currentPage", commandMap.get("currentPage"));
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/ScreenSelect.do")
+	@ResponseBody
+	public ModelAndView selectAjaxScreen(HttpServletRequest request, HttpServletResponse response, String param)
+			throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		String cinema_no = param;
+
+		CommandMap map = new CommandMap();
+
+		map.put("CINEMA_NO", cinema_no);
+
+		List<Map<String, Object>> screenList = screenService.selectCinemaScreen(map.getMap());
+		
+		mv.setViewName("jsonView");
+		mv.addObject("result", screenList);
 		
 		return mv;
 	}
