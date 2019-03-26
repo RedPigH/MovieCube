@@ -43,6 +43,11 @@ public class SeatServiceImpl implements SeatService {
 	public Map<String, Object> selectSeat(Map<String,Object> map) throws Exception{
 		return seatDAO.selectSeat(map);
 	}
+	
+	@Override
+	public Map<String, Object> selectSeatNo(Map<String, Object> map) throws Exception{
+		return seatDAO.selectSeatNo(map);
+	}
 
 	@Override
 	public void insertSeat(Map<String, Object> map) throws Exception {
@@ -52,6 +57,11 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public void insertTimeSeat(Map<String, Object> map) throws Exception {
 		seatDAO.insertTimeSeat(map);
+	}
+	
+	@Override
+	public void insertResSeat(Map<String, Object> map) throws Exception{
+		seatDAO.insertResSeat(map);
 	}
 
 	@Override

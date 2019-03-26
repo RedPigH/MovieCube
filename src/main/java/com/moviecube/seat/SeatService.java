@@ -18,11 +18,15 @@ public interface SeatService {
 	List<Map<String, Object>> unableTimeSeat(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> selectSeat(Map<String, Object> map) throws Exception;
+	
+	Map<String, Object> selectSeatNo(Map<String, Object> map) throws Exception;
 
 	void insertSeat(Map<String, Object> map) throws Exception;
 	
 	//Time Controller insert시 좌석도 함께 생성
 	void insertTimeSeat(Map<String, Object> map) throws Exception;
+	
+	void insertResSeat(Map<String, Object> map) throws Exception;
 
 	void updateSeatStatus(Map<String, Object> map) throws Exception;
 

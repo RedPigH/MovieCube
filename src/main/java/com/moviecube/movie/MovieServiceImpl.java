@@ -29,6 +29,26 @@ public class MovieServiceImpl implements MovieService{
 	public List<Map<String, Object>> selectMovieList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectMovieList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> HotMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.HotMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> LatelyMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.LatelyMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> ExpectedMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.ExpectedMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.dupMovieList(map);
+	}
 
 	@Override
 	public void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
@@ -145,16 +165,15 @@ public class MovieServiceImpl implements MovieService{
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectCommentList(map);
 	}
-
-	@Override
-	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void deleteComment(Map<String, Object> map) throws Exception {
 		MovieDAO.deleteComment(map);
+	}
+	
+	public List<Map<String, Object>> selectHotWishList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

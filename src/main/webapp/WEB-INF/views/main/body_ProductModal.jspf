@@ -169,18 +169,7 @@ function deleteReview(cmt_no) {
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots">
-								<ul class="slick3-dots" role="tablist" style="">
-									<li class="slick-active" role="presentation"><img
-										src="/moviecube/resources/images/product-detail-01.jpg ">
-										<div class="slick3-dot-overlay"></div></li>
-									<li role="presentation">
-									<img src=" images/product-detail-02.jpg ">
-										<div class="slick3-dot-overlay"></div></li>
-									<li role="presentation">
-									<img src=" images/product-detail-03.jpg ">
-										<div class="slick3-dot-overlay"></div>
-									</li>
-								</ul>
+								
 							</div>
 						
 

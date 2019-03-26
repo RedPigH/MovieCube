@@ -29,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
 	  }
 	  
 	  @Override
+	  public Map<String, Object> selectOneMember(Map<String, Object> map) throws Exception{
+		  return memberDAO.selectOneMember(map);
+	  }
+	  
+	  @Override
 	  public String findId(Map<String, Object> map) throws Exception{
 		  return memberDAO.findId(map);
 	  }
@@ -36,5 +41,15 @@ public class MemberServiceImpl implements MemberService {
 	  @Override
 	  public String findPasswd(Map<String, Object> map) throws Exception{
 		  return memberDAO.findPasswd(map);
+	  }
+	  
+	  @Override
+	  public void updateMile(Map<String, Object> map) throws Exception{
+		  memberDAO.updateMile(map);
+	  }
+	  
+	  @Override
+	  public void updateRank(Map<String, Object> map ) throws Exception{
+		  memberDAO.updateRank(map);
 	  }
 }

@@ -21,6 +21,9 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	@Resource(name = "timeDAO")
 	private TimeDAO timeDAO;
+	
+	@Resource(name = "reserveDAO")
+	private ReserveDAO reserveDAO;
 
 	@Override
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
@@ -48,10 +51,13 @@ public class ReserveServiceImpl implements ReserveService {
 		return resultMap;
 	}
 	
-	public List<Map<String, Object>> testTimeList(Map<String, Object> map) throws Exception{
-		
-		return timeDAO.optionTimeList(map);
+	@Override
+	public void insertReservation(Map<String, Object> map) throws Exception{
+		reserveDAO.insertReserve(map);
 	}
 
-
+	@Override
+	public void deleteReservation(Map<String, Object> map) throws Exception{
+		reserveDAO.deleteReserve(map);
+	}
 }
