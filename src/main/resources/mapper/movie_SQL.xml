@@ -33,7 +33,8 @@
 	<!-- 인기 영화 리스트 -->
 	<select id = "HotMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
-		select w.movie_no, m.movie_name, m.movie_genre, f.poster_savname, (select count(*) from mc_wishlist where movie_no = w.movie_no) as wish_cnt
+		select w.movie_no,m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from mc_wishlist where movie_no = w.movie_no) as wish_cnt
 		from (select * from mc_wishlist
 		where rowid in(select max(rowid) from mc_wishlist group by movie_no)) w
 		inner join mc_movie m on w.movie_no = m.movie_no
@@ -46,7 +47,8 @@
 	<!-- 최근 개봉 영화 리스트 -->
 	<select id = "LatelyMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
-		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
+		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
@@ -59,7 +61,8 @@
 	<!-- 개봉 예정 영화 리스트 -->
 	<select id = "ExpectedMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
-		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
+		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
