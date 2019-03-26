@@ -100,8 +100,7 @@
 							<th scope="row">영화제목</th>
 							<td>
 								<input type="text" class="txt w200" id="EVENT_NAME" name="EVENT_NAME" value="${map.EVENT_NAME}"/>
-								<input type="hidden" id="EVENT_NO" name="EVENT_NO" value="${map.EVENT_NO}" />
-								<font color="blue"><span class="ibk">예) 영화제목(3D) </span></font>
+								<font color="blue"><span class="ibk">예) 이벤트 제목 </span></font>
 								
 							</td>
 						</tr>
@@ -167,7 +166,7 @@
 
 				<div class="btn_type_03">
 					<a href="#this" class="btn btnC_04 btnP_04" id="write"> 
-					<input type="hidden" name="MOVIE_NO" value="${param.EVENT_NO}"/><span>수정하기</span>
+					<input type="hidden" name="EVENT_NO" value="${param.EVENT_NO}"/><span>수정하기</span>
 					</a> <a href="#this" class="btn btnC_04 btnP_04" id="list"
 						style="padding-left: 10px;"> <span>목록으로</span>
 					</a>

@@ -21,9 +21,11 @@ import com.moviecube.movie.MovieService;
 import com.moviecube.screen.ScreenService;
 import com.moviecube.seat.SeatService;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.moviecube.cinema.CinemaService;
 import com.moviecube.common.Paging;
-
 
 @RequestMapping(value = "/admin")
 @Controller
@@ -85,8 +87,7 @@ public class AdminTimeController {
 		mv.addObject("totalCount", totalCount);
 		return mv;
 	}
-  
-	
+
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/time/timeDetail");
@@ -130,7 +131,7 @@ public class AdminTimeController {
 
 		screenSeatmap.put("SCREEN_NO", commandMap.get("SCREEN_NO"));
 
-		List<Map<String, Object>> seatlist = seatService.selectSeatList(screenSeatmap.getMap());
+		List<Map<String, Object>> seatlist = seatService.selectScreenSeat(screenSeatmap.getMap());
 
 		for (int i = 0; i < seatlist.size(); i++) {
 			timeSeatmap.put("SEAT_NO", seatlist.get(i).get("SEAT_NO"));

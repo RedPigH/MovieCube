@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
@@ -81,7 +82,8 @@ public class EventFileUtils {
 		List<Map<String, Object>> Filelist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> FilelistMap = null;
 
-		String EVENT_NO = (String) map.get("EVENT_NO");
+		int EVENT_NO = Integer.parseInt((String)map.get("EVENT_NO"));
+		/* int EVENT_NO = Integer.parseInt((String)map.get("EVENT_NO")); */
 		String requestName = null;
 		String idx = null;
 

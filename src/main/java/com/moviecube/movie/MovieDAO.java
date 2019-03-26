@@ -14,9 +14,19 @@ public class MovieDAO extends AbstractDAO{
 	public List<Map<String,Object>> selectMovieList(Map<String, Object> map) throws Exception{
 		return (List<Map<String, Object>>)selectList("movie.selectMovieList", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("movie.selectStillCutList", map);
+	}
 
 	public void insertMovie(Map<String, Object> map) throws Exception{
 		insert("movie.insertMovie", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> dupMovieList(Map<String,Object> map) throws Exception{
+		return (List<Map<String, Object>>)selectList("movie.DupMovieList", map);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -68,5 +78,6 @@ public class MovieDAO extends AbstractDAO{
 	public void deleteFile2(Map<String, Object> map) {
 		delete("movie.deleteFile2", map);
 	}
+	
 
 }

@@ -52,7 +52,7 @@ public class EventController {
 		Map<String, Object> map = eventService.selectEventDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map"));
 		mv.addObject("eventDetail", map.get("eventDetail"));
-
+System.out.println("혜쮸꼰뜌님:"+commandMap.get("EVENT_NO"));
 		return mv;
 	}
 
@@ -84,6 +84,12 @@ public class EventController {
 		mv.addObject("map", map.get("map"));
 		mv.addObject("eventDetail", map.get("eventDetail"));
 		mv.addObject("fileList", map.get("fileList"));
+		System.out.println("혜쮸꼰뜌님1:"+commandMap.get("EVENT_NO"));
+		System.out.println("혜쮸꼰뜌님2:"+commandMap.get("EVENT_TYPE"));
+		System.out.println("혜쮸꼰뜌님3:"+commandMap.get("EVENT_OPENDATE"));
+		System.out.println("혜쮸꼰뜌님4:"+commandMap.get("EVENT_CLOSEDATE"));
+		System.out.println("혜쮸꼰뜌님5:"+commandMap.get("EVENT_URL"));
+		
 		return mv;
 	}
 
@@ -91,9 +97,18 @@ public class EventController {
 	public ModelAndView modifyEvent(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("event/eventList");
 
+		/*
+		 * String EVENT_NO = (String)commandMap.get("EVENT_NO");
+		 * commandMap.getMap().put("EVENT_NO", EVENT_NO);
+		 */
+		/*
+		 * int EVENT_NO = Integer.parseInt((String)commandMap.get("EVENT_NO"));
+		 * commandMap.getMap().put("EVENT_NO", EVENT_NO);
+		 */
 		eventService.modifyEvent(commandMap.getMap(), request);
-
+		System.out.println("혜쮸꼰뜌님힝:"+commandMap.get("EVENT_NO"));
 		mv.addObject("EVENT_NO", commandMap.get("EVENT_NO"));
+	
 
 		return mv;
 	}
