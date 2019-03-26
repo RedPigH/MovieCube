@@ -68,6 +68,12 @@ public class MovieServiceImpl implements MovieService{
 				MovieDAO.insertFile2(fileList2.get(i));
 			}
 	}
+	
+	@Override
+	public void insertComment(Map<String, Object> map) throws Exception {
+		MovieDAO.insertComment(map);
+		
+	}
 
 	
 	@Override
@@ -139,4 +145,16 @@ public class MovieServiceImpl implements MovieService{
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
 		return MovieDAO.selectCommentList(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteComment(Map<String, Object> map) throws Exception {
+		MovieDAO.deleteComment(map);
+	}
+	
 }

@@ -156,18 +156,18 @@
             CMT_NO,
             MOVIE_NO,
             CMT_ID,
+            CMT_CONTENT,
             CMT_REGDATE,
-            CMT_LIKE,
-            CMT_DEL
+            CMT_LIKE
         )
         VALUES
         (
             MC_COMMENT_NO_SEQ.NEXTVAL,
             #{MOVIE_NO},
             #{CMT_ID},
+            #{CMT_CONTENT},
             SYSDATE,
-            #{CMT_LIKE},
-            #{CMT_DEL}
+            #{CMT_LIKE}
         )
     	]]>
 </insert>
@@ -254,4 +254,14 @@
 			where MOVIE_NO = #{MOVIE_NO}
 		]]>
 </delete>
+
+<delete id="deleteComment" parameterType="hashmap" >
+
+		<![CDATA[
+		DELETE FROM MC_COMMENT 
+			WHERE CMT_NO = #{CMT_NO}
+		]]>
+</delete>
+
+
 </mapper>

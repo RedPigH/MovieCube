@@ -21,6 +21,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	var type = "타입  :  " + movie_type;
 	$("#h_modal_movie_type").text(type);
 	
+	movie_opendate = movie_opendate.substring(0,10);
 	var open_date = "개봉일  :  " + movie_opendate;
 	$("#h_modal_movie_opendate").text(open_date);
 	
@@ -39,6 +40,9 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	
 	/* Ajax를 해봅시다 */
 	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
+	$("div").remove("#comment_start");
+	$("#review").val(''); // textarea 값 초기화
+	get_reviews();
 	
 	jQuery.ajaxSettings.traditional = true;
 	stillcut_list = new Array();
@@ -55,7 +59,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 				success : function(data) {
 					
 					var stillcut_length = data.stillcut_list.length;
-					alert('스틸컷 리스트 넘버 : ' + stillcut_length);
+					// alert('스틸컷 리스트 넘버 : ' + stillcut_length);
 					
 					var for_label_prev = "&#x2039;";
 					var for_label_next = "&#x203a;"

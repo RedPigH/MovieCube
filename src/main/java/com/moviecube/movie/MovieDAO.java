@@ -84,5 +84,12 @@ public class MovieDAO extends AbstractDAO{
 		delete("movie.deleteFile2", map);
 	}
 	
+	public void insertComment(Map<String, Object> map) {
+		insert("movie.insertComment", map);
+	}
+
+	public void deleteComment(Map<String, Object> map) {
+		delete("movie.deleteComment", map);
+	}
 
 }
