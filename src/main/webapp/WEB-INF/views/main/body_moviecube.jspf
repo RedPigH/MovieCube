@@ -334,9 +334,9 @@
 
 										<c:choose>
 											<c:when test="${WishList != null}">
-											<c:forEach items="${WishList}" var="idx">
+											<%-- <c:forEach items="${WishList}" var="idx">
 													<c:choose>
-														<c:when test="${idx.MOVIE_NO == row.MOVIE_NO }">
+														<c:when test="${idx.MOVIE_NO == row.MOVIE_NO}"> --%>
 												            <a href="#"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addedwish-b2"
 															onclick="deleteWishList('${idx.WISH_NO}');"> <img
@@ -346,8 +346,8 @@
 															<img class="icon-heart2 dis-block trans-04 ab-t-l"
 															src="resources/images/icons/icon-heart-02.png" alt="ICON">
 														</a>
-												        </c:when>
-														<c:otherwise>
+												        <%-- </c:when>
+														<c:otherwise> --%>
 												           <a href="#"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
 															onclick="addWishList('${row.MOVIE_NO}');"> <img
@@ -357,9 +357,9 @@
 															<img class="icon-heart2 dis-block trans-04 ab-t-l"
 															src="resources/images/icons/icon-heart-02.png" alt="ICON">
 														</a>
-												         </c:otherwise>
+												         <%-- </c:otherwise>
 													</c:choose>
-												</c:forEach>
+												</c:forEach> --%>
 											</c:when>
 											<c:otherwise>
 												<a href="#" class="btn-addwish-b2 dis-block pos-relative"
