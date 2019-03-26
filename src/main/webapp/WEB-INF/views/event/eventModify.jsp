@@ -64,7 +64,7 @@
 							<th scope="row">이벤트 이미지</th>
 			          
 							<td>
-								<input type="hidden" id="EVENT_NO" name="EVENT_ORGNAME_${var.index}" value="${row.EVENT_NO}">
+								<input type="hidden" id="IDX" name="IDX_ORGNAME_${var.index}" value="${row.FILE_NO}">
 								<a href="#this" id="name" name="name"><font color="red">${row.EVENT_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font>
 								

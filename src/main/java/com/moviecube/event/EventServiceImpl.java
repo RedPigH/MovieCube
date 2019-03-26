@@ -80,33 +80,43 @@ public class EventServiceImpl implements EventService {
 		return resultMap;
 	}
 
-	
-	  @Override public Map<String, Object> selectEventDetail2(Map<String, Object>
-	  map) throws Exception { return EventDAO.selectEventDetail2(map); }
-	 
+	@Override
+	public Map<String, Object> selectEventDetail2(Map<String, Object> map) throws Exception {
+		return EventDAO.selectEventDetail2(map);
+	}
 
 	@Override
 	public void modifyEvent(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		EventDAO.modifyEvent(map);
-		EventDAO.deleteFileList(map);
+		EventDAO.updateFileList(map);
 
 		List<Map<String, Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
+		
+		for(Map<String, Object> fmap : fileList) {
+			System.out.println("항ㄴ한ㅇ항ㄴ하 : " + fmap);
+		}
+		
+		
 		Map<String, Object> tempMap = null;
 
-
 		for (int i = 0, size = fileList.size(); i < size; i++) {
-			EventDAO.insertFile(fileList.get(i));
-			/*
-			 * tempMap = fileList.get(i); if (i == 0) {
-			 * 
-			 * if (tempMap.get("IS_NEW").equals("Y")) { EventDAO.insertFile(tempMap); } else
-			 * { EventDAO.modifyFile(tempMap);
-			 */
-			
+			tempMap = fileList.get(i);
+			if (i == 0) {
+
+				if (tempMap.get("IS_NEW").equals("Y")) {
+					EventDAO.insertFile(tempMap);
+				} else {
+					EventDAO.modifyFile(tempMap);
+					/*
+					 * tempMap = fileList.get(i); if (i == 0) {
+					 * 
+					 * if (tempMap.get("IS_NEW").equals("Y")) { EventDAO.insertFile(tempMap); } else
+					 * { EventDAO.modifyFile(tempMap);
+					 */
 				}
 			}
-		
-	
+		}
+	}
 
 	/*
 	 * @Override public Map<String, Object> checkEventFile(Map<String, Object> map)

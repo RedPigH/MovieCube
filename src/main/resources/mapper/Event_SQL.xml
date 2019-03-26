@@ -65,14 +65,16 @@ values
 	FILE_NO,
 	EVENT_NO,
 	EVENT_ORGNAME,
-	EVENT_SAVNAME
+	EVENT_SAVNAME,
+	DEL_GB
 	)
 	VALUES
 	(
 	MC_EVENT_FILE_NO_SEQ.NEXTVAL,
 	#{EVENT_NO},
 	#{EVENT_ORGNAME},
-	#{EVENT_SAVNAME}
+	#{EVENT_SAVNAME},
+	'N'
 	)
 	]]>
 
@@ -81,8 +83,8 @@ values
 		파일 없을 때 상세보기 <![CDATA[ SELECT EVENT_NO, EVENT_NAME, EVENT_TYPE, EVENT_OPENDATE, 
 		EVENT_CLOSEDATE, EVENT_URL FROM MC_EVENT WHERE EVENT_NO = #{EVENT_NO} ]]> 
 		</select> -->
-		
-			<select parameterType="hashmap" resultType="hashmap"
+
+	<select parameterType="hashmap" resultType="hashmap"
 		id="selectEventDetail">
 	
 	<![CDATA[
@@ -120,7 +122,7 @@ values
 	</select>
 
 	<select parameterType="hashmap" resultType="hashmap"
-		id="selectEventFileDetail">
+	id="selectEventFileDetail">
 	
 	<![CDATA[
 	select
@@ -167,12 +169,9 @@ values
 	]]>
 	</update>
 
-<!-- 	<select id="checkEventFile" parameterType="hashmap"
-		resultType="hashmap">
-	<![CDATA[
-	SELECT COUNT(*) AS CNT FROM MC_EVENT_FILE WHERE EVENT_NO = #{EVENT_NO} AND DEL_GB = 'N'
-	]]></select>
- -->
+	<!-- <select id="checkEventFile" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ SELECT COUNT(*) AS CNT FROM MC_EVENT_FILE WHERE EVENT_NO = #{EVENT_NO} 
+		AND DEL_GB = 'N' ]]></select> -->
 	<delete parameterType="hashmap" id="deleteEvent">
 	
 	<![CDATA[
@@ -180,7 +179,7 @@ values
 	where EVENT_NO = #{EVENT_NO}
 	]]>
 	</delete>
-	
+
 	<update id="deleteFileList" parameterType="hashmap">
 	<![CDATA[
 	UPDATE MC_EVENT_FILE SET

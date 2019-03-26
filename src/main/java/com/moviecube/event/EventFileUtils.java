@@ -83,7 +83,7 @@ public class EventFileUtils {
 		Map<String, Object> FilelistMap = null;
 
 		int EVENT_NO = Integer.parseInt((String)map.get("EVENT_NO"));
-		/* int EVENT_NO = Integer.parseInt((String)map.get("EVENT_NO")); */
+		
 		String requestName = null;
 		String idx = null;
 
@@ -110,7 +110,7 @@ public class EventFileUtils {
 				Filelist.add(FilelistMap);
 			} else {
 				requestName = multipartFile.getName();
-				idx = "EVENT_NAME" + requestName.substring(requestName.indexOf("_") + 1);
+				idx = "IDX_" + requestName.substring(requestName.indexOf("_") + 1);
 
 				FilelistMap = new HashMap<String, Object>();
 				FilelistMap.put("IS_NEW", "N");
@@ -121,5 +121,13 @@ public class EventFileUtils {
 
 		return Filelist;
 	}
+	
+	public void fileDelete(Map<String, Object> map, String filePath, String media) throws Exception{
+	String EVENT_SAVNAME = null;
+	File file = null;
+	
+	file = new File(filePath + EVENT_SAVNAME);
+	file.delete();
 
+}
 }

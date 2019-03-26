@@ -31,6 +31,21 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
+	public List<Map<String, Object>> HotMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.HotMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> LatelyMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.LatelyMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> ExpectedMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.ExpectedMovieList(map);
+	}
+	
+	@Override
 	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception{
 		return MovieDAO.dupMovieList(map);
 	}

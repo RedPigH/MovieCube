@@ -53,6 +53,7 @@ public class EventController {
 		mv.addObject("map", map.get("map"));
 		mv.addObject("eventDetail", map.get("eventDetail"));
 System.out.println("혜쮸꼰뜌님:"+commandMap.get("EVENT_NO"));
+
 		return mv;
 	}
 
@@ -84,12 +85,7 @@ System.out.println("혜쮸꼰뜌님:"+commandMap.get("EVENT_NO"));
 		mv.addObject("map", map.get("map"));
 		mv.addObject("eventDetail", map.get("eventDetail"));
 		mv.addObject("fileList", map.get("fileList"));
-		System.out.println("혜쮸꼰뜌님1:"+commandMap.get("EVENT_NO"));
-		System.out.println("혜쮸꼰뜌님2:"+commandMap.get("EVENT_TYPE"));
-		System.out.println("혜쮸꼰뜌님3:"+commandMap.get("EVENT_OPENDATE"));
-		System.out.println("혜쮸꼰뜌님4:"+commandMap.get("EVENT_CLOSEDATE"));
-		System.out.println("혜쮸꼰뜌님5:"+commandMap.get("EVENT_URL"));
-		
+      
 		return mv;
 	}
 
@@ -107,6 +103,7 @@ System.out.println("혜쮸꼰뜌님:"+commandMap.get("EVENT_NO"));
 		 */
 		eventService.modifyEvent(commandMap.getMap(), request);
 		System.out.println("혜쮸꼰뜌님힝:"+commandMap.get("EVENT_NO"));
+		System.out.println("혜쮸는짱이야ㅃ:"+commandMap.getMap());
 		mv.addObject("EVENT_NO", commandMap.get("EVENT_NO"));
 	
 
