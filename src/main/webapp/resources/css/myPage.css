@@ -35,6 +35,11 @@
 	border: 1px solid #ddd;
 }
 
+.mypage_main_box
+ul {
+	margin: 0px !important;
+}
+
 .h3_wrap{
 	overflow: hidden;
 	margin: 0;
@@ -61,6 +66,11 @@
 	width: auto;
 	height: 18px;
 	line-height: 18px;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul{
+	margin: 0 !important;
 }
 
 .row3 .cols.col1

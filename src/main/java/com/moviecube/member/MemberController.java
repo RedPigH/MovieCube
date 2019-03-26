@@ -28,7 +28,7 @@ public class MemberController {
 	  @Resource(name="memberService")
 	  private MemberServiceImpl memberService;
 	  
-	  //ï¿½ï¿½ï¿½Ç¼ï¿½
+	  //µ¿ÀÇ¼­
 	  
 	  @RequestMapping(value="/term.do")
 	  public ModelAndView terms(CommandMap commandMap) throws Exception{
@@ -37,7 +37,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	  //È¸¿ø°¡ÀÔ Æû
 	  
 	  @RequestMapping(value="/member/joinForm.do")
 	  public ModelAndView joinForm(CommandMap commandMap) throws Exception{
@@ -46,7 +46,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½È®ï¿½ï¿½
+	  //Áßº¹È®ÀÎ
 	  @RequestMapping("/member/checkId.do")
 	  @ResponseBody
 	   public Map<String, Object> findUsedID(@RequestBody String id) throws Exception{
@@ -61,7 +61,7 @@ public class MemberController {
 		  
 	  }
 	  
-	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	  //È¸¿ø°¡ÀÔ
 	  @RequestMapping(value="/member/join.do")
 	  public String join(CommandMap commandMap) throws Exception{
 		  try {
@@ -72,7 +72,7 @@ public class MemberController {
 		  	return "redirect:/main.do";
 	  }
 	  
-	  //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
+	  //·Î±×ÀÎ Æû
 	  @RequestMapping(value="/member/loginForm.do")
 	  public ModelAndView loginForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/loginForm");
@@ -80,7 +80,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //ï¿½Î±ï¿½ï¿½ï¿½ 
+	  //·Î±×ÀÎ
 	  @RequestMapping(value="/member/login.do")
 	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
 		  ModelAndView mv = new ModelAndView();
@@ -108,7 +108,7 @@ public class MemberController {
 	  }
 	  
 	    
-	  //ï¿½Î±×¾Æ¿ï¿½
+	  //·Î±×¾Æ¿ô
 	  @RequestMapping(value="/member/logout.do")
 	  public ModelAndView logout(HttpSession session) {
 		  ModelAndView mv = new ModelAndView("redirect:/main.do");
@@ -116,7 +116,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+	  //¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â Æû
 	  @RequestMapping(value="/member/findForm.do")
 	  public ModelAndView findForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/findIdAndPassword");
@@ -125,33 +125,39 @@ public class MemberController {
 	  }
 	  
 	
-	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+	  //¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â
 	  
 	  @RequestMapping(value="/member/find.do")
 	  @ResponseBody
-	  public Map<String, Object> findIdAndPw(@RequestBody String name, String age, String phone) throws Exception{
+	  public Map<String, Object> findId(@RequestBody String name1,String name, String age, String phone) throws Exception{
 		  Map<String, Object> map = new HashMap<String, Object>();
-		  String id = "";
-		  String pw = "";
-		  
+
 		  map.put("MEMBER_NAME", name);
 		  map.put("MEMBER_AGE", age); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ 24ï¿½ï¿½ï¿½Ì´ï¿½.
 		  map.put("MEMBER_PHONE" , phone);
 		  
+		  String id = memberService.findId(map);
+		
+		  map.put("id", id);
+		  
 		  id = memberService.findId(map);
 		  
-		  	if(id!=null) {
-		  		
-		  	}
-		  pw = memberService.findPasswd(map);
-		  
 		  return map;
-				  
 	  }
 	 
-	  
-	  /*//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	  @RequestMapping
-	  public */
-	  
+	  @RequestMapping(value="/member/find1.do")
+	  @ResponseBody
+	  public Map<String, Object> findPw(@RequestBody String name,String id, String name1, String phone1) throws Exception{
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  
+		  map.put("MEMBER_ID", id);
+		  map.put("MEMBER_NAME1", name1); // ÁÖÇöÀÌ´Â 24¼¼ÀÌ´Ù.
+		  map.put("MEMBER_PHONE1" , phone1);
+		  
+		  String pw = memberService.findPasswd(map);
+		  
+		  map.put("pw", pw);
+		  
+		  return map;
+	  }
 }
