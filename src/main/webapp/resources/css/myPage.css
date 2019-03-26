@@ -1,0 +1,176 @@
+.width-fixed{
+	width: 970px;
+	max-width: 970px;
+	min-width: 970px;
+	margin-top: 150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.row3 {
+	overflow:hidden;
+}
+
+.cols{
+	width: 316px;
+	float: left;
+}
+
+.cols.col2{
+	margin: 0 11px;
+}
+
+.cols.col1
+.mypage_myInfo{
+	margin-bottom: 10px;
+	padding: 29px 24px 0 24px;
+	height: 253px;
+	border: 1px solid #e1e1e1;
+	background-color: #f2f2f2;
+}
+
+.mypage_main_box {
+	margin-bottom: 10px;
+	padding: 25px 20px;
+	border: 1px solid #ddd;
+}
+
+.h3_wrap{
+	overflow: hidden;
+	margin: 0;
+}
+
+.mb35{
+	margin-bottom: 35px !important;
+}
+
+.h3_wrap>h3{
+	float: left;
+	width: auto;
+	height: 18px;
+	line-height: 18px;
+}
+
+.h3_wrap button{
+	display: block;
+	float: right;
+}
+
+.glop{
+	float: left;
+	width: auto;
+	height: 18px;
+	line-height: 18px;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li {
+	margin-bottom: 14px;
+	vertical-align: middle;
+	overflow: hidden;
+	font-size: 13px;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li strong{
+	vertical-align: middle;
+	display: block;
+	float: left;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li span {
+	vertical-align: middle;
+	display: block;
+	float: right;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li span.btn_sms
+button.no.active{
+	background-position: 0 -22px;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li span.btn_sms button{
+	width: 39px;
+	height: 22px;
+	overflow: hidden;
+	text-indent: -9999px;
+	background: url(http://image2.megabox.co.kr/mop/home/mypage/main_btn7.jpg) 0 0 no-repeat;
+}
+
+.row3 .cols.col1
+.mypage_myInfo ul li span.btn_sms button.yes{
+	width: 38px;
+	background-position: -39px -22px;
+}
+
+.mypage_main_box
+ul.mypage_main_moviestory li a {
+	padding-left: 20px;
+	padding-right: 20px;
+	overflow: hidden;
+	display: block;
+}
+
+.mypage_main_box
+ul.mypage_main_moviestory li a span,
+.mypage_main_box
+ul.mypage_main_moviestory li a strong{
+ 	height: 50px;
+ 	line-height: 38px;
+ 	display: block;
+ 	float: left;
+ 	color: #333;
+ }
+ 
+.c_red{
+	color: #ff5959 !important;
+}
+
+.pull-right{
+	float: right !important;
+}
+
+.m10{
+	margin-bottom: 10px !important;
+}
+
+.h3_wrap.mb38 {
+	margin-bottom: 38px;
+}
+
+.positionR {
+	position: relative !important;
+}
+
+.mypage_main_box
+ul.type1{
+	border-top: 2px solid #e1e1e1;
+	padding-top: 13px;
+}
+
+.mypage_main_wrap .mypage_main_box 
+ul.type1 li{
+	padding-bottom: 13px;
+    margin-bottom: 11px;
+    font-size: 13px;
+    border-bottom: 1px solid #e1e1e1;
+    color: #666;
+}
+
+.mypage_main_wrap .mypage_main_box 
+ul.type1 li:last-child{
+	margin-bottom: 0;
+    padding-bottom: 0;
+    border: none;
+}
+
+.pa30{
+	padding: 30px !important;
+}
+
+.positionA{
+	position: absolute !important;
+}

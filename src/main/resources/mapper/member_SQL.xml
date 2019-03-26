@@ -71,6 +71,8 @@
 	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
 			SELECT
+			 MEMBER_NAME,
+			 MEMBER_PHONE,
 			 MEMBER_ID,
 			 MEMBER_PASSWD1,
 			 MEMBER_EMAIL,

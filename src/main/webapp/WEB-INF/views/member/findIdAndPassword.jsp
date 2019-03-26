@@ -134,7 +134,7 @@
 					</ul>
 					
 					<div class="submit_wrap">
-						<button type="button" id="fp" class="flex-c-m stext-107 float-r cl13 size-301 bor21 p-lr-15 hov-tag2 trans-04 m-r-5 m-b-5"><span class="blind">확인</span></button> 
+						<button type="submit" id="fp" class="flex-c-m stext-107 float-r cl13 size-301 bor21 p-lr-15 hov-tag2 trans-04 m-r-5 m-b-5"><span class="blind">확인</span></button> 
 					</div>
 				</form>
 				</div>
@@ -221,6 +221,8 @@
 					 findid.append('age', age);
 					 findid.append('phone', phone);
 					 
+					 
+					 
 					 $.ajax({
 						async: false,
 					 	type : "POST",
@@ -231,8 +233,8 @@
 						processData: false,
 						success : function(data){
 					 		if(data.id != null){
-						 		modalContents.text("회원님의 아이디는 ["+id+"]입니다.");
-						 		modal.modal('show');
+					 			modalContents.text("회원님의 아이디는["+id+"]입니다.");
+							 	modal.modal('show');
 						 	}
 						},
 						error : function(error){
@@ -240,6 +242,7 @@
 							}
 					 });
 				 });
+				 
 				 
 				 $( "#fp" ).click(function(){
 					 
@@ -266,6 +269,35 @@
 						 	$('#phone1').focus();
 						 	return false;
 					 }
+					 
+					 var id = $("#id").val();
+					 var name1 = $("#name1").val();
+					 var phone1 = $("#phone1").val();
+					 
+					 var findpw = new FormData();
+					 
+					 findpw.append('id', id);
+					 findpw.append('name1', name1);
+					 findpw.append('phone1', phone1);
+					 
+					 $.ajax({
+							async: false,
+						 	type : "POST",
+						 	data : findpw,
+							url : "/moviecube/member/find1.do",
+							dataType : "json",
+							contentType : false,
+							processData: false,
+							success : function(data){
+						 		if(data.pw != null){
+						 			modalContents.text("회원님의 비밀번호는["+pw+"]입니다.");
+								 	modal.modal('show');
+							 	}
+							},
+							error : function(error){
+									alert("error : "+error);
+							}
+					 });
 				 });
 			});
 		</script>

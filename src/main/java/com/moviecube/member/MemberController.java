@@ -117,7 +117,7 @@ public class MemberController {
 	  
 	  @RequestMapping(value="/member/find.do")
 	  @ResponseBody
-	  public Map<String, Object> findId(@RequestBody String name, String age, String phone) throws Exception{
+	  public Map<String, Object> findId(@RequestBody String name1,String name, String age, String phone) throws Exception{
 		  Map<String, Object> map = new HashMap<String, Object>();
 
 		  map.put("MEMBER_NAME", name);
@@ -126,7 +126,7 @@ public class MemberController {
 		  System.out.println(map);
 		  
 		  String id = memberService.findId(map);
-		  
+		
 		  map.put("id", id);
 		  
 		  return map;
@@ -134,11 +134,14 @@ public class MemberController {
 	 
 	  @RequestMapping(value="/member/find1.do")
 	  @ResponseBody
-	  public Map<String, Object> findPw(@RequestBody String id, String name, String phone) throws Exception{
+	  public Map<String, Object> findPw(@RequestBody String name,String id, String name1, String phone1) throws Exception{
 		  Map<String, Object> map = new HashMap<String, Object>();
-		  String pw = "";
 		  
-		  pw = memberService.findPasswd(map);
+		  map.put("MEMBER_ID", id);
+		  map.put("MEMBER_NAME1", name1); // 주현이는 24세이다.
+		  map.put("MEMBER_PHONE1" , phone1);
+		  
+		  String pw = memberService.findPasswd(map);
 		  
 		  map.put("pw", pw);
 		  
