@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.wishlist.WishListService;
 
 @Controller
 public class MemberController {
 	
 	  Logger log = Logger.getLogger(this.getClass());
 	  
+	  @Resource(name = "wishlistService")
+		private WishListService wishlistService;
+	  
 	  @Resource(name="memberService")
 	  private MemberServiceImpl memberService;
 	  
-	  //µ¿ÀÇ¼­
+	  //ï¿½ï¿½ï¿½Ç¼ï¿½
 	  
 	  @RequestMapping(value="/term.do")
 	  public ModelAndView terms(CommandMap commandMap) throws Exception{
@@ -33,7 +37,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //È¸¿ø°¡ÀÔ Æû
+	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	  
 	  @RequestMapping(value="/member/joinForm.do")
 	  public ModelAndView joinForm(CommandMap commandMap) throws Exception{
@@ -42,7 +46,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //¾ÆÀÌµð Áßº¹È®ÀÎ
+	  //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½È®ï¿½ï¿½
 	  @RequestMapping("/member/checkId.do")
 	  @ResponseBody
 	   public Map<String, Object> findUsedID(@RequestBody String id) throws Exception{
@@ -57,7 +61,7 @@ public class MemberController {
 		  
 	  }
 	  
-	  //È¸¿ø°¡ÀÔ
+	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	  @RequestMapping(value="/member/join.do")
 	  public String join(CommandMap commandMap) throws Exception{
 		  try {
@@ -68,7 +72,7 @@ public class MemberController {
 		  	return "redirect:/main.do";
 	  }
 	  
-	  //·Î±×ÀÎ Æû
+	  //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
 	  @RequestMapping(value="/member/loginForm.do")
 	  public ModelAndView loginForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/loginForm");
@@ -76,7 +80,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //·Î±×ÀÎ 
+	  //ï¿½Î±ï¿½ï¿½ï¿½ 
 	  @RequestMapping(value="/member/login.do")
 	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
 		  ModelAndView mv = new ModelAndView();
@@ -86,8 +90,16 @@ public class MemberController {
 		  		  
 		  if(user!=null){
 			  session.setAttribute("userLoginInfo", user);
-			  mv.setViewName("redirect:/main.do");
-			  
+				
+				CommandMap map = new CommandMap();
+				
+				map.put("MEMBER_NO", user.get("MEMBER_NO"));
+				
+				List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
+				
+				mv.addObject("WishList", wish);
+				mv.setViewName("redirect:/main.do");
+				
 			  return mv;
 		  } 
 		  
@@ -96,7 +108,7 @@ public class MemberController {
 	  }
 	  
 	    
-	  //·Î±×¾Æ¿ô
+	  //ï¿½Î±×¾Æ¿ï¿½
 	  @RequestMapping(value="/member/logout.do")
 	  public ModelAndView logout(HttpSession session) {
 		  ModelAndView mv = new ModelAndView("redirect:/main.do");
@@ -104,7 +116,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â ÆäÀÌÁö ÀÌµ¿
+	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	  @RequestMapping(value="/member/findForm.do")
 	  public ModelAndView findForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/findIdAndPassword");
@@ -113,7 +125,7 @@ public class MemberController {
 	  }
 	  
 	
-	  //¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â
+	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
 	  
 	  @RequestMapping(value="/member/find.do")
 	  @ResponseBody
@@ -123,7 +135,7 @@ public class MemberController {
 		  String pw = "";
 		  
 		  map.put("MEMBER_NAME", name);
-		  map.put("MEMBER_AGE", age); // ÁÖÇöÀÌ´Â 24¼¼ÀÌ´Ù.
+		  map.put("MEMBER_AGE", age); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ 24ï¿½ï¿½ï¿½Ì´ï¿½.
 		  map.put("MEMBER_PHONE" , phone);
 		  
 		  id = memberService.findId(map);
@@ -138,7 +150,7 @@ public class MemberController {
 	  }
 	 
 	  
-	  /*//¸¶ÀÌÆäÀÌÁö
+	  /*//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	  @RequestMapping
 	  public */
 	  
