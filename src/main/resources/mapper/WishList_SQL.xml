@@ -10,7 +10,7 @@
 			INNER JOIN MC_MOVIE m ON w.MOVIE_NO = m.MOVIE_NO
 			INNER JOIN MC_MOVIE_FILE f ON w.MOVIE_NO = f.MOVIE_NO
 			INNER JOIN MC_MEMBER mb ON w.MEMBER_NO = mb.MEMBER_NO
-			WHERE w.MEMBER_NO = #{MEMBER_NO}
+			WHERE w.MEMBER_NO = #{MEMBER_NO} and f.DEL_GB = 'N'
 	</select>
 	
 	
@@ -38,7 +38,7 @@
 	<!-- 찜하기 삭제 -->
 	<delete id = "deleteWishList" parameterType = "hashmap">
 		<![CDATA[
-		delete from MC_WISHLIST
+		DELETE FROM MC_WISHLIST
 		WHERE WISH_NO = #{WISH_NO}
 		]]>
 	</delete>

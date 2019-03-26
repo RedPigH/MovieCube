@@ -26,18 +26,46 @@
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
 		on m.movie_no = f.movie_no
+		where f.del_gb = 'N'
 		]]>
 	</select>
 
 	<!-- 인기 영화 리스트 -->
 	<select id = "HotMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
-		select m.movie_no, m.movie_name, m.movie_genre, f.poster_savname, (select count(*) from mc_wishlist where movie_no = m.movie_no) as wish_cnt
+		select w.movie_no, m.movie_name, m.movie_genre, f.poster_savname, (select count(*) from mc_wishlist where movie_no = w.movie_no) as wish_cnt
+		from (select * from mc_wishlist
+		where rowid in(select max(rowid) from mc_wishlist group by movie_no)) w
+		inner join mc_movie m on w.movie_no = m.movie_no
+		inner join mc_movie_file f on w.movie_no = f.movie_no
+		where f.del_gb = 'N' and rownum <= 6
+		order by wish_cnt desc
+	]]>
+	</select>
+	
+	<!-- 최근 개봉 영화 리스트 -->
+	<select id = "LatelyMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<![CDATA[
+		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
-		inner join mc_movie_file f on m.movie_no = f.movie_no
-		inner join mc_wishlist w on m.movie_no = w.movie_no
-		order by wish_cnt asc
+		inner join mc_movie_file f
+		on m.movie_no = f.movie_no
+		where f.del_gb = 'N' and rownum <= 6
+		order by m.movie_opendate desc
+	]]>
+	</select>
+	
+	<!-- 개봉 예정 영화 리스트 -->
+	<select id = "ExpectedMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<![CDATA[
+		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
+		from (select * from mc_movie
+		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
+		inner join mc_movie_file f
+		on m.movie_no = f.movie_no
+		where f.del_gb = 'N' and rownum <= 6 and m.movie_opendate >= sysdate
+		order by m.movie_opendate asc
 	]]>
 	</select>
 
@@ -120,7 +148,7 @@
 			#{MOVIE_NAME},
 			#{MOVIE_TYPE},
 			#{MOVIE_OPENDATE},
-			#{MOVIE_DIRECTOR},
+			#{MOVIE_DIRECTOR}, 
 			#{MOVIE_ACTOR},
 			#{MOVIE_GENRE},
 			#{MOVIE_CONTENT},
