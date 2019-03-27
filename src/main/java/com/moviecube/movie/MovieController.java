@@ -85,7 +85,6 @@ public class MovieController {
 		ModelAndView mv = new ModelAndView("redirect:/main");
 
 		String movieNo = request.getParameter("movie_no");
-		// System.out.println("찍히는지 테스트 : " + movieNo);
 
 		commandMap.put("MOVIE_NO", movieNo);
 
@@ -97,4 +96,78 @@ public class MovieController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/movieComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView commentList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/main");
+
+		String movie_no = request.getParameter("movie_no");
+
+		commandMap.put("MOVIE_NO", movie_no);
+		List<Map<String, Object>> comment_list = movieService.selectCommentList(commandMap.getMap());
+
+		mv.setViewName("jsonView");
+		mv.addObject("comment_list", comment_list);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/writeComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView writeComment(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/main");
+
+		String member_id = request.getParameter("member_id");
+		String cmt_content = request.getParameter("cmt_content");
+		String cmt_like = request.getParameter("cmt_like");
+		String movie_no = request.getParameter("movie_no");
+		boolean id_check = true; // true면 쓸 수 있음
+
+		CommandMap map = new CommandMap();
+
+		map.put("CMT_ID", member_id);
+		map.put("CMT_CONTENT", cmt_content);
+		map.put("CMT_LIKE", cmt_like);
+		map.put("MOVIE_NO", movie_no);
+		
+		// 리뷰 이미 썼으면 다시 못쓰게
+		List<Map<String, Object>> comment_list = movieService.selectCommentList(map.getMap());
+		for(int i = 0 ; i < comment_list.size(); i ++) {
+			if( (comment_list.get(i).get("CMT_ID")).equals(member_id) ) {
+					id_check = false;
+					break;
+			}
+		}
+		
+		if(id_check)
+			movieService.insertComment(map.getMap());
+		
+		// map.clear();
+		
+		// map.put("MOVIE_NO", movie_no);
+		
+		
+		mv.addObject("id_check", id_check);
+		mv.setViewName("jsonView");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/deleteComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView deleteComment(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/main");
+		
+		String cmt_no = request.getParameter("cmt_no");
+		commandMap.put("CMT_NO", cmt_no);
+		movieService.deleteComment(commandMap.getMap());
+
+		mv.setViewName("jsonView");
+
+		return mv;
+	}
+
+	
+	
+	
 }

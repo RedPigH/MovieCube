@@ -19,7 +19,8 @@
 	</select>
 
 	<!-- 영화 중복제거 리스트 -->
-	<select id="DupMovieList" resultType="hashmap" parameterType = "hashmap">
+	<select id="DupMovieList" resultType="hashmap"
+		parameterType="hashmap">
 		<![CDATA[
 		select m.movie_name, m.movie_type, m.movie_age, f.poster_savname
 		from (select * from mc_movie
@@ -31,7 +32,8 @@
 	</select>
 
 	<!-- 인기 영화 리스트 -->
-	<select id = "HotMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<select id="HotMovieList" resultType="hashmap"
+		parameterType="hashmap">
 	<![CDATA[
 		select w.movie_no,m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
 			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from mc_wishlist where movie_no = w.movie_no) as wish_cnt
@@ -43,9 +45,10 @@
 		order by wish_cnt desc
 	]]>
 	</select>
-	
+
 	<!-- 최근 개봉 영화 리스트 -->
-	<select id = "LatelyMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<select id="LatelyMovieList" resultType="hashmap"
+		parameterType="hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
 			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
@@ -57,9 +60,10 @@
 		order by m.movie_opendate desc
 	]]>
 	</select>
-	
+
 	<!-- 개봉 예정 영화 리스트 -->
-	<select id = "ExpectedMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<select id="ExpectedMovieList" resultType="hashmap"
+		parameterType="hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
 			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
@@ -115,13 +119,22 @@
             AND DEL_GB = 'N'
    		 ]]>
 	</select>
-	
+
+
 	<!-- 영화 스틸컷 리스트 -->
-	<select parameterType="hashmap" resultType="hashmap" id="selectStillCutList">
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectStillCutList">
 		<![CDATA[
         SELECT * FROM STILLCUT WHERE MOVIE_NO = #{MOVIE_NO} AND DEL_GB = 'N' ORDER BY STILLCUT_NO DESC
    		 ]]>
-   	</select>
+	</select>
+
+	<select id="selectCommentList" resultType="hashmap"
+		parameterType="hashmap">
+		<![CDATA[
+        SELECT * FROM MC_COMMENT WHERE MOVIE_NO = #{MOVIE_NO} AND CMT_DEL = 'N' ORDER BY CMT_REGDATE, CMT_NO ASC
+   		 ]]>
+	</select>
 
 	<!-- 영화 정보 입력 -->
 	<insert id="insertMovie" parameterType="hashmap"
@@ -162,6 +175,7 @@
 		]]>
 	</insert>
 
+
 	<!-- 영화 포스터 업로드 -->
 	<insert id="insertFile" parameterType="hashmap">
 
@@ -200,6 +214,30 @@
             #{MOVIE_NO},
             #{STILLCUT_ORGNAME},
             #{STILLCUT_SAVNAME}
+        )
+    	]]>
+	</insert>
+
+	<insert id="insertComment" parameterType="hashmap"> <!-- MC_COMMENT_NO_SEQ -->
+
+		<![CDATA[
+        INSERT INTO MC_COMMENT
+        (
+            CMT_NO,
+            MOVIE_NO,
+            CMT_ID,
+            CMT_CONTENT,
+            CMT_REGDATE,
+            CMT_LIKE
+        )
+        VALUES
+        (
+            MC_COMMENT_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{CMT_ID},
+            #{CMT_CONTENT},
+            SYSDATE,
+            #{CMT_LIKE}
         )
     	]]>
 	</insert>
@@ -258,7 +296,7 @@
 	<!-- 영화 스틸컷 수정 -->
 	<update id="modifyFile2" parameterType="hashmap">
 		<![CDATA[
-		UPDATE STILLCUT SET
+		UPDATE STILL SET
             DEL_GB = 'N'
         WHERE
             STILLCUT_NO = #{STILLCUT_NO} 
@@ -281,11 +319,20 @@
 		]]>
 	</delete>
 
+
 	<!-- 영화 스틸컷 삭제 -->
 	<delete id="deleteFile2" parameterType="hashmap">
 		<![CDATA[
 		delete from STILLCUT 
 			where MOVIE_NO = #{MOVIE_NO}
+		]]>
+	</delete>
+
+	<delete id="deleteComment" parameterType="hashmap">
+
+		<![CDATA[
+		DELETE FROM MC_COMMENT 
+			WHERE CMT_NO = #{CMT_NO}
 		]]>
 	</delete>
 </mapper>

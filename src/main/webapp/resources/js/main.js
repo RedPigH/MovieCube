@@ -250,6 +250,10 @@
             var index = item.index(this);
             rated = index;
             $(input).val(index+1);
+            // 여기부터 중원이가 추가함 
+            // alert(index+1);
+            $("#rating_value").attr("value",index+1);
+            // 여기까지 중원이가 추가함
         });
 
         $(this).on('mouseleave', function(){
