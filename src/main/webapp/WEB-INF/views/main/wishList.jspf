@@ -39,9 +39,9 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<li class="header-cart-item flex-w flex-t m-b-12" style="margin-left: 30px;">
+					<li class="header-cart-item flex-w flex-t m-b-12" id="emptyWishListNotice" style="margin-left: 30px;">
 							<div class="header-cart-item-txt p-t-8">
-								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04" id="emptyWishListNotice">
+								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 									보고싶은 영화가 없네요ㅠㅠ</a>
 							</div>
 						</li>

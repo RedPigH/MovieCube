@@ -329,37 +329,41 @@
 											id="MOVIE_GENRE"> 장르 : ${row.MOVIE_GENRE} </span>
 									</div>
 
-									<div class="block2-txt-child2 flex-r p-t-3">
+									<div class="block2-txt-child2 flex-r p-t-3 ${row.MOVIE_NO}">
 
 
 										<c:choose>
 											<c:when test="${WishList != null}">
-											<%-- <c:forEach items="${WishList}" var="idx">
-													<c:choose>
-														<c:when test="${idx.MOVIE_NO == row.MOVIE_NO}"> --%>
-												            <a href="#"
+												<c:set var="redHeart" value="false"/>
+												<c:forEach var="idx" items="${WishList}">
+													<c:if test="${idx.MOVIE_NO == row.MOVIE_NO}">
+														<c:set var="redHeart" value="true" />
+													</c:if>
+												</c:forEach>
+												<c:choose>
+													<c:when test="${redHeart}">
+														<a href="#" id="${row.MOVIE_NO}"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addedwish-b2"
-															onclick="deleteWishList('${idx.WISH_NO}');"> <img
+															onclick="deleteWishList(${row.MOVIE_NO});"> <img
 															class="icon-heart1 dis-block trans-04"
 															src="resources/images/icons/icon-heart-01.png" alt="ICON">
 
 															<img class="icon-heart2 dis-block trans-04 ab-t-l"
 															src="resources/images/icons/icon-heart-02.png" alt="ICON">
 														</a>
-												        <%-- </c:when>
-														<c:otherwise> --%>
-												           <a href="#"
+													</c:when>
+													<c:otherwise>
+														<a href="#" id="${row.MOVIE_NO}"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
-															onclick="addWishList('${row.MOVIE_NO}');"> <img
+															onclick="addWishList(${row.MOVIE_NO});"> <img
 															class="icon-heart1 dis-block trans-04"
 															src="resources/images/icons/icon-heart-01.png" alt="ICON">
 
 															<img class="icon-heart2 dis-block trans-04 ab-t-l"
 															src="resources/images/icons/icon-heart-02.png" alt="ICON">
 														</a>
-												         <%-- </c:otherwise>
-													</c:choose>
-												</c:forEach> --%>
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:otherwise>
 												<a href="#" class="btn-addwish-b2 dis-block pos-relative"
