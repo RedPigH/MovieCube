@@ -13,6 +13,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
+<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
@@ -20,69 +21,81 @@
 
 <div class="admin">
 	<div class="logo">
-	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie List</a></h1>
+	<h1><a href="<%=cp %>/admin/faqList.do">MovieCube Administrator - Q&amp;A List</a></h1>
 	</div>
 </div>
 
 <div class="admin_grp">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
+			<li><a href="<%=cp%>/admin/movieList.do">영화 정보</a></li>
 			<li><a href="<%=cp%>/admin/cinemaList.do">영화관</a></li>
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
-			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
+			<li><a href="<%=cp%>/admin/insertSeatForm.do">영화 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
-			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
+			<li class="on"><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
-			<li><a href="<%=cp%>/main.do" style="text-decoration: underline">메인으로</a></li>
 		</ul>
 	</div>
+	
 	<div class="admin_ct">
-		<div class="movie_list">
-			<h3 class="sub_tit">상영작</h3>
-			<ul>
-			<c:choose>
-			<c:when test="${fn:length(movieList) > 0}">
-            	<c:forEach items="${movieList}" var="row">
+		<h3 class="sub_tit">QNA 리스트</h3>
+		<div class="tbl_type_02">
+			<table>
+				<caption>QNA 리스트</caption>
+				<colgroup>
+					<col style="width:10%;"/>
+					<col style="width:50%;"/>
+					<col style="width:15%;"/>
+					<col style="width:15%;"/>
+					<col style="width:10%;"/>
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성일</th>
+						<th scope="col">작성자</th>
+						<th scope="col">답변</th>
+					</tr>
+				</thead>
+				<tbody>
 					
-				<li><a href="#this" name="poster" class="list"> 
-				<img src="<%=cp%>/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /> 
-				<input type="hidden" id="MOVIE_NO" value="${row.MOVIE_NO}">
-				<input type="hidden" id="currentPage" value="${currentPage}">
-				<span class="detail">상세보기</span>
-						<div class="explan">
-							<p>
-								<strong>영화제목</strong> : ${row.MOVIE_NAME}
-							</p>
-							<p>
-								<strong>감독</strong> : ${row.MOVIE_DIRECTOR}
-							</p>
-							<p>
-								<strong>개봉</strong> :  <c:set var="TextValue" value="${row.MOVIE_OPENDATE}"/>
-									${fn:substring(TextValue,0,10)}
-							</p>
-						</div>
-				</a> 
-				</li>
-				</c:forEach>
-				</c:when>
+				<c:choose>
+					<c:when test="${fn:length(qnaList) > 0}">
+            			<c:forEach items="${qnaList}" var="row">
+						<tr>
+							<td>${row.QNA_NO}</td>
+							<td class="subject"><a href="#this" name="QNA_SUB">${row.QNA_SUB}
+							<input type="hidden" id="QNA_NO" value="${row.QNA_NO}"/></a></td>
+							<td> <c:set var="TextValue" value="${row.QNA_REGDATE}"/>
+									${fn:substring(TextValue,0,19)}</td>
+							<td>${row.QNA_ID}</td>	
+							<td class="schedule_delete">
+								<a href="qnaReply.do?QNA_NO=${row.QNA_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03">
+									<span>답변달기</span></a></td>			
+						</tr>
+						</c:forEach>
+					</c:when>
 				<c:otherwise>
-					조회된 결과가 없습니다.
+					등록된 게시물이 없습니다
 				</c:otherwise>
 			</c:choose>
-			</ul>
+				</tbody>
+			</table>
 		</div>
-		<%-- <c:if test="${session_member_grade == 1}"> --%>
-			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_01 btnP_04" id="write">
-					<span>글쓰기</span>
-				</a>
-			</div>
-		<%-- </c:if> --%>
-		
-		<div class="search_form">
+<!-- 		
+		<div class="btn_type_03">
+			<a href="#this" class="btn btnC_01 btnP_04" id="write">
+				<span>글쓰기</span>
+			</a>
+		</div>
+				
+ -->		<div class="search_form">
 			<form>
 				<div class="inner">
 					<select class="slct w100" name="searchNum">
@@ -97,9 +110,7 @@
 			</form>	
 		</div>
 		
-		<div class="paging">
-			${pagingHtml}
-		</div>
+		<div class="paging">${pagingHtml}</div>
 	</div>
 </div>
 
@@ -112,7 +123,7 @@
                 fn_openBoardWrite();
             }); 
              
-            $("a[name='poster']").on("click", function(e){ // 영화제목, 영화포스터 클릭
+            $("a[name='QNA_SUB']").on("click", function(e){ // 
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
@@ -120,18 +131,18 @@
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieWriteForm.do' />");
+            comSubmit.setUrl("<c:url value='qnaWriteForm.do' />");
             comSubmit.submit();
         }
          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='movieDetail.do' />");
-            comSubmit.addParam("MOVIE_NO", obj.parent().find("#MOVIE_NO").val());
+            comSubmit.setUrl("<c:url value='qnaDetail.do' />");
+            comSubmit.addParam("QNA_NO", obj.parent().find("#QNA_NO").val());
             comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
-        
     </script> 
 </body>
 </html>
+	

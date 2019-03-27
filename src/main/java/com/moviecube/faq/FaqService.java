@@ -14,5 +14,9 @@ public interface FaqService {
 	void updateFaq(Map<String, Object> map) throws Exception;
 
 	void deleteFaq(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> faqSearch0(String map) throws Exception;
+	
+	List<Map<String, Object>> faqSearch1(String map) throws Exception;
 
 }

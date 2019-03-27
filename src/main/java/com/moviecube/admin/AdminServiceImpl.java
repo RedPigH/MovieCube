@@ -1,5 +1,6 @@
 package com.moviecube.admin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,17 +30,17 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<Map<String, Object>> memberSearch0(String map) throws Exception {
-		return adminDAO.memberSearch1(map);
+		return adminDAO.memberSearch0(map);
 	}
 
 	@Override
 	public List<Map<String, Object>> memberSearch1(String map) throws Exception {
-		return adminDAO.memberSearch2(map);
+		return adminDAO.memberSearch1(map);
 	}
 
 	@Override
 	public List<Map<String, Object>> memberSearch2(String map) throws Exception {
-		return adminDAO.memberSearch3(map);
+		return adminDAO.memberSearch2(map);
 	}
 
 	@Override
@@ -48,4 +49,12 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	@Override
+	public Map<String, Object> selectMemberDetail(Map<String, Object> map) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		Map<String, Object> tempMap = adminDAO.selectMemberDetail(map);
+		resultMap.put("map", tempMap);
+		
+		return resultMap;
+	}
 }

@@ -288,4 +288,35 @@
 			where MOVIE_NO = #{MOVIE_NO}
 		]]>
 	</delete>
+	
+	<!-- 회원 검색 -->
+	<select id="movieSearch0" resultType="hashmap" parameterType="hashmap">
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						WHERE f.DEL_GB = 'N'AND m.MOVIE_NAME like #{search} 
+							order by m.MOVIE_NO desc
+	</select>
+	
+	<select id="movieSearch1" resultType="hashmap" parameterType="hashmap">
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						WHERE f.DEL_GB = 'N'AND m.MOVIE_DIRECTOR like #{search} 
+							order by m.MOVIE_NO desc
+	</select>
+	
+	<select id="movieSearch2" resultType="hashmap" parameterType="hashmap">
+		select 
+			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
+					ON m.MOVIE_NO = f.MOVIE_NO 
+						WHERE f.DEL_GB = 'N'AND m.MOVIE_ACTOR like #{search} 
+							order by m.MOVIE_NO desc
+	</select>
 </mapper>

@@ -20,19 +20,20 @@
 <script src="<%=cp%>/resources/js/admin_common.js"></script>
 </head>
 
-
 <body>
 
 	<div class="admin">
 		<div class="logo">
 			<h1>
-				<a href="<%=cp%>/admin/movieList.do">MovieCube Administrator - Movie List</a>
+				<a href="<%=cp%>/admin/movieList.do">MovieCube Administrator -
+					Movie List</a>
 			</h1>
 		</div>
 		<div class="logo" style="float: right;">
 			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
 		</div>
 	</div>
+
 
 	<div class="admin_grp">
 		<div class="admin_list">
@@ -42,6 +43,8 @@
 				<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 				<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 				<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+				<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+				<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 				<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 				<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 				<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
@@ -86,7 +89,8 @@
 			</div>
 			<%-- <c:if test="${session_member_grade == 1}"> --%>
 			<div class="btn_type_03">
-				<a href="#this" class="btn btnC_01 btnP_04" id="write"> <span>글쓰기</span>
+				<a href="#this" class="btn btnC_01 btnP_04" id="write"> <span>영화
+						등록하기</span>
 				</a>
 			</div>
 			<%-- </c:if> --%>
@@ -95,11 +99,13 @@
 				<form>
 					<div class="inner">
 						<select class="slct w100" name="searchNum">
-							<option value="0">제목</option>
-							<option value="1">내용</option>
-						</select> <input class="txt w100" type="text" name="isSearch" /> <span
-							class="btn btnC_04 btnP_04"> <input type="submit"
-							value="검색" />
+							<option value="0">영화제목</option>
+							<option value="1">감독</option>
+							<option value="2">배우</option>
+						</select> 
+						<input class="txt w100" type="text" name="isSearch" /> 
+						<span class="btn btnC_04 btnP_04"> 
+						<input type="submit" value="검색" />
 						</span>
 					</div>
 				</form>
@@ -138,7 +144,6 @@
 			comSubmit.addParam("currentPage", "${currentPage}");
 			comSubmit.submit();
 		}
-		
 	</script>
 </body>
 </html>
