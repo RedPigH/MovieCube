@@ -48,12 +48,12 @@
 <script src="/moviecube/resources/vendor/sweetalert/sweetalert.min.js"></script>
 
 <script>
-$('.js-addwish-b2').on('click', function(e) {
+/* $('.js-addwish-b2').on('click', function(e) { */
+$(document).on( 'click', '.js-addwish-b2', function (e){
 				e.preventDefault();
 			});
 
-			$('.js-addwish-b2').each(
-					function() {
+			$('.js-addwish-b2').each(function() {
 						var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 						$(this).on('click',function() {
 									swal(nameProduct, "보고싶은 영화로 등록 !","success");
@@ -89,12 +89,12 @@ $('.js-addwish-b2').on('click', function(e) {
 					});
 </script>
 <script>
-$('.js-addedwish-b2').on('click', function(e) {
+/* $('.js-addedwish-b2').on('click', function(e) { */
+$(document).on('click', '.js-addedwish-b2', function (e){
 				e.preventDefault();
 			});
 
-			$('.js-addedwish-b2').each(
-					function() {
+			$('.js-addedwish-b2').each( function() {
 						var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 						$(this).on('click',function() {
 									swal(nameProduct, "보고싶은 영화, 해제","success");
@@ -120,13 +120,14 @@ function addWishList(MOVIE_NO) {
 			$.ajax({
 				type : "POST",
 				url : "<c:url value='/insertWishList.do'/>",
+				cache : false,
 				dataType : "json",
 				data : allData,
 				
 				success : function(data) {
+					
+							$('#'+MOVIE_NO).addClass('js-addedwish-b2');
 						
-							$('#'+MOVIE_NO).addClass("js-addedwish-b2");
-							
 							$('#'+MOVIE_NO).attr("onclick", 'deleteWishList('+MOVIE_NO+');');
 							
 							$(".js-show-cart").attr("data-notify", data.WishList.length);
@@ -179,13 +180,69 @@ function deleteWishList(MOVIE_NO) {
 			$.ajax({
 				type : "POST",
 				url : "<c:url value='/deleteWishList.do'/>",
+				cache : false,
 				dataType : "json",
 				data : allData,
 				
 				success : function(data) {
+						
+							$('#'+MOVIE_NO).addClass('js-addwish-b2');
+					
+							$('#'+MOVIE_NO).attr("onclick", 'addWishList('+MOVIE_NO+');');
+					
+							$(".js-show-cart").attr("data-notify", data.WishList.length);
+					
+							$('li').remove("#MyWishMovie").end();
 							
-							$('#'+MOVIE_NO).removeClass("js-addedwish-b2");
+							for (var idx = 0; idx < data.WishList.length; idx++) {
+									$("#myWishList").append(
+											'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
+											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" style="margin-right: 10px">'
+											+'<div class="header-cart-item-img">'
+											+'<img src="resources/upload/movie/poster/'+data.WishList[idx].POSTER_SAVNAME+'" alt="IMG">'
+											+'</div>'
+
+											+'<div class="p-t-8">'
+											+'<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">'
+											+data.WishList[idx].MOVIE_NAME+'</a> <span class="header-cart-item-info">'
+											+data.WishList[idx].MOVIE_GENRE+'&nbsp;/&nbsp;감독:'+data.WishList[idx].MOVIE_DIRECTOR+'</span>'
+											+'</div>'
+											+'</li>'
+											)
+						}
 							
+							$('#WishListLength').empty();
+							$("#WishListLength").html('총 : '+data.WishList.length+'편');
+				},
+
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("오류가 발생하였습니다.");
+				}
+			}); 
+		}
+	</script>
+<!--===============================================================================================-->
+<script type="text/javascript">
+function deleteWishList2(MOVIE_NO) {
+	
+			
+			var movie_no = MOVIE_NO;
+			
+			var allData = {
+				"MOVIE_NO" : movie_no
+			};
+
+			jQuery.ajaxSettings.traditional = true;
+
+			$.ajax({
+				type : "POST",
+				url : "<c:url value='/deleteWishList.do'/>",
+				cache : false,
+				dataType : "json",
+				data : allData,
+				
+				success : function(data) {
+					
 							$('#'+MOVIE_NO).attr("onclick", 'addWishList('+MOVIE_NO+');');
 					
 							$(".js-show-cart").attr("data-notify", data.WishList.length);
@@ -256,7 +313,7 @@ function deleteWishList(MOVIE_NO) {
         div.innerHTML = document.getElementById(movie_name).innerHTML;
         document.getElementById('field').appendChild(div);
         } else {
-        	alert("더 이상 영화를 추가할 수 없습니다.");
+        	swal("더 이상 영화를 추가할 수 없습니다");
         	return false;
         }
     }
@@ -401,7 +458,7 @@ function deleteWishList(MOVIE_NO) {
 <!--===============================================================================================-->
 <script>
 function loginAlert(){
-	alert("로그인이 필요합니다.");
+	swal("로그인이 필요합니다");
 	return false;
 }
 </script>

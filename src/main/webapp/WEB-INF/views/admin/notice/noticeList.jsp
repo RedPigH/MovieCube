@@ -13,7 +13,6 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 

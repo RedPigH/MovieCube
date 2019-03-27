@@ -19,7 +19,7 @@
 					<a href="notice/adminNoticeList.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 공지사항 </a>
 					<a href="faq/adminFaqList.do" class="flex-c-m trans-04 p-lr-25"
-						style="width: 100px"> FAQ </a> <a href="qna/adminInquiryList.do"
+						style="width: 100px"> FAQs </a> <a href="qna/adminInquiryList.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 1:1문의
 					</a>
 
@@ -86,7 +86,8 @@
 					<c:if test="${empty sessionScope.userLoginInfo }">
 					</c:if>
 					<c:if test="${not empty sessionScope.userLoginInfo }">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+						<div
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 							data-notify="${fn:length(WishList)}">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
@@ -133,45 +134,58 @@
 
 			<li>
 				<div class="right-top-bar flex-w h-full">
-					<a href="resources/#" class="flex-c-m p-lr-10 trans-04"> 공지사항 </a>
-					<a href="resources/#" class="flex-c-m p-lr-10 trans-04"> FAQs </a>
-					<a href="resources/#" class="flex-c-m p-lr-10 trans-04"> 1:1문의
-					</a>
+					<a href="notice/adminNoticeList.do"
+						class="flex-c-m p-lr-10 trans-04"> 공지사항 </a> <a
+						href="faq/adminFaqList.do" class="flex-c-m p-lr-10 trans-04">
+						FAQs </a> <a href="qna/adminInquiryList.do"
+						class="flex-c-m p-lr-10 trans-04"> 1:1문의 </a>
 
 				</div>
 			</li>
 		</ul>
 
 		<ul class="main-menu-m">
-			<li><a href="resources/index.html">로그인</a>
-				<ul class="sub-menu-m">
-					<li><a href="resources/index.html">Homepage 1</a></li>
-					<li><a href="resources/home-02.html">Homepage 2</a></li>
-					<li><a href="resources/home-03.html">Homepage 3</a></li>
-				</ul> <span class="arrow-main-menu-m"> <i
-					class="fa fa-angle-right" aria-hidden="true"></i>
-			</span></li>
-
-			<li><a href="resources/product.html">Shop</a></li>
-
-			<li><a href="resources/contact.html">Contact</a></li>
 
 			<li><a href="resources/shoping-cart.html" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
 			<li><a href="resources/blog.html">스토어</a></li>
 
-			<li><a href="resources/about.html">빠른예매</a></li>
+			<c:if test="${empty sessionScope.userLoginInfo }">
+				<li><a href="#" class="js-show-modal2">빠른 예매</a></li>
+			</c:if>
+			<c:if test="${not empty sessionScope.userLoginInfo }">
+				<li><a href="reserve.do">빠른예매</a></li>
+			</c:if>
 
-			<li><a href="resources/index.html">로그인</a>
-				<ul class="sub-menu-m">
-					<li><a href="resources/index.html">Homepage 1</a></li>
-					<li><a href="resources/home-02.html">Homepage 2</a></li>
-					<li><a href="resources/home-03.html">Homepage 3</a></li>
-				</ul> <span class="arrow-main-menu-m"> <i
-					class="fa fa-angle-right" aria-hidden="true"></i>
-			</span></li>
-
+			<c:if test="${empty sessionScope.userLoginInfo }">
+				<li><a href="#" class="js-show-modal2">로그인</a></li>
+			</c:if>
+			<c:if test="${not empty sessionScope.userLoginInfo }">
+				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
+					<li><a href="#"><span
+							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+						<ul class="sub-menu-m" style="margin-left: 0px;">
+							<li><a href="admin/movieList.do">관리자 페이지</a></li>
+							<li><a href="member/logout.do">로그아웃</a></li>
+						</ul>
+						<span class="arrow-main-menu-m"> <i
+							class="fa fa-angle-right" aria-hidden="true"></i>
+					</span></li>
+				</c:if>
+				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
+					<li><a href="#"><span
+							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+						<ul class="sub-menu-m" style="margin-left: 0px;">
+							<li><a href="#">마이페이지</a></li>
+							<li><a href="#">예매확인/취소</a></li>
+							<li><a href="member/logout.do">로그아웃</a></li>
+						</ul>
+						<span class="arrow-main-menu-m"> <i
+							class="fa fa-angle-right" aria-hidden="true"></i>
+					</span></li>
+				</c:if>
+			</c:if>
 		</ul>
 	</div>
 </header>

@@ -178,21 +178,20 @@
 			<div class="dis-none panel-filter w-full p-t-10">
 				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 					<div class="filter-col1 p-r-15 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">Sort By</div>
+						<div class="mtext-102 cl2 p-b-15">장르</div>
 
 						<ul>
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> Default </a></li>
+								class="filter-link stext-106 trans-04 filter-link-active"> 액션 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> Popularity </a></li>
+								class="filter-link stext-106 trans-04"> 코미디 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> Average rating </a></li>
+								class="filter-link stext-106 trans-04"> 로맨스 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04 filter-link-active">
-									Newness </a></li>
+								class="filter-link stext-106 trans-04"> Newness </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
 								class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
@@ -203,82 +202,59 @@
 					</div>
 
 					<div class="filter-col2 p-r-15 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">Price</div>
+						<div class="mtext-102 cl2 p-b-15">평점</div>
 
 						<ul>
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04 filter-link-active">
-									All </a></li>
+								class="filter-link stext-106 trans-04 filter-link-active"> 8 ~ 10 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> $0.00 - $50.00 </a></li>
+								class="filter-link stext-106 trans-04"> 6 ~ 7 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> $50.00 - $100.00 </a></li>
+								class="filter-link stext-106 trans-04"> 4 ~ 5 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> $100.00 - $150.00 </a></li>
+								class="filter-link stext-106 trans-04"> 2 ~ 3 </a></li>
 
 							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> $150.00 - $200.00 </a></li>
-
-							<li class="p-b-6"><a href="resources/#"
-								class="filter-link stext-106 trans-04"> $200.00+ </a></li>
+								class="filter-link stext-106 trans-04"> 1 ~ 2 </a></li>
 						</ul>
 					</div>
 
 					<div class="filter-col3 p-r-15 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">Color</div>
+						<div class="mtext-102 cl2 p-b-15">상영관 종류</div>
 
 						<ul>
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #222;"> <i class="zmdi zmdi-circle"></i>
-							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
-									Black </a></li>
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
+							 <a href="resources/#" class="filter-link stext-106 trans-04 filter-link-active" style="display: inline-block">
+									일반 </a></span></li>
 
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #4272d7;"> <i class="zmdi zmdi-circle"></i>
-							</span> <a href="resources/#"
-								class="filter-link stext-106 trans-04 filter-link-active">
-									Blue </a></li>
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
+							<a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+									3D </a></span></li>
 
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #b3b3b3;"> <i class="zmdi zmdi-circle"></i>
-							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
-									Grey </a></li>
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
+							<a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+									4D </a></span></li>
 
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #00ad5f;"> <i class="zmdi zmdi-circle"></i>
-							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
-									Green </a></li>
-
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #fa4251;"> <i class="zmdi zmdi-circle"></i>
-							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
-									Red </a></li>
-
-							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-								style="color: #aaa;"> <i class="zmdi zmdi-circle-o"></i>
-							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
-									White </a></li>
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
+							<a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+									IMAX </a></span></li>
 						</ul>
 					</div>
 
 					<div class="filter-col4 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">Tags</div>
+						<div class="mtext-102 cl2 p-b-15">관람연령</div>
 
 						<div class="flex-w p-t-4 m-r--5">
 							<a href="resources/#"
 								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Fashion </a> <a href="resources/#"
+								12세 이상 </a> <a href="resources/#"
 								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Lifestyle </a> <a href="resources/#"
+								15세 이상 </a> <a href="resources/#"
 								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Denim </a> <a href="resources/#"
-								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Streetstyle </a> <a href="resources/#"
-								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Crafts </a>
+								19세 이상 </a>
 						</div>
 					</div>
 				</div>

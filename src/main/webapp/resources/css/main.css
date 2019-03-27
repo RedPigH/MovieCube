@@ -1726,9 +1726,9 @@ button.mfp-close {
 }
 
 .swal-text {
-  font-family: Poppins-Regular;
+  font-family: NanumGothicBold;
   color: #555555;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.666667;
   text-align: center;
 }
@@ -1783,8 +1783,8 @@ button.mfp-close {
 
 .show-search:hover:after,
 .show-filter:hover:after {
-  background-color: #717fe0;
-  border-color: #717fe0;
+  background-color: #ff5959;
+  border-color: #ff5959;
 }
 
 /*---------------------------------------------*/
@@ -1800,13 +1800,13 @@ button.mfp-close {
 }
 
 .filter-link:hover {
-  color: #6c7ae0;
-  border-bottom: 1px solid #6c7ae0;
+  color: #ff5959;
+  border-bottom: 1px solid #ff5959;
 }
 
 .filter-link-active {
-  color: #6c7ae0;
-  border-bottom: 1px solid #6c7ae0;
+  color: #ff5959;
+  border-bottom: 1px solid #ff5959;
 }
 
 @media (max-width: 767px) {
@@ -2356,7 +2356,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .mtext-102 {
-  font-family: Poppins-SemiBold;
+  font-family: NanumGothicBold;
   font-size: 16px;
   line-height: 1.6;
 }
