@@ -132,43 +132,57 @@ public class MovieController {
 
 		currentPage = Integer.parseInt(request.getParameter("currentPage")); // 클릭한 페이지
 
-		System.out.println("왜? : " + currentPage);
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1;
+		endPage = startPage + blockPage - 1;
 
 		commandMap.put("MOVIE_NO", movie_no);
-		System.out.println("영화넘버 : " + movie_no);
 
-		totalCount = Integer .parseInt((movieService.selectCommentCount(commandMap.getMap())).get("COMMENT_CNT").toString());
+		totalCount = Integer
+				.parseInt((movieService.selectCommentCount(commandMap.getMap())).get("COMMENT_CNT").toString());
 		totalPage = (int) Math.ceil((double) totalCount / blockCount); // 전체페이지 수 = 전체게시글의 수 / 한 화면에 보여줄 게시글의 수
-		System.out.println("전체 게시글 수 : " + totalCount);
-		System.out.println("전체 페이지 개수 : " + totalPage);
-		
-		if(totalCount != 0) {
-			for(int i = 1; i <= totalPage; i++) {
-				commentHtml += "<a id='page" + i + "' onclick='get_reviews(" + i + ")' >" + i + "</a>";
-			}
+
+		if (currentPage > blockPage)
+			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (startPage - 1) + ")'> 이전 </a> &nbsp;";
+
+		if (totalCount != 0) {
+			String selected = "";
+
+			for (int i = startPage; i <= endPage; i++) {
+				if(i > totalPage){
+					break;
+				}
+
+				if (i == currentPage) {
+					selected = "<Strong>" + i + "<Strong>";
+				} else {
+					selected = " " + i;
+				} // if문 끝
+
+				commentHtml += "<a id='page" + i + "' onclick='get_reviews(" + i + ")' >" + selected + "</a> &nbsp;";
+			} // for문 끝
+		} // if문 끝
+
+		if (totalPage - startPage >= blockPage) {
+			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (endPage + 1) + ")'> 다음 </a> &nbsp;"; 
 		}
 
 		startCount = ((currentPage - 1) * blockCount) + 1; // 만약 현재 선택한 페이지가 2페이지면 1 (2-1) * 5 + 1 = 6
 		endCount = startCount + blockCount - 1; // 6 + 5 - 1 = 10 그래서 6~10번까지 5개 띄워줄 수 있도록 설정.
 
-		System.out.println("시작 : " + startCount);
-		System.out.println("끝 : " + endCount);
-
 		commandMap.put("START_COUNT", startCount);
 		commandMap.put("END_COUNT", endCount);
 
 		List<Map<String, Object>> comment_paging_list = movieService.selectCommentPaingList(commandMap.getMap());
-		
+
 		// 시작 페이지와 마지막 페이지 값 구하기.
-		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1; // 현재페이지가 6페이지라면 시작페지이지는 6부터 10까지 만들어주기 위한 변수설정.
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1; // 현재페이지가 6페이지라면 시작페지이지는 6부터 10까지 만들어주기 위한
+																			// 변수설정.
 		endPage = startPage + blockPage - 1;
 
-		
-		mv.addObject("commentHtml" , commentHtml);
-		
+		mv.addObject("commentHtml", commentHtml);
+
 		mv.setViewName("jsonView");
 		mv.addObject("comment_paging_list", comment_paging_list);
-		
 
 		return mv;
 	}

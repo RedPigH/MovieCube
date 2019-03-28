@@ -17,7 +17,7 @@ function get_reviews(currentPage) {
 	if(currentPage == null){
 		currentPage = 1;
 	} else {
-		$("#commentDiv").children("#comment_start").remove();
+		// $("#commentDiv2").children("#comment_start").remove();
 	}
 	
 	var data = {
@@ -29,6 +29,8 @@ function get_reviews(currentPage) {
 		type : "POST",
 		url : "<c:url value='/commentPaging.do'/>",
 		dataType : "json",
+		/* frequency: delay,
+		decay: 1, */
 		data : data,
 
 		success : function(data) {
@@ -38,6 +40,7 @@ function get_reviews(currentPage) {
 			var cmt_like;
 			var delete_button = "";
 			var member_id = "${sessionScope.userLoginInfo.MEMBER_ID}"; // 로그인했는지 확인하기 위해서
+			var text_comment = "";
 			
 			for(var i = 0; i < comment_list_length; i++) {
 				var cmt_no = data.comment_paging_list[i].CMT_NO;
@@ -56,23 +59,21 @@ function get_reviews(currentPage) {
 				for(var j = 0 ; j < cmt_like; j++) {
 					rating_text = rating_text + "<i class='zmdi zmdi-star'></i> ";
 				}
+				text_comment = text_comment + "<div class='flex-w flex-t p-b-68' id='comment_start'>" +
+				"<div class='wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6'>" + 
+				"<img src='images/avatar-01.jpg' alt='AVATAR'>" + 
+				"</div>" + 
+				"<div class='size-207'>" + 
+				"<div class='flex-w flex-sb-m p-b-17'>" + 
+				"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
+				"<span class='fs-18 cl11'>" + 
+				rating_text +  "</span>" +  "</div>" + 
+				"<textarea class='stext-102 cl6' style='float: left; width:600px; height:80px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>";
 				
-				
-				$("#commentDiv").prepend(
-						"<div class='flex-w flex-t p-b-68' id='comment_start'>" +
-						"<div class='wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6'>" + 
-						"<img src='images/avatar-01.jpg' alt='AVATAR'>" + 
-						"</div>" + 
-						"<div class='size-207'>" + 
-						"<div class='flex-w flex-sb-m p-b-17'>" + 
-						"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
-						"<span class='fs-18 cl11'>" + 
-						rating_text +  "</span>" +  "</div>" + 
-						"<textarea class='stext-102 cl6' style='float: left; width:600px; height:80px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>"
-						);
 			} // for문 끝
+			$("#commentDiv2").html(text_comment);
 			$('#paging').children().remove();
-			$("#paging").append(data.commentHtml);
+			$("#paging").html(data.commentHtml);
 			
 		}, // success 함수 끝
 		error : function() { 
@@ -345,9 +346,11 @@ function deleteReview(cmt_no) {
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-8 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm" id="commentDiv">
+									<div class="p-b-30 m-lr-15-sm" id="commentDiv2">
+									</div>
 										
 										
-										<div class = "col-md-6" style="text-align:center;" id="paging">
+										<div class = "flex" style="text-align:center;" id="paging">
 										<!-- 여기 페이징 관련 넣어줄거임 -->
 										
 										</div>
