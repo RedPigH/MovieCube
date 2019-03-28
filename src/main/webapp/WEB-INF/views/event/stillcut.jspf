@@ -124,7 +124,7 @@ input#img-1:checked ~ .nav-dots label#img-dot-1, input#img-2:checked ~
 </style>
 </head>
 <body>
-	<ul class="slides" id="event-slide">
+	<ul class="slides" id="stillcut-slide">
 	<!-- body_moviecube 메서드에서 ajax로 불러와서 뿌려줍니다 -->
 	</ul>
 </body>

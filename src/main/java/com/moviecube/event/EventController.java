@@ -30,9 +30,9 @@ public class EventController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/userEventList.do")
+	@RequestMapping(value = "userEventList.do")
 	public ModelAndView userEventList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventList");
+		ModelAndView mv = new ModelAndView("event/userEventList");
 
 		List<Map<String, Object>> eventList = eventService.selectEventList(commandMap);
 		mv.addObject("eventList", eventList);
@@ -42,7 +42,7 @@ public class EventController {
 
 	@RequestMapping(value = "/eventWriteForm.do")
 	public ModelAndView eventWriteForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventWriteForm");
+		ModelAndView mv = new ModelAndView("/admin/event/eventWriteForm");
 
 		return mv;
 	}
@@ -57,7 +57,7 @@ public class EventController {
 
 	@RequestMapping(value = "/eventDetail.do")
 	public ModelAndView eventDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventDetail");
+		ModelAndView mv = new ModelAndView("/admin/event/eventDetail");
 
 		Map<String, Object> map = eventService.selectEventDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map"));
@@ -88,7 +88,7 @@ System.out.println("�삙怡멸섟�쐧�떂:"+commandMap.get("EVENT_NO"));
 
 	@RequestMapping(value = "/eventModifyForm.do")
 	public ModelAndView movieModifyForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventModify");
+		ModelAndView mv = new ModelAndView("/admin/event/eventModify");
 		System.out.println("�쁺�솕 �닔�젙 �뤌1 媛� �솗�씤 =============: " + commandMap.getMap());
 		Map<String, Object> map = eventService.selectEventDetail(commandMap.getMap());
 
