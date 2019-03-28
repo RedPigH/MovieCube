@@ -108,14 +108,15 @@ public class MovieDAO extends AbstractDAO {
 		delete("movie.deleteFile2", map);
 	}
 	
-<<<<<<< .merge_file_a05464
 	public void insertComment(Map<String, Object> map) {
 		insert("movie.insertComment", map);
 	}
 
 	public void deleteComment(Map<String, Object> map) {
 		delete("movie.deleteComment", map);
-=======
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch0(String isSearch) {
 		return (List<Map<String, Object>>)selectList("movie.movieSearch0", "%"+isSearch+"%");
@@ -129,7 +130,7 @@ public class MovieDAO extends AbstractDAO {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch2(String isSearch) {
 		return (List<Map<String, Object>>)selectList("movie.movieSearch2", "%"+isSearch+"%");
->>>>>>> .merge_file_a13196
+
 	}
 
 }
