@@ -382,7 +382,7 @@ function deleteWishList2() {
 					$("#timeList").append(
 							'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">'
 							+'<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">'
-								+'<span class="mtext-110 cl2" style="font-family: NanumGothicBold"></span>'
+								+'<span class="mtext-110 cl2" style="font-family: MaplestoryBold"></span>'
 							+'</div>'
 					+'</div>'
 						)	
@@ -390,23 +390,23 @@ function deleteWishList2() {
 			
 					if(selectedDate.trim() != "" && !cinemaNo.length && !movieName.length){
 						$("#movieSelectNotice").find("span").remove().end().append(
-						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">극장, 영화를 선택해주세요.</span>');
+						'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">극장, 영화를 선택해주세요.</span>');
 				} else if(selectedDate.trim() == "" && !(!cinemaNo.length) && !movieName.length){
 						$("#movieSelectNotice").find("span").remove().end().append(
-						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 영화를 선택해주세요.</span>');
+						'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">날짜, 영화를 선택해주세요.</span>');
 				} else if(selectedDate.trim() == "" && !cinemaNo.length && !(!movieName.length)){
 						$("#movieSelectNotice").find("span").remove().end().append(
-						'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장을 선택해주세요.</span>');
+						'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">날짜, 극장을 선택해주세요.</span>');
 						
 				} else if(selectedDate.trim() != "" && !(!cinemaNo.length) && !movieName.length){
 					$("#movieSelectNotice").find("span").remove().end().append(
-					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">영화를 선택해주세요.</span>');
+					'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">영화를 선택해주세요.</span>');
 				} else if(selectedDate.trim() != "" && !cinemaNo.length && !(!movieName.length)){
 					$("#movieSelectNotice").find("span").remove().end().append(
-					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">극장을 선택해주세요.</span>');
+					'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">극장을 선택해주세요.</span>');
 				} else if(selectedDate.trim() == "" && !(!cinemaNo.length) && !(!movieName.length)){
 					$("#movieSelectNotice").find("span").remove().end().append(
-					'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜를 선택해주세요.</span>');
+					'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">날짜를 선택해주세요.</span>');
 				}
 					
 					
@@ -455,7 +455,7 @@ function deleteWishList2() {
 						$("#timeList").append(
 								'<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">'
 								+'<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">'
-									+'<span class="mtext-110 cl2" style="font-family: NanumGothicBold">상영 중인 영화가 없습니다.</span>'
+									+'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">상영 중인 영화가 없습니다.</span>'
 								+'</div>'
 						+'</div>'
 								)						
