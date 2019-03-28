@@ -811,14 +811,14 @@ public class AdminController {
 
 	@RequestMapping(value = "/qnaReplyForm.do")
 	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
-		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
+//		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
 		ModelAndView mv = new ModelAndView("/admin/qna/qnaReply");
 
 		Map<String, Object> map = new HashMap();
 
 		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
+		map.put("QNA_SUB", commandMap.get("QNA_SUB"));
 		mv.addObject("map", map);
-		mv.addObject("map", map1);
 
 		return mv;
 
@@ -829,6 +829,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/qnaList.do");
 		
 		System.out.println("답변 달기 테스트 2: " + commandMap.getMap());
+		
 		Map<String, Object> map = new HashMap();
 		
 		map.put("REF", commandMap.get("REF"));
@@ -1003,4 +1004,10 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/userStoreList.do")
+	public ModelAndView userstoreList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("store/storeList");
+		
+		return mv;
+	}
 }

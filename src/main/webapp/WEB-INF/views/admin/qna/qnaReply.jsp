@@ -43,7 +43,7 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">Q&amp;A 답변</h3>
+		<h3 class="sub_tit">Q&amp;A 답변 ${map.QNA_NOM}</h3>
 		<form id="frm">
 			<div class="tbl_type_01">
 				<table>
@@ -56,7 +56,7 @@
 					<tbody>
 					<tr>
 							<th scope="row">제목</th>
-							<td><input type="text" class="txt w350" id="QNA_SUB" name="QNA_SUB" />
+							<td><input type="text" class="txt w350" id="QNA_SUB" name="QNA_SUB" value="[답변]${map.QNA_SUB}" />
 							<font color="red"></font>
 						</tr>
 						
@@ -118,7 +118,10 @@
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
+            var qna_no = "${map.QNA_NOM}";
             comSubmit.setUrl("<c:url value='qnaReply.do' />");
+            comSubmit.addParam("REF", qna_no);
+            alert(qna_no);
             comSubmit.submit();
         }
     </script>
