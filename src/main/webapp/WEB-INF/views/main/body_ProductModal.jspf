@@ -16,8 +16,6 @@ function get_reviews(currentPage) {
 	
 	if(currentPage == null){
 		currentPage = 1;
-	} else {
-		// $("#commentDiv2").children("#comment_start").remove();
 	}
 	
 	var data = {
@@ -29,8 +27,6 @@ function get_reviews(currentPage) {
 		type : "POST",
 		url : "<c:url value='/commentPaging.do'/>",
 		dataType : "json",
-		/* frequency: delay,
-		decay: 1, */
 		data : data,
 
 		success : function(data) {
@@ -42,6 +38,8 @@ function get_reviews(currentPage) {
 			var member_id = "${sessionScope.userLoginInfo.MEMBER_ID}"; // 로그인했는지 확인하기 위해서
 			var text_comment = "";
 			
+			$("#reviewCount").text("리뷰 (" + data.totalCount + ")");
+
 			for(var i = 0; i < comment_list_length; i++) {
 				var cmt_no = data.comment_paging_list[i].CMT_NO;
 				cmt_id = data.comment_paging_list[i].CMT_ID;
@@ -317,7 +315,7 @@ function deleteReview(cmt_no) {
 								</a></li>
 
 						<li class="nav-item p-b-10"><a class="nav-link" onclick="" 
-							data-toggle="tab" href="#reviews" role="tab">리뷰 (1)</a></li>
+							data-toggle="tab" href="#reviews" role="tab" id="reviewCount">리뷰 (1)</a></li>
 					</ul>
 
 					<!-- Tab panes -->

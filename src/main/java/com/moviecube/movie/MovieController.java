@@ -180,6 +180,7 @@ public class MovieController {
 		endPage = startPage + blockPage - 1;
 
 		mv.addObject("commentHtml", commentHtml);
+		mv.addObject("totalCount", totalCount);
 
 		mv.setViewName("jsonView");
 		mv.addObject("comment_paging_list", comment_paging_list);
