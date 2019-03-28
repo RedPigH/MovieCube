@@ -39,7 +39,7 @@
 			<nav class="navbar" style="float: right; height: 100%">
 				<!-- Menu desktop -->
 				<div class="menu-desktop">
-					<ul class="main-menu" style="width: 400px">
+					<ul class="main-menu" style="width: 420px">
 
 						<li class="label1" data-label1="hot"><a
 							href="resources/blog.html">이벤트</a></li>
@@ -59,7 +59,7 @@
 						</c:if>
 						<c:if test="${not empty sessionScope.userLoginInfo }">
 							<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
-								<li><a href="#"><span
+								<li><a href="#" style="font-family: MaplestoryLight"><span
 										style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
@@ -68,7 +68,7 @@
 									</ul></li>
 							</c:if>
 							<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
-								<li><a href="#"><span
+								<li><a href="#" style="font-family: MaplestoryLight"><span
 										style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
@@ -163,7 +163,7 @@
 			</c:if>
 			<c:if test="${not empty sessionScope.userLoginInfo }">
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
-					<li><a href="#"><span
+					<li><a href="#" style="font-family: MaplestoryLight"><span
 							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
 							<li><a href="admin/movieList.do">관리자 페이지</a></li>
@@ -174,7 +174,7 @@
 					</span></li>
 				</c:if>
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
-					<li><a href="#"><span
+					<li><a href="#" style="font-family: MaplestoryLight"><span
 							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
 							<li><a href="#">마이페이지</a></li>

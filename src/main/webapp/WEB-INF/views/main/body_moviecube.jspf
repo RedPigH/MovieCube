@@ -318,7 +318,7 @@
 												</c:forEach>
 												<c:choose>
 													<c:when test="${redHeart}">
-														<a href="#" id="${row.MOVIE_NO}"
+														<a href="javascript:void(0);" id="${row.MOVIE_NO}"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addedwish-b2"
 															onclick="deleteWishList(${row.MOVIE_NO});"> <img
 															class="icon-heart1 dis-block trans-04"
@@ -329,7 +329,7 @@
 														</a>
 													</c:when>
 													<c:otherwise>
-														<a href="#" id="${row.MOVIE_NO}"
+														<a href="javascript:void(0);" id="${row.MOVIE_NO}"
 															class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
 															onclick="addWishList(${row.MOVIE_NO});"> <img
 															class="icon-heart1 dis-block trans-04"
