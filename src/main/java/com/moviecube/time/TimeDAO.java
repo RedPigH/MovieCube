@@ -47,5 +47,19 @@ public class TimeDAO extends AbstractDAO {
 	public void deleteTime(Map<String, Object> map) throws Exception {
 		delete("time.deleteTime", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> timeSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("time.timeSearch0", "%"+isSearch+"%");
+	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> timeSearch1(String isSearch) {
+		return (List<Map<String, Object>>)selectList("time.timeSearch1", "%"+isSearch+"%");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> timeSearch2(String isSearch) {
+		return (List<Map<String, Object>>)selectList("time.timeSearch2", "%"+isSearch+"%");
+	}
 }

@@ -50,6 +50,9 @@
 	<div class="logo">
 	<h1><a href="<%=cp %>/admin/memberList.do">MovieCube Administrator - Member List</a></h1>
 	</div>
+	<div class="logo" style="float: right;">
+			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
+	</div>
 </div>
 
 <div class="admin_grp">
@@ -60,11 +63,12 @@
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
 			<li class="on"><a href="<%=cp%>/admin/memberList.do">회원정보</a></li>
-			<li><a href="<%=cp%>/main.do" style="text-decoration: underline">메인으로</a></li>
 		</ul>
 	</div>
 	
@@ -135,7 +139,7 @@
 					<select class="slct w100" name="searchNum">
 						<option value="0">아이디</option>
 						<option value="1">이름</option>
-						<option value="2">이메일</option>
+						<option value="2">등급</option>
 					</select>
 					<input class="txt w100" type="text" name="isSearch" />
 					<span class="btn btnC_04 btnP_04">
