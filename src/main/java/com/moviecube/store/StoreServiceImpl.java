@@ -29,6 +29,11 @@ public class StoreServiceImpl implements StoreService {
 	public List<Map<String, Object>> selectStoreList(Map<String, Object> map) throws Exception {
 		return storeDAO.selectStoreList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectMyItem(Map<String, Object> map) throws Exception {
+		return storeDAO.selectMyItem(map);
+	}
 
 	@Override
 	public void insertStore(Map<String, Object> map, HttpServletRequest request) throws Exception {
@@ -36,6 +41,11 @@ public class StoreServiceImpl implements StoreService {
 		
 		List<Map<String,Object>> fileList = fileUtils.parseInsertFileInfo(map, request);
 	 	storeDAO.insertFile(fileList.get(0)); 	
+	}
+	
+	@Override
+	public void insertItem(Map<String, Object> map) throws Exception {
+		storeDAO.insertItem(map);
 	}
 
 	@Override

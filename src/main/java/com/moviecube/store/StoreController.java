@@ -26,3 +26,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moviecube.common.CommandMap;
 import com.moviecube.common.Paging;
 
+@Controller
+public class StoreController {
+	@Resource(name = "storeService")
+	private StoreService storeService;
+
+	@RequestMapping(value = "/storeList.do")
+	public ModelAndView storeList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/storeDetail.do")
+	public ModelAndView storeDetail(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/insertItem.do")
+	public ModelAndView insertItem(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		storeService.insertItem(commandMap.getMap());
+		
+		return mv;
+	}
+
+}

@@ -9,7 +9,11 @@ public interface StoreService {
 	
 	List<Map<String, Object>> selectStoreList(Map<String, Object> map) throws Exception;
 	
+	List<Map<String, Object>> selectMyItem(Map<String, Object> map) throws Exception;
+	
 	void insertStore(Map<String, Object> map, HttpServletRequest request) throws Exception;
+	
+	void insertItem(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> selectStoreDetail(Map<String,Object> map) throws Exception;
 	
