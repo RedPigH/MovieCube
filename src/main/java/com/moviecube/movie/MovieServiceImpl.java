@@ -167,6 +167,16 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
+	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception {
+		return MovieDAO.selectCommentCount(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectCommentPaingList(Map<String, Object> map) throws Exception {
+		return MovieDAO.selectCommentPagingList(map);
+	}
+	
+	@Override
 	public void deleteComment(Map<String, Object> map) throws Exception {
 		MovieDAO.deleteComment(map);
 	}

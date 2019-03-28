@@ -36,6 +36,10 @@ public interface MovieService {
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception;
 	
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception;
+	
+	public List<Map<String, Object>> selectCommentPaingList(Map<String, Object> map) throws Exception;
+	
+	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception;
 
 	List<Map<String, Object>> selectHotWishList(Map<String, Object> map) throws Exception;
 		

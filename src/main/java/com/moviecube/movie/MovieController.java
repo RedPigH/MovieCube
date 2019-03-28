@@ -112,6 +112,67 @@ public class MovieController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/commentPaging.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView commentPaingList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/main");
+
+		String movie_no = request.getParameter("movie_no");
+		String commentHtml = "";
+
+		int currentPage; // 현재페이지
+		int totalCount = 0; // 전체 게시물 수
+		int totalPage; // 전체 페이지 수
+		int blockCount = 5; // 한 페이지의 게시물의 수
+		int blockPage = 5; // 한 화면에 보여줄 페이지 수
+		int startCount; // 한 페이지에서 보여줄 게시글의 시작 번호
+		int endCount; // 한 페이지에서 보여줄 게시글의 끝 번호
+		int startPage; // 시작 페이지
+		int endPage; // 마지막 페이지
+
+		currentPage = Integer.parseInt(request.getParameter("currentPage")); // 클릭한 페이지
+
+		System.out.println("왜? : " + currentPage);
+
+		commandMap.put("MOVIE_NO", movie_no);
+		System.out.println("영화넘버 : " + movie_no);
+
+		totalCount = Integer .parseInt((movieService.selectCommentCount(commandMap.getMap())).get("COMMENT_CNT").toString());
+		totalPage = (int) Math.ceil((double) totalCount / blockCount); // 전체페이지 수 = 전체게시글의 수 / 한 화면에 보여줄 게시글의 수
+		System.out.println("전체 게시글 수 : " + totalCount);
+		System.out.println("전체 페이지 개수 : " + totalPage);
+		
+		if(totalCount != 0) {
+			for(int i = 1; i <= totalPage; i++) {
+				commentHtml += "<a id='page" + i + "' onclick='get_reviews(" + i + ")' >" + i + "</a>";
+			}
+		}
+
+		startCount = ((currentPage - 1) * blockCount) + 1; // 만약 현재 선택한 페이지가 2페이지면 1 (2-1) * 5 + 1 = 6
+		endCount = startCount + blockCount - 1; // 6 + 5 - 1 = 10 그래서 6~10번까지 5개 띄워줄 수 있도록 설정.
+
+		System.out.println("시작 : " + startCount);
+		System.out.println("끝 : " + endCount);
+
+		commandMap.put("START_COUNT", startCount);
+		commandMap.put("END_COUNT", endCount);
+
+		List<Map<String, Object>> comment_paging_list = movieService.selectCommentPaingList(commandMap.getMap());
+		
+		// 시작 페이지와 마지막 페이지 값 구하기.
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1; // 현재페이지가 6페이지라면 시작페지이지는 6부터 10까지 만들어주기 위한 변수설정.
+		endPage = startPage + blockPage - 1;
+
+		
+		mv.addObject("commentHtml" , commentHtml);
+		
+		mv.setViewName("jsonView");
+		mv.addObject("comment_paging_list", comment_paging_list);
+		
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/writeComment.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView writeComment(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -129,35 +190,34 @@ public class MovieController {
 		map.put("CMT_CONTENT", cmt_content);
 		map.put("CMT_LIKE", cmt_like);
 		map.put("MOVIE_NO", movie_no);
-		
+
 		// 리뷰 이미 썼으면 다시 못쓰게
 		List<Map<String, Object>> comment_list = movieService.selectCommentList(map.getMap());
-		for(int i = 0 ; i < comment_list.size(); i ++) {
-			if( (comment_list.get(i).get("CMT_ID")).equals(member_id) ) {
-					id_check = false;
-					break;
+		for (int i = 0; i < comment_list.size(); i++) {
+			if ((comment_list.get(i).get("CMT_ID")).equals(member_id)) {
+				id_check = false;
+				break;
 			}
 		}
-		
-		if(id_check)
+
+		if (id_check)
 			movieService.insertComment(map.getMap());
-		
+
 		// map.clear();
-		
+
 		// map.put("MOVIE_NO", movie_no);
-		
-		
+
 		mv.addObject("id_check", id_check);
 		mv.setViewName("jsonView");
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/deleteComment.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView deleteComment(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/main");
-		
+
 		String cmt_no = request.getParameter("cmt_no");
 		commandMap.put("CMT_NO", cmt_no);
 		movieService.deleteComment(commandMap.getMap());
@@ -167,7 +227,4 @@ public class MovieController {
 		return mv;
 	}
 
-	
-	
-	
 }
