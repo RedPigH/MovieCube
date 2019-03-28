@@ -107,7 +107,7 @@
 												</div>
 											</div>
 											<div class="column-2"
-												style="font-family: NanumGothicExtraBold; font-size: 20px">${row.MOVIE_NAME}</div>
+												style="font-family: MaplestoryBold; font-size: 20px">${row.MOVIE_NAME}</div>
 											<div class="column-3">
 												<button
 													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}')); movieSelect();"

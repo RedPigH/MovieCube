@@ -25,8 +25,9 @@
 				<c:when test="${fn:length(WishList) > 0 }">
 					<c:forEach items="${WishList}" var="row">
 						<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">
-										<input type="checkbox" id="wishCheckBox" style="margin-right: 10px">
-										<div class="wishCheckBox" style="diplay: none">${row.WISH_NO}</div>
+										<input type="checkbox" id="${row.WISH_NO}" name="wishCheckBox" style="margin-right: 10px">
+										<div class="wishCheckBox" style="display: none">${row.WISH_NO}</div>
+										<div class="wishMovieNo" style="display: none">${row.MOVIE_NO}</div>
 										<div class="header-cart-item-img">
 											<img src="resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="IMG">
 										</div>
