@@ -36,6 +36,21 @@ public class NoticeDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> noticeSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("notice.noticeSearch0", "%"+isSearch+"%");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>>noticeSearch1(String isSearch) {
+		return (List<Map<String, Object>>)selectList("notice.noticeSearch1", "%"+isSearch+"%");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> noticeSearch2(String isSearch) {
+		return (List<Map<String, Object>>)selectList("notice.noticeSearch2", "%"+isSearch+"%");
+	}
 
 	/*
 	 * @SuppressWarnings("unchecked") public List<Map<String,Object>>

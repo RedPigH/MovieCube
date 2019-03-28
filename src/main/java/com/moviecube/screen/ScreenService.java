@@ -16,4 +16,10 @@ public interface ScreenService {
 	void updateScreen(Map<String, Object> map) throws Exception;
 
 	void deleteScreen(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> screenSearch0(String map) throws Exception;
+	
+	List<Map<String, Object>> screenSearch1(String map) throws Exception;
+	
+	List<Map<String, Object>> screenSearch2(String map) throws Exception;
 }

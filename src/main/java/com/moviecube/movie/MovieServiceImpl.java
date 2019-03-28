@@ -179,5 +179,20 @@ public class MovieServiceImpl implements MovieService{
 	public void deleteComment(Map<String, Object> map) throws Exception {
 		MovieDAO.deleteComment(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch0(String map) throws Exception {
+		return MovieDAO.movieSearch0(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch1(String map) throws Exception {
+		return MovieDAO.movieSearch1(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch2(String map) throws Exception {
+		return MovieDAO.movieSearch2(map);
+	}
 	
 }
