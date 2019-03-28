@@ -2956,6 +2956,11 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 15px;
 }
 
+/* Ãß°¡ Æû */
+
+.bor22{
+	border-bottom: 2px solid #e1e1e1;
+}
 
 /*==================================================================
  HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW 
@@ -3333,6 +3338,14 @@ input.num-product::-webkit-inner-spin-button {
 
 .hov-btn3:hover i {
   color: #fff;
+}
+
+/* Ãß°¡Æû */
+
+.hov-btn4:hover {
+	border-color: #333;
+	background-color: #333;
+ 	color: #fff;
 }
 
 /*---------------------------------------------*/

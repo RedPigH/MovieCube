@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/views/main/head.jspf"%>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/findid.css"/>
-<script src="//code.jquery.com/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <%@ include file="/WEB-INF/views/main/body_header.jspf"%>
@@ -211,27 +211,22 @@
 						 	return false;
 					 }
 					 
-					 var name = $("#name").val();
-					 var age = $("#age").val();
-					 var phone = $("#phone").val();
-					 
-					 var findid = new FormData();
-					 
-					 findid.append('name', name);
-					 findid.append('age', age);
-					 findid.append('phone', phone);
-					 
-					 
+					 /* var name = $('#name').val();
+					 var age = $('#age').val();
+					 var phone = $('#phone').val()e */;
+					 var sendData = { "MEMBER_NAME" : $('#name').val() , "MEMBER_AGE" : $('#age').val() , "MEMBER_PHONE" : $('#phone').val() };
+					 //alert(sendData);
+					/*  var data2 = {"MEMBER_NAME":name, "MEMBER_AGE":age, "MEMBER_PHONE":phone};
+					 var data = JSON.stringify(data2); */
 					 
 					 $.ajax({
-						async: false,
-					 	type : "POST",
-					 	data : findid,
+					 	type : "GET",
+					 	data : sendData,
 						url : "/moviecube/member/find.do",
 						dataType : "json",
-						contentType : false,
-						processData: false,
+						contentType : "application/json:charset=UTF-8",
 						success : function(data){
+							alert("회원님의 아이디는["+id+"]입니다.");
 					 		if(data.id != null){
 					 			modalContents.text("회원님의 아이디는["+id+"]입니다.");
 							 	modal.modal('show');
@@ -275,6 +270,8 @@
 					 var phone1 = $("#phone1").val();
 					 
 					 var findpw = new FormData();
+					 
+					 
 					 
 					 findpw.append('id', id);
 					 findpw.append('name1', name1);

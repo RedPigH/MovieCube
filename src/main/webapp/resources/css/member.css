@@ -130,8 +130,6 @@ ul.mypage_main_moviestory li a span,
 ul.mypage_main_moviestory li a strong{
  	height: 50px;
  	line-height: 38px;
- 	display: block;
- 	float: left;
  	color: #333;
  }
  
@@ -183,4 +181,172 @@ ul.type1 li:last-child{
 
 .positionA{
 	position: absolute !important;
+}
+
+img{
+	display: inline !important;
+}
+
+/* 회원정보 수정 */
+
+.mypage_membership_wrap{
+	position: relative;
+}
+
+.h2_mypage{
+	position: relative;
+	margin-bottom: 27px;
+}
+
+.h2_mypage h3.sub_title{
+	font-size: 20px;
+	display: inline-block;
+}
+
+.h2_mypage span{
+	font-size: 13px;
+	padding-left: 1rem;
+	letter-spacing: -0.05em;
+}
+
+.personal_info_last{
+	position: absolute;
+	right: 0;
+	text-align: right;
+}
+
+
+.mr6{
+	margin-right: 6px !important;
+}
+
+.img_btn{
+	display: block;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.img_btn.psw_change{
+	display: inline-block;
+	width: 88px;
+	height: 22px;
+	background-position: -550px -450px
+}
+
+.img_btn.personal_quit {
+    display: inline-block;
+    width: 62px;
+    height: 22px;
+    background-position: -650px -450px;
+}
+
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: " ";
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.mb10{
+	margin-bottom: 10px !important;
+}
+
+.text-sub{
+	color: #666;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.user_wrap .myInfoArea1{
+	margin-left: 20px;
+    margin-bottom: -30px;
+}
+
+.user_wrap .myInfoArea1 .textArea{
+	margin-top: 38px;
+    margin-left: 20px;
+}
+
+.user_wrap .myInfoArea1 .textArea .profile_btn_wrap {
+    display: block;
+    margin-top: 3px;
+}
+
+.user_wrap .myInfoArea1 .textArea .profile_btn_wrap button {
+    width: 70px;
+    height: 21px;
+    display: inline-block;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.form-style h4{
+	font-size: 13px;
+    padding-left: 1rem;
+    letter-spacing: -0.05em;
+    margin: 40px 0 10px;
+}
+
+.form-style .form-table {
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #d2d2d2;
+    width: 100%;
+}
+
+.form-style .form-table th, .form-style .form-table td {
+    border-top: 1px solid #dcdcdc;
+    padding: 5px;
+}
+
+.form-style .form-table th {
+    padding-left: 26px;
+    background-color: #f8f8f8;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.form-style .form-table td {
+    padding-left: 30px;
+}
+
+.blind2{
+	width: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.ml7 {
+    margin-left: 7px !important;
+}
+
+.mr18 {
+    margin-right: 18px !important;
+}
+
+input{
+	width: 200px;
+    border: 1px solid #d9d9d9;
+    line-height: 26px;
+    height: 26px;
+    background-color: #f8f8f8;
+    font-size: 12px;
+    color: #333;
+    text-indent: 14px;
+    vertical-align: middle;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0)
+input {
+    line-height: 14px;
 }

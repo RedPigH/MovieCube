@@ -18,4 +18,11 @@ public class MypageController {
 		  
 		  return mv;
 	  }
+	 
+	 @RequestMapping(value="/member/updateMemberForm.do")
+	 public ModelAndView updateMemberForm(CommandMap commandMap) throws Exception{
+		 ModelAndView mv = new ModelAndView("/member/updateMember");
+		 
+		 return mv;
+	 }
 }

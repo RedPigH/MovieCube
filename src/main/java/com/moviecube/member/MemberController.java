@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -129,20 +130,20 @@ public class MemberController {
 	  
 	  @RequestMapping(value="/member/find.do")
 	  @ResponseBody
-	  public Map<String, Object> findId(@RequestBody String name1,String name, String age, String phone) throws Exception{
-		  Map<String, Object> map = new HashMap<String, Object>();
-
-		  map.put("MEMBER_NAME", name);
-		  map.put("MEMBER_AGE", age); // �����̴� 24���̴�.
-		  map.put("MEMBER_PHONE" , phone);
-		  
-		  String id = memberService.findId(map);
+	  public String findId(@RequestBody CommandMap map) throws Exception{
+		/*
+		 * Map<String, Object> map = new HashMap<String, Object>();
+		 * 
+		 * map.put("MEMBER_NAME", name); map.put("MEMBER_AGE", age); // �����̴�
+		 * 24���̴�. map.put("MEMBER_PHONE" , phone);
+		 */
+		  System.out.println(map.getMap());
+		  String id = memberService.findId(map.getMap());
 		
-		  map.put("id", id);
+		  //map.put("id", id);		  
+		 
 		  
-		  id = memberService.findId(map);
-		  
-		  return map;
+		  return id;
 	  }
 	 
 	  @RequestMapping(value="/member/find1.do")

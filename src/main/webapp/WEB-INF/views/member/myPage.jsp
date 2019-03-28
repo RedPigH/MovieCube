@@ -1,17 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="ko">
 
 <head>
 <%@ include file="/WEB-INF/views/main/head.jspf"%>
-<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/myPage.css"/>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/member.css"/>
 <script type="text/javascript" src="/moviecube/resources/js/init.controls.js"></script>
 </head>
 
-<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
--
 <body>
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
+<%@ include file="/WEB-INF/views/main/wishList.jspf" %>
+<%@ include file="/WEB-INF/views/member/loginForm.jspf" %>
+
+<c:if test="${empty sessionScope.userLoginInfo}">
+<script type="text/javascript">
+history.go(-1);
+</script>
+</c:if>
+
+
+<c:if test="${not empty sessionScope.userLoginInfo}">
 <div id="container">
 	<div class="width-fixed" style="position: relative">
 		<div class="row1">
@@ -24,7 +34,7 @@
 			  <div id="myPageMainUser" class="mypage_myInfo">
 				<div class="h3_wrap mb35">
 					<h3><img src="http://image2.megabox.co.kr/mop/home/mypage/main_title3.png" alt="개인정보"></h3>
-					<button title="수정하기" onclick="showMenu('mypage-myinfo')" class="flex-c-m stext-107 cl13 size-301 bor21 p-lr-15 hov-tag2 trans-04">정보수정</button>
+					<a href="/moviecube/member/updateMemberForm.do" style="display: block;" class="flex-c-m stext-107 cl13 float-r size-301 bor21 p-lr-15 hov-tag2 trans-04">정보수정</a>
 				</div>
 
 				<ul>
@@ -73,7 +83,9 @@
 					  $(this).attr('title',$(this).val()+' 선택됨');
 				  });
 			  </script>
-			  <script>initControls($('div#myPageMainUser'));</script>
+			  <script>
+
+			  </script>
 			  </div>
 
 
@@ -85,7 +97,7 @@
 
 				<ul class="mypage_main_moviestory m-t-30">
 					<li>
-						<a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'interesting')" title="보고싶어 보기">
+						<a href="javascript:void(0)" class="js-show-cart" data-notify="0" title="보고싶어 보기">
 							<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon1.png" alt=""></span>
 							<strong class="ml10">보고싶어</strong>
 							<strong class="c_red pull-right">0</strong>
@@ -99,25 +111,28 @@
 						</a>
 					</li>
 				</ul>
-			  <script>initControls($('div#myPageMainMovieStory'));</script>
+			  <script>
+			  
+			  </script>
 			  </div>
 			</div>
 			
 			
 			
-		  <!-- 나의 예매내역 -->
 			<div id="myPageMyBooking" class="cols col2">
+			<!-- 나의 예매내역 -->
 				<div class="mypage_main_box" style="height: 505px;">
 					<div class="h3_wrap mb38">
 						<h3><img src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역"></h3>
-						<button title="더보기" onclick="showMenu('mypage-booking')"><img src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기"></button>
 				  	</div>
 	
 				<ul class="booking_list">
 					<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
 				</ul>
 				</div>
-			<script>initControls($('div#myPageMyBooking'));</script>
+			<script>
+			
+			</script>
 			</div>
 
 
@@ -133,20 +148,23 @@
 						<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
 					</ul>
 					
-					<div class="positionA" style="top:0; right:0;">
-						<button title="더보기" onclick="showMenu('mypage-question')">
-						  <img src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기">
-						</button>
-					</div>
+					<div class="bor22 m-t-205"></div>
+					
 				  </div>
 
-				<script>initControls($('div#myPageMyQuestion'));</script>
+				<script>
+				
+				</script>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+</c:if>
+
+
 <%@ include file="/WEB-INF/views/main/script.jspf" %>
+
 </body>
 </html>
