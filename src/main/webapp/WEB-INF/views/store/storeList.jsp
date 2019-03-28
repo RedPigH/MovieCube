@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String cp = request.getContextPath();
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="../main/head.jspf"%>
+   <%@ include file="../main/head.jspf" %>
 </head>
 <script type="text/javascript">
 	function toModal(store_no, store_item, store_price, store_content, img_savname) {
@@ -26,8 +24,9 @@
 		$("#h_modal_img_savname").attr('src', img_url);
 	}
 </script>
+<%@ include file="../main/body_header.jspf" %> 
+
 <body class="animsition">
-<%-- <%@ include file="../main/body_header.jspf" %> --%>
 	
 <header class="header-v4">
 	<div class="container-menu-desktop">
