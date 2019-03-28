@@ -80,7 +80,7 @@
 											/ ${time.START_TIME}~${time.END_TIME}</span>
 									</p>
 									<p>좌석:</p>
-									<ul id="selected-seats"></ul>
+									<ul id="selected-seats" style="margin: 0 0 1.5em 2em;"></ul>
 									<p>
 										좌석수: <span id="counter">0</span>
 									</p>

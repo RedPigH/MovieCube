@@ -59,10 +59,26 @@ public class WishListController {
 	}
 	
 	@RequestMapping(value = "/deleteWishList.do")
-	public ModelAndView deleteWishList(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("");
+	public ModelAndView deleteWishList(CommandMap commandMap, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView("/main");
 		
-		wishlistService.deleteWishList(commandMap.getMap());
+		@SuppressWarnings("unchecked")
+		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
+		
+		if(commandMap.get("MOVIE_NO") == null) {
+			wishlistService.deleteWishList(commandMap.getMap());
+		}else {
+			CommandMap map = new CommandMap();
+			map.put("MEMBER_NO", user.get("MEMBER_NO"));
+			map.put("MOVIE_NO", commandMap.get("MOVIE_NO"));
+			
+			wishlistService.deleteWishList(map.getMap());
+		}
+		
+		List<Map<String, Object>> wish = wishlistService.selectWishList(user);
+		
+		mv.setViewName("jsonView");
+		mv.addObject("WishList", wish);
 		
 		return mv;
 	}
