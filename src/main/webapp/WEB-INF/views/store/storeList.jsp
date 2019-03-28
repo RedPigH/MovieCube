@@ -9,6 +9,8 @@
 </head>
 <script type="text/javascript">
 	function toModal(store_no, store_item, store_price, store_content, img_savname) {
+		
+		$("#h_modal_store_no").attr("value", store_no);
 
 		var item = "상품명 : " + store_item;
 		$("#h_modal_store_item").text(item);

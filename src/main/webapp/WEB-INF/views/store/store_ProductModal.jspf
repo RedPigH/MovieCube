@@ -5,54 +5,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script>
-function writeReview() {
-	var movie_no = $("#h_modal_movie_no").val();
-	var member_id = "${sessionScope.userLoginInfo.MEMBER_ID}";
+function buyItem() {
+	var store_no = $("#h_modal_store_no").val();
+	var member_no = "${sessionScope.userLoginInfo.MEMBER_NO}";
+	var total = $("#h_modal_store_price").val() * $("#amount").val();
+	var amount = $("#amount").val();
 	
-	/* 여기부터 validation 처리부분 */
-	if(member_id.length == 0) {
-		alert("5252 댓글작성은 로그인 후 이용할 수 있습니다.");
-		return;
-	} else if($("#review").val() == 0) {
-		alert("내용을 입력하세요");
+	if($("#amount").val() == "") {
+		alert("수량을 선택하세요");
 		return;
 	}
-	
-	var cmt_like = $("#rating_value").val();
-	var content = $("#review").val();
-	
-	var data = {
-			"member_id" : member_id,
-			"cmt_content" : content,
-			"cmt_like" : cmt_like,
-			"movie_no" : movie_no
-	}
-	
-	$.ajax({
-		type : "POST",
-		url : "<c:url value='/writeComment.do'/>",
-		dataType : "json",
-		data : data,
-
-		success : function(data) {
-			var id_check = data.id_check;
-			
-			if(!data.id_check) {
-				alert("이미 리뷰를 등록하셨습니다.");
-				return;
-			}
-			else if(data.id_check) {
-				$("div").remove("#comment_start");
-				get_reviews();
-				$("#review").val(''); // textarea 값 초기화
-				$("#comment_hr").remove();
-			}
-			
-		},
-		error : function() { 
-			alert("오류"); 
-			}
-		});
 }
 </script>
 

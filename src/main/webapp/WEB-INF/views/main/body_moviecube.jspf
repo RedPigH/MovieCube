@@ -318,7 +318,6 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 											${row.MOVIE_NAME}</a> <span class="stext-105 cl3" id="MOVIE_GENRE"> 장르 :
 											${row.MOVIE_GENRE} </span>
 									</div>
-									sdlkfdjsalf(row);
 
 									<div class="block2-txt-child2 flex-r p-t-3">
 										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="addWishList('${row.MOVIE_NO }');">
