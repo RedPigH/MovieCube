@@ -48,7 +48,7 @@
 							</div>
 							<div class="wrapper">
 								<input type="text" id="datepicker" placeholder="날짜를 선택하세요."
-									autocomplete="off" /> <i
+									autocomplete="off" style="font-family: MaplestoryLight"/> <i
 									class="ion-calendar"></i>
 							</div>
 							<%@ include file="./datepicker.jspf"%>
@@ -134,7 +134,7 @@
 						
 							<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
 									<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">
-										<span class="mtext-110 cl2" style="font-family: NanumGothicBold">날짜, 극장, 영화를 선택해주세요.</span>
+										<span class="mtext-110 cl2" style="font-family: MaplestoryLight">날짜, 극장, 영화를 선택해주세요.</span>
 									</div>
 							</div>
 					</div>
