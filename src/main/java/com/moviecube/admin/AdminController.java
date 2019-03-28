@@ -971,11 +971,4 @@ public class AdminController {
 		
 		return mv;
 	}
-	
-	@RequestMapping(value="/userStoreList.do")
-	public ModelAndView userstoreList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("store/storeList");
-		
-		return mv;
-	}
 }

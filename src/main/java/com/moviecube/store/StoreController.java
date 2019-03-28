@@ -33,9 +33,12 @@ public class StoreController {
 
 	@RequestMapping(value = "/storeList.do")
 	public ModelAndView storeList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView();
-
+		ModelAndView mv = new ModelAndView("store/storeList");
 		
+		List<Map<String, Object>> storelist = storeService.selectStoreList(commandMap.getMap());
+		
+		mv.addObject("storelist", storelist);
+
 		return mv;
 	}
 	
