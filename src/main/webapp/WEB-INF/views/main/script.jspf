@@ -116,7 +116,9 @@ function addWishList(MOVIE_NO) {
 							for (var idx = 0; idx < data.WishList.length; idx++) {
 									$("#myWishList").append(
 											'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
-											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" style="margin-right: 10px">'
+											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" name="wishCheckBox" style="margin-right: 10px">'
+											+'<div class="wishCheckBox" style="display: none">'+data.WishList[idx].WISH_NO+'</div>'
+											+'<div class="wishMovieNo" style="display: none">'+data.WishList[idx].MOVIE_NO+'</div>'
 											+'<div class="header-cart-item-img">'
 											+'<img src="resources/upload/movie/poster/'+data.WishList[idx].POSTER_SAVNAME+'" alt="IMG">'
 											+'</div>'
@@ -167,7 +169,7 @@ function deleteWishList(MOVIE_NO) {
 					
 						
 							var nameProduct = $('#'+MOVIE_NO).parent().parent().find('.js-name-b2').html();
-							swal(nameProduct, "보고싶은 영화, 해제","success");
+							swal(nameProduct, "보고싶은 영화, 해제","error");
 							$('#'+MOVIE_NO).removeClass('js-addedwish-b2');
 							$('#'+MOVIE_NO).attr("onclick", 'addWishList('+MOVIE_NO+');');
 							$('#'+MOVIE_NO).off('click');
@@ -190,7 +192,9 @@ function deleteWishList(MOVIE_NO) {
 							for (var idx = 0; idx < data.WishList.length; idx++) {
 									$("#myWishList").append(
 											'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
-											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" style="margin-right: 10px">'
+											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" name="wishCheckBox" style="margin-right: 10px">'
+											+'<div class="wishCheckBox" style="display: none">'+data.WishList[idx].WISH_NO+'</div>'
+											+'<div class="wishMovieNo" style="display: none">'+data.WishList[idx].MOVIE_NO+'</div>'
 											+'<div class="header-cart-item-img">'
 											+'<img src="resources/upload/movie/poster/'+data.WishList[idx].POSTER_SAVNAME+'" alt="IMG">'
 											+'</div>'
@@ -217,17 +221,23 @@ function deleteWishList(MOVIE_NO) {
 	</script>
 <!--===============================================================================================-->
 <script type="text/javascript">
-/* function deleteWishList2() {
+function deleteWishList2() {
 			
-			for(var idx = 0; idx < $("input[name=wishCheckBox]").length; idx++){
-				var CheckedBoxList
-				$("#wishCheckBox").value();
+			if($("input[name=wishCheckBox]:checked").length >= 1){
+				var CheckedBoxList = new Array();
+			
+				$("input[name=wishCheckBox]:checked").each(function() {
+		        	 CheckedBoxList += ($(this).parent().find('.wishCheckBox').html()) + ",";
+		        	 $('#'+$(this).parent().find('.wishMovieNo').html()).removeClass('js-addedwish-b2');
+					 $('#'+$(this).parent().find('.wishMovieNo').html()).attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
+		      });
+			} else {
+				swal("선택된 영화가 없습니다");
+				return false;
 			}
 			
-			var wish_no = WISH_NO;
-			
 			var allData = {
-				"WISH_NO" : wish_no
+				"WISH_NO_LIST" : CheckedBoxList
 			};
 
 			jQuery.ajaxSettings.traditional = true;
@@ -240,9 +250,6 @@ function deleteWishList(MOVIE_NO) {
 				data : allData,
 				
 				success : function(data) {
-					
-							$('#'+MOVIE_NO).removeClass('js-addedwish-b2');
-							$('#'+MOVIE_NO).attr("onclick", 'addWishList('+MOVIE_NO+');');
 					
 							$(".js-show-cart").attr("data-notify", data.WishList.length);
 					
@@ -259,9 +266,12 @@ function deleteWishList(MOVIE_NO) {
 								)
 							} else {
 							for (var idx = 0; idx < data.WishList.length; idx++) {
+								
 									$("#myWishList").append(
 											'<li class="header-cart-item flex-w flex-t m-b-12" id="MyWishMovie" style="align-items: center;">'
-											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" style="margin-right: 10px">'
+											+'<input type="checkbox" id="'+data.WishList[idx].WISH_NO+'" name="wishCheckBox" style="margin-right: 10px">'
+											+'<div class="wishCheckBox" style="display: none">'+data.WishList[idx].WISH_NO+'</div>'
+											+'<div class="wishMovieNo" style="display: none">'+data.WishList[idx].MOVIE_NO+'</div>'
 											+'<div class="header-cart-item-img">'
 											+'<img src="resources/upload/movie/poster/'+data.WishList[idx].POSTER_SAVNAME+'" alt="IMG">'
 											+'</div>'
@@ -283,7 +293,7 @@ function deleteWishList(MOVIE_NO) {
 					alert("오류가 발생하였습니다.");
 				}
 			}); 
-		} */
+		}
 	</script>
 <!--===============================================================================================-->
 <script
