@@ -43,9 +43,9 @@
 					<ul class="main-menu" style="width: 420px">
 
 						<li class="label1" data-label1="hot"><a
-							href="resources/blog.html">이벤트</a></li>
+							href="resources/about.html">이벤트</a></li>
 
-						<li><a href="resources/about.html">스토어</a></li>
+						<li><a href="admin/userStoreList.do">스토어</a></li>
 
 						<c:if test="${empty sessionScope.userLoginInfo }">
 							<li><a href="#" class="js-show-modal2">빠른 예매</a></li>

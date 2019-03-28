@@ -49,18 +49,18 @@
 				<caption>QNA 리스트</caption>
 				<colgroup>
 					<col style="width:10%;"/>
-					<col style="width:50%;"/>
+					<col style="width:60%;"/>
 					<col style="width:15%;"/>
 					<col style="width:15%;"/>
-					<col style="width:10%;"/>
+				<%-- 	<col style="width:10%;"/> --%>
 				</colgroup>
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
 						<th scope="col">제목</th>
-						<th scope="col">작성일</th>
 						<th scope="col">작성자</th>
-						<th scope="col">답변</th>
+						<th scope="col">작성일</th>
+						<!-- <th scope="col">답변</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -72,12 +72,11 @@
 							<td>${row.QNA_NO}</td>
 							<td class="subject"><a href="#this" name="QNA_SUB">${row.QNA_SUB}
 							<input type="hidden" id="QNA_NO" value="${row.QNA_NO}"/></a></td>
+							<td>${row.QNA_ID}</td>
 							<td> <c:set var="TextValue" value="${row.QNA_REGDATE}"/>
-									${fn:substring(TextValue,0,19)}</td>
-							<td>${row.QNA_ID}</td>	
-							<td class="schedule_delete">
-								<a href="qnaReply.do?QNA_NO=${row.QNA_NO}&currentPage=${currentPage}" class="btn btnC_04 btnP_03">
-									<span>답변달기</span></a></td>			
+									${fn:substring(TextValue,0,19)}</td>	
+					   <!-- <td><a href="#this" class="btn btnC_04 btnP_03" id="reply">
+									<span>답변달기</span></a></td> -->			
 						</tr>
 						</c:forEach>
 					</c:when>
@@ -127,6 +126,11 @@
                 e.preventDefault();
                 fn_openBoardDetail($(this));
             });
+            
+            $("#reply").on("click", function(e) { /* 답변달기 */
+				e.preventDefault();
+				fn_openBoardReply();
+			});
         });
          
         function fn_openBoardWrite(){
@@ -142,6 +146,17 @@
             comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
+        function fn_openBoardReply() {
+			var qna_no = "${map.QNA_NO}";
+			var qna_no1 = "${map.QNA_NO}";
+			var qna_sub = "${map.QNA_SUB }";
+			var comSubmit = new ComSubmit();
+			comSubmit.setUrl("<c:url value='/admin/qnaReplyForm.do'/>");
+			comSubmit.addParam("QNA_NOM", qna_no1);
+     		comSubmit.addParam("QNA_NO", qna_no); 
+			comSubmit.addParam("QNA_SUB", qna_sub);
+			comSubmit.submit();
+		}
     </script> 
 </body>
 </html>
