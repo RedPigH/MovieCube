@@ -17,7 +17,7 @@ import com.moviecube.cinema.CinemaService;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminScreenController {
+public class ScreenController {
 
 	@Resource(name = "screenService")
 	private ScreenService screenService;
