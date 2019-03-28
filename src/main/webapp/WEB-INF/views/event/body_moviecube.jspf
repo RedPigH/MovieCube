@@ -1,0 +1,334 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<script type="text/javascript">
+	function toModal(event_name, event_type, event_opendate, event_closedate,
+			event_url, event_savname, event_no) {
+
+		var eventNo = event_no; // 영화넘버 Ajax로 컨트롤러로 넘겨줄 예정임 으히힇훠휳ㅎ
+		$("h_modal_event_no").text(eventNo);
+
+		$("#h_modal_event_name").text(event_name);
+
+		var img_url = "/moviecube/resources/upload/event/" + event_savname;
+		$("#h_modal_event_savname").attr('src', img_url);
+
+		var type = "타입  :  " + event_type;
+		$("#h_modal_event_type").text(type);
+
+		var open_date = "이벤트 기간  :  " + event_opendate;
+		$("#h_modal_event_opendate").text(open_date);
+
+		var open_date = "~" + event_closedate;
+		$("#h_modal_event_closedate").text(close_date);
+
+		/* $("#h_modal_movie_content").text(movie_content); */
+
+		$("#h_modal_event_no").attr("value", eventNo);
+
+		/* Ajax를 해봅시다 */
+		/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
+
+		jQuery.ajaxSettings.traditional = true;
+		event_list = new Array();
+		var data = {
+			"event_no" : eventNo
+		}
+
+		$
+				.ajax({
+					type : "POST",
+					url : "<c:url value='/eventList.do'/>",
+					dataType : "json",
+					data : data,
+
+					success : function(data) {
+
+						var event_length = data.event_list.length;
+						alert('이벤트 리스트 넘버 : ' + event_length);
+
+						var for_label_prev = "&#x2039;";
+						var for_label_next = "&#x203a;"
+
+						var img_tag = "<img src='/moviecube/resources/upload/event/";
+						var label_prev = "";
+						var label_next = "";
+
+						$('#event-slide').children().remove();
+
+						for (var i = 0; i < data.event_list.length; i++) {
+							img_tag = "<img src='/moviecube/resources/upload/event/";
+							var input_tag = "<input type='radio' name='radio-btn' id='img-"
+									+ (i + 1) + "' />" // i = 0일때 checked 해줘야됨.
+							if (i == 0) {
+								input_tag = "<input type='radio' name='radio-btn' id='img-1' checked />";
+							}
+							var savname = data.event_list[i].EVENT_SAVNAME
+									+ "'/>";
+							// alert(data.stillcut_list[i].STILLCUT_SAVNAME);
+							img_tag = img_tag + savname;
+
+							if (i == 0) { // 만약 i가 처음 값이면 이전 버튼 눌렀을 때 마지막 사진을 띄워줘야됨.
+								label_prev = "<label for = 'img-"
+										+ (event_length) + "' class='prev'>"
+										+ for_label_prev + "</label>";
+							} else {
+								label_prev = "<label for = 'img-" + (i)
+										+ "' class='prev'>" + for_label_prev
+										+ "</label>";
+							}
+							if (i == (event_length - 1)) { // 만약 i가 끝값이면 다음 눌렀을 때 처음으로 돌아가게 해줘야됨 
+								label_next = "<label for = 'img-1' class='next'>"
+										+ for_label_next + " </label>";
+							}
+
+							label_next = "<label for = 'img-" + (i + 2)
+									+ "' class='next'>" + for_label_next
+									+ "</label>";
+
+							$("#event-slide").append(
+									input_tag + "<li class='slide-container'>"
+											+ "<div class='slide'>" + img_tag
+											+ "</div>" + "<div class='nav'>"
+											+ label_prev + label_next
+											+ "</div>" + "</li>");
+						} // for문 끝
+					},
+
+					error : function() {
+						alert("오류가 발생하였습니다.");
+					}
+				});
+
+		// var movieNo = movie_no; 이거 그대로 가져다가 쓰면 됨 ㅎㅎ
+
+	}
+</script>
+
+<!-- moviecube -->
+<section class="bg0 p-t-23 p-b-140">
+	<div class="container">
+		<div class="flex-col-c p-b-10">
+			<h3 class="ltext-105 cl5">MOVIECUBE</h3>
+		</div>
+
+		<div class="flex-w flex-sb-m p-b-52">
+			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+				<button
+					class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+					data-filter="*">전체</button>
+
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					data-filter=".women">무비큐브 이벤트</button>
+
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					data-filter=".men">영화 이벤트</button>
+
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					data-filter=".bag">제휴 이벤트</button>
+
+			</div>
+
+
+			<div
+				class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+				<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+				<i
+					class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+				이벤트 찾기
+			</div>
+
+
+			</div>
+
+			<!-- Search product -->
+			<div class="dis-none panel-search w-full p-t-10 p-b-15">
+				<div class="bor8 dis-flex p-l-15">
+					<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+
+					<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
+						name="search-product" placeholder="이벤트 이름">
+				</div>
+			</div>
+
+			<!-- Filter -->
+			<div class="dis-none panel-filter w-full p-t-10">
+				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+					<div class="filter-col1 p-r-15 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">Sort By</div>
+
+						<ul>
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> Default </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> Popularity </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> Average rating </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04 filter-link-active">
+									Newness </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
+						</ul>
+					</div>
+
+					<div class="filter-col2 p-r-15 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">Price</div>
+
+						<ul>
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04 filter-link-active">
+									All </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> $0.00 - $50.00 </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> $50.00 - $100.00 </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> $100.00 - $150.00 </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> $150.00 - $200.00 </a></li>
+
+							<li class="p-b-6"><a href="resources/#"
+								class="filter-link stext-106 trans-04"> $200.00+ </a></li>
+						</ul>
+					</div>
+
+					<div class="filter-col3 p-r-15 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">Color</div>
+
+						<ul>
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #222;"> <i class="zmdi zmdi-circle"></i>
+							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
+									Black </a></li>
+
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #4272d7;"> <i class="zmdi zmdi-circle"></i>
+							</span> <a href="resources/#"
+								class="filter-link stext-106 trans-04 filter-link-active">
+									Blue </a></li>
+
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #b3b3b3;"> <i class="zmdi zmdi-circle"></i>
+							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
+									Grey </a></li>
+
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #00ad5f;"> <i class="zmdi zmdi-circle"></i>
+							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
+									Green </a></li>
+
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #fa4251;"> <i class="zmdi zmdi-circle"></i>
+							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
+									Red </a></li>
+
+							<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+								style="color: #aaa;"> <i class="zmdi zmdi-circle-o"></i>
+							</span> <a href="resources/#" class="filter-link stext-106 trans-04">
+									White </a></li>
+						</ul>
+					</div>
+
+					<div class="filter-col4 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">Tags</div>
+
+						<div class="flex-w p-t-4 m-r--5">
+							<a href="resources/#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Fashion </a> <a href="resources/#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Lifestyle </a> <a href="resources/#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Denim </a> <a href="resources/#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle </a> <a href="resources/#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Crafts </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row isotope-grid">
+			<!-- 여기부터 하나 시작  -->
+
+			<c:choose>
+				<c:when test="${fn:length(list) > 0 }">
+					<c:forEach items="${list}" var="row">
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+							<!-- Block2 -->
+							<div class="block2">
+								<div class="block2-pic hov-img0" id="forEventModal">
+									<img
+										src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}"
+										alt="이벤트" />
+									<!-- height 뺐음 -->
+
+
+									<a href="#" id="gahyun"
+										onclick="toModal(
+										'${row.EVENT_NAME }',
+										'${row.EVENT_TYPE }',
+										'${row.EVENT_URL }',
+										'${row.EVENT_SAVNAME }',
+										'${row.EVENT_OPENDATE }',
+										'${row.EVENT_CLOSEDATE }',
+										'${row.EVENT_NO }'
+									);"
+										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+										상세보기 </a>
+
+								</div>
+
+								<div class="block2-txt flex-w flex-t p-t-14">
+									<div class="block2-txt-child1 flex-col-l ">
+										<a href="resources/product-detail.html"
+											class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											${row.EVENT_NAME}</a> <span class="stext-105 cl3"
+											id="MOVIE_GENRE"> 장르 : ${row.MOVIE_GENRE} </span>
+									</div>
+
+									<div class="block2-txt-child2 flex-r p-t-3">
+										<a href="#"
+											class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
+											onclick="addWishList('${row.MOVIE_NO }');"> <img
+											class="icon-heart1 dis-block trans-04"
+											src="resources/images/icons/icon-heart-01.png" alt="ICON">
+
+											<img class="icon-heart2 dis-block trans-04 ab-t-l"
+											src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div>영화 없음</div>
+				</c:otherwise>
+			</c:choose>
+
+
+		</div>
+</section>
+
+

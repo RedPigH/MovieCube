@@ -1,0 +1,316 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<script type="text/javascript">
+function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genre, movie_content, movie_age, movie_url, poster_savname, movie_grade, movie_opendate, movie_no) {
+	
+	var movieNo = movie_no; // 영화넘버 Ajax로 컨트롤러로 넘겨줄 예정임 으히힇훠휳ㅎ
+	$("h_modal_movie_no").text(movieNo);
+	
+	$("#h_modal_movie_name").text(movie_name);
+	
+	var grade_text = "평점 : " + movie_grade;
+	$("#h_modal_movie_grade").text(grade_text);
+	
+	var img_url = "/moviecube/resources/upload/movie/poster/" + poster_savname;
+	$("#h_modal_poster_savname").attr('src', img_url);
+	
+	var type = "타입  :  " + movie_type;
+	$("#h_modal_movie_type").text(type);
+	
+	var open_date = "개봉일  :  " +  movie_opendate;
+	$("#h_modal_movie_opendate").text(open_date);
+	
+	var director = "감독  :  " + movie_director;
+	$("#h_modal_movie_director").text(director);
+	
+	var actor = "출연진  :  " + movie_actor;
+	$("#h_modal_movie_actor").text(actor);
+	
+	var genre = "장르  :  " + movie_genre;
+	$("#h_modal_movie_genre").text(genre);
+	
+	$("#h_modal_movie_content").text(movie_content);
+	
+	$("#h_modal_movie_no").attr("value", movieNo);
+	
+	/* Ajax를 해봅시다 */
+	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
+	
+	jQuery.ajaxSettings.traditional = true;
+	stillcut_list = new Array();
+	var data = {
+			"movie_no" : movieNo
+	}
+	
+			$.ajax({
+				type : "POST",
+				url : "<c:url value='/stillcut.do'/>",
+				dataType : "json",
+				data : data,
+
+				success : function(data) {
+					
+					var stillcut_length = data.stillcut_list.length;
+					// alert('스틸컷 리스트 넘버 : ' + stillcut_length);
+					
+					var for_label_prev = "&#x2039;";
+					var for_label_next = "&#x203a;"
+					
+					var img_tag = "<img src='/moviecube/resources/upload/movie/stillcut/";
+					var label_prev = "";
+					var label_next = "";
+					
+					$('#stillcut-slide').children().remove();
+					
+					for(var i = 0 ; i < data.stillcut_list.length; i++) {
+						img_tag = "<img src='/moviecube/resources/upload/movie/stillcut/";
+						var input_tag = "<input type='radio' name='radio-btn' id='img-" + (i+1) + "' />" // i = 0일때 checked 해줘야됨.
+						if(i == 0) {
+							input_tag = "<input type='radio' name='radio-btn' id='img-1' checked />";
+						}
+						var savname = data.stillcut_list[i].STILLCUT_SAVNAME + "'/>";
+						// alert(data.stillcut_list[i].STILLCUT_SAVNAME);
+						img_tag = img_tag + savname;
+						
+						if(i == 0) { // 만약 i가 처음 값이면 이전 버튼 눌렀을 때 마지막 사진을 띄워줘야됨.
+							label_prev = "<label for = 'img-" + (stillcut_length) + "' class='prev'>" + for_label_prev + "</label>";
+						} else {
+							label_prev = "<label for = 'img-" + (i) + "' class='prev'>" + for_label_prev + "</label>";
+						}
+						if( i == (stillcut_length - 1) ) { // 만약 i가 끝값이면 다음 눌렀을 때 처음으로 돌아가게 해줘야됨 
+							label_next = "<label for = 'img-1' class='next'>" + for_label_next + " </label>";
+						}
+						
+						label_next = "<label for = 'img-" + (i+2) + "' class='next'>" + for_label_next +  "</label>";
+						
+						$("#stillcut-slide").append(
+								input_tag + "<li class='slide-container'>" + 
+								"<div class='slide'>" + img_tag + "</div>" + 
+								"<div class='nav'>" + label_prev + label_next + "</div>" + "</li>"
+								);
+					} // for문 끝
+				},
+
+				error : function() {
+					alert("오류가 발생하였습니다.");
+				}
+			});
+			
+	
+	// var movieNo = movie_no; 이거 그대로 가져다가 쓰면 됨 ㅎㅎ
+
+			
+	
+}
+</script>
+
+<!-- BOX OFFICE -->
+		<section class="sec-product bg0 p-t-100 p-b-50">
+			<div class="container">
+				<div class="p-b-32">
+					<h3 class="ltext-105 cl5 txt-center respon1">BOX OFFICE</h3>
+				</div>
+
+				<!-- Tab01 -->
+				<div class="tab01">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist" style="margin-left: 0px">
+						<li class="nav-item p-b-10"><a class="nav-link active"
+							data-toggle="tab" href="#best-seller" role="tab">HOT</a>
+						</li>
+
+						<li class="nav-item p-b-10"><a class="nav-link"
+							data-toggle="tab" href="#featured" role="tab">최근개봉작</a></li>
+
+						<li class="nav-item p-b-10"><a class="nav-link"
+							data-toggle="tab" href="#sale" role="tab">상영예정작</a></li>
+
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content p-t-50">
+						<!-- - -->
+						<div class="tab-pane fade show active" id="best-seller"
+							role="tabpanel">
+							<!-- Slide2 -->
+							<div class="wrap-slick2">
+								<div class="slick2">
+										<c:choose>
+										<c:when test = "${fn:length(HotList) > 0 }">
+											<c:forEach items = "${HotList }" var = "row">
+												<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+												<!-- Block2 -->
+													<div class="block2">
+														<div class="block2-pic hov-img0">
+															<img src="/moviecube/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" />
+																<a href="#" id="gahyun" onclick="toModal(
+																	'${row.MOVIE_NAME }',
+																	'${row.MOVIE_TYPE }',
+																	'${row.MOVIE_DIRECTOR }',
+																	'${row.MOVIE_ACTOR }',
+																	'${row.MOVIE_GENRE }',
+																	'${row.MOVIE_CONTENT }',
+																	'${row.MOVIE_AGE }',
+																	'${row.MOVIE_URL }',
+																	'${row.POSTER_SAVNAME }',
+																	'${row.MOVIE_GRADE }',
+																	'${row.MOVIE_OPENDATE }',
+																	'${row.MOVIE_NO }');" 
+																class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+																상세보기 </a>
+														</div>
+														
+														<div class="block2-txt flex-w flex-t p-t-14">
+															<div class="block2-txt-child1 flex-col-l ">
+																<a href="resources/product-detail.html"
+																	class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+																		${row.MOVIE_NAME}</a> <span class="stext-105 cl3" id="MOVIE_GENRE"> 장르 :
+																		${row.MOVIE_GENRE} </span>
+															</div>
+															<div class="block2-txt-child2 flex-r p-t-3">
+																<a href="#"
+																	class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+																	<img class="icon-heart1 dis-block trans-04"
+																	src="resources/images/icons/icon-heart-01.png" alt="ICON"> <img
+																	class="icon-heart2 dis-block trans-04 ab-t-l"
+																	src="resources/images/icons/icon-heart-02.png" alt="ICON">
+																</a>			
+															</div>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div>영화 없음</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+						</div>
+
+						<!-- - -->
+						<div class="tab-pane fade" id="featured" role="tabpanel">
+							<!-- Slide2 -->
+							<div class="wrap-slick2">
+								<div class="slick2">
+									<c:choose>
+										<c:when test = "${fn:length(LatelyList) > 0 }">
+											<c:forEach items = "${LatelyList }" var = "row">
+												<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+												<!-- Block2 -->
+													<div class="block2">
+														<div class="block2-pic hov-img0">
+															<img src="/moviecube/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" />
+																<a href="#" id="gahyun" onclick="toModal(
+																	'${row.MOVIE_NAME }',
+																	'${row.MOVIE_TYPE }',
+																	'${row.MOVIE_DIRECTOR }',
+																	'${row.MOVIE_ACTOR }',
+																	'${row.MOVIE_GENRE }',
+																	'${row.MOVIE_CONTENT }',
+																	'${row.MOVIE_AGE }',
+																	'${row.MOVIE_URL }',
+																	'${row.POSTER_SAVNAME }',
+																	'${row.MOVIE_GRADE }',
+																	'${row.MOVIE_OPENDATE }',
+																	'${row.MOVIE_NO }');" 
+																class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+																상세보기 </a>
+														</div>
+														
+														<div class="block2-txt flex-w flex-t p-t-14">
+															<div class="block2-txt-child1 flex-col-l ">
+																<a href="resources/product-detail.html"
+																	class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+																		${row.MOVIE_NAME}</a> <span class="stext-105 cl3" id="MOVIE_GENRE"> 장르 :
+																		${row.MOVIE_GENRE} </span>
+															</div>
+															<div class="block2-txt-child2 flex-r p-t-3">
+																<a href="#"
+																	class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+																	<img class="icon-heart1 dis-block trans-04"
+																	src="resources/images/icons/icon-heart-01.png" alt="ICON"> <img
+																	class="icon-heart2 dis-block trans-04 ab-t-l"
+																	src="resources/images/icons/icon-heart-02.png" alt="ICON">
+																</a>			
+															</div>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div>영화 없음</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+						</div>
+
+						<!-- - -->
+						<div class="tab-pane fade" id="sale" role="tabpanel">
+							<!-- Slide2 -->
+							<div class="wrap-slick2">
+								<div class="slick2">
+									<c:choose>
+										<c:when test = "${fn:length(ExpectedList) > 0 }">
+											<c:forEach items = "${ExpectedList }" var = "row">
+												<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+												<!-- Block2 -->
+													<div class="block2">
+														<div class="block2-pic hov-img0">
+															<img src="/moviecube/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" />
+																<a href="#" id="gahyun" onclick="toModal(
+																	'${row.MOVIE_NAME }',
+																	'${row.MOVIE_TYPE }',
+																	'${row.MOVIE_DIRECTOR }',
+																	'${row.MOVIE_ACTOR }',
+																	'${row.MOVIE_GENRE }',
+																	'${row.MOVIE_CONTENT }',
+																	'${row.MOVIE_AGE }',
+																	'${row.MOVIE_URL }',
+																	'${row.POSTER_SAVNAME }',
+																	'${row.MOVIE_GRADE }',
+																	'${row.MOVIE_OPENDATE }',
+																	'${row.MOVIE_NO }');" 
+																class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+																상세보기 </a>
+														</div>
+														
+														<div class="block2-txt flex-w flex-t p-t-14">
+															<div class="block2-txt-child1 flex-col-l ">
+																<a href="resources/product-detail.html"
+																	class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+																		${row.MOVIE_NAME}</a> <span class="stext-105 cl3" id="MOVIE_GENRE"> 장르 :
+																		${row.MOVIE_GENRE} </span>
+															</div>
+															<div class="block2-txt-child2 flex-r p-t-3">
+																<a href="#"
+																	class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+																	<img class="icon-heart1 dis-block trans-04"
+																	src="resources/images/icons/icon-heart-01.png" alt="ICON"> <img
+																	class="icon-heart2 dis-block trans-04 ab-t-l"
+																	src="resources/images/icons/icon-heart-02.png" alt="ICON">
+																</a>			
+															</div>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div>영화 없음</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
