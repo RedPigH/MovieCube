@@ -21,6 +21,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	var type = "타입  :  " + movie_type;
 	$("#h_modal_movie_type").text(type);
 	
+	movie_opendate = movie_opendate.substring(0,10);
 	var open_date = "개봉일  :  " + movie_opendate;
 	$("#h_modal_movie_opendate").text(open_date);
 	
@@ -39,6 +40,9 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	
 	/* Ajax를 해봅시다 */
 	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
+	$("div").remove("#comment_start");
+	$("#review").val(''); // textarea 값 초기화
+	get_reviews();
 	
 	jQuery.ajaxSettings.traditional = true;
 	stillcut_list = new Array();
@@ -107,6 +111,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 	
 }
 </script>
+
 
 <!-- moviecube -->
 <section class="bg0 p-t-23 p-b-140">
@@ -313,6 +318,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 											${row.MOVIE_NAME}</a> <span class="stext-105 cl3" id="MOVIE_GENRE"> 장르 :
 											${row.MOVIE_GENRE} </span>
 									</div>
+									sdlkfdjsalf(row);
 
 									<div class="block2-txt-child2 flex-r p-t-3">
 										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="addWishList('${row.MOVIE_NO }');">
