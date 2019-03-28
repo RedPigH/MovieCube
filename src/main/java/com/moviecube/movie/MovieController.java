@@ -146,6 +146,19 @@ public class MovieController {
 		
 		// map.put("MOVIE_NO", movie_no);
 		
+		Map<String, Object> ReviewMap = movieService.CommentLikeInfo(map.getMap());
+		
+		int all_like = Integer.parseInt(ReviewMap.get("ALL_LIKE").toString());
+		int cnt = Integer.parseInt(ReviewMap.get("CNT").toString());
+		
+		double grade = all_like / cnt;
+		
+		CommandMap Grademap = new CommandMap();
+		
+		Grademap.put("MOVIE_NO", movie_no);
+		Grademap.put("MOVIE_GRADE", String.format("%.1f", grade));
+		
+		movieService.modifyGrade(Grademap.getMap());
 		
 		mv.addObject("id_check", id_check);
 		mv.setViewName("jsonView");
@@ -166,8 +179,5 @@ public class MovieController {
 
 		return mv;
 	}
-
-	
-	
 	
 }

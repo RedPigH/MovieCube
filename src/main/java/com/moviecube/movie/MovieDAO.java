@@ -39,6 +39,11 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectCommentList", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception{
+		return (Map<String, Object>) selectOne("movie.CommentLikeInfo",map);
+	}	
 
 	public void insertMovie(Map<String, Object> map) throws Exception {
 		insert("movie.insertMovie", map);
@@ -89,6 +94,10 @@ public class MovieDAO extends AbstractDAO {
 
 	public void modifyFile2(Map<String, Object> map) {
 		update("movie.modifyFile2", map);
+	}
+	
+	public void modifyGrade(Map<String, Object> map) {
+		update("movie.modifyGrade", map);
 	}
 
 	public void deleteFile(Map<String, Object> map) {
