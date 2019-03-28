@@ -10,64 +10,70 @@
 }
 </style>
 <script>
-function get_reviews() {
+function get_reviews(currentPage) {
 	var movie_no = $("#h_modal_movie_no").val();
+	// alert(currentPage);
+	
+	if(currentPage == null){
+		currentPage = 1;
+	}
 	
 	var data = {
-			"movie_no" : movie_no
+			"movie_no" : movie_no,
+			"currentPage" : currentPage
 	}
 	
 	$.ajax({
 		type : "POST",
-		url : "<c:url value='/movieComment.do'/>",
+		url : "<c:url value='/commentPaging.do'/>",
 		dataType : "json",
 		data : data,
 
 		success : function(data) {
-			var comment_list_length = data.comment_list.length;
+			var comment_list_length = data.comment_paging_list.length;
 			var cmt_id = "";
 			var cmt_content = "";
 			var cmt_like;
 			var delete_button = "";
 			var member_id = "${sessionScope.userLoginInfo.MEMBER_ID}"; // 로그인했는지 확인하기 위해서
+			var text_comment = "";
 			
-			// alert(comment_list_length);
-			
-			
+			$("#reviewCount").text("리뷰 (" + data.totalCount + ")");
+
 			for(var i = 0; i < comment_list_length; i++) {
-				var cmt_no = data.comment_list[i].CMT_NO;
-				cmt_id = data.comment_list[i].CMT_ID;
+				var cmt_no = data.comment_paging_list[i].CMT_NO;
+				cmt_id = data.comment_paging_list[i].CMT_ID;
 				
 				if(member_id == cmt_id) { // 로그인한 아이디와 댓글 아이디가 같으면 삭제버튼을 추가해줌.
-					var delete_button = '<img src="resources/images/icons/icon_delete.png" onclick="deleteReview(' + cmt_no + ')" style="width:40px; height:20px; box-shadow:0.5px 0.5px 0.5px 0.5px #999;"/>'
 					var delete_button2 = "<a href='javascript:deleteReview(" + cmt_no + ")' style='float: right;'>" + "<p><font size='1'>삭제</font><font color='red'</font></p>";
+				} else {
+					var delete_button2 = "<div></div>";
 				}
 				
-				cmt_content = data.comment_list[i].CMT_CONTENT;
-				cmt_like = Number(data.comment_list[i].CMT_LIKE);
-				/* cmt_like = (data.comment_list[i].CMT_LIKE) * 1; */
+				cmt_content = data.comment_paging_list[i].CMT_CONTENT;
+				cmt_like = Number(data.comment_paging_list[i].CMT_LIKE);
 				var rating_text = "";
 				
 				for(var j = 0 ; j < cmt_like; j++) {
 					rating_text = rating_text + "<i class='zmdi zmdi-star'></i> ";
 				}
+				text_comment = text_comment + "<div class='flex-w flex-t p-b-68' id='comment_start'>" +
+				"<div class='wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6'>" + 
+				"<img src='images/avatar-01.jpg' alt='AVATAR'>" + 
+				"</div>" + 
+				"<div class='size-207'>" + 
+				"<div class='flex-w flex-sb-m p-b-17'>" + 
+				"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
+				"<span class='fs-18 cl11'>" + 
+				rating_text +  "</span>" +  "</div>" + 
+				"<textarea class='stext-102 cl6' style='float: left; width:600px; height:80px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>";
 				
-				
-				$("#commentDiv").prepend(
-						"<div class='flex-w flex-t p-b-68' id='comment_start'>" +
-						"<div class='wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6'>" + 
-						"<img src='images/avatar-01.jpg' alt='AVATAR'>" + 
-						"</div>" + 
-						"<div class='size-207'>" + 
-						"<div class='flex-w flex-sb-m p-b-17'>" + 
-						"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
-						"<span class='fs-18 cl11'>" + 
-						rating_text +  "</span>" +  "</div>" + 
-						"<textarea class='stext-102 cl6' style='float: left; width:600px; height:100px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>"
-						);
-			}
+			} // for문 끝
+			$("#commentDiv2").html(text_comment);
+			$('#paging').children().remove();
+			$("#paging").html(data.commentHtml);
 			
-		},
+		}, // success 함수 끝
 		error : function() { 
 			alert("오류가 발생혔슈"); 
 			}
@@ -309,7 +315,7 @@ function deleteReview(cmt_no) {
 								</a></li>
 
 						<li class="nav-item p-b-10"><a class="nav-link" onclick="" 
-							data-toggle="tab" href="#reviews" role="tab">리뷰 (1)</a></li>
+							data-toggle="tab" href="#reviews" role="tab" id="reviewCount">리뷰 (1)</a></li>
 					</ul>
 
 					<!-- Tab panes -->
@@ -338,35 +344,14 @@ function deleteReview(cmt_no) {
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-8 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm" id="commentDiv">
+									<div class="p-b-30 m-lr-15-sm" id="commentDiv2">
+									</div>
 										
 										
-										<!-- Review -->
-										<!-- <div class="flex-w flex-t p-b-68">
-											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="images/avatar-01.jpg" alt="AVATAR">
-											</div>
-
-											<div class="size-207">
-												<div class="flex-w flex-sb-m p-b-17">
-												여기부터가 작성자 아이디 불러와야되는 부분임
-													<span class="mtext-107 cl2 p-r-20"> Ariana Grande </span> 
-													<span class="fs-18 cl11"> 
-														별점에 따라 뿌려줘야하는 별이 다름.  COMMENT_LIKE
-														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star"></i> 
-														<i class="zmdi zmdi-star-half"></i> 
-													</span>
-											</div>
-												
-												여기가 COMMENT_CONTENT
-												<p class="stext-102 cl6">Quod autem in homine
-													praestantissimum atque optimum est, id deseruit. Apud
-													ceteros autem philosophos</p>
-											</div>
+										<div class = "flex" style="text-align:center;" id="paging">
+										<!-- 여기 페이징 관련 넣어줄거임 -->
+										
 										</div>
-										<!-- 여기까지 리뷰 한 줄 끝 -->
 										
 
 										<!-- 	Add review -->

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@ include file="../main/head.jspf"%>
 </head>
 <body>

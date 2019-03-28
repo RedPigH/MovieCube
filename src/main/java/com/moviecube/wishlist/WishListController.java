@@ -1,6 +1,7 @@
 package com.moviecube.wishlist;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -66,7 +67,17 @@ public class WishListController {
 		Map<String, Object> user = (Map<String, Object>) session.getAttribute("userLoginInfo");
 		
 		if(commandMap.get("MOVIE_NO") == null) {
-			wishlistService.deleteWishList(commandMap.getMap());
+			if(commandMap.get("WISH_NO_LIST") == null) {
+				wishlistService.deleteWishList(commandMap.getMap());
+			} else {
+				String[] wish_no_list = ((String)commandMap.get("WISH_NO_LIST")).split(",");
+				
+				for(int i=0; i < wish_no_list.length; i++) {
+					CommandMap map = new CommandMap();
+					map.put("WISH_NO", Integer.parseInt(wish_no_list[i]));
+					wishlistService.deleteWishList(map.getMap());
+				}
+			}
 		}else {
 			CommandMap map = new CommandMap();
 			map.put("MEMBER_NO", user.get("MEMBER_NO"));

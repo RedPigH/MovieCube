@@ -27,10 +27,10 @@
 	}
 </script>
 <body class="animsition">
+<%-- <%@ include file="../main/body_header.jspf" %> --%>
 	
 <header class="header-v4">
 	<div class="container-menu-desktop">
-		<%@ include file="../main/body_header.jspf"%>
 
 	<!-- Back to top -->
 		<div class="btn-back-to-top" id="myBtn">
