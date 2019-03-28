@@ -16,7 +16,7 @@ import com.moviecube.screen.ScreenService;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminSeatController {
+public class SeatController {
 	
 	@Resource(name = "seatService")
 	private SeatService seatService;
@@ -34,7 +34,69 @@ public class AdminSeatController {
 	
 	@RequestMapping(value = "/seatList.do")
 	public ModelAndView selectSeatList(CommandMap commandMap, HttpServletRequest request) throws Exception{
+		
 		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> seatList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				seatList = seatService.seatSearch0(isSearch);
+			}
+			
+			totalCount = seatList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "seatList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			seatList = seatList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("seatList", seatList);
+			mv.setViewName("/admin/seat/seatList");
+			return mv;
+		
+		}
+			
+		seatList = seatService.selectSeatList(commandMap.getMap());
+		
+		totalCount = seatList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "seatList");
+		pagingHtml = paging.getPagingHtml().toString();
+			
+		int lastCount = totalCount;
+			
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+			
+		seatList = seatList.subList(paging.getStartCount(), lastCount);
+			
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("seatList", seatList);
+		mv.setViewName("/admin/seat/seatList");
+		return mv;
+	}
+	
+/*		ModelAndView mv = new ModelAndView();
 		
 		List<Map<String, Object>> seatList = seatService.selectSeatList(commandMap.getMap());
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
@@ -65,6 +127,7 @@ public class AdminSeatController {
 		mv.setViewName("/admin/seat/seatList");
 		return mv;
 	}
+*/	
 	
 	@RequestMapping(value = "/insertSeatForm.do")
 	public ModelAndView insertSeatForm(CommandMap commandMap) throws Exception{

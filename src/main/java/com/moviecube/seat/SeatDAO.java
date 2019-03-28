@@ -66,5 +66,10 @@ public class SeatDAO extends AbstractDAO {
 	public void deleteSeat(Map<String, Object> map) throws Exception {
 		delete("seat.deleteSeat", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> seatSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("seat.seatSearch0", "%"+isSearch+"%");
+	}
 
 }

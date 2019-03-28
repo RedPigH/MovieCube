@@ -42,5 +42,20 @@ public class CinemaDAO extends AbstractDAO {
 	public Map<String, Object> selectOneCinema(Map<String, Object> map) {
 		return(Map<String, Object>) selectOne("cinema.selectOneCinema", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> cinemaSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("cinema.cinemaSearch0", "%"+isSearch+"%");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> cinemaSearch1(String isSearch) {
+		return (List<Map<String, Object>>)selectList("cinema.cinemaSearch1", "%"+isSearch+"%");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> cinemaSearch2(String isSearch) {
+		return (List<Map<String, Object>>)selectList("cinema.cinemaSearch2", "%"+isSearch+"%");
+	}
 
 }

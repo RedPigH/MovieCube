@@ -15,13 +15,13 @@ import com.moviecube.common.Paging;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminCinemaController {
+public class CinemaController {
 
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
 	
 	private int currentPage = 1;
-	private int totalCount;
+	private int totalCount; 
 	private int blockCount = 5;
 	private int blockpaging = 5;
 	private String pagingHtml;
@@ -29,6 +29,70 @@ public class AdminCinemaController {
 
 	@RequestMapping(value = "/cinemaList.do")
 	public ModelAndView cinemaList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> cinemaList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				cinemaList = cinemaService.cinemaSearch0(isSearch);
+			}else if(searchNum == 1){
+				cinemaList = cinemaService.cinemaSearch1(isSearch);
+			}else{
+				cinemaList = cinemaService.cinemaSearch2(isSearch);
+			}
+			
+			totalCount = cinemaList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "cinemaList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			cinemaList = cinemaList.subList(paging.getStartCount(), lastCount);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("pagingHtml", pagingHtml);
+			mav.addObject("cinemaList", cinemaList);
+			mav.setViewName("/admin/cinema/cinemaList");
+			return mav;
+		}
+		
+		cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
+		
+		totalCount = cinemaList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+		
+		cinemaList = cinemaList.subList(paging.getStartCount(), lastCount);
+		
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("cinemaList", cinemaList);
+		mav.setViewName("/admin/cinema/cinemaList");
+		return mav;
+/*
 		ModelAndView mv = new ModelAndView();
 
 		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
@@ -45,8 +109,7 @@ public class AdminCinemaController {
 		pagingHtml = paging.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
-		//System.out.println(paging.getEndCount());
-		//System.out.println(totalCount);
+		
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}
@@ -60,6 +123,7 @@ public class AdminCinemaController {
 		mv.addObject("totalCount", totalCount);
 		mv.setViewName("/admin/cinema/cinemaList");
 		return mv;
+*/
 	}
 
 	@RequestMapping(value = "/cinemaDetail.do")

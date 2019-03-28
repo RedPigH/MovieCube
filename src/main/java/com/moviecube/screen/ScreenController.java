@@ -17,7 +17,7 @@ import com.moviecube.cinema.CinemaService;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminScreenController {
+public class ScreenController {
 
 	@Resource(name = "screenService")
 	private ScreenService screenService;
@@ -38,7 +38,71 @@ public class AdminScreenController {
 
 	@RequestMapping(value = "/screenList.do")
 	public ModelAndView screenList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/screenList");
+
+		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> screenList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				screenList = screenService.screenSearch0(isSearch);
+			}else if(searchNum == 1){
+				screenList = screenService.screenSearch1(isSearch);
+			}else{
+				screenList = screenService.screenSearch2(isSearch);
+			}
+			
+			totalCount = screenList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "memberList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			screenList = screenList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("screenList", screenList);
+			mv.setViewName("/admin/screen/screenList");
+			return mv;
+		}
+		
+		screenList = screenService.selectScreenList(commandMap.getMap());
+		
+		totalCount = screenList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "screenList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+		
+		screenList = screenList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("screenList", screenList);
+		mv.setViewName("/admin/screen/screenList");
+		return mv;
+	}
+/*		ModelAndView mv = new ModelAndView("/admin/screenList");
 
 		List<Map<String, Object>> screenList = screenService.selectScreenList(commandMap.getMap());
 		
@@ -69,7 +133,8 @@ public class AdminScreenController {
 		mv.addObject("totalCount", totalCount);
 		mv.setViewName("/admin/screen/screenList");
 		return mv;
-	}
+*/
+	
 
 	@RequestMapping(value = "/screenDetail.do")
 	public ModelAndView screenDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {

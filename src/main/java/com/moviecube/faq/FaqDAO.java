@@ -37,5 +37,14 @@ public class FaqDAO extends AbstractDAO {
 		update("faq.deleteFaq",map);
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> faqSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("faq.faqSearch0", "%"+isSearch+"%");
+	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> faqSearch1(String isSearch) {
+		return (List<Map<String, Object>>)selectList("faq.faqSearch1", "%"+isSearch+"%");
+	}
 }

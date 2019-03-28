@@ -29,7 +29,7 @@ import com.moviecube.common.Paging;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminTimeController {
+public class TimeController {
 
 	@Resource(name = "timeService")
 	private TimeService timeService;
@@ -55,37 +55,70 @@ public class AdminTimeController {
 
 	@RequestMapping(value = "/timeList.do")
 	public ModelAndView timeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/time/timeList");
-
-		List<Map<String, Object>> timeList = timeService.selectTimeList(commandMap.getMap());
-
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
 			currentPage = 1;
-		} else {
+		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
+		
+		List<Map<String, Object>> timeList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+				
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				timeList = timeService.timeSearch0(isSearch);
+			}else if(searchNum == 1){
+				timeList = timeService.timeSearch1(isSearch);
+			}else{
+				timeList = timeService.timeSearch2(isSearch);
+			}
+		
+			totalCount = timeList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "timeList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			timeList = timeList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("timeList", timeList);
+			mv.setViewName("/admin/time/timeList");
+			return mv;
+		}
+		
+		timeList = timeService.selectTimeList(commandMap.getMap());
+		
 		totalCount = timeList.size();
-
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "timeList");
 		pagingHtml = paging.getPagingHtml().toString();
-
+		
 		int lastCount = totalCount;
-		// System.out.println(paging.getEndCount());
-		// System.out.println(totalCount);
-		if (paging.getEndCount() < totalCount) {
+		
+		if(paging.getEndCount() < totalCount){
 			lastCount = paging.getEndCount() + 1;
 		}
-
+		
 		timeList = timeList.subList(paging.getStartCount(), lastCount);
-
-		mv.addObject("timeList", timeList);
-		mv.addObject("list", timeList);
+		
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
+		mv.addObject("timeList", timeList);
+		mv.setViewName("/admin/time/timeList");
 		return mv;
+		
 	}
 
 	@RequestMapping(value = "/timeDetail.do")

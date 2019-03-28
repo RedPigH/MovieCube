@@ -27,7 +27,7 @@
 	
 	<select id="memberSearch2" resultType="hashmap" parameterType="hashmap">
 		select * from MC_MEMBER 
-		where MEMBER_EMAIL like #{search} 
+		where MEMBER_RANK like #{search} 
 		order by MEMBER_NO desc
 	</select>
 
