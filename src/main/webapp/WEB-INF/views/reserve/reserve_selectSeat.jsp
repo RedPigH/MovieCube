@@ -80,9 +80,10 @@
 											/ ${time.START_TIME}~${time.END_TIME}</span>
 									</p>
 									<p>좌석:</p>
-									<ul id="selected-seats"></ul>
+									<ul id="selected-seats" style="margin: 0 0 1.5em 2em;"></ul>
 									<p>
 										좌석수: <span id="counter">0</span>
+										<span style="font-size: 12px; color:#ff0000; padding-left: 15px">*총 4매까지 예약할 수 있습니다.</span>
 									</p>
 									<p>
 										금액: <b>&#8361<span id="total">0</span></b>

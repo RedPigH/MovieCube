@@ -1,6 +1,5 @@
 /* Documentation Stylesheet */
 
-html,
 span,
 applet,
 object,
@@ -37,7 +36,6 @@ dl,
 dt,
 dd,
 ol,
-ul,
 li,
 fieldset,
 form,
@@ -59,7 +57,6 @@ embed,
 figure,
 figcaption,
 footer,
-header,
 hgroup,
 menu,
 nav,
@@ -176,7 +173,6 @@ p {
 	margin-bottom: 1.5em;
 }
 
-ul,
 ol {
 	margin: 0 0 1.5em 2em;
 }
@@ -411,10 +407,6 @@ tfoot th {
 	padding: 0;
 	margin: 0 0 1.5em;
 	border-bottom: 1px solid #e5e5e5;
-}
-
-.header {
-	padding-bottom: 1.5em;
 }
 
 .alignright {

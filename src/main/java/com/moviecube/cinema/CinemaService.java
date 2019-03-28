@@ -19,4 +19,9 @@ public interface CinemaService {
 
 	Map<String, Object> selectOneCinema(Map<String, Object> map) throws Exception;
 
+	List<Map<String, Object>> cinemaSearch0(String map) throws Exception;
+	
+	List<Map<String, Object>> cinemaSearch1(String map) throws Exception;
+	
+	List<Map<String, Object>> cinemaSearch2(String map) throws Exception;
 }

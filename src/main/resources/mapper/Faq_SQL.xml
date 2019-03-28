@@ -70,4 +70,17 @@ ORDER BY FAQ_NO DESC
 	FAQ_NO = #{FAQ_NO}
 	]]>
 	</delete>
+	
+	<!-- FAQ 검색 -->
+	<select id="faqSearch0" resultType="hashmap" parameterType="hashmap">
+		select * from MC_FAQ
+		where FAQ_SUB like #{search} 
+		order by FAQ_NO desc
+	</select>
+	
+	<select id="faqSearch1" resultType="hashmap" parameterType="hashmap">
+		select * from MC_FAQ 
+		where FAQ_CONTENT like #{search} 
+		order by FAQ_NO desc
+	</select>
 </mapper>

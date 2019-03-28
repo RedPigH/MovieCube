@@ -12,12 +12,12 @@
 				<col width="15%">
 				<col width="*" />
 			</colgroup>
-			<caption>답변 작성♥</caption>
+			<caption>답변 작성♥ ${map.QNA_NOM}</caption>
 			<tbody>
 				<tr>
 					<th scope="row">제목</th>
 					<td><input type="text" id="QNA_SUB" name="QNA_SUB"
-						class="wdp_90"></td>
+						class="wdp_90" value="[답변]${map.QNA_SUB}"></td>
 				</tr>
 				<tr>
 					<th scope="row">작성자</th>
@@ -74,6 +74,7 @@
 			var qna_no = "${map.QNA_NOM}";
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryReply.do'/>");
 			comSubmit.addParam("REF", qna_no);
+			alert(qna_no);
 			comSubmit.submit();
 		}
 			

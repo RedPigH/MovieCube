@@ -3,13 +3,13 @@ package com.moviecube.qna;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -154,9 +154,11 @@ public class QnaController {
 
 		Map<String, Object> map = new HashMap();
 		System.out.println("혜쮸꼰뜌" + commandMap.get("QNA_NOM"));
+		System.out.println("혜쮸꼰뜌2" + commandMap.get("QNA_SUB"));
 		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
+		map.put("QNA_SUB", commandMap.get("QNA_SUB"));
 		mv.addObject("map", map);
-		mv.addObject("map", map1);
+		//mv.addObject("map", map1);
 
 		return mv;
 
@@ -166,6 +168,10 @@ public class QnaController {
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
 
+		Set keyset = commandMap.keySet();
+		System.out.println("result : " + keyset);
+		System.out.println("ref : " + commandMap.get("REF"));
+		
 		Map<String, Object> map = new HashMap();
 		map.put("REF", commandMap.get("REF"));
 		System.out.println("우앙은개뿔ㅎㅎ" + commandMap.get("REF"));
