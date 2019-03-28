@@ -70,5 +70,24 @@
 			WHERE CINEMA_NO = #{CINEMA_NO}
 		]]>
 	</delete>
+	
+	<!-- 영화관 검색 -->
+	<select id="cinemaSearch0" resultType="hashmap" parameterType="hashmap">
+		select * from CINEMA  
+		where CINEMA_NAME like #{search} 
+		order by CINEMA_NO desc
+	</select>
+	
+	<select id="cinemaSearch1" resultType="hashmap" parameterType="hashmap">
+		select * from CINEMA  
+		where CINEMA_ADDRESS like #{search} 
+		order by CINEMA_NO desc
+	</select>
+	
+	<select id="cinemaSearch2" resultType="hashmap" parameterType="hashmap">
+		select * from CINEMA  
+		where CINEMA_CONTENT like #{search} 
+		order by CINEMA_NO desc
+	</select>
 
 </mapper>

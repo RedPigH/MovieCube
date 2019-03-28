@@ -71,6 +71,24 @@ NOTICE_NO = #{NOTICE_NO}
     ]]>
 	</delete>
 	
+	<!-- 공지사항 검색 -->
+	<select id="noticeSearch0" resultType="hashmap" parameterType="hashmap">
+		select * from MC_NOTICE 
+		where NOTICE_SUB like #{search} 
+		order by NOTICE_NO desc
+	</select>
+	
+	<select id="noticeSearch1" resultType="hashmap" parameterType="hashmap">
+		select * from MC_NOTICE 
+		where NOTICE_CONTENT like #{search} 
+		order by NOTICE_NO desc
+	</select>
+	
+	<select id="noticeSearch2" resultType="hashmap" parameterType="hashmap">
+		select * from MC_NOTICE 
+		where NOTICE_ID like #{search} 
+		order by NOTICE_NO desc
+	</select>
 	
 	<!-- <delete id="deleteBoard" parameterType="hashmap"> <![CDATA[ DELETE 
 		MC_NOTICE WHERE NOTICE_NO = #{NOTICE_NO} ]]> </delete> -->

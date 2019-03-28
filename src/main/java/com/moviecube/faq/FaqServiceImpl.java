@@ -47,6 +47,15 @@ public class FaqServiceImpl implements FaqService {
 		// TODO Auto-generated method stub
 		faqDAO.deleteFaq(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> faqSearch0(String map) throws Exception {
+		return faqDAO.faqSearch0(map);
+	}
 
+	@Override
+	public List<Map<String, Object>> faqSearch1(String map) throws Exception {
+		return faqDAO.faqSearch1(map);
+	}
 	
 }

@@ -17,6 +17,7 @@ public interface AdminService {
 
 	void memberDelete(Map<String, Object> map) throws Exception;
 
+	Map<String,Object> selectMemberDetail(Map<String,Object> map) throws Exception;
 /*	
 	List<Map<String, Object>> memberSearch0(Map<String, Object> map) throws Exception;
 	

@@ -81,12 +81,23 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
+	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception{
+		return MovieDAO.CommentLikeInfo(map);
+	}
+	
+	@Override
 	public void insertMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		List<Map<String,Object>> fileList2 = fileUtils.parseInsertFileInfo2(map, request);
 	 		
 			for(int i=0, size=fileList2.size(); i<size; i++){
 				MovieDAO.insertFile2(fileList2.get(i));
 			}
+	}
+	
+	@Override
+	public void insertComment(Map<String, Object> map) throws Exception {
+		MovieDAO.insertComment(map);
+		
 	}
 
 	
@@ -144,12 +155,14 @@ public class MovieServiceImpl implements MovieService{
 		}
 	}
 	
+	public void modifyGrade(Map<String, Object> map) throws Exception{
+		MovieDAO.modifyGrade(map);
+	}
+	
 	@Override
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-		MovieDAO.deleteMovie(map);	
-		MovieDAO.updateFileList(map);
-		MovieDAO.updateFileList2(map);
+		MovieDAO.deleteMovie(map);
 	}
 
 	@Override
@@ -158,9 +171,28 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectHotWishList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
+		return MovieDAO.selectCommentList(map);
+	}
+	
+	@Override
+	public void deleteComment(Map<String, Object> map) throws Exception {
+		MovieDAO.deleteComment(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch0(String map) throws Exception {
+		return MovieDAO.movieSearch0(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch1(String map) throws Exception {
+		return MovieDAO.movieSearch1(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> movieSearch2(String map) throws Exception {
+		return MovieDAO.movieSearch2(map);
 	}
 	
 }

@@ -129,4 +129,12 @@
 		DELETE FROM SEAT
 		WHERE SEAT_NO = #{SEAT_NO}
 	</delete>
+	
+	<select id="seatSearch0" resultType="hashmap" parameterType="hashmap">
+		SELECT s.SEAT_NO, s.SEAT_ROW, s.SEAT_COL, c.SCREEN_NAME
+			FROM SEAT s, SCREEN c
+			WHERE s.SCREEN_NO = c.SCREEN_NO
+			AND c.SCREEN_NAME like #{search} 
+			ORDER BY SEAT_NO ASC
+	</select>
 </mapper>

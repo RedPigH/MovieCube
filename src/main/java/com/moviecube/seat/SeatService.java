@@ -31,5 +31,7 @@ public interface SeatService {
 	void updateSeatStatus(Map<String, Object> map) throws Exception;
 
 	void deleteSeat(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> seatSearch0(String map) throws Exception;
 
 }
