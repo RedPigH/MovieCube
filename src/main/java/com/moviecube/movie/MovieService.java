@@ -39,17 +39,12 @@ public interface MovieService {
 	
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception;
 	
-<<<<<<< HEAD
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception;
-
-=======
-	List<Map<String, Object>> selectHotWishList(Map<String, Object> map) throws Exception;
 	
 	List<Map<String, Object>> movieSearch0(String map) throws Exception;
 	
 	List<Map<String, Object>> movieSearch1(String map) throws Exception;
 	
 	List<Map<String, Object>> movieSearch2(String map) throws Exception;
->>>>>>> 51a97c61308344db039d2fe6bd8ca020c395c038
 		
 }
