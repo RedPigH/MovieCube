@@ -18,21 +18,16 @@
 	<%@ include file="../main/body_header.jspf"%>
 	<%@ include file="../main/wishList.jspf"%>
 
-
+	
 	<!-- 영화 예매 -->
 	<form class="bg0 p-t-75 p-b-85">
-	
-		<div class="container" style="margin-top: 100px">
-		<div class="bread-crumb flex-w p-l-50 p-r-15 p-b-30 p-lr-0-lg">
-			<a href="main.do" class="stext-109 cl8 hov-cl1 trans-04">
-				main
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
 
-			<span class="stext-109 cl4">
-				날짜/극장/영화/시간
-			</span>
-		</div>
+		<div class="container" style="margin-top: 100px">
+			<div class="bread-crumb flex-w p-l-50 p-r-15 p-b-30 p-lr-0-lg">
+				<a href="main.do" class="stext-109 cl8 hov-cl1 trans-04"> 메인으로 <i
+					class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+				</a> <span class="stext-109 cl4"> 날짜/극장/영화/시간 </span>
+			</div>
 
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -48,7 +43,7 @@
 							</div>
 							<div class="wrapper">
 								<input type="text" id="datepicker" placeholder="날짜를 선택하세요."
-									autocomplete="off" style="font-family: MaplestoryLight"/> <i
+									autocomplete="off" style="font-family: MaplestoryLight" /> <i
 									class="ion-calendar"></i>
 							</div>
 							<%@ include file="./datepicker.jspf"%>
@@ -107,11 +102,11 @@
 												</div>
 											</div>
 											<div class="column-2"
-												style="font-family: NanumGothicExtraBold; font-size: 20px">${row.MOVIE_NAME}</div>
+												style="font-family: MaplestoryBold; font-size: 20px">${row.MOVIE_NAME}</div>
 											<div class="column-3">
 												<button
 													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}')); movieSelect();"
-													style="font-family: NanumGothicBold">삭제</button>
+													style="font-family: MaplestoryLight">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -128,15 +123,18 @@
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div
-						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" id="timeList">
+						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm"
+						id="timeList">
 						<h4 class="mtext-109 cl2 p-b-30">상영시간표</h4>
-						
-						
-							<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
-									<div class="size-196 p-t-35 p-b-35 flex-c-m" id="movieSelectNotice">
-										<span class="mtext-110 cl2" style="font-family: MaplestoryLight">날짜, 극장, 영화를 선택해주세요.</span>
-									</div>
+
+
+						<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
+							<div class="size-196 p-t-35 p-b-35 flex-c-m"
+								id="movieSelectNotice">
+								<span class="mtext-110 cl2" style="font-family: MaplestoryLight">날짜,
+									극장, 영화를 선택해주세요.</span>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -151,13 +149,20 @@
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top"> <i
-			class="zmdi zmdi-chevron-up"></i>
+			class="zmdi zmdi-chevron-up"></i> 
 		</span>
 	</div>
 
 	<%@ include file="movieList_modal.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>
+	
+	<c:if test="${selectedMovieList != null}">
+		<c:forEach var="idx" items="${selectedMovieList}">
+			<script type="text/javascript">add_item('${idx}');</script> 
+		</c:forEach>
+		<script type="text/javascript">movieSelect();</script>
+	</c:if>
 
 
 </body>

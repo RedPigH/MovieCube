@@ -48,6 +48,7 @@ public class MovieController {
 		return mv;
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
@@ -58,6 +59,30 @@ public class MovieController {
 
 		return mv;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/movieDetail2.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView movieDetail2(CommandMap commandMap, HttpServletRequest request) throws Exception { // 모달을 위한 메서드
+		ModelAndView mv = new ModelAndView("redirect:/main");
+		
+		String movie_no = request.getParameter("movie_no");
+		commandMap.put("MOVIE_NO", movie_no);
+		
+		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		Map<String, Object> map2 = (Map<String, Object>) map.get("map");
+
+		String openDate = map2.get("MOVIE_OPENDATE").toString();
+		openDate = openDate.substring(0, 10);
+	
+		mv.addObject("map", map.get("map"));
+		mv.addObject("openDate", openDate);
+		mv.setViewName("jsonView");
+		
+		
+		return mv;
+	}
+	
 
 	@RequestMapping(value = "/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -132,43 +157,58 @@ public class MovieController {
 
 		currentPage = Integer.parseInt(request.getParameter("currentPage")); // 클릭한 페이지
 
-		System.out.println("왜? : " + currentPage);
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1;
+		endPage = startPage + blockPage - 1;
 
 		commandMap.put("MOVIE_NO", movie_no);
-		System.out.println("영화넘버 : " + movie_no);
 
-		totalCount = Integer .parseInt((movieService.selectCommentCount(commandMap.getMap())).get("COMMENT_CNT").toString());
+		totalCount = Integer
+				.parseInt((movieService.selectCommentCount(commandMap.getMap())).get("COMMENT_CNT").toString());
 		totalPage = (int) Math.ceil((double) totalCount / blockCount); // 전체페이지 수 = 전체게시글의 수 / 한 화면에 보여줄 게시글의 수
-		System.out.println("전체 게시글 수 : " + totalCount);
-		System.out.println("전체 페이지 개수 : " + totalPage);
-		
-		if(totalCount != 0) {
-			for(int i = 1; i <= totalPage; i++) {
-				commentHtml += "<a id='page" + i + "' onclick='get_reviews(" + i + ")' >" + i + "</a>";
-			}
+
+		if (currentPage > blockPage)
+			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (startPage - 1) + ")'> 이전 </a> &nbsp;";
+
+		if (totalCount != 0) {
+			String selected = "";
+
+			for (int i = startPage; i <= endPage; i++) {
+				if(i > totalPage){
+					break;
+				}
+
+				if (i == currentPage) {
+					selected = "<Strong>" + i + "<Strong>";
+				} else {
+					selected = " " + i;
+				} // if문 끝
+
+				commentHtml += "<a id='page" + i + "' onclick='get_reviews(" + i + ")' >" + selected + "</a> &nbsp;";
+			} // for문 끝
+		} // if문 끝
+
+		if (totalPage - startPage >= blockPage) {
+			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (endPage + 1) + ")'> 다음 </a> &nbsp;"; 
 		}
 
 		startCount = ((currentPage - 1) * blockCount) + 1; // 만약 현재 선택한 페이지가 2페이지면 1 (2-1) * 5 + 1 = 6
 		endCount = startCount + blockCount - 1; // 6 + 5 - 1 = 10 그래서 6~10번까지 5개 띄워줄 수 있도록 설정.
 
-		System.out.println("시작 : " + startCount);
-		System.out.println("끝 : " + endCount);
-
 		commandMap.put("START_COUNT", startCount);
 		commandMap.put("END_COUNT", endCount);
 
 		List<Map<String, Object>> comment_paging_list = movieService.selectCommentPaingList(commandMap.getMap());
-		
+
 		// 시작 페이지와 마지막 페이지 값 구하기.
-		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1; // 현재페이지가 6페이지라면 시작페지이지는 6부터 10까지 만들어주기 위한 변수설정.
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1; // 현재페이지가 6페이지라면 시작페지이지는 6부터 10까지 만들어주기 위한
+																			// 변수설정.
 		endPage = startPage + blockPage - 1;
 
-		
-		mv.addObject("commentHtml" , commentHtml);
-		
+		mv.addObject("commentHtml", commentHtml);
+		mv.addObject("totalCount", totalCount);
+
 		mv.setViewName("jsonView");
 		mv.addObject("comment_paging_list", comment_paging_list);
-		
 
 		return mv;
 	}
@@ -202,11 +242,21 @@ public class MovieController {
 
 		if (id_check)
 			movieService.insertComment(map.getMap());
-
-		// map.clear();
-
-		// map.put("MOVIE_NO", movie_no);
-
+		
+		Map<String, Object> ReviewMap = movieService.CommentLikeInfo(map.getMap());
+		
+		int all_like = Integer.parseInt(ReviewMap.get("ALL_LIKE").toString());
+		int cnt = Integer.parseInt(ReviewMap.get("CNT").toString());
+		
+		double grade = all_like / cnt;
+		
+		CommandMap Grademap = new CommandMap();
+		
+		Grademap.put("MOVIE_NO", movie_no);
+		Grademap.put("MOVIE_GRADE", String.format("%.1f", grade));
+		
+		movieService.modifyGrade(Grademap.getMap());
+		
 		mv.addObject("id_check", id_check);
 		mv.setViewName("jsonView");
 
@@ -226,5 +276,5 @@ public class MovieController {
 
 		return mv;
 	}
-
+	
 }

@@ -16,7 +16,7 @@ import com.moviecube.screen.ScreenService;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminSeatController {
+public class SeatController {
 	
 	@Resource(name = "seatService")
 	private SeatService seatService;

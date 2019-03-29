@@ -34,7 +34,7 @@
 			<div class="row" style="margin: 0 0;">
 				<div class="bread-crumb flex-w p-l-50 p-r-15 p-b-30 p-lr-0-lg">
 			<a href="main.do" class="stext-109 cl8 hov-cl1 trans-04">
-				main
+				메인으로
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 			
@@ -83,6 +83,7 @@
 									<ul id="selected-seats" style="margin: 0 0 1.5em 2em;"></ul>
 									<p>
 										좌석수: <span id="counter">0</span>
+										<span style="font-size: 12px; color:#ff0000; padding-left: 15px">*총 4매까지 예약할 수 있습니다.</span>
 									</p>
 									<p>
 										금액: <b>&#8361<span id="total">0</span></b>

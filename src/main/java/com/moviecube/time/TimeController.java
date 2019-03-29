@@ -29,7 +29,7 @@ import com.moviecube.common.Paging;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminTimeController {
+public class TimeController {
 
 	@Resource(name = "timeService")
 	private TimeService timeService;
@@ -120,40 +120,6 @@ public class AdminTimeController {
 		return mv;
 		
 	}
-			
-/*		ModelAndView mv = new ModelAndView();
-
-		List<Map<String, Object>> timeList = timeService.selectTimeList(commandMap.getMap());
-
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) {
-			currentPage = 1;
-		} else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-
-		totalCount = timeList.size();
-
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "timeList");
-		pagingHtml = paging.getPagingHtml().toString();
-
-		int lastCount = totalCount;
-		
-		if (paging.getEndCount() < totalCount) {
-			lastCount = paging.getEndCount() + 1;
-		}
-
-		timeList = timeList.subList(paging.getStartCount(), lastCount);
-
-		mv.addObject("timeList", timeList);
-		mv.addObject("list", timeList);
-		mv.addObject("currentPage", currentPage);
-		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
-		mv.addObject("/admin/time/timeList");
-		return mv;
-*/
-	
 
 	@RequestMapping(value = "/timeDetail.do")
 	public ModelAndView timeSelectOne(CommandMap commandMap) throws Exception {

@@ -15,13 +15,13 @@ import com.moviecube.common.Paging;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminCinemaController {
+public class CinemaController {
 
 	@Resource(name = "cinemaService")
 	private CinemaService cinemaService;
 	
 	private int currentPage = 1;
-	private int totalCount;
+	private int totalCount; 
 	private int blockCount = 5;
 	private int blockpaging = 5;
 	private String pagingHtml;

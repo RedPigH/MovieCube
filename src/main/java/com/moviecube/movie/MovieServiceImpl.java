@@ -81,6 +81,11 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
+	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception{
+		return MovieDAO.CommentLikeInfo(map);
+	}
+	
+	@Override
 	public void insertMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		List<Map<String,Object>> fileList2 = fileUtils.parseInsertFileInfo2(map, request);
 	 		
@@ -150,6 +155,10 @@ public class MovieServiceImpl implements MovieService{
 		}
 	}
 	
+	public void modifyGrade(Map<String, Object> map) throws Exception{
+		MovieDAO.modifyGrade(map);
+	}
+	
 	@Override
 	public void deleteMovie(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
@@ -179,11 +188,6 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public void deleteComment(Map<String, Object> map) throws Exception {
 		MovieDAO.deleteComment(map);
-	}
-	
-	public List<Map<String, Object>> selectHotWishList(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

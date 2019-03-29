@@ -125,39 +125,7 @@ public class AdminController {
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("movieList", movieList);
 		mv.setViewName("/admin/movie/movieList");
-		return mv;
-/*		
-		ModelAndView mv = new ModelAndView();
-		
-		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
-		
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
-			currentPage = 1;
-		}else{
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		totalCount = movieList.size();
-		
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
-		pagingHtml = paging.getPagingHtml().toString();
-		
-		int lastCount = totalCount;
-	
-		if (paging.getEndCount() < totalCount) {
-			lastCount = paging.getEndCount() + 1;
-		}
-
-		movieList = movieList.subList(paging.getStartCount(), lastCount);
-		
-		mv.addObject("movieList", movieList);
-		mv.addObject("list", movieList);
-		mv.addObject("currentPage", currentPage);
-		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
-		mv.setViewName("admin/movie/movieList");
-		return mv;
-*/		
+		return mv;	
 	}
 	
 	@RequestMapping(value="/movieWriteForm.do")
@@ -1000,13 +968,6 @@ public class AdminController {
 		storeService.deleteStore(commandMap.getMap(), request);
 		
 		mv.addObject("STORE_NO", commandMap.get("STORE_NO"));
-		
-		return mv;
-	}
-	
-	@RequestMapping(value="/userStoreList.do")
-	public ModelAndView userstoreList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("store/storeList");
 		
 		return mv;
 	}
