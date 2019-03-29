@@ -1959,14 +1959,14 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+/* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
 .no-scrolling {
    height:100%;
    overflow:hidden;
 }
 
 .show-modal1 {
-  /* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+  /* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
   /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
@@ -2003,7 +2003,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+/* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
 .no-scrolling {
    height:100%;
    overflow:hidden;
@@ -2621,6 +2621,12 @@ input.num-product::-webkit-inner-spin-button {
   width: 100%;
   height: 50px;
 }
+
+.size-001 {
+  width: 740px;
+  height: 50px;
+}
+
 
 .size-117 {
   width: 220px;
