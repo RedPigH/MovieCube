@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- body_header -->
 <header>
@@ -17,11 +18,10 @@
 				</div>
 
 				<div class="right-top-bar flex-w h-full">
-					<a href="noticeList.do"
+					<a href="<%=cp%>/noticeList.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 공지사항 </a>
-					<a href="faqList.do" class="flex-c-m trans-04 p-lr-25"
-						style="width: 100px"> FAQs </a> 
-					<a href="qnaWriteForm.do"
+					<a href="<%=cp%>/faqList.do" class="flex-c-m trans-04 p-lr-25"
+						style="width: 100px"> FAQs </a> <a href="<%=cp%>/qnaWriteForm.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 1:1문의
 					</a>
 
@@ -44,39 +44,39 @@
 					<ul class="main-menu" style="width: 420px">
 
 						<li class="label1" data-label1="hot"><a
-							href="resources/about.html">이벤트</a></li>
+							href="<%=cp%>/resources/about.html">이벤트</a></li>
 
-						<li><a href="storeList.do">스토어</a></li>
+						<li><a href="<%=cp%>/storeList.do">스토어</a></li>
 
 						<c:if test="${empty sessionScope.userLoginInfo }">
-							<li><a href="#" class="js-show-modal2">빠른 예매</a></li>
+							<li><a href="javascript:void(0);" class="js-show-modal2">빠른 예매</a></li>
 						</c:if>
 						<c:if test="${not empty sessionScope.userLoginInfo }">
-							<li><a href="reserve.do">빠른예매</a></li>
+							<li><a href="<%=cp%>/reserve.do">빠른예매</a></li>
 						</c:if>
 
 
 						<c:if test="${empty sessionScope.userLoginInfo }">
-							<li><a href="#" class="js-show-modal2">로그인</a></li>
+							<li><a href="javascript:void(0);" class="js-show-modal2">로그인</a></li>
 						</c:if>
 						<c:if test="${not empty sessionScope.userLoginInfo }">
 							<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
-								<li><a href="#" style="font-family: MaplestoryLight"><span
-										style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
+								<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
+										style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
-										<li><a href="admin/movieList.do">관리자 페이지</a></li>
-										<li><a href="member/logout.do">로그아웃</a></li>
+										<li><a href="<%=cp%>/admin/movieList.do">관리자 페이지</a></li>
+										<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 									</ul></li>
 							</c:if>
 							<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
-								<li><a href="#" style="font-family: MaplestoryLight"><span
-										style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
+								<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
+										style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
-										<li><a href="member/myPage.do">마이페이지</a></li>
-										<li><a href="#">예매확인/취소</a></li>
-										<li><a href="member/logout.do">로그아웃</a></li>
+										<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
+										<li><a href="javascript:void(0);">예매확인/취소</a></li>
+										<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 									</ul></li>
 							</c:if>
 						</c:if>
@@ -103,7 +103,7 @@
 	<div class="wrap-header-mobile">
 		<!-- Logo moblie -->
 		<div class="logo-mobile">
-			<a href="resources/index.html"><img
+			<a href="<%=cp%>/main.do"><img
 				src="/moviecube/resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 		</div>
 
@@ -136,10 +136,10 @@
 
 			<li>
 				<div class="right-top-bar flex-w h-full">
-					<a href="notice/adminNoticeList.do"
+					<a href="<%=cp%>/notice/adminNoticeList.do"
 						class="flex-c-m p-lr-10 trans-04"> 공지사항 </a> <a
-						href="faq/adminFaqList.do" class="flex-c-m p-lr-10 trans-04">
-						FAQs </a> <a href="qna/adminInquiryList.do"
+						href="<%=cp%>/faqList.do" class="flex-c-m p-lr-10 trans-04">
+						FAQs </a> <a href="<%=cp%>/qna/adminInquiryList.do"
 						class="flex-c-m p-lr-10 trans-04"> 1:1문의 </a>
 
 				</div>
@@ -148,40 +148,40 @@
 
 		<ul class="main-menu-m">
 
-			<li><a href="resources/shoping-cart.html" class="label1 rs1"
+			<li><a href="<%=cp%>/resources/shoping-cart.html" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
-			<li><a href="resources/blog.html">스토어</a></li>
+			<li><a href="<%=cp%>/storeList.do">스토어</a></li>
 
 			<c:if test="${empty sessionScope.userLoginInfo }">
-				<li><a href="#" class="js-show-modal2">빠른 예매</a></li>
+				<li><a href="javascript:void(0);" class="js-show-modal2">빠른 예매</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope.userLoginInfo }">
-				<li><a href="reserve.do">빠른예매</a></li>
+				<li><a href="<%=cp%>/reserve.do">빠른예매</a></li>
 			</c:if>
 
 			<c:if test="${empty sessionScope.userLoginInfo }">
-				<li><a href="#" class="js-show-modal2">로그인</a></li>
+				<li><a href="javascript:void(0);" class="js-show-modal2">로그인</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope.userLoginInfo }">
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
-					<li><a href="#" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
-							<li><a href="admin/movieList.do">관리자 페이지</a></li>
-							<li><a href="member/logout.do">로그아웃</a></li>
+							<li><a href="<%=cp%>/admin/movieList.do">관리자 페이지</a></li>
+							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 						</ul>
 						<span class="arrow-main-menu-m"> <i
 							class="fa fa-angle-right" aria-hidden="true"></i>
 					</span></li>
 				</c:if>
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
-					<li><a href="#" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
-							<li><a href="#">마이페이지</a></li>
-							<li><a href="#">예매확인/취소</a></li>
-							<li><a href="member/logout.do">로그아웃</a></li>
+							<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
+							<li><a href="javascript:void(0);">예매확인/취소</a></li>
+							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 						</ul>
 						<span class="arrow-main-menu-m"> <i
 							class="fa fa-angle-right" aria-hidden="true"></i>
