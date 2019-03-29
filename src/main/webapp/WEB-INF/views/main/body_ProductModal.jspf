@@ -232,46 +232,14 @@ function writeToModal(movie_no) {
 									<div class="slick-track" style="opacity: 1; width: 1539px;">
 										<div
 											class="item-slick3 slick-slide slick-current slick-active"
-											data-thumb="/moviecube/resources/images/product-detail-01.jpg"
+											data-thumb=""
 											data-slick-index="0" aria-hidden="false" tabindex="0"
 											role="tabpanel" id="slick-slide00"
 											aria-describedby="slick-slide-control00"
 											style="width: 513px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
 											<div class="wrap-pic-w pos-relative">
 											<!-- 이미지는 바로 이곳이로군 . -->
-												<img id="h_modal_poster_savname" src="/moviecube/resources/images/product-detail-01.jpg" width="270px" height="634px" alt="IMG-PRODUCT">
-											</div>
-										</div>
-										<div class="item-slick3 slick-slide"
-											data-thumb="images/product-detail-02.jpg"
-											data-slick-index="1" aria-hidden="true" tabindex="-1"
-											role="tabpanel" id="slick-slide01"
-											aria-describedby="slick-slide-control01"
-											style="width: 513px; position: relative; left: -513px; top: 0px; z-index: 998; opacity: 0;">
-											<div class="wrap-pic-w pos-relative">
-												<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-												<a
-													class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-													href="images/product-detail-02.jpg" tabindex="-1"> <i
-													class="fa fa-expand"></i>
-												</a>
-											</div>
-										</div>
-										<div class="item-slick3 slick-slide"
-											data-thumb="images/product-detail-03.jpg"
-											data-slick-index="2" aria-hidden="true" tabindex="-1"
-											role="tabpanel" id="slick-slide02"
-											aria-describedby="slick-slide-control02"
-											style="width: 513px; position: relative; left: -1026px; top: 0px; z-index: 998; opacity: 0;">
-											<div class="wrap-pic-w pos-relative">
-												<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-												<a
-													class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-													href="images/product-detail-03.jpg" tabindex="-1"> <i
-													class="fa fa-expand"></i>
-												</a>
+												<img id="h_modal_poster_savname" src="" width="270px" height="634px" alt="IMG-PRODUCT">
 											</div>
 										</div>
 									</div>

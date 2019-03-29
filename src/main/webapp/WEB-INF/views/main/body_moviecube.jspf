@@ -293,8 +293,6 @@ function toModal(movie_no) {
 					<div>영화 없음</div>
 				</c:otherwise>
 			</c:choose>
-			
-
 		</div>
 	</div>
 </section>
