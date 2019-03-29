@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,17 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "/insertItem.do")
-	public ModelAndView insertItem(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView insertItem(CommandMap commandMap, HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView("store/storeList");
+		
+		commandMap.put("STORE_NO", request.getParameter("STORE_NO"));
+		commandMap.put("MEMBER_NO", request.getParameter("MEMBER_NO"));
+		commandMap.put("TOTAL", request.getParameter("TOTAL"));
+		commandMap.put("AMOUNT", request.getParameter("AMOUNT"));
 		
 		storeService.insertItem(commandMap.getMap());
+		
+		mv.setViewName("jsonView");
 		
 		return mv;
 	}

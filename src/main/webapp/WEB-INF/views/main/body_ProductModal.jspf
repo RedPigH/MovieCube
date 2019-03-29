@@ -186,7 +186,7 @@ function writeToModal(movie_no) {
 			var type = "타입 :  " + data.map.MOVIE_TYPE;
 			$("#h_modal_movie_type").text(type);
 			
-			var movie_opendate = "개봉일 :  " + data.openDate;
+			var movie_opendate = "개봉일 :  " + String(data.openDate);
 			$("#h_modal_movie_opendate").text(movie_opendate);
 			
 			var director = "감독  :  " + data.map.MOVIE_DIRECTOR;
