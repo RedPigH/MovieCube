@@ -3,20 +3,59 @@
 
 <mapper namespace="faq">
 
-	<select id="selectFaqList" parameterType="hashmap"
-		resultType="hashmap">
-
-<![CDATA[
-SELECT
-FAQ_NO,
-FAQ_TYPE,
-FAQ_SUB
-FROM
-MC_FAQ
-ORDER BY FAQ_NO DESC
-]]>
+	<select id="selectFaqList" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ
+				ORDER BY FAQ_NO DESC
+		]]>
+	</select>
+	
+	<select id="selectFaqList1" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ 
+				WHERE FAQ_TYPE='영화예매'
+				ORDER BY FAQ_NO DESC
+		]]>
+	</select>
+	
+	<select id="selectFaqList2" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ 
+				WHERE FAQ_TYPE='영화관'
+				ORDER BY FAQ_NO DESC
+		]]>
+	</select>
+	
+	<select id="selectFaqList3" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ 
+				WHERE FAQ_TYPE='상영관'
+				ORDER BY FAQ_NO DESC
+		]]>
+	</select>
+	
+	<select id="selectFaqList4" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ 
+				WHERE FAQ_TYPE='멤버쉽'
+				ORDER BY FAQ_NO DESC
+		]]>
 	</select>
 
+	<select id="selectFaqList5" parameterType="hashmap"	resultType="hashmap">
+		<![CDATA[
+		SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ 
+				WHERE FAQ_TYPE='기타'
+				ORDER BY FAQ_NO DESC
+		]]>
+	</select>
+	
 	<insert id="insertFaq" parameterType="hashmap">
 	<![CDATA[
 	INSERT INTO MC_FAQ
@@ -70,17 +109,19 @@ ORDER BY FAQ_NO DESC
 	FAQ_NO = #{FAQ_NO}
 	]]>
 	</delete>
-	
+
 	<!-- FAQ 검색 -->
-	<select id="faqSearch0" resultType="hashmap" parameterType="hashmap">
+	<select id="faqSearch0" resultType="hashmap"
+		parameterType="hashmap">
 		select * from MC_FAQ
-		where FAQ_SUB like #{search} 
+		where FAQ_SUB like #{search}
 		order by FAQ_NO desc
 	</select>
-	
-	<select id="faqSearch1" resultType="hashmap" parameterType="hashmap">
-		select * from MC_FAQ 
-		where FAQ_CONTENT like #{search} 
+
+	<select id="faqSearch1" resultType="hashmap"
+		parameterType="hashmap">
+		select * from MC_FAQ
+		where FAQ_CONTENT like #{search}
 		order by FAQ_NO desc
 	</select>
 </mapper>

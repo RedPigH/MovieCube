@@ -24,17 +24,17 @@
 <div class="admin_grp" style="margin: 100px 200px 5px">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/faqList.do">전체 FAW</a></li>
+			<li><a href="<%=cp%>/faqList.do">전체 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList1.do">영화예매 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList2.do">영화관 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList3.do">상영관 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList4.do">멤버쉽 FAQ</a></li>
+			<li class="on"><a href="<%=cp%>/faqList4.do">멤버쉽 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList5.do">기타 FAQ</a></li>
 		</ul>
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">전체 FAQ 안내</h3>
+		<h3 class="sub_tit">FAQ 안내</h3>
 		<div class="tbl_type_02">
 			<table>
 				<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
