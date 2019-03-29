@@ -35,14 +35,14 @@
 	<select id="HotMovieList" resultType="hashmap"
 		parameterType="hashmap">
 	<![CDATA[
-		select w.movie_no,m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from mc_wishlist where movie_no = w.movie_no) as wish_cnt
-		from (select * from mc_wishlist
-		where rowid in(select max(rowid) from mc_wishlist group by movie_no)) w
-		inner join mc_movie m on w.movie_no = m.movie_no
-		inner join mc_movie_file f on w.movie_no = f.movie_no
-		where f.del_gb = 'N' and rownum <= 6
-		order by wish_cnt desc
+		select h.movie_no, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+         m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from reservation where movie_no = h.movie_no) as rev_cnt
+      from (select * from (select * from reservation r inner join time t on r.time_no = t.time_no)
+      where rowid in(select max(rowid) from (select * from reservation r inner join time t on r.time_no = t.time_no) group by movie_no)) h
+      inner join mc_movie m on h.movie_no = m.movie_no
+      inner join mc_movie_file f on h.movie_no = f.movie_no
+      where f.del_gb = 'N' and rownum <= 6
+      order by rev_cnt desc
 	]]>
 	</select>
 
