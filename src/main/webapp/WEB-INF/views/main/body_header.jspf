@@ -74,7 +74,7 @@
 										style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
-										<li><a href="javascript:void(0);">마이페이지</a></li>
+										<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
 										<li><a href="javascript:void(0);">예매확인/취소</a></li>
 										<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 									</ul></li>
@@ -166,7 +166,7 @@
 			<c:if test="${not empty sessionScope.userLoginInfo }">
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
 					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
 							<li><a href="<%=cp%>/admin/movieList.do">관리자 페이지</a></li>
 							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
@@ -177,9 +177,9 @@
 				</c:if>
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
 					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
-							<li><a href="javascript:void(0);">마이페이지</a></li>
+							<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
 							<li><a href="javascript:void(0);">예매확인/취소</a></li>
 							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 						</ul>
