@@ -407,6 +407,9 @@ function deleteWishList2() {
 				} else if(selectedDate.trim() == "" && !(!cinemaNo.length) && !(!movieName.length)){
 					$("#movieSelectNotice").find("span").remove().end().append(
 					'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">날짜를 선택해주세요.</span>');
+				} else if(selectedDate.trim() == "" && !cinemaNo.length && !movieName.length){
+					$("#movieSelectNotice").find("span").remove().end().append(
+					'<span class="mtext-110 cl2" style="font-family: MaplestoryBold">날짜, 극장, 영화를 선택해주세요.</span>');
 				}
 					
 					
