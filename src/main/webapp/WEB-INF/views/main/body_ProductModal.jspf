@@ -259,12 +259,6 @@ function deleteReview(cmt_no) {
 						<p id="h_modal_movie_genre" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
 						<input type="hidden" id="h_modal_movie_no" value=""/>
 						
-						
-						<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
-							pharetra viverra. Nam vitae luctus ligula. Mauris consequat
-							ornare feugiat.</p>
-
-						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
@@ -274,28 +268,6 @@ function deleteReview(cmt_no) {
 									</button>
 								</div>
 							</div>
-						</div>
-
-						<!--  -->
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="resources/#"
-									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-									data-tooltip="Add to Wishlist"> <i
-									class="zmdi zmdi-favorite"></i>
-								</a>
-							</div>
-
-							<a href="resources/#"
-								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
-							</a> <a href="resources/#"
-								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
-							</a> <a href="resources/#"
-								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
-							</a>
 						</div>
 					</div>
 				</div>
