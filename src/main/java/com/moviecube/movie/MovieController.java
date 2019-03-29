@@ -76,6 +76,7 @@ public class MovieController {
 		openDate = openDate.substring(0, 10);
 	
 		mv.addObject("map", map.get("map"));
+		
 		mv.addObject("openDate", openDate);
 		mv.setViewName("jsonView");
 		

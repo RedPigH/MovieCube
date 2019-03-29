@@ -7,7 +7,7 @@
 <script type="text/javascript">
 function toModal(movie_no) {
 	writeToModal(movie_no);
-	 
+
 	/* Ajax를 해봅시다 */
 	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
 	$("div").remove("#comment_start");
