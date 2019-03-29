@@ -34,7 +34,7 @@
 <body>
 	<%@ include file="../main/body_header.jspf"%>
 
-<div class="admin_grp">
+<div class="admin_grp" style="margin: 100px 100px 50px 100px">
 	<div class="admin_ct">
 		<h3 class="sub_tit">공지사항</h3>
 		<div class="tbl_type_02">
