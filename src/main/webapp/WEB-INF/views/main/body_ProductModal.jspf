@@ -44,7 +44,7 @@ function get_reviews(currentPage) {
 				cmt_id = data.comment_paging_list[i].CMT_ID;
 				
 				if(member_id == cmt_id) { // 로그인한 아이디와 댓글 아이디가 같으면 삭제버튼을 추가해줌.
-					var delete_button2 = "<a href='javascript:deleteReview(" + cmt_no + ")' style='float: right;'>" + "<p><font size='1'>삭제</font><font color='red'</font></p>";
+					var delete_button2 = "<a href='javascript:deleteReview(" + cmt_no + ")' style='float: right;'>" + "<p><font size='2'>삭제</font><font color='red'</font></p>";
 				} else {
 					var delete_button2 = "<div></div>";
 				}
@@ -62,10 +62,10 @@ function get_reviews(currentPage) {
 				"</div>" + 
 				"<div class='size-207'>" + 
 				"<div class='flex-w flex-sb-m p-b-17'>" + 
-				"<span class='mtext-107 cl2 p-r-20'>" + cmt_id + "</span>" + 
+				"<span class='mtext-107 cl2 p-r-20' style='font-size:20px;'>" + cmt_id + "</span>" + 
 				"<span class='fs-18 cl11'>" + 
 				rating_text +  "</span>" +  "</div>" + 
-				"<textarea class='stext-102 cl6' style='float: left; width:600px; height:83px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>" +
+				"<textarea class='stext-118 cl13' style='float: left; width:600px; height:83px;'>" + cmt_content + "</textarea>" + delete_button2 + "</div>" +  " </div>" +
 				"<hr>";
 				
 			} // for문 끝
@@ -173,17 +173,24 @@ function writeToModal(movie_no) {
 		data : data,
 
 		success : function(data) {
+			var movie_rating_text = "";
+			
+			var movie_grade = data.map.MOVIE_GRADE;
+			for(var i =0; i < Number(movie_grade) / 2; i++) {
+				movie_rating_text = movie_rating_text + "<i class='zmdi zmdi-star'></i> ";
+			}
+			
 			$("h_modal_movie_no").text(movie_no);
 			
 			$("#h_modal_movie_name").text(data.map.MOVIE_NAME);
 			
-			var grade_text = "평점 : " + data.map.MOVIE_GRADE;
-			$("#h_modal_movie_grade").text(grade_text);
+			var grade_text = "평점 : " + movie_grade + movie_rating_text;
+			$("#h_modal_movie_grade").html(grade_text);
 			
 			var img_url = "/moviecube/resources/upload/movie/poster/" + data.map.POSTER_SAVNAME;
 			$("#h_modal_poster_savname").attr('src', img_url);
 			
-			var type = "타입 :  " + data.map.MOVIE_TYPE;
+			var type = "타입 :  " + String(data.map.MOVIE_TYPE);
 			$("#h_modal_movie_type").text(type);
 			
 			var movie_opendate = "개봉일 :  " + String(data.openDate);
@@ -260,19 +267,19 @@ function writeToModal(movie_no) {
 
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h4 id="h_modal_movie_name" style="font-weight: bold; font-size: 26px"
-							class="mtext-105 cl2 js-name-detail p-b-14">
+						<h4 id="h_modal_movie_name" 
+							class="stext-119 cl2 js-name-detail p-b-14">
 							<!-- Jquery로 값 자동으로들어감 -->
 						</h4>
 						<hr>
 						<p class="stext-102 cl3 p-t-23"> </p>
-						<p id="h_modal_movie_grade" style="font-weight: bold; font-size: 20px"> <!-- Jquery로 값 자동으로들어감 --> </p>
-						<p class="stext-102 cl3 p-t-23"> </p>
-						<p id="h_modal_movie_type" style="font-weight: bold; font-size: 20px">타입 : </p> 
-						<p id="h_modal_movie_opendate" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
-						<p id="h_modal_movie_director" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
-						<p id="h_modal_movie_actor" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
-						<p id="h_modal_movie_genre" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"> </p>
+						<p id="h_modal_movie_grade" class="stext-118"> <!-- Jquery로 값 자동으로들어감 --> </p>
+						<span class='fs-18 cl11' id="movie_rating"></span>
+						<p id="h_modal_movie_type" class="stext-118" > </p> 
+						<p id="h_modal_movie_opendate" class="stext-118 cl3" > </p>
+						<p id="h_modal_movie_director" class="stext-118 cl3" > </p>
+						<p id="h_modal_movie_actor" class="stext-118 cl3" > </p>
+						<p id="h_modal_movie_genre" class="stext-118 cl3" > </p>
 						<input type="hidden" id="h_modal_movie_no" value=""/>
 
 						<!--  -->
@@ -318,15 +325,15 @@ function writeToModal(movie_no) {
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item p-b-10"><a class="nav-link active"
-							data-toggle="tab" href="#description" role="tab">줄거리</a>
+							data-toggle="tab" href="#description" role="tab" style="font-size:20px;">줄거리</a>
 						</li>
 
 						<li class="nav-item p-b-10"><a class="nav-link"
-							data-toggle="tab" href="#information" role="tab">스틸컷
+							data-toggle="tab" href="#information" role="tab" style="font-size:20px;">스틸컷
 								</a></li>
 
 						<li class="nav-item p-b-10"><a class="nav-link" onclick="" 
-							data-toggle="tab" href="#reviews" role="tab" id="reviewCount">리뷰 (1)</a></li>
+							data-toggle="tab" href="#reviews" role="tab" id="reviewCount" style="font-size:20px;" ></a></li>
 					</ul>
 
 					<!-- Tab panes -->
@@ -335,7 +342,7 @@ function writeToModal(movie_no) {
 						<div class="tab-pane fade show active" id="description"
 							role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
-								<p id="h_modal_movie_content" class="stext-102 cl6">앙</p>
+								<p id="h_modal_movie_content" class="stext-118 cl6">앙</p>
 							</div>
 						</div>
 
@@ -367,12 +374,12 @@ function writeToModal(movie_no) {
 
 										<!-- 	Add review -->
 										<form class="w-full">
-											<h5 class="mtext-108 cl2 p-b-7">리뷰 작성하기</h5>
+											<h5 class="stext-118 cl2 p-b-7">리뷰 작성하기</h5>
 
-											<p class="stext-102 cl6">함께 아름다운 댓글 문화를 만들어가요 ~</p>
+											<p class="stext-102 cl6" style="font-size:20px;">함께 아름다운 댓글 문화를 만들어가요 ~</p>
 
 											<div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16"> 별 점 </span>
+												<span class="stext-102 cl3 m-r-16" style="font-size:18px;"> 별 점 </span>
 												<span class="wrap-rating fs-18 cl11 pointer">
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i> 
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i> 
@@ -388,7 +395,7 @@ function writeToModal(movie_no) {
 
 											<div class="row p-b-25">
 												<div class="col-12 p-b-5">
-													<label class="stext-102 cl3" for="review">Your
+													<label class="stext-102 cl3" style="font-size:18px;" for="review">Your
 														review</label>
 													<textarea
 														class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review">  
