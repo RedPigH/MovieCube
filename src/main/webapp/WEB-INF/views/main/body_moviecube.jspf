@@ -5,49 +5,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script type="text/javascript">
-function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genre, movie_content, movie_age, movie_url, poster_savname, movie_grade, movie_opendate, movie_no) {
-	
-	var movieNo = movie_no; // 영화넘버 Ajax로 컨트롤러로 넘겨줄 예정임 으히힇훠휳ㅎ
-	$("h_modal_movie_no").text(movieNo);
-	
-	$("#h_modal_movie_name").text(movie_name);
-	
-	var grade_text = "평점 : " + movie_grade;
-	$("#h_modal_movie_grade").text(grade_text);
-	
-	var img_url = "/moviecube/resources/upload/movie/poster/" + poster_savname;
-	$("#h_modal_poster_savname").attr('src', img_url);
-	
-	var type = "타입  :  " + movie_type;
-	$("#h_modal_movie_type").text(type);
-	
-	movie_opendate = movie_opendate.substring(0,10);
-	var open_date = "개봉일  :  " + movie_opendate;
-	$("#h_modal_movie_opendate").text(open_date);
-	
-	var director = "감독  :  " + movie_director;
-	$("#h_modal_movie_director").text(director);
-	
-	var actor = "출연진  :  " + movie_actor;
-	$("#h_modal_movie_actor").text(actor);
-	
-	var genre = "장르  :  " + movie_genre;
-	$("#h_modal_movie_genre").text(genre);
-	
-	$("#h_modal_movie_content").text(movie_content);
-	
-	$("#h_modal_movie_no").attr("value", movieNo);
-	
+function toModal(movie_no) {
+	writeToModal(movie_no);
+	 
 	/* Ajax를 해봅시다 */
 	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
 	$("div").remove("#comment_start");
 	$("#review").val(''); // textarea 값 초기화
-	get_reviews();
 	
 	jQuery.ajaxSettings.traditional = true;
 	stillcut_list = new Array();
 	var data = {
-			"movie_no" : movieNo
+			"movie_no" : movie_no
 	}
 	
 			$.ajax({
@@ -59,7 +28,6 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 				success : function(data) {
 					
 					var stillcut_length = data.stillcut_list.length;
-					// alert('스틸컷 리스트 넘버 : ' + stillcut_length);
 					
 					var for_label_prev = "&#x2039;";
 					var for_label_next = "&#x203a;"
@@ -77,7 +45,7 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 							input_tag = "<input type='radio' name='radio-btn' id='img-1' checked />";
 						}
 						var savname = data.stillcut_list[i].STILLCUT_SAVNAME + "'/>";
-						// alert(data.stillcut_list[i].STILLCUT_SAVNAME);
+						
 						img_tag = img_tag + savname;
 						
 						if(i == 0) { // 만약 i가 처음 값이면 이전 버튼 눌렀을 때 마지막 사진을 띄워줘야됨.
@@ -293,20 +261,8 @@ function toModal(movie_name, movie_type, movie_director, movie_actor, movie_genr
 										src="/moviecube/resources/upload/movie/poster/${row.POSTER_SAVNAME}" alt="영화포스터" /><!-- height 뺐음 -->
 									
 
-									<a href="#" id="gahyun" onclick="toModal(
-										'${row.MOVIE_NAME }',
-										'${row.MOVIE_TYPE }',
-										'${row.MOVIE_DIRECTOR }',
-										'${row.MOVIE_ACTOR }',
-										'${row.MOVIE_GENRE }',
-										'${row.MOVIE_CONTENT }',
-										'${row.MOVIE_AGE }',
-										'${row.MOVIE_URL }',
-										'${row.POSTER_SAVNAME }',
-										'${row.MOVIE_GRADE }',
-										'${row.MOVIE_OPENDATE }',
-										'${row.MOVIE_NO }'
-									);" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+									<a href="#" id="gahyun" onclick="toModal(${row.MOVIE_NO });" 
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 										상세보기 </a>
 
 								</div>

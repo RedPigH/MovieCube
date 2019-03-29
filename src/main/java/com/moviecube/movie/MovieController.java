@@ -58,6 +58,24 @@ public class MovieController {
 
 		return mv;
 	}
+	
+	@RequestMapping(value = "/movieDetail2.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView movieDetail2(CommandMap commandMap, HttpServletRequest request) throws Exception { // 모달을 위한 메서드
+		ModelAndView mv = new ModelAndView("redirect:/main");
+		
+		String movie_no = request.getParameter("movie_no");
+		commandMap.put("MOVIE_NO", movie_no);
+		
+		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+		
+		mv.addObject("map", map.get("map"));
+		mv.setViewName("jsonView");
+		
+		
+		return mv;
+	}
+	
 
 	@RequestMapping(value = "/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
