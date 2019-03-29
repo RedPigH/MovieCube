@@ -321,8 +321,6 @@ function deleteWishList2() {
 <script type="text/javascript">
     function add_item(MOVIE_NAME){
     	
-    	alert(MOVIE_NAME);
-    	
         var length = $(".AddedMovieList").length;
         
         if(length < 4){

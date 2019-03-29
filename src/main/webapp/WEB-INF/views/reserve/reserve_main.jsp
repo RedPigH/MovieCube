@@ -18,12 +18,7 @@
 	<%@ include file="../main/body_header.jspf"%>
 	<%@ include file="../main/wishList.jspf"%>
 
-	<c:if test="${selectedMovieList != null}">
-		<c:forEach var="idx" items="${selectedMovieList}">
-			<script type="text/javascript">add_item(${idx});</script>
-		</c:forEach>
-		<script type="text/javascript">movieSelect();</script>
-	</c:if>
+	
 	<!-- 영화 예매 -->
 	<form class="bg0 p-t-75 p-b-85">
 
@@ -111,7 +106,7 @@
 											<div class="column-3">
 												<button
 													onclick="remove_item(document.getElementById('AddedMovieList${row.MOVIE_NAME}')); movieSelect();"
-													style="font-family: NanumGothicBold">삭제</button>
+													style="font-family: MaplestoryLight">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -154,13 +149,20 @@
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top"> <i
-			class="zmdi zmdi-chevron-up"></i>
+			class="zmdi zmdi-chevron-up"></i> 
 		</span>
 	</div>
 
 	<%@ include file="movieList_modal.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>
+	
+	<c:if test="${selectedMovieList != null}">
+		<c:forEach var="idx" items="${selectedMovieList}">
+			<script type="text/javascript">add_item('${idx}');</script> 
+		</c:forEach>
+		<script type="text/javascript">movieSelect();</script>
+	</c:if>
 
 
 </body>
