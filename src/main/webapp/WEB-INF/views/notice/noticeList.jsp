@@ -2,100 +2,107 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@ include file="../main/head.jspf"%>
+<link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
+<script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
+<script src="<%= cp %>/resources/js/admin_common.js"></script>
+
+
+<style>
+    .menu a{cursor:pointer;}
+    .menu .hide{display:none;}
+</style>
+
+<script>
+
+    $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".menu>a").click(function(){
+            // 현재 클릭한 태그가 a 이기 때문에
+            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+            $(this).next("ul").toggleClass("hide");
+            var value = $('#')
+        });
+    });
+</script>
+
 </head>
 <body>
 	<%@ include file="../main/body_header.jspf"%>
-	<form class="bg0 p-t-75 p-b-85">
-		<div class="container" style="margin-top: 100px">
 
-			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="flex-w flex-m m-r-20 m-tb-5">
-								<h2 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">공지사항 목록♥</h2>
-						</div>
-						<table class="board_list">
-							<colgroup>
-								<col width="10%" />
-								<col width="*" />
-								<col width="15%" />
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="col">글번호</th>
-									<th scope="col">제목</th>
-									<th scope="col">작성일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:choose>
-									<c:when test="${fn:length(noticeList) > 0}">
-										<c:forEach items="${noticeList }" var="row">
-											<tr>
-												<td>${row.NOTICE_NO }</td>
-												<td class="NOTICE_SUB"><a href="#this"
-													name="NOTICE_SUB">${row.NOTICE_SUB }</a> <input
-													type="hidden" id="NOTICE_NO" value="${row.NOTICE_NO }">
-												</td>
-												<td>${row.NOTICE_REGDATE }</td>
-											</tr>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<tr>
-											<td colspan="4">조회된 결과가 없습니다.</td>
-										</tr>
-									</c:otherwise>
-								</c:choose>
-							</tbody>
-						</table>
-						<a href="#this" class="btn" id="write">글쓰기</a> ${pagingHtml}
-						<%@ include file="/WEB-INF/include/include-body.jspf"%>
-					</div>
-				</div>
-			</div>
+<div class="admin_grp" style="margin: 100px 100px 50px 100px">
+	<div class="admin_ct">
+		<h3 class="sub_tit">공지사항</h3>
+		<div class="tbl_type_02">
+			<table>
+				<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
+				<colgroup>
+					<col style="width:15%;" />
+					<col style="width:70%;" />
+					<col style="width:15%;" />
+				
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">제목</th>
+						<th scope="col">날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				<c:choose>
+					<c:when test="${fn:length(noticeList) > 0}">
+            			<c:forEach items="${noticeList}" var="row">
+						<tr>
+							<td>${row.NOTICE_NO}</td>
+							<%--<td><a href="javascript:doDisplay();">${row.NOTICE_SUB}</a><br/><br/>
+								<div id="myDIV">나나나</div> --%>
+							<td class="subject"><a href="#this" name="NOTICE_SUB">${row.NOTICE_SUB}
+							<input type="hidden" id="NOTICE_NO" value="${row.NOTICE_NO}"/></a></td>
+							<%-- <td class="menu">
+									<a>${row.NOTICE_SUB}<input type="hidden" id="NOTICE_CONTENT" value="${row.NOTICE_CONTENT}"/></a>			 
+           						 	<ul class="hide">${row.NOTICE_CONTENT}</ul>
+							 </td> --%>
+							<td><c:set var="TextValue" value="${row.NOTICE_REGDATE}"/> ${fn:substring(TextValue,0,16)}</td>
+						</tr>
+						</c:forEach>
+					</c:when>
+				<c:otherwise>
+					등록된 게시물이 없습니다
+				</c:otherwise>
+			</c:choose>
+				</tbody>
+			</table>
 		</div>
-	</form>
+		
+		<div class="paging">${pagingHtml}</div>
+	</div>
+</div>
 
+<form id="commonForm" name="common"></form>
 
-
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#write").on("click", function(e) {/* 글쓰기 버튼 */
-				e.preventDefault();
-				fn_openBoardWrite();
-			});
-
-			$("a[name='NOTICE_SUB']").on("click", function(e) { /* 제목 */
-				e.preventDefault();
-				fn_openBoardDetail($(this));
-			});
-		});
-
-		function fn_openBoardWrite() {
-			var comSubmit = new ComSubmit();
-			comSubmit
-					.setUrl("<c:url value='/notice/adminNoticeWriteForm.do'/>");
-			comSubmit.submit();
-		}
-
-		function fn_openBoardDetail(obj) {
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeDetail.do'/>");
-			comSubmit.addParam("NOTICE_NO", obj.parent().find("#NOTICE_NO")
-					.val());
-			comSubmit.submit();
-		}
-	</script>
-
-
-	<%@ include file="../main/body_footer.jspf"%>
-	<%@ include file="../main/script.jspf"%>
+<script type="text/javascript">
+        $(document).ready(function(){
+    
+            $("a[name='NOTICE_SUB']").on("click", function(e){ // 영화제목, 영화포스터 클릭
+                e.preventDefault();
+                fn_openBoardDetail($(this));
+            });
+        });
+         
+        function fn_openBoardDetail(obj){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='noticeDetail.do' />");
+            comSubmit.addParam("NOTICE_NO", obj.parent().find("#NOTICE_NO").val());
+            comSubmit.addParam("currentPage", "${currentPage}");
+            comSubmit.submit();
+        }
+    </script> 
 </body>
 </html>

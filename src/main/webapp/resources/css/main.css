@@ -1701,6 +1701,51 @@ button.mfp-close {
   border-color: #797979;
 }
 
+/*//////////////////////////////////////////////////////////////////
+[ Tab02 ]*/
+.tab02 .nav-tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.tab02 .nav-tabs .nav-item {
+  margin: 0px 15px;
+}
+
+.tab02 .nav-link {
+  font-family: MaplestoryLight;
+  font-size: 20px;
+  color: #888;
+  line-height: 1.2;
+
+  padding: 0;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid transparent;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.tab02 .nav-link.active {
+  color: #333;
+  border-color: #797979;
+}
+
+.tab02 .nav-link:hover {
+  color: #333;
+  border-color: #797979;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -1960,14 +2005,14 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+/* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
 .no-scrolling {
    height:100%;
    overflow:hidden;
 }
 
 .show-modal1 {
-  /* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+  /* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
   /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
@@ -2004,7 +2049,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* Áß¿øÀÌ°¡ Ãß°¡ÇÔ */
+/* ï¿½ß¿ï¿½ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ */
 .no-scrolling {
    height:100%;
    overflow:hidden;
@@ -2246,6 +2291,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl10 {color: #1d1d1d;}
 .cl11 {color: #f9ba48;}
 .cl12 {color: #ccc;}
+.cl13 {color: #777;}
 
 /* Ãß°¡ Æû */
 
@@ -2356,6 +2402,18 @@ input.num-product::-webkit-inner-spin-button {
   font-family: Poppins-Light;
   font-size: 15px;
   line-height: 1.666667;
+}
+
+.stext-118 {
+	font-family: MaplestoryLight;
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.stext-119 {
+	font-family: MaplestoryBold;
+    font-size: 30px;
+    line-height: 1.7;
 }
 
 
@@ -2636,6 +2694,12 @@ input.num-product::-webkit-inner-spin-button {
   width: 100%;
   height: 50px;
 }
+
+.size-001 {
+  width: 740px;
+  height: 50px;
+}
+
 
 .size-117 {
   width: 220px;

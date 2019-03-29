@@ -29,7 +29,7 @@ public class NoticeController {
 	private String pagingHtml;
 	private Paging paging;
 
-	@RequestMapping(value = "/notice/adminNoticeList.do")
+	@RequestMapping(value = "/noticeList.do")
 	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
@@ -44,7 +44,7 @@ public class NoticeController {
 
 		totalCount = noticeList.size();
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminNoticeList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -65,25 +65,7 @@ public class NoticeController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/notice/adminNoticeWriteForm.do")
-	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeWriteForm");
-
-		return mv;
-
-	}
-
-	@RequestMapping(value = "/notice/adminNoticeWrite.do")
-	public ModelAndView writeNotice(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-
-		noticeService.insertBoard(commandMap.getMap());
-
-		return mv;
-
-	}
-
-	@RequestMapping(value = "/notice/adminNoticeDetail.do")
+	@RequestMapping(value = "/noticeDetail.do")
 	public ModelAndView noticeDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/notice/noticeDetail");
 		
@@ -96,52 +78,4 @@ public class NoticeController {
 
 		return mv;
 	}
-
-	@RequestMapping(value = "/notice/adminNoticeModifyForm.do")
-	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/notice/noticeModify");
-
-		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
-		mv.addObject("map", map);
-
-		return mv;
-
-	}
-
-	@RequestMapping(value = "/notice/adminNoticeModify.do")
-	public ModelAndView modifyNotice(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-
-		noticeService.updateBoard(commandMap.getMap());
-
-		mv.addObject("NOTICE_NO", commandMap.get("NOTICE_NO"));
-		return mv;
-	}
-
-	@RequestMapping(value = "/notice/adminNoticeDelete.do")
-	public ModelAndView noticeDelete(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/notice/adminNoticeList.do");
-		
-		noticeService.deleteBoard(commandMap.getMap());
-
-		return mv;
-	}
-
-	/*
-	 * @RequestMapping(value="/ntoice/openNoticeList.do") public ModelAndView
-	 * openNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv = new
-	 * ModelAndView("noticeList");
-	 * 
-	 * return mv; }
-	 * 
-	 * @RequestMapping(value="/notice/selectNoticeList.do") public ModelAndView
-	 * selectNoticeList(CommandMap commandMap) throws Exception{ ModelAndView mv =
-	 * new ModelAndView("jsonView");
-	 * 
-	 * List<Map<String,Object>> list =
-	 * noticeService.selectNoticeList(commandMap.getMap()); mv.addObject("list",
-	 * list); if(list.size() > 0) { mv.addObject("TOTAL",
-	 * list.get(0).get("TOTAL_COUNT")); } else { mv.addObject("TOTAL",0); } return
-	 * mv; }
-	 */
 }
