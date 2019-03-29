@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<% String cp = request.getContextPath(); %>
+
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<title>MovieCube FAQ</title>
-<%@ include file="../main/head.jspf"%>
-<%@ include file="../main/body_header.jspf"%>
+<title>FAQs</title>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <meta http-equiv="Pragma" content="no-cache" />
-<link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
-<script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<script src="<%= cp %>/resources/js/admin_common.js"></script>
+<link rel="stylesheet" type="text/css" href="/moviecube/resources/css/admin_import.css" />
+<script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/admin_common.js"></script>
 </head>
 
 <body>
@@ -24,12 +24,12 @@
 <div class="admin_grp" style="margin: 100px 200px 5px">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/faqList.do">전체 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList1.do">영화예매 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList2.do">영화관 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList3.do">상영관 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList4.do">멤버쉽 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList5.do">기타 FAQ</a></li>
+			<li class="on"><a href="/moviecube/faqList.do">전체 FAQ</a></li>
+			<li><a href="/moviecube/faqList1.do">영화예매 FAQ</a></li>
+			<li><a href="/moviecube/faqList2.do">영화관 FAQ</a></li>
+			<li><a href="/moviecube/faqList3.do">상영관 FAQ</a></li>
+			<li><a href="/moviecube/faqList4.do">멤버쉽 FAQ</a></li>
+			<li><a href="/moviecube/faqList5.do">기타 FAQ</a></li>
 		</ul>
 	</div>
 	
@@ -66,7 +66,7 @@
 		</div>
 		<div class="btn_type_03">
 
-			<a href="#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='<%=cp%>/faqList.do?currentPage=${currentPage}' ">
+			<a href="/moviecube#none" style="padding-left: 10px;" class="btn btnC_04 btnP_04" onclick="location.href='/faqList.do?currentPage=${currentPage}' ">
 				<span>목록</span>
 			</a>
 		</div>
@@ -125,8 +125,8 @@
 		</tbody>
 	</table>
 
-	<a href="#this" class="btn" id="list">목록으로</a>
-	<a href="#this" class="btn" id="update">수정하기</a>
+	<a href="/moviecube#this" class="btn" id="list">목록으로</a>
+	<a href="/moviecube#this" class="btn" id="update">수정하기</a>
 
 	<%@ include file="/WEB-INF/include/include-body.jspf"%>
 	<script type="text/javascript">

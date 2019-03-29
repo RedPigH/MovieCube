@@ -1,35 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<% String cp = request.getContextPath(); %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <title>MovieCube FAQ</title>
-<%@ include file="../main/head.jspf"%>
-<%@ include file="../main/body_header.jspf"%>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <meta http-equiv="Pragma" content="no-cache" />
-<link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
-<script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<script src="<%= cp %>/resources/js/admin_common.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_import.css" />
+<script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/admin_common.js"></script>
 </head>
 
 <body>
+
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 <div>
 </div>
 <div class="admin_grp" style="margin: 100px 200px 5px">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/faqList.do">전체 FAW</a></li>
-			<li><a href="<%=cp%>/faqList1.do">영화예매 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList2.do">영화관 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList3.do">상영관 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList4.do">멤버쉽 FAQ</a></li>
-			<li><a href="<%=cp%>/faqList5.do">기타 FAQ</a></li>
+			<li class="on"><a href="/moviecube/faqList.do">전체 FAW</a></li>
+			<li><a href="/moviecube/faqList1.do">영화예매 FAQ</a></li>
+			<li><a href="/moviecube/faqList2.do">영화관 FAQ</a></li>
+			<li><a href="/moviecube/faqList3.do">상영관 FAQ</a></li>
+			<li><a href="/moviecube/faqList4.do">멤버쉽 FAQ</a></li>
+			<li><a href="/moviecube/faqList5.do">기타 FAQ</a></li>
 		</ul>
 	</div>
 	

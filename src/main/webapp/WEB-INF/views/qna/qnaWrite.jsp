@@ -2,14 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@ include file="../main/head.jspf"%>
-<link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
-<script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<script src="<%= cp %>/resources/js/admin_common.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_import.css" />
+<script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/admin_common.js"></script>
 <style>
 
 	div.button{
@@ -26,7 +25,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../main/body_header.jspf"%>
+	<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 	
 	<div class="bor19 size-218 m-b-50">
 		<input name="nothing" class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" placeholder="nothing *">

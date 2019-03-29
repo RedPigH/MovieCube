@@ -149,13 +149,16 @@ ul.mypage_main_moviestory li a strong{
 	margin-bottom: 38px;
 }
 
+.h3_wrap.pb38 {
+	padding-bottom: 38px;
+}
+
 .positionR {
 	position: relative !important;
 }
 
 .mypage_main_box
 ul.type1{
-	border-top: 2px solid #e1e1e1;
 	padding-top: 13px;
 }
 

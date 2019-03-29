@@ -2,15 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@ include file="../main/head.jspf"%>
-<link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
-<script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<script src="<%= cp %>/resources/js/admin_common.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_import.css" />
+<script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/admin_common.js"></script>
 
 
 <style>
@@ -33,7 +32,7 @@
 
 </head>
 <body>
-	<%@ include file="../main/body_header.jspf"%>
+	<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 
 <div class="admin_grp" style="margin: 100px 100px 50px 100px">
 	<div class="admin_ct">

@@ -18,10 +18,10 @@
 				</div>
 
 				<div class="right-top-bar flex-w h-full">
-					<a href="<%=cp%>/notice/adminNoticeList.do"
+					<a href="<%=cp%>/noticeList.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 공지사항 </a>
-					<a href="<%=cp%>/faq/adminFaqList.do" class="flex-c-m trans-04 p-lr-25"
-						style="width: 100px"> FAQs </a> <a href="<%=cp%>/qna/adminInquiryWriteForm.do"
+					<a href="<%=cp%>/faqList.do" class="flex-c-m trans-04 p-lr-25"
+						style="width: 100px"> FAQs </a> <a href="<%=cp%>/qnaWriteForm.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 1:1문의
 					</a>
 
@@ -138,7 +138,7 @@
 				<div class="right-top-bar flex-w h-full">
 					<a href="<%=cp%>/notice/adminNoticeList.do"
 						class="flex-c-m p-lr-10 trans-04"> 공지사항 </a> <a
-						href="<%=cp%>/faq/adminFaqList.do" class="flex-c-m p-lr-10 trans-04">
+						href="<%=cp%>/faqList.do" class="flex-c-m p-lr-10 trans-04">
 						FAQs </a> <a href="<%=cp%>/qna/adminInquiryList.do"
 						class="flex-c-m p-lr-10 trans-04"> 1:1문의 </a>
 

@@ -25,13 +25,14 @@
 
 
 	<c:if test="${not empty sessionScope.userLoginInfo}">
-		<div class="container">
-			<div class="flex-w flex-sb-m p-t-18 p-b-30 p-lr-50 p-lr-15-sm">
-				<h4 class="mtext-109 cl2 p-b-30" style="padding-bottom: 0px">마이페이지</h4>
-			</div>
-			<div class="flex-w flex-tr">
-				<div class="size-217 bor7 p-tb-10 w-full-md">
-					<div class="row">
+		<section class="bg0 p-t-140 p-b-116">
+			<div class="container">
+				<div class="flex-w flex-tr">
+					<div class="size-217 w-full-md">
+						<div class="flex-w flex-sb-m p-t-18 p-b-30 p-lr-50 p-lr-15-sm">
+								<h4 class="mtext-109 cl2 p-b-30" style="padding-left: 150px; padding-bottom: 0px">마이페이지</h4>
+							</div>
+						<div class="row" style="margin: auto; justify-content: center;">
 							<div class="cols col1">
 								<!-- 개인정보 -->
 								<div id="myPageMainUser" class="mypage_myInfo">
@@ -151,7 +152,7 @@
 							<div id="myPageMyBooking" class="cols col2">
 								<!-- 나의 예매내역 -->
 								<div class="mypage_main_box" style="height: 505px;">
-									<div class="h3_wrap mb38">
+									<div class="h3_wrap pb38 bor22">
 										<h3>
 											<img
 												src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png"
@@ -159,7 +160,7 @@
 										</h3>
 									</div>
 
-									<ul class="booking_list">
+									<ul class="type1">
 										<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
 									</ul>
 								</div>
@@ -174,8 +175,8 @@
 								<div id="myPageMyQuestion" class="mypage_main_box"
 									style="height: 505px;">
 									<div class="positionR">
-										<div class="h3_wrap mb38">
-											<h3 style="height: 23px;">
+										<div class="h3_wrap pb38 bor22">
+											<h3>
 												<img
 													src="http://image2.megabox.co.kr/mop/home/mypage/main_title8.png"
 													alt="나의문의내역">
@@ -186,22 +187,23 @@
 											<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
 										</ul>
 
-										<div class="bor22 m-t-205"></div>
+										<div class="m-t-205"></div>
 
 									</div>
 
 									<script>
-				
-				</script>
+										
+									</script>
 								</div>
 							</div>
 
 
 
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</c:if>
 
 	<%@ include file="/WEB-INF/views/main/script.jspf"%>
