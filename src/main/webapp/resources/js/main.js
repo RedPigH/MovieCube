@@ -269,6 +269,54 @@
             }
         });
     });
+    /*==================================================================*/
+    $(document).bind('ready ajaxComplete', function star(){
+    	$('.wrap-rating').each(function(){
+            var item = $(this).find('.item-rating');
+            var rated = -1;
+            var input = $(this).find('input');
+            $(input).val(0);
+
+            $(item).on('mouseenter', function(){
+                var index = item.index(this);
+                var i = 0;
+                for(i=0; i<=index; i++) {
+                    $(item[i]).removeClass('zmdi-star-outline');
+                    $(item[i]).addClass('zmdi-star');
+                }
+
+                for(var j=i; j<item.length; j++) {
+                    $(item[j]).addClass('zmdi-star-outline');
+                    $(item[j]).removeClass('zmdi-star');
+                }
+            });
+
+            $(item).on('click', function(){
+                var index = item.index(this);
+                rated = index;
+                $(input).val(index+1);
+                // 여기부터 중원이가 추가함 
+                // alert(index+1);
+                $("#rating_value").attr("value",index+1);
+                // 여기까지 중원이가 추가함
+            });
+
+            $(this).on('mouseleave', function(){
+                var i = 0;
+                for(i=0; i<=rated; i++) {
+                    $(item[i]).removeClass('zmdi-star-outline');
+                    $(item[i]).addClass('zmdi-star');
+                }
+
+                for(var j=i; j<item.length; j++) {
+                    $(item[j]).addClass('zmdi-star-outline');
+                    $(item[j]).removeClass('zmdi-star');
+                }
+            })
+        })
+       });
+    
+    
     
    
     /*==================================================================
