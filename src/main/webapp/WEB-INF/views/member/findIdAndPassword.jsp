@@ -55,7 +55,7 @@
 			<div class="tab-content">
 				<!-- 아이디 간편찾기// -->
 				<div class="tab-pane active" id="find_id_easy" role="tabpanel" aria-expanded="true">
-				<form name="findId" id="findId" role="form" method="post">
+				<form name="findId" id="findId" role="form">
 					<ul class="easy_input_wrap">
 						<li>
 							<label for="name" class="stext-111 size-220 dis-inline-block">이름</label>
@@ -79,7 +79,7 @@
 						</li>
 					</ul>
 					<div class="submit_wrap">
-						<button id="fi" type="submit" class="flex-c-m stext-107 float-r cl13 size-301 bor21 p-lr-15 hov-tag2 trans-04 m-r-5 m-b-5"><span class="blind">확인</span></button> 
+						<button type="button" id="fi" class="flex-c-m stext-107 float-r cl13 size-301 bor21 p-lr-15 hov-tag2 trans-04 m-r-5 m-b-5"><span class="blind">확인</span></button> 
 					</div>
 				</form>
 				</div>
@@ -210,17 +210,19 @@
 						 	$('#phone').focus();
 						 	return false;
 					 }
-					 
+				  
 					 /* var name = $('#name').val();
 					 var age = $('#age').val();
 					 var phone = $('#phone').val()e */;
-					 var sendData = { "MEMBER_NAME" : $('#name').val() , "MEMBER_AGE" : $('#age').val() , "MEMBER_PHONE" : $('#phone').val() };
-					 //alert(sendData);
+					/*  var sendData = { "MEMBER_NAME" : $('#name').val() , "MEMBER_AGE" : $('#age').val() , "MEMBER_PHONE" : $('#phone').val() };
+					 alert($('#name').val()); */
 					/*  var data2 = {"MEMBER_NAME":name, "MEMBER_AGE":age, "MEMBER_PHONE":phone};
 					 var data = JSON.stringify(data2); */
-					 
+
+					 var sendData = $('#findId').serialize();
+					 alert(sendData);
 					 $.ajax({
-					 	type : "GET",
+					 	type : "POST",
 					 	data : sendData,
 						url : "/moviecube/member/find.do",
 						dataType : "json",

@@ -5,6 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/views/main/head.jspf"%>
 <link rel="stylesheet" type="text/css" href="/moviecube/resources/css/member.css"/>
+<script src="//code.jquery.com/jquery.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 function aaaa(){
@@ -54,6 +55,7 @@ function aaaa(){
         }
     }).open();
 }
+
 </script>
 </head>
 
@@ -66,7 +68,28 @@ function aaaa(){
 <div id="container" class="container">
 
 	<div class="width-fixed mypage_membership_wrap" style="position: relative;" id="mypageMembershipWrap">
-
+	<div class="modal fade" id="defaultModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="mtext-115 modal-title">알림</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<p class="stext-112 modal-contents"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!--// 모달창 -->
+		
 		<div class="h2_mypage">
 			<h3 class="sub_title">개인정보 수정</h3> <span> 회원님의 정보를 정확히 입력해주세요. </span>
 		</div>
@@ -77,8 +100,8 @@ function aaaa(){
 		</div>
 
 		<div class="user_wrap">
+		<form id="update" name="update" method="post">
 			<div id="userJoinContainer" class="form-style">
-
 				<div class="clearfix">
 					<span class="text-sub mb10">*표시 항목은 필수입력 항목입니다.</span>
 				</div>
@@ -106,7 +129,7 @@ function aaaa(){
 					</colgroup>
 						<tbody><tr><th scope="row" id="th_myInfo_password"><label for="inputtext2">*비밀번호</label></th>
 						<td headers="th_myInfo_password">
-							<input type="password" id="inputtext2" name="password" fieldname="비밀번호" required="">
+							<input type="text" id="psw" name="password">
 						</td>
 					</tr>
 					<tr>
@@ -148,100 +171,12 @@ function aaaa(){
 						<th scope="row" id="th_myInfo_address"><label for="inputtext6">주소</label></th>
 						<td headers="th_myInfo_address">
 						<div class="how-pos4-parent">
-							<input type="text" style="margin-bottom: 5px; display: inline-block;" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
-							<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block; width: 150px; height: 22px;" class="flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04">
-							<input type="text" id="address1" name="MEMBER_ADDRESS1" data-rule-required="true" placeholder="주소" maxlength="40">
-							<input type="text" style="margin-top:3px;" id="address2" name="MEMBER_ADDRESS2" data-rule-required="true" placeholder="상세주소" maxlength="40">
+							<input type="text" value="${sessionScope.userLoginInfo.MEMBER_ZIPCODE}" style="margin-bottom: 5px; display: inline-block;" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
+							<button type="button" onclick="aaaa()" style="display: inline-block; width: 120px; height: 22px;" class="flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04 m-l-20">우편번호 찾기</button>
+							<input type="text" value="${sessionScope.userLoginInfo.MEMBER_ADDRESS1}" id="address1" name="MEMBER_ADDRESS1" data-rule-required="true" placeholder="주소" maxlength="40">
+							<input type="text" style="margin-top:5px; display: inline-block" value="${sessionScope.userLoginInfo.MEMBER_ADDRESS2}" id="address2" name="MEMBER_ADDRESS2" data-rule-required="true" placeholder="상세주소" maxlength="40">
+							<input type="text" style="display: inline-block;" id="extra" data-rule-required="true" placeholder="참고항목" maxlength="40">
 						</div>
-						
-						</td>
-					</tr>
-					
-
-					<tr>
-						<th scope="row" id="th_myInfo_favorite">선호영화관</th>
-						<td headers="th_myInfo_favorite">
-							<div class="mt8 mb9">
-								<span class="text-sub">선호 영화관은 최대3개까지 등록 가능합니다.</span>
-							</div>
-							<div class="mb10">
-								<label for="select1" class="mr20"><span class="asterisk"></span>1순위</label>
-								<select id="selectGroup1" data-width="154px" class="mr8" style="display: none;">
-									<option value="">지역선택</option>
-
-								<option value="10">서울</option>
-
-								<option value="30">경기</option>
-
-								<option value="35">인천</option>
-
-								<option value="45">대전/충청/세종</option>
-
-								<option value="55">부산/대구/경상</option>
-
-								<option value="65">광주/전라</option>
-
-								<option value="70">강원</option>
-
-								<option value="80">제주</option>
-
-								</select><div class="btn-group bootstrap-select mr8" style="width: 154px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectGroup1" title="지역선택"><span class="filter-option pull-left">지역선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">지역선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">서울</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">경기</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">인천</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">대전/충청/세종</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">부산/대구/경상</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">광주/전라</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">강원</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">제주</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-								<select id="selectCinema1" name="cinemaCode" data-width="119px" style="display: none;">
-									<option value="">영화관선택</option>
-								</select><div class="btn-group bootstrap-select" style="width: 119px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectCinema1" title="영화관선택"><span class="filter-option pull-left">영화관선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">영화관선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-							</div>
-							<div class="mb10">
-								<label for="select2" class="mr20"><span class="asterisk"></span>2순위</label>
-								<select id="selectGroup2" data-width="154px" class="mr8" style="display: none;">
-									<option value="">지역선택</option>
-
-								<option value="10">서울</option>
-
-								<option value="30">경기</option>
-
-								<option value="35">인천</option>
-
-								<option value="45">대전/충청/세종</option>
-
-								<option value="55">부산/대구/경상</option>
-
-								<option value="65">광주/전라</option>
-
-								<option value="70">강원</option>
-
-								<option value="80">제주</option>
-
-								</select><div class="btn-group bootstrap-select mr8" style="width: 154px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectGroup2" title="지역선택"><span class="filter-option pull-left">지역선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">지역선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">서울</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">경기</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">인천</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">대전/충청/세종</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">부산/대구/경상</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">광주/전라</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">강원</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">제주</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-								<select id="selectCinema2" name="cinemaCode2" data-width="119px" style="display: none;">
-									<option value="">영화관선택</option>
-								</select><div class="btn-group bootstrap-select" style="width: 119px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectCinema2" title="영화관선택"><span class="filter-option pull-left">영화관선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">영화관선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-							</div>
-							<div>
-								<label for="select3" class="mr20"><span class="asterisk"></span>3순위</label>
-								<select id="selectGroup3" data-width="154px" class="mr8" style="display: none;">
-									<option value="">지역선택</option>
-
-								<option value="10">서울</option>
-
-								<option value="30">경기</option>
-
-								<option value="35">인천</option>
-
-								<option value="45">대전/충청/세종</option>
-
-								<option value="55">부산/대구/경상</option>
-
-								<option value="65">광주/전라</option>
-
-								<option value="70">강원</option>
-
-								<option value="80">제주</option>
-
-								</select><div class="btn-group bootstrap-select mr8" style="width: 154px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectGroup3" title="지역선택"><span class="filter-option pull-left">지역선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">지역선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">서울</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">경기</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">인천</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">대전/충청/세종</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">부산/대구/경상</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">광주/전라</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">강원</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">제주</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-								<select id="selectCinema3" name="cinemaCode3" data-width="119px" style="display: none;">
-									<option value="">영화관선택</option>
-								</select><div class="btn-group bootstrap-select" style="width: 119px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="selectCinema3" title="영화관선택"><span class="filter-option pull-left">영화관선택</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">영화관선택</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-							</div>
 						</td>
 					</tr>
 				</tbody></table>
@@ -282,8 +217,8 @@ function aaaa(){
 									회원 탈퇴 시 혹은 이용 목적 달성 시까지
 							</td>
 							<td headers="th_myInfo_agree" class="ml20">
-								<label for="marketingRuleAgreeY"><span class="iradio_minimal checked" style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;" aria-checked="false" aria-disabled="false"><input type="radio" id="marketingRuleAgreeY" name="marketingRuleAgreeYN" value="Y" class="icheck" checked="checked" style="position: absolute; top: 0px; left: 0px; display: block; width: 16px; height: 16px; padding: 0px; margin: 0px; background: rgb(255, 255, 255); z-index: 0; border: 0px; opacity: 1;"><ins class="iCheck-helper" style="position:absolute; width:16px; height:16px; top:0px; left:0px; background-color:#fff; z-index:0"></ins></span><strong>동의</strong></label>
-								<label for="marketingRuleAgreeN"><span class="iradio_minimal" style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;" aria-checked="false" aria-disabled="false"><input type="radio" id="marketingRuleAgreeN" name="marketingRuleAgreeYN" value="N" class="icheck" style="position: absolute; top: 0px; left: 0px; display: block; width: 16px; height: 16px; padding: 0px; margin: 0px; background: rgb(255, 255, 255); z-index: 0; border: 0px; opacity: 1;"><ins class="iCheck-helper" style="position:absolute; width:16px; height:16px; top:0px; left:0px; background-color:#fff; z-index:0"></ins></span><strong>동의 안함</strong></label>
+								<label class="radio-inline"> <span style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;"><input type="radio" style="position: absolute; width: 16px; height: 16px; padding: 0px; margin: 0px;" id="smsReceiveYn" name="smsReceiveYn" value="Y" checked></span> <strong>동의</strong></label>
+								<label class="radio-inline"> <span style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;"><input type="radio" style="position: absolute; width: 16px; height: 16px; padding: 0px; margin: 0px;" id="smsReceiveYn" name="smsReceiveYn" value="N"></span> <strong>동의 않음</strong></label>
 							</td>
 						</tr>
 					</tbody>
@@ -294,23 +229,42 @@ function aaaa(){
 				</h2>
 				<div class="agree_area">
 					<p class="txt">이벤트, 신규 서비스, 할인 혜택 등의 소식을 전해드립니다. (소멸포인트 및 공지성 안내 또는 거래정보와 관련된 내용은 수신동의 여부와 상관없이 발송됩니다.)</p>
-					<label for="smsReceiveYN"><span class="icheckbox_minimal" style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;" aria-checked="false" aria-disabled="false"><input type="checkbox" id="smsReceiveYn" name="smsReceiveYn" value="Y" class="icheck" style="position: absolute; top: 0px; left: 0px; display: block; width: 16px; height: 16px; padding: 0px; margin: 0px; background: rgb(255, 255, 255); z-index: 0; border: 0px; opacity: 1;"><ins class="iCheck-helper" style="position:absolute; width:16px; height:16px; top:0px; left:0px; background-color:#fff; z-index:0"></ins></span><span>휴대폰 번호</span></label>
-					<label for="mailingReceiveYn" class="ml100"><span class="icheckbox_minimal" style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;" aria-checked="false" aria-disabled="false"><input type="checkbox" id="mailingReceiveYn" name="mailingReceiveYn" value="Y" class="icheck" style="position: absolute; top: 0px; left: 0px; display: block; width: 16px; height: 16px; padding: 0px; margin: 0px; background: rgb(255, 255, 255); z-index: 0; border: 0px; opacity: 1;"><ins class="iCheck-helper" style="position:absolute; width:16px; height:16px; top:0px; left:0px; background-color:#fff; z-index:0"></ins></span><span>이메일</span></label>
+					<label class="radio-inline" style="display: inline-block;"> <span style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;"><input type="radio" style="position: absolute; width: 16px; height: 16px; padding: 0px; margin: 0px;" id="smsReceiveYn" name="smsReceiveYn" value="Y" checked></span> <strong>동의</strong></label>
+					<label class="radio-inline" style="display: inline-block;"> <span style="vertical-align: middle; display: inline-block; width: 18px; height: 18px; position: relative;"><input type="radio" style="position: absolute; width: 16px; height: 16px; padding: 0px; margin: 0px;" id="smsReceiveYn" name="smsReceiveYn" value="N"></span> <strong>동의 않음</strong></label>
 				</div>
 			</div>
 		</div>
 		<!-- //마케팅 활용을 위한 개인정보 수집 이용 안내 -->
 		
-			<div class="btn_wrap text-center mt50">
-				<button type="button" class="img_btn user cancel mr7" id="myInfoModifycancel">취소</button>
-				<button type="button" class="img_btn user modify ml7" onclick="MyPageMyInfoInput.save('')">수정</button>
+			<div class="btn_wrap text-center mt50 mb50">
+				<button type="button" class="img_btn user cancel mr7 flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04" onclick="history.back()">취소</button>
+				<button type="button" class="img_btn user modify ml7 flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04" id="up">수정</button>
 			</div>
-		</div> <!-- user_wrap -->
+		</div>
+	</form>
+	
+	<script>
+	$(function(){
+		
+		 var modalContents = $(".modal-contents");
+         var modal = $("#defaultModal");
+		
+		$("#up").click(function(){
+			if($('#psw').val()==""){
+				modalContents.text("비밀번호는 필수 입력사항입니다.");
+                modal.modal('show');
+                $('#psw').focus();
+                return false;
+			}
+				return update();
+		});
+	});
+	</script>
 	</div>
-
 </div>
 
 <%@ include file="/WEB-INF/views/main/script.jspf" %>
+
 
 </body>
 </html>

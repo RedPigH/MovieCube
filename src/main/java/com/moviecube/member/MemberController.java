@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -128,27 +129,26 @@ public class MemberController {
 	
 	  //¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â
 	  
-	  @RequestMapping(value="/member/find.do")
+	  @RequestMapping(value="/member/find.do", method = RequestMethod.POST)
 	  @ResponseBody
-	  public String findId(@RequestBody CommandMap map) throws Exception{
-		/*
-		 * Map<String, Object> map = new HashMap<String, Object>();
-		 * 
-		 * map.put("MEMBER_NAME", name); map.put("MEMBER_AGE", age); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
-		 * 24ï¿½ï¿½ï¿½Ì´ï¿½. map.put("MEMBER_PHONE" , phone);
-		 */
-		  System.out.println(map.getMap());
-		  String id = memberService.findId(map.getMap());
+	  public String findId(@RequestParam String MEMBER_NAME, @RequestParam String MEMBER_AGE, @RequestParam String MEMBER_PHONE) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("MEMBER_NAME", MEMBER_NAME); 
+		map.put("MEMBER_AGE", MEMBER_AGE); 
+		map.put("MEMBER_PHONE" , MEMBER_PHONE);
+		 
+		  System.out.println(map);
+		  String id = memberService.findId(map);
 		
 		  //map.put("id", id);		  
-		 
+		 System.out.println(id);
 		  
 		  return id;
 	  }
 	 
 	  @RequestMapping(value="/member/find1.do")
 	  @ResponseBody
-	  public Map<String, Object> findPw(@RequestBody String name,String id, String name1, String phone1) throws Exception{
+	  public Map<String, Object> findPw(String name,String id, String name1, String phone1) throws Exception{
 		  Map<String, Object> map = new HashMap<String, Object>();
 		  
 		  map.put("MEMBER_ID", id);

@@ -209,6 +209,20 @@ img{
 	letter-spacing: -0.05em;
 }
 
+.h2_mypage.marktingAgree {
+    margin: 20px 0 0 5px;
+}
+
+h2>.sub_title.mypage.st14 {
+    background-position: 0 -1041px;
+}
+
+h2>.sub_title {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
 .personal_info_last{
 	position: absolute;
 	right: 0;
@@ -229,14 +243,14 @@ img{
 
 .img_btn.psw_change{
 	display: inline-block;
-	width: 88px;
+	width: 120px;
 	height: 22px;
 	background-position: -550px -450px
 }
 
 .img_btn.personal_quit {
     display: inline-block;
-    width: 62px;
+    width: 80px;
     height: 22px;
     background-position: -650px -450px;
 }
@@ -319,6 +333,25 @@ img{
     padding-left: 30px;
 }
 
+.form-style .form-table td span {
+    display: inline-block;
+}
+
+.form-style .form-table td label, .form-style .form-table td span.title {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+.form-style p.txt {
+    width: 600px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
 .blind2{
 	width: 0;
     height: 0;
@@ -334,7 +367,19 @@ img{
     margin-right: 18px !important;
 }
 
-input{
+.mb9 {
+    margin-bottom: 9px !important;
+}
+
+.mt8 {
+    margin-top: 8px !important;
+}
+
+.mb10 {
+    margin-bottom: 10px !important;
+}
+
+.form-style input{
 	width: 200px;
     border: 1px solid #d9d9d9;
     line-height: 26px;
@@ -347,6 +392,225 @@ input{
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0)
-input {
+.form-style input {
     line-height: 14px;
+}
+
+.bootstrap-select>button.btn-default {
+    border: 1px solid #d9d9d9;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    padding: 6px 16px 0 7px;
+    color: #666666;
+    font-size: 12px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0f0f0), color-stop(1, #ffffff));
+    background-image: -o-linear-gradient(bottom, #f0f0f0 0, #ffffff 100%);
+    background-image: -moz-linear-gradient(bottom, #f0f0f0 0, #ffffff 100%);
+    background-image: -webkit-linear-gradient(bottom, #f0f0f0 0, #ffffff 100%);
+    background-image: -ms-linear-gradient(bottom, #f0f0f0 0, #ffffff 100%);
+    background-image: linear-gradient(to bottom, #f0f0f0 0, #ffffff 100%);
+}
+
+.bootstrap-select>button.btn {
+    float: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 3px 25px 0 7px;
+}
+
+.btn-group > .btn, .btn-group-vertical > .btn {
+    position: relative;
+    float: left;
+}
+
+.btn-default {
+    color: #333333;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.btn-group > .btn:first-child {
+    margin-left: 0;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    color: #333333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+
+.btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    background-image: none;
+}
+
+.bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*="span"] {
+    float: none;
+    display: inline-block;
+    margin-left: 0;
+}
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle {
+    outline: 0;
+}
+
+.bootstrap-select.btn-group .dropdown-menu {
+    min-width: 100%;
+    z-index: 2000;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.open > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+.personal_information_wrap .form-table th:first-child {
+    border-left: none;
+}
+
+.personal_information_wrap .form-table th {
+    text-align: center;
+    border-left: 1px solid #dcdcdc;
+    padding: 5px !important;
+}
+
+.personal_information_wrap .form-table td {
+    font-size: 12px;
+    text-align: center;
+    padding: 15px 20px !important;
+    border-left: 1px solid #dcdcdc;
+}
+
+.personal_information_wrap .form-table td:first-child, .personal_information_wrap .form-table td:last-child {
+    text-align: left;
+}
+
+.personal_information_wrap .form-table td:first-child {
+    border-left: none;
+}
+
+.personal_information_wrap .agree_area {
+    padding: 15px 0 0 15px;
+}
+
+.personal_information_wrap .agree_area .txt {
+    width: 100%;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.iradio_minimal.checked ins {
+    background-position: -16px 0;
+}
+
+.icheckbox_minimal ins, .iradio_minimal ins {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px 0 0;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    background: url(http://image2.megabox.co.kr/mop/home/bg_input.png) 0 0 no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.iCheck-helper {
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 0;
+    background-color: #fff;
+}
+
+.radio-inline{
+	padding-left: 20px;
+	color: #666;
+    font-size: 12px;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+.btn_wrap{
+	overflow: hidden;
+    margin: 50px auto 0;
+}
+
+.mt50 {
+    margin-top: 50px !important;
+}
+
+.btn_wrap button.user.cancel {
+    display: inline-block;
+    width: 123px;
+    height: 45px;
+    background-position: 0 -300px;
+}
+
+.btn_wrap button.user.modify {
+    display: inline-block;
+    width: 123px;
+    height: 45px;
+}
+
+.mr7 {
+    margin-right: 7px !important;
+}
+
+.mb50{
+	margin-bottom: 50px !important;
 }
