@@ -26,11 +26,11 @@
 							<li class="p-b-10"><a href="reserve.do"
 								class="stext-107 cl7 hov-cl1 trans-04 js-show-modal2">빠른예매</a></li>
 							</c:if>
-							<li class="p-b-10"><a href="javascript:void(0);"
-								class="stext-107 cl7 hov-cl1 trans-04"> Shoes </a></li>
-
-							<li class="p-b-10"><a href="javascript:void(0);"
-								class="stext-107 cl7 hov-cl1 trans-04"> Watches </a></li>
+							
+							<c:if test="${empty sessionScope.userLoginInfo }">
+							<li class="p-b-10"><a href="javascript:void(0);" 
+								class="stext-107 cl7 hov-cl1 trans-04 js-show-modal2">로그인</a></li>
+							</c:if>
 						</ul>
 					</div>
 
@@ -47,8 +47,6 @@
 							<li class="p-b-10"><a href="qna/adminInquiryWriteForm.do"
 								class="stext-107 cl7 hov-cl1 trans-04"> 1:1문의 </a></li>
 
-							<li class="p-b-10"><a href="javascript:void(0);"
-								class="stext-107 cl7 hov-cl1 trans-04"> Returns </a></li>
 						</ul>
 					</div>
 

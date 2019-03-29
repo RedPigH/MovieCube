@@ -472,7 +472,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .main-menu > li > .sub-menu {
-  top:100%;
+  top:88%;
   left: 0;
 }
 
@@ -2392,7 +2392,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .mtext-105 {
-  font-family: Poppins-Regular;
+  font-family: MaplestoryBold;
   font-size: 24px;
   line-height: 1.5;
 }

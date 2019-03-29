@@ -92,12 +92,21 @@ public class ReserveController {
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		
+		
 		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
 		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
 		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
-	      
+		
+		if(request.getParameter("CheckedBoxList") != null) {
+			String[] selectedMovieList = request.getParameter("CheckedBoxList").split(",");
+			for(int i=0; i < selectedMovieList.length; i++) {
+				System.out.println(selectedMovieList[i]);
+			}
+			mv.addObject("selectedMovieList", selectedMovieList);
+		}
+		
 	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
 		mv.addObject("cinemaList", cinemaList);

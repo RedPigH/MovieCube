@@ -483,3 +483,21 @@ function loginAlert(){
 </script>
 
 <!--===============================================================================================-->
+<!-- selectedReserve -->
+<script type="text/javascript">
+function selectedReserve() {
+	
+			if($("input[name=wishCheckBox]:checked").length >= 5){
+				swal("4편까지만", "동시 예매 가능합니다", "error");
+			} else {
+				var CheckedBoxList = new Array();
+				
+				$("input[name=wishCheckBox]:checked").each(function() {
+		        	 CheckedBoxList += ($(this).parent().find('.header-cart-item-name').html()) + ",";
+		     	 });
+				
+				location.href="/moviecube/reserve.do?CheckedBoxList="+CheckedBoxList;
+				
+			}
+		}
+	</script>
