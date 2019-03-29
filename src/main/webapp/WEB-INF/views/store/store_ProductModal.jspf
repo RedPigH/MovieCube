@@ -101,15 +101,18 @@ function buyItem() {
 						
 						<p id="h_modal_store_price" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"></p> 
 					
-						<p id="h_modal_amount" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px">수량 : 
-						<select id = "amount" name = "amount">
-							<option value = "">수 량 선 택</option>
-							<option value = "1">1</option>
-							<option value = "2">2</option>
-							<option value = "3">3</option>
-							<option value = "4">4</option>
-							<option value = "5">5</option>
-						</select>
+						<p id="h_modal_amount" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px">
+							<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+
+											<input class="mtext-104 cl3 txt-center num-product" id = "amount" type="number" name="num-product" value="1">
+
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
+							</div>
 						</p>
 						
 						<p id="h_modal_store_content" class="stext-102 cl3 p-t-23" style="font-weight: bold; font-size: 20px"></p> 
