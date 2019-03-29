@@ -78,8 +78,22 @@
 	<!-- 로그인 -->
 	<select id = "findUserIdAndPassword" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT * FROM MC_MEMBER
-			WHERE MEMBER_ID=#{MEMBER_ID} AND MEMBER_PASSWD1=#{MEMBER_PASSWD1}
+			SELECT
+<<<<<<< .merge_file_a09412
+			 MEMBER_NAME,
+			 MEMBER_PHONE,
+=======
+			 MEMBER_NO,
+>>>>>>> .merge_file_a09844
+			 MEMBER_ID,
+			 MEMBER_PASSWD1,
+			 MEMBER_EMAIL,
+			 MEMBER_NAME,
+			 ISADMIN
+			FROM
+			 MC_MEMBER
+			WHERE
+			 MEMBER_ID=#{MEMBER_ID} AND MEMBER_PASSWD1=#{MEMBER_PASSWD1}
 		]]>
 	</select>
 	
