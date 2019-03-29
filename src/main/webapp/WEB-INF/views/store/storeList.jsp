@@ -8,7 +8,7 @@
    <%@ include file="../main/head.jspf" %>
 </head>
 <script type="text/javascript">
-	function toModal(store_no, store_item, store_price, store_content, img_savname) {
+	function storeModal(store_no, store_item, store_price, store_content, img_savname) {
 		
 		$("#h_modal_store_no").attr("value", store_no);
 		
@@ -69,7 +69,7 @@
 										alt="상품 이미지" />
 
 									<a href="#" id="gahyun"
-									onclick="toModal(
+									onclick="storeModal(
 										'${row.STORE_NO }',
 										'${row.STORE_ITEM }',
 										'${row.STORE_PRICE }',

@@ -33,7 +33,7 @@
 										</div>
 
 										<div class="p-t-8">
-											<a href="javascript:void(0);" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+											<a href="javascript:void(0);" class="header-cart-item-name m-b-18 hov-cl1 trans-04 js-show-modal1 js-hide-cart" id="toModal${row.MOVIE_NO}" onclick="toModal(${row.MOVIE_NO})">
 												${row.MOVIE_NAME}</a> <span class="header-cart-item-info">
 												${row.MOVIE_GENRE}&nbsp;/&nbsp;감독:${row.MOVIE_DIRECTOR}</span>
 										</div>
