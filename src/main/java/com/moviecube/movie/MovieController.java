@@ -48,6 +48,7 @@ public class MovieController {
 		return mv;
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movieDetail");
@@ -59,6 +60,7 @@ public class MovieController {
 		return mv;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/movieDetail2.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView movieDetail2(CommandMap commandMap, HttpServletRequest request) throws Exception { // 모달을 위한 메서드
@@ -68,8 +70,13 @@ public class MovieController {
 		commandMap.put("MOVIE_NO", movie_no);
 		
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
-		
+		Map<String, Object> map2 = (Map<String, Object>) map.get("map");
+
+		String openDate = map2.get("MOVIE_OPENDATE").toString();
+		openDate = openDate.substring(0, 10);
+	
 		mv.addObject("map", map.get("map"));
+		mv.addObject("openDate", openDate);
 		mv.setViewName("jsonView");
 		
 		
