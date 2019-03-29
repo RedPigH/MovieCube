@@ -25,7 +25,7 @@
 
 
 	<c:if test="${not empty sessionScope.userLoginInfo}">
-		<section class="bg0 p-t-140 p-b-116">
+		<section class="bg0 p-t-140 p-b-80">
 			<div class="container">
 				<div class="flex-w flex-tr">
 					<div class="size-217 w-full-md">
@@ -205,7 +205,7 @@
 			</div>
 		</section>
 	</c:if>
-
+<%@ include file="/WEB-INF/views/main/body_footer.jspf"%>
 	<%@ include file="/WEB-INF/views/main/script.jspf"%>
 
 </body>

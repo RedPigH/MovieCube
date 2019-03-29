@@ -7,20 +7,7 @@
 <title>자리 예매</title>
 <%@ include file="../main/head.jspf"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-	function confirm() {
-		$(function() { 	//선택 좌석 행,열 값 가져오기
-		    var selectSeats = $.map($('ul li').contents(), function(elem, i) { 
-		    if(elem.nodeType === 3 && $.trim(elem.nodeValue).length) 
-		     return $.trim(elem.nodeValue); 
-		    }); 
-		
-			var totalprice = $("#total").text();
-		
-		    location.href = 'reserve_confirm.do?time_no=${time.TIME_NO}&selectSeats=' +selectSeats +'&totalprice=' + totalprice;
-		}); 
-	}
-</script>
+
 </head>
 <body class="animsition">
 
@@ -107,5 +94,69 @@
 	<%@ include file="../main/body_footer.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>
+	
+	
+<script type="text/javascript">
+		function confirm() {
+			
+			/* 선택된 좌석 정보 */
+			var selectSeats = $.map($('ul li').contents(), function(elem, i) { 
+			    if(elem.nodeType === 3 && $.trim(elem.nodeValue).length) 
+			     return $.trim(elem.nodeValue); 
+			    }); 
+			
+			if(selectSeats == "" || selectSeats == null){
+				swal("", "좌석을 선택해 주세요", "error");
+				return false;
+			}
+			
+			/* 총 가격 정보 */
+			var totalprice = $("#total").text();
+				
+			/* 상영 정보 */
+			var time_no = ${time.TIME_NO};
+			    
+			    
+			
+			
+			var allData = {
+				"SELECT_SEATS" : selectSeats,
+				"TOTAL_PRICE" : totalprice,
+				"TIME_NO" : time_no
+			};
+
+			jQuery.ajaxSettings.traditional = true;
+
+			$.ajax({
+				type : "POST",
+				url : "<c:url value='/reserve_confirm.do'/>",
+				dataType : "json",
+				data : allData,
+				
+				success : function(data) {
+					
+					  var imageURL = 'resources/upload/movie/poster/'+data.time.POSTER_SAVNAME;
+					 
+					  swal({
+					    title:'영화: '+data.time.MOVIE_NAME,
+					    text: '영화관: '+data.time.CINEMA_NAME+'\n'
+					    	 +'상영관: '+data.time.SCREEN_NAME+'\n'
+					    	 +'상영 날짜: '+data.time.TIME_DATE+'\n'
+					    	 +'상영 시간: '+data.time.START_TIME+'~'+data.time.END_TIME+'\n'
+					    	 +'선택 좌석: '+data.selectSeat+'\n'
+					    	 +'총 가격: '+data.totalprice,
+					    icon: imageURL,
+					  });
+					
+					 /*  location.href = 'reserve_complete.do?TIME_NO=${time.TIME_NO}&SCREEN_NO=${time.SCREEN_NO}&selectSeats=${selectSeats}&TOTAL_PRICE=${totalprice}'; */
+					
+				},
+
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("오류가 발생하였습니다.");
+				}
+			}); 
+		}
+	</script>
 </body>
 </html>
