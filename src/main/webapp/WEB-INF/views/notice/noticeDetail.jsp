@@ -17,7 +17,7 @@
 	<div class="admin_ct">
 		<div class="movie_list">
 			<h3 class="sub_tit">공지사항 상세보기 </h3>
-			<div class="tbl_type_01">
+			<div class="tbl_type_01" style="margin: 200px 200px 200px 200px">
 				<table>
 					<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
 					<colgroup>

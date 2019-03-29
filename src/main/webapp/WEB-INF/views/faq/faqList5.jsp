@@ -7,8 +7,8 @@
 <head>
 <meta charset="utf-8" />
 <title>MovieCube FAQ</title>
-<%@ include file="../main/head.jspf"%>
-<%@ include file="../main/body_header.jspf"%>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -19,6 +19,7 @@
 </head>
 
 <body>
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 <div>
 </div>
 <div class="admin_grp" style="margin: 100px 200px 5px">

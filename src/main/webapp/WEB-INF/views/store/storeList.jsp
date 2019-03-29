@@ -54,22 +54,6 @@
 						class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
 						data-filter="*">상품 목록</button>
 				</div>
-
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>		
-					</div>
-				</div>
-
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-		
-					</div>
-				</div>
 			</div>
 
 			<div class="row isotope-grid">

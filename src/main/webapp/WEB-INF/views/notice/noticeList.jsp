@@ -6,36 +6,30 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf"%>
-<%@ include file="../main/head.jspf"%>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
+
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
-
-
-<style>
-    .menu a{cursor:pointer;}
-    .menu .hide{display:none;}
-</style>
-
-<script>
-
-    $(document).ready(function(){
-        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-        $(".menu>a").click(function(){
-            // 현재 클릭한 태그가 a 이기 때문에
-            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
-            $(this).next("ul").toggleClass("hide");
-            var value = $('#')
-        });
-    });
-</script>
+<script src="<%= cp %>/moviecube/resources/js/main.js"></script>
 
 </head>
-<body>
-	<%@ include file="../main/body_header.jspf"%>
+<body class="animsition">
+	<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
+	
+	<header class="header-v4">
+	<div class="container-menu-desktop">
 
-<div class="admin_grp" style="margin: 100px 100px 50px 100px">
+	<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top"> <i
+			class="zmdi zmdi-chevron-up"></i>
+			</span>
+		</div>
+	</div>
+	</header>
+	
+<div class="admin_grp" style="margin: 0px 200px 50px 100px">
 	<div class="admin_ct">
 		<h3 class="sub_tit">공지사항</h3>
 		<div class="tbl_type_02">
@@ -85,6 +79,12 @@
 	</div>
 </div>
 
+<%@ include file="/WEB-INF/views/main/script.jspf"%>
+<%@ include file="/WEB-INF/views/main/body_footer.jspf"%>
+<%@ include file="/WEB-INF/views/member/loginForm.jspf"%>
+
+</body>
+
 <form id="commonForm" name="common"></form>
 
 <script type="text/javascript">
@@ -103,6 +103,6 @@
             comSubmit.addParam("currentPage", "${currentPage}");
             comSubmit.submit();
         }
-    </script> 
-</body>
+</script> 
+
 </html>

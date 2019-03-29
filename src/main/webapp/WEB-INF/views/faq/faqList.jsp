@@ -6,9 +6,9 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<title>MovieCube FAQ</title>
-<%@ include file="../main/head.jspf"%>
-<%@ include file="../main/body_header.jspf"%>
+<title>FAQ</title>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -18,13 +18,14 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
-<body>
+<body class="animsition">
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 <div>
 </div>
-<div class="admin_grp" style="margin: 100px 200px 5px">
+<div class="admin_grp" style="margin: 100px 100px 5px">
 	<div class="admin_list">
 		<ul>
-			<li class="on"><a href="<%=cp%>/faqList.do">전체 FAW</a></li>
+			<li class="on"><a href="<%=cp%>/faqList.do">전체 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList1.do">영화예매 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList2.do">영화관 FAQ</a></li>
 			<li><a href="<%=cp%>/faqList3.do">상영관 FAQ</a></li>
@@ -71,7 +72,7 @@
 			</table>
 		</div>
 				
-		<div class="search_form">
+<!-- 		<div class="search_form">
 			<form>
 				<div class="inner">
 					<select class="slct w100" name="searchNum">
@@ -84,29 +85,37 @@
 					</span>
 				</div>
 			</form>	
-		</div>
+		</div> -->
 		
 		<div class="paging">${pagingHtml}</div>
 	</div>
 </div>
+<div class="admin_grp" style="margin: 50px 50px 50px">
+	</div>
+
+<%@ include file="/WEB-INF/views/main/script.jspf"%>
+<%@ include file="/WEB-INF/views/main/body_footer.jspf"%>
+<%@ include file="/WEB-INF/views/member/loginForm.jspf"%>
+
+</body>
 
 <form id="commonForm" name="common"></form>
 
 <script type="text/javascript">
-        $(document).ready(function(){    
-            $("a[name='FAQ_SUB']").on("click", function(e){ // 
-                e.preventDefault();
-                fn_openBoardDetail($(this));
-            });
-        });
+	$(document).ready(function(){   
+		$("a[name='FAQ_SUB']").on("click", function(e){ // 
+        e.preventDefault();
+        fn_openBoardDetail($(this));
+       	});
+    });
          
-        function fn_openBoardDetail(obj){
-            var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='faqDetail.do'/>");
-            comSubmit.addParam("FAQ_NO", obj.parent().find("#FAQ_NO").val());
-            comSubmit.addParam("currentPage", "${currentPage}");
-            comSubmit.submit();
-        }
-    </script> 
-</body>
+    function fn_openBoardDetail(obj){
+        var comSubmit = new ComSubmit();
+        comSubmit.setUrl("<c:url value='faqDetail.do'/>");
+        comSubmit.addParam("FAQ_NO", obj.parent().find("#FAQ_NO").val());
+        comSubmit.addParam("currentPage", "${currentPage}");
+        comSubmit.submit();
+    }
+</script> 
+
 </html>		

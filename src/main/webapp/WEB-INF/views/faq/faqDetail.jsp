@@ -6,9 +6,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<title>MovieCube FAQ</title>
-<%@ include file="../main/head.jspf"%>
-<%@ include file="../main/body_header.jspf"%>
+<title>FAQ Detail</title>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -18,7 +17,8 @@
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
-<body>
+<body class="animsition">
+<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
 <div>
 </div>
 <div class="admin_grp" style="margin: 100px 200px 5px">
@@ -72,88 +72,3 @@
 		</div>
 	</div>
 </div>
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<%@ include file="/WEB-INF/include/include-header.jspf"%>
-</head>
-<body>
-	<table class="board_view">
-		<colgroup>
-			<col width="15%" />
-			<col width="35%" />
-			<col width="15%" />
-			<col width="35%" />
-		</colgroup>
-		<caption>게시글 상세</caption>
-		<tbody>
-			<tr>
-				<th scope="row">글 번호</th>
-				<td>${map.FAQ_NO }</td>
-			</tr>
-			<tr>
-				<th scope="row">타입</th>
-				<td>${map.FAQ_TYPE }</td>
-			</tr>
-			<tr>
-				<th scope="row">질문</th>
-				<td colspan="3">${map.FAQ_SUB }</td>
-			</tr>
-			<tr>
-				<td colspan="4">${map.FAQ_CONTENT }</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<a href="#this" class="btn" id="list">목록으로</a>
-	<a href="#this" class="btn" id="update">수정하기</a>
-
-	<%@ include file="/WEB-INF/include/include-body.jspf"%>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#list").on("click", function(e) { /* 목록으로 */
-				e.preventDefault();
-				fn_openBoardList();
-			});
-
-			$("#update").on("click", function(e) { /* 저장하기  */
-				e.preventDefault();
-				fn_openBoardUpdate();
-			});
-		});
-
-		function fn_openBoardList() {
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/faq/adminFaqList.do'/>");
-			comSubmit.submit();
-		}
-		function fn_openBoardUpdate() {
-			var FAQ_NO = "${map.FAQ_NO}";
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/faq/adminFaqModifyForm.do'/>");
-			comSubmit.addParam("FAQ_NO", FAQ_NO);
-			comSubmit.submit();
-		}
-	</script>
-</body>
-</html> --%>
