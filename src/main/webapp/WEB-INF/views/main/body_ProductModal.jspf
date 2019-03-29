@@ -183,7 +183,7 @@ function writeToModal(movie_no) {
 			var img_url = "/moviecube/resources/upload/movie/poster/" + data.map.POSTER_SAVNAME;
 			$("#h_modal_poster_savname").attr('src', img_url);
 			
-			var type = "타입 :  " + data.map.MOVIE_TYPE;
+			var type = "타입 :  " + String(data.map.MOVIE_TYPE);
 			$("#h_modal_movie_type").text(type);
 			
 			var movie_opendate = "개봉일 :  " + data.openDate;
