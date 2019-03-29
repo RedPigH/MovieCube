@@ -59,31 +59,29 @@ public class MovieController {
 
 		return mv;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/movieDetail2.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView movieDetail2(CommandMap commandMap, HttpServletRequest request) throws Exception { // 모달을 위한 메서드
 		ModelAndView mv = new ModelAndView("redirect:/main");
-		
+
 		String movie_no = request.getParameter("movie_no");
 		commandMap.put("MOVIE_NO", movie_no);
-		
+
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
 		Map<String, Object> map2 = (Map<String, Object>) map.get("map");
 
 		String openDate = map2.get("MOVIE_OPENDATE").toString();
 		openDate = openDate.substring(0, 10);
-	
+
 		mv.addObject("map", map.get("map"));
-		
+
 		mv.addObject("openDate", openDate);
 		mv.setViewName("jsonView");
-		
-		
+
 		return mv;
 	}
-	
 
 	@RequestMapping(value = "/movieModify.do")
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -174,7 +172,7 @@ public class MovieController {
 			String selected = "";
 
 			for (int i = startPage; i <= endPage; i++) {
-				if(i > totalPage){
+				if (i > totalPage) {
 					break;
 				}
 
@@ -189,7 +187,7 @@ public class MovieController {
 		} // if문 끝
 
 		if (totalPage - startPage >= blockPage) {
-			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (endPage + 1) + ")'> 다음 </a> &nbsp;"; 
+			commentHtml += "<a id='prevPage' onclick='get_reviews(" + (endPage + 1) + ")'> 다음 </a> &nbsp;";
 		}
 
 		startCount = ((currentPage - 1) * blockCount) + 1; // 만약 현재 선택한 페이지가 2페이지면 1 (2-1) * 5 + 1 = 6
@@ -243,21 +241,22 @@ public class MovieController {
 
 		if (id_check)
 			movieService.insertComment(map.getMap());
-		
+
+		/* 여기서부터 영화 평점 업데이트 */
 		Map<String, Object> ReviewMap = movieService.CommentLikeInfo(map.getMap());
-		
+
 		int all_like = Integer.parseInt(ReviewMap.get("ALL_LIKE").toString());
 		int cnt = Integer.parseInt(ReviewMap.get("CNT").toString());
-		
-		double grade = all_like / cnt;
-		
+
+		double grade = (double) all_like / cnt;
+
 		CommandMap Grademap = new CommandMap();
-		
+
 		Grademap.put("MOVIE_NO", movie_no);
 		Grademap.put("MOVIE_GRADE", String.format("%.1f", grade));
-		
+
 		movieService.modifyGrade(Grademap.getMap());
-		
+
 		mv.addObject("id_check", id_check);
 		mv.setViewName("jsonView");
 
@@ -273,9 +272,33 @@ public class MovieController {
 		commandMap.put("CMT_NO", cmt_no);
 		movieService.deleteComment(commandMap.getMap());
 
+		/* 영화 평점 업데이트 */
+		String movie_no = request.getParameter("movie_no");
+		commandMap.put("MOVIE_NO", movie_no);
+
+		Map<String, Object> ReviewMap = movieService.CommentLikeInfo(commandMap.getMap());
+		CommandMap Grademap = new CommandMap();
+
+		if (ReviewMap.get("ALL_LIKE") != null) {
+			int all_like = Integer.parseInt(ReviewMap.get("ALL_LIKE").toString());
+
+			int cnt = Integer.parseInt(ReviewMap.get("CNT").toString());
+
+			double grade = (double) all_like / cnt;
+
+			Grademap.put("MOVIE_NO", movie_no);
+			Grademap.put("MOVIE_GRADE", String.format("%.1f", grade));
+		} else {
+
+			Grademap.put("MOVIE_NO", movie_no);
+			Grademap.put("MOVIE_GRADE", 0);
+		}
+
+		movieService.modifyGrade(Grademap.getMap());
+
 		mv.setViewName("jsonView");
 
 		return mv;
 	}
-	
+
 }
