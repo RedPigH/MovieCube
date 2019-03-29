@@ -127,9 +127,19 @@ history.go(-1);
 				  	</div>
 	
 				<ul class="booking_list">
-					<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
+					<c:choose>
+						<c:when test="${fn:length(ResList) > 0 }">
+							<c:forEach items="${ResList}" var="row">
+								<li>${row.MOVIE_NAME} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <c:set var="TextValue" value="${row.TIME_DATE}"/>
+                           ${fn:substring(TextValue,0,10)}</li>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<li class="no_data text-center pa30">조회된 내역이 없습니다</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
-				</div>
+				</div> 
 			<script>
 			
 			</script>
