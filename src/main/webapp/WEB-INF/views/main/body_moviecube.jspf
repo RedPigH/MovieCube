@@ -4,75 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<script type="text/javascript">
-function toModal(movie_no) {
-	writeToModal(movie_no);
 
-	/* Ajax를 해봅시다 */
-	/* 여기부터는 바로 스틸컷 슬라이드 부분입니다.항! */
-	$("div").remove("#comment_start");
-	$("#review").val(''); // textarea 값 초기화
-	
-	jQuery.ajaxSettings.traditional = true;
-	stillcut_list = new Array();
-	var data = {
-			"movie_no" : movie_no
-	}
-	
-			$.ajax({
-				type : "POST",
-				url : "<c:url value='/stillcut.do'/>",
-				dataType : "json",
-				data : data,
-
-				success : function(data) {
-					
-					var stillcut_length = data.stillcut_list.length;
-					
-					var for_label_prev = "&#x2039;";
-					var for_label_next = "&#x203a;"
-					
-					var img_tag = "<img src='/moviecube/resources/upload/movie/stillcut/";
-					var label_prev = "";
-					var label_next = "";
-					
-					$('#stillcut-slide').children().remove();
-					
-					for(var i = 0 ; i < data.stillcut_list.length; i++) {
-						img_tag = "<img src='/moviecube/resources/upload/movie/stillcut/";
-						var input_tag = "<input type='radio' name='radio-btn' id='img-" + (i+1) + "' />" // i = 0일때 checked 해줘야됨.
-						if(i == 0) {
-							input_tag = "<input type='radio' name='radio-btn' id='img-1' checked />";
-						}
-						var savname = data.stillcut_list[i].STILLCUT_SAVNAME + "'/>";
-						
-						img_tag = img_tag + savname;
-						
-						if(i == 0) { // 만약 i가 처음 값이면 이전 버튼 눌렀을 때 마지막 사진을 띄워줘야됨.
-							label_prev = "<label for = 'img-" + (stillcut_length) + "' class='prev'>" + for_label_prev + "</label>";
-						} else {
-							label_prev = "<label for = 'img-" + (i) + "' class='prev'>" + for_label_prev + "</label>";
-						}
-						if( i == (stillcut_length - 1) ) { // 만약 i가 끝값이면 다음 눌렀을 때 처음으로 돌아가게 해줘야됨 
-							label_next = "<label for = 'img-1' class='next'>" + for_label_next + " </label>";
-						}
-						
-						label_next = "<label for = 'img-" + (i+2) + "' class='next'>" + for_label_next +  "</label>";
-						
-						$("#stillcut-slide").append(
-								input_tag + "<li class='slide-container'>" + 
-								"<div class='slide'>" + img_tag + "</div>" + 
-								"<div class='nav'>" + label_prev + label_next + "</div>" + "</li>"
-								);
-					} // for문 끝
-				},
-
-				error : function() {
-					alert("오류가 발생하였습니다.");
-				}
-			});
-}
-</script>
 
 <!-- moviecube -->
 <section class="bg0 p-t-23 p-b-140">
@@ -136,22 +68,22 @@ function toModal(movie_no) {
                   <div class="mtext-102 cl2 p-b-15">장르</div>
 
                   <ul>
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04 filter-link-active"> 액션 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 코미디 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 로맨스 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> Newness </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
                   </ul>
                </div>
@@ -160,19 +92,19 @@ function toModal(movie_no) {
                   <div class="mtext-102 cl2 p-b-15">평점</div>
 
                   <ul>
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04 filter-link-active"> 8 ~ 10 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 6 ~ 7 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 4 ~ 5 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 2 ~ 3 </a></li>
 
-                     <li class="p-b-6"><a href="resources/#"
+                     <li class="p-b-6"><a href="javascript:void(0);"
                         class="filter-link stext-106 trans-04"> 1 ~ 2 </a></li>
                   </ul>
                </div>
@@ -182,19 +114,19 @@ function toModal(movie_no) {
 
                   <ul>
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                      <a href="resources/#" class="filter-link stext-106 trans-04 filter-link-active" style="display: inline-block">
+                      <a href="javascript:void(0);" class="filter-link stext-106 trans-04 filter-link-active" style="display: inline-block">
                            일반 </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
                            3D </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
                            4D </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="resources/#" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
                            IMAX </a></span></li>
                   </ul>
                </div>
@@ -203,11 +135,11 @@ function toModal(movie_no) {
                   <div class="mtext-102 cl2 p-b-15">관람연령</div>
 
                   <div class="flex-w p-t-4 m-r--5">
-                     <a href="resources/#"
+                     <a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                        12세 이상 </a> <a href="resources/#"
+                        12세 이상 </a> <a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                        15세 이상 </a> <a href="resources/#"
+                        15세 이상 </a> <a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                         19세 이상 </a>
                   </div>
@@ -233,16 +165,16 @@ function toModal(movie_no) {
 
 
                            <a href="#" id="gahyun" onclick="toModal(${row.MOVIE_NO });" 
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										상세보기 </a>
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                              상세보기 </a>
 
                         </div>
 
                         <div class="block2-txt flex-w flex-t p-t-14">
                            <div class="block2-txt-child1 flex-col-l ">
                               <a href="resources/product-detail.html"
-                                 class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                 ${row.MOVIE_NAME}</a> <span class="stext-105 cl3"
+                                 class="stext-105 cl3 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                 ${row.MOVIE_NAME}</a> <span class="stext-104 cl3"
                                  id="MOVIE_GENRE"> 장르 : ${row.MOVIE_GENRE} </span>
                            </div>
 
