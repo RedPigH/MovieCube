@@ -18,7 +18,7 @@
       
    <%@ include file="main/body_slider.jspf" %>
 
-   <%@ include file="main/body_boxoffice.jspf" %>
+   <%-- <%@ include file="main/body_boxoffice.jspf" %> --%>
       
    <%@ include file="main/body_moviecube.jspf" %>
 
