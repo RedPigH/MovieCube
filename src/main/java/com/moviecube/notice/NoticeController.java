@@ -24,43 +24,74 @@ public class NoticeController {
 
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 7;
 	private int blockpaging = 10;
 	private String pagingHtml;
 	private Paging paging;
 
 	@RequestMapping(value = "/noticeList.do")
 	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
-
-		List<Map<String, Object>> noticeList = noticeService.selectBoardList(commandMap.getMap());
-
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) {
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
 			currentPage = 1;
-		} else {
+		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
-		totalCount = noticeList.size();
 		
+		List<Map<String, Object>> noticeList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				noticeList = noticeService.noticeSearch0(isSearch);
+			}else if(searchNum == 1){
+				noticeList = noticeService.noticeSearch1(isSearch);
+			}else{
+				noticeList = noticeService.noticeSearch2(isSearch);
+			}
+			
+			totalCount = noticeList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			noticeList = noticeList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("noticeList", noticeList);
+			mv.setViewName("/notice/noticeList");
+			return mv;
+		}
+		
+		noticeList = noticeService.selectBoardList(commandMap.getMap());
+		
+		totalCount = noticeList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList");
 		pagingHtml = paging.getPagingHtml().toString();
-
+		
 		int lastCount = totalCount;
-		// System.out.println(paging.getEndCount());
-		// System.out.println(totalCount);
-		if (paging.getEndCount() < totalCount) {
+		
+		if(paging.getEndCount() < totalCount){
 			lastCount = paging.getEndCount() + 1;
 		}
-
+		
 		noticeList = noticeList.subList(paging.getStartCount(), lastCount);
-
-		mv.addObject("noticeList", noticeList);
-		mv.addObject("list", noticeList);
+		
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
+		mv.addObject("noticeList", noticeList);
 		mv.setViewName("/notice/noticeList");
 		return mv;
 	}

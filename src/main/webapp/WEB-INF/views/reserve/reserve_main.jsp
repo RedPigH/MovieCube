@@ -60,8 +60,7 @@
 
 							</div>
 						</div>
-						<div
-							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 
 							<c:forEach var="i" begin="1" end="4" step="1">
 								<div class="size-199 respon6-next" id="cinemaNo${i}">

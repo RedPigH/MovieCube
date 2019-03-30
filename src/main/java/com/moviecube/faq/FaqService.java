@@ -28,5 +28,7 @@ public interface FaqService {
 	List<Map<String, Object>> faqSearch0(String map) throws Exception;
 	
 	List<Map<String, Object>> faqSearch1(String map) throws Exception;
+	
+	List<Map<String, Object>> selectFaqType(Map<String, Object> map) throws Exception;
 
 }

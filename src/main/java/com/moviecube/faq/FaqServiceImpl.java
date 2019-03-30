@@ -87,4 +87,10 @@ public class FaqServiceImpl implements FaqService {
 		return faqDAO.faqSearch1(map);
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectFaqType(Map<String, Object> map) throws Exception{
+		return faqDAO.selectFaqType(map);
+	}
+
+	
 }

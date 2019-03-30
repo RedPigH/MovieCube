@@ -56,6 +56,16 @@
 		]]>
 	</select>
 	
+	<!-- 타입별 FAQ 리스트 -->
+	<select id = "selectFaqType" parameterType = "hashmap" resultType = "hashmap">
+		<![CDATA[
+			SELECT	FAQ_NO, FAQ_TYPE, FAQ_SUB
+			FROM MC_FAQ
+			WHERE FAQ_TYPE = #{FAQ_TYPE}
+				ORDER BY FAQ_NO DESC 
+		]]>
+	</select>
+	
 	<insert id="insertFaq" parameterType="hashmap">
 	<![CDATA[
 	INSERT INTO MC_FAQ

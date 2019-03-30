@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -23,45 +24,75 @@ public class FAQController {
 
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 7;
 	private int blockpaging = 10;
 	private String pagingHtml;
 	private Paging paging;
 
 	@RequestMapping(value = "/faqList.do")
 	public ModelAndView faqList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
-
-		List<Map<String, Object>> faqList = faqService.selectFaqList(commandMap.getMap());
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) {
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
 			currentPage = 1;
-		} else {
+		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
+		
+		List<Map<String, Object>> faqList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				faqList = faqService.faqSearch0(isSearch);
+			}else if(searchNum == 1){
+				faqList = faqService.faqSearch1(isSearch);
+			}
+			
+			totalCount = faqList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "faqList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			faqList = faqList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("faqList", faqList);
+			mv.setViewName("/faq/faqList");
+			return mv;
+		}
+		
+		faqList = faqService.selectFaqList(commandMap.getMap());
+		
 		totalCount = faqList.size();
-
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "faqList");
 		pagingHtml = paging.getPagingHtml().toString();
-
+		
 		int lastCount = totalCount;
-		// System.out.println(paging.getEndCount());
-		// System.out.println(totalCount);
-		if (paging.getEndCount() < totalCount) {
+		
+		if(paging.getEndCount() < totalCount){
 			lastCount = paging.getEndCount() + 1;
 		}
-
+		
 		faqList = faqList.subList(paging.getStartCount(), lastCount);
-
-		mv.addObject("faqList", faqList);
-		mv.addObject("list", faqList);
+		
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
+		mv.addObject("faqList", faqList);
 		mv.setViewName("/faq/faqList");
 		return mv;
-	}
+	}	
 	
 	@RequestMapping(value = "/faqList1.do")
 	public ModelAndView faqList1(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -94,7 +125,7 @@ public class FAQController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/faq/faqList1");
+		mv.setViewName("/faq/faqList");
 		return mv;
 	}
 
@@ -129,7 +160,7 @@ public class FAQController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/faq/faqList2");
+		mv.setViewName("/faq/faqList");
 		return mv;
 	}
 	
@@ -164,7 +195,7 @@ public class FAQController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/faq/faqList3");
+		mv.setViewName("/faq/faqList");
 		return mv;
 	}
 	
@@ -199,7 +230,7 @@ public class FAQController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/faq/faqList4");
+		mv.setViewName("/faq/faqList");
 		return mv;
 	}
 	
@@ -234,7 +265,7 @@ public class FAQController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/faq/faqList5");
+		mv.setViewName("/faq/faqList");
 		return mv;
 	}
 	
@@ -299,6 +330,22 @@ public class FAQController {
 
 		faqService.deleteFaq(commandMap.getMap());
 
+		return mv;
+	}
+	
+	@RequestMapping(value = "/selectFaqType")
+	public ModelAndView selectFaqType(HttpServletRequest request, HttpServletResponse response, String param) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		String FAQ_TYPE = param;
+		CommandMap map = new CommandMap();
+		map.put("FAQ_TYPE", FAQ_TYPE);
+		
+		List<Map<String, Object>> faqList = faqService.selectFaqType(map.getMap());
+		
+		mv.setViewName("jsonView");
+		mv.addObject("result", faqList);
+		
 		return mv;
 	}
 }
