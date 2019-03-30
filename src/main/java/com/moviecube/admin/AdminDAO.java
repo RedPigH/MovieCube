@@ -17,21 +17,26 @@ public class AdminDAO extends AbstractDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> memberSearch1(String isSearch) {
+	public List<Map<String, Object>> memberSearch0(String isSearch) {
 		return (List<Map<String, Object>>)selectList("admin.memberSearch0", "%"+isSearch+"%");
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> memberSearch2(String isSearch) {
+	public List<Map<String, Object>> memberSearch1(String isSearch) {
 		return (List<Map<String, Object>>)selectList("admin.memberSearch1", "%"+isSearch+"%");
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> memberSearch3(String isSearch) {
+	public List<Map<String, Object>> memberSearch2(String isSearch) {
 		return (List<Map<String, Object>>)selectList("admin.memberSearch2", "%"+isSearch+"%");
 	}
 
 	public void memberDelete(Map<String, Object> map) {
 		delete("admin.memberDelete", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectMemberDetail(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("admin.selectMemberDetail", map);
 	}
 }

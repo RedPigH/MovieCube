@@ -1,84 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf"%>
+<%@ include file="../main/head.jspf"%>
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_import.css" />
+<script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/admin_common.js"></script>
 </head>
 <body>
-	<table class="board_view">
-		<colgroup>
-			<col width="15%" />
-			<col width="35%" />
-			<col width="15%" />
-			<col width="35%" />
-		</colgroup>
-		<caption>게시글 상세</caption>
-		<tbody>
-			<tr>
-				<th scope="row">글 번호</th>
-				<td>${map.NOTICE_SUB }</td>
-			</tr>
-			<tr>
-				<th scope="row">작성시간</th>
-				<td>${map.NOTICE_REGDATE }</td>
-			</tr>
-			<tr>
-				<th scope="row">제목</th>
-				<td scope="3">${map.NOTICE_SUB }</td>
-			</tr>
-			<tr>
-				<td colspan="4">${map.NOTICE_CONTENT }</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<a href="#this" class="btn" id="list">목록으로</a>
-	<a href="#this" class="btn" id="update">수정하기</a>
-	<a href="#this" class="btn" id="delete">삭제하기</a>
-
-	<%@ include file="/WEB-INF/include/include-body.jspf"%>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#list").on("click", function(e) { /* 목록으로 */
-				e.preventDefault();
-				fn_openBoardList();
-			});
-
-			$("#update").on("click", function(e) { /* 저장하기  */
-				e.preventDefault();
-				fn_openBoardUpdate();
-			});
-
-			$("#delete").on("click", function(e) { /* 삭제하기 */
-				e.preventDefault();
-				fn_deleteBoard();
-			});
-		});
-
-		function fn_openBoardList() {
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeList.do'/>");
-			comSubmit.submit();
-		}
-
-		function fn_openBoardUpdate() {
-			var notice_no = "${map.NOTICE_NO}";
-			var comSubmit = new ComSubmit();
-			comSubmit
-					.setUrl("<c:url value='/notice/adminNoticeModifyForm.do'/>")
-			comSubmit.addParam("NOTICE_NO", notice_no);
-			comSubmit.submit();
-		}
-
-		function fn_deleteBoard() {
-			var comSubmit = new ComSubmit();
-			var notice_no = "${map.NOTICE_NO}";
-			comSubmit.setUrl("<c:url value='/notice/adminNoticeDelete.do'/>");
-			comSubmit.addParam("NOTICE_NO", notice_no);
-			comSubmit.submit();
-			// im babo
-		}
-	</script>
-</body>
-</html>
+	<%@ include file="/WEB-INF/views/main/body_header.jspf"%>
+<div class="admin_grp">
+	<div class="admin_ct">
+		<div class="movie_list">
+			<h3 class="sub_tit">공지사항 상세보기 </h3>
+			<div class="tbl_type_01">
+				<table>
+					<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
+					<colgroup>
+						<col style="width: 120px;" />
+						<col />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="row">글번호</th>
+							<td>${map.NOTICE_NO}</td>
+						</tr>
+						<tr>
+							<th scope="row">글제목</th>
+							<td>${map.NOTICE_SUB}</td>
+						</tr>
+						<tr>
+							<th scope="row">작성일</th>
+							<td><c:set var="TextValue" value="${map.NOTICE_REGDATE}"/>
+								${fn:substring(TextValue,0,16)}
+						</tr>
+						<tr>
+							<th scope="row">글내용</th>
+							<td>${map.NOTICE_CONTENT}</pre></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="btn_type_03">
+			<a href="#none" class="btn btnC_04 btnP_04" onclick="location.href='<%=cp%>/noticeList.do?currentPage=${currentPage}' ">
+				<span>목록</span>
+			</a>
+		</div>
+	</div>
+</div>
+	

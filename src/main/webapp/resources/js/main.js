@@ -250,6 +250,10 @@
             var index = item.index(this);
             rated = index;
             $(input).val(index+1);
+            // 여기부터 중원이가 추가함 
+            // alert(index+1);
+            $("#rating_value").attr("value",index+1);
+            // 여기까지 중원이가 추가함
         });
 
         $(this).on('mouseleave', function(){
@@ -266,6 +270,7 @@
         });
     });
     
+   
     /*==================================================================
  [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
@@ -274,12 +279,42 @@
         // 중원이가 추가함
         $("body").addClass("no-scrolling");
     });
-
+    
     $('.js-hide-modal1').on('click',function(){
         $('.js-modal1').removeClass('show-modal1');
         $("body").removeClass("no-scrolling");
     });
+    
+    
+    $(document).bind('ready ajaxComplete', function show_modal1(){
+        $('.js-show-modal1').on('click',function(e){
+            e.preventDefault();
+            $('.js-modal1').addClass('show-modal1');
+            // 중원이가 추가함
+            $("body").addClass("no-scrolling");
+        })
+    	});
+    
+    $(document).bind('ready ajaxComplete', function hide_modal1(){
+    $('.js-hide-modal1').on('click',function(){
+        $('.js-modal1').removeClass('show-modal1');
+        $("body").removeClass("no-scrolling");
+    })
+    });
 
+/*==================================================================
+[ Show modal2 ] 로그인 창 */
+$('.js-show-modal2').on('click',function(e){
+    e.preventDefault();
+    $('.js-modal2').addClass('show-modal2');
+    $("input[name='MEMBER_ID']").focus();
+    // 승현이가 추가함
+    $("body").addClass("no-scrolling");
+});
 
+$('.js-hide-modal2').on('click',function(){
+    $('.js-modal2').removeClass('show-modal2');
+    $("body").removeClass("no-scrolling");
+});
 
 })(jQuery);

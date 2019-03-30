@@ -51,6 +51,21 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.deleteBoard(map);
 
 	}
+	
+	@Override
+	public List<Map<String, Object>> noticeSearch0(String map) throws Exception {
+		return noticeDAO.noticeSearch0(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> noticeSearch1(String map) throws Exception {
+		return noticeDAO.noticeSearch1(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> noticeSearch2(String map) throws Exception {
+		return noticeDAO.noticeSearch2(map);
+	}
 
 	/*
 	 * @Override public List<Map<String, Object>> selectNoticeList(Map<String,

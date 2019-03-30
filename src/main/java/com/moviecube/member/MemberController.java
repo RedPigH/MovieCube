@@ -5,21 +5,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
+import com.moviecube.wishlist.WishListService;
 
 @Controller
 public class MemberController {
 	
 	  Logger log = Logger.getLogger(this.getClass());
+	  
+	  @Resource(name = "wishlistService")
+		private WishListService wishlistService;
 	  
 	  @Resource(name="memberService")
 	  private MemberServiceImpl memberService;
@@ -42,7 +49,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //아이디 중복확인
+	  //중복확인
 	  @RequestMapping("/member/checkId.do")
 	  @ResponseBody
 	   public Map<String, Object> findUsedID(@RequestBody String id) throws Exception{
@@ -76,18 +83,29 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //로그인 
+	  //로그인
 	  @RequestMapping(value="/member/login.do")
-	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
+	  public ModelAndView login(CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception{
 		  ModelAndView mv = new ModelAndView();
+		  
+		  String referer = request.getHeader("Referer");
+		  
 		  Map <String, Object> user = new HashMap<String, Object>();
 		  
 		  user = memberService.checkUserIdAndPassword(commandMap.getMap());
 		  		  
 		  if(user!=null){
 			  session.setAttribute("userLoginInfo", user);
-			  mv.setViewName("redirect:/main.do");
-			  
+				
+				CommandMap map = new CommandMap();
+				
+				map.put("MEMBER_NO", user.get("MEMBER_NO"));
+				
+				List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
+				
+				mv.addObject("WishList", wish);
+				mv.setViewName("redirect:" + referer);
+				
 			  return mv;
 		  } 
 		  
@@ -104,7 +122,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //아이디/비밀번호 찾기 페이지 이동
+	  //아이디 비밀번호 찾기 폼
 	  @RequestMapping(value="/member/findForm.do")
 	  public ModelAndView findForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/findIdAndPassword");
@@ -113,33 +131,38 @@ public class MemberController {
 	  }
 	  
 	
-	  //아이디/비밀번호 찾기
+	  //아이디 비밀번호 찾기
 	  
-	  @RequestMapping(value="/member/find.do")
+	  @RequestMapping(value="/member/find.do", method = RequestMethod.POST)
 	  @ResponseBody
-	  public Map<String, Object> findIdAndPw(@RequestBody String name, String age, String phone) throws Exception{
-		  Map<String, Object> map = new HashMap<String, Object>();
-		  String id = "";
-		  String pw = "";
+	  public String findId(@RequestParam String MEMBER_NAME, @RequestParam String MEMBER_AGE, @RequestParam String MEMBER_PHONE) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("MEMBER_NAME", MEMBER_NAME); 
+		map.put("MEMBER_AGE", MEMBER_AGE); 
+		map.put("MEMBER_PHONE" , MEMBER_PHONE);
+		 
+		  System.out.println(map);
+		  String id = memberService.findId(map);
+		
+		  //map.put("id", id);		  
+		 System.out.println(id);
 		  
-		  map.put("MEMBER_NAME", name);
-		  map.put("MEMBER_AGE", age); // 주현이는 24세이다.
-		  map.put("MEMBER_PHONE" , phone);
-		  
-		  id = memberService.findId(map);
-		  
-		  	if(id!=null) {
-		  		
-		  	}
-		  pw = memberService.findPasswd(map);
-		  
-		  return map;
-				  
+		  return id;
 	  }
 	 
-	  
-	  /*//마이페이지
-	  @RequestMapping
-	  public */
-	  
+	  @RequestMapping(value="/member/find1.do")
+	  @ResponseBody
+	  public Map<String, Object> findPw(String name,String id, String name1, String phone1) throws Exception{
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  
+		  map.put("MEMBER_ID", id);
+		  map.put("MEMBER_NAME1", name1); // 주현이는 24세이다.
+		  map.put("MEMBER_PHONE1" , phone1);
+		  
+		  String pw = memberService.findPasswd(map);
+		  
+		  map.put("pw", pw);
+		  
+		  return map;
+	  }
 }

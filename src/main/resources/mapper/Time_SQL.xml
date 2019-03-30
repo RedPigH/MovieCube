@@ -78,17 +78,18 @@
 			order by t.start_time asc
 	</select>
 	
-	<select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
-		<![CDATA[
-			SELECT m.MOVIE_NO, m.MOVIE_NAME, c.CINEMA_NO, c.CINEMA_NAME, s.SCREEN_NO, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
-			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
-			WHERE 
-			t.CINEMA_NO = c.CINEMA_NO AND 
-			t.SCREEN_NO = s.SCREEN_NO AND 
-			t.MOVIE_NO= m.MOVIE_NO AND
-			t.TIME_NO = #{TIME_NO}
-		]]>
-	</select>
+	   <select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
+      <![CDATA[
+         SELECT m.MOVIE_NO, m.MOVIE_NAME, c.CINEMA_NO, c.CINEMA_NAME, s.SCREEN_NO, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO, f.POSTER_SAVNAME
+         FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m, MC_MOVIE_FILE f
+         WHERE 
+         t.CINEMA_NO = c.CINEMA_NO AND 
+         t.SCREEN_NO = s.SCREEN_NO AND 
+         t.MOVIE_NO = m.MOVIE_NO AND
+         t.MOVIE_NO = f.MOVIE_NO AND
+         t.TIME_NO = #{TIME_NO}
+      ]]>
+   </select>
 	
 	
 	<!-- 상영일정 등록 -->
@@ -115,7 +116,7 @@
 			#{MOVIE_NO},
 			#{CINEMA_NO},
 			#{SCREEN_NO},
-			SYSDATE,
+			#{TIME_DATE},
 			#{START_TIME},
 			#{END_TIME}
 		)
@@ -146,6 +147,39 @@
 			WHERE TIME_NO = #{TIME_NO}
 		]]>
 	</delete>
-
+	
+	<!-- 타임 검색 -->
+	<select id="timeSearch0" resultType="hashmap" parameterType="hashmap">
+		SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
+			WHERE
+			t.CINEMA_NO = c.CINEMA_NO AND 
+			t.SCREEN_NO = s.SCREEN_NO AND 
+			t.MOVIE_NO= m.MOVIE_NO AND
+			m.MOVIE_NAME like #{search} 
+			ORDER BY t.TIME_NO DESC
+	</select>
+	
+	<select id="timeSearch1" resultType="hashmap" parameterType="hashmap">
+		SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
+			WHERE
+			t.CINEMA_NO = c.CINEMA_NO AND 
+			t.SCREEN_NO = s.SCREEN_NO AND 
+			t.MOVIE_NO= m.MOVIE_NO AND
+			c.CINEMA_NAME like #{search} 
+			ORDER BY t.TIME_NO DESC
+	</select>
+	
+	<select id="timeSearch2" resultType="hashmap" parameterType="hashmap">
+		SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
+			WHERE
+			t.CINEMA_NO = c.CINEMA_NO AND 
+			t.SCREEN_NO = s.SCREEN_NO AND 
+			t.MOVIE_NO= m.MOVIE_NO AND
+			s.SCREEN_NAME like #{search} 
+			ORDER BY t.TIME_NO DESC
+	</select>
 
 </mapper>

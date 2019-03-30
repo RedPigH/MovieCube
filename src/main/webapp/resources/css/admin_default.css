@@ -391,3 +391,16 @@ textarea{width:100%;font-size:12px;resize:none;}
 	font-size:12px;
 	text-shadow:none;
 }
+
+a.toMain{
+    font-size: 15px
+}
+
+a.toMain:hover{
+    -webkit-transform: scale(1.3);
+    -moz-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    transform: scale(1.3);
+    transition: transform 0.9s ease;
+}

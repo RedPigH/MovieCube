@@ -14,11 +14,35 @@ public class FaqDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>) selectList("faq.selectFaqList", map);
 	}
-
+	
+	public List<Map<String, Object>> selectFaqList1(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("faq.selectFaqList1", map);
+	}
+	
+	public List<Map<String, Object>> selectFaqList2(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("faq.selectFaqList2", map);
+	}
+	
+	public List<Map<String, Object>> selectFaqList3(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("faq.selectFaqList3", map);
+	}
+	
+	public List<Map<String, Object>> selectFaqList4(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("faq.selectFaqList4", map);
+	}
+	
+	public List<Map<String, Object>> selectFaqList5(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("faq.selectFaqList5", map);
+	}
+	
 	public void insertFaq(Map<String, Object> map) throws Exception {
 		insert("faq.insertFaq", map);
 		// TODO Auto-generated method stub
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,5 +61,14 @@ public class FaqDAO extends AbstractDAO {
 		update("faq.deleteFaq",map);
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> faqSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("faq.faqSearch0", "%"+isSearch+"%");
+	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> faqSearch1(String isSearch) {
+		return (List<Map<String, Object>>)selectList("faq.faqSearch1", "%"+isSearch+"%");
+	}
 }

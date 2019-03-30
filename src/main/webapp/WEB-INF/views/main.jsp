@@ -14,7 +14,7 @@
 
    <%@ include file="main/body_header.jspf" %>
    
-   <%@ include file="main/favorite.jspf" %>
+   <%@ include file="main/wishList.jspf" %>
       
    <%@ include file="main/body_slider.jspf" %>
 
@@ -31,7 +31,9 @@
             class="zmdi zmdi-chevron-up"></i>
          </span>
       </div>
-
+      
+      
+   <%@ include file="member/loginForm.jspf" %>
 
    <%@ include file="main/body_ProductModal.jspf" %>
 
