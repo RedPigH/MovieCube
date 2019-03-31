@@ -136,15 +136,16 @@
 				success : function(data) {
 					
 					  var imageURL = 'resources/upload/movie/poster/'+data.time.POSTER_SAVNAME;
+					  var reserveNotice = '영화관: '+data.time.CINEMA_NAME+'\n'
+				    	 +'상영관: '+data.time.SCREEN_NAME+'\n'
+				    	 +'상영 날짜: '+data.time.TIME_DATE+'\n'
+				    	 +'상영 시간: '+data.time.START_TIME+'~'+data.time.END_TIME+'\n'
+				    	 +'선택 좌석: '+data.selectSeat+'\n'
+				    	 +'총 가격: '+data.totalprice;
 					 
 					  swal({
 					    title:'영화: '+data.time.MOVIE_NAME,
-					    text: '영화관: '+data.time.CINEMA_NAME+'\n'
-					    	 +'상영관: '+data.time.SCREEN_NAME+'\n'
-					    	 +'상영 날짜: '+data.time.TIME_DATE+'\n'
-					    	 +'상영 시간: '+data.time.START_TIME+'~'+data.time.END_TIME+'\n'
-					    	 +'선택 좌석: '+data.selectSeat+'\n'
-					    	 +'총 가격: '+data.totalprice,
+					    text: reserveNotice,
 					    icon: imageURL,
 					  });
 					
