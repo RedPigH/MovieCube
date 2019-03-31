@@ -1,0 +1,124 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+
+<div class="modal fade booking_lp booking_lp2" id="select_theater"
+		tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-keyboard="false"
+		aria-hidden="true" style="padding-right: 17px">
+		<div class="wrapper" style="margin-top: 284px">
+			<div class="contents" tabindex="0">
+
+				<div class="movie_header">
+					<div class="pull-left clearfix" id="h3_wrap">
+						<h3 class="h3_theater1 pull-left active overflow_visible">
+							<a class="blank theaterTabBtn" href="#body_theater1"
+								data-toggle="tab">지역별</a>
+						</h3>
+					</div>
+				</div>
+				<div class="util">
+					<div class="selected" id="cinemaSelected"></div>
+				</div>
+
+				<!-- 지역별 -->
+				<div id="body_theater1"
+					class="tab-pane active movie_body body_theater1">
+					<div class="theater_list">
+						<ul class="depth1">
+							<li data-areacode="10"><a href="javascript:void(0);"
+								title="서울">서울
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="30"><a href="javascript:void(0);"
+								title="경기">경기
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="35"><a href="javascript:void(0);"
+								title="인천">인천
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="45"><a href="javascript:void(0);"
+								title="대전/충청/세종">대전/충청/세종
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="55"><a href="javascript:void(0);"
+								title="부산/대구/경상">부산/대구/경상
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="65"><a href="javascript:void(0);"
+								title="광주/전라">광주/전라
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="70"><a href="javascript:void(0);"
+								title="강원">강원
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+							<li data-areacode="80"><a href="javascript:void(0);"
+								title="제주">제주
+									<div class=""></div>
+							</a><span><i class="fa fa-angle-right"></i></span></li>
+						</ul>
+						<ul class="depth2"></ul>
+					</div>
+					<!-- 지도 -->
+					<div class="map map_h"
+						style="padding: 0; width: 580px; background-color: #eee; border-top: 1px solid #e5e5e5;">
+						<ul>
+							<li class="mapArea" data-areacode="10"><a
+								href="javascript:void(0);" title="서울 선택">서울</a>
+								<ul class="depth2 area_10" style="top: 0; left: 0;">
+									<li data-cinemacode="1372" data-screencode=""><a
+										href="javascript:void(0);" title="강남 선택"
+										style="left: 232px; top: 275px; letter-spacing: inherit;">강남
+											<div class=""></div>
+									</a></li>
+									<li data-cinemacode="1003" data-screencode=""><a
+										href="javascript:void(0);" title="동대문 선택"
+										style="left: 215px; top: 180px; letter-spacing: inherit;">동대문
+											<div class=""></div>
+									</a></li>
+									<li data-cinemacode="1202" data-screencode=""><a
+										href="javascript:void(0);" title="신촌 선택"
+										style="left: 140px; top: 185px; letter-spacing: inherit;">신촌
+											<div class=""></div>
+									</a></li>
+								</ul></li>
+							<li class="mapArea" data-areacode="30"><a
+								href="javascript:void(0);" title="경기 선택">경기</a></li>
+							<li class="mapArea" data-areacode="35"><a
+								href="javascript:void(0);" title="인천 선택">인천</a></li>
+							<li class="mapArea" data-areacode="45"><a
+								href="javascript:void(0);" title="대전/충청/세종 선택">대전/충청/세종</a></li>
+							<li class="mapArea" data-areacode="55"><a
+								href="javascript:void(0);" title="부산/대구/경상 선택">부산/대구/경상</a></li>
+							<li class="mapArea" data-areacode="65"><a
+								href="javascript:void(0);" title="광주/전라 선택">광주/전라</a></li>
+							<li class="mapArea" data-areacode="70"><a
+								href="javascript:void(0);" title="강원 선택">강원</a></li>
+							<li class="mapArea" data-areacode="80"><a
+								href="javascript:void(0);" title="제주 선택">제주</a></li>
+						</ul>
+					</div>
+					<!-- //지도 -->
+				</div>
+				<!-- 특별관 -->
+				<div id="body_theater2" class="tab-pane movie_body body_theater2"
+					style="display: none;">
+					<div class="theater_list">
+						<ul class="depth1"></ul>
+						<ul class="depth2" tabindex="0"></ul>
+						<div class="detail_wrap"></div>
+					</div>
+				</div>
+				<div class="last_btns">
+					<button id="btnCinemaCancel" type="button"
+						class="img_btn booking cancel" data-dismiss="modal">취소</button>
+					<button id="btnCinemaConfirm" type="button"
+						class="img_btn booking ok">확인</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>

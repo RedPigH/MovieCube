@@ -43,11 +43,12 @@
 }
 </style>
 
-<body>
+<body class="animsition">
 
 <div class="super_container">
 
 	<%@ include file="/WEB-INF/views/main/body_header.jspf" %>
+	<%@ include file="../member/loginForm.jspf"%>
 
 <form id="frm" name="frmMain" method="post">
 <div class="bg0 p-t-104">

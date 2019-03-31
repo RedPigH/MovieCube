@@ -40,6 +40,8 @@ public class MainController {
 			
 			List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
 			
+			session.setAttribute("WishList", wish);
+			
 			mv.addObject("WishList", wish);
 		  }
 
