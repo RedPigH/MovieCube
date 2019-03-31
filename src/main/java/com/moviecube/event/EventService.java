@@ -21,4 +21,10 @@ public interface EventService {
 
 	public void deleteEvent(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
+	public List<Map<String, Object>> McEventList(Map<String, Object> Map) throws Exception;
+
+	public List<Map<String, Object>> MovieEventList(Map<String, Object> Map) throws Exception;
+
+	public List<Map<String, Object>> AllEventList(Map<String, Object> Map) throws Exception;
+
 }

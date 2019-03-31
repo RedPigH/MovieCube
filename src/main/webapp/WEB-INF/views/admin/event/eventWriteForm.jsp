@@ -78,7 +78,6 @@
 									<td><select name="EVENT_TYPE" class="slct w200">
 											<option value="무비큐브 이벤트">무비큐브 이벤트</option>
 											<option value="영화 이벤트">영화 이벤트</option>
-											<option value="영화관 이벤트">영화관 이벤트</option>
 											<option value="제휴 이벤트">제휴 이벤트</option>
 									</select></td>
 								</tr>

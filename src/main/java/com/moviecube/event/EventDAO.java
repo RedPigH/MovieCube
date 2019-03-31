@@ -15,6 +15,18 @@ public class EventDAO extends AbstractDAO {
 		return (List<Map<String, Object>>) selectList("event.selectEventList", map);
 
 	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectMovieCubeEventList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("event.selectMovieCubeEventList", map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectMovieEventList(Map<String, Object> map) throws Exception {
+		return (List<Map<String,Object>>) selectList("event.selectMovieEventList", map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectAllianceEventList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("event.selectAllianceEventList", map);
+	}
 
 	public void insertEvent(Map<String, Object> map) throws Exception {
 		insert("event.insertEvent", map);
@@ -49,17 +61,18 @@ public class EventDAO extends AbstractDAO {
 		update("event.modifyFile", map);
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectEventDetail2(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("event.selectEventDetail2", map);
 	}
-	
-	public void deleteEvent(Map<String, Object> map)throws Exception{
+
+	public void deleteEvent(Map<String, Object> map) throws Exception {
 		update("event.deleteEvent", map);
 	}
-	
-	public void deleteFileList(Map<String,Object> map) throws Exception{
+
+	public void deleteFileList(Map<String, Object> map) throws Exception {
 		update("event.deleteFileList", map);
 	}
+
+
 }

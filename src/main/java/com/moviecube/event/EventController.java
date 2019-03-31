@@ -36,9 +36,20 @@ public class EventController {
 
 		List<Map<String, Object>> eventList = eventService.selectEventList(commandMap);
 		mv.addObject("eventList", eventList);
+		
+		List<Map<String, Object>> mceventList = eventService.McEventList(commandMap);//moviecubeeventList 
+		List<Map<String, Object>> meventList = eventService.MovieEventList(commandMap);//movieEventList
+		List<Map<String, Object>> alleventList = eventService.AllEventList(commandMap);//alliance(제휴)eventList
+		
+		mv.addObject("mceventList", mceventList);
+		mv.addObject("meventList", meventList);
+		mv.addObject("alleventList", alleventList);
+		
 
 		return mv;
 	}
+	
+	
 
 	@RequestMapping(value = "/eventWriteForm.do")
 	public ModelAndView eventWriteForm(CommandMap commandMap) throws Exception {
@@ -101,7 +112,7 @@ System.out.println("�삙怡멸섟�쐧�떂:"+commandMap.get("EVENT_NO"));
 
 	@RequestMapping(value = "/eventModify.do")
 	public ModelAndView modifyEvent(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventList");
+		ModelAndView mv = new ModelAndView("/admin/event/eventList");
 
 		/*
 		 * String EVENT_NO = (String)commandMap.get("EVENT_NO");
@@ -122,11 +133,13 @@ System.out.println("�삙怡멸섟�쐧�떂:"+commandMap.get("EVENT_NO"));
 
 	@RequestMapping(value = "/eventDelete.do")
 	public ModelAndView eventDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("event/eventList");
+		ModelAndView mv = new ModelAndView("/admin/event/eventList");
 
 		eventService.deleteEvent(commandMap.getMap(), request);
 
 		return mv;
 	}
+	
+	
 
 }

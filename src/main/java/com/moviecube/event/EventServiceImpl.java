@@ -31,6 +31,21 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	public List<Map<String, Object>> McEventList(Map<String, Object> map) throws Exception {
+		return EventDAO.selectMovieCubeEventList(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> MovieEventList(Map<String, Object> map) throws Exception {
+		return EventDAO.selectMovieEventList(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> AllEventList(Map<String, Object> map) throws Exception {
+		return EventDAO.selectAllianceEventList(map);
+	}
+
+	@Override
 	public void insertEvent(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		EventDAO.insertEvent(map);
 
@@ -45,19 +60,22 @@ public class EventServiceImpl implements EventService {
 			 * MultipartHttpServletRequest multipartHttpServletRequest =
 			 * (MultipartHttpServletRequest) request;
 			 * 
-			 * // HttpServletRequest 자체로는 Multipart형식. 데이터 조작하는데 어려움이 있기 때문에 //
-			 * MultipartHttpServletRequest 형식으로 형 변환한다
+			 * // HttpServletRequest �옄泥대줈�뒗 Multipart�삎�떇. �뜲�씠�꽣 議곗옉�븯�뒗�뜲 �뼱�젮���씠 �엳湲�
+			 * �븣臾몄뿉 // MultipartHttpServletRequest �삎�떇�쑝濡� �삎 蹂��솚�븳�떎
 			 * 
 			 * Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); //
-			 * 이터레이터를 이용하여 request에 전송된 모든 name을 이용한다 => Map에 있는 데이터를 while문을 이용하여 순차적으로 접근함
+			 * �씠�꽣�젅�씠�꽣瑜� �씠�슜�븯�뿬 request�뿉 �쟾�넚�맂 紐⑤뱺 name�쓣 �씠�슜�븳�떎 => Map�뿉 �엳�뒗
+			 * �뜲�씠�꽣瑜� while臾몄쓣 �씠�슜�븯�뿬 �닚李⑥쟻�쑝濡� �젒洹쇳븿
 			 * 
 			 * MultipartFile multipartFile = null; while (iterator.hasNext()) {
 			 * multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			 * 
-			 * // MultipartFile객체에 request에서 파일 객체를 가져온다 // multipartHttpServletRequest의
-			 * getFile() 메서드는 request에 저장된 파일의 name을 인자로 받는다. // 이 name을 Iterator를 통해서 가져오는데
-			 * 그것이 Iterator.next() 메서드이다 if (multipartFile.isEmpty() == false) { // 실제 파일
-			 * 정보가 있는지 검사한후에 아래의 메서드를 통해 파일의 정보를 출력한다(log.debug)
+			 * // MultipartFile媛앹껜�뿉 request�뿉�꽌 �뙆�씪 媛앹껜瑜� 媛��졇�삩�떎 //
+			 * multipartHttpServletRequest�쓽 getFile() 硫붿꽌�뱶�뒗 request�뿉 ���옣�맂 �뙆�씪�쓽
+			 * name�쓣 �씤�옄濡� 諛쏅뒗�떎. // �씠 name�쓣 Iterator瑜� �넻�빐�꽌 媛��졇�삤�뒗�뜲 洹멸쾬�씠
+			 * Iterator.next() 硫붿꽌�뱶�씠�떎 if (multipartFile.isEmpty() == false) { // �떎�젣
+			 * �뙆�씪 �젙蹂닿� �엳�뒗吏� 寃��궗�븳�썑�뿉 �븘�옒�쓽 硫붿꽌�뱶瑜� �넻�빐 �뙆�씪�쓽 �젙蹂대��
+			 * 異쒕젰�븳�떎(log.debug)
 			 * 
 			 * log.debug("------------- file start -------------"); log.debug("name : " +
 			 * multipartFile.getName()); log.debug("filename : " +
@@ -91,29 +109,28 @@ public class EventServiceImpl implements EventService {
 		EventDAO.updateFileList(map);
 
 		List<Map<String, Object>> fileList = fileUtils.parseUpdateFileInfo(map, request);
-		
-		for(Map<String, Object> fmap : fileList) {
-			System.out.println("항ㄴ한ㅇ항ㄴ하 : " + fmap);
+
+		for (Map<String, Object> fmap : fileList) {
+			System.out.println("�빆�꽩�븳�뀋�빆�꽩�븯 : " + fmap);
 		}
-		
-		
+
 		Map<String, Object> tempMap = null;
 
 		for (int i = 0, size = fileList.size(); i < size; i++) {
 			tempMap = fileList.get(i);
 
-				if (tempMap.get("IS_NEW").equals("Y")) {
-					EventDAO.insertFile(tempMap);
-				} else {
-					EventDAO.modifyFile(tempMap);
-					/*
-					 * tempMap = fileList.get(i); if (i == 0) {
-					 * 
-					 * if (tempMap.get("IS_NEW").equals("Y")) { EventDAO.insertFile(tempMap); } else
-					 * { EventDAO.modifyFile(tempMap);
-					 */
-				}
+			if (tempMap.get("IS_NEW").equals("Y")) {
+				EventDAO.insertFile(tempMap);
+			} else {
+				EventDAO.modifyFile(tempMap);
+				/*
+				 * tempMap = fileList.get(i); if (i == 0) {
+				 * 
+				 * if (tempMap.get("IS_NEW").equals("Y")) { EventDAO.insertFile(tempMap); } else
+				 * { EventDAO.modifyFile(tempMap);
+				 */
 			}
+		}
 	}
 
 	/*

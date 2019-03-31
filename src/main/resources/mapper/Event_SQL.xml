@@ -28,6 +28,66 @@ order by e.EVENT_NO desc
 ]]>
 	</select>
 
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectMovieCubeEventList">
+	
+	<![CDATA[
+	select
+e.EVENT_NO,
+e.EVENT_NAME,
+e.EVENT_TYPE,
+e.EVENT_OPENDATE,
+e.EVENT_CLOSEDATE,
+e.EVENT_URL,
+f.FILE_NO,
+f.EVENT_ORGNAME,
+f.EVENT_SAVNAME
+FROM MC_EVENT e INNER JOIN (select * from mc_event_file where rowid in(select min(rowid) from mc_event_file where del_gb = 'N' group by event_no)) f
+ON e.EVENT_NO = f.EVENT_NO and EVENT_TYPE = '무비큐브 이벤트'
+order by e.EVENT_NO desc
+	]]>
+	</select>
+
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectMovieEventList">
+	
+	<![CDATA[
+	select
+e.EVENT_NO,
+e.EVENT_NAME,
+e.EVENT_TYPE,
+e.EVENT_OPENDATE,
+e.EVENT_CLOSEDATE,
+e.EVENT_URL,
+f.FILE_NO,
+f.EVENT_ORGNAME,
+f.EVENT_SAVNAME
+FROM MC_EVENT e INNER JOIN (select * from mc_event_file where rowid in(select min(rowid) from mc_event_file where del_gb = 'N' group by event_no)) f
+ON e.EVENT_NO = f.EVENT_NO and EVENT_TYPE = '영화 이벤트'
+order by e.EVENT_NO desc
+	]]>
+	</select>
+
+	<select parameterType="hashmap" resultType="hashmap"
+		id="selectAllianceEventList">
+	
+	<![CDATA[
+	select
+e.EVENT_NO,
+e.EVENT_NAME,
+e.EVENT_TYPE,
+e.EVENT_OPENDATE,
+e.EVENT_CLOSEDATE,
+e.EVENT_URL,
+f.FILE_NO,
+f.EVENT_ORGNAME,
+f.EVENT_SAVNAME
+FROM MC_EVENT e INNER JOIN (select * from mc_event_file where rowid in(select min(rowid) from mc_event_file where del_gb = 'N' group by event_no)) f
+ON e.EVENT_NO = f.EVENT_NO and EVENT_TYPE = '제휴 이벤트'
+order by e.EVENT_NO desc
+	]]>
+	</select>
+
 	<insert parameterType="hashmap" id="insertEvent"
 		keyProperty="EVENT_NO" useGeneratedKeys="true">
 
@@ -121,7 +181,7 @@ values
 	</select>
 
 	<select parameterType="hashmap" resultType="hashmap"
-	id="selectEventFileDetail">
+		id="selectEventFileDetail">
 	
 	<![CDATA[
 	select
