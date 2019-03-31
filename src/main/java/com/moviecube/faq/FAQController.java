@@ -334,17 +334,19 @@ public class FAQController {
 	}
 	
 	@RequestMapping(value = "/selectFaqType")
-	public ModelAndView selectFaqType(HttpServletRequest request, HttpServletResponse response, String param) throws Exception {
+	public ModelAndView selectFaqType(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String FAQ_TYPE = param;
+		String FAQ_TYPE = request.getParameter("FAQ_TYPE");
+		System.out.println("dsfsdf :" +FAQ_TYPE);
 		CommandMap map = new CommandMap();
+		
 		map.put("FAQ_TYPE", FAQ_TYPE);
 		
 		List<Map<String, Object>> faqList = faqService.selectFaqType(map.getMap());
 		
 		mv.setViewName("jsonView");
-		mv.addObject("result", faqList);
+		mv.addObject("faqList", faqList);
 		
 		return mv;
 	}

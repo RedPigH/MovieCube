@@ -6,8 +6,59 @@
 <head>
 <meta charset="utf-8" />
 <title>FAQ</title>
+<script src="/moviecube/resources/js_test/jquery-1.12.4.min.js"></script>
 <script src="/moviecube/resources/js/admin_common.js"></script>
 <%@ include file="/WEB-INF/views/main/head.jspf"%>
+<script type="text/javascript">
+
+function selectFaqType(){
+			
+	var faq_type =  $("#FAQ_TYPE").val();
+	var data = {
+			"FAQ_TYPE" : faq_type
+	}
+	
+	alert(" FAQ_TYPE : " + faq_type);
+
+
+	jQuery.ajaxSettings.traditional = true;
+	
+	$.ajax({
+		type: "POST",
+		url: "<c:url value='/selectFaqType.do'/>",
+		dateType:"json",
+		date : data,
+		
+		success:function(data){
+			$("#faqList").find("#faqType").remove().end();
+			
+			if(data.faqList.length != 0){
+			
+				for (var idx = 0; idx < data.faqList.length; idx++) {
+				  $("#faqType").append(
+					  	'<div class="wrap-table-shopping-cart" id="faqType">'
+						+ '<table class="table-shopping-cart">'
+						+ '<tbody><tr class="table_head">'
+						+ '<th class="column-1">글번호</th>'
+						+ '<th class="column-2">분류</th>'
+						+ '<th class="column-3">자주묻는질문</th></tr>'
+						+ '<tr class="table_row">'
+						+ '<td class="column-1">'+data.faqList[idx].FAQ_NO +'</td>'
+						+ '<td class="column-2">'+data.faqList[idx].FAQ_TYPE +'</td>'
+						+ '<td class="column-3"><a href="FAQ_NO" value="$row.FAQ_NO}">'+data.faqList[idx].FAQ_SUB +'<input type="hidden" id="FAQ_NO" value="${row.FAQ_NO}"/></a></td></tr>'
+						+ '</tbody></table></div>'	
+				  )
+				}
+			}
+		},
+
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert("오류가 발생하였습니다.");
+		}
+	});
+}
+
+</script>
 </head>
 
 <body class="animsition" style="opacity: 1; animation-duration: 1500ms;">
@@ -18,13 +69,23 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<!-- 
 					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList.do">전체 FAQ</a>
-					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList1.do">영화 예매</a> 
-					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList2.do">영화관 </a>	
-					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList3.do">상영관 </a>	
-					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList5.do">기타 </a>		
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList1.do">영화예매</a>
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList2.do">영화관 </a>
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList3.do">상영관 </a>
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList5.do">기타 </a>
+					 -->
+					
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"  id="FAQ_TYPE" value="영화예매" onClick="selectFaqType();">영화예매</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"  id="FAQ_TYPE" value="영화관" onClick="selectFaqType();">영화관</button>
+					
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"  id="FAQ_TYPE" value="상영관" onClick="selectFaqType();">상영관</button>
+						
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"  id="FAQ_TYPE" value="기타" onClick="selectFaqType();">기타</button>
+						
 				</div>
-				
 			</div>
 			
 			<div class="row" style="border-width:0px" >
