@@ -43,11 +43,9 @@
 
 			<%@ include file="../member/loginForm.jspf"%>
 
-			<%@ include file="../main/body_ProductModal.jspf"%>
+			<%@ include file="../event/event_ProductModal.jspf"%> 
 
 			<%@ include file="../main/script.jspf"%>
-
-		</div>
 
 	</header>
 
