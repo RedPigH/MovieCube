@@ -29,27 +29,9 @@
 	}
 </script>
 
-<%@ include file="../main/body_header.jspf"%>
 <body class="animsition">
-	<header class="header-v4">
 
-
-			<!-- Back to top -->
-			<div class="btn-back-to-top" id="myBtn">
-				<span class="symbol-btn-back-to-top"> <i
-					class="zmdi zmdi-chevron-up"></i>
-				</span>
-			</div>
-
-			<%@ include file="../member/loginForm.jspf"%>
-
-			<%@ include file="../main/body_ProductModal.jspf"%>
-
-			<%@ include file="../main/script.jspf"%>
-
-		</div>
-
-	</header>
+<%@ include file="../main/body_header.jspf"%>
 
 	<!-- Event List -->
 	<section class="sec-product bg0 p-t-100 p-b-50">
@@ -93,13 +75,13 @@
 															src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}"
 															alt="이벤트" /> <a href="#" id="gahyun"
 															onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+																	'${row.EVENT_NO }',
+																	'${row.EVENT_NAME }',
+																	'${row.EVENT_OPENDATE }',
+																	'${row.EVENT_CLOSEDATE }',
+																	'${row.EVENT_SAVNAME }',
+																	'${row.EVENT_URL }'
+																);"
 															class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 															상세보기 </a>
 
@@ -144,13 +126,13 @@
 															src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}"
 															alt="이벤트" /> <a href="#" id="gahyun"
 															onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+																	'${row.EVENT_NO }',
+																	'${row.EVENT_NAME }',
+																	'${row.EVENT_OPENDATE }',
+																	'${row.EVENT_CLOSEDATE }',
+																	'${row.EVENT_SAVNAME }',
+																	'${row.EVENT_URL }'
+																);"
 															class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 															상세보기 </a>
 
@@ -195,13 +177,13 @@
 															src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}"
 															alt="이벤트" /> <a href="#" id="gahyun"
 															onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+																	'${row.EVENT_NO }',
+																	'${row.EVENT_NAME }',
+																	'${row.EVENT_OPENDATE }',
+																	'${row.EVENT_CLOSEDATE }',
+																	'${row.EVENT_SAVNAME }',
+																	'${row.EVENT_URL }'
+																);"
 															class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 															상세보기 </a>
 
@@ -244,12 +226,12 @@
 															alt="이벤트" /> <a href="#" id="gahyun"
 															onclick="toModal(
 																			'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+																			'${row.EVENT_NAME }',
+																			'${row.EVENT_OPENDATE }',
+																			'${row.EVENT_CLOSEDATE }',
+																			'${row.EVENT_SAVNAME }',
+																			'${row.EVENT_URL }'
+																		);"
 															class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 															상세보기 </a>
 													</div>
@@ -371,6 +353,14 @@
 	<%@ include file="../event/event_ProductModal.jspf"%>
 
 	<%@ include file="../main/script.jspf"%>
+	
+	<!-- Back to top -->
+			<div class="btn-back-to-top" id="myBtn">
+				<span class="symbol-btn-back-to-top"> <i
+					class="zmdi zmdi-chevron-up"></i>
+				</span>
+			</div>
+			
 </body>
 </html>
 
