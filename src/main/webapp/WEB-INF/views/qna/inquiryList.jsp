@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%
+	String cp = request.getContextPath();
+%>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 </head>
 <body>
@@ -29,8 +34,9 @@
 						<tr>
 							<td>${row.QNA_NO }</td>
 							<td>${row.QNA_ID }</td>
-							<td class="QNA_SUB"><a href="#this" name="QNA_SUB">${row.QNA_SUB }</a>
-								<input type="hidden" id="QNA_NO" value="${row.QNA_NO }">
+							<td class="QNA_SUB">
+							 <a href="#this" name="QNA_SUB">${row.QNA_SUB }</a>
+							<input type="hidden" id="QNA_NO" value="${row.QNA_NO }">
 							</td>
 							<td>${row.QNA_REGDATE }</td>
 
