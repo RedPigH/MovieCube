@@ -18,10 +18,10 @@
 				</div>
 
 				<div class="right-top-bar flex-w h-full">
-					<a href="<%=cp%>/notice/adminNoticeList.do"
+					<a href="<%=cp%>/noticeList.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 공지사항 </a>
-					<a href="<%=cp%>/faq/adminFaqList.do" class="flex-c-m trans-04 p-lr-25"
-						style="width: 100px"> FAQs </a> <a href="<%=cp%>/qna/adminInquiryWriteForm.do"
+					<a href="<%=cp%>/faqList.do" class="flex-c-m trans-04 p-lr-25"
+						style="width: 100px"> FAQs </a> <a href="<%=cp%>/qnaWriteForm.do"
 						class="flex-c-m trans-04 p-lr-25" style="width: 100px"> 1:1문의
 					</a>
 
@@ -44,7 +44,7 @@
 					<ul class="main-menu" style="width: 420px">
 
 						<li class="label1" data-label1="hot"><a
-							href="<%=cp%>/resources/about.html">이벤트</a></li>
+							href="<%=cp%>/userEventList.do">이벤트</a></li>
 
 						<li><a href="<%=cp%>/storeList.do">스토어</a></li>
 
@@ -74,7 +74,7 @@
 										style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님
 										<br>환영합니다!</a>
 									<ul class="sub-menu" style="margin-left: 0px;">
-										<li><a href="javascript:void(0);">마이페이지</a></li>
+										<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
 										<li><a href="javascript:void(0);">예매확인/취소</a></li>
 										<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 									</ul></li>
@@ -138,7 +138,7 @@
 				<div class="right-top-bar flex-w h-full">
 					<a href="<%=cp%>/notice/adminNoticeList.do"
 						class="flex-c-m p-lr-10 trans-04"> 공지사항 </a> <a
-						href="<%=cp%>/faq/adminFaqList.do" class="flex-c-m p-lr-10 trans-04">
+						href="<%=cp%>/faqList.do" class="flex-c-m p-lr-10 trans-04">
 						FAQs </a> <a href="<%=cp%>/qna/adminInquiryList.do"
 						class="flex-c-m p-lr-10 trans-04"> 1:1문의 </a>
 
@@ -148,7 +148,7 @@
 
 		<ul class="main-menu-m">
 
-			<li><a href="<%=cp%>/resources/shoping-cart.html" class="label1 rs1"
+			<li><a href="<%=cp%>/userEventList.do" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
 			<li><a href="<%=cp%>/storeList.do">스토어</a></li>
@@ -166,7 +166,7 @@
 			<c:if test="${not empty sessionScope.userLoginInfo }">
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 1}">
 					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
 							<li><a href="<%=cp%>/admin/movieList.do">관리자 페이지</a></li>
 							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
@@ -177,9 +177,9 @@
 				</c:if>
 				<c:if test="${sessionScope.userLoginInfo.ISADMIN == 0}">
 					<li><a href="javascript:void(0);" style="font-family: MaplestoryLight"><span
-							style="font-size: 18px; font-family: NanumGothicExtraBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
+							style="font-size: 18px; font-family: MaplestoryBold">${sessionScope.userLoginInfo.MEMBER_NAME}</span>님 &nbsp;환영합니다!</a>
 						<ul class="sub-menu-m" style="margin-left: 0px;">
-							<li><a href="javascript:void(0);">마이페이지</a></li>
+							<li><a href="<%=cp%>/member/myPage.do">마이페이지</a></li>
 							<li><a href="javascript:void(0);">예매확인/취소</a></li>
 							<li><a href="<%=cp%>/member/logout.do">로그아웃</a></li>
 						</ul>

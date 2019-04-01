@@ -97,7 +97,7 @@
 					<select class="slct w100" name="searchNum">
 						<option value="0">영화관 이름</option>
 						<option value="1">영화관 주소</option>
-						<option value="1">영화관 안내</option>
+						<option value="2">영화관 안내</option>
 					</select>
 					<input class="txt w100" type="text" name="isSearch" />
 					<span class="btn btnC_04 btnP_04">

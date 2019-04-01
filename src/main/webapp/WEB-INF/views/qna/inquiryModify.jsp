@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%
 	String cp = request.getContextPath();
 %>
@@ -12,15 +12,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script src="/moviecube/resources/js/jquery-3.2.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="<c:url value='/js/common2.js'/>" charset="utf-8"></script>
 
 <script>
-function delete_file() {
-	$("#fileid").remove();
-	/* $("#fileTD2").html("<input type='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>"); */
-	$("#fileTD2").html("<input type='file' name ='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>");
-}
+	function delete_file() {
+		$("#fileid").remove();
+		/* $("#fileTD2").html("<input type='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>"); */
+		$("#fileTD2")
+				.html(
+						"<input type='file' name ='file' id='QNA_FILE_NO' class='QNA_FILE_NO' value='${map.QNA_FILE_NO }'>");
+	}
 </script>
 </head>
 <body>
@@ -52,38 +55,38 @@ function delete_file() {
 				</tr>
 				<tr>
 					<th scope="row">제목</th>
-					<td colspan="3"><input type="text" id="QNA_SUB" name="QNA_SUB" class="wdp_90" value="${map.QNA_SUB }" /></td>
+					<td colspan="3"><input type="text" id="QNA_SUB" name="QNA_SUB"
+						class="wdp_90" value="${map.QNA_SUB }" /></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="view_text">
-						<textarea rows="20" cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${map.QNA_CONTENT }</textarea>
+					<td colspan="4" class="view_text"><textarea rows="20"
+							cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${map.QNA_CONTENT }</textarea>
 					</td>
 				</tr>
-				 <tr id="deleteTest">
+				<tr id="deleteTest">
 					<th scope="row">첨부파일</th>
-					<td id="file_TD">
-					
-					<c:choose>
-						<c:when test="${map.QNA_FILE_NO > 0 }">
-							<input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제">
-						</c:when>
-						<c:otherwise>
-							<input type="file" name ="file" id='QNA_FILE_NO' class='QNA_FILE_NO' value="파일수정">
-						</c:otherwise>
-					</c:choose>
-						<!-- <input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제"> -->
+					<td id="file_TD"><c:choose>
+							<c:when test="${map.QNA_FILE_NO > 0 }">
+								<input type="button" onclick="delete_file();" id="fileid"
+									class="fileclass" value="파일삭제">
+							</c:when>
+							<c:otherwise>
+								<input type="file" name="file" id='QNA_FILE_NO'
+									class='QNA_FILE_NO' value="파일수정">
+							</c:otherwise>
+						</c:choose> <!-- <input type="button" onclick="delete_file();" id="fileid" class="fileclass" value="파일삭제"> -->
 					</td>
-					<td colspan="3" id="fileTD2">
-						<input type="hidden" id="QNA_FILE_NO" class="QNA_FILE_NO" value="${map.QNA_FILE_NO }"> 
-						<a href="#this" name="file"> ${map.QNA_FILE_NO } ${map.QNA_ORGNAME }</a></td>
-				</tr>  
-	
+					<td colspan="3" id="fileTD2"><input type="hidden"
+						id="QNA_FILE_NO" class="QNA_FILE_NO" value="${map.QNA_FILE_NO }">
+						<a href="#this" name="file"> ${map.QNA_FILE_NO }
+							${map.QNA_ORGNAME }</a></td>
+				</tr>
+
 				<tr>
-				<!-- 여기서부터 추가 -->
-				
+					<!-- 여기서부터 추가 -->
 			</tbody>
 		</table>
-					
+
 	</form>
 
 	<!-- 		<input type="file" name="file"> <br /> <br />  이거 추가시켜야함 원래대로 돌릴라면...-->
@@ -128,13 +131,13 @@ function delete_file() {
 		function fn_updateBoard() {
 			var comSubmit = new ComSubmit("frm");
 			comSubmit.setUrl("<c:url value='/qna/adminInquiryModify.do'/>");
-			
+
 			var qna_file_no = "${map.QNA_FILE_NO}";
 			var qna_orgname = "${map.QNA_ORGNAME}";
-			
+
 			comSubmit.addParam("QNA_FILE_NO", qna_file_no);
 			comSubmit.addParam("QNA_ORGNAME", qna_orgname);
-			
+
 			comSubmit.submit();
 
 		}

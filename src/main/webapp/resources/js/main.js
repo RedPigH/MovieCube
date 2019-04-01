@@ -153,6 +153,7 @@
                 }
             });
         });
+        $('#allmovie').trigger("click");
     });
 
     var isotopeButton = $('.filter-tope-group button');
@@ -163,9 +164,11 @@
                 $(isotopeButton[i]).removeClass('how-active1');
             }
 
-            $(this).addClass('how-active1');
+            $(this).addClass('how-active1');   
+               
         });
-    });
+    })
+    
 
     /*==================================================================
     [ Filter / Search product ]*/
@@ -327,12 +330,28 @@
         // 중원이가 추가함
         $("body").addClass("no-scrolling");
     });
-
+    
     $('.js-hide-modal1').on('click',function(){
         $('.js-modal1').removeClass('show-modal1');
         $("body").removeClass("no-scrolling");
     });
-
+    
+    
+    $(document).bind('ready ajaxComplete', function show_modal1(){
+        $('.js-show-modal1').on('click',function(e){
+            e.preventDefault();
+            $('.js-modal1').addClass('show-modal1');
+            // 중원이가 추가함
+            $("body").addClass("no-scrolling");
+        })
+    	});
+    
+    $(document).bind('ready ajaxComplete', function hide_modal1(){
+    $('.js-hide-modal1').on('click',function(){
+        $('.js-modal1').removeClass('show-modal1');
+        $("body").removeClass("no-scrolling");
+    })
+    });
 
 /*==================================================================
 [ Show modal2 ] 로그인 창 */

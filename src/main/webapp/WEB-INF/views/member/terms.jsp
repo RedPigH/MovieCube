@@ -43,11 +43,12 @@
 }
 </style>
 
-<body>
+<body class="animsition">
 
 <div class="super_container">
 
 	<%@ include file="/WEB-INF/views/main/body_header.jspf" %>
+	<%@ include file="../member/loginForm.jspf"%>
 
 <form id="frm" name="frmMain" method="post">
 <div class="bg0 p-t-104">
@@ -515,6 +516,7 @@
 	</div>
 </div>
 </div>
+				<%@ include file="../main/body_footer.jspf"%>
 				<!-- Benefit & footer -->
 				<%@ include file="/WEB-INF/views/main/script.jspf" %>
 
