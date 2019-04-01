@@ -52,15 +52,14 @@
 								<tr class="table_head">
 									<th class="column-1">글번호</th>
 									<th class="column-2">분류</th>
-									<th class="column-3">자주묻는질문</th>
-									
+									<th class="column-3">자주묻는질문</th>	
 								</tr>
 								
 								<c:choose>
 									<c:when test="${fn:length(faqList) > 0}">
             							<c:forEach items="${faqList}" var="row">
 			
-								<tr class="table_row">
+								<tr class="table_row" id="faqType">
 									<td class="column-1">${row.FAQ_NO}</td>
 									<td class="column-2">${row.FAQ_TYPE}</td>
 									<td class="column-3"><a href="#this" name="FAQ_SUB">${row.FAQ_SUB}

@@ -52,7 +52,7 @@
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="p-t-40" style="margin: 0px 300px 5px">
-				<h5 class="flex-c-m stext-101 cl0 size-112 bg1 bor14 hov-btn3 p-lr-15 trans-04 pointer" >
+				<h5 class="flex-c-m stext-101 cl0 size-112 bg1 bor14 hov-btn3 p-lr-15" >
 				1 : 1 문의하기
 				</h5>
 				<p></p>
