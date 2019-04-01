@@ -120,7 +120,7 @@
 	</select>
 
 	<!-- 영화 파일 상세 정보 -->
-	<select id="selectMovieFileDetail" resultType="hashmap"
+<!-- 	<select id="selectMovieFileDetail" resultType="hashmap"
 		parameterType="hashmap">
 
 		<![CDATA[
@@ -129,6 +129,21 @@
 				FROM MC_MOVIE m INNER JOIN STILLCUT s
 					ON m.MOVIE_NO = s.MOVIE_NO 
 						WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
+		]]>
+	</select>
+ -->
+	<!-- 영화 파일 상세 정보 -->
+	<select id="selectMovieFileDetail" resultType="hashmap"
+		parameterType="hashmap">
+
+		<![CDATA[
+		select 
+			m.MOVIE_NO, s.STILLCUT_NO, r.SLIDER_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME, r.SLIDER_ORGNAME, r.SLIDER_SAVNAME
+				FROM MC_MOVIE m, STILLCUT s, MC_SLIDER r
+					WHERE m.MOVIE_NO = s.MOVIE_NO 
+					AND m.MOVIE_NO = r.MOVIE_NO 
+					AND m.MOVIE_NO = #{MOVIE_NO} 
+					AND s.DEL_GB = 'N' AND r.DEL_GB = 'N'
 		]]>
 	</select>
 
@@ -191,8 +206,7 @@
 	</select>
 
 	<!-- 영화 정보 입력 -->
-	<insert id="insertMovie" parameterType="hashmap"
-		useGeneratedKeys="true" keyProperty="MOVIE_NO">
+	<insert id="insertMovie" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MOVIE_NO">
 		<selectKey keyProperty="MOVIE_NO" resultType="int"
 			order="BEFORE">
 			select MC_MOVIE_NO_SEQ.NEXTVAL from DUAL
@@ -209,8 +223,9 @@
 	        MOVIE_GENRE, 
 	        MOVIE_CONTENT, 
 	        MOVIE_GRADE,
-		    MOVIE_AGE,
-		    MOVIE_RUNTIME
+		    MOVIE_AGE, 
+		    MOVIE_RUNTIME,
+		    MOVIE_SUBTITLE
 			)
 		values 
 		(
@@ -222,9 +237,10 @@
 			#{MOVIE_ACTOR},
 			#{MOVIE_GENRE},
 			#{MOVIE_CONTENT},
-			#{MOVIE_GRADE},
-			#{MOVIE_AGE}
-			#{MOVIE_RUNTIME}
+			'0',
+			#{MOVIE_AGE},
+			#{MOVIE_RUNTIME},
+			#{MOVIE_SUBTITLE}
 			)		 		  
 		]]>
 	</insert>
@@ -268,6 +284,27 @@
             #{MOVIE_NO},
             #{STILLCUT_ORGNAME},
             #{STILLCUT_SAVNAME}
+        )
+    	]]>
+	</insert>
+	
+	<!-- 영화 메인슬라이더이미지 업로드 -->
+	<insert id="insertFile3" parameterType="hashmap">
+
+		<![CDATA[
+        INSERT INTO MC_SLIDER
+        (
+            SLIDER_NO,
+            MOVIE_NO,
+            SLIDER_ORGNAME,
+            SLIDER_SAVNAME
+        )
+        VALUES
+        (
+            MC_SLIDER_NO_SEQ.NEXTVAL,
+            #{MOVIE_NO},
+            #{SLIDER_ORGNAME},
+            #{SLIDER_SAVNAME}
         )
     	]]>
 	</insert>
@@ -333,6 +370,16 @@
             MOVIE_NO = #{MOVIE_NO} 
     ]]>
 	</update>
+	
+	<!-- 영화 슬라이더 수정 -->
+	<update id="updateFileList3" parameterType="hashmap">
+    <![CDATA[
+        UPDATE MC_SLIDER SET
+            DEL_GB = 'Y'
+        WHERE
+            MOVIE_NO = #{MOVIE_NO} 
+    ]]>
+	</update>
 
 	<!-- 영화 포스터 수정 -->
 	<update id="modifyFile" parameterType="hashmap">
@@ -353,6 +400,16 @@
             DEL_GB = 'N'
         WHERE
             STILLCUT_NO = #{STILLCUT_NO} 
+		]]>
+	</update>
+	
+	<!-- 영화 스틸컷 수정 -->
+	<update id="modifyFile3" parameterType="hashmap">
+		<![CDATA[
+		UPDATE MC_SLIDER
+            DEL_GB = 'N'
+        WHERE
+            SLIDER_NO = #{SLIDER_NO} 
 		]]>
 	</update>
 	
