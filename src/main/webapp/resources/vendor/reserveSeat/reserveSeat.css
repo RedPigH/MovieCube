@@ -426,6 +426,13 @@ img {
 	display: block;
 }
 
+img.event {
+	width: 700px;
+	height: 1100px;
+	max-width: 100%;
+	display: block;
+}
+
 .footerimg {
 	margin: 0;
 }
