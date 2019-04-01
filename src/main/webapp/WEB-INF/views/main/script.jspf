@@ -233,9 +233,9 @@ function deleteWishList2() {
 			
 				$("input[name=wishCheckBox]:checked").each(function() {
 		        	 CheckedBoxList += ($(this).parent().find('.wishCheckBox').html()) + ",";
-		        	 $('#'+$(this).parent().find('.wishMovieNo').html()).removeClass('js-addedwish-b2');
-					 $('#'+$(this).parent().find('.wishMovieNo').html()).attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
-		      });
+		        	 $('.'+$(this).parent().find('.wishMovieNo').html()).children().removeClass('js-addedwish-b2');
+					 $('.'+$(this).parent().find('.wishMovieNo').html()).children().attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
+				  });
 			} else {
 				swal("선택된 영화가 없습니다");
 				return false;
@@ -599,4 +599,23 @@ function toModal(movie_no) {
             }
          });
 }
+</script>
+
+<!--===============================================================================================-->
+<!-- 메인 키워드 검색 -->
+<script>
+         $(document).ready(function(){
+             $("#keywordSearch").keypress(function (e) {
+              if (e.which == 13){
+            	  keywordSearchJS();  // 실행할 이벤트
+              }
+          });
+    	  });
+
+</script>
+
+<script>
+         function keywordSearchJS() {
+        	 location.href="/moviecube/movieSearch.do?searchKeyword="+$("#keywordSearch").val()
+         }
 </script>
