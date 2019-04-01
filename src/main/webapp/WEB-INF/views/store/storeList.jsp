@@ -8,7 +8,11 @@
    <%@ include file="../main/head.jspf" %>
 </head>
 <script type="text/javascript">
-	function toModal(store_no, store_item, store_price, store_content, img_savname) {
+	function storeModal(store_no, store_item, store_price, store_content, img_savname) {
+		
+		$("#h_modal_store_no").attr("value", store_no);
+		
+		$("#h_modal_price").attr("value", store_price);
 
 		var item = "상품명 : " + store_item;
 		$("#h_modal_store_item").text(item);
@@ -50,22 +54,6 @@
 						class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
 						data-filter="*">상품 목록</button>
 				</div>
-
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>		
-					</div>
-				</div>
-
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-		
-					</div>
-				</div>
 			</div>
 
 			<div class="row isotope-grid">
@@ -81,7 +69,7 @@
 										alt="상품 이미지" />
 
 									<a href="#" id="gahyun"
-									onclick="toModal(
+									onclick="storeModal(
 										'${row.STORE_NO }',
 										'${row.STORE_ITEM }',
 										'${row.STORE_PRICE }',

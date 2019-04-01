@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +31,7 @@ public class MemberController {
 	  @Resource(name="memberService")
 	  private MemberServiceImpl memberService;
 	  
-	  //ï¿½ï¿½ï¿½Ç¼ï¿½
+	  //µ¿ÀÇ¼­
 	  
 	  @RequestMapping(value="/term.do")
 	  public ModelAndView terms(CommandMap commandMap) throws Exception{
@@ -37,7 +40,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	  //È¸¿ø°¡ÀÔ Æû
 	  
 	  @RequestMapping(value="/member/joinForm.do")
 	  public ModelAndView joinForm(CommandMap commandMap) throws Exception{
@@ -46,7 +49,7 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½È®ï¿½ï¿½
+	  //Áßº¹È®ÀÎ
 	  @RequestMapping("/member/checkId.do")
 	  @ResponseBody
 	   public Map<String, Object> findUsedID(@RequestBody String id) throws Exception{
@@ -61,7 +64,7 @@ public class MemberController {
 		  
 	  }
 	  
-	  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	  //È¸¿ø°¡ÀÔ
 	  @RequestMapping(value="/member/join.do")
 	  public String join(CommandMap commandMap) throws Exception{
 		  try {
@@ -72,7 +75,7 @@ public class MemberController {
 		  	return "redirect:/main.do";
 	  }
 	  
-	  //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
+	  //·Î±×ÀÎ Æû
 	  @RequestMapping(value="/member/loginForm.do")
 	  public ModelAndView loginForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/loginForm");
@@ -80,10 +83,13 @@ public class MemberController {
 		  return mv;
 	  }
 	  
-	  //ï¿½Î±ï¿½ï¿½ï¿½ 
+	  //·Î±×ÀÎ
 	  @RequestMapping(value="/member/login.do")
-	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
+	  public ModelAndView login(CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception{
 		  ModelAndView mv = new ModelAndView();
+		  
+		  String referer = request.getHeader("Referer");
+		  
 		  Map <String, Object> user = new HashMap<String, Object>();
 		  
 		  user = memberService.checkUserIdAndPassword(commandMap.getMap());
@@ -98,7 +104,7 @@ public class MemberController {
 				List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
 				
 				mv.addObject("WishList", wish);
-				mv.setViewName("redirect:/main.do");
+				mv.setViewName("redirect:" + referer);
 				
 			  return mv;
 		  } 
@@ -108,15 +114,16 @@ public class MemberController {
 	  }
 	  
 	    
-	  //ï¿½Î±×¾Æ¿ï¿½
+	  //·Î±×¾Æ¿ô
 	  @RequestMapping(value="/member/logout.do")
 	  public ModelAndView logout(HttpSession session) {
 		  ModelAndView mv = new ModelAndView("redirect:/main.do");
 		  session.setAttribute("userLoginInfo", null);
+		  session.setAttribute("WishList", null);
 		  return mv;
 	  }
 	  
-	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+	  //¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â Æû
 	  @RequestMapping(value="/member/findForm.do")
 	  public ModelAndView findForm(CommandMap commandMap) throws Exception{
 		  ModelAndView mv = new ModelAndView("/member/findIdAndPassword");
@@ -125,33 +132,38 @@ public class MemberController {
 	  }
 	  
 	
-	  //ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+	  //¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â
 	  
-	  @RequestMapping(value="/member/find.do")
+	  @RequestMapping(value="/member/find.do", method = RequestMethod.POST)
 	  @ResponseBody
-	  public Map<String, Object> findIdAndPw(@RequestBody String name, String age, String phone) throws Exception{
-		  Map<String, Object> map = new HashMap<String, Object>();
-		  String id = "";
-		  String pw = "";
+	  public String findId(@RequestParam String MEMBER_NAME, @RequestParam String MEMBER_AGE, @RequestParam String MEMBER_PHONE) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("MEMBER_NAME", MEMBER_NAME); 
+		map.put("MEMBER_AGE", MEMBER_AGE); 
+		map.put("MEMBER_PHONE" , MEMBER_PHONE);
+		 
+		  System.out.println(map);
+		  String id = memberService.findId(map);
+		
+		  //map.put("id", id);		  
+		 System.out.println(id);
 		  
-		  map.put("MEMBER_NAME", name);
-		  map.put("MEMBER_AGE", age); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ 24ï¿½ï¿½ï¿½Ì´ï¿½.
-		  map.put("MEMBER_PHONE" , phone);
-		  
-		  id = memberService.findId(map);
-		  
-		  	if(id!=null) {
-		  		
-		  	}
-		  pw = memberService.findPasswd(map);
-		  
-		  return map;
-				  
+		  return id;
 	  }
 	 
-	  
-	  /*//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	  @RequestMapping
-	  public */
-	  
+	  @RequestMapping(value="/member/find1.do")
+	  @ResponseBody
+	  public Map<String, Object> findPw(String name,String id, String name1, String phone1) throws Exception{
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  
+		  map.put("MEMBER_ID", id);
+		  map.put("MEMBER_NAME1", name1); // ÁÖÇöÀÌ´Â 24¼¼ÀÌ´Ù.
+		  map.put("MEMBER_PHONE1" , phone1);
+		  
+		  String pw = memberService.findPasswd(map);
+		  
+		  map.put("pw", pw);
+		  
+		  return map;
+	  }
 }

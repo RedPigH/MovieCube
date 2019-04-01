@@ -38,23 +38,7 @@ public class NoticeDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> noticeSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("notice.noticeSearch0", "%"+isSearch+"%");
+	public List<Map<String, Object>> noticeSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("notice.noticeSearch", map);
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>>noticeSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("notice.noticeSearch1", "%"+isSearch+"%");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> noticeSearch2(String isSearch) {
-		return (List<Map<String, Object>>)selectList("notice.noticeSearch2", "%"+isSearch+"%");
-	}
-
-	/*
-	 * @SuppressWarnings("unchecked") public List<Map<String,Object>>
-	 * selectNoticeList(Map<String,Object> map) throws Exception{ return
-	 * (List<Map<String,Object>>)selectPagingList("notice.selectNoticeList",map); }
-	 */
 }

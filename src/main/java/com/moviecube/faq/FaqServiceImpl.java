@@ -21,7 +21,36 @@ public class FaqServiceImpl implements FaqService {
 		// TODO Auto-generated method stub
 		return faqDAO.selectFaqList(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectFaqList1(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return faqDAO.selectFaqList1(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectFaqList2(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return faqDAO.selectFaqList2(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectFaqList3(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return faqDAO.selectFaqList3(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectFaqList4(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return faqDAO.selectFaqList4(map);
+	}
 
+	@Override
+	public List<Map<String, Object>> selectFaqList5(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return faqDAO.selectFaqList5(map);
+	}
 	@Override
 	public void insertFaq(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
@@ -49,13 +78,14 @@ public class FaqServiceImpl implements FaqService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> faqSearch0(String map) throws Exception {
-		return faqDAO.faqSearch0(map);
+	public List<Map<String, Object>> faqSearch(Map<String, Object> map) throws Exception {
+		return faqDAO.faqSearch(map);
 	}
 
 	@Override
-	public List<Map<String, Object>> faqSearch1(String map) throws Exception {
-		return faqDAO.faqSearch1(map);
+	public List<Map<String, Object>> selectFaqType(Map<String, Object> map) throws Exception{
+		return faqDAO.selectFaqType(map);
 	}
+
 	
 }
