@@ -58,9 +58,9 @@ function aaaa(){
 </script>
 </head>
 
+<body class="animsition">
 <%@ include file="/WEB-INF/views/main/body_header.jspf"%>
-
-<body>
+<%@ include file="../member/loginForm.jspf"%>
 
 	<div class="container" style="margin-top:150px;">
 		<!-- 좌우측의 공간 확보 -->

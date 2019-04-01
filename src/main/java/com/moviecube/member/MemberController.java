@@ -119,6 +119,7 @@ public class MemberController {
 	  public ModelAndView logout(HttpSession session) {
 		  ModelAndView mv = new ModelAndView("redirect:/main.do");
 		  session.setAttribute("userLoginInfo", null);
+		  session.setAttribute("WishList", null);
 		  return mv;
 	  }
 	  

@@ -44,7 +44,7 @@
 					<ul class="main-menu" style="width: 420px">
 
 						<li class="label1" data-label1="hot"><a
-							href="<%=cp%>/resources/about.html">이벤트</a></li>
+							href="<%=cp%>/userEventList.do">이벤트</a></li>
 
 						<li><a href="<%=cp%>/storeList.do">스토어</a></li>
 
@@ -148,7 +148,7 @@
 
 		<ul class="main-menu-m">
 
-			<li><a href="<%=cp%>/resources/shoping-cart.html" class="label1 rs1"
+			<li><a href="<%=cp%>/userEventList.do" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
 			<li><a href="<%=cp%>/storeList.do">스토어</a></li>

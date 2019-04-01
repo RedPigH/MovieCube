@@ -233,9 +233,9 @@ function deleteWishList2() {
 			
 				$("input[name=wishCheckBox]:checked").each(function() {
 		        	 CheckedBoxList += ($(this).parent().find('.wishCheckBox').html()) + ",";
-		        	 $('#'+$(this).parent().find('.wishMovieNo').html()).removeClass('js-addedwish-b2');
-					 $('#'+$(this).parent().find('.wishMovieNo').html()).attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
-		      });
+		        	 $('.'+$(this).parent().find('.wishMovieNo').html()).children().removeClass('js-addedwish-b2');
+					 $('.'+$(this).parent().find('.wishMovieNo').html()).children().attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
+				  });
 			} else {
 				swal("선택된 영화가 없습니다");
 				return false;
