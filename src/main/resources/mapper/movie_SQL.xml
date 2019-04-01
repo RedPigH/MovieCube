@@ -14,7 +14,7 @@
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
 						WHERE f.DEL_GB = 'N'
-							order by m.MOVIE_NO desc
+							order by m.MOVIE_NAME asc
 		]]>
 	</select>
 
@@ -28,21 +28,22 @@
 		inner join mc_movie_file f
 		on m.movie_no = f.movie_no
 		where f.del_gb = 'N'
+		order by m.movie_name asc
 		]]>
 	</select>
 
-	<!-- 인기 영화 리스트 -->
+	<!-- 인기 영화 리스트(예매율순) -->
 	<select id="HotMovieList" resultType="hashmap"
 		parameterType="hashmap">
 	<![CDATA[
-		select h.movie_no, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-         m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from reservation where movie_no = h.movie_no) as rev_cnt
-      from (select * from (select * from reservation r inner join time t on r.time_no = t.time_no)
-      where rowid in(select max(rowid) from (select * from reservation r inner join time t on r.time_no = t.time_no) group by movie_no)) h
-      inner join mc_movie m on h.movie_no = m.movie_no
-      inner join mc_movie_file f on h.movie_no = f.movie_no
-      where f.del_gb = 'N' and rownum <= 6
-      order by rev_cnt desc
+			select h.movie_no, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+	         m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from reservation where movie_no = h.movie_no) as rev_cnt
+	      from (select * from (select * from reservation r inner join time t on r.time_no = t.time_no)
+	      where rowid in(select max(rowid) from (select * from reservation r inner join time t on r.time_no = t.time_no) group by movie_no)) h
+	      inner join mc_movie m on h.movie_no = m.movie_no
+	      inner join mc_movie_file f on h.movie_no = f.movie_no
+	      where f.del_gb = 'N'
+	      order by rev_cnt desc, m.movie_name asc
 	]]>
 	</select>
 
@@ -56,8 +57,8 @@
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
 		on m.movie_no = f.movie_no
-		where f.del_gb = 'N' and rownum <= 6
-		order by m.movie_opendate desc
+		where f.del_gb = 'N'
+		order by m.movie_opendate desc, m.movie_name asc
 	]]>
 	</select>
 
@@ -71,11 +72,38 @@
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
 		on m.movie_no = f.movie_no
-		where f.del_gb = 'N' and rownum <= 6 and m.movie_opendate >= sysdate
-		order by m.movie_opendate asc
+		where f.del_gb = 'N' and m.movie_opendate >= sysdate
+		order by m.movie_opendate asc, m.movie_name asc
 	]]>
 	</select>
-
+	
+	<!-- 평점 순 영화 리스트 -->
+	<select id="GradeMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<![CDATA[
+		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
+		from (select * from mc_movie
+		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
+		inner join mc_movie_file f
+		on m.movie_no = f.movie_no
+		where f.del_gb = 'N'
+		order by m.movie_grade desc, m.movie_name asc
+	]]>
+	</select>
+	
+	<!-- 리뷰 개수 순 영화 리스트 -->
+	<select id="CommentMovieList" resultType = "hashmap" parameterType = "hashmap">
+	<![CDATA[
+		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from mc_comment where movie_no = m.movie_no) as total_cmt
+		from (select * from mc_movie
+		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
+		inner join mc_movie_file f on m.movie_no = f.movie_no
+		where f.del_gb = 'N'
+		order by total_cmt desc, m.movie_name asc
+	]]>
+	</select>
+	
 	<!-- 영화 상세 정보 -->
 	<select id="selectMovieDetail" resultType="hashmap"
 		parameterType="hashmap">

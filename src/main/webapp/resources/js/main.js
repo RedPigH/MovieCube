@@ -153,6 +153,7 @@
                 }
             });
         });
+        $('#allmovie').trigger("click");
     });
 
     var isotopeButton = $('.filter-tope-group button');
