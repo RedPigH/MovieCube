@@ -209,7 +209,8 @@
 	        MOVIE_GENRE, 
 	        MOVIE_CONTENT, 
 	        MOVIE_GRADE,
-		    MOVIE_AGE
+		    MOVIE_AGE,
+		    MOVIE_RUNTIME
 			)
 		values 
 		(
@@ -222,7 +223,8 @@
 			#{MOVIE_GENRE},
 			#{MOVIE_CONTENT},
 			#{MOVIE_GRADE},
-			#{MOVIE_AGE}
+			#{MOVIE_AGE},
+			#{MOVIE_RUNTIME}
 			)		 		  
 		]]>
 	</insert>
