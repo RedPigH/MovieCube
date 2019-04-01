@@ -98,7 +98,6 @@ public class QnaFileUtils {
 	        }
 	    }
 	    
-	    
 	    return list;
 	}
 	

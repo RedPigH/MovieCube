@@ -45,7 +45,8 @@
 <!--===============================================================================================-->
 <script src="/moviecube/resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
-<script src="/moviecube/resources/vendor/sweetalert/sweetalert.min.js"></script>
+<script src="/moviecube/resources/vendor/sweetalert/package/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="/moviecube/resources/vendor/sweetalert/package/dist/sweetalert2.min.css">
 
 <script>
 
@@ -55,7 +56,7 @@
 								.find('.js-name-detail').html();
 
 						$(this).on('click',function() {
-									swal(nameProduct, "보고싶은 영화로 등록 !",
+									Swal.fire(nameProduct, "보고싶은 영화로 등록 !",
 											"success");
 
 									$(this).addClass('js-addedwish-detail');
@@ -70,7 +71,7 @@
 						var nameProduct = $(this).parent().parent().parent()
 								.parent().find('.js-name-detail').html();
 						$(this).on('click', function() {
-							swal(nameProduct, "보고싶은 영화로 등록 !", "success");
+							Swal.fire(nameProduct, "보고싶은 영화로 등록 !", "success");
 						});
 					});
 </script>
@@ -98,7 +99,7 @@ function addWishList(MOVIE_NO) {
 				success : function(data) {
 					
 							var nameProduct = $('#'+MOVIE_NO).parent().parent().find('.js-name-b2').html();
-							swal(nameProduct, "보고싶은 영화로 등록 !","success")
+							Swal.fire(nameProduct, "보고싶은 영화로 등록 !","success")
 							$('.'+MOVIE_NO).children().addClass('js-addedwish-b2');
 							$('.'+MOVIE_NO).children().attr("onclick", 'deleteWishList('+MOVIE_NO+');');
 							$('.'+MOVIE_NO).children().off('click');
@@ -171,7 +172,7 @@ function deleteWishList(MOVIE_NO) {
 					
 						
 							var nameProduct = $('#'+MOVIE_NO).parent().parent().find('.js-name-b2').html();
-							swal(nameProduct, "보고싶은 영화, 해제","error");
+							Swal.fire(nameProduct, "보고싶은 영화, 해제","error");
 							$('.'+MOVIE_NO).children().removeClass('js-addedwish-b2');
 							$('.'+MOVIE_NO).children().attr("onclick", 'addWishList('+MOVIE_NO+');');
 							$('.'+MOVIE_NO).children().off('click');
@@ -237,7 +238,7 @@ function deleteWishList2() {
 					 $('.'+$(this).parent().find('.wishMovieNo').html()).children().attr("onclick", 'addWishList('+$(this).parent().find('.wishMovieNo').html()+');');
 				  });
 			} else {
-				swal("선택된 영화가 없습니다");
+				Swal.fire("선택된 영화가 없습니다");
 				return false;
 			}
 			
@@ -339,7 +340,7 @@ function deleteWishList2() {
         div.innerHTML = document.getElementById(movie_name).innerHTML;
         document.getElementById('field').appendChild(div);
         } else {
-        	swal("더 이상 영화를 추가할 수 없습니다");
+        	Swal.fire("","더 이상 영화를 추가할 수 없습니다", "warning");
         	return false;
         }
     }
@@ -487,7 +488,7 @@ function deleteWishList2() {
 <!--===============================================================================================-->
 <script>
 function loginAlert(){
-	swal("로그인이 필요합니다");
+	Swal.fire("로그인이 필요합니다");
 	return false;
 }
 </script>
@@ -498,7 +499,7 @@ function loginAlert(){
 function selectedReserve() {
 	
 			if($("input[name=wishCheckBox]:checked").length >= 5){
-				swal("4편까지만", "동시 예매 가능합니다", "error");
+				Swal.fire("4편까지만", "동시 예매 가능합니다", "error");
 			} else {
 				var CheckedBoxList = new Array();
 				
