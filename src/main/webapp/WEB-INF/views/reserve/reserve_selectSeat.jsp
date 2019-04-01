@@ -8,6 +8,7 @@
 <%@ include file="../main/head.jspf"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 </head>
 <body class="animsition">
 
@@ -95,7 +96,6 @@
 
 	<%@ include file="../main/script.jspf"%>
 	
-	
 <script type="text/javascript">
 		function confirm() {
 			
@@ -106,7 +106,7 @@
 			    }); 
 			
 			if(selectSeats == "" || selectSeats == null){
-				swal("", "좌석을 선택해 주세요", "error");
+				Swal.fire("", "좌석을 선택해 주세요", "warning");
 				return false;
 			}
 			
@@ -135,22 +135,26 @@
 				
 				success : function(data) {
 					
-					  var imageURL = 'resources/upload/movie/poster/'+data.time.POSTER_SAVNAME;
-					  var reserveNotice = '영화관: '+data.time.CINEMA_NAME+'\n'
-				    	 +'상영관: '+data.time.SCREEN_NAME+'\n'
-				    	 +'상영 날짜: '+data.time.TIME_DATE+'\n'
-				    	 +'상영 시간: '+data.time.START_TIME+'~'+data.time.END_TIME+'\n'
-				    	 +'선택 좌석: '+data.selectSeat+'\n'
-				    	 +'총 가격: '+data.totalprice;
-					 
-					  swal({
-					    title:'영화: '+data.time.MOVIE_NAME,
-					    text: reserveNotice,
-					    icon: imageURL,
-					  });
-					
-					 /*  location.href = 'reserve_complete.do?TIME_NO=${time.TIME_NO}&SCREEN_NO=${time.SCREEN_NO}&selectSeats=${selectSeats}&TOTAL_PRICE=${totalprice}'; */
-					
+				    	 Swal.fire({
+				    		  imageUrl: 'resources/upload/movie/poster/'+data.time.POSTER_SAVNAME,
+				    		  imageHeight: 250,
+				    		  title: data.time.MOVIE_NAME,
+				    		  html:
+				    			  '<div class="p-b-15">영화관: '+data.time.CINEMA_NAME+'</div>'
+							    	 +'<div class="p-b-15">상영관: '+data.time.SCREEN_NAME+'</div>'
+							    	 +'<div class="p-b-15">상영 날짜: '+String(data.timeDate)
+							    	 +' / '+data.time.START_TIME+'~'+data.time.END_TIME+'</div>'
+							    	 +'<div class="p-b-15">선택 좌석: '+data.selectSeats+'</div>'
+							    	 +'<div class="p-b-15">총 가격: '+data.totalprice+'원</div>',
+				    		  showCloseButton: true,
+				    		  showCancelButton: true,
+				    		  focusConfirm: false,
+				    		  confirmButtonText:
+				    		    '<a style="all: unset;" href="reserve_complete.do?TIME_NO='+data.time.TIME_NO+'&SCREEN_NO='+data.time.SCREEN_NO+'&selectSeats='+data.selectSeats+'&TOTAL_PRICE='+data.totalprice+'">확인</div>',
+				    		  cancelButtonText:
+				    		    '취소',
+				    		})
+					  
 				},
 
 				error : function(jqXHR, textStatus, errorThrown) {

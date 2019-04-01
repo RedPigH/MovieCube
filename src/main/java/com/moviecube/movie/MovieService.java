@@ -47,6 +47,8 @@ public interface MovieService {
 
 	List<Map<String, Object>> movieSearch(Map<String, Object> map) throws Exception;
 	
+	List<Map<String, Object>> movieSearch0(String map) throws Exception;
+	
 	List<Map<String, Object>> movieSearch1(String map) throws Exception;
 	
 	List<Map<String, Object>> movieSearch2(String map) throws Exception;

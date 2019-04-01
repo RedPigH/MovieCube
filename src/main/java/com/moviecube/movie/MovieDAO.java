@@ -132,6 +132,11 @@ public class MovieDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> movieSearch0(String isSearch) {
+		return (List<Map<String, Object>>)selectList("movie.movieSearch0", isSearch);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch1(String isSearch) {
 		return (List<Map<String, Object>>)selectList("movie.movieSearch1", isSearch);
 	}
