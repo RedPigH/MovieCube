@@ -36,7 +36,7 @@
 						<div class="slick2">
 							<c:choose>
 								<c:when test="${fn:length(HotList) > 0 }">
-									<c:forEach items="${HotList }" var="row">
+									<c:forEach items="${HotList }" var="row" end = "5">
 										<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 											<!-- Block2 -->
 											<div class="block2">
@@ -126,7 +126,7 @@
 						<div class="slick2">
 							<c:choose>
 								<c:when test="${fn:length(LatelyList) > 0 }">
-									<c:forEach items="${LatelyList }" var="row">
+									<c:forEach items="${LatelyList }" var="row" end = "5">
 										<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 											<!-- Block2 -->
 											<div class="block2">
@@ -228,7 +228,7 @@
 						<div class="slick2">
 							<c:choose>
 								<c:when test="${fn:length(ExpectedList) > 0 }">
-									<c:forEach items="${ExpectedList }" var="row">
+									<c:forEach items="${ExpectedList }" var="row" end = "5">
 										<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 											<!-- Block2 -->
 											<div class="block2">

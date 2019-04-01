@@ -15,6 +15,10 @@ public interface MovieService {
 	
 	List<Map<String, Object>> ExpectedMovieList(Map<String, Object> map) throws Exception;
 	
+	List<Map<String, Object>> GradeMovieList(Map<String, Object> map) throws Exception;
+	
+	List<Map<String, Object>> CommentMovieList(Map<String, Object> map) throws Exception;
+	
 	List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception;
 	
 	void insertMovie(Map<String, Object> map, HttpServletRequest request) throws Exception;
@@ -49,10 +53,8 @@ public interface MovieService {
 	
 	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception;
 
-	List<Map<String, Object>> movieSearch0(String map) throws Exception;
+	public List<Map<String, Object>> movieSearch(Map<String, Object> map) throws Exception;
 	
-	List<Map<String, Object>> movieSearch1(String map) throws Exception;
-	
-	List<Map<String, Object>> movieSearch2(String map) throws Exception;
+	public List<Map<String, Object>> MainMovieSearch(Map<String, Object> map) throws Exception;
 		
 }

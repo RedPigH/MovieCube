@@ -31,6 +31,16 @@ public class MovieDAO extends AbstractDAO {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> GradeMovieList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("movie.GradeMovieList", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> CommentMovieList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("movie.CommentMovieList", map);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectStillCutList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectStillCutList", map);
 	}
@@ -39,17 +49,17 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectCommentList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("movie.CommentLikeInfo",map);
-	}	
+	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.CommentLikeInfo", map);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectCommentPagingList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectCommentPagingList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("movie.selectCommentCount", map);
@@ -58,7 +68,7 @@ public class MovieDAO extends AbstractDAO {
 	public void insertMovie(Map<String, Object> map) throws Exception {
 		insert("movie.insertMovie", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.DupMovieList", map);
@@ -73,12 +83,7 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectMovieFileDetail(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectMovieFileDetail", map);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectMovieFileDetail2(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("movie.selectMovieFileDetail2", map);
-	}
-	
+
 	public void modifyMovie(Map<String, Object> map) throws Exception {
 		update("movie.modifyMovie", map);
 	}
@@ -94,10 +99,6 @@ public class MovieDAO extends AbstractDAO {
 	public void insertFile2(Map<String, Object> map) throws Exception {
 		insert("movie.insertFile2", map);
 	}
-	
-	public void insertFile3(Map<String, Object> map) throws Exception {
-		insert("movie.insertFile3", map);
-	}
 
 	public void updateFileList(Map<String, Object> map) throws Exception {
 		update("movie.updateFileList", map);
@@ -106,11 +107,7 @@ public class MovieDAO extends AbstractDAO {
 	public void updateFileList2(Map<String, Object> map) {
 		update("movie.updateFileList2", map);
 	}
-	
-	public void updateFileList3(Map<String, Object> map) throws Exception {
-		update("movie.updateFileList3", map);
-	}
-	
+
 	public void modifyFile(Map<String, Object> map) {
 		update("movie.modifyFile", map);
 	}
@@ -118,11 +115,7 @@ public class MovieDAO extends AbstractDAO {
 	public void modifyFile2(Map<String, Object> map) {
 		update("movie.modifyFile2", map);
 	}
-	
-	public void modifyFile3(Map<String, Object> map) {
-		update("movie.modifyFile3", map);
-	}
-	
+
 	public void modifyGrade(Map<String, Object> map) {
 		update("movie.modifyGrade", map);
 	}
@@ -142,20 +135,15 @@ public class MovieDAO extends AbstractDAO {
 	public void deleteComment(Map<String, Object> map) {
 		delete("movie.deleteComment", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> movieSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch0", "%"+isSearch+"%");
+	public List<Map<String, Object>> movieSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectList("movie.movieSearch", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> movieSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch1", "%"+isSearch+"%");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> movieSearch2(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch2", "%"+isSearch+"%");
+	public List<Map<String, Object>> MainMovieSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("movie.MainMovieSearch", map);
 	}
 
 }

@@ -78,15 +78,20 @@ public class AdminController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				movieList = movieService.movieSearch0(isSearch);
+				smap.put("MOVIE_NAME", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
 			}else if(searchNum == 1){
-				movieList = movieService.movieSearch1(isSearch);
-			}else{
-				movieList = movieService.movieSearch2(isSearch);
+				smap.put("MOVIE_DIRECTOR", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("MOVIE_ACTOR", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
 			}
 			
 			totalCount = movieList.size();
@@ -320,15 +325,17 @@ public class AdminController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				noticeList = noticeService.noticeSearch0(isSearch);
+				smap.put("NOTICE_SUB", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
 			}else if(searchNum == 1){
-				noticeList = noticeService.noticeSearch1(isSearch);
-			}else{
-				noticeList = noticeService.noticeSearch2(isSearch);
+				smap.put("NOTICE_CONTENT", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
 			}
 			
 			totalCount = noticeList.size();
@@ -482,13 +489,17 @@ public class AdminController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				faqList = faqService.faqSearch0(isSearch);
+				smap.put("FAQ_SUB", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
 			}else if(searchNum == 1){
-				faqList = faqService.faqSearch1(isSearch);
+				smap.put("FAQ_CONTENT", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
 			}
 			
 			totalCount = faqList.size();
@@ -643,15 +654,20 @@ public class AdminController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				memberList = adminService.memberSearch0(isSearch);
+				smap.put("MEMBER_ID", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
 			}else if(searchNum == 1){
-				memberList = adminService.memberSearch1(isSearch);
-			}else{
-				memberList = adminService.memberSearch2(isSearch);
+				smap.put("MEMBER_NAME", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("MEMBER_RANK", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
 			}
 			
 			totalCount = memberList.size();

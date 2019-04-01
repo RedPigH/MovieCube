@@ -37,15 +37,14 @@
                   class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                <i
                   class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-               조건 검색
+            	   조건 검색
             </div>
 
             <div
                class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-               <i
-                  class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-               영화 찾기
+               <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+           	    영화 찾기
             </div>
          </div>
 
@@ -57,9 +56,13 @@
                </button>
 
                <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
-                  name="search-product" placeholder="영화 제목...">
+                  name="search-product" placeholder="영화 제목..." id="keywordSearch">
+               <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-10" onclick="keywordSearchJS()">
+            	검색
+            </div>
             </div>
          </div>
+         
 
          <!-- Filter -->
          <div class="dis-none panel-filter w-full p-t-10">
@@ -69,22 +72,25 @@
 
                   <ul>
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04 filter-link-active"> 액션 </a></li>
+                        class="filter-link stext-106 trans-04 filter-link-active" id="액션"> 액션 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 코미디 </a></li>
+                        class="filter-link stext-106 trans-04" id="코미디"> 코미디 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 로맨스 </a></li>
+                        class="filter-link stext-106 trans-04" id="로맨스"> 로맨스 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> Newness </a></li>
+                        class="filter-link stext-106 trans-04" id="애니메이션"> 애니메이션 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
+                        class="filter-link stext-106 trans-04" id="범죄"> 범죄 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
+                        class="filter-link stext-106 trans-04" id="판타지"> 판타지 </a></li>
+                        
+                     <li class="p-b-6"><a href="javascript:void(0);"
+                        class="filter-link stext-106 trans-04" id="공포"> 공포 </a></li>
                   </ul>
                </div>
 
@@ -93,19 +99,19 @@
 
                   <ul>
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04 filter-link-active"> 8 ~ 10 </a></li>
+                        class="filter-link stext-106 trans-04 filter-link-active" id="9"> 9 ~ 10 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 6 ~ 7 </a></li>
+                        class="filter-link stext-106 trans-04" id="8"> 7 ~ 8 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 4 ~ 5 </a></li>
+                        class="filter-link stext-106 trans-04" id="5"> 5 ~ 6 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 2 ~ 3 </a></li>
+                        class="filter-link stext-106 trans-04" id="3"> 3 ~ 4 </a></li>
 
                      <li class="p-b-6"><a href="javascript:void(0);"
-                        class="filter-link stext-106 trans-04"> 1 ~ 2 </a></li>
+                        class="filter-link stext-106 trans-04" id="1"> 1 ~ 2 </a></li>
                   </ul>
                </div>
 
@@ -114,19 +120,19 @@
 
                   <ul>
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                      <a href="javascript:void(0);" class="filter-link stext-106 trans-04 filter-link-active" style="display: inline-block">
-                           일반 </a></span></li>
+                      <a href="javascript:void(0);" class="filter-link stext-106 trans-04 filter-link-active" id="일반" style="display: inline-block">
+                          	 일반 </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" id="3D" style="display: inline-block">
                            3D </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" id="4D" style="display: inline-block">
                            4D </a></span></li>
 
                      <li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><img src="resources/images/icons/favicon.png" style="max-width: 6%; display: inline-block">
-                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" style="display: inline-block">
+                     <a href="javascript:void(0);" class="filter-link stext-106 trans-04" id="IMAX" style="display: inline-block">
                            IMAX </a></span></li>
                   </ul>
                </div>
@@ -137,12 +143,17 @@
                   <div class="flex-w p-t-4 m-r--5">
                      <a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                        12세 이상 </a> <a href="javascript:void(0);"
+                                                전체 관람가</a> <a href="javascript:void(0);"
+                        class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                      	12세 이상 </a><a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                         15세 이상 </a> <a href="javascript:void(0);"
                         class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                        19세 이상 </a>
+                      	  청불 </a>
                   </div>
+                  <button class="flex-c-m stext-101 cl0 size-104 bg1 bor1 hov-btn2 p-lr-15 trans-04" 
+                  			style="float:right; margin-top: 80px">
+				    검색</button>
                </div>
             </div>
          </div>

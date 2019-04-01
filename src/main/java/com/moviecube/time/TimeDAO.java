@@ -49,17 +49,7 @@ public class TimeDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> timeSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("time.timeSearch0", "%"+isSearch+"%");
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> timeSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("time.timeSearch1", "%"+isSearch+"%");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> timeSearch2(String isSearch) {
-		return (List<Map<String, Object>>)selectList("time.timeSearch2", "%"+isSearch+"%");
+	public List<Map<String, Object>> timeSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("time.timeSearch", map);
 	}
 }

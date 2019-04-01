@@ -46,6 +46,16 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
+	public List<Map<String, Object>> GradeMovieList(Map<String, Object> map) throws Exception {
+		return MovieDAO.GradeMovieList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> CommentMovieList(Map<String, Object> map) throws Exception{
+		return MovieDAO.CommentMovieList(map);
+	}
+	
+	@Override
 	public List<Map<String, Object>> dupMovieList(Map<String, Object> map) throws Exception{
 		return MovieDAO.dupMovieList(map);
 	}
@@ -225,18 +235,14 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public List<Map<String, Object>> movieSearch0(String map) throws Exception {
-		return MovieDAO.movieSearch0(map);
+	public List<Map<String, Object>> movieSearch(Map<String, Object> map) throws Exception {
+		return MovieDAO.movieSearch(map);
 	}
 
 	@Override
-	public List<Map<String, Object>> movieSearch1(String map) throws Exception {
-		return MovieDAO.movieSearch1(map);
-	}
-
-	@Override
-	public List<Map<String, Object>> movieSearch2(String map) throws Exception {
-		return MovieDAO.movieSearch2(map);
+	public List<Map<String, Object>> MainMovieSearch(Map<String, Object> map) throws Exception {
+		
+		return MovieDAO.MainMovieSearch(map);
 	}
 	
 }

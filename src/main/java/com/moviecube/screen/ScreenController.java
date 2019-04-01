@@ -53,15 +53,20 @@ public class ScreenController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				screenList = screenService.screenSearch0(isSearch);
+				smap.put("CINEMA_NAME", isSearch);
+				screenList = screenService.screenSearch(smap.getMap());
 			}else if(searchNum == 1){
-				screenList = screenService.screenSearch1(isSearch);
+				smap.put("SCREEN_TYPE", isSearch);
+				screenList = screenService.screenSearch(smap.getMap());
 			}else{
-				screenList = screenService.screenSearch2(isSearch);
+				smap.put("SCREEN_NAME", isSearch);
+				screenList = screenService.screenSearch(smap.getMap());
 			}
 			
 			totalCount = screenList.size();

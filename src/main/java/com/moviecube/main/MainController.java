@@ -54,14 +54,35 @@ public class MainController {
 		
 		List<Map<String, Object>> ExpectedList = movieService.ExpectedMovieList(commandMap.getMap());
 		
+		List<Map<String, Object>> GradeMovieList = movieService.GradeMovieList(commandMap.getMap());
+		
+		List<Map<String, Object>> CommentMovieList = movieService.CommentMovieList(commandMap.getMap());
+		
 		
 		mv.addObject("list", list);
 		mv.addObject("HotList", HotList);
 		mv.addObject("LatelyList", LatelyList);
 		mv.addObject("ExpectedList", ExpectedList);
+		mv.addObject("GradeMovieList", GradeMovieList);
+		mv.addObject("CommentMovieList", CommentMovieList);
 		
 		mv.addObject(mv);
 		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/movieSearch.do")
+	public ModelAndView movieList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("main/searchedList");
+		
+		CommandMap searchKeyword = new CommandMap();
+		searchKeyword.put("searchKeyword", commandMap.get("searchKeyword"));
+		
+		System.out.println(searchKeyword.getMap());
+
+		List<Map<String, Object>> movieList = movieService.MainMovieSearch(searchKeyword.getMap());
+		mv.addObject("movieList", movieList);
+
 		return mv;
 	}
 

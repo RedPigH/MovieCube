@@ -13,21 +13,20 @@
 	</select>
 
 	<!-- 회원 검색 -->
-	<select id="memberSearch0" resultType="hashmap" parameterType="hashmap">
+	<select id="memberSearch" resultType="hashmap" parameterType="hashmap">
 		select * from MC_MEMBER 
-		where MEMBER_ID like #{search} 
-		order by MEMBER_NO desc
-	</select>
-	
-	<select id="memberSearch1" resultType="hashmap" parameterType="hashmap">
-		select * from MC_MEMBER 
-		where MEMBER_NAME like #{search} 
-		order by MEMBER_NO desc
-	</select>
-	
-	<select id="memberSearch2" resultType="hashmap" parameterType="hashmap">
-		select * from MC_MEMBER 
-		where MEMBER_RANK like #{search} 
+		where 
+			<choose>
+				<when test = "MEMBER_ID != NULL">
+					MEMBER_ID like '%'||#{MEMBER_ID}||'%'
+				</when>
+				<when test = "MEMBER_NAME != NULL">
+					MEMBER_NAME like '%'||#{MEMBER_NAME}||'%'
+				</when>
+				<when test = "MEMBER_RANK != NULL">
+					MEMBER_RANK like '%'||#{MEMBER_RANK}||'%'
+				</when>
+			</choose>
 		order by MEMBER_NO desc
 	</select>
 

@@ -97,7 +97,6 @@
 					<select class="slct w100" name="searchNum">
 						<option value="0">제목</option>
 						<option value="1">내용</option>
-						<option value="2">작성자</option>
 					</select>
 					<input class="txt w100" type="text" name="isSearch" />
 					<span class="btn btnC_04 btnP_04">
