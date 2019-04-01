@@ -400,7 +400,7 @@
 		]]>
 	</delete>
 	
-	<!-- 영화 검색 -->
+	<!--관리자 영화 검색 -->
 	<select id="movieSearch" resultType="hashmap" parameterType="hashmap">
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
@@ -420,5 +420,19 @@
 								</when>
 							</choose>
 							order by m.MOVIE_NO desc
+	</select>
+	
+	<!-- 메인화면 영화검색 -->
+	<select parameterType="hashmap" resultType="hashmap" id="MainMovieSearch">
+	select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE,
+	m.MOVIE_CONTENT,m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+	FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f ON m.MOVIE_NO = f.MOVIE_NO
+	WHERE f.DEL_GB = 'N' 
+	AND m.MOVIE_NAME like '%' || #{searchKeyword} || '%'
+	OR m.MOVIE_DIRECTOR like '%' || #{searchKeyword} || '%' 
+	OR m.MOVIE_ACTOR like '%' || #{searchKeyword} || '%' 
+	OR m.MOVIE_GENRE like '%' || #{searchKeyword} || '%' 
+	OR m.MOVIE_CONTENT like '%' || #{searchKeyword} || '%'
+	order by m.MOVIE_NO desc 
 	</select>
 </mapper>

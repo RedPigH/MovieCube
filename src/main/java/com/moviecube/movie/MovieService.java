@@ -50,5 +50,7 @@ public interface MovieService {
 	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception;
 
 	public List<Map<String, Object>> movieSearch(Map<String, Object> map) throws Exception;
+	
+	public List<Map<String, Object>> MainMovieSearch(Map<String, Object> map) throws Exception;
 		
 }

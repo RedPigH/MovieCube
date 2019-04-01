@@ -29,15 +29,15 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> ExpectedMovieList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.ExpectedMovieList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> GradeMovieList(Map<String, Object> map) throws Exception{
+	public List<Map<String, Object>> GradeMovieList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.GradeMovieList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> CommentMovieList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectList("movie.CommentMovieList",map);
+	public List<Map<String, Object>> CommentMovieList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("movie.CommentMovieList", map);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,17 +49,17 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectCommentList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("movie.CommentLikeInfo",map);
-	}	
+	public Map<String, Object> CommentLikeInfo(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.CommentLikeInfo", map);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectCommentPagingList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectCommentPagingList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectCommentCount(Map<String, Object> map) throws Exception {
 		return (Map<String, Object>) selectOne("movie.selectCommentCount", map);
@@ -115,7 +115,7 @@ public class MovieDAO extends AbstractDAO {
 	public void modifyFile2(Map<String, Object> map) {
 		update("movie.modifyFile2", map);
 	}
-	
+
 	public void modifyGrade(Map<String, Object> map) {
 		update("movie.modifyGrade", map);
 	}
@@ -135,10 +135,15 @@ public class MovieDAO extends AbstractDAO {
 	public void deleteComment(Map<String, Object> map) {
 		delete("movie.deleteComment", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch(Map<String, Object> map) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch", map);
+		return (List<Map<String, Object>>) selectList("movie.movieSearch", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> MainMovieSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("movie.MainMovieSearch", map);
 	}
 
 }
