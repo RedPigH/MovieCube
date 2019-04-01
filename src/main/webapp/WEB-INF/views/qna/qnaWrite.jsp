@@ -8,6 +8,7 @@
 <script src="/moviecube/resources/js/jquery-1.10.2.min.js"></script>
 <script src="/moviecube/resources/js/jquery-ui.js"></script>
 <script src="/moviecube/resources/js/admin_common.js"></script>
+
 <script>
 
     function qnaWrite() {
@@ -16,7 +17,7 @@
 	var member_no = "${sessionScope.userLoginInfo.MEMBER_NO}";
 
 	if(member_no.length == 0){
-		swal("로그인 후 이용하세요","", "error");
+		swal("로그인 후 이용하세요","", "error"); 
 		return;
 	}
 	else if(form.QNA_SUB.value == ""){
@@ -28,12 +29,12 @@
 		return;
 	}
 	else{
-	form.action="/moviecube/qnaWrite.do"
-//	form.setUrl("<c:url value='/qnaWrite.do'/>")
-//	form.addParam("QNA_NO", $("#QNA_NO").val());
-	form.submit();
+		var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/qnaWrite.do'/>");
+		comSubmit.addParam("QNA_NO", $("#QNA_NO").val());
+		comSubmit.submit();
 	}
-} 
+}
 </script>
 
 </head>
@@ -51,7 +52,7 @@
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="p-t-40" style="margin: 0px 300px 5px">
-				<h5 class="flex-c-m stext-101 cl0 size-112 bg1 bor14 hov-btn3 p-lr-15 trans-04 pointer" >
+				<h5 class="flex-c-m stext-101 cl0 size-112 bg1 bor14 hov-btn3 p-lr-15" >
 				1 : 1 문의하기
 				</h5>
 				<p></p>
@@ -77,7 +78,11 @@
 	
 			<a href="javascript:qnaWrite()" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" id="write" style="margin: 0px 500px 5px" >
 				작성 완료
-			</a>
+			</a> 
+			
+			<!-- <a href="#this" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" id="write" style="margin: 0px 500px 5px" >
+				작성 완료
+			</a> -->
 		</form>
 		</div>
 	</div>
@@ -98,7 +103,8 @@
 
 <form id="commonForm" name="common"></form>
 
-<!-- <script type="text/javascript">
+<!--  
+<script type="text/javascript">
 
 	$(document).ready(function() {
 		$("#write").on("click", function(e) {
@@ -113,5 +119,5 @@
 		comSubmit.addParam("QNA_NO", $("#QNA_NO").val());
 		comSubmit.submit();
 	}
-</script>  -->
+</script> -->
 </html>

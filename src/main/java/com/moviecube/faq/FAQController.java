@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecube.common.CommandMap;
@@ -337,19 +338,42 @@ public class FAQController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/selectFaqType")
-	public ModelAndView selectFaqType(HttpServletRequest request, HttpServletResponse response, String param) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value = "/selectFaqType.do", method = RequestMethod.POST)
+	public ModelAndView selectFaqType(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("/faq/faqList");
 		
-		String FAQ_TYPE = param;
-		CommandMap map = new CommandMap();
-		map.put("FAQ_TYPE", FAQ_TYPE);
 		
-		List<Map<String, Object>> faqList = faqService.selectFaqType(map.getMap());
+		String FAQ_TYPE = request.getParameter("FAQ_TYPE");
+//		String FAQ_TYPE2 = request.getParameter("FAQ_TYPE2");
+//		String FAQ_TYPE3 = request.getParameter("FAQ_TYPE3");
+//		String FAQ_TYPE4 = request.getParameter("FAQ_TYPE4");
 		
+		System.out.println(" 값 확인0 +++++++++++" + request.getParameter("FAQ_TYPE"));
+//		System.out.println(" 값 확인1 +++++++++++" + request.getParameter("FAQ_TYPE2"));
+//		System.out.println(" 값 확인2 +++++++++++" + request.getParameter("FAQ_TYPE3"));
+//		System.out.println(" 값 확인3 +++++++++++" + request.getParameter("FAQ_TYPE4"));
+		
+		commandMap.put("FAQ_TYPE", FAQ_TYPE);
+//		commandMap.put("FAQ_TYPE", FAQ_TYPE2);
+//		commandMap.put("FAQ_TYPE", FAQ_TYPE3);
+//		commandMap.put("FAQ_TYPE", FAQ_TYPE4);
+		System.out.println(" CommandMap값 확인  +++++++++++" + commandMap.get("FAQ_TYPE"));
+		
+		List<Map<String, Object>> faqList = faqService.selectFaqType(commandMap.getMap());
+		
+		mv.addObject("faqList", faqList);
 		mv.setViewName("jsonView");
-		mv.addObject("result", faqList);
-		
+
 		return mv;
+		
+//		CommandMap map = new CommandMap();
+//		commandMap.get("FAQ_TYPE");
+//		System.out.println(" 값 확인 +++++++++++" + commandMap.get("FAQ_TYPE"));
+//		map.put("FAQ_TYPE", commandMap.get("FAQ_TYPE"));
+//		List<Map<String, Object>> faqList = faqService.selectFaqType(map.getMap());
+		
+//		mv.setViewName("jsonView");
+//		mv.addObject("faqList", faqList);	
+//		return mv;
 	}
 }

@@ -602,6 +602,7 @@ function toModal(movie_no) {
 }
 </script>
 
+<<<<<<< HEAD
 <!--===============================================================================================-->
 <!-- 메인 키워드 검색 -->
 <script>
@@ -620,3 +621,85 @@ function toModal(movie_no) {
         	 location.href="/moviecube/movieSearch.do?searchKeyword="+$("#keywordSearch").val()
          }
 </script>
+=======
+<!-- <script type="text/javascript">
+var $topeContainer = $('.isotope-grid');
+    var $filter = $('.filter-tope-group');
+
+    // filter items on button click
+    $filter.each(function () {
+        $filter.on('click', 'button', function () {
+            var filterValue = $(this).attr('data-filter');
+            $topeContainer.isotope({filter: filterValue});
+        });
+        
+    });
+
+    // init Isotope
+    $(window).on('load', function () {
+        var $grid = $topeContainer.each(function () {
+            $(this).isotope({
+                itemSelector: '.isotope-item',
+                layoutMode: 'fitRows',
+                percentPosition: true,
+                animationEngine : 'best-available',
+                masonry: {
+                    columnWidth: '.isotope-item'
+                }
+            });
+        });
+    });
+
+    var isotopeButton = $('.filter-tope-group button');
+
+    $(isotopeButton).each(function(){
+        $(this).on('click', function(){
+            for(var i=0; i<isotopeButton.length; i++) {
+                $(isotopeButton[i]).removeClass('how-active1');
+            }
+
+            $(this).addClass('how-active1');   
+            
+            var faq_type = $(".how-active1").attr("value");
+        	
+        	var data = {
+        		"FAQ_TYPE" :  faq_type	
+        	}
+        	
+        	alert(" FAQ_TYPE : " + faq_type);
+
+        	jQuery.ajaxSettings.traditional = true;
+        	
+        	$.ajax({
+        		type: "POST",
+        		url: "<c:url value='/selectFaqType.do'/>",
+        		dateType:"json",
+        		data : data,
+        		
+        		success:function(data){
+        			$("#faqList").find(".table_row").remove().end();
+        			
+        			if(data.faqList.length != 0){
+        			
+        				for (var idx = 0; idx < data.faqList.length; idx++) {	
+        				  $("#faqList").append(
+        						  '<tr class="table_row">'
+        							+'<td class="column-1">'+data.faqList[idx].FAQ_NO+'</td>'
+        							+'<td class="column-2"><a href="#this" name="FAQ_SUB">'+data.faqList[idx].FAQ_SUB
+        							+'<input type="hidden" id="FAQ_NO" value="'+data.faqList[idx].FAQ_NO+'"/></a></td>'
+        							+'<td class="column-3">'+data.faqList[idx].FAQ_TYPE+'</td>'
+        							+'</tr>'
+        				  )
+        				}
+        			}
+        		},
+
+        		error : function(jqXHR, textStatus, errorThrown) {
+        			alert("오류가 발생하였습니다.");
+        		}
+        	}); 
+            
+        });
+    })
+</script> -->
+>>>>>>> afb3978f8d04078933deb7bb9174e50d30c8524f

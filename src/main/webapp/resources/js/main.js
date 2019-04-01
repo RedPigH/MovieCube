@@ -164,9 +164,11 @@
                 $(isotopeButton[i]).removeClass('how-active1');
             }
 
-            $(this).addClass('how-active1');
+            $(this).addClass('how-active1');   
+               
         });
-    });
+    })
+    
 
     /*==================================================================
     [ Filter / Search product ]*/
