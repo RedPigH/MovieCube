@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <% String cp = request.getContextPath(); %>
+<%  pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -80,7 +83,7 @@
 						</tr>
 						<tr>
 							<th scope="row">내용</th>
-							<td><pre>${map.FAQ_CONTENT}</pre></td>
+							<td><pre>${fn:replace(map.FAQ_CONTENT,cn,br)}</pre></td>
 						</tr>
 					</tbody>
 				</table>
