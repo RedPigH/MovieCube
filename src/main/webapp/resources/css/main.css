@@ -2005,14 +2005,14 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* �߿��̰� �߰��� */
+/* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
 .no-scrolling {
    height:100%;
    overflow:hidden;
 }
 
 .show-modal1 {
-  /* �߿��̰� �߰��� */
+  /* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
   /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
@@ -2049,7 +2049,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* �߿��̰� �߰��� */
+/* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
 .no-scrolling {
    height:100%;
    overflow:hidden;
@@ -2293,7 +2293,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl12 {color: #ccc;}
 .cl13 {color: #777;}
 
-/* �߰� �� */
+/* 추가 폼 */
 
 .cl13{color:#ff5959;}
 
@@ -2466,7 +2466,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .mtext-107 {
-  font-family: Poppins-Regular;
+  font-family: MaplestoryLight;
   font-size: 16px;
   line-height: 1.625;
 }
@@ -2511,7 +2511,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* �߰� �� */
+/* 추가 폼 */
 
 .mtext-114{
 	font-family: NanumGothicBold;
@@ -2761,7 +2761,7 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
-/* �߰� �� */
+/* 추가 폼 */
 
 .size-129{
   min-width: 100%;
@@ -2869,7 +2869,7 @@ input.num-product::-webkit-inner-spin-button {
   max-width: 286px;
 }
 
-/* �߰��� */
+/* 추가폼 */
 
 .size-219{
 	width: 750px;
@@ -3037,7 +3037,7 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 15px;
 }
 
-/* �߰� �� */
+/* 추가 폼 */
 
 .bor22{
 	border-bottom: 2px solid #e1e1e1;
@@ -3421,7 +3421,7 @@ input.num-product::-webkit-inner-spin-button {
   color: #fff;
 }
 
-/* �߰��� */
+/* 추가폼 */
 
 .hov-btn4:hover {
 	border-color: #333;

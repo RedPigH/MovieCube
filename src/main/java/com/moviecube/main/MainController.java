@@ -64,5 +64,20 @@ public class MainController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/movieSearch.do")
+	public ModelAndView movieList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("main/searchedList");
+		
+		CommandMap searchKeyword = new CommandMap();
+		searchKeyword.put("searchKeyword", commandMap.get("searchKeyword"));
+		
+		System.out.println(searchKeyword.getMap());
+
+		List<Map<String, Object>> movieList = movieService.movieSearch(searchKeyword.getMap());
+		mv.addObject("movieList", movieList);
+
+		return mv;
+	}
 
 }

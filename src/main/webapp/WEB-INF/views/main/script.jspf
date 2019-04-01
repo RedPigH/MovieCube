@@ -600,3 +600,22 @@ function toModal(movie_no) {
          });
 }
 </script>
+
+<!--===============================================================================================-->
+<!-- 메인 키워드 검색 -->
+<script>
+         $(document).ready(function(){
+             $("#keywordSearch").keypress(function (e) {
+              if (e.which == 13){
+            	  keywordSearchJS();  // 실행할 이벤트
+              }
+          });
+    	  });
+
+</script>
+
+<script>
+         function keywordSearchJS() {
+        	 location.href="/moviecube/movieSearch.do?searchKeyword="+$("#keywordSearch").val()
+         }
+</script>

@@ -127,18 +127,18 @@ public class MovieDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> movieSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch0", "%"+isSearch+"%");
+	public List<Map<String, Object>> movieSearch(Map<String, Object> isSearch) {
+		return (List<Map<String, Object>>)selectList("movie.movieSearch", isSearch);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch1", "%"+isSearch+"%");
+		return (List<Map<String, Object>>)selectList("movie.movieSearch1", isSearch);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> movieSearch2(String isSearch) {
-		return (List<Map<String, Object>>)selectList("movie.movieSearch2", "%"+isSearch+"%");
+		return (List<Map<String, Object>>)selectList("movie.movieSearch2", isSearch);
 	}
 
 }

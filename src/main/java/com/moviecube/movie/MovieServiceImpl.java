@@ -191,8 +191,8 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public List<Map<String, Object>> movieSearch0(String map) throws Exception {
-		return MovieDAO.movieSearch0(map);
+	public List<Map<String, Object>> movieSearch(Map<String, Object> map) throws Exception {
+		return MovieDAO.movieSearch(map);
 	}
 
 	@Override
