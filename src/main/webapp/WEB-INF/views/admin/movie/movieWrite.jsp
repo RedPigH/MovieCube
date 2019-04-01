@@ -96,7 +96,7 @@
 								
 							</td>
 						</tr>
-						<!-- 
+						 
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -104,7 +104,7 @@
 								<font color="red"><span class="ibk"></span></font>
 							</td>
 						</tr>
-						 -->
+						 
 						<tr>
 							<th scope="row">타입</th>
 							<td>
@@ -143,7 +143,7 @@
 						<tr>
 							<th scope="row">별점</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_GRADE" name="MOVIE_GRADE"/>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME"/>
 								<font color="red"></font>
 							</td>
 						</tr>

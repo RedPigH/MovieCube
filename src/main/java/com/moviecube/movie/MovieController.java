@@ -74,6 +74,9 @@ public class MovieController {
 
 		String openDate = map2.get("MOVIE_OPENDATE").toString();
 		openDate = openDate.substring(0, 10);
+		
+		Map<String, Object> map3 = movieService.selectCommentCount(commandMap.getMap()); // 코멘트 카운트 가져올려고
+		mv.addObject("comment_count", map3.get("COMMENT_CNT"));
 
 		mv.addObject("map", map.get("map"));
 
@@ -248,7 +251,7 @@ public class MovieController {
 		int all_like = Integer.parseInt(ReviewMap.get("ALL_LIKE").toString());
 		int cnt = Integer.parseInt(ReviewMap.get("CNT").toString());
 
-		double grade = (double) all_like / cnt;
+		double grade = all_like / (double)cnt;
 
 		CommandMap Grademap = new CommandMap();
 
@@ -258,6 +261,8 @@ public class MovieController {
 		movieService.modifyGrade(Grademap.getMap());
 
 		mv.addObject("id_check", id_check);
+		mv.addObject("cnt", cnt);
+		
 		mv.setViewName("jsonView");
 
 		return mv;
