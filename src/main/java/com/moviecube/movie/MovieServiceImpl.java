@@ -122,15 +122,16 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
+		
 		Map<String, Object> tempMap = MovieDAO.selectMovieDetail(map);	
 		resultMap.put("map", tempMap);
+		
+		Map<String, Object> tempMap2 = MovieDAO.selectSliderFileDetail(map);		
+		resultMap.put("map2", tempMap2);
 
 		List<Map<String, Object>> movieDetail = MovieDAO.selectMovieFileDetail(map);
 		resultMap.put("movieDetail", movieDetail);
-/*		
-		List<Map<String, Object>> movieDetail2 = MovieDAO.selectMovieFileDetail2(map);
-		resultMap.put("movieDetail2", movieDetail2);
-*/		
+
 		return resultMap;
 	}
 

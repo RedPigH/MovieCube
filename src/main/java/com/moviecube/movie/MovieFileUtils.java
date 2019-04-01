@@ -19,8 +19,9 @@ import com.moviecube.common.CommonUtils;
 public class MovieFileUtils {
 	private static final String filePath = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\poster\\"; // POSTER 파일의 저장위치
     private static final String filePath2 = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\stillcut\\"; // STILLCUT 파일의 저장위치
-    private static final String filePath3 = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\slider\\"; // STILLCUT 파일의 저장위치
+    private static final String filePath3 = "D:\\MovieCube\\src\\main\\webapp\\resources\\upload\\movie\\slider\\"; // SLIDER 파일의 저장위치
     
+    /*영화 포스터 파일 Insert*/ 
     public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -63,6 +64,7 @@ public class MovieFileUtils {
         return fileList;
     }
     
+    /*영화 스틸컷 파일 수정*/ 
     public List<Map<String,Object>> parseInsertFileInfo2(Map<String,Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -106,6 +108,7 @@ public class MovieFileUtils {
         return fileList2;
     }
     
+    /*영화 포스터 파일 수정*/ 
     public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -157,6 +160,7 @@ public class MovieFileUtils {
         return fileList;
     }
     
+    /*영화 스틸컷 파일 수정*/ 
     public List<Map<String, Object>> parseUpdateFileInfo2(Map<String, Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -218,6 +222,7 @@ public class MovieFileUtils {
             
     }
     
+    /*영화 슬라이드 파일 Insert*/    
     public List<Map<String,Object>> parseInsertFileInfo3(Map<String,Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -230,7 +235,7 @@ public class MovieFileUtils {
         List<Map<String,Object>> fileList3 = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
         Map<String, Object> fileListMap3 = null;
                
-        String MOVIE_NO = (String)map.get("MOVIE_NO"); 
+        int MOVIE_NO = (Integer)map.get("MOVIE_NO"); 
          
         File file = new File(filePath); // 파일을 저장할 경로에 해당폴더가 없으면 폴더를 생성한다
         if(file.exists() == false){
@@ -260,6 +265,7 @@ public class MovieFileUtils {
         return fileList3;
     }
     
+    /*영화 슬라이드 파일 수정*/ 
     public List<Map<String, Object>> parseUpdateFileInfo3(Map<String, Object> map, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -286,7 +292,7 @@ public class MovieFileUtils {
            		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
            		storedFileName = CommonUtils.getRandomString() + originalFileExtension; // 32자리의 랜덤한 파일이름 생성하고 원본파일의 확장자를 붙여준다
                 
-           		multipartFile.transferTo(new File(filePath + storedFileName));
+           		multipartFile.transferTo(new File(filePath3 + storedFileName));
            		
            		fileListMap3 = new HashMap<String,Object>();
            		fileListMap3.put("IS_NEW", "Y");
@@ -310,5 +316,4 @@ public class MovieFileUtils {
         }
         return fileList3;
     }
-    
 }

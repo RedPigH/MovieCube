@@ -53,26 +53,24 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; }
 		<h3 class="sub_tit">슬라이드 이미지 수정</h3>
 		<form id="frm" name="frm" enctype="multipart/form-data">
 		
-		<div id="fileDiv">
-			<c:forEach var="row" items="${movieDetail}" varStatus="var">
+		<div class="tbl_type_01">
 				<table>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
-						<tr>	
-							<th scope="row">슬라이더</th>
+						<tr>
+							<th scope="row">포스터</th>
 							<td>
-								<input type="hidden" id="slider" name="slider" value="${map.SLIDER_NO}">
-								<a href="#this" id="name" name="name"><font color="red">${map.SLIDER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
+								<input type="hidden" id="slider" name="slider" value="${map2.SLIDER_NO}">
+								<a href="#this" id="name" name="name"><font color="red">${map2.SLIDER_ORGNAME}</font>&nbsp;&nbsp;&nbsp;</a>
 								<font color="blue"><span class="ibk">파일이 이미 등록되어 있습니다. 새로 등록하시면 기존 파일이 삭제됩니다.</span></font><br/><br>
-								<input type="file" class="txt" name="SLIDER_ORGNAME"/>
+								<input type="file" class="txt" name="SLIDER_ORGNAME" />
 							</td>
 						</tr>
 					</tbody>
-				</table>
-			</c:forEach>		
+				</table>	
 		</div>	
 		<div class="btn_type_03">
 				<a href="#this" class="btn btnC_04 btnP_04" id="write">

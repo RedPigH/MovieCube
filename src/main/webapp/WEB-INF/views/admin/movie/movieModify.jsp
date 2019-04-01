@@ -56,7 +56,7 @@
 					<tbody>
 					
 						<tr>
-							<th scope="row">영화제목</th>
+							<th scope="row">영화제목</th><!--  -->
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" value="${map.MOVIE_NAME}"/>
 								<input type="hidden" id="MOVIE_NO" name="MOVIE_NO" value="${map.MOVIE_NO}" />
@@ -66,7 +66,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">감독</th>
+							<th scope="row">감독</th><!--  -->
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_DIRECTOR" name="MOVIE_DIRECTOR" value="${map.MOVIE_DIRECTOR}"/>
 								<font color="red"></font>
@@ -74,7 +74,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">배우</th>
+							<th scope="row">배우</th><!--  -->
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_ACTOR" name="MOVIE_ACTOR" value="${map.MOVIE_ACTOR}"/>
 								<font color="red"></font>
@@ -82,7 +82,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">개봉일</th>
+							<th scope="row">개봉일</th><!--  -->
 							<td>
 								<c:set var="TextValue" value="${map.MOVIE_OPENDATE}"/>
 								<input type="date" class="txt w200" id="MOVIE_OPENDATE" name="MOVIE_OPENDATE" value="${fn:substring(TextValue,0,10)}" />
@@ -91,7 +91,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">장르</th>
+							<th scope="row">장르</th><!--  -->
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" value="${map.MOVIE_GENRE}" />
 								<font color="red"><span class="ibk"></span></font>
@@ -100,7 +100,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">러닝타임</th>
+							<th scope="row">러닝타임</th><!--  -->
 							<td>
 								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME" value="${map.MOVIE_RUNTIME}" />
 								<font color="red"><span class="ibk"></span></font>
@@ -109,7 +109,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">타입</th>
+							<th scope="row">타입</th><!--  -->
 							<td>
 								<select name="MOVIE_TYPE" class="slct w200" value="${map.MOVIE_TYPE}">
 									<option value="일반" <c:if test="${map.MOVIE_TYPE == '일반'}"> selected</c:if>>2D</option>
@@ -121,7 +121,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">관람등급</th>
+							<th scope="row">관람등급</th><!--  -->
 							<td>
 								<select name="MOVIE_AGE" class="slct w200" value="${map.MOVIE_AGE}">
 									<option value="12" <c:if test="${map.MOVIE_TYPE == '12'}"> selected</c:if>>12</option>
@@ -132,15 +132,15 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">별점</th>
+							<th scope="row">서브 타이틀</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_GRADE" name="MOVIE_GRADE" value="${map.MOVIE_GRADE}"/>
+								<input type="text" class="txt w200" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE" value="${map.MOVIE_SUBTITLE}"/>
 								<font color="red"></font>
 							</td>
-						</tr>
+						</tr> 
 												
 						<tr>
-							<th scope="row">줄거리</th>
+							<th scope="row">줄거리</th><!--  -->
 							<td>
 								<div class="textarea_grp">
 									<textarea name="MOVIE_CONTENT">${map.MOVIE_CONTENT}</textarea>

@@ -201,9 +201,10 @@ public class AdminController {
 		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
 		
 		mv.addObject("map", map.get("map"));
+		mv.addObject("map2", map.get("map2"));
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
-		/* mv.addObject("movieDetail2", map.get("movieDetail2")); */
+	
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
 		System.out.println(" 상세보기 값 체크 ================" + commandMap.getMap());
 		
@@ -271,8 +272,9 @@ public class AdminController {
 		
 		System.out.println("스틸컷 수정 폼 값 확인 =============: " + commandMap.getMap());
 		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
-
+	
 		mv.addObject("map", map.get("map"));
+		mv.addObject("map2", map.get("map2"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
 		mv.addObject("fileList", map.get("fileList"));
 		
@@ -282,8 +284,8 @@ public class AdminController {
 	@RequestMapping(value="/movieModify3.do")
 	public ModelAndView movieModify3(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
-		
-		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
+		String MOVIE_NO = ((String)commandMap.get("MOVIE_NO"));
+//		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
 		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
 		
 		movieService.modifyMovie3(commandMap.getMap(), request);

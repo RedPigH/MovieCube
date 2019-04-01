@@ -104,24 +104,24 @@
 	]]>
 	</select>
 	
-	<!-- 영화 상세 정보 -->
+	<!-- 영화 상세 정보 + 포스터 파일 상세 정보 -->
 	<select id="selectMovieDetail" resultType="hashmap"
 		parameterType="hashmap">
 
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
-				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
-				 ON m.MOVIE_NO = f.MOVIE_NO
-					WHERE m.MOVIE_NO = #{MOVIE_NO} AND f.DEL_GB = 'N'
-						 			
+			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_RUNTIME, m.MOVIE_SUBTITLE, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
+				FROM MC_MOVIE m, MC_MOVIE_FILE f
+					WHERE m.MOVIE_NO = f.MOVIE_NO
+					AND m.MOVIE_NO = #{MOVIE_NO} 
+					AND f.DEL_GB = 'N'
+								
 		]]>
 	</select>
 
-	<!-- 영화 파일 상세 정보 -->
-<!-- 	<select id="selectMovieFileDetail" resultType="hashmap"
-		parameterType="hashmap">
+	<!-- 영화 스틸컷 파일 상세 정보 -->
+ 	<select id="selectMovieFileDetail" resultType="hashmap" parameterType="hashmap">
 
 		<![CDATA[
 		select 
@@ -131,22 +131,19 @@
 						WHERE m.MOVIE_NO = #{MOVIE_NO} and s.DEL_GB = 'N'
 		]]>
 	</select>
- -->
-	<!-- 영화 파일 상세 정보 -->
-	<select id="selectMovieFileDetail" resultType="hashmap"
-		parameterType="hashmap">
+	
+	<!-- 영화 슬라이더 이미지 파일 상세 정보 -->
+ 	<select id="selectSliderFileDetail" resultType="hashmap" parameterType="hashmap">
 
 		<![CDATA[
 		select 
-			m.MOVIE_NO, s.STILLCUT_NO, r.SLIDER_NO, s.STILLCUT_ORGNAME, s.STILLCUT_SAVNAME, r.SLIDER_ORGNAME, r.SLIDER_SAVNAME
-				FROM MC_MOVIE m, STILLCUT s, MC_SLIDER r
-					WHERE m.MOVIE_NO = s.MOVIE_NO 
-					AND m.MOVIE_NO = r.MOVIE_NO 
-					AND m.MOVIE_NO = #{MOVIE_NO} 
-					AND s.DEL_GB = 'N' AND r.DEL_GB = 'N'
+			m.MOVIE_NO, r.SLIDER_NO, r.SLIDER_ORGNAME, r.SLIDER_SAVNAME, r.DEL_GB
+				FROM MC_MOVIE m INNER JOIN MC_SLIDER r
+					ON m.MOVIE_NO = r.MOVIE_NO 
+						WHERE m.MOVIE_NO = #{MOVIE_NO} and r.DEL_GB = 'N'
 		]]>
 	</select>
-
+	
 	<!-- 영화 파일 리스트 -->
 	<select id="selectFileList" resultType="hashmap"
 		parameterType="hashmap">
@@ -344,9 +341,10 @@
 		    MOVIE_DIRECTOR = #{MOVIE_DIRECTOR}, 
 	        MOVIE_ACTOR = #{MOVIE_ACTOR}, 
 	        MOVIE_GENRE = #{MOVIE_GENRE}, 
-	        MOVIE_CONTENT = #{MOVIE_CONTENT} , 
-	        MOVIE_GRADE = #{MOVIE_GRADE},
-		    MOVIE_AGE = #{MOVIE_AGE}
+	        MOVIE_CONTENT = #{MOVIE_CONTENT}, 
+		    MOVIE_AGE = #{MOVIE_AGE},
+		    MOVIE_RUNTIME = #{MOVIE_RUNTIME},
+		    MOVIE_SUBTITLE = #{MOVIE_SUBTITLE}
 				where MOVIE_NO = #{MOVIE_NO}
 		]]>
 	</update>
@@ -403,7 +401,7 @@
 		]]>
 	</update>
 	
-	<!-- 영화 스틸컷 수정 -->
+	<!-- 영화 슬라이더 수정 -->
 	<update id="modifyFile3" parameterType="hashmap">
 		<![CDATA[
 		UPDATE MC_SLIDER

@@ -83,6 +83,11 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectMovieFileDetail(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectMovieFileDetail", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectSliderFileDetail(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.selectSliderFileDetail", map);
+	}
 
 	public void modifyMovie(Map<String, Object> map) throws Exception {
 		update("movie.modifyMovie", map);

@@ -71,6 +71,8 @@
 					<dd>${map.MOVIE_DIRECTOR}</dd>
 					<dt>출현</dt>
 					<dd>${map.MOVIE_ACTOR}</dd>
+					<dt>시간</dt>
+					<dd>${map.MOVIE_RUNTIME}</dd>
 					<dt>개봉</dt>
 					<dd>
 						<c:set var="TextValue" value="${map.MOVIE_OPENDATE}"/>
@@ -87,9 +89,9 @@
 					
 					<a href="<%=cp%>/admin/movieModifyForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" > <span>스틸컷수정</span></a>	
 					
-					<a href="<%=cp%>/admin/movieWriteForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" > <span>slider add</span></a>
+					<a href="<%=cp%>/admin/movieWriteForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" > <span>Slider add</span></a>
 					
-					<a href="<%=cp%>/admin/movieModifyForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04"> <span>slider mofy</span></a>
+					<a href="<%=cp%>/admin/movieModifyForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04"> <span>SlideRenew</span></a>
 						
 					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_01 btnF_04" > <span>수정</span></a>				
 						
@@ -99,15 +101,19 @@
 				</div>
 			</div>
 		</div>
+		
+		<h3 class="sub_tit">서브타이틀</h3>
+		<p class="summary">${map.MOVIE_SUBTITLE}</p>
+		
 		<h3 class="sub_tit">줄거리</h3>
 		<p class="summary">${map.MOVIE_CONTENT}</p>
 		
-		<h3 class="sub_tit">메인 슬라이드 이미지</h3>
+		<h3 class="sub_tit">슬라이드 이미지</h3>
 		<div class="movie_steel">
 			<div class="inner">
 				<ul>
 					<li>
-						<img src="<%=cp%>/resources/upload/movie/slider/${map.SLIDER_SAVNAME}" alt="" /> 
+						<img src="<%=cp%>/resources/upload/movie/slider/${map2.SLIDER_SAVNAME}" alt=""  /> 
 					</li>
 				</ul>
 			</div>
