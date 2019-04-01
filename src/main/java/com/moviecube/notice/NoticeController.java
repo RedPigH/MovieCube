@@ -46,15 +46,17 @@ public class NoticeController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				noticeList = noticeService.noticeSearch0(isSearch);
+				smap.put("NOTICE_SUB", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
 			}else if(searchNum == 1){
-				noticeList = noticeService.noticeSearch1(isSearch);
-			}else{
-				noticeList = noticeService.noticeSearch2(isSearch);
+				smap.put("NOTICE_CONTENT", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
 			}
 			
 			totalCount = noticeList.size();

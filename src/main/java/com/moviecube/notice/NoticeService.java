@@ -17,16 +17,6 @@ public interface NoticeService {
 
 	void deleteBoard(Map<String, Object> map) throws Exception;
 
-	List<Map<String, Object>> noticeSearch0(String map) throws Exception;
-	
-	List<Map<String, Object>> noticeSearch1(String map) throws Exception;
-	
-	List<Map<String, Object>> noticeSearch2(String map) throws Exception;
-	
-	
-	
-	/*
-	 * List<Map<String, Object>> selectNoticeList(Map<String,Object> map) throws
-	 * Exception;
-	 */
+	List<Map<String, Object>> noticeSearch(Map<String, Object> map) throws Exception;
+
 }

@@ -53,23 +53,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> noticeSearch0(String map) throws Exception {
-		return noticeDAO.noticeSearch0(map);
+	public List<Map<String, Object>> noticeSearch(Map<String, Object> map) throws Exception {
+		return noticeDAO.noticeSearch(map);
 	}
 
-	@Override
-	public List<Map<String, Object>> noticeSearch1(String map) throws Exception {
-		return noticeDAO.noticeSearch1(map);
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeSearch2(String map) throws Exception {
-		return noticeDAO.noticeSearch2(map);
-	}
-
-	/*
-	 * @Override public List<Map<String, Object>> selectNoticeList(Map<String,
-	 * Object> map) throws Exception { // TODO Auto-generated method stub return
-	 * noticeDAO.selectNoticeList(map);
-	 */
 }

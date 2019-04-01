@@ -47,12 +47,17 @@ public class CinemaController {
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
+			CommandMap smap = new CommandMap();
+			
 			if(searchNum == 0){
-				cinemaList = cinemaService.cinemaSearch0(isSearch);
+				smap.put("CINEMA_NAME", isSearch);
+				cinemaList = cinemaService.cinemaSearch(smap.getMap());
 			}else if(searchNum == 1){
-				cinemaList = cinemaService.cinemaSearch1(isSearch);
-			}else{
-				cinemaList = cinemaService.cinemaSearch2(isSearch);
+				smap.put("CINEMA_ADDRESS", isSearch);
+				cinemaList = cinemaService.cinemaSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("CINEMA_CONTENT", isSearch);
+				cinemaList = cinemaService.cinemaSearch(smap.getMap());
 			}
 			
 			totalCount = cinemaList.size();
@@ -92,38 +97,6 @@ public class CinemaController {
 		mav.addObject("cinemaList", cinemaList);
 		mav.setViewName("/admin/cinema/cinemaList");
 		return mav;
-/*
-		ModelAndView mv = new ModelAndView();
-
-		List<Map<String, Object>> cinemaList = cinemaService.selectCinemaList(commandMap.getMap());
-		
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
-			currentPage = 1;
-		}else{
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		totalCount = cinemaList.size();
-		
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "cinemaList");
-		pagingHtml = paging.getPagingHtml().toString();
-		
-		int lastCount = totalCount;
-		
-		if (paging.getEndCount() < totalCount) {
-			lastCount = paging.getEndCount() + 1;
-		}
-
-		cinemaList = cinemaList.subList(paging.getStartCount(), lastCount);
-		
-		mv.addObject("cinemaList", cinemaList);
-		mv.addObject("list", cinemaList);
-		mv.addObject("currentPage", currentPage);
-		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/admin/cinema/cinemaList");
-		return mv;
-*/
 	}
 
 	@RequestMapping(value = "/cinemaDetail.do")

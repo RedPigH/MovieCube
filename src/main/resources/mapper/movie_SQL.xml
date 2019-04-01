@@ -400,34 +400,25 @@
 		]]>
 	</delete>
 	
-	<!-- 회원 검색 -->
-	<select id="movieSearch0" resultType="hashmap" parameterType="hashmap">
+	<!-- 영화 검색 -->
+	<select id="movieSearch" resultType="hashmap" parameterType="hashmap">
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
 			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
-						WHERE f.DEL_GB = 'N'AND m.MOVIE_NAME like #{search} 
-							order by m.MOVIE_NO desc
-	</select>
-	
-	<select id="movieSearch1" resultType="hashmap" parameterType="hashmap">
-		select 
-			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
-				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
-					ON m.MOVIE_NO = f.MOVIE_NO 
-						WHERE f.DEL_GB = 'N'AND m.MOVIE_DIRECTOR like #{search} 
-							order by m.MOVIE_NO desc
-	</select>
-	
-	<select id="movieSearch2" resultType="hashmap" parameterType="hashmap">
-		select 
-			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
-				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
-					ON m.MOVIE_NO = f.MOVIE_NO 
-						WHERE f.DEL_GB = 'N'AND m.MOVIE_ACTOR like #{search} 
+						WHERE f.DEL_GB = 'N'
+							<choose>
+								<when test = "MOVIE_NAME != NULL">
+									AND m.MOVIE_NAME like '%'||#{MOVIE_NAME}||'%'
+								</when>
+								<when test = "MOVIE_DIRECTOR != NULL">
+									AND m.MOVIE_DIRECTOR like '%'||#{MOVIE_DIRECTOR}||'%'
+								</when>
+								<when test = "MOVIE_ACTOR != NULL">
+									AND m.MOVIE_ACTOR like '%'||#{MOVIE_ACTOR}||'%'
+								</when>
+							</choose>
 							order by m.MOVIE_NO desc
 	</select>
 </mapper>

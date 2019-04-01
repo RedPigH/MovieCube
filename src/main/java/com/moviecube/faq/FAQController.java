@@ -46,13 +46,17 @@ public class FAQController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				faqList = faqService.faqSearch0(isSearch);
+				smap.put("FAQ_SUB", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
 			}else if(searchNum == 1){
-				faqList = faqService.faqSearch1(isSearch);
+				smap.put("FAQ_CONTENT", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
 			}
 			
 			totalCount = faqList.size();

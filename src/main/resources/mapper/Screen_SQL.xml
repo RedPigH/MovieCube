@@ -77,27 +77,22 @@
 	</delete>
 	
 	<!-- 회원 검색 -->
-	<select id="screenSearch0" resultType="hashmap" parameterType="hashmap">
+	<select id="screenSearch" resultType="hashmap" parameterType="hashmap">
 		SELECT s.SCREEN_NO, s.SCREEN_NAME, s.SCREEN_TYPE, c.CINEMA_NAME  
 			FROM SCREEN s, CINEMA c
 			WHERE s.CINEMA_NO = c.CINEMA_NO 
-			AND c.CINEMA_NAME like #{search}
+			<choose>
+				<when test = "CINEMA_NAME != NULL">
+					AND c.CINEMA_NAME like '%'||#{CINEMA_NAME}||'%'
+				</when>
+				<when test = "SCREEN_TYPE != NULL">
+					AND s.SCREEN_TYPE like '%'||#{SCREEN_TYPE}||'%'
+				</when>
+				<when test = "SCREEN_NAME != NULL">
+					AND s.SCREEN_NAME like '%'||#{SCREEN_NAME}||'%'
+				</when>
+			</choose>
 				ORDER BY SCREEN_NO ASC
 	</select>
 	
-	<select id="screenSearch1" resultType="hashmap" parameterType="hashmap">
-		SELECT s.SCREEN_NO, s.SCREEN_NAME, s.SCREEN_TYPE, c.CINEMA_NAME  
-			FROM SCREEN s, CINEMA c
-			WHERE s.CINEMA_NO = c.CINEMA_NO 
-			AND s.SCREEN_TYPE like #{search}
-				ORDER BY SCREEN_NO ASC
-	</select>
-	
-	<select id="screenSearch2" resultType="hashmap" parameterType="hashmap">
-		SELECT s.SCREEN_NO, s.SCREEN_NAME, s.SCREEN_TYPE, c.CINEMA_NAME  
-			FROM SCREEN s, CINEMA c
-			WHERE s.CINEMA_NO = c.CINEMA_NO 
-			AND s.SCREEN_NAME like #{search}
-				ORDER BY SCREEN_NO ASC
-	</select>
 </mapper>

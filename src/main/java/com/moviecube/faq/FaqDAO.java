@@ -63,17 +63,13 @@ public class FaqDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> faqSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("faq.faqSearch0", "%"+isSearch+"%");
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> faqSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("faq.faqSearch1", "%"+isSearch+"%");
+	public List<Map<String, Object>> faqSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("faq.faqSearch", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectFaqType(Map<String, Object> map) throws Exception{
 		return (List<Map<String, Object>>) selectList("faq.selectFaqType", map);
 	}
+
 }

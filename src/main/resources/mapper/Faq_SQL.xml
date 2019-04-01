@@ -121,17 +121,19 @@
 	</delete>
 
 	<!-- FAQ 검색 -->
-	<select id="faqSearch0" resultType="hashmap"
+	<select id="faqSearch" resultType="hashmap"
 		parameterType="hashmap">
 		select * from MC_FAQ
-		where FAQ_SUB like #{search}
+		where 
+		<choose>
+				<when test = "FAQ_SUB != NULL">
+					FAQ_SUB like '%'||#{FAQ_SUB}||'%'
+				</when>
+				<when test = "FAQ_CONTENT != NULL">
+					FAQ_CONTENT like '%'||#{FAQ_CONTENT}||'%'
+				</when>
+		</choose>
 		order by FAQ_NO desc
 	</select>
-
-	<select id="faqSearch1" resultType="hashmap"
-		parameterType="hashmap">
-		select * from MC_FAQ
-		where FAQ_CONTENT like #{search}
-		order by FAQ_NO desc
-	</select>
+	
 </mapper>
