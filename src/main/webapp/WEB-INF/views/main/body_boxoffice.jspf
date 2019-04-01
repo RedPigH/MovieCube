@@ -71,9 +71,6 @@ function toModal(movie_no) {
 					alert("오류가 발생하였습니다.");
 				}
 			});
-			
-	
-	// var movieNo = movie_no; 이거 그대로 가져다가 쓰면 됨 ㅎㅎ
 
 			
 	
