@@ -45,7 +45,7 @@
 	</div>
 	
 	<div class="admin_ct">
-		<h3 class="sub_tit">영화 정보 등록</h3>
+		<h3 class="sub_tit">스틸컷 등록</h3>
 		<form id="frm" name="frm" enctype="multipart/form-data">
 			<div class="tbl_type_01">
 				<table>
@@ -54,130 +54,28 @@
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
-					<tbody>
-					
-						<tr>
-							<th scope="row">영화제목</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_NAME" name="MOVIE_NAME" />
-								<font color="green"><span class="ibk">예) 영화제목 (3D) </span></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">감독</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_DIRECTOR" name="MOVIE_DIRECTOR" />
-								<font color="red"></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">배우</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_ACTOR" name="MOVIE_ACTOR" />
-								<font color="red"></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">개봉일</th>
-							<td>
-								<input type="date" class="txt w200" id="MOVIE_OPENDATE" name="MOVIE_OPENDATE" />
-								<font color="red"></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">장르</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_GENRE" name="MOVIE_GENRE" />
-								<font color="red"><span class="ibk"></span></font>
-								
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">러닝타임</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME" />
-								<font color="red"><span class="ibk"></span></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">타입</th>
-							<td>
-								<select name="MOVIE_TYPE" class="slct w200">
-									<option value="일반">일반</option>
-									<option value="3D">3D</option>
-									<option value="4D">4D</option>
-									<option value="IMAX">IMAX</option>
-								</select>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">관람등급</th>
-							<td>
-								<select name="MOVIE_AGE" class="slct w200">
-									<option value="12">12</option>
-									<option value="15">15</option>
-									<option value="19">19</option>
-								</select>							
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">서브 타이틀</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE"/>
-								<font color="red"></font>
-							</td>
-						</tr> 
-												
-						<tr>
-							<th scope="row">줄거리</th>
-							<td>
-								<div class="textarea_grp">
-									<textarea name="MOVIE_CONTENT"></textarea>
-								</div>
-								<font color="red"></font>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">포스터</th>
-							<td>
-								<input type="file" class="txt" name="POSTER_ORGNAME" />
-							</td>
-						</tr>
-						
-					
-					</tbody>
 				</table>
+			
 				
-				
-<%-- 				<div id="fileDiv">
+				<div id="fileDiv">
 				<table>
 					<colgroup>
 						<col style="width: 120px;" />
 						<col />
 					</colgroup>
 					<tbody>
-
+						
 						<tr>	
-							<th scope="row">스틸컷</th>
+							<th scope="row">슬라이드 이미지</th>
 							<td>
-								<input type="file" class="txt" name="STILLCUT_ORGNAME_0" />
-								<a href="#this" class="btn btnC_04 btnP_04" id="addFile"> <span>스틸컷 추가</span></a>
-								<a href="this" class="btn btnC_04 btnP_04" id="delete" name="delete"><span>삭제</span></a>
+								<input type="hidden" name="MOVIE_NO" value="${param.MOVIE_NO}"/>
+								<input type="file" class="txt" name="SLIDER_ORGNAME" />
 							</td>
 						</tr>	
 					</tbody>
 				</table>	
 				</div>
- --%>
+
 			</div>	
 			
 			<div class="btn_type_03">
@@ -210,10 +108,6 @@
                 fn_insertBoard();
             });
              
-            $("#addFile").on("click", function(e){ //파일 추가 버튼
-                e.preventDefault();
-                fn_addFile();
-            });
              
             $("a[name='delete']").on("click", function(e){ //삭제 버튼
                 e.preventDefault();
@@ -229,19 +123,10 @@
          
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='movieWrite.do' />");
+            comSubmit.setUrl("<c:url value='movieWrite3.do' />");
             comSubmit.submit();
         }
-         
-        function fn_addFile(){
-            var str = "<p><input type='file' name='STILLCUT_ORGNAME_"+(gfv_count++)+"'><a href='#this' class='btn btnC_04 btnP_02' name='delete'><span>삭제</span></a></p>";
-            $("#fileDiv").append(str);
-            $("a[name='delete']").on("click", function(e){ //삭제 버튼
-                e.preventDefault();
-                fn_deleteFile($(this));
-            });
-        }
-         
+     
         function fn_deleteFile(obj){
             obj.parent().remove();
         } 

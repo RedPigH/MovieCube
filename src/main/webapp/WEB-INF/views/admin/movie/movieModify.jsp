@@ -98,7 +98,7 @@
 								
 							</td>
 						</tr>
-						<%-- 
+						
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -107,7 +107,7 @@
 								
 							</td>
 						</tr>
-						 --%>
+						
 						<tr>
 							<th scope="row">타입</th>
 							<td>
@@ -128,14 +128,6 @@
 									<option value="15" <c:if test="${map.MOVIE_TYPE == '15'}"> selected</c:if>>15</option>
 									<option value="19" <c:if test="${map.MOVIE_TYPE == '19'}"> selected</c:if>>19</option>
 								</select>
-							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">동영상 URL</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_URL" name="MOVIE_URL" value="${map.MOVIE_URL}" />
-								<font color="red"></font>
 							</td>
 						</tr>
 						

@@ -32,8 +32,12 @@ public interface MovieService {
 	void deleteComment(Map<String, Object> map) throws Exception;
 
 	void insertMovie2(Map<String, Object> map, HttpServletRequest request) throws Exception;
+	
+	void insertMovie3(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
 	void modifyMovie2(Map<String, Object> map,  HttpServletRequest request) throws Exception;
+	
+	void modifyMovie3(Map<String, Object> map,  HttpServletRequest request) throws Exception;
 	
 	void modifyGrade(Map<String, Object> map) throws Exception;
 	
