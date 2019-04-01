@@ -93,7 +93,48 @@
 	<%@ include file="../main/script.jspf"%>
 	
 </body>
+</html>
 
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>FAQ</title>
+<script src="/moviecube/resources/js/admin_common.js"></script>
+<%@ include file="/WEB-INF/views/main/head.jspf"%>
+</head>
+
+<body class="animsition" style="opacity: 1; animation-duration: 1500ms;">
+
+<%@ include file="../main/body_header.jspf" %> 
+	
+	<div class="bg0 p-t-75 p-b-85">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList.do">전체 FAQ</a>
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList1.do">영화 예매</a> 
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList2.do">영화관 </a>	
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList3.do">상영관 </a>	
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="faqList5.do">기타 </a>		
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-menu-desktop">
+			<div class="btn-back-to-top" id="myBtn">
+				<span class="symbol-btn-back-to-top"> 
+				<i class="zmdi zmdi-chevron-up"></i>
+				</span>
+			</div>
+	</div>
+	
+ --%>
 <%-- 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
