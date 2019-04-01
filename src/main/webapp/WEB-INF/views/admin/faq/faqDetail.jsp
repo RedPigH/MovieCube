@@ -83,7 +83,8 @@
 						</tr>
 						<tr>
 							<th scope="row">내용</th>
-							<td><pre>${fn:replace(map.FAQ_CONTENT,cn,br)}</pre></td>
+							<td><pre>${map.FAQ_CONTENT}</pre></td>
+							<%-- <td><pre>${fn:replace(map.FAQ_CONTENT,cn,br)}</pre></td> --%>
 						</tr>
 					</tbody>
 				</table>

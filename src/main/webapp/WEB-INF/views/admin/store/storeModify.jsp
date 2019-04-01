@@ -74,14 +74,6 @@
 						</tr>	
 												
 						<tr>
-							<th scope="row">수량</th>
-							<td>
-								<input type="text" class="txt w200" id="STORE_AMOUNT" name="STORE_AMOUNT" value="${map.STORE_AMOUNT}"/>
-								<font color="red"></font>
-							</td>
-						</tr>
-						
-						<tr>
 							<th scope="row">상품 이용 안내</th>
 							<td>
 								<div class="textarea_grp">

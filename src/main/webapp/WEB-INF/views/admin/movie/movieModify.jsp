@@ -134,7 +134,7 @@
 						<tr>
 							<th scope="row">서브 타이틀</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE" value="${map.MOVIE_SUBTITLE}"/>
+								<input type="text" class="txt w350" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE" value="${map.MOVIE_SUBTITLE}"/>
 								<font color="red"></font>
 							</td>
 						</tr> 
