@@ -10,7 +10,7 @@
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
 						WHERE f.DEL_GB = 'N'
@@ -37,7 +37,7 @@
 		parameterType="hashmap">
 	<![CDATA[
 			select h.movie_no, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-	         m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from reservation where movie_no = h.movie_no) as rev_cnt
+	         m.MOVIE_GRADE, m.MOVIE_AGE, f.poster_savname, (select count(*) from reservation where movie_no = h.movie_no) as rev_cnt
 	      from (select * from (select * from reservation r inner join time t on r.time_no = t.time_no)
 	      where rowid in(select max(rowid) from (select * from reservation r inner join time t on r.time_no = t.time_no) group by movie_no)) h
 	      inner join mc_movie m on h.movie_no = m.movie_no
@@ -52,7 +52,7 @@
 		parameterType="hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
@@ -67,7 +67,7 @@
 		parameterType="hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
@@ -81,7 +81,7 @@
 	<select id="GradeMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.poster_savname
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f
@@ -95,7 +95,7 @@
 	<select id="CommentMovieList" resultType = "hashmap" parameterType = "hashmap">
 	<![CDATA[
 		select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.poster_savname, (select count(*) from mc_comment where movie_no = m.movie_no) as total_cmt
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.poster_savname, (select count(*) from mc_comment where movie_no = m.movie_no) as total_cmt
 		from (select * from mc_movie
 		where rowid in(select max(rowid) from mc_movie group by movie_name)) m
 		inner join mc_movie_file f on m.movie_no = f.movie_no
@@ -111,7 +111,7 @@
 		<![CDATA[
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.FILE_NO,	f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB 
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f
 				 ON m.MOVIE_NO = f.MOVIE_NO
 					WHERE m.MOVIE_NO = #{MOVIE_NO} AND f.DEL_GB = 'N'
@@ -209,8 +209,7 @@
 	        MOVIE_GENRE, 
 	        MOVIE_CONTENT, 
 	        MOVIE_GRADE,
-		    MOVIE_AGE, 
-		    MOVIE_URL
+		    MOVIE_AGE
 			)
 		values 
 		(
@@ -223,8 +222,7 @@
 			#{MOVIE_GENRE},
 			#{MOVIE_CONTENT},
 			#{MOVIE_GRADE},
-			#{MOVIE_AGE},
-			#{MOVIE_URL}
+			#{MOVIE_AGE}
 			)		 		  
 		]]>
 	</insert>
@@ -309,8 +307,7 @@
 	        MOVIE_GENRE = #{MOVIE_GENRE}, 
 	        MOVIE_CONTENT = #{MOVIE_CONTENT} , 
 	        MOVIE_GRADE = #{MOVIE_GRADE},
-		    MOVIE_AGE = #{MOVIE_AGE}, 
-		    MOVIE_URL = #{MOVIE_URL}
+		    MOVIE_AGE = #{MOVIE_AGE}
 				where MOVIE_NO = #{MOVIE_NO}
 		]]>
 	</update>
@@ -404,7 +401,7 @@
 	<select id="movieSearch" resultType="hashmap" parameterType="hashmap">
 		select 
 			m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE, m.MOVIE_CONTENT, 
-			m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+			m.MOVIE_GRADE, m.MOVIE_AGE, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
 				FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f 
 					ON m.MOVIE_NO = f.MOVIE_NO 
 						WHERE f.DEL_GB = 'N'
@@ -425,7 +422,7 @@
 	<!-- 메인화면 영화검색 -->
 	<select parameterType="hashmap" resultType="hashmap" id="MainMovieSearch">
 	select m.MOVIE_NO, m.MOVIE_NAME, m.MOVIE_TYPE, m.MOVIE_OPENDATE, m.MOVIE_DIRECTOR, m.MOVIE_ACTOR, m.MOVIE_GENRE,
-	m.MOVIE_CONTENT,m.MOVIE_GRADE, m.MOVIE_AGE, m.MOVIE_URL, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
+	m.MOVIE_CONTENT,m.MOVIE_GRADE, m.MOVIE_AGE, f.FILE_NO, f.POSTER_ORGNAME, f.POSTER_SAVNAME, f.DEL_GB
 	FROM MC_MOVIE m INNER JOIN MC_MOVIE_FILE f ON m.MOVIE_NO = f.MOVIE_NO
 	WHERE f.DEL_GB = 'N' 
 	AND m.MOVIE_NAME like '%' || #{searchKeyword} || '%'
