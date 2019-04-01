@@ -2199,6 +2199,7 @@ input.num-product::-webkit-inner-spin-button {
 /*---------------------------------------------*/
 .block1-txt:hover {
   background-color: rgba(255,89,89,0.8);
+  border-radius: 20px;
 }
 
 .block1-txt:hover .block1-txt-child2 {

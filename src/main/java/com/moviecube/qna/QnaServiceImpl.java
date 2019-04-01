@@ -42,6 +42,8 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.insertQna(map);
 
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
+		
+		System.out.println("파일 길이 : " + list.size());
 		if (list.size() > 0)
 			for (int i = 0, size = list.size(); i < size; i++) {
 				qnaDAO.insertFile(list.get(i));

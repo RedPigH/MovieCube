@@ -45,7 +45,6 @@ public class EventController {
 		mv.addObject("meventList", meventList);
 		mv.addObject("alleventList", alleventList);
 		
-
 		return mv;
 	}
 	
