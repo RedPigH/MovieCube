@@ -7,7 +7,7 @@
 	<select id="selectStoreList" resultType="hashmap" parameterType="hashmap">
 		<![CDATA[
 		select 
-			s.STORE_NO, s.STORE_ITEM, s.STORE_PRICE,
+			s.STORE_NO, s.STORE_ITEM, s.STORE_PRICE, s.STORE_CONTENT,
 			f.FILE_NO, f.IMAGE_ORGNAME, f.IMAGE_SAVNAME, f.DEL_GB
 				FROM MC_STORE s INNER JOIN MC_STORE_FILE f 
 					ON s.STORE_NO = f.STORE_NO 
@@ -32,7 +32,7 @@
 
 		<![CDATA[
 		select 
-			s.STORE_NO, s.STORE_ITEM, s.STORE_AMOUNT, s.STORE_PRICE, s.STORE_CONTENT, 
+			s.STORE_NO, s.STORE_ITEM, s.STORE_PRICE, s.STORE_CONTENT, 
 			f.FILE_NO,	f.IMAGE_ORGNAME, f.IMAGE_SAVNAME, f.DEL_GB 
 				FROM MC_STORE s INNER JOIN MC_STORE_FILE f
 					ON s.STORE_NO = f.STORE_NO

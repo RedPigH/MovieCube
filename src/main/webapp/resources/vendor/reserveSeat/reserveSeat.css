@@ -431,6 +431,12 @@ img {
 	display: block;
 }
 
+img.modal-poster {
+	width: 380px;
+	height: 532px;
+	display: block;
+}
+
 .footerimg {
 	margin: 0;
 }
