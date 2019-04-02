@@ -274,7 +274,7 @@ public class AdminController {
 		
 		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
 		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
-		
+		System.out.println("스틸컷 수정 처리 값 확인 =============: " + commandMap.getMap());
 		movieService.modifyMovie2(commandMap.getMap(), request);
 		
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
