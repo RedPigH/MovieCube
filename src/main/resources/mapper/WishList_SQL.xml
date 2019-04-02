@@ -37,17 +37,18 @@
 	
 	<!-- 찜하기 삭제 -->
 	<delete id = "deleteWishList" parameterType = "hashmap">
-		<![CDATA[
-		DELETE FROM MC_WISHLIST
-		WHERE MEMBER_NO = #{MEMBER_NO} AND MOVIE_NO = #{MOVIE_NO}
-		]]>
-		<choose>
-				<when test = "WISH_NO != NULL">
-					AND WISH_NO = #{WISH_NO}
-				</when>
-				<otherwise>
-				</otherwise>
-		</choose>
-	</delete>
+      <![CDATA[
+      DELETE FROM MC_WISHLIST
+      WHERE 
+      ]]>
+      <choose>
+            <when test = "WISH_NO != NULL">
+               WISH_NO = #{WISH_NO}
+            </when>
+            <otherwise>
+               MEMBER_NO = #{MEMBER_NO} AND MOVIE_NO = #{MOVIE_NO}
+            </otherwise>
+      </choose>
+   </delete>
 
 </mapper>

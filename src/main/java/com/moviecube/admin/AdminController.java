@@ -28,6 +28,7 @@ import com.moviecube.notice.NoticeService;
 import com.moviecube.qna.QnaService;
 import com.moviecube.common.Paging;
 import com.moviecube.faq.FaqService;
+import com.moviecube.store.StoreService;
 
 
 @Controller
@@ -49,6 +50,9 @@ public class AdminController {
 	@Resource(name = "qnaService")
 	private QnaService qnaService;
 	
+	@Resource(name = "storeService")
+	private StoreService storeService;
+	
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 5;
@@ -59,49 +63,95 @@ public class AdminController {
 	
 	@RequestMapping(value="/movieList.do")
 	public ModelAndView movieList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		
+
 		ModelAndView mv = new ModelAndView();
 		
-		List<Map<String, Object>> movieList = movieService.selectMovieList(commandMap.getMap());
-		
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
 			currentPage = 1;
 		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		totalCount = movieList.size();
+		List<Map<String, Object>> movieList = null;
+		String isSearch  = null;
+		int searchNum = 0;
 		
+		isSearch = request.getParameter("isSearch");
+		
+		CommandMap smap = new CommandMap();
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				smap.put("MOVIE_NAME", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
+			}else if(searchNum == 1){
+				smap.put("MOVIE_DIRECTOR", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("MOVIE_ACTOR", isSearch);
+				movieList = movieService.movieSearch(smap.getMap());
+			}
+			
+			totalCount = movieList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			movieList = movieList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("movieList", movieList);
+			mv.setViewName("/admin/movie/movieList");
+			return mv;
+		}
+		
+		movieList = movieService.selectMovieList(commandMap.getMap());
+		
+		totalCount = movieList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "movieList");
 		pagingHtml = paging.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
-	
-		if (paging.getEndCount() < totalCount) {
+		
+		if(paging.getEndCount() < totalCount){
 			lastCount = paging.getEndCount() + 1;
 		}
-
+		
 		movieList = movieList.subList(paging.getStartCount(), lastCount);
 		
-		mv.addObject("movieList", movieList);
-		mv.addObject("list", movieList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
-		mv.setViewName("admin/movie/movieList");
-		return mv;
+		mv.addObject("movieList", movieList);
+		mv.setViewName("/admin/movie/movieList");
+		return mv;	
 	}
 	
 	@RequestMapping(value="/movieWriteForm.do")
 	public ModelAndView movieWriteForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movie/movieWrite");
-		
+		System.out.println(" 영화 등록 폼 값 체크 ================" + commandMap.getMap());
 		return mv;
 	}
 	
 	@RequestMapping(value="/movieWrite.do")
 	public ModelAndView movieWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieList.do");
+		System.out.println(" 영화 등록 처리 값 체크 ================" + commandMap.getMap());
+		
+		String content2 = (String)commandMap.get("MOVIE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("MOVIE_CONTENT", content);
+		
+		String subtitle2 = (String)commandMap.get("MOVIE_SUBTITLE");
+		String subtitle = subtitle2.replaceAll("\r\n", "<br>");
+		commandMap.put("MOVIE_SUBTITLE", subtitle);
 		
 		movieService.insertMovie(commandMap.getMap(), request);
 		
@@ -129,7 +179,30 @@ public class AdminController {
 		
 		return mv;
 	}
+
+	@RequestMapping(value="/movieWriteForm3.do")
+	public ModelAndView movieWriteForm3(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/movie/movieWrite3");
+		
+		System.out.println(" 슬라이드 추가 폼 체크 ================" + commandMap.getMap());
+		return mv;
+	}
 	
+	@RequestMapping(value="/movieWrite3.do")
+	public ModelAndView movieWrtie3(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
+		
+		System.out.println(" 슬라이더 추가 값 체크 ================" + commandMap.get("MOVIE_NO"));
+		String MOVIE_NO = ((String)commandMap.get("MOVIE_NO"));
+		
+		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
+		movieService.insertMovie3(commandMap.getMap(), request);
+		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+		
+		return mv;
+	}
+
 	@RequestMapping(value="/movieDetail.do")
 	public ModelAndView movieDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/movie/movieDetail");
@@ -137,9 +210,12 @@ public class AdminController {
 		Map<String,Object> map = movieService.selectMovieDetail(commandMap.getMap());
 		
 		mv.addObject("map", map.get("map"));
+		mv.addObject("map2", map.get("map2"));
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 		mv.addObject("movieDetail", map.get("movieDetail"));
+	
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+		System.out.println(" 상세보기 값 체크 ================" + commandMap.getMap());
 		
 		return mv;
 	}
@@ -161,10 +237,19 @@ public class AdminController {
 	public ModelAndView movieModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
 		
+		String content2 = (String)commandMap.get("MOVIE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("MOVIE_CONTENT", content);
+		
+		String subtitle2 = (String)commandMap.get("MOVIE_SUBTITLE");
+		String subtitle = subtitle2.replaceAll("\r\n", "<br>");
+		commandMap.put("MOVIE_SUBTITLE", subtitle);
+		
 		System.out.println("영화 수정 처리1 값 확인 =============: " + commandMap.getMap());
 		movieService.modifyMovie(commandMap.getMap(), request);
 
 		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+
 
 		return mv;
 	}
@@ -197,6 +282,37 @@ public class AdminController {
 		return mv;
 	}
 
+
+	@RequestMapping(value="/movieModifyForm3.do")
+	public ModelAndView movieModifyForm3(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/movie/movieModify3");
+		
+		System.out.println("스틸컷 수정 폼 값 확인 =============: " + commandMap.getMap());
+		Map<String, Object> map = movieService.selectMovieDetail(commandMap.getMap());
+	
+		mv.addObject("map", map.get("map"));
+		mv.addObject("map2", map.get("map2"));
+		mv.addObject("movieDetail", map.get("movieDetail"));
+		mv.addObject("fileList", map.get("fileList"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/movieModify3.do")
+	public ModelAndView movieModify3(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/movieDetail.do");
+		String MOVIE_NO = ((String)commandMap.get("MOVIE_NO"));
+//		int MOVIE_NO = Integer.parseInt((String)commandMap.get("MOVIE_NO"));
+		commandMap.getMap().put("MOVIE_NO", MOVIE_NO);
+		
+		movieService.modifyMovie3(commandMap.getMap(), request);
+		
+		mv.addObject("MOVIE_NO", commandMap.get("MOVIE_NO"));
+		
+		return mv;
+	}
+
+	
 	
 	@RequestMapping(value="/movieDelete.do")
 	public ModelAndView movieDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -213,7 +329,74 @@ public class AdminController {
 	
 	@RequestMapping(value = "noticeList.do")
 	public ModelAndView noticeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> noticeList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		CommandMap smap = new CommandMap();
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				smap.put("NOTICE_SUB", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
+			}else if(searchNum == 1){
+				smap.put("NOTICE_CONTENT", isSearch);
+				noticeList = noticeService.noticeSearch(smap.getMap());
+			}
+			
+			totalCount = noticeList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			noticeList = noticeList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("noticeList", noticeList);
+			mv.setViewName("/admin/notice/noticeList");
+			return mv;
+		}
+		
+		noticeList = noticeService.selectBoardList(commandMap.getMap());
+		
+		totalCount = noticeList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "noticeList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+		
+		noticeList = noticeList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("noticeList", noticeList);
+		mv.setViewName("/admin/notice/noticeList");
+		return mv;
+	}
+		
+/*	    ModelAndView mv = new ModelAndView();
 		
 		List<Map<String, Object>> noticeList = noticeService.selectBoardList(commandMap.getMap());
 		
@@ -245,7 +428,8 @@ public class AdminController {
 		mv.setViewName("/admin/notice/noticeList");
 		return mv;
 	}
-	
+*/
+		
 	@RequestMapping(value = "/noticeWriteForm.do")
 	public ModelAndView writeNoticeForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/notice/noticeWrite");
@@ -257,7 +441,11 @@ public class AdminController {
 	@RequestMapping(value = "/noticeWrite.do")
 	public ModelAndView writeNotice(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/noticeList.do");
-
+		
+		String content2 = (String)commandMap.get("NOTICE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("NOTICE_CONTENT", content);
+		System.out.println(" 글쓰기 페이지 넘기는값 확인 : =============== " + commandMap.getMap());
 		noticeService.insertBoard(commandMap.getMap());
 
 		return mv;
@@ -271,6 +459,7 @@ public class AdminController {
 		System.out.println("상세보기 페이지 넘기는값 확인 : " + commandMap.getMap());
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		
+		
 		mv.addObject("map", map);
 		mv.addObject("currentPage", commandMap.get("currentPage"));
 		return mv;
@@ -279,7 +468,7 @@ public class AdminController {
 	@RequestMapping(value = "/noticeModifyForm.do")
 	public ModelAndView modifyNoticeForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/notice/noticeModify");
-
+		
 		Map<String, Object> map = noticeService.selectBoardDetail(commandMap.getMap());
 		mv.addObject("map", map);
 
@@ -290,7 +479,11 @@ public class AdminController {
 	@RequestMapping(value = "/noticeModify.do")
 	public ModelAndView modifyNotice(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/noticeDetail.do");
-
+		
+		String content2 = (String)commandMap.get("NOTICE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("NOTICE_CONTENT", content);
+		
 		noticeService.updateBoard(commandMap.getMap());
 
 		mv.addObject("NOTICE_NO", commandMap.get("NOTICE_NO"));
@@ -309,7 +502,76 @@ public class AdminController {
 	
 	@RequestMapping(value = "/faqList.do")
 	public ModelAndView faqList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> faqList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		CommandMap smap = new CommandMap();
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				smap.put("FAQ_SUB", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
+			}else if(searchNum == 1){
+				smap.put("FAQ_CONTENT", isSearch);
+				faqList = faqService.faqSearch(smap.getMap());
+			}
+			
+			totalCount = faqList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "faqList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			faqList = faqList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("faqList", faqList);
+			mv.setViewName("/admin/faq/faqList");
+			return mv;
+		}
+		
+		faqList = faqService.selectFaqList(commandMap.getMap());
+		
+		totalCount = faqList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "faqList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+		
+		faqList = faqList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("faqList", faqList);
+		mv.setViewName("/admin/faq/faqList");
+		return mv;
+	}		
+		
+		
+		
+/*		ModelAndView mv = new ModelAndView();
 
 		List<Map<String, Object>> faqList = faqService.selectFaqList(commandMap.getMap());
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -340,7 +602,7 @@ public class AdminController {
 		mv.setViewName("/admin/faq/faqList");
 		return mv;
 	}
-	
+*/	
 	@RequestMapping(value = "/faqWriteForm.do")
 	public ModelAndView faqWriteForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/faq/faqWrite");
@@ -353,11 +615,15 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/faqList.do");
 		String faq_type = request.getParameter("FAQ_TYPE");
 		String faq_sub = request.getParameter("FAQ_SUB");
-		String faq_content = request.getParameter("FAQ_CONTENT");
-
+		
+		String content2 = (String)commandMap.get("FAQ_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		
+		commandMap.put("FAQ_CONTENT", content);
+		
 		commandMap.put("FAQ_TYPE", faq_type);
 		commandMap.put("FAQ_SUB", faq_sub);
-		commandMap.put("FAQ_CONTENT", faq_content);
+		
 
 		faqService.insertFaq(commandMap.getMap());
 
@@ -388,7 +654,12 @@ public class AdminController {
 	@RequestMapping(value = "/faqModify.do")
 	public ModelAndView faqModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/faqDetail.do");
-
+		
+		String content2 = (String)commandMap.get("FAQ_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		
+		commandMap.put("FAQ_CONTENT", content);
+		
 		faqService.updateFaq(commandMap.getMap());
 		mv.addObject("FAQ_NO", commandMap.get("FAQ_NO"));
 
@@ -406,7 +677,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/memberList.do")
 	public ModelAndView memberList(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		
 		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
 			currentPage = 1;
@@ -420,15 +691,20 @@ public class AdminController {
 		
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				memberList = adminService.memberSearch0(isSearch);
+				smap.put("MEMBER_ID", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
 			}else if(searchNum == 1){
-				memberList = adminService.memberSearch1(isSearch);
-			}else{
-				memberList = adminService.memberSearch2(isSearch);
+				smap.put("MEMBER_NAME", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("MEMBER_RANK", isSearch);
+				memberList = adminService.memberSearch(smap.getMap());
 			}
 			
 			totalCount = memberList.size();
@@ -442,11 +718,11 @@ public class AdminController {
 			}
 			
 			memberList = memberList.subList(paging.getStartCount(), lastCount);
-			mav.addObject("currentPage", currentPage);
-			mav.addObject("pagingHtml", pagingHtml);
-			mav.addObject("memberList", memberList);
-			mav.setViewName("/admin/member/memberList");
-			return mav;
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("memberList", memberList);
+			mv.setViewName("/admin/member/memberList");
+			return mv;
 		}
 		
 		memberList = adminService.selectMemberList(commandMap.getMap());
@@ -463,13 +739,25 @@ public class AdminController {
 		
 		memberList = memberList.subList(paging.getStartCount(), lastCount);
 		
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("pagingHtml", pagingHtml);
-		mav.addObject("memberList", memberList);
-		mav.setViewName("/admin/member/memberList");
-		return mav;
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("memberList", memberList);
+		mv.setViewName("/admin/member/memberList");
+		return mv;
 	}
 	
+	@RequestMapping(value="/memberDetail.do")
+	public ModelAndView memberDetail(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/member/memberDetail");
+		
+		Map<String,Object> map = adminService.selectMemberDetail(commandMap.getMap());
+		
+		mv.addObject("map", map.get("map"));
+		mv.addObject("currentPage", commandMap.get("currentPage"));
+		mv.addObject("MEMBER_NO", commandMap.get("MEMBER_NO"));
+		
+		return mv;
+	}
 	@RequestMapping(value = "/memberDelete.do")
 	public ModelAndView memberDelete(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/admin/memberList.do");
@@ -483,11 +771,11 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/qna/adminInquiryList.do")
+	@RequestMapping(value = "/qnaList.do")
 	public ModelAndView inquiryList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
-		List<Map<String, Object>> Qnalist = qnaService.selectQnaList(commandMap.getMap());
+		List<Map<String, Object>> qnaList = qnaService.selectQnaList(commandMap.getMap());
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -495,48 +783,53 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		totalCount = Qnalist.size();
+		totalCount = qnaList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminInquiryList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "qnaList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
-		// System.out.println(paging.getEndCount());
-		// System.out.println(totalCount);
+
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}
 
-		Qnalist = Qnalist.subList(paging.getStartCount(), lastCount);
+		qnaList = qnaList.subList(paging.getStartCount(), lastCount);
 
-		mv.addObject("Qnalist", Qnalist);
-		mv.addObject("list", Qnalist);
+		mv.addObject("qnaList", qnaList);
+		mv.addObject("list", qnaList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/qna/inquiryList");
+		mv.setViewName("/admin/qna/qnaList");
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryWriteForm.do")
+	@RequestMapping(value = "/qnaWriteForm.do")
 	public ModelAndView writeInquiryForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("qna/inquiryWriteForm");
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaWrite");
 
 		return mv;
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryWrite.do")
+	@RequestMapping(value = "/qnaWrite.do")
 	public ModelAndView writeInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/qnaList.do");
+		
+		String content2 = (String)commandMap.get("QNA_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		
+		commandMap.put("QNA_CONTENT", content);
+		
 		qnaService.insertQna(commandMap.getMap(), request);
 		return mv;
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryDetail.do")
+	@RequestMapping(value = "/qnaDetail.do")
 	public ModelAndView inquiryDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaDetail");
 
 		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
 
@@ -554,9 +847,9 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryModifyForm.do")
+	@RequestMapping(value = "qnaModifyForm.do")
 	public ModelAndView modifyInquiryForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/qna/inquiryModify");
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaModify");
 
 		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
 
@@ -575,13 +868,16 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryModify.do")
+	@RequestMapping(value = "/qnaModify.do")
 	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/qnaList.do");
+		
+		String content2 = (String)commandMap.get("QNA_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("QNA_CONTENT", content);
 		
 		qnaService.updateQna(commandMap.getMap(), request);
-		
-		System.out.println("혜쮸꼰듀듀듀듀듀듀듀듀" + commandMap.getMap().size());
+	
 		System.out.println(commandMap.get("QNA_ORGNAME"));
 		System.out.println(commandMap.get("QNA_SUB"));
 		System.out.println(commandMap.get("QNA_NO"));
@@ -591,40 +887,219 @@ public class AdminController {
 	}
 
 
-	@RequestMapping(value = "/qna/adminInquiryDelete.do")
+	@RequestMapping(value = "/qnaDelete.do")
 	public ModelAndView deleteInquiry(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/admin/qnaList.do");
 		qnaService.deleteQna(commandMap.getMap());
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
+	@RequestMapping(value = "/qnaReplyForm.do")
 	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
-		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
-		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
+//		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaReply");
 
 		Map<String, Object> map = new HashMap();
-		System.out.println("혜쮸꼰뜌" + commandMap.get("QNA_NOM"));
+
 		map.put("QNA_NOM", commandMap.get("QNA_NOM"));
+		map.put("QNA_SUB", commandMap.get("QNA_SUB"));
 		mv.addObject("map", map);
-		mv.addObject("map", map1);
 
 		return mv;
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryReply.do")
+	@RequestMapping(value = "/qnaReply.do")
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
-
+		ModelAndView mv = new ModelAndView("redirect:/admin/qnaList.do");
+		
+		System.out.println("답변 달기 테스트 2: " + commandMap.getMap());
+		
 		Map<String, Object> map = new HashMap();
+		
+		String content2 = (String)commandMap.get("QNA_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("QNA_CONTENT", content);
+		
 		map.put("REF", commandMap.get("REF"));
-		System.out.println("우앙은개뿔ㅎㅎ" + commandMap.get("REF"));
 		commandMap.put("RE_STEP", 1);
 		commandMap.put("RE_LEVEL", 1);
 		qnaService.replyQna(commandMap.getMap());
 		return mv;
 	}
 
+	@RequestMapping(value="/storeList.do")
+	public ModelAndView storeList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")){
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Map<String, Object>> storeList = null;
+		String isSearch  = null;
+		int searchNum = 0;
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null){
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0){
+				storeList = storeService.storeSearch0(isSearch);			
+			}
+			
+			totalCount = storeList.size();
+			paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "storeList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(paging.getEndCount() < totalCount){
+				lastCount = paging.getEndCount() + 1;
+			}
+			
+			storeList = storeList.subList(paging.getStartCount(), lastCount);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("storeList", storeList);
+			mv.setViewName("/admin/store/storeList");
+			return mv;
+		}
+		
+		storeList = storeService.selectStoreList(commandMap.getMap());
+		
+		totalCount = storeList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "storeList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount){
+			lastCount = paging.getEndCount() + 1;
+		}
+		
+		storeList = storeList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("storeList", storeList);
+		mv.setViewName("/admin/store/storeList");
+		return mv;
+	}
+/*
+		ModelAndView mv = new ModelAndView();
+		
+		List<Map<String, Object>> storeList = storeService.selectStoreList(commandMap.getMap());
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else{
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		totalCount = storeList.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "storeList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+	
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		storeList = storeList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("storeList", storeList);
+		mv.addObject("list", storeList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("admin/store/storeList");
+		return mv;
+	}
+*/
+	
+	@RequestMapping(value="/storeWriteForm.do")
+	public ModelAndView storeWriteForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/store/storeWrite");
+		System.out.println(" 스토어 등록 폼 값 체크 ================" + commandMap.getMap());
+		return mv;
+	}
+	
+	@RequestMapping(value="/storeWrite.do")
+	public ModelAndView storeWrtie(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/storeList.do");
+		System.out.println(" 스토어 등록 처리 값 체크 ================" + commandMap.getMap());
+		
+		String content2 = (String)commandMap.get("STORE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("STORE_CONTENT", content);
+		
+//		int STORE_NO = Integer.parseInt((String)commandMap.get("STORE_NO"));
+//		commandMap.getMap().put("STORE_NO", STORE_NO);
+		storeService.insertStore(commandMap.getMap(), request);
+//		mv.addObject("STORE_NO", commandMap.get("STORE_NO"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/storeDetail.do")
+	public ModelAndView storeDetail(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/store/storeDetail");
+		System.out.println(" 스토어 디테일 페이지 값 체크 ================" + commandMap.getMap());
+		Map<String,Object> map = storeService.selectStoreDetail(commandMap.getMap());
+		
+		mv.addObject("map", map.get("map"));
+		mv.addObject("currentPage", commandMap.get("currentPage"));
+		mv.addObject("storeDetail", map.get("storeDetail"));
+		mv.addObject("STORE_NO", commandMap.get("STORE_NO"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/storeModifyForm.do")
+	public ModelAndView storeModifyForm(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/store/storeModify");
+		
+		Map<String, Object> map = storeService.selectStoreDetail(commandMap.getMap());
+
+		mv.addObject("map", map.get("map"));
+		mv.addObject("storeDetail", map.get("storeDetail"));
+		mv.addObject("fileList", map.get("fileList"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/storeModify.do")
+	public ModelAndView storeModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/admin/storeDetail.do");
+		
+		String content2 = (String)commandMap.get("STORE_CONTENT");
+		String content = content2.replaceAll("\r\n", "<br>");
+		commandMap.put("STORE_CONTENT", content);
+		
+		storeService.modifyStore(commandMap.getMap(), request);
+		System.out.println(" 스토어 수정 값 체크 ================" + commandMap.getMap());
+		mv.addObject("STORE_NO", commandMap.get("STORE_NO"));
+
+		return mv;
+	}
+	
+	@RequestMapping(value="/storeDelete.do")
+	public ModelAndView storeDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
+		ModelAndView mv = new ModelAndView("redirect:/admin/storeList.do");
+		
+		storeService.deleteStore(commandMap.getMap(), request);
+		
+		mv.addObject("STORE_NO", commandMap.get("STORE_NO"));
+		
+		return mv;
+	}
 }

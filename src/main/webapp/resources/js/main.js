@@ -153,6 +153,7 @@
                 }
             });
         });
+        $('#allmovie').trigger("click");
     });
 
     var isotopeButton = $('.filter-tope-group button');
@@ -163,9 +164,11 @@
                 $(isotopeButton[i]).removeClass('how-active1');
             }
 
-            $(this).addClass('how-active1');
+            $(this).addClass('how-active1');   
+               
         });
-    });
+    })
+    
 
     /*==================================================================
     [ Filter / Search product ]*/
@@ -250,6 +253,10 @@
             var index = item.index(this);
             rated = index;
             $(input).val(index+1);
+            // 여기부터 중원이가 추가함 
+            // alert(index+1);
+            $("#rating_value").attr("value",index+1);
+            // 여기까지 중원이가 추가함
         });
 
         $(this).on('mouseleave', function(){
@@ -265,6 +272,54 @@
             }
         });
     });
+    /*==================================================================*/
+    $(document).bind('ready ajaxComplete', function star(){
+    	$('.wrap-rating').each(function(){
+            var item = $(this).find('.item-rating');
+            var rated = -1;
+            var input = $(this).find('input');
+            $(input).val(0);
+
+            $(item).on('mouseenter', function(){
+                var index = item.index(this);
+                var i = 0;
+                for(i=0; i<=index; i++) {
+                    $(item[i]).removeClass('zmdi-star-outline');
+                    $(item[i]).addClass('zmdi-star');
+                }
+
+                for(var j=i; j<item.length; j++) {
+                    $(item[j]).addClass('zmdi-star-outline');
+                    $(item[j]).removeClass('zmdi-star');
+                }
+            });
+
+            $(item).on('click', function(){
+                var index = item.index(this);
+                rated = index;
+                $(input).val(index+1);
+                // 여기부터 중원이가 추가함 
+                // alert(index+1);
+                $("#rating_value").attr("value",index+1);
+                // 여기까지 중원이가 추가함
+            });
+
+            $(this).on('mouseleave', function(){
+                var i = 0;
+                for(i=0; i<=rated; i++) {
+                    $(item[i]).removeClass('zmdi-star-outline');
+                    $(item[i]).addClass('zmdi-star');
+                }
+
+                for(var j=i; j<item.length; j++) {
+                    $(item[j]).addClass('zmdi-star-outline');
+                    $(item[j]).removeClass('zmdi-star');
+                }
+            })
+        })
+       });
+    
+    
     
    
     /*==================================================================
@@ -275,12 +330,28 @@
         // 중원이가 추가함
         $("body").addClass("no-scrolling");
     });
-
+    
     $('.js-hide-modal1').on('click',function(){
         $('.js-modal1').removeClass('show-modal1');
         $("body").removeClass("no-scrolling");
     });
-
+    
+    
+    $(document).bind('ready ajaxComplete', function show_modal1(){
+        $('.js-show-modal1').on('click',function(e){
+            e.preventDefault();
+            $('.js-modal1').addClass('show-modal1');
+            // 중원이가 추가함
+            $("body").addClass("no-scrolling");
+        })
+    	});
+    
+    $(document).bind('ready ajaxComplete', function hide_modal1(){
+    $('.js-hide-modal1').on('click',function(){
+        $('.js-modal1').removeClass('show-modal1');
+        $("body").removeClass("no-scrolling");
+    })
+    });
 
 /*==================================================================
 [ Show modal2 ] 로그인 창 */

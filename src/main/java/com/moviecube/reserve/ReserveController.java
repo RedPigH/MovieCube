@@ -92,12 +92,21 @@ public class ReserveController {
 	public ModelAndView reserveMain(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reserve_main");
 		
+		
 		List<Map<String, Object>> alltimeList = timeService.selectAllTimeList(commandMap.getMap());
 		
 		List<Map<String, Object>> cinemaList =  cinemaService.selectCinemaList(commandMap.getMap());
 		
 		List<Map<String, Object>> movieList = movieService.dupMovieList(commandMap.getMap());
-	      
+		
+		if(request.getParameter("CheckedBoxList") != null) {
+			String[] selectedMovieList = request.getParameter("CheckedBoxList").split(",");
+			for(int i=0; i < selectedMovieList.length; i++) {
+				System.out.println(selectedMovieList[i]);
+			}
+			mv.addObject("selectedMovieList", selectedMovieList);
+		}
+		
 	    mv.addObject("movieList", movieList);
 		mv.addObject("alltimeList", alltimeList);
 		mv.addObject("cinemaList", cinemaList);
@@ -139,13 +148,23 @@ public class ReserveController {
 		
 		CommandMap map = new CommandMap();
 		
-		map.put("TIME_NO", commandMap.get("time_no"));
+		System.out.println(commandMap.get("TIME_NO"));
+		System.out.println(commandMap.get("SELECT_SEATS"));
+		System.out.println(commandMap.get("TOTAL_PRICE"));
+		
+		map.put("TIME_NO", commandMap.get("TIME_NO"));
 		
 		Map<String,Object> timemap = timeService.timeDetail(map.getMap());
 		
+		String timeDate = timemap.get("TIME_DATE").toString();
+		timeDate = timeDate.substring(0, 10);
+	
+		
+		mv.setViewName("jsonView");
+		mv.addObject("timeDate", timeDate);
+		mv.addObject("selectSeats",commandMap.get("SELECT_SEATS"));
+		mv.addObject("totalprice", commandMap.get("TOTAL_PRICE"));
 		mv.addObject("time", timemap);
-		mv.addObject("selectSeats",commandMap.get("selectSeats"));
-		mv.addObject("totalprice", commandMap.get("totalprice"));
 		
 		return mv;
 	}

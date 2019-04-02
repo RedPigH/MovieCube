@@ -36,5 +36,10 @@ public class ScreenDAO extends AbstractDAO {
 	public void deleteScreen(Map<String, Object> map) throws Exception {
 		delete("screen.deleteScreen", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> screenSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("screen.screenSearch", map);
+	}
 
 }

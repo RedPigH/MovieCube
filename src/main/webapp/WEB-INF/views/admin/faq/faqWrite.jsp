@@ -23,6 +23,9 @@
 	<div class="logo">
 	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Register</a></h1>
 	</div>
+	<div class="logo" style="float: right;">
+			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
+	</div>
 </div>
 
 <div class="admin_grp">
@@ -33,6 +36,8 @@
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li class="on"><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
@@ -59,7 +64,7 @@
 									<option value="영화관">영화관</option>
 									<option value="상영관">상영관</option>
 									<option value="영화예매">영화예매</option>
-									<option value="멤버쉽">멤버쉽</option>
+							<!-- 	<option value="멤버쉽">멤버쉽</option> -->
 									<option value="기타">기타</option>
 								</select>
 							</td>

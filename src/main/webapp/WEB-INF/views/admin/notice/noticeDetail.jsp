@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <% String cp = request.getContextPath(); %>
+<%  pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -33,6 +36,9 @@
 	<div class="logo">
 	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Notice Detail </a></h1>
 	</div>
+	<div class="logo" style="float: right;">
+			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
+	</div>
 </div>
 
 <div class="admin_grp">
@@ -43,6 +49,8 @@
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
@@ -77,6 +85,7 @@
 						<tr>
 							<th scope="row">글내용</th>
 							<td><pre>${map.NOTICE_CONTENT}</pre></td>
+							<%-- <td><pre>${fn:replace(map.NOTICE_CONTENT,cn,br)}</pre></td> --%>
 						</tr>
 					</tbody>
 				</table>

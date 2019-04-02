@@ -22,6 +22,9 @@
 	<div class="logo">
 	<h1><a href="<%=cp %>/admin/movieList.do">MovieCube Administrator - Movie Register</a></h1>
 	</div>
+	<div class="logo" style="float: right;">
+			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
+	</div>
 </div>
 
 <div class="admin_grp">
@@ -32,6 +35,8 @@
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
@@ -91,7 +96,7 @@
 								
 							</td>
 						</tr>
-						<!-- 
+						
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -99,7 +104,7 @@
 								<font color="red"><span class="ibk"></span></font>
 							</td>
 						</tr>
-						 -->
+						
 						<tr>
 							<th scope="row">타입</th>
 							<td>
@@ -120,28 +125,16 @@
 									<option value="15">15</option>
 									<option value="19">19</option>
 								</select>							
-							<!-- 
-								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" />
-								<font color="red"></font>
-								 -->
 							</td>
 						</tr>
 						
 						<tr>
-							<th scope="row">동영상 URL</th>
+							<th scope="row">서브 타이틀</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_URL" name="MOVIE_URL" />
+								<input type="text" class="txt w350" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE"/>
 								<font color="red"></font>
 							</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">별점</th>
-							<td>
-								<input type="text" class="txt w200" id="MOVIE_GRADE" name="MOVIE_GRADE"/>
-								<font color="red"></font>
-							</td>
-						</tr>
+						</tr> 
 												
 						<tr>
 							<th scope="row">줄거리</th>

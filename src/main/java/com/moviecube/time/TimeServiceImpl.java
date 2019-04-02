@@ -54,4 +54,8 @@ public class TimeServiceImpl implements TimeService {
 		timeDAO.deleteTime(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> timeSearch(Map<String, Object> map) throws Exception {
+		return timeDAO.timeSearch(map);
+	}
 }

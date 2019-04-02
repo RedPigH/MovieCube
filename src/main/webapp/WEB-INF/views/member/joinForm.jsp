@@ -58,9 +58,9 @@ function aaaa(){
 </script>
 </head>
 
+<body class="animsition">
 <%@ include file="/WEB-INF/views/main/body_header.jspf"%>
-
-<body>
+<%@ include file="../member/loginForm.jspf"%>
 
 	<div class="container" style="margin-top:150px;">
 		<!-- 좌우측의 공간 확보 -->
@@ -420,14 +420,14 @@ function aaaa(){
 						contentType : "application/json; charset=UTF-8",
 						success : function(data){
 							if($('#id').val()==""){
-								alert("아이디를 입력해주세요.");
+								Swal.fire("","아이디를 입력해주세요.","warning");
 							} else if(data.count > 0) {
-								alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+								Swal.fire("","아이디가 존재합니다. 다른 아이디를 입력해주세요.","warning");
 								$("#divId").addClass("has-error")
 			                    $("#divId").removeClass("has-success")
 			                    $("#id").focus();
 							} else {
-								alert("사용가능한 아이디입니다.");
+								Swal.fire("","사용가능한 아이디입니다.","info");
 								$("#divId").addClass("has-error")
 			                    $("#divId").removeClass("has-success")
 			                    $("#password").focus();
@@ -436,7 +436,7 @@ function aaaa(){
 							}
 						},
 						error : function(error){
-							alert("error : "+error);
+							Swal.fire("error : "+error);
 						}
 					});
                 });
@@ -624,7 +624,7 @@ function aaaa(){
             });
             
             function join(){
-            	alert("회원가입을 축하합니다.")
+            	Swal.fire("","회원가입을 축하합니다.","success")
             	var joinform = document.getElementById("joinForm");
             	joinform.action="/moviecube/member/join.do";
             	joinform.submit();

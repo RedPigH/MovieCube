@@ -13,7 +13,6 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <link rel="stylesheet" type="text/css" href="<%= cp %>/resources/css/admin_import.css" />
 <script src="<%= cp %>/resources/js/jquery-1.10.2.min.js"></script>
-<%-- <script src="<%= cp %>/resources/js/common.js"></script> --%>
 <script src="<%= cp %>/resources/js/admin_common.js"></script>
 </head>
 
@@ -22,6 +21,9 @@
 <div class="admin">
 	<div class="logo">
 	<h1><a href="<%=cp %>/admin/noticeList.do">MovieCube Administrator - Notice List</a></h1>
+	</div>
+	<div class="logo" style="float: right;">
+			<a href="<%=cp%>/main.do" class="toMain" style="font-size: 15px;">메인으로</a>
 	</div>
 </div>
 
@@ -33,6 +35,8 @@
 			<li><a href="<%=cp%>/admin/screenList.do">상영관</a></li>
 			<li><a href="<%=cp%>/admin/insertSeatForm.do">상영관 좌석</a></li>
 			<li><a href="<%=cp%>/admin/timeList.do">영화시간표</a></li>
+			<li><a href="<%=cp%>/admin/storeList.do">STORE</a>
+			<li><a href="<%=cp%>/admin/eventList.do">EVENT</a>
 			<li class="on"><a href="<%=cp%>/admin/noticeList.do">공지사항</a></li>
 			<li><a href="<%=cp%>/admin/faqList.do">FAQ</a></li>
 			<li><a href="<%=cp%>/admin/qnaList.do">Q&amp;A</a></li>
@@ -47,15 +51,15 @@
 				<caption>번호,제목,글쓴이,날짜,조회를 나타내는 공지사항 표</caption>
 				<colgroup>
 					<col style="width:10%;" />
-					<col />
 					<col style="width:70%;" />
-					<col style="width:20%;" />
+					<col style="width:10%;" />
+					<col style="width:10%;" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
-						<th scope="col"> 
-						<th scope="col">제목</th>
+						<th scope="col">제목
+						<th scope="col">작성자</th>
 						<th scope="col">날짜</th>
 					</tr>
 				</thead>
@@ -66,9 +70,9 @@
             			<c:forEach items="${noticeList}" var="row">
 						<tr>
 							<td>${row.NOTICE_NO}</td>
-							<td></td>
 							<td class="subject"><a href="#this" name="NOTICE_SUB">${row.NOTICE_SUB}
 							<input type="hidden" id="NOTICE_NO" value="${row.NOTICE_NO}"/></a></td>
+							<td>${row.NOTICE_ID}</td>
 							<td><c:set var="TextValue" value="${row.NOTICE_REGDATE}"/>
 									${fn:substring(TextValue,0,10)}</td>
 						</tr>
@@ -83,7 +87,7 @@
 		</div>
 		<div class="btn_type_03">
 			<a href="#this" class="btn btnC_01 btnP_04" id="write">
-				<span>글쓰기</span>
+				<span>공지사항 등록하기</span>
 			</a>
 		</div>
 				

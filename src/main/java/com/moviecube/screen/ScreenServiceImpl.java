@@ -48,5 +48,10 @@ public class ScreenServiceImpl implements ScreenService {
 
 		screenDAO.deleteScreen(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> screenSearch(Map<String, Object> map) throws Exception {
+		return screenDAO.screenSearch(map);
+	}
 
 }

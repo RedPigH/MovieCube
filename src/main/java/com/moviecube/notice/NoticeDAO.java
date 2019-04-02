@@ -36,10 +36,9 @@ public class NoticeDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 
 	}
-
-	/*
-	 * @SuppressWarnings("unchecked") public List<Map<String,Object>>
-	 * selectNoticeList(Map<String,Object> map) throws Exception{ return
-	 * (List<Map<String,Object>>)selectPagingList("notice.selectNoticeList",map); }
-	 */
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> noticeSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("notice.noticeSearch", map);
+	}
 }

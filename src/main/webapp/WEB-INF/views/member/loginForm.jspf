@@ -46,7 +46,7 @@
 			<div class="row" style="margin: 0 0;">
 
 				<form name="lgfm" id="lgfm" method="post"
-					style="border-top: 1px solid #f1f1f1; width: -webkit-fill-available;">
+					style="border-top: 1px solid #f1f1f1; width: -webkit-fill-available; padding-bottom: 20px;">
 
 					<div class="col-sm-10 col-md-8 col-lg-8 m-lr-auto p-t-30">
 						<div class="p-b-30 m-lr-15-sm">
@@ -82,11 +82,6 @@
 						</div>
 					</div>
 				</form>
-
-
-
-
-
 			</div>
 		</div>
 	</div>

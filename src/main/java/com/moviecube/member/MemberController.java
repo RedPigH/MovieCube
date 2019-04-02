@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -84,8 +85,11 @@ public class MemberController {
 	  
 	  //·Î±×ÀÎ
 	  @RequestMapping(value="/member/login.do")
-	  public ModelAndView login(CommandMap commandMap, HttpSession session) throws Exception{
+	  public ModelAndView login(CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception{
 		  ModelAndView mv = new ModelAndView();
+		  
+		  String referer = request.getHeader("Referer");
+		  
 		  Map <String, Object> user = new HashMap<String, Object>();
 		  
 		  user = memberService.checkUserIdAndPassword(commandMap.getMap());
@@ -100,7 +104,7 @@ public class MemberController {
 				List<Map<String, Object>> wish = wishlistService.selectWishList(map.getMap());
 				
 				mv.addObject("WishList", wish);
-				mv.setViewName("redirect:/main.do");
+				mv.setViewName("redirect:" + referer);
 				
 			  return mv;
 		  } 
@@ -115,6 +119,7 @@ public class MemberController {
 	  public ModelAndView logout(HttpSession session) {
 		  ModelAndView mv = new ModelAndView("redirect:/main.do");
 		  session.setAttribute("userLoginInfo", null);
+		  session.setAttribute("WishList", null);
 		  return mv;
 	  }
 	  

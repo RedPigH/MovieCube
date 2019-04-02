@@ -75,4 +75,24 @@
 			WHERE SCREEN_NO = #{SCREEN_NO}
 		]]>
 	</delete>
+	
+	<!-- 회원 검색 -->
+	<select id="screenSearch" resultType="hashmap" parameterType="hashmap">
+		SELECT s.SCREEN_NO, s.SCREEN_NAME, s.SCREEN_TYPE, c.CINEMA_NAME  
+			FROM SCREEN s, CINEMA c
+			WHERE s.CINEMA_NO = c.CINEMA_NO 
+			<choose>
+				<when test = "CINEMA_NAME != NULL">
+					AND c.CINEMA_NAME like '%'||#{CINEMA_NAME}||'%'
+				</when>
+				<when test = "SCREEN_TYPE != NULL">
+					AND s.SCREEN_TYPE like '%'||#{SCREEN_TYPE}||'%'
+				</when>
+				<when test = "SCREEN_NAME != NULL">
+					AND s.SCREEN_NAME like '%'||#{SCREEN_NAME}||'%'
+				</when>
+			</choose>
+				ORDER BY SCREEN_NO ASC
+	</select>
+	
 </mapper>

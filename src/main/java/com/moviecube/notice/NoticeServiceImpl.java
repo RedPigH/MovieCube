@@ -51,10 +51,10 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.deleteBoard(map);
 
 	}
+	
+	@Override
+	public List<Map<String, Object>> noticeSearch(Map<String, Object> map) throws Exception {
+		return noticeDAO.noticeSearch(map);
+	}
 
-	/*
-	 * @Override public List<Map<String, Object>> selectNoticeList(Map<String,
-	 * Object> map) throws Exception { // TODO Auto-generated method stub return
-	 * noticeDAO.selectNoticeList(map);
-	 */
 }

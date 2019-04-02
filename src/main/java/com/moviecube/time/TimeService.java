@@ -19,4 +19,6 @@ public interface TimeService {
 
 	void deleteTime(Map<String, Object> map) throws Exception;
 
+	List<Map<String, Object>> timeSearch(Map<String, Object> map) throws Exception;
+
 }

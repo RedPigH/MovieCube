@@ -19,5 +19,10 @@ public class ReserveDAO extends AbstractDAO {
 		
 		delete("reservation.deleteReservation", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> MyReservation(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("reservation.MyReservation", map);
+	}
 
 }

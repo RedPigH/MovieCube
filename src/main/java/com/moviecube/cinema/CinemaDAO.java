@@ -14,9 +14,9 @@ public class CinemaDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectCinemaList(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("cinema.selectCinemaList", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map) throws Exception{
+	public List<Map<String, Object>> selectCinemaScreen(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("cinema.selectCinemaScreen", map);
 	}
 
@@ -37,10 +37,13 @@ public class CinemaDAO extends AbstractDAO {
 		delete("cinema.deleteCinema", map);
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectOneCinema(Map<String, Object> map) {
-		return(Map<String, Object>) selectOne("cinema.selectOneCinema", map);
+		return (Map<String, Object>) selectOne("cinema.selectOneCinema", map);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> cinemaSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectList("cinema.cinemaSearch", map);
+	}
 }

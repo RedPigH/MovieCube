@@ -73,4 +73,9 @@ public class SeatServiceImpl implements SeatService {
 	public void deleteSeat(Map<String, Object> map) throws Exception {
 		seatDAO.deleteSeat(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> seatSearch0(String map) throws Exception {
+		return seatDAO.seatSearch0(map);
+	}
 }

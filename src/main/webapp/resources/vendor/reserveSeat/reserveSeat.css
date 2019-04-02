@@ -1,6 +1,5 @@
 /* Documentation Stylesheet */
 
-html,
 span,
 applet,
 object,
@@ -37,11 +36,9 @@ dl,
 dt,
 dd,
 ol,
-ul,
 li,
 fieldset,
 form,
-label,
 legend,
 table,
 caption,
@@ -54,7 +51,6 @@ embed,
 figure,
 figcaption,
 footer,
-header,
 hgroup,
 menu,
 nav,
@@ -89,24 +85,13 @@ html {
 }
 
 
-/* Links */
-a {
-	outline: none;
-	color: #336699;
-	text-decoration: none;
-}
 
-a:hover {
-	color: #e00000;
-	text-decoration: none;
-}
 
 /* Text elements */
 p {
 	margin-bottom: 1.5em;
 }
 
-ul,
 ol {
 	margin: 0 0 1.5em 2em;
 }
@@ -153,6 +138,11 @@ dd {
 strong,
 b {
 	font-weight: bold;
+	color: #333;
+}
+
+strong.rating {
+	font-weight: light;
 	color: #333;
 }
 
@@ -343,10 +333,6 @@ tfoot th {
 	border-bottom: 1px solid #e5e5e5;
 }
 
-.header {
-	padding-bottom: 1.5em;
-}
-
 .alignright {
 	float:right
 }
@@ -360,6 +346,13 @@ p.tip {
 
 img {
 	width: auto;
+	max-width: 100%;
+	display: block;
+}
+
+img.event {
+	width: 700px;
+	height: 1100px;
 	max-width: 100%;
 	display: block;
 }

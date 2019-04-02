@@ -80,12 +80,13 @@
 	
 	<select id="selectOneTime" parameterType = "hashmap" resultType = "hashmap">
 		<![CDATA[
-			SELECT m.MOVIE_NO, m.MOVIE_NAME, c.CINEMA_NO, c.CINEMA_NAME, s.SCREEN_NO, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
-			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
+			SELECT m.MOVIE_NO, m.MOVIE_NAME, c.CINEMA_NO, c.CINEMA_NAME, s.SCREEN_NO, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO, f.POSTER_SAVNAME
+			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m, MC_MOVIE_FILE f
 			WHERE 
 			t.CINEMA_NO = c.CINEMA_NO AND 
 			t.SCREEN_NO = s.SCREEN_NO AND 
-			t.MOVIE_NO= m.MOVIE_NO AND
+			t.MOVIE_NO = m.MOVIE_NO AND
+			t.MOVIE_NO = f.MOVIE_NO AND
 			t.TIME_NO = #{TIME_NO}
 		]]>
 	</select>
@@ -146,6 +147,26 @@
 			WHERE TIME_NO = #{TIME_NO}
 		]]>
 	</delete>
-
-
+	
+	<!-- 타임 검색 -->
+	<select id="timeSearch" resultType="hashmap" parameterType="hashmap">
+		SELECT m.MOVIE_NAME, m.MOVIE_TYPE, c.CINEMA_NAME, s.SCREEN_NAME, t.TIME_DATE, t.START_TIME, t.END_TIME, t.TIME_NO
+			FROM TIME t, CINEMA c, SCREEN s, MC_MOVIE m
+			WHERE
+			t.CINEMA_NO = c.CINEMA_NO AND 
+			t.SCREEN_NO = s.SCREEN_NO AND 
+			t.MOVIE_NO= m.MOVIE_NO
+			<choose>
+				<when test = "MOVIE_NAME != NULL">
+					AND m.MOVIE_NAME like '%'||#{MOVIE_NAME}||'%'
+				</when>
+				<when test = "CINEMA_NAME != NULL">
+					AND c.CINEMA_NAME like '%'||#{CINEMA_NAME}||'%'
+				</when>
+				<when test = "SCREEN_NAME != NULL">
+					AND s.SCREEN_NAME like '%'||#{SCREEN_NAME}||'%'
+				</when>
+			</choose>
+			ORDER BY t.TIME_NO DESC
+	</select>
 </mapper>

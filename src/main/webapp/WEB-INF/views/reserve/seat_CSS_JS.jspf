@@ -41,6 +41,12 @@ $(document).ready(function() {
 											]
 										},
 										click : function() { //Click event
+											
+											if($('#counter').html() >= 4 && this.status() != 'selected'){
+												swal("","더 이상 좌석을 추가할 수 없습니다", "error");
+												return 'available';
+											}
+										
 											if (this.status() == 'available') { //optional seat
 												$('<li>' +(this.settings.row + 1)+'-'+this.settings.label+'</li>')
 														.attr('id', 'cart-item-'+ this.settings.id)
@@ -72,6 +78,10 @@ $(document).ready(function() {
 					sc.get(unableseatmap).status('unavailable');
 
 				});
+		
+
+				
+				
 //sum total money
 function recalculateTotal(sc) {
 	var total = 0;
