@@ -96,7 +96,7 @@
 								
 							</td>
 						</tr>
-						
+						<!-- 
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -104,7 +104,7 @@
 								<font color="red"><span class="ibk"></span></font>
 							</td>
 						</tr>
-						
+						 -->
 						<tr>
 							<th scope="row">타입</th>
 							<td>
@@ -125,16 +125,28 @@
 									<option value="15">15</option>
 									<option value="19">19</option>
 								</select>							
+							<!-- 
+								<input type="text" class="txt w200" id="MOVIE_AGE" name="MOVIE_AGE" />
+								<font color="red"></font>
+								 -->
 							</td>
 						</tr>
 						
 						<tr>
-							<th scope="row">서브 타이틀</th>
+							<th scope="row">동영상 URL</th>
 							<td>
-								<input type="text" class="txt w350" id="MOVIE_SUBTITLE" name="MOVIE_SUBTITLE"/>
+								<input type="text" class="txt w200" id="MOVIE_URL" name="MOVIE_URL" />
 								<font color="red"></font>
 							</td>
-						</tr> 
+						</tr>
+						
+						<tr>
+							<th scope="row">런타임</th>
+							<td>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME"/>
+								<font color="red"></font>
+							</td>
+						</tr>
 												
 						<tr>
 							<th scope="row">줄거리</th>
