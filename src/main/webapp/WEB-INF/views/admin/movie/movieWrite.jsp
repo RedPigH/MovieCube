@@ -96,7 +96,7 @@
 								
 							</td>
 						</tr>
-						<!-- 
+						
 						<tr>
 							<th scope="row">러닝타임</th>
 							<td>
@@ -104,7 +104,7 @@
 								<font color="red"><span class="ibk"></span></font>
 							</td>
 						</tr>
-						 -->
+						 
 						<tr>
 							<th scope="row">타입</th>
 							<td>
