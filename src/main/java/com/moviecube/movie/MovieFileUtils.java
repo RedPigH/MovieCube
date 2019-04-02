@@ -235,7 +235,7 @@ public class MovieFileUtils {
         List<Map<String,Object>> fileList3 = new ArrayList<Map<String,Object>>(); // 클라이언트에서 전송된 파일 정보를 담아서 반환을 해주는 List (다중파일전송)
         Map<String, Object> fileListMap3 = null;
                
-        int MOVIE_NO = (Integer)map.get("MOVIE_NO"); 
+        String MOVIE_NO = (String)map.get("MOVIE_NO");
          
         File file = new File(filePath); // 파일을 저장할 경로에 해당폴더가 없으면 폴더를 생성한다
         if(file.exists() == false){
