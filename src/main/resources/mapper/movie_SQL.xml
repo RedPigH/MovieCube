@@ -208,7 +208,7 @@
 	        MOVIE_ACTOR, 
 	        MOVIE_GENRE, 
 	        MOVIE_CONTENT, 
-	        MOVIE_GRADE,
+	        MOVIE_RUNTIME,
 		    MOVIE_AGE
 			)
 		values 
@@ -221,7 +221,7 @@
 			#{MOVIE_ACTOR},
 			#{MOVIE_GENRE},
 			#{MOVIE_CONTENT},
-			#{MOVIE_GRADE},
+			#{MOVIE_RUNTIME},
 			#{MOVIE_AGE}
 			)		 		  
 		]]>

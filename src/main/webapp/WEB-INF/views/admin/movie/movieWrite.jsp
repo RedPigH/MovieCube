@@ -141,9 +141,9 @@
 						</tr>
 						
 						<tr>
-							<th scope="row">별점</th>
+							<th scope="row">런타임</th>
 							<td>
-								<input type="text" class="txt w200" id="MOVIE_GRADE" name="MOVIE_GRADE"/>
+								<input type="text" class="txt w200" id="MOVIE_RUNTIME" name="MOVIE_RUNTIME"/>
 								<font color="red"></font>
 							</td>
 						</tr>
