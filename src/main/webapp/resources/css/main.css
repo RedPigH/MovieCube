@@ -2066,6 +2066,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .wrap-table-shopping-cart {
   overflow: auto;
+  border-top: 1px solid #e6e6e6;
   border-left: 1px solid #e6e6e6;
   border-right: 1px solid #e6e6e6;
 }
@@ -2078,16 +2079,16 @@ input.num-product::-webkit-inner-spin-button {
 
 
 .table-shopping-cart .column-1 {
-  width: 100px;
+  width: 10%;
 }
 
 .table-shopping-cart .column-2 {
-  width: 220px;
+  width: 70%;
   font-size: 15px;
 }
 
 .table-shopping-cart .column-3 {
-  width: 120px;
+  width: 20%;
   font-size: 16px;
 }
 
@@ -2104,31 +2105,37 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .table_row {
-  height: 140px;
+  height: 80px;
 }
 
 .table-shopping-cart .table_row td {
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 16px;
+  font-color: #999;
 }
 
 .table-shopping-cart .table_row td.column-1 {
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .table-shopping-cart .table_head th {
-  font-family: Poppins-Bold;
-  font-size: 13px;
+  font-family: MaplestoryBold;
+  font-size: 14px;
   color: #555;
   text-transform: uppercase;
   line-height: 1.6;
   padding-top: 15px;
   padding-bottom: 15px;
+  text-align: -webkit-center;
 }
 
 .table-shopping-cart td {
-  font-family: Poppins-Regular;
+  font-family: MaplestoryLight;
   color: #555;
   line-height: 1.6;
+  text-align: -webkit-center;
 }
 
 
