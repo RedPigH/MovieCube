@@ -58,9 +58,9 @@ function aaaa(){
 </script>
 </head>
 
+<body class="animsition">
 <%@ include file="/WEB-INF/views/main/body_header.jspf"%>
-
-<body>
+<%@ include file="../member/loginForm.jspf"%>
 
 	<div class="container" style="margin-top:150px;">
 		<!-- 좌우측의 공간 확보 -->
@@ -70,14 +70,12 @@ function aaaa(){
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<div class="mdt">
-							<h4 class="modal-title">알림</h4>
-						</div>
+						<h4 class="mtext-115 modal-title">알림</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
 					</div>
 					<div class="modal-body">
-						<p class="modal-contents"></p>
+						<p class="stext-112 modal-contents"></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -93,37 +91,37 @@ function aaaa(){
 		<div class="size-219 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" style="margin:auto;">
 		<form id="joinForm" role="form" method="post">
 			<div id="divId">
-				<label for="inputId" style="display: inline-block;" class="cl2 mtext-114 jointext">아이디</label>
+				<label for="inputId" style="display: inline-block;" class="cl2 mtext-114">아이디</label>
 				<input type="button" style="display: inline-block; position:float; right;" value="ID중복확인" id="checkId" class="flex-c-m stext-118 cl0 bg1 bor2 hov-btn1 p-lr-15 trans-04 pointer">
 				<div class="bor8 m-b-20 ">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyAlphabetAndNumber"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15 onlyAlphabetAndNumber"
 						id="id" name="MEMBER_ID" data-rule-required="true"
 						placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
 				</div>
 			</div>
 			
 			<div id="divPassword">
-				<label for="inputPassword" class="cl2 mtext-114 jointext">패스워드</label>
+				<label for="inputPassword" class="cl2 mtext-114">패스워드</label>
 				<div class="bor8 m-b-20 ">
-					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="password"
+					<input type="password" class="stext-111 cl8 plh3 size-129 p-lr-15" id="password"
 						name="MEMBER_PASSWD1" data-rule-required="true" placeholder="패스워드"
 						maxlength="30">
 				</div>
 			</div>
 			
 			<div id="divPasswordCheck">
-				<label for="inputPasswordCheck" class="cl2 mtext-114 jointext">패스워드
+				<label for="inputPasswordCheck" class="cl2 mtext-114">패스워드
 					확인</label>
 				<div class="bor8 m-b-20 ">
-					<input type="password" class="stext-111 cl8 plh3 size-111 p-lr-15" id="passwordCheck"
+					<input type="password" class="stext-111 cl8 plh3 size-129 p-lr-15" id="passwordCheck"
 						name="MEMBER_PASSWD2" data-rule-required="true"
 						placeholder="패스워드 확인" maxlength="30">
 				</div>
 			</div>
 			<div id="divName">
-				<label for="inputName" class="cl2 mtext-114 jointext">이름</label>
+				<label for="inputName" class="cl2 mtext-114">이름</label>
 				<div class="bor8 m-b-20 ">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyHangul" id="name"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15 onlyHangul" id="name"
 						name="MEMBER_NAME" data-rule-required="true"
 						placeholder="한글만 입력 가능합니다." maxlength="15">
 				</div>
@@ -131,25 +129,25 @@ function aaaa(){
 
 
 			<div id="divEmail">
-				<label for="inputEmail" class="cl2 mtext-114 jointext">이메일</label>
+				<label for="inputEmail" class="cl2 mtext-114">이메일</label>
 				<div class="bor8 m-b-20 ">
-					<input type="email" class="stext-111 cl8 plh3 size-111 p-lr-15" id="email"
+					<input type="email" class="stext-111 cl8 plh3 size-129 p-lr-15" id="email"
 						name="MEMBER_EMAIL" data-rule-required="true" placeholder="이메일"
 						maxlength="40">
 				</div>
 			</div>
 
 			<div id="divZipcode">
-				<label for="inputZipcode" class="cl2 mtext-114 jointext">주소</label>
+				<label for="inputZipcode" class="cl2 mtext-114">주소</label>
 				<div class="how-pos4-parent">
 						<input type="text" style="margin-bottom: 5px; display: inline-block;" class="bor8 stext-111 cl8 plh3 size-128 p-lr-15" id="zipcode" name="MEMBER_ZIPCODE" data-rule-required="true" placeholder="우편번호" maxlength="6">
-						<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block;" class="flex-c-m size-127 cl0 bg1 bor20 hov-btn1 p-lr-15 trans-04 pointer">
+						<input type="button" onclick="aaaa()"  value="우편번호 찾기" style="display: inline-block;" class="flex-c-m size-128 cl0 bg1 bor20 hov-btn1 p-lr-15 trans-04 pointer">
 				</div>
 			</div>
 
 			<div id="divAddress1">
 				<div class="bor8" style="margin-bottom: 5px;">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="address1"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15" id="address1"
 						name="MEMBER_ADDRESS1" data-rule-required="true" placeholder="주소"
 						maxlength="40">
 				</div>
@@ -157,7 +155,7 @@ function aaaa(){
 
 			<div id="divAddress2">
 				<div class="bor8" style="margin-bottom: 5px;">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="address2"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15" id="address2"
 						name="MEMBER_ADDRESS2" data-rule-required="true"
 						placeholder="상세주소" maxlength="40">
 				</div>
@@ -165,7 +163,7 @@ function aaaa(){
 
 			<div id="divExtra">
 				<div class="bor8 m-b-20 ">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15" id="extra"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15" id="extra"
 						data-rule-required="true" placeholder="참고항목" maxlength="40">
 				</div>
 			</div>
@@ -174,7 +172,7 @@ function aaaa(){
 				<label for="inputPhoneNumber" class="cl2 mtext-114 jointext">휴대폰
 					번호</label>
 				<div class="bor8 m-b-20 ">
-					<input type="tel" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumber" id="phoneNumber"
+					<input type="tel" class="stext-111 cl8 plh3 size-129 p-lr-15 onlyNumber" id="phoneNumber"
 						name="MEMBER_PHONE" data-rule-required="true"
 						placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
 				</div>
@@ -183,7 +181,7 @@ function aaaa(){
 			<div id="divAge">
 				<label for="inputAge" class="cl2 mtext-114 jointext">생일</label>
 				<div class="bor8 m-b-20 ">
-					<input type="text" class="stext-111 cl8 plh3 size-111 p-lr-15 onlyNumberSlash" id="age"
+					<input type="text" class="stext-111 cl8 plh3 size-129 p-lr-15 onlyNumberSlash" id="age"
 						name="MEMBER_AGE" data-rule-required="true"
 						placeholder="YYYY/MM/DD형식으로 작성해주세요." maxlength="10">
 				</div>
@@ -192,7 +190,7 @@ function aaaa(){
 			<div class="divSex">
 				<label for="inputSex" class="cl2 mtext-114 jointext">성별</label>
 				<div class="bor8 m-b-20 ">
-					<select class="stext-111 cl8 plh3 size-111 p-lr-15" id="gender">
+					<select class="stext-111 cl8 plh3 size-129 p-lr-15" id="gender">
 						<option value="M">남</option>
 						<option value="F">여</option>
 					</select>
@@ -204,11 +202,11 @@ function aaaa(){
 			<div class="divEmail">
 				<label for="inputEmailReceiveYn" class="cl2 mtext-114 jointext">이메일
 					수신여부</label>
-				<div class="col-lg-10">
-					<label class="radio-inline"> <input type="radio"
+				<div class="col-lg-10 m-tb-15">
+					<label class="radio-inline" style="display: inline-block;"> <input type="radio"
 						id="emailReceiveYn" name="emailReceiveYn" value="Y" checked>
 						동의합니다.
-					</label> <label class="radio-inline"> <input type="radio"
+					</label> <label class="radio-inline" style="display: inline-block;"> <input type="radio"
 						id="emailReceiveYn" name="emailReceiveYn" value="N"> 동의하지
 						않습니다.
 					</label>
@@ -217,11 +215,11 @@ function aaaa(){
 			<div class="">
 				<label for="inputPhoneNumber" class="cl2 mtext-114 jointext">SMS
 					수신여부</label>
-				<div class="col-lg-10">
-					<label class="radio-inline"> <input type="radio"
+				<div class="col-lg-10 m-tb-15">
+					<label class="radio-inline" style="display: inline-block;"> <input type="radio"
 						id="smsReceiveYn" name="smsReceiveYn" value="Y" checked>
 						동의합니다.
-					</label> <label class="radio-inline"> <input type="radio"
+					</label> <label class="radio-inline" style="display: inline-block;"> <input type="radio"
 						id="smsReceiveYn" name="smsReceiveYn" value="N"> 동의하지
 						않습니다.
 					</label>
@@ -232,7 +230,7 @@ function aaaa(){
 
 			<div class="flex-w flex-t p-t-27 p-b-33">
 				<span class="mtext-101 cl2">
-					<button class="flex-c-m stext-101 size-127 cl0 bg1 bor1 hov-btn1 p-lr-15 trans-04 pointer" id="sm">완료</button>
+					<button class="flex-c-m stext-101 size-130 cl0 bg1 bor1 hov-btn1 p-lr-15 trans-04 pointer" id="sm">완료</button>
 				</span>
 			</div>
 		</form>
@@ -422,14 +420,14 @@ function aaaa(){
 						contentType : "application/json; charset=UTF-8",
 						success : function(data){
 							if($('#id').val()==""){
-								alert("아이디를 입력해주세요.");
+								Swal.fire("","아이디를 입력해주세요.","warning");
 							} else if(data.count > 0) {
-								alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+								Swal.fire("","아이디가 존재합니다. 다른 아이디를 입력해주세요.","warning");
 								$("#divId").addClass("has-error")
 			                    $("#divId").removeClass("has-success")
 			                    $("#id").focus();
 							} else {
-								alert("사용가능한 아이디입니다.");
+								Swal.fire("","사용가능한 아이디입니다.","info");
 								$("#divId").addClass("has-error")
 			                    $("#divId").removeClass("has-success")
 			                    $("#password").focus();
@@ -438,7 +436,7 @@ function aaaa(){
 							}
 						},
 						error : function(error){
-							alert("error : "+error);
+							Swal.fire("error : "+error);
 						}
 					});
                 });
@@ -475,7 +473,8 @@ function aaaa(){
                     
                     //중복확인 검사
                     if(checkid==0){
-                    	alert("중복확인 해주시길 바랍니다.");
+                        modalContents.text("중복확인 해주세요.");
+                        modal.modal('show');
                     	return false;
                     }
                     
@@ -625,7 +624,7 @@ function aaaa(){
             });
             
             function join(){
-            	alert("회원가입을 축하합니다.")
+            	Swal.fire("","회원가입을 축하합니다.","success")
             	var joinform = document.getElementById("joinForm");
             	joinform.action="/moviecube/member/join.do";
             	joinform.submit();

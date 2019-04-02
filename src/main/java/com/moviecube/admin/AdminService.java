@@ -9,21 +9,11 @@ public interface AdminService {
 
 	List<Map<String, Object>> selectMemberList(Map<String, Object> map) throws Exception;
 
-	List<Map<String, Object>> memberSearch0(String map) throws Exception;
-	
-	List<Map<String, Object>> memberSearch1(String map) throws Exception;
-	
-	List<Map<String, Object>> memberSearch2(String map) throws Exception;
+	List<Map<String, Object>> memberSearch(Map<String, Object> map) throws Exception;
 
 	void memberDelete(Map<String, Object> map) throws Exception;
 
 	Map<String,Object> selectMemberDetail(Map<String,Object> map) throws Exception;
-/*	
-	List<Map<String, Object>> memberSearch0(Map<String, Object> map) throws Exception;
-	
-	List<Map<String, Object>> memberSearch1(Map<String, Object> map) throws Exception;
-	
-	List<Map<String, Object>> memberSearch2(Map<String, Object> map) throws Exception;
-*/	
+
 }
 

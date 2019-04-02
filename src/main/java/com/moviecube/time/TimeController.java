@@ -70,15 +70,20 @@ public class TimeController {
 				
 		isSearch = request.getParameter("isSearch");
 		
+		CommandMap smap = new CommandMap();
+		
 		if(isSearch != null){
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
 			if(searchNum == 0){
-				timeList = timeService.timeSearch0(isSearch);
+				smap.put("MOVIE_NAME", isSearch);
+				timeList = timeService.timeSearch(smap.getMap());
 			}else if(searchNum == 1){
-				timeList = timeService.timeSearch1(isSearch);
-			}else{
-				timeList = timeService.timeSearch2(isSearch);
+				smap.put("CINEMA_NAME", isSearch);
+				timeList = timeService.timeSearch(smap.getMap());
+			}else if(searchNum == 2){
+				smap.put("SCREEN_NAME", isSearch);
+				timeList = timeService.timeSearch(smap.getMap());
 			}
 		
 			totalCount = timeList.size();

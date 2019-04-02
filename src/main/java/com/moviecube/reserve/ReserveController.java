@@ -148,13 +148,23 @@ public class ReserveController {
 		
 		CommandMap map = new CommandMap();
 		
-		map.put("TIME_NO", commandMap.get("time_no"));
+		System.out.println(commandMap.get("TIME_NO"));
+		System.out.println(commandMap.get("SELECT_SEATS"));
+		System.out.println(commandMap.get("TOTAL_PRICE"));
+		
+		map.put("TIME_NO", commandMap.get("TIME_NO"));
 		
 		Map<String,Object> timemap = timeService.timeDetail(map.getMap());
 		
+		String timeDate = timemap.get("TIME_DATE").toString();
+		timeDate = timeDate.substring(0, 10);
+	
+		
+		mv.setViewName("jsonView");
+		mv.addObject("timeDate", timeDate);
+		mv.addObject("selectSeats",commandMap.get("SELECT_SEATS"));
+		mv.addObject("totalprice", commandMap.get("TOTAL_PRICE"));
 		mv.addObject("time", timemap);
-		mv.addObject("selectSeats",commandMap.get("selectSeats"));
-		mv.addObject("totalprice", commandMap.get("totalprice"));
 		
 		return mv;
 	}

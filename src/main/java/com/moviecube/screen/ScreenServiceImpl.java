@@ -50,18 +50,8 @@ public class ScreenServiceImpl implements ScreenService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> screenSearch0(String map) throws Exception {
-		return screenDAO.screenSearch0(map);
-	}
-
-	@Override
-	public List<Map<String, Object>> screenSearch1(String map) throws Exception {
-		return screenDAO.screenSearch1(map);
-	}
-
-	@Override
-	public List<Map<String, Object>> screenSearch2(String map) throws Exception {
-		return screenDAO.screenSearch2(map);
+	public List<Map<String, Object>> screenSearch(Map<String, Object> map) throws Exception {
+		return screenDAO.screenSearch(map);
 	}
 
 }

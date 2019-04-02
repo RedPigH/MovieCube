@@ -26,7 +26,7 @@
 		<div class="logo">
 			<h1>
 				<a href="<%=cp%>/admin/movieList.do">MovieCube Administrator -
-					Movie List</a>
+					Movie List<%=cp%></a>
 			</h1>
 		</div>
 		<div class="logo" style="float: right;">

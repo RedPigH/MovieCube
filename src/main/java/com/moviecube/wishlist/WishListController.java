@@ -53,6 +53,8 @@ public class WishListController {
 		wishlistService.insertWishList(map.getMap());
 		List<Map<String, Object>> wish = wishlistService.selectWishList(user);
 		
+		session.setAttribute("WishList", wish);
+		
 		mv.setViewName("jsonView");
 		mv.addObject("WishList", wish);
 		
@@ -87,6 +89,8 @@ public class WishListController {
 		}
 		
 		List<Map<String, Object>> wish = wishlistService.selectWishList(user);
+		
+		session.setAttribute("WishList", wish);
 		
 		mv.setViewName("jsonView");
 		mv.addObject("WishList", wish);

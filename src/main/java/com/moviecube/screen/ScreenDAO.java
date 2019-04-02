@@ -38,18 +38,8 @@ public class ScreenDAO extends AbstractDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> screenSearch0(String isSearch) {
-		return (List<Map<String, Object>>)selectList("screen.screenSearch0", "%"+isSearch+"%");
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> screenSearch1(String isSearch) {
-		return (List<Map<String, Object>>)selectList("screen.screenSearch1", "%"+isSearch+"%");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> screenSearch2(String isSearch) {
-		return (List<Map<String, Object>>)selectList("screen.screenSearch2", "%"+isSearch+"%");
+	public List<Map<String, Object>> screenSearch(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("screen.screenSearch", map);
 	}
 
 }

@@ -60,8 +60,7 @@
 
 							</div>
 						</div>
-						<div
-							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-50 p-lr-15-sm">
 
 							<c:forEach var="i" begin="1" end="4" step="1">
 								<div class="size-199 respon6-next" id="cinemaNo${i}">
@@ -131,8 +130,7 @@
 						<div class="flex-w flex-t bor12 p-t-15 p-b-15" id="Notice">
 							<div class="size-196 p-t-35 p-b-35 flex-c-m"
 								id="movieSelectNotice">
-								<span class="mtext-110 cl2" style="font-family: MaplestoryLight">날짜,
-									극장, 영화를 선택해주세요.</span>
+								<span class="mtext-110 cl2" style="font-family: MaplestoryLight">날짜, 극장, 영화를 선택해주세요.</span>
 							</div>
 						</div>
 					</div>

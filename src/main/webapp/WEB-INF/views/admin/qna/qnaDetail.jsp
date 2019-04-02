@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <% String cp = request.getContextPath(); %>
+<%  pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -82,7 +85,7 @@
 						</tr>
 						<tr>
 							<th scope="row">내용</th>
-							<td><pre>${map.QNA_CONTENT}</pre></td>
+							<td><pre>${fn:replace(map.QNA_CONTENT,cn,br)}</pre></td>
 						</tr>
 						
 						<c:if test= "${map.QNA_FILE_NO > 0}">  

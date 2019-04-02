@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <% String cp = request.getContextPath(); %>
+<%  pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -71,6 +74,8 @@
 					<dd>${map.MOVIE_DIRECTOR}</dd>
 					<dt>출현</dt>
 					<dd>${map.MOVIE_ACTOR}</dd>
+					<dt>시간</dt>
+					<dd>${map.MOVIE_RUNTIME}</dd>
 					<dt>개봉</dt>
 					<dd>
 						<c:set var="TextValue" value="${map.MOVIE_OPENDATE}"/>
@@ -80,23 +85,44 @@
 					<dd><strong class="iblock pt_red mr10 fz18">${map.MOVIE_GRADE}</strong></dd>
 				</dl>
 				<div class="movie_btn">
-					<span class="btn btnC_02 btnF_01 mr10"></span> 
-					<span></span>
+					<!-- span class="btn btnC_02 btnF_01 mr10"></span> 
+					<span></span> -->
 					
 					<a href="<%=cp%>/admin/movieWriteForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04"> <span>스틸컷추가</span></a>
 					
-					<a href="<%=cp%>/admin/movieModifyForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" style="padding-left: 10px;"> <span>스틸컷수정</span></a>	
-						
-					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>수정</span></a>				
-						
-					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>삭제</span></a>
+					<a href="<%=cp%>/admin/movieModifyForm2.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" > <span>스틸컷수정</span></a>	
 					
-					<a href="<%=cp%>/admin/movieList.do?currentPage=${currentPage}" class="btn btnC_01 btnF_04" style="padding-left: 10px;"> <span>목록</span> </a>
+					<a href="<%=cp%>/admin/movieWriteForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04" > <span>Slider add</span></a>
+					
+					<a href="<%=cp%>/admin/movieModifyForm3.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_04 btnF_04"> <span>SlideRenew</span></a>
+						
+					<a href="<%=cp%>/admin/movieModifyForm.do?MOVIE_NO=${map.MOVIE_NO}" class="btn btnC_01 btnF_04" > <span>수정</span></a>				
+						
+					<a onClick="movieDelete()" class="btn btnC_01 btnF_04" > <span>삭제</span></a>
+					
+					<a href="<%=cp%>/admin/movieList.do?currentPage=${currentPage}" class="btn btnC_01 btnF_04"><!-- style="padding-left: 10px;" --><span>목록</span> </a>
 				</div>
 			</div>
 		</div>
+		
+		<h3 class="sub_tit">서브타이틀</h3>
+		<p class="summary">${map.MOVIE_SUBTITLE}</p>
+		<%-- <p class="summary">${fn : replace(map.MOVIE_SUBTITLE,cn,br)}</p> --%>
+		
 		<h3 class="sub_tit">줄거리</h3>
-		<p class="summary">${map.MOVIE_CONTENT}</p>
+		<p class="summary">${map.MOVIE_CONTENT}</p> 
+		<%-- <p class="summary">${fn : replace(map.MOVIE_CONTENT,cn,br)}</p> --%>
+		
+		<h3 class="sub_tit">슬라이드 이미지</h3>
+		<div class="movie_steel">
+			<div class="inner">
+				<ul>
+					<li>
+						<img src="<%=cp%>/resources/upload/movie/slider/${map2.SLIDER_SAVNAME}" alt=""  /> 
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 		<h3 class="sub_tit">스틸컷</h3>
 		<div class="movie_steel">

@@ -31,7 +31,7 @@ public class QnaController {
 	private Paging paging;
 
 	/* "/qna/inquiryList" */
-	@RequestMapping(value = "/qna/adminInquiryList.do")
+	@RequestMapping(value = "/qnaList.do")
 	public ModelAndView inquiryList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
@@ -45,7 +45,7 @@ public class QnaController {
 
 		totalCount = Qnalist.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "adminInquiryList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockpaging, "qnalist");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -62,29 +62,29 @@ public class QnaController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/qna/inquiryList");
+		mv.setViewName("/qna/qnaList");
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryWriteForm.do")
+	@RequestMapping(value = "/qnaWriteForm.do")
 	public ModelAndView writeInquiryForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("qna/inquiryWriteForm");
+		ModelAndView mv = new ModelAndView("qna/qnaWrite");
 
 		return mv;
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryWrite.do")
+	@RequestMapping(value = "/qnaWrite.do")
 	public ModelAndView writeInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/main.do");
 		qnaService.insertQna(commandMap.getMap(), request);
 		return mv;
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryDetail.do")
+	@RequestMapping(value = "/qnaDetail.do")
 	public ModelAndView inquiryDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/qna/inquiryDetail");
+		ModelAndView mv = new ModelAndView("/qna/qnaDetail");
 
 		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
 
@@ -102,9 +102,9 @@ public class QnaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryModifyForm.do")
+	@RequestMapping(value = "/qnaModifyForm.do")
 	public ModelAndView modifyInquiryForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/qna/inquiryModify");
+		ModelAndView mv = new ModelAndView("/qna/qnaModify");
 
 		Map<String, Object> cmap = qnaService.checkQnaFile(commandMap.getMap());
 
@@ -123,9 +123,9 @@ public class QnaController {
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryModify.do")
+	@RequestMapping(value = "/qnaModify.do")
 	public ModelAndView modifyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/qnaList.do");
 		
 		qnaService.updateQna(commandMap.getMap(), request);
 		
@@ -139,18 +139,18 @@ public class QnaController {
 	}
 
 
-	@RequestMapping(value = "/qna/adminInquiryDelete.do")
+	@RequestMapping(value = "/qnaDelete.do")
 	public ModelAndView deleteInquiry(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/qnaList.do");
 		qnaService.deleteQna(commandMap.getMap());
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryReplyForm.do")
+	@RequestMapping(value = "/qnaReplyForm.do")
 	public ModelAndView replyInquiryForm(CommandMap commandMap) throws Exception {
 		Map<String, Object> map1 = qnaService.selectQnaDetail1(commandMap.getMap());
-		ModelAndView mv = new ModelAndView("qna/inquiryReplyForm");
+		ModelAndView mv = new ModelAndView("qna/qnaReplyForm");
 
 		Map<String, Object> map = new HashMap();
 		System.out.println("혜쮸꼰뜌" + commandMap.get("QNA_NOM"));
@@ -164,9 +164,9 @@ public class QnaController {
 
 	}
 
-	@RequestMapping(value = "/qna/adminInquiryReply.do")
+	@RequestMapping(value = "/qnaReply.do")
 	public ModelAndView replyInquiry(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/qna/adminInquiryList.do");
+		ModelAndView mv = new ModelAndView("redirect:/qnaList.do");
 
 		Set keyset = commandMap.keySet();
 		System.out.println("result : " + keyset);
@@ -180,5 +180,4 @@ public class QnaController {
 		qnaService.replyQna(commandMap.getMap());
 		return mv;
 	}
-
 }
