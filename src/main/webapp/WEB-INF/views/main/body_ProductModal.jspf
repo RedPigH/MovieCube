@@ -400,9 +400,9 @@ function writeToModal(movie_no) {
 										
 										<!-- 	Add review -->
 										<form class="w-full">
-											<h5 class="stext-118 cl2 p-b-7">리뷰 작성하기</h5>
+											<h5 class="stext-118 cl2 p-b-7">리뷰 작성할까말까~~></h5>
 
-											<p class="stext-102 cl6" style="font-size:20px;">함께 아름다운 댓글 문화를 만들어가요 ~</p>
+											<p class="stext-102 cl6" style="font-size:20px;">함께 아름다운 댓글 문화를 만들어ㄲ ~</p>
 
 											<div class="flex-w flex-m p-t-50 p-b-23">
 												<span class="stext-102 cl3 m-r-16" style="font-size:18px;"> 별 점 </span>
