@@ -1999,6 +1999,44 @@ input.num-product::-webkit-inner-spin-button {
   opacity: 1;
 }
 
+/* 명이 추가함 */
+
+/* [ Modal3 ] */
+.wrap-modal3 {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  overflow: auto;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay-modal3 {
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.8;
+}
+
+.show-modal3 {
+  /* overflow: hidden; */
+  visibility: visible;
+  opacity: 1;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Table Shopping Cart ]*/
 
@@ -2690,6 +2728,11 @@ input.num-product::-webkit-inner-spin-button {
 .size-130{
   min-width: 205px;
   height: 40px;
+}
+
+.size-131{
+  min-width: 270px;
+  height: 35px;
 }
 
 

@@ -161,4 +161,28 @@ public class MemberController {
 		  
 		  return map;
 	  }
+	  
+	
+	  //회원 정보 수정
+	  
+	  @RequestMapping(value="/member/updateMember.do")
+	  public ModelAndView updateMember(CommandMap commandMap, HttpSession session) throws Exception{
+		  ModelAndView mv = new ModelAndView();
+		  Map <String, Object> user = new HashMap<String, Object>();
+		  Map <String, Object> infoUpdate = new HashMap<String, Object>();
+		  
+		  user = memberService.checkUserIdAndPassword(commandMap.getMap());
+		  
+		  if(user != null) {
+			  memberService.updateMember(commandMap.getMap());
+			  
+			  infoUpdate = memberService.checkUserIdAndPassword(commandMap.getMap());
+			  session.setAttribute("userLoginInfo", infoUpdate);
+			  mv.setViewName("redirect:/member/myPage.do");
+			  return mv;
+		  }
+		  
+		  mv.setViewName("/member/passwordError");
+		  return mv;
+	  }
 }

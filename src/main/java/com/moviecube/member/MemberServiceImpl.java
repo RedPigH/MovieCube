@@ -52,4 +52,9 @@ public class MemberServiceImpl implements MemberService {
 	  public void updateRank(Map<String, Object> map ) throws Exception{
 		  memberDAO.updateRank(map);
 	  }
+	  
+	  @Override
+	  public void updateMember(Map<String, Object> map) throws Exception{
+		  memberDAO.updateMember(map);
+	  }
 }

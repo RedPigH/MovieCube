@@ -49,4 +49,8 @@ public class MemberDAO extends AbstractDAO {
 	public void updateRank(Map<String, Object> map) throws Exception {
 		update("member.updateRank", map);
 	}
+	
+	public void updateMember(Map<String, Object> map) throws Exception{
+		update("member.informUpdate", map);
+	}
 }
