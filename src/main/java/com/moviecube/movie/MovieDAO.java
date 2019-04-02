@@ -83,6 +83,11 @@ public class MovieDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectMovieFileDetail(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("movie.selectMovieFileDetail", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectSliderFileDetail(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("movie.selectSliderFileDetail", map);
+	}
 
 	public void modifyMovie(Map<String, Object> map) throws Exception {
 		update("movie.modifyMovie", map);
@@ -100,6 +105,10 @@ public class MovieDAO extends AbstractDAO {
 		insert("movie.insertFile2", map);
 	}
 
+	public void insertFile3(Map<String, Object> map) throws Exception {
+		insert("movie.insertFile3", map);
+	}
+	
 	public void updateFileList(Map<String, Object> map) throws Exception {
 		update("movie.updateFileList", map);
 	}
@@ -108,6 +117,10 @@ public class MovieDAO extends AbstractDAO {
 		update("movie.updateFileList2", map);
 	}
 
+	public void updateFileList3(Map<String, Object> map) throws Exception {
+		update("movie.updateFileList3", map);
+	}
+	
 	public void modifyFile(Map<String, Object> map) {
 		update("movie.modifyFile", map);
 	}
@@ -116,6 +129,10 @@ public class MovieDAO extends AbstractDAO {
 		update("movie.modifyFile2", map);
 	}
 
+	public void modifyFile3(Map<String, Object> map) {
+		update("movie.modifyFile3", map);
+	}
+	
 	public void modifyGrade(Map<String, Object> map) {
 		update("movie.modifyGrade", map);
 	}

@@ -163,8 +163,8 @@ function deleteReview(cmt_no) {
 		success : function(data) {
 			$("div").remove("#comment_start");
 			get_reviews();
-			// alert(movie_no);
 			writeToModal(movie_no);
+			star(); // 별점주는거 다시 작동하도록 
 		}, // success 끝
 		error : function() { 
 			alert("오류가 발생혔슈"); 
@@ -188,25 +188,32 @@ function writeToModal(movie_no) {
 		dataType : "json",
 		data : data,
 
-		success : function(data) {
+ 		success : function(data) {
 			var movie_rating_text = "";
+			var movie_age = data.map.MOVIE_AGE; // 영화 연령
 			
-			var movie_grade = data.map.MOVIE_GRADE;
+			$("#people_cnt").text(data.comment_count + "명  참여");
+
+			var movie_grade = data.map.MOVIE_GRADE
 			if(movie_grade == null) {
 				movie_grade = 0;
 			}
-			for(var i = 0; i < Number(movie_grade); i++) {
+			
+			var age_img = "/moviecube/resources/images/" + data.map.MOVIE_AGE + "_age.png";
+			$("#h_modal_movie_age").attr("src",age_img);
+			
+			for(var i = 0; i < Math.round(Number(movie_grade)); i++) {
 				movie_rating_text = movie_rating_text + "<i class='zmdi zmdi-star'></i> ";
 			}
 			
-			for(var i = 5; i > Number(movie_grade); i--) {
+			for(var i = 5; i > Math.round(Number(movie_grade)); i--) {
 				movie_rating_text = movie_rating_text + "<i class='item-rating pointer zmdi zmdi-star-outline' style='padding-right: 4px;'></i>";
 			}
 			
 			$("h_modal_movie_no").text(movie_no);
 			$("#h_modal_movie_name").text(data.map.MOVIE_NAME);
 			
-			var grade_text = "평점 : " + movie_grade + "&nbsp;&nbsp;" + "<span class='fs-18 cl11'>"+ movie_rating_text + "</span>";
+			var grade_text = "<span class='fs-18 cl11'>"+ movie_rating_text + "</span>" + "&nbsp;&nbsp;" + movie_grade;
 			$("#h_modal_movie_grade").html(grade_text);
 			
 			var img_url = "/moviecube/resources/upload/movie/poster/" + data.map.POSTER_SAVNAME;
@@ -289,12 +296,15 @@ function writeToModal(movie_no) {
 
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h4 id="h_modal_movie_name" 
-							class="stext-119 cl2 js-name-detail p-b-14">
+						<div style="float:left; marging-bottom:0px;">
+								<img id="h_modal_movie_age" width="30" height="32" src="/moviecube/resources/images/15_age.PNG" style="margin-top:11px; margin-right:8px;">
+						</div>
+						<h4 id="h_modal_movie_name" class="stext-119 cl2" style="margin-bottom:-10px;">
 							<!-- Jquery로 값 자동으로들어감 -->
 						</h4>
 						<hr>
-						<p id="h_modal_movie_grade" class="stext-118"> <!-- Jquery로 값 자동으로들어감 --> </p>
+						<p id="h_modal_movie_grade" class="stext-118" style="margin-bottom:-10px;"> <!-- Jquery로 값 자동으로들어감 --> </p>
+						<span id="people_cnt" style="margin-top:-10px;">33명 참여</span>
 						<p id="h_modal_movie_type" class="stext-118" > </p> 
 						<p id="h_modal_movie_opendate" class="stext-118 cl3" > </p>
 						<p id="h_modal_movie_director" class="stext-118 cl3" > </p>

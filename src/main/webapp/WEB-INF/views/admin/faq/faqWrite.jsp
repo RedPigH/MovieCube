@@ -64,7 +64,7 @@
 									<option value="영화관">영화관</option>
 									<option value="상영관">상영관</option>
 									<option value="영화예매">영화예매</option>
-									<option value="멤버쉽">멤버쉽</option>
+							<!-- 	<option value="멤버쉽">멤버쉽</option> -->
 									<option value="기타">기타</option>
 								</select>
 							</td>

@@ -103,6 +103,14 @@ public class MovieServiceImpl implements MovieService{
 				MovieDAO.insertFile2(fileList2.get(i));
 			}
 	}
+
+	@Override
+	public void insertMovie3(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		
+		List<Map<String,Object>> fileList3 = fileUtils.parseInsertFileInfo3(map, request);
+	 	MovieDAO.insertFile3(fileList3.get(0)); 
+	}
+
 	
 	@Override
 	public void insertComment(Map<String, Object> map) throws Exception {
@@ -114,11 +122,16 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public Map<String, Object> selectMovieDetail(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
-		Map<String, Object> tempMap = MovieDAO.selectMovieDetail(map);
+		
+		Map<String, Object> tempMap = MovieDAO.selectMovieDetail(map);	
 		resultMap.put("map", tempMap);
 		
+		Map<String, Object> tempMap2 = MovieDAO.selectSliderFileDetail(map);		
+		resultMap.put("map2", tempMap2);
+
 		List<Map<String, Object>> movieDetail = MovieDAO.selectMovieFileDetail(map);
 		resultMap.put("movieDetail", movieDetail);
+
 		return resultMap;
 	}
 
@@ -164,7 +177,29 @@ public class MovieServiceImpl implements MovieService{
 			}
 		}
 	}
-	
+
+	@Override
+	public void modifyMovie3(Map<String, Object> map, HttpServletRequest request) throws Exception {
+				
+		MovieDAO.updateFileList3(map);
+		
+		List<Map<String,Object>> fileList3 = fileUtils.parseUpdateFileInfo3(map, request);
+		Map<String, Object> tempMap = null;
+		
+		for(int i=0, size=fileList3.size(); i<size; i++){
+			tempMap = fileList3.get(i);
+			if (i == 0) {
+				
+				if(tempMap.get("IS_NEW").equals("Y")) { 
+					MovieDAO.insertFile3(tempMap);	
+				}
+				else {
+					MovieDAO.modifyFile3(tempMap);
+				}
+			}
+		}
+	}	
+
 	public void modifyGrade(Map<String, Object> map) throws Exception{
 		MovieDAO.modifyGrade(map);
 	}

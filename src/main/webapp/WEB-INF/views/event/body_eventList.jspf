@@ -45,14 +45,7 @@
 													<img
 														src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}" width="350" height="350"
 														alt="이벤트" /> <a href="#" id="gahyun"
-														onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+														onclick="writeToModal(${row.EVENT_NO });"
 														class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 														상세보기 </a>
 
@@ -95,14 +88,7 @@
 													<img
 														src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}" width="350" height="350"
 														alt="이벤트" /> <a href="#" id="gahyun"
-														onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+														onclick="writeToModal(${row.EVENT_NO });"
 														class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 														상세보기 </a>
 
@@ -146,14 +132,7 @@
 													<img
 														src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}" width="350" height="350"
 														alt="이벤트" /> <a href="#" id="gahyun"
-														onclick="toModal(
-										'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+														onclick="writeToModal(${row.EVENT_NO });"
 														class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 														상세보기 </a>
 
@@ -194,14 +173,7 @@
 													<img
 														src="/moviecube/resources/upload/event/${row.EVENT_SAVNAME}" width="350" height="350"
 														alt="이벤트" /> <a href="#" id="gahyun"
-														onclick="toModal(
-																			'${row.EVENT_NO }',
-										'${row.EVENT_NAME }',
-										'${row.EVENT_OPENDATE }',
-										'${row.EVENT_CLOSEDATE }',
-										'${row.EVENT_SAVNAME }',
-										'${row.EVENT_URL }'
-									);"
+														onclick="writeToModal(${row.EVENT_NO });"
 														class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 														상세보기 </a>
 												</div>

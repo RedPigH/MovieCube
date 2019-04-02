@@ -63,13 +63,13 @@
 				</a>
 			</div>
 			<div class="movie_txt">
-				<p class="tit">${map.MOVIE_NAME}</p>
+				<p class="tit">${map.STORE_ITEM}</p>
 				<dl>
 					<dt><strong class="iblock pt_bk mr15 fz18">상품</strong></dt>
 					<dd><strong class="iblock pt_red mr15 fz18">${map.STORE_ITEM}</strong></dd>
 					
 					<dt><strong class="iblock pt_bk mr15 fz18">가격</strong></dt>
-					<dd><strong class="iblock pt_red mr15 fz18">${map.STORE_PRICE}</strong></dd>
+					<dd><strong class="iblock pt_red mr15 fz18">${map.STORE_PRICE}&nbsp;원</strong></dd>
 				</dl>
 				
 				<div class="movie_btn">
