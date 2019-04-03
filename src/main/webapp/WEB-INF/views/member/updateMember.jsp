@@ -75,6 +75,7 @@ function aaaa(){
 <%@ include file="/WEB-INF/views/main/wishList.jspf" %>
 <%@ include file="/WEB-INF/views/member/loginForm.jspf" %>
 <%@ include file="/WEB-INF/views/member/updatePassword.jspf" %>
+<%@ include file="/WEB-INF/views/member/deleteMember.jspf" %>
 
 <div id="container" class="container">
 
@@ -107,7 +108,7 @@ function aaaa(){
 
 		<div class="personal_info_last">
 			<button type="button" class="img_btn psw_change mr6 flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04 js-show-modal3">비밀번호 변경</button>
-			<button type="button" class="img_btn personal_quit mr6 flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04" onclick="">회원탈퇴</button>
+			<button type="button" class="img_btn personal_quit mr6 flex-c-m stext-111 cl0 bg1 bor2 hov-btn4 trans-04 js-show-modal4">회원탈퇴</button>
 		</div>
 
 		<div class="user_wrap">

@@ -2005,14 +2005,14 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
+/* �뜝�뙥�슱�삕�뜝�떛怨ㅼ삕 �뜝�뙥怨ㅼ삕�뜝�룞�삕 */
 .no-scrolling {
    height:100%;
    overflow:hidden;
 }
 
 .show-modal1 {
-  /* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
+  /* �뜝�뙥�슱�삕�뜝�떛怨ㅼ삕 �뜝�뙥怨ㅼ삕�뜝�룞�삕 */
   /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
@@ -2049,7 +2049,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* 占쌩울옙占싱곤옙 占쌩곤옙占쏙옙 */
+/* �뜝�뙥�슱�삕�뜝�떛怨ㅼ삕 �뜝�뙥怨ㅼ삕�뜝�룞�삕 */
 .no-scrolling {
    height:100%;
    overflow:hidden;
@@ -2061,7 +2061,7 @@ input.num-product::-webkit-inner-spin-button {
   opacity: 1;
 }
 
-/* ���� �߰��� */
+/* 명이 추가함 */
 
 /* [ Modal3 ] */
 .wrap-modal3 {
@@ -2094,6 +2094,14 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .show-modal3 {
+  /* overflow: hidden; */
+  visibility: visible;
+  opacity: 1;
+}
+
+/* [Modal4] */
+
+.show-modal4 {
   /* overflow: hidden; */
   visibility: visible;
   opacity: 1;
@@ -2338,7 +2346,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl12 {color: #ccc;}
 .cl13 {color: #777;}
 
-/* 추가 폼 */
+/* 異붽� �뤌 */
 
 .cl13{color:#ff5959;}
 
@@ -2556,7 +2564,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/* 추가 폼 */
+/* 異붽� �뤌 */
 
 .mtext-114{
 	font-family: NanumGothicBold;
@@ -2806,7 +2814,7 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
-/* 추가 폼 */
+/* 異붽� �뤌 */
 
 .size-129{
   min-width: 100%;
@@ -2919,7 +2927,7 @@ input.num-product::-webkit-inner-spin-button {
   max-width: 286px;
 }
 
-/* 추가폼 */
+/* 異붽��뤌 */
 
 .size-219{
 	width: 750px;
@@ -3087,7 +3095,7 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 15px;
 }
 
-/* 추가 폼 */
+/* 異붽� �뤌 */
 
 .bor22{
 	border-bottom: 2px solid #e1e1e1;
@@ -3471,7 +3479,7 @@ input.num-product::-webkit-inner-spin-button {
   color: #fff;
 }
 
-/* 추가폼 */
+/* 異붽��뤌 */
 
 .hov-btn4:hover {
 	border-color: #333;

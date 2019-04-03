@@ -190,4 +190,33 @@ public class MemberController {
 		  mv.setViewName("/member/passwordError");
 		  return mv;
 	  }
+	  
+	  @RequestMapping(value="/member/updatePassword.do")
+	  public ModelAndView updateMember(CommandMap commandMap) throws Exception{
+		  ModelAndView mv = new ModelAndView();
+		  Map <String, Object> pass = new HashMap<String, Object>();
+		  
+		  pass = memberService.checkUserIdAndPassword(commandMap.getMap());
+		  
+		  if(pass!=null) {
+		 	memberService.updatePass(commandMap.getMap());
+		 	mv.setViewName("redirect:/member/updateMemberForm.do");
+		 	
+		 	return mv;
+		  }
+		  
+		  mv.setViewName("/member/passwordError");
+		  return mv;
+	  }
+	  
+	  @RequestMapping(value="/member/deleteMember.do")
+	  public ModelAndView deleteMember(CommandMap commandMap, HttpSession session) throws Exception{
+		  ModelAndView mv = new ModelAndView("/member/deleteSuccess");
+		  
+		  memberService.deleteMember(commandMap.getMap());
+		  session.setAttribute("userLoginInfo", null);
+		  session.setAttribute("WishList", null);
+		  
+		  return mv;
+	  }
 }

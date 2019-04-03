@@ -114,7 +114,15 @@
 	<!-- 회원 정보 수정 -->
 	<!-- 1. 비밀번호 변경 -->
 	<update id="passwdUpdate" parameterType = "hashmap">
-		
+		<![CDATA[
+			UPDATE
+			 MC_MEMBER
+			SET
+			 MEMBER_PASSWD1=#{MEMBER_PASSWDA},
+			 MEMBER_PASSWD2=#{MEMBER_PASSWDB}
+			WHERE
+			 MEMBER_ID=#{MEMBER_ID} AND MEMBER_PASSWD1=#{MEMBER_PASSWD1}
+		]]>
 	</update>
 	
 	<!-- 2. 기본 정보 변경 -->
